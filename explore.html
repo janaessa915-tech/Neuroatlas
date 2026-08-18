@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Explore Anatomy | NeuroAtlas</title>
 
 <style>
+
 *{
 box-sizing:border-box;
 margin:0;
@@ -23,14 +27,36 @@ line-height:1.6;
 nav{
 padding:22px 7%;
 border-bottom:1px solid rgba(255,255,255,.08);
+display:flex;
+justify-content:space-between;
+align-items:center;
 }
 
-nav a{
-color:#aebdce;
+.logo{
+font-size:23px;
+font-weight:bold;
+color:white;
 text-decoration:none;
 }
 
-nav a:hover{color:white}
+.logo span{
+color:#4da6ff;
+}
+
+.nav-links{
+display:flex;
+gap:25px;
+}
+
+.nav-links a{
+color:#aebdce;
+text-decoration:none;
+font-size:14px;
+}
+
+.nav-links a:hover{
+color:white;
+}
 
 .container{
 max-width:1150px;
@@ -112,18 +138,21 @@ gap:8px;
 
 .structure{
 display:inline-block;
-padding:7px 10px;
+padding:8px 11px;
 border-radius:8px;
 background:#10233a;
 color:#c8d6e5;
 font-size:13px;
 text-decoration:none;
+cursor:pointer;
 transition:.2s;
+border:1px solid transparent;
 }
 
 .structure:hover{
 background:#183654;
 color:white;
+border-color:#4da6ff;
 transform:translateY(-2px);
 }
 
@@ -134,29 +163,68 @@ margin-top:20px;
 }
 
 @media(max-width:850px){
+
 .categories{
 grid-template-columns:1fr;
 }
+
+nav{
+flex-direction:column;
+gap:15px;
 }
+
+}
+
 </style>
+
 </head>
+
 
 <body>
 
+
 <nav>
-<a href="index.html">← NeuroAtlas Home</a>
+
+<a class="logo"
+href="https://janaessa915-tech.github.io/Neuroatlas/">
+Neuro<span>Atlas</span>
+</a>
+
+<div class="nav-links">
+
+<a href="https://janaessa915-tech.github.io/Neuroatlas/">
+Home
+</a>
+
+<a href="https://janaessa915-tech.github.io/Neuroatlas/explore.html">
+Explore
+</a>
+
+</div>
+
 </nav>
+
 
 <main class="container">
 
-<div class="label">Explore Anatomy</div>
 
-<h1>Navigate the Human Brain.</h1>
+<div class="label">
+Explore Anatomy
+</div>
+
+
+<h1>
+Navigate the Human Brain.
+</h1>
+
 
 <p class="intro">
+
 Explore major neuroanatomical regions and discover how structures
 connect to function, pathways, and clinical reasoning.
+
 </p>
+
 
 <input
 id="search"
@@ -166,77 +234,129 @@ placeholder="Search a brain structure..."
 aria-label="Search brain structures"
 >
 
+
 <div class="categories">
+
+
+<!-- CEREBRAL CORTEX -->
 
 <div class="category">
 
 <h2>🧠 Cerebral Cortex</h2>
 
-<p>Major cortical regions and their functional roles.</p>
+<p>
+Major cortical regions and their functional roles.
+</p>
 
 <div class="structures">
 
-<a class="structure" href="cerebral-cortex.html">
+<a
+class="structure"
+href="https://janaessa915-tech.github.io/Neuroatlas/cerebral-cortex.html"
+>
 Cerebral Cortex
 </a>
 
-<a class="structure" href="cerebral-cortex.html">
+<a
+class="structure"
+href="https://janaessa915-tech.github.io/Neuroatlas/cerebral-cortex.html"
+>
 Frontal Lobe
 </a>
 
-<a class="structure" href="cerebral-cortex.html">
+<a
+class="structure"
+href="https://janaessa915-tech.github.io/Neuroatlas/cerebral-cortex.html"
+>
 Parietal Lobe
 </a>
 
-<a class="structure" href="cerebral-cortex.html">
+<a
+class="structure"
+href="https://janaessa915-tech.github.io/Neuroatlas/cerebral-cortex.html"
+>
 Temporal Lobe
 </a>
 
-<a class="structure" href="cerebral-cortex.html">
+<a
+class="structure"
+href="https://janaessa915-tech.github.io/Neuroatlas/cerebral-cortex.html"
+>
 Occipital Lobe
 </a>
 
 </div>
+
 </div>
 
+
+<!-- DEEP BRAIN -->
 
 <div class="category">
 
 <h2>🔬 Deep Brain</h2>
 
-<p>Structures located beneath the cerebral cortex.</p>
+<p>
+Structures located beneath the cerebral cortex.
+</p>
 
 <div class="structures">
 
-<a class="structure" href="hippocampus.html">
+
+<a
+class="structure"
+href="https://janaessa915-tech.github.io/Neuroatlas/hippocampus.html"
+>
 Hippocampus
 </a>
 
-<a class="structure" href="hippocampus.html">
+
+<a
+class="structure"
+href="#"
+>
 Thalamus
 </a>
 
-<a class="structure" href="hippocampus.html">
+
+<a
+class="structure"
+href="#"
+>
 Hypothalamus
 </a>
 
-<a class="structure" href="hippocampus.html">
+
+<a
+class="structure"
+href="#"
+>
 Amygdala
 </a>
 
-<a class="structure" href="hippocampus.html">
+
+<a
+class="structure"
+href="#"
+>
 Basal Ganglia
 </a>
 
-</div>
+
 </div>
 
+</div>
+
+
+<!-- BRAINSTEM -->
 
 <div class="category">
 
 <h2>⚡ Brainstem</h2>
 
-<p>Core structures connecting the brain with the spinal cord.</p>
+<p>
+Core structures connecting the brain with the spinal cord.
+</p>
 
 <div class="structures">
 
@@ -253,14 +373,19 @@ Medulla
 </a>
 
 </div>
+
 </div>
 
+
+<!-- CEREBELLUM -->
 
 <div class="category">
 
 <h2>🎯 Cerebellum</h2>
 
-<p>Important for coordination, balance, and motor learning.</p>
+<p>
+Important for coordination, balance, and motor learning.
+</p>
 
 <div class="structures">
 
@@ -277,14 +402,19 @@ Deep Cerebellar Nuclei
 </a>
 
 </div>
+
 </div>
 
+
+<!-- VENTRICULAR SYSTEM -->
 
 <div class="category">
 
 <h2>🧬 Ventricular System</h2>
 
-<p>The interconnected spaces containing cerebrospinal fluid.</p>
+<p>
+The interconnected spaces containing cerebrospinal fluid.
+</p>
 
 <div class="structures">
 
@@ -305,14 +435,19 @@ Fourth Ventricle
 </a>
 
 </div>
+
 </div>
 
+
+<!-- VASCULATURE -->
 
 <div class="category">
 
 <h2>🩸 Cerebral Vasculature</h2>
 
-<p>Major arteries supplying the brain.</p>
+<p>
+Major arteries supplying the brain.
+</p>
 
 <div class="structures">
 
@@ -337,38 +472,55 @@ Circle of Willis
 </a>
 
 </div>
-</div>
 
 </div>
+
+
+</div>
+
 
 <p id="noResults" class="no-results">
 No matching structures found.
 </p>
 
+
 </main>
+
 
 <script>
 
-const search=document.getElementById("search");
-const categories=document.querySelectorAll(".category");
-const noResults=document.getElementById("noResults");
+const search =
+document.getElementById("search");
+
+const categories =
+document.querySelectorAll(".category");
+
+const noResults =
+document.getElementById("noResults");
+
 
 search.addEventListener("input",function(){
 
-const query=search.value.toLowerCase().trim();
+const query =
+search.value.toLowerCase().trim();
 
 let visible=0;
 
+
 categories.forEach(category=>{
 
-const text=category.innerText.toLowerCase();
+const text =
+category.innerText.toLowerCase();
+
 
 if(text.includes(query)){
 
 category.style.display="";
 visible++;
 
-}else{
+}
+
+else{
 
 category.style.display="none";
 
@@ -376,12 +528,24 @@ category.style.display="none";
 
 });
 
-noResults.style.display=
-visible===0 ? "block" : "none";
+
+if(visible===0){
+
+noResults.style.display="block";
+
+}
+
+else{
+
+noResults.style.display="none";
+
+}
 
 });
 
 </script>
 
+
 </body>
+
 </html>
