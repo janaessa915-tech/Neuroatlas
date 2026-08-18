@@ -91,37 +91,39 @@ margin-bottom:45px;
 }
 
 
-/* LOCATION */
+/* LOCATION CARD */
 
 .location-card{
 padding:30px;
 background:rgba(255,255,255,.035);
 border:1px solid rgba(255,255,255,.08);
 border-radius:18px;
-cursor:pointer;
-transition:.25s;
-margin-bottom:25px;
+margin-bottom:30px;
 }
 
-.location-card:hover{
-border-color:rgba(77,166,255,.65);
-transform:translateY(-3px);
-}
-
-.location-header{
+.location-button{
+width:100%;
 display:flex;
 justify-content:space-between;
 align-items:center;
-gap:20px;
-}
-
-.location-header h2{
+background:none;
+border:none;
+color:#f4f7fb;
 font-size:22px;
+font-weight:bold;
+cursor:pointer;
+text-align:left;
+padding:0;
+font-family:Arial,sans-serif;
 }
 
-.location-header span{
+.location-button:hover{
+color:#7ebcff;
+}
+
+.location-button span:last-child{
 color:#4da6ff;
-font-size:25px;
+font-size:28px;
 }
 
 .location-preview{
@@ -157,15 +159,15 @@ transform:translateY(0);
 
 .map-title{
 color:#aebdce;
-margin-bottom:20px;
 font-size:15px;
+margin-bottom:20px;
 }
 
 .brain-map{
 width:100%;
 max-width:850px;
-margin:auto;
 display:block;
+margin:auto;
 background:#091727;
 border-radius:16px;
 border:1px solid rgba(255,255,255,.08);
@@ -181,7 +183,6 @@ stroke-width:3;
 fill:none;
 stroke:#344d68;
 stroke-width:2;
-opacity:.8;
 }
 
 .midbrain{
@@ -235,13 +236,12 @@ color:#7ebcff;
 }
 
 
-/* CONTENT */
+/* CONTENT CARDS */
 
 .grid{
 display:grid;
 grid-template-columns:repeat(2,1fr);
 gap:20px;
-margin-top:25px;
 }
 
 .card{
@@ -265,6 +265,9 @@ margin-bottom:12px;
 .card p{
 color:#aebdce;
 }
+
+
+/* INSIGHT */
 
 .insight{
 margin-top:30px;
@@ -304,240 +307,4 @@ border:1px solid #263951;
 background:#0d2035;
 color:white;
 cursor:pointer;
-font-size:15px;
-}
-
-.option:hover{
-border-color:#4da6ff;
-}
-
-#feedback{
-margin-top:20px;
-color:#7ebcff;
-font-weight:bold;
-}
-
-
-/* NAVIGATION */
-
-.bottom-nav{
-display:flex;
-justify-content:space-between;
-gap:15px;
-margin-top:60px;
-}
-
-.bottom-nav a{
-padding:13px 18px;
-border-radius:10px;
-text-decoration:none;
-border:1px solid #263951;
-color:#d7e2ee;
-}
-
-.bottom-nav a:hover{
-border-color:#4da6ff;
-}
-
-
-/* FOOTER */
-
-footer{
-text-align:center;
-padding:35px 7%;
-border-top:1px solid rgba(255,255,255,.08);
-color:#718197;
-font-size:14px;
-}
-
-
-/* MOBILE */
-
-@media(max-width:700px){
-
-.grid{
-grid-template-columns:1fr;
-}
-
-nav{
-flex-direction:column;
-gap:15px;
-}
-
-.bottom-nav{
-flex-direction:column;
-}
-
-.location-header{
-align-items:flex-start;
-}
-
-.brain-map{
-width:100%;
-}
-
-}
-
-</style>
-
-</head>
-
-
-<body>
-
-
-<nav>
-
-<a
-class="logo"
-href="https://janaessa915-tech.github.io/Neuroatlas/"
->
-Neuro<span>Atlas</span>
-</a>
-
-<div class="nav-links">
-
-<a
-href="https://janaessa915-tech.github.io/Neuroatlas/"
->
-Home
-</a>
-
-<a
-href="https://janaessa915-tech.github.io/Neuroatlas/explore.html"
->
-Explore Anatomy
-</a>
-
-</div>
-
-</nav>
-
-
-<main class="container">
-
-
-<div class="label">
-Brainstem
-</div>
-
-
-<h1>
-Midbrain
-</h1>
-
-
-<div class="arabic">
-الدماغ الأوسط
-</div>
-
-
-<p class="intro">
-
-The midbrain is the uppermost part of the brainstem. It helps
-coordinate eye movements, visual and auditory reflexes, motor
-control, and communication between higher brain regions and
-the brainstem.
-
-</p>
-
-
-<!-- INTERACTIVE LOCATION -->
-
-<div
-class="location-card"
-onclick="toggleLocation()"
->
-
-<div class="location-header">
-
-<h2>
-📍 Where is the Midbrain?
-</h2>
-
-<span id="locationArrow">
-+
-</span>
-
-</div>
-
-
-<p class="location-preview">
-
-Tap to see exactly where the midbrain sits within the brain.
-
-</p>
-
-
-<div
-id="locationMap"
-class="location-map"
-onclick="event.stopPropagation()"
->
-
-
-<p class="map-title">
-
-Interactive anatomical map — the highlighted region represents
-the approximate location of the midbrain.
-
-</p>
-
-
-<!-- ORIGINAL SVG BRAIN MAP -->
-
-<svg
-class="brain-map"
-viewBox="0 0 900 600"
-xmlns="http://www.w3.org/2000/svg"
-role="img"
-aria-label="Simplified lateral brain diagram showing the midbrain"
->
-
-
-<!-- BRAIN -->
-
-<path
-class="brain-outline"
-d="
-M170 330
-C135 275 145 190 210 140
-C275 90 365 75 455 95
-C545 112 630 155 690 225
-C735 278 750 345 720 390
-C700 420 665 430 625 430
-C585 430 550 450 515 475
-C475 505 420 515 365 505
-C310 500 255 475 220 435
-C195 412 180 375 170 330
-Z
-"
-/>
-
-
-<!-- CEREBELLUM -->
-
-<path
-class="brain-detail"
-d="
-M570 380
-C610 345 680 350 715 390
-C680 430 620 440 575 420
-"
-/>
-
-<path
-class="brain-detail"
-d="
-M585 392
-C620 370 665 375 700 400
-"
-/>
-
-
-<!-- CEREBRAL DETAILS -->
-
-<path
-class="brain-detail"
-d="
-M205 
+font-size:15px
