@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,301 +11,461 @@
 
 <style>
 
-*{
-box-sizing:border-box;
-margin:0;
-padding:0;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-body{
-font-family:Arial,sans-serif;
-background:#07111f;
-color:#f4f7fb;
-line-height:1.7;
+body {
+    font-family: Arial, sans-serif;
+    background: #07111f;
+    color: #f4f7fb;
+    line-height: 1.7;
 }
 
-nav{
-padding:22px 7%;
-border-bottom:1px solid rgba(255,255,255,.08);
-display:flex;
-justify-content:space-between;
-align-items:center;
+nav {
+    padding: 22px 7%;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.logo{
-font-size:22px;
-font-weight:bold;
-color:white;
-text-decoration:none;
+.logo {
+    color: white;
+    text-decoration: none;
+    font-size: 23px;
+    font-weight: bold;
 }
 
-.logo span{
-color:#4da6ff;
+.logo span {
+    color: #4da6ff;
 }
 
-.nav-links{
-display:flex;
-gap:25px;
+.nav-links {
+    display: flex;
+    gap: 25px;
 }
 
-.nav-links a{
-color:#aebdce;
-text-decoration:none;
-font-size:14px;
+.nav-links a {
+    color: #aebdce;
+    text-decoration: none;
+    font-size: 14px;
 }
 
-.nav-links a:hover{
-color:white;
+.nav-links a:hover {
+    color: white;
 }
 
-.container{
-max-width:1100px;
-margin:auto;
-padding:70px 7%;
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 70px 7%;
 }
 
-.label{
-color:#4da6ff;
-text-transform:uppercase;
-letter-spacing:2px;
-font-size:13px;
-margin-bottom:12px;
+.label {
+    color: #4da6ff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 13px;
+    margin-bottom: 12px;
 }
 
-h1{
-font-size:clamp(45px,7vw,76px);
-line-height:1.05;
-margin-bottom:8px;
+h1 {
+    font-size: clamp(45px, 7vw, 76px);
+    line-height: 1.05;
+    margin-bottom: 10px;
 }
 
-.arabic{
-color:#7ebcff;
-font-size:25px;
-margin-bottom:28px;
+.arabic {
+    color: #7ebcff;
+    font-size: 24px;
+    margin-bottom: 25px;
 }
 
-.intro{
-color:#aebdce;
-font-size:18px;
-max-width:780px;
-margin-bottom:45px;
+.intro {
+    color: #aebdce;
+    font-size: 18px;
+    max-width: 800px;
+    margin-bottom: 45px;
 }
 
-
-/* LOCATION CARD */
-
-.location-card{
-padding:30px;
-background:rgba(255,255,255,.035);
-border:1px solid rgba(255,255,255,.08);
-border-radius:18px;
-margin-bottom:30px;
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
 }
 
-.location-button{
-width:100%;
-display:flex;
-justify-content:space-between;
-align-items:center;
-background:none;
-border:none;
-color:#f4f7fb;
-font-size:22px;
-font-weight:bold;
-cursor:pointer;
-text-align:left;
-padding:0;
-font-family:Arial,sans-serif;
+.card {
+    padding: 28px;
+    background: rgba(255,255,255,.035);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 16px;
 }
 
-.location-button:hover{
-color:#7ebcff;
+.card h2 {
+    font-size: 20px;
+    margin-bottom: 12px;
 }
 
-.location-button span:last-child{
-color:#4da6ff;
-font-size:28px;
+.card p {
+    color: #aebdce;
 }
 
-.location-preview{
-color:#9fb0c3;
-margin-top:10px;
+.insight {
+    margin-top: 30px;
+    padding: 30px;
+    border-left: 3px solid #4da6ff;
+    background: #0a1728;
+    border-radius: 10px;
 }
 
-.location-map{
-display:none;
-margin-top:30px;
-padding-top:30px;
-border-top:1px solid rgba(255,255,255,.08);
+.insight strong {
+    color: #7ebcff;
 }
 
-.location-map.active{
-display:block;
-animation:fadeIn .35s ease;
+.quiz {
+    margin-top: 55px;
+    padding: 35px;
+    background: #0a1728;
+    border: 1px solid rgba(77,166,255,.2);
+    border-radius: 18px;
 }
 
-@keyframes fadeIn{
-
-from{
-opacity:0;
-transform:translateY(8px);
+.quiz h2 {
+    margin-bottom: 20px;
 }
 
-to{
-opacity:1;
-transform:translateY(0);
+.option {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 14px 16px;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 1px solid #263951;
+    background: #0d2035;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
 }
 
+.option:hover {
+    border-color: #4da6ff;
 }
 
-.map-title{
-color:#aebdce;
-font-size:15px;
-margin-bottom:20px;
+#feedback {
+    margin-top: 20px;
+    color: #7ebcff;
+    font-weight: bold;
 }
 
-.brain-map{
-width:100%;
-max-width:850px;
-display:block;
-margin:auto;
-background:#091727;
-border-radius:16px;
-border:1px solid rgba(255,255,255,.08);
+.bottom-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 60px;
 }
 
-.brain-outline{
-fill:#172b42;
-stroke:#526b86;
-stroke-width:3;
+.bottom-nav a {
+    padding: 13px 18px;
+    border-radius: 10px;
+    text-decoration: none;
+    border: 1px solid #263951;
+    color: #d7e2ee;
 }
 
-.brain-detail{
-fill:none;
-stroke:#344d68;
-stroke-width:2;
+.bottom-nav a:hover {
+    border-color: #4da6ff;
 }
 
-.midbrain{
-fill:#4da6ff;
-stroke:#b8ddff;
-stroke-width:3;
-filter:drop-shadow(0 0 9px rgba(77,166,255,.8));
-animation:pulse 2s infinite;
+footer {
+    text-align: center;
+    padding: 35px 7%;
+    border-top: 1px solid rgba(255,255,255,.08);
+    color: #718197;
+    font-size: 14px;
 }
 
-@keyframes pulse{
+@media (max-width: 700px) {
 
-0%,100%{
-opacity:1;
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    nav {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .bottom-nav {
+        flex-direction: column;
+    }
+
 }
 
-50%{
-opacity:.65;
-}
+</style>
+
+</head>
+
+
+<body>
+
+
+<nav>
+
+<a
+class="logo"
+href="index.html"
+>
+Neuro<span>Atlas</span>
+</a>
+
+<div class="nav-links">
+
+<a href="index.html">
+Home
+</a>
+
+<a href="explore.html">
+Explore Anatomy
+</a>
+
+</div>
+
+</nav>
+
+
+<main class="container">
+
+
+<div class="label">
+Brainstem
+</div>
+
+
+<h1>
+Midbrain
+</h1>
+
+
+<div class="arabic">
+الدماغ الأوسط
+</div>
+
+
+<p class="intro">
+
+The midbrain is the uppermost part of the brainstem. It plays
+important roles in eye movement, visual and auditory reflexes,
+motor control, and communication between different regions of
+the nervous system.
+
+</p>
+
+
+<div class="grid">
+
+
+<div class="card">
+
+<h2>📍 Location</h2>
+
+<p>
+
+The midbrain is located between the diencephalon and the pons.
+It forms the upper part of the brainstem.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h2>👁️ Visual Reflexes</h2>
+
+<p>
+
+The superior colliculus helps coordinate reflexive movements
+of the eyes and head in response to visual stimuli.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h2>👂 Auditory Processing</h2>
+
+<p>
+
+The inferior colliculus is an important relay in the auditory
+pathway and contributes to auditory reflexes.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h2>🚶 Motor Control</h2>
+
+<p>
+
+The midbrain contains the substantia nigra and other structures
+that participate in movement and motor control.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h2>🔗 Major Structures</h2>
+
+<p>
+
+Important structures include the cerebral peduncles, tectum,
+tegmentum, superior colliculus, inferior colliculus, and
+substantia nigra.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h2>🩺 Clinical Relevance</h2>
+
+<p>
+
+Midbrain injury can affect eye movements, motor function,
+consciousness, and communication between sensory and motor
+pathways.
+
+</p>
+
+</div>
+
+
+</div>
+
+
+<div class="insight">
+
+<strong>NeuroAtlas Insight</strong>
+
+<br><br>
+
+Although the midbrain is relatively small, it contains
+important pathways and nuclei involved in movement, sensory
+processing, reflexes, and alertness.
+
+</div>
+
+
+<section class="quiz">
+
+<div class="label">
+Knowledge Check
+</div>
+
+<h2>
+Which structure is found in the midbrain?
+</h2>
+
+
+<button
+class="option"
+onclick="checkAnswer(true)"
+>
+A. Substantia nigra
+</button>
+
+
+<button
+class="option"
+onclick="checkAnswer(false)"
+>
+B. Hippocampus
+</button>
+
+
+<button
+class="option"
+onclick="checkAnswer(false)"
+>
+C. Cerebral cortex
+</button>
+
+
+<button
+class="option"
+onclick="checkAnswer(false)"
+>
+D. Lateral ventricle
+</button>
+
+
+<div id="feedback"></div>
+
+</section>
+
+
+<div class="bottom-nav">
+
+<a href="explore.html">
+← Back to Explore Anatomy
+</a>
+
+<a href="index.html">
+NeuroAtlas Home →
+</a>
+
+</div>
+
+
+</main>
+
+
+<footer>
+
+NeuroAtlas · Free bilingual neuroanatomy education
+
+</footer>
+
+
+<script>
+
+function checkAnswer(correct) {
+
+    const feedback =
+        document.getElementById("feedback");
+
+    if (correct) {
+
+        feedback.textContent =
+        "✓ Correct — the substantia nigra is a major structure of the midbrain.";
+
+    } else {
+
+        feedback.textContent =
+        "Not quite. Think about the structures located in the brainstem.";
+
+    }
 
 }
 
-.label-line{
-stroke:#7ebcff;
-stroke-width:2;
-stroke-dasharray:5 4;
-}
-
-.map-label{
-fill:white;
-font-size:17px;
-font-weight:bold;
-}
-
-.map-small{
-fill:#9fb0c3;
-font-size:13px;
-}
-
-.location-explanation{
-margin-top:22px;
-padding:22px;
-background:#0a1728;
-border-radius:12px;
-border-left:3px solid #4da6ff;
-color:#aebdce;
-}
-
-.location-explanation strong{
-color:#7ebcff;
-}
+</script>
 
 
-/* CONTENT CARDS */
+</body>
 
-.grid{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:20px;
-}
-
-.card{
-padding:28px;
-background:rgba(255,255,255,.035);
-border:1px solid rgba(255,255,255,.08);
-border-radius:16px;
-transition:.25s;
-}
-
-.card:hover{
-transform:translateY(-4px);
-border-color:rgba(77,166,255,.45);
-}
-
-.card h2{
-font-size:20px;
-margin-bottom:12px;
-}
-
-.card p{
-color:#aebdce;
-}
-
-
-/* INSIGHT */
-
-.insight{
-margin-top:30px;
-padding:30px;
-border-left:3px solid #4da6ff;
-background:#0a1728;
-border-radius:10px;
-}
-
-.insight strong{
-color:#7ebcff;
-}
-
-
-/* QUIZ */
-
-.quiz{
-margin-top:55px;
-padding:35px;
-background:#0a1728;
-border:1px solid rgba(77,166,255,.2);
-border-radius:18px;
-}
-
-.quiz h2{
-margin-bottom:20px;
-}
-
-.option{
-display:block;
-width:100%;
-text-align:left;
-padding:14px 16px;
-margin-top:10px;
-border-radius:10px;
-border:1px solid #263951;
-background:#0d2035;
-color:white;
-cursor:pointer;
-font-size:15px
+</html>
+```
