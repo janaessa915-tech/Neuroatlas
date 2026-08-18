@@ -143,7 +143,6 @@ background:#10233a;
 color:#c8d6e5;
 font-size:13px;
 text-decoration:none;
-cursor:pointer;
 border:1px solid transparent;
 transition:.2s;
 }
@@ -203,7 +202,6 @@ href="https://janaessa915-tech.github.io/Neuroatlas/"
 Neuro<span>Atlas</span>
 </a>
 
-
 <div class="nav-links">
 
 <a
@@ -237,10 +235,8 @@ Navigate the Human Brain.
 
 
 <p class="intro">
-
 Explore major neuroanatomical regions and discover how structures
 connect to function, pathways, and clinical reasoning.
-
 </p>
 
 
@@ -309,46 +305,40 @@ Structures located beneath the cerebral cortex.
 
 <div class="structures">
 
-
 <a
 class="structure"
-href="https://janaessa915-tech.github.io/Neuroatlas/hippocampus.html"
+href="hippocampus.html"
 >
 Hippocampus
 </a>
 
-
 <a
 class="structure"
-href="https://janaessa915-tech.github.io/Neuroatlas/thalamus.html"
+href="thalamus.html"
 >
 Thalamus
 </a>
 
-
 <a
 class="structure"
-href="https://janaessa915-tech.github.io/Neuroatlas/hypothalamus.html"
+href="hypothalamus.html"
 >
 Hypothalamus
 </a>
 
-
 <a
 class="structure"
-href="https://janaessa915-tech.github.io/Neuroatlas/amygdala.html"
+href="amygdala.html"
 >
 Amygdala
 </a>
 
-
 <a
 class="structure"
-href="https://janaessa915-tech.github.io/Neuroatlas/basal-ganglia.html"
+href="basal-ganglia.html"
 >
 Basal Ganglia
 </a>
-
 
 </div>
 
@@ -367,15 +357,24 @@ Core structures connecting the brain with the spinal cord.
 
 <div class="structures">
 
-<a class="structure disabled" href="#">
+<a
+class="structure"
+href="midbrain.html"
+>
 Midbrain
 </a>
 
-<a class="structure disabled" href="#">
+<a
+class="structure disabled"
+href="#"
+>
 Pons
 </a>
 
-<a class="structure disabled" href="#">
+<a
+class="structure disabled"
+href="#"
+>
 Medulla
 </a>
 
@@ -516,21 +515,17 @@ search.value.toLowerCase().trim();
 
 let visible=0;
 
-
 categories.forEach(function(category){
 
 const text =
 category.innerText.toLowerCase();
-
 
 if(text.includes(query)){
 
 category.style.display="";
 visible++;
 
-}
-
-else{
+}else{
 
 category.style.display="none";
 
@@ -543,9 +538,7 @@ if(visible===0){
 
 noResults.style.display="block";
 
-}
-
-else{
+}else{
 
 noResults.style.display="none";
 
