@@ -3,19 +3,339 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NeuroAtlas</title>
+
+  <title>NeuroAtlas | Explore the Brain</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #07111f;
+      color: #f4f7fb;
+      line-height: 1.6;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 7%;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .logo span {
+      color: #4da6ff;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 14px;
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    .hero {
+      min-height: 75vh;
+      display: flex;
+      align-items: center;
+      padding: 80px 7%;
+      background:
+        radial-gradient(circle at 75% 45%, rgba(40,130,255,0.18), transparent 30%),
+        #07111f;
+    }
+
+    .hero-content {
+      max-width: 720px;
+    }
+
+    .eyebrow {
+      color: #4da6ff;
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(48px, 8vw, 88px);
+      line-height: 1;
+      margin-bottom: 25px;
+    }
+
+    .hero h1 span {
+      color: #4da6ff;
+    }
+
+    .hero p {
+      max-width: 650px;
+      color: #aebdce;
+      font-size: 19px;
+      margin-bottom: 35px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 23px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+
+    .primary {
+      background: #2688ff;
+      color: white;
+    }
+
+    .secondary {
+      border: 1px solid #33465e;
+      color: white;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    section {
+      padding: 80px 7%;
+    }
+
+    .section-label {
+      color: #4da6ff;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-size: 40px;
+      margin-bottom: 15px;
+    }
+
+    .section-intro {
+      color: #aebdce;
+      max-width: 650px;
+      margin-bottom: 40px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.035);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 28px;
+      transition: 0.25s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(77,166,255,0.5);
+    }
+
+    .icon {
+      font-size: 30px;
+      margin-bottom: 18px;
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: #9fb0c3;
+      font-size: 15px;
+    }
+
+    .bilingual {
+      text-align: center;
+      background: #0a1728;
+    }
+
+    .bilingual p {
+      color: #aebdce;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    footer {
+      padding: 35px 7%;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      color: #718197;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    @media (max-width: 800px) {
+      nav {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      nav a {
+        margin: 0 8px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 60px;
+        padding-bottom: 60px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-  <h1>NeuroAtlas</h1>
+  <nav>
+    <div class="logo">Neuro<span>Atlas</span></div>
 
-  <p>Explore the brain. Understand the connections.</p>
+    <div>
+      <a href="#explore">Explore</a>
+      <a href="#learn">Learn</a>
+      <a href="#about">About</a>
+    </div>
+  </nav>
 
-  <p>
-    A free bilingual English-Arabic neuroanatomy learning platform
-    for students.
-  </p>
+  <main>
+
+    <section class="hero">
+
+      <div class="hero-content">
+
+        <div class="eyebrow">
+          Bilingual Neuroanatomy Learning Platform
+        </div>
+
+        <h1>
+          Explore the <span>Brain.</span><br>
+          Understand the Connections.
+        </h1>
+
+        <p>
+          NeuroAtlas is a free English-Arabic learning platform that helps
+          students visualize neuroanatomy, understand neural relationships,
+          and practice neurological localization.
+        </p>
+
+        <div class="buttons">
+          <a class="btn primary" href="#explore">
+            Explore Anatomy →
+          </a>
+
+          <a class="btn secondary" href="#learn">
+            Test Yourself
+          </a>
+        </div>
+
+      </div>
+
+    </section>
+
+    <section id="explore">
+
+      <div class="section-label">Explore</div>
+
+      <h2>Navigate the nervous system.</h2>
+
+      <p class="section-intro">
+        Move beyond memorizing isolated structures. Learn how regions,
+        pathways, and functions connect.
+      </p>
+
+      <div class="cards">
+
+        <div class="card">
+          <div class="icon">🧠</div>
+          <h3>Brain Structures</h3>
+          <p>
+            Explore cortical regions, deep brain structures,
+            cerebellum, brainstem, and more.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="icon">〰️</div>
+          <h3>Neural Pathways</h3>
+          <p>
+            Follow major pathways from their origins
+            through their connections and destinations.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="icon">🧩</div>
+          <h3>Clinical Localization</h3>
+          <p>
+            Practice connecting neurological findings
+            with relevant anatomical regions.
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+    <section id="learn" class="bilingual">
+
+      <div class="section-label">Learn</div>
+
+      <h2>Understand. Practice. Connect.</h2>
+
+      <p>
+        Learn neuroanatomy in English and Arabic through structured
+        explanations, interactive challenges, and clinical reasoning.
+      </p>
+
+    </section>
+
+    <section id="about">
+
+      <div class="section-label">About NeuroAtlas</div>
+
+      <h2>Making neuroanatomy easier to understand.</h2>
+
+      <p class="section-intro">
+        NeuroAtlas was created to make neuroanatomy more accessible by
+        transforming complex anatomical relationships into visual,
+        interactive learning experiences.
+      </p>
+
+    </section>
+
+  </main>
+
+  <footer>
+    NeuroAtlas · Free bilingual neuroanatomy education
+  </footer>
 
 </body>
 </html>
