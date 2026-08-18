@@ -5,6 +5,7 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Midbrain | NeuroAtlas</title>
@@ -93,19 +94,81 @@ margin-bottom:12px;
 color:#aebdce;
 }
 
-.location-link{
-display:block;
-text-decoration:none;
+.location-button{
+width:100%;
+text-align:left;
 color:white;
+cursor:pointer;
+font-family:Arial,sans-serif;
 }
 
-.location-link:hover .card{
+.location-button:hover{
 border-color:#4da6ff;
-transform:translateY(-4px);
 }
 
-.card{
-transition:.2s;
+.location-visual{
+display:none;
+margin-top:20px;
+padding:30px;
+background:#0b192b;
+border:1px solid #263951;
+border-radius:16px;
+}
+
+.location-visual:target{
+display:block;
+}
+
+.location-visual h2{
+margin-bottom:10px;
+}
+
+.location-visual p{
+margin-bottom:25px;
+}
+
+svg{
+width:100%;
+max-width:750px;
+display:block;
+margin:auto;
+}
+
+.brain{
+fill:#263d55;
+stroke:#71869e;
+stroke-width:3;
+}
+
+.cerebellum{
+fill:#344d66;
+stroke:#71869e;
+stroke-width:3;
+}
+
+.pons{
+fill:#355d78;
+}
+
+.medulla{
+fill:#29465b;
+}
+
+.midbrain{
+fill:#4da6ff;
+stroke:#c8e7ff;
+stroke-width:4;
+}
+
+.line{
+stroke:#8fc7ff;
+stroke-width:2;
+}
+
+.svg-label{
+fill:white;
+font-size:18px;
+font-weight:bold;
 }
 
 .insight{
@@ -143,6 +206,7 @@ border:1px solid #263951;
 border-radius:8px;
 text-align:left;
 cursor:pointer;
+font-size:15px;
 }
 
 .option:hover{
@@ -224,22 +288,21 @@ the nervous system.
 <div class="cards">
 
 
-<!-- LOCATION -->
+<!-- LOCATION BUTTON -->
 
 <a
-class="location-link"
-href="midbrain-location.html"
+href="#location"
+style="text-decoration:none;"
 >
 
-<div class="card">
+<div class="card location-button">
 
 <h2>
 📍 Location
 </h2>
 
 <p>
-View a visualization showing where the midbrain is located
-within the brain.
+Click here to see where the midbrain is located within the brain.
 </p>
 
 </div>
@@ -247,7 +310,7 @@ within the brain.
 </a>
 
 
-<!-- VISUAL -->
+<!-- VISUAL REFLEXES -->
 
 <div class="card">
 
@@ -341,6 +404,164 @@ consciousness, and important sensory and motor pathways.
 </div>
 
 
+<!-- LOCATION VISUALIZATION -->
+
+<div
+id="location"
+class="location-visual"
+>
+
+<h2>
+📍 Where is the Midbrain?
+</h2>
+
+<p>
+
+The midbrain sits between the diencephalon and the pons,
+forming the uppermost part of the brainstem.
+
+</p>
+
+
+<svg
+viewBox="0 0 800 560"
+xmlns="http://www.w3.org/2000/svg"
+>
+
+
+<!-- CEREBRUM -->
+
+<path
+class="brain"
+d="M150 100
+C200 45 300 30 400 50
+C510 70 575 150 570 235
+C568 300 525 330 470 330
+C410 330 375 285 315 275
+C255 265 190 300 150 255
+C115 215 115 145 150 100Z"
+/>
+
+
+<!-- CEREBELLUM -->
+
+<path
+class="cerebellum"
+d="M465 315
+C530 285 600 315 620 370
+C640 425 605 475 545 475
+C485 475 450 430 450 380
+C450 350 455 330 465 315Z"
+/>
+
+
+<!-- MEDULLA -->
+
+<path
+class="medulla"
+d="M365 365
+C370 400 375 440 365 485
+L400 485
+C405 440 405 400 395 360Z"
+/>
+
+
+<!-- PONS -->
+
+<ellipse
+class="pons"
+cx="380"
+cy="345"
+rx="42"
+ry="30"
+/>
+
+
+<!-- MIDBRAIN -->
+
+<ellipse
+class="midbrain"
+cx="380"
+cy="300"
+rx="27"
+ry="21"
+/>
+
+
+<!-- MIDBRAIN LABEL -->
+
+<line
+class="line"
+x1="407"
+y1="300"
+x2="590"
+y2="235"
+/>
+
+
+<text
+class="svg-label"
+x="605"
+y="240"
+>
+MIDBRAIN
+</text>
+
+
+<!-- PONS LABEL -->
+
+<line
+class="line"
+x1="420"
+y1="345"
+x2="590"
+y2="345"
+/>
+
+
+<text
+class="svg-label"
+x="605"
+y="351"
+>
+PONS
+</text>
+
+
+<!-- MEDULLA LABEL -->
+
+<line
+class="line"
+x1="390"
+y1="450"
+x2="590"
+y2="440"
+/>
+
+
+<text
+class="svg-label"
+x="605"
+y="446"
+>
+MEDULLA
+</text>
+
+
+</svg>
+
+
+<p style="text-align:center;color:#aebdce;">
+
+🔵 The highlighted region represents the approximate location
+of the midbrain.
+
+</p>
+
+
+</div>
+
+
 <div class="insight">
 
 <strong>
@@ -408,7 +629,9 @@ D. Lateral ventricle
 class="back"
 href="explore.html"
 >
+
 ← Back to Explore Anatomy
+
 </a>
 
 
@@ -427,7 +650,9 @@ if(correct){
 feedback.textContent =
 "✓ Correct! The substantia nigra is located in the midbrain.";
 
-}else{
+}
+
+else{
 
 feedback.textContent =
 "Not quite. Try again.";
