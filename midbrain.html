@@ -58,7 +58,7 @@ color:white;
 }
 
 .container{
-max-width:1050px;
+max-width:1100px;
 margin:auto;
 padding:70px 7%;
 }
@@ -90,10 +90,158 @@ max-width:780px;
 margin-bottom:45px;
 }
 
+
+/* LOCATION */
+
+.location-card{
+padding:30px;
+background:rgba(255,255,255,.035);
+border:1px solid rgba(255,255,255,.08);
+border-radius:18px;
+cursor:pointer;
+transition:.25s;
+margin-bottom:25px;
+}
+
+.location-card:hover{
+border-color:rgba(77,166,255,.65);
+transform:translateY(-3px);
+}
+
+.location-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:20px;
+}
+
+.location-header h2{
+font-size:22px;
+}
+
+.location-header span{
+color:#4da6ff;
+font-size:25px;
+}
+
+.location-preview{
+color:#9fb0c3;
+margin-top:10px;
+}
+
+.location-map{
+display:none;
+margin-top:30px;
+padding-top:30px;
+border-top:1px solid rgba(255,255,255,.08);
+}
+
+.location-map.active{
+display:block;
+animation:fadeIn .35s ease;
+}
+
+@keyframes fadeIn{
+
+from{
+opacity:0;
+transform:translateY(8px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+.map-title{
+color:#aebdce;
+margin-bottom:20px;
+font-size:15px;
+}
+
+.brain-map{
+width:100%;
+max-width:850px;
+margin:auto;
+display:block;
+background:#091727;
+border-radius:16px;
+border:1px solid rgba(255,255,255,.08);
+}
+
+.brain-outline{
+fill:#172b42;
+stroke:#526b86;
+stroke-width:3;
+}
+
+.brain-detail{
+fill:none;
+stroke:#344d68;
+stroke-width:2;
+opacity:.8;
+}
+
+.midbrain{
+fill:#4da6ff;
+stroke:#b8ddff;
+stroke-width:3;
+filter:drop-shadow(0 0 9px rgba(77,166,255,.8));
+animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+
+0%,100%{
+opacity:1;
+}
+
+50%{
+opacity:.65;
+}
+
+}
+
+.label-line{
+stroke:#7ebcff;
+stroke-width:2;
+stroke-dasharray:5 4;
+}
+
+.map-label{
+fill:white;
+font-size:17px;
+font-weight:bold;
+}
+
+.map-small{
+fill:#9fb0c3;
+font-size:13px;
+}
+
+.location-explanation{
+margin-top:22px;
+padding:22px;
+background:#0a1728;
+border-radius:12px;
+border-left:3px solid #4da6ff;
+color:#aebdce;
+}
+
+.location-explanation strong{
+color:#7ebcff;
+}
+
+
+/* CONTENT */
+
 .grid{
 display:grid;
 grid-template-columns:repeat(2,1fr);
 gap:20px;
+margin-top:25px;
 }
 
 .card{
@@ -129,6 +277,9 @@ border-radius:10px;
 .insight strong{
 color:#7ebcff;
 }
+
+
+/* QUIZ */
 
 .quiz{
 margin-top:55px;
@@ -166,6 +317,9 @@ color:#7ebcff;
 font-weight:bold;
 }
 
+
+/* NAVIGATION */
+
 .bottom-nav{
 display:flex;
 justify-content:space-between;
@@ -185,6 +339,9 @@ color:#d7e2ee;
 border-color:#4da6ff;
 }
 
+
+/* FOOTER */
+
 footer{
 text-align:center;
 padding:35px 7%;
@@ -192,6 +349,9 @@ border-top:1px solid rgba(255,255,255,.08);
 color:#718197;
 font-size:14px;
 }
+
+
+/* MOBILE */
 
 @media(max-width:700px){
 
@@ -206,6 +366,14 @@ gap:15px;
 
 .bottom-nav{
 flex-direction:column;
+}
+
+.location-header{
+align-items:flex-start;
+}
+
+.brain-map{
+width:100%;
 }
 
 }
@@ -274,233 +442,102 @@ the brainstem.
 </p>
 
 
-<div class="grid">
+<!-- INTERACTIVE LOCATION -->
 
+<div
+class="location-card"
+onclick="toggleLocation()"
+>
 
-<div class="card">
-
-<h2>📍 Location</h2>
-
-<p>
-
-The midbrain lies between the diencephalon above and the pons
-below, forming the upper portion of the brainstem.
-
-</p>
-
-</div>
-
-
-<div class="card">
-
-<h2>👁️ Visual Reflexes</h2>
-
-<p>
-
-The superior colliculus is involved in orienting movements of
-the eyes and head toward important visual stimuli.
-
-</p>
-
-</div>
-
-
-<div class="card">
-
-<h2>👂 Auditory Reflexes</h2>
-
-<p>
-
-The inferior colliculus is an important relay in auditory
-pathways and contributes to auditory reflexes.
-
-</p>
-
-</div>
-
-
-<div class="card">
-
-<h2>🚶 Motor Control</h2>
-
-<p>
-
-The midbrain contains structures involved in movement,
-including the substantia nigra and connections with basal
-ganglia circuits.
-
-</p>
-
-</div>
-
-
-<div class="card">
-
-<h2>🔗 Major Structures</h2>
-
-<p>
-
-Important midbrain structures include the cerebral peduncles,
-tectum, tegmentum, superior colliculi, inferior colliculi,
-and substantia nigra.
-
-</p>
-
-</div>
-
-
-<div class="card">
-
-<h2>🩺 Clinical Relevance</h2>
-
-<p>
-
-Damage to the midbrain can affect eye movements, motor
-function, consciousness, and pathways carrying sensory and
-motor information.
-
-</p>
-
-</div>
-
-
-</div>
-
-
-<div class="insight">
-
-<strong>NeuroAtlas Insight</strong>
-
-<br><br>
-
-The midbrain is a major communication hub. Although relatively
-small, it contains pathways and nuclei involved in movement,
-sensory processing, reflexes, and maintaining alertness.
-
-</div>
-
-
-<section class="quiz">
-
-
-<div class="label">
-Knowledge Check
-</div>
-
+<div class="location-header">
 
 <h2>
-
-Which structure is located in the midbrain?
-
+📍 Where is the Midbrain?
 </h2>
 
-
-<button
-class="option"
-onclick="checkAnswer(true)"
->
-
-A. Substantia nigra
-
-</button>
-
-
-<button
-class="option"
-onclick="checkAnswer(false)"
->
-
-B. Hippocampus
-
-</button>
-
-
-<button
-class="option"
-onclick="checkAnswer(false)"
->
-
-C. Cerebral cortex
-
-</button>
-
-
-<button
-class="option"
-onclick="checkAnswer(false)"
->
-
-D. Lateral ventricle
-
-</button>
-
-
-<div id="feedback"></div>
-
-
-</section>
-
-
-<div class="bottom-nav">
-
-
-<a
-href="https://janaessa915-tech.github.io/Neuroatlas/explore.html"
->
-
-← Back to Explore Anatomy
-
-</a>
-
-
-<a
-href="https://janaessa915-tech.github.io/Neuroatlas/"
->
-
-NeuroAtlas Home →
-
-</a>
-
+<span id="locationArrow">
++
+</span>
 
 </div>
 
 
-</main>
+<p class="location-preview">
+
+Tap to see exactly where the midbrain sits within the brain.
+
+</p>
 
 
-<footer>
-
-NeuroAtlas · Free bilingual neuroanatomy education
-
-</footer>
-
-
-<script>
-
-function checkAnswer(correct){
-
-const feedback =
-document.getElementById("feedback");
-
-if(correct){
-
-feedback.textContent =
-"✓ Correct — the substantia nigra is a major structure of the midbrain.";
-
-}
-
-else{
-
-feedback.textContent =
-"Not quite. Think about the structures located within the brainstem.";
-
-}
-
-}
-
-</script>
+<div
+id="locationMap"
+class="location-map"
+onclick="event.stopPropagation()"
+>
 
 
-</body>
+<p class="map-title">
 
-</html>
+Interactive anatomical map — the highlighted region represents
+the approximate location of the midbrain.
+
+</p>
+
+
+<!-- ORIGINAL SVG BRAIN MAP -->
+
+<svg
+class="brain-map"
+viewBox="0 0 900 600"
+xmlns="http://www.w3.org/2000/svg"
+role="img"
+aria-label="Simplified lateral brain diagram showing the midbrain"
+>
+
+
+<!-- BRAIN -->
+
+<path
+class="brain-outline"
+d="
+M170 330
+C135 275 145 190 210 140
+C275 90 365 75 455 95
+C545 112 630 155 690 225
+C735 278 750 345 720 390
+C700 420 665 430 625 430
+C585 430 550 450 515 475
+C475 505 420 515 365 505
+C310 500 255 475 220 435
+C195 412 180 375 170 330
+Z
+"
+/>
+
+
+<!-- CEREBELLUM -->
+
+<path
+class="brain-detail"
+d="
+M570 380
+C610 345 680 350 715 390
+C680 430 620 440 575 420
+"
+/>
+
+<path
+class="brain-detail"
+d="
+M585 392
+C620 370 665 375 700 400
+"
+/>
+
+
+<!-- CEREBRAL DETAILS -->
+
+<path
+class="brain-detail"
+d="
+M205 
