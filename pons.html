@@ -1,4 +1,4 @@
-```html id="qf4y3j"
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,219 +13,287 @@
 <style>
 
 *{
-box-sizing:border-box;
-margin:0;
-padding:0;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
 }
 
 body{
-font-family:Arial,sans-serif;
-background:#07111f;
-color:#f4f7fb;
-line-height:1.7;
+    font-family:Arial,sans-serif;
+    background:#07111f;
+    color:#f4f7fb;
+    line-height:1.7;
 }
 
 nav{
-padding:22px 7%;
-border-bottom:1px solid rgba(255,255,255,.08);
+    padding:22px 7%;
+    border-bottom:1px solid rgba(255,255,255,.08);
 }
 
 nav a{
-color:#aebdce;
-text-decoration:none;
+    color:#aebdce;
+    text-decoration:none;
 }
 
 nav a:hover{
-color:white;
+    color:white;
 }
 
 .container{
-max-width:1100px;
-margin:auto;
-padding:70px 7%;
+    max-width:1100px;
+    margin:auto;
+    padding:70px 7%;
 }
 
 .label{
-color:#4da6ff;
-text-transform:uppercase;
-letter-spacing:2px;
-font-size:13px;
-margin-bottom:12px;
+    color:#4da6ff;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    font-size:13px;
+    margin-bottom:12px;
 }
 
 h1{
-font-size:clamp(45px,7vw,76px);
-line-height:1.05;
-margin-bottom:10px;
+    font-size:clamp(45px,7vw,76px);
+    line-height:1.05;
+    margin-bottom:8px;
 }
 
 .subtitle{
-color:#7ebcff;
-font-size:22px;
-margin-bottom:25px;
+    color:#7ebcff;
+    font-size:22px;
+    margin-bottom:25px;
 }
 
 .intro{
-color:#aebdce;
-font-size:18px;
-max-width:800px;
-margin-bottom:45px;
+    color:#aebdce;
+    font-size:18px;
+    max-width:800px;
+    margin-bottom:30px;
 }
 
+
+/* BUTTONS */
+
+.actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-bottom:50px;
+}
+
+.action-button{
+    display:inline-block;
+    padding:13px 18px;
+    border-radius:9px;
+    border:1px solid #263951;
+    background:#10233a;
+    color:white;
+    text-decoration:none;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.action-button:hover{
+    background:#183654;
+    border-color:#4da6ff;
+}
+
+
+/* CARDS */
+
 .cards{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:20px;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
 }
 
 .card{
-padding:28px;
-background:#0b192b;
-border:1px solid #263951;
-border-radius:16px;
+    padding:28px;
+    background:#0b192b;
+    border:1px solid #263951;
+    border-radius:16px;
 }
 
 .card h2{
-font-size:20px;
-margin-bottom:12px;
+    font-size:20px;
+    margin-bottom:12px;
 }
 
 .card p{
-color:#aebdce;
+    color:#aebdce;
 }
 
+
+/* LOCATION */
+
 .location{
-margin-top:25px;
-padding:30px;
-background:#0b192b;
-border:1px solid #263951;
-border-radius:16px;
+    margin-top:50px;
+    padding:35px;
+    background:#0b192b;
+    border:1px solid #263951;
+    border-radius:18px;
 }
 
 .location h2{
-margin-bottom:12px;
+    font-size:28px;
+    margin-bottom:10px;
 }
 
-.location p{
-color:#aebdce;
-margin-bottom:25px;
+.location-intro{
+    color:#aebdce;
+    margin-bottom:30px;
+}
+
+.brain-visual{
+    width:100%;
+    overflow:hidden;
 }
 
 svg{
-display:block;
-width:100%;
-max-width:750px;
-margin:auto;
+    display:block;
+    width:100%;
+    max-width:800px;
+    height:auto;
+    margin:auto;
 }
 
 .brain{
-fill:#263d55;
-stroke:#71869e;
-stroke-width:3;
+    fill:#263d55;
+    stroke:#71869e;
+    stroke-width:3;
 }
 
 .cerebellum{
-fill:#344d66;
-stroke:#71869e;
-stroke-width:3;
+    fill:#344d66;
+    stroke:#71869e;
+    stroke-width:3;
 }
 
 .midbrain{
-fill:#29465b;
-stroke:#71869e;
-stroke-width:3;
+    fill:#29465b;
+    stroke:#71869e;
+    stroke-width:3;
 }
 
 .pons{
-fill:#4da6ff;
-stroke:white;
-stroke-width:4;
+    fill:#4da6ff;
+    stroke:white;
+    stroke-width:4;
 }
 
 .medulla{
-fill:#29465b;
-stroke:#71869e;
-stroke-width:3;
+    fill:#29465b;
+    stroke:#71869e;
+    stroke-width:3;
 }
 
 .line{
-stroke:#8fc7ff;
-stroke-width:2;
+    stroke:#8fc7ff;
+    stroke-width:2;
 }
 
 .svg-label{
-fill:white;
-font-size:18px;
-font-weight:bold;
+    fill:white;
+    font-size:18px;
+    font-weight:bold;
 }
 
+.location-caption{
+    text-align:center;
+    color:#9fb0c3;
+    margin-top:15px;
+}
+
+
+/* INSIGHT */
+
 .insight{
-margin-top:30px;
-padding:25px;
-background:#0b192b;
-border-left:3px solid #4da6ff;
-border-radius:10px;
-color:#aebdce;
+    margin-top:30px;
+    padding:25px;
+    background:#0b192b;
+    border-left:3px solid #4da6ff;
+    border-radius:10px;
+    color:#aebdce;
 }
 
 .insight strong{
-color:#7ebcff;
+    color:#7ebcff;
 }
 
+
+/* QUIZ */
+
 .quiz{
-margin-top:45px;
-padding:30px;
-background:#0b192b;
-border:1px solid #263951;
-border-radius:15px;
+    margin-top:50px;
+    padding:30px;
+    background:#0b192b;
+    border:1px solid #263951;
+    border-radius:15px;
 }
 
 .quiz h2{
-margin-bottom:15px;
+    margin-bottom:15px;
 }
 
 .option{
-display:block;
-width:100%;
-padding:13px;
-margin-top:10px;
-background:#10233a;
-color:white;
-border:1px solid #263951;
-border-radius:8px;
-text-align:left;
-cursor:pointer;
-font-size:15px;
+    display:block;
+    width:100%;
+    padding:13px;
+    margin-top:10px;
+    background:#10233a;
+    color:white;
+    border:1px solid #263951;
+    border-radius:8px;
+    text-align:left;
+    cursor:pointer;
+    font-size:15px;
 }
 
 .option:hover{
-border-color:#4da6ff;
+    border-color:#4da6ff;
 }
 
 #feedback{
-margin-top:15px;
-color:#7ebcff;
+    margin-top:15px;
+    color:#7ebcff;
 }
 
+
+/* BOTTOM NAVIGATION */
+
 .back{
-display:inline-block;
-margin-top:40px;
-padding:12px 18px;
-border:1px solid #263951;
-border-radius:9px;
-color:white;
-text-decoration:none;
+    display:inline-block;
+    margin-top:40px;
+    padding:12px 18px;
+    border:1px solid #263951;
+    border-radius:9px;
+    color:white;
+    text-decoration:none;
 }
 
 .back:hover{
-border-color:#4da6ff;
+    border-color:#4da6ff;
 }
+
 
 @media(max-width:700px){
 
-.cards{
-grid-template-columns:1fr;
-}
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .location{
+        padding:20px;
+    }
+
+    .svg-label{
+        font-size:14px;
+    }
 
 }
 
@@ -236,6 +304,8 @@ grid-template-columns:1fr;
 
 <body>
 
+
+<!-- NAVIGATION -->
 
 <nav>
 
@@ -248,6 +318,8 @@ grid-template-columns:1fr;
 
 <main class="container">
 
+
+<!-- HEADER -->
 
 <div class="label">
 Brainstem
@@ -266,15 +338,48 @@ Pons
 
 <p class="intro">
 
-The pons is the middle portion of the brainstem. It serves as
-an important communication bridge between the cerebrum,
-cerebellum, and spinal cord and contributes to movement,
-sensation, facial function, breathing, and sleep.
+The pons is the middle portion of the brainstem. It acts as an
+important communication bridge between the cerebrum, cerebellum,
+and spinal cord and contributes to movement, sensation, breathing,
+sleep, and facial functions.
 
 </p>
 
 
-<div class="cards">
+<!-- ACTION BUTTONS -->
+
+<div class="actions">
+
+<a
+class="action-button"
+href="#location"
+>
+📍 View Location
+</a>
+
+<a
+class="action-button"
+href="#function"
+>
+⚡ Functions
+</a>
+
+<a
+class="action-button"
+href="#quiz"
+>
+🧠 Test Yourself
+</a>
+
+</div>
+
+
+<!-- INFORMATION -->
+
+<div
+id="function"
+class="cards"
+>
 
 
 <div class="card">
@@ -287,7 +392,8 @@ sensation, facial function, breathing, and sleep.
 
 The pons is a major structure of the brainstem located between
 the midbrain and the medulla. It contains important neural
-pathways and cranial nerve nuclei.
+pathways and nuclei involved in communication between different
+parts of the nervous system.
 
 </p>
 
@@ -303,7 +409,8 @@ pathways and cranial nerve nuclei.
 <p>
 
 The pons contains pathways connecting the cerebral cortex,
-cerebellum, and spinal cord.
+cerebellum, and spinal cord. These connections help coordinate
+information involved in movement and other functions.
 
 </p>
 
@@ -318,8 +425,8 @@ cerebellum, and spinal cord.
 
 <p>
 
-Pontine pathways communicate with the cerebellum and help
-coordinate movement.
+Pontine pathways communicate with the cerebellum and participate
+in the coordination and control of movement.
 
 </p>
 
@@ -351,8 +458,9 @@ movement, hearing, and balance.
 
 <p>
 
-Pontine networks participate in regulating breathing patterns
-and transitions between sleep states.
+Networks within and around the pons participate in regulating
+breathing patterns and transitions between different sleep
+states.
 
 </p>
 
@@ -368,7 +476,7 @@ and transitions between sleep states.
 <p>
 
 Damage involving the pons can affect movement, sensation,
-facial function, coordination, breathing, and consciousness.
+facial functions, coordination, breathing, and consciousness.
 
 </p>
 
@@ -380,23 +488,34 @@ facial function, coordination, breathing, and consciousness.
 
 <!-- LOCATION -->
 
-<div class="location">
+<section
+id="location"
+class="location"
+>
+
 
 <h2>
 📍 Where is the Pons?
 </h2>
 
-<p>
 
-The pons lies between the midbrain and medulla and forms the
-middle portion of the brainstem.
+<p class="location-intro">
+
+The pons lies in the middle of the brainstem. It sits
+<strong>below the midbrain</strong> and
+<strong>above the medulla</strong>, while the cerebellum lies
+posterior to it.
 
 </p>
+
+
+<div class="brain-visual">
 
 
 <svg
 viewBox="0 0 800 560"
 xmlns="http://www.w3.org/2000/svg"
+aria-label="Simplified brainstem location diagram"
 >
 
 
@@ -465,13 +584,13 @@ C405 440 405 400 395 360Z"
 class="line"
 x1="422"
 y1="345"
-x2="590"
+x2="570"
 y2="300"
 />
 
 <text
 class="svg-label"
-x="605"
+x="585"
 y="306"
 >
 PONS
@@ -484,13 +603,13 @@ PONS
 class="line"
 x1="405"
 y1="300"
-x2="590"
+x2="570"
 y2="230"
 />
 
 <text
 class="svg-label"
-x="605"
+x="585"
 y="236"
 >
 MIDBRAIN
@@ -503,13 +622,13 @@ MIDBRAIN
 class="line"
 x1="390"
 y1="450"
-x2="590"
+x2="570"
 y2="440"
 />
 
 <text
 class="svg-label"
-x="605"
+x="585"
 y="446"
 >
 MEDULLA
@@ -519,15 +638,20 @@ MEDULLA
 </svg>
 
 
-<p style="text-align:center;color:#aebdce;">
+<p class="location-caption">
 
-🔵 The highlighted region represents the approximate location
-of the pons.
+🔵 The highlighted blue region represents the approximate
+location of the pons.
 
 </p>
 
+
 </div>
 
+</section>
+
+
+<!-- INSIGHT -->
 
 <div class="insight">
 
@@ -544,11 +668,17 @@ regions, the cerebellum, and the spinal cord.
 </div>
 
 
-<div class="quiz">
+<!-- QUIZ -->
+
+<div
+id="quiz"
+class="quiz"
+>
 
 <h2>
 🧠 Knowledge Check
 </h2>
+
 
 <p>
 Which structure lies between the midbrain and the medulla?
@@ -589,6 +719,7 @@ D. Occipital Lobe
 
 <div id="feedback"></div>
 
+
 </div>
 
 
@@ -607,22 +738,22 @@ href="explore.html"
 
 function answer(correct){
 
-const feedback =
-document.getElementById("feedback");
+    const feedback =
+    document.getElementById("feedback");
 
-if(correct){
+    if(correct){
 
-feedback.textContent =
-"✓ Correct! The pons lies between the midbrain and medulla.";
+        feedback.textContent =
+        "✓ Correct! The pons lies between the midbrain and medulla.";
 
-}
+    }
 
-else{
+    else{
 
-feedback.textContent =
-"Not quite. Try again.";
+        feedback.textContent =
+        "Not quite. Try again.";
 
-}
+    }
 
 }
 
