@@ -13,149 +13,149 @@
 <style>
 
 *{
-box-sizing:border-box;
-margin:0;
-padding:0;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
 body{
-font-family:Arial,sans-serif;
-background:#07111f;
-color:#f4f7fb;
-line-height:1.6;
+    font-family:Arial,sans-serif;
+    background:#07111f;
+    color:#f4f7fb;
+    line-height:1.6;
 }
 
 nav{
-padding:22px 7%;
-border-bottom:1px solid rgba(255,255,255,.08);
+    padding:22px 7%;
+    border-bottom:1px solid rgba(255,255,255,.08);
 }
 
 nav a{
-color:#aebdce;
-text-decoration:none;
+    color:#aebdce;
+    text-decoration:none;
 }
 
 nav a:hover{
-color:white;
+    color:white;
 }
 
 .container{
-max-width:1150px;
-margin:auto;
-padding:70px 7%;
+    max-width:1150px;
+    margin:auto;
+    padding:70px 7%;
 }
 
 .label{
-color:#4da6ff;
-text-transform:uppercase;
-letter-spacing:2px;
-font-size:13px;
-margin-bottom:12px;
+    color:#4da6ff;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    font-size:13px;
+    margin-bottom:12px;
 }
 
 h1{
-font-size:clamp(42px,7vw,70px);
-line-height:1.05;
-margin-bottom:20px;
+    font-size:clamp(42px,7vw,70px);
+    line-height:1.05;
+    margin-bottom:20px;
 }
 
 .intro{
-color:#aebdce;
-max-width:700px;
-font-size:18px;
-margin-bottom:45px;
+    color:#aebdce;
+    max-width:700px;
+    font-size:18px;
+    margin-bottom:45px;
 }
 
 .search{
-width:100%;
-padding:17px 20px;
-border-radius:12px;
-border:1px solid #263951;
-background:#0b192b;
-color:white;
-font-size:16px;
-outline:none;
-margin-bottom:35px;
+    width:100%;
+    padding:17px 20px;
+    border-radius:12px;
+    border:1px solid #263951;
+    background:#0b192b;
+    color:white;
+    font-size:16px;
+    outline:none;
+    margin-bottom:35px;
 }
 
 .search:focus{
-border-color:#4da6ff;
+    border-color:#4da6ff;
 }
 
 .categories{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:20px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
 }
 
 .category{
-padding:28px;
-border-radius:18px;
-background:rgba(255,255,255,.035);
-border:1px solid rgba(255,255,255,.08);
-transition:.25s;
+    padding:28px;
+    border-radius:18px;
+    background:rgba(255,255,255,.035);
+    border:1px solid rgba(255,255,255,.08);
+    transition:.25s;
 }
 
 .category:hover{
-transform:translateY(-5px);
-border-color:rgba(77,166,255,.55);
+    transform:translateY(-5px);
+    border-color:rgba(77,166,255,.55);
 }
 
 .category h2{
-font-size:22px;
-margin-bottom:10px;
+    font-size:22px;
+    margin-bottom:10px;
 }
 
 .category p{
-color:#9fb0c3;
-margin-bottom:18px;
+    color:#9fb0c3;
+    margin-bottom:18px;
 }
 
 .structures{
-display:flex;
-flex-wrap:wrap;
-gap:8px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
 }
 
 .structure{
-display:inline-block;
-padding:7px 10px;
-border-radius:8px;
-background:#10233a;
-color:#c8d6e5;
-font-size:13px;
-text-decoration:none;
-transition:.2s;
-border:0;
-cursor:pointer;
-font-family:Arial,sans-serif;
+    display:inline-block;
+    padding:8px 12px;
+    border-radius:8px;
+    background:#10233a;
+    color:#c8d6e5;
+    font-size:13px;
+    text-decoration:none;
+    transition:.2s;
 }
 
 .structure:hover{
-background:#183654;
-color:white;
-transform:translateY(-2px);
+    background:#183654;
+    color:white;
+    transform:translateY(-2px);
 }
 
 .no-results{
-display:none;
-color:#9fb0c3;
-margin-top:20px;
+    display:none;
+    color:#9fb0c3;
+    margin-top:20px;
 }
+
+
+/* MOBILE */
 
 @media(max-width:1000px){
 
-.categories{
-grid-template-columns:repeat(2,1fr);
-}
+    .categories{
+        grid-template-columns:repeat(2,1fr);
+    }
 
 }
 
 @media(max-width:700px){
 
-.categories{
-grid-template-columns:1fr;
-}
+    .categories{
+        grid-template-columns:1fr;
+    }
 
 }
 
@@ -167,6 +167,10 @@ grid-template-columns:1fr;
 <body>
 
 
+<!-- =========================
+     NAVIGATION
+========================= -->
+
 <nav>
 
 <a href="index.html">
@@ -175,6 +179,10 @@ grid-template-columns:1fr;
 
 </nav>
 
+
+<!-- =========================
+     MAIN
+========================= -->
 
 <main class="container">
 
@@ -190,10 +198,14 @@ Navigate the Human Brain.
 
 
 <p class="intro">
-Explore major neuroanatomical regions and discover how structures
-connect to function, pathways, and clinical reasoning.
+
+Explore major neuroanatomical regions and discover how
+structures connect to function, pathways, and clinical reasoning.
+
 </p>
 
+
+<!-- SEARCH -->
 
 <input
 id="search"
@@ -204,6 +216,10 @@ aria-label="Search brain structures"
 >
 
 
+<!-- =========================
+     CATEGORIES
+========================= -->
+
 <div class="categories">
 
 
@@ -213,7 +229,9 @@ aria-label="Search brain structures"
 
 <div class="category">
 
-<h2>🧠 Cerebral Cortex</h2>
+<h2>
+🧠 Cerebral Cortex
+</h2>
 
 <p>
 Major cortical regions and their functional roles.
@@ -221,27 +239,45 @@ Major cortical regions and their functional roles.
 
 <div class="structures">
 
-<a class="structure" href="cerebral-cortex.html">
+<a
+class="structure"
+href="cerebral-cortex.html"
+>
 Cerebral Cortex
 </a>
 
-<a class="structure" href="frontal-lobe.html">
+<a
+class="structure"
+href="frontal-lobe.html"
+>
 Frontal Lobe
 </a>
 
-<a class="structure" href="parietal-lobe.html">
+<a
+class="structure"
+href="parietal-lobe.html"
+>
 Parietal Lobe
 </a>
 
-<a class="structure" href="temporal-lobe.html">
+<a
+class="structure"
+href="temporal-lobe.html"
+>
 Temporal Lobe
 </a>
 
-<a class="structure" href="occipital-lobe.html">
+<a
+class="structure"
+href="occipital-lobe.html"
+>
 Occipital Lobe
 </a>
 
-<a class="structure" href="insula.html">
+<a
+class="structure"
+href="insula.html"
+>
 Insula
 </a>
 
@@ -256,7 +292,9 @@ Insula
 
 <div class="category">
 
-<h2>🔬 Deep Brain</h2>
+<h2>
+🔬 Deep Brain
+</h2>
 
 <p>
 Structures located beneath the cerebral cortex.
@@ -264,23 +302,38 @@ Structures located beneath the cerebral cortex.
 
 <div class="structures">
 
-<a class="structure" href="hippocampus.html">
-Hippocampus
-</a>
-
-<a class="structure" href="thalamus.html">
+<a
+class="structure"
+href="thalamus.html"
+>
 Thalamus
 </a>
 
-<a class="structure" href="hypothalamus.html">
+<a
+class="structure"
+href="hypothalamus.html"
+>
 Hypothalamus
 </a>
 
-<a class="structure" href="amygdala.html">
+<a
+class="structure"
+href="hippocampus.html"
+>
+Hippocampus
+</a>
+
+<a
+class="structure"
+href="amygdala.html"
+>
 Amygdala
 </a>
 
-<a class="structure" href="basal-ganglia.html">
+<a
+class="structure"
+href="basal-ganglia.html"
+>
 Basal Ganglia
 </a>
 
@@ -295,13 +348,18 @@ Basal Ganglia
 
 <div class="category">
 
-<h2>⚡ Brainstem</h2>
+<h2>
+⚡ Brainstem
+</h2>
 
 <p>
 Core structures connecting the brain with the spinal cord.
 </p>
 
 <div class="structures">
+
+
+<!-- MIDBRAIN -->
 
 <a
 class="structure"
@@ -311,6 +369,8 @@ Midbrain
 </a>
 
 
+<!-- PONS -->
+
 <a
 class="structure"
 href="pons.html"
@@ -319,12 +379,15 @@ Pons
 </a>
 
 
+<!-- MEDULLA -->
+
 <a
 class="structure"
 href="medulla.html"
 >
 Medulla
 </a>
+
 
 </div>
 
@@ -337,7 +400,9 @@ Medulla
 
 <div class="category">
 
-<h2>🎯 Cerebellum</h2>
+<h2>
+🎯 Cerebellum
+</h2>
 
 <p>
 Important for coordination, balance, and motor learning.
@@ -345,15 +410,24 @@ Important for coordination, balance, and motor learning.
 
 <div class="structures">
 
-<a class="structure" href="cerebellar-cortex.html">
+<a
+class="structure"
+href="cerebellar-cortex.html"
+>
 Cerebellar Cortex
 </a>
 
-<a class="structure" href="cerebellar-vermis.html">
+<a
+class="structure"
+href="cerebellar-vermis.html"
+>
 Cerebellar Vermis
 </a>
 
-<a class="structure" href="deep-cerebellar-nuclei.html">
+<a
+class="structure"
+href="deep-cerebellar-nuclei.html"
+>
 Deep Cerebellar Nuclei
 </a>
 
@@ -368,7 +442,9 @@ Deep Cerebellar Nuclei
 
 <div class="category">
 
-<h2>🧬 Ventricular System</h2>
+<h2>
+🧬 Ventricular System
+</h2>
 
 <p>
 The interconnected spaces containing cerebrospinal fluid.
@@ -376,19 +452,31 @@ The interconnected spaces containing cerebrospinal fluid.
 
 <div class="structures">
 
-<a class="structure" href="lateral-ventricles.html">
+<a
+class="structure"
+href="lateral-ventricles.html"
+>
 Lateral Ventricles
 </a>
 
-<a class="structure" href="third-ventricle.html">
+<a
+class="structure"
+href="third-ventricle.html"
+>
 Third Ventricle
 </a>
 
-<a class="structure" href="cerebral-aqueduct.html">
+<a
+class="structure"
+href="cerebral-aqueduct.html"
+>
 Cerebral Aqueduct
 </a>
 
-<a class="structure" href="fourth-ventricle.html">
+<a
+class="structure"
+href="fourth-ventricle.html"
+>
 Fourth Ventricle
 </a>
 
@@ -403,7 +491,9 @@ Fourth Ventricle
 
 <div class="category">
 
-<h2>🩸 Cerebral Vasculature</h2>
+<h2>
+🩸 Cerebral Vasculature
+</h2>
 
 <p>
 Major arteries supplying the brain.
@@ -411,23 +501,38 @@ Major arteries supplying the brain.
 
 <div class="structures">
 
-<a class="structure" href="aca.html">
+<a
+class="structure"
+href="aca.html"
+>
 ACA
 </a>
 
-<a class="structure" href="mca.html">
+<a
+class="structure"
+href="mca.html"
+>
 MCA
 </a>
 
-<a class="structure" href="pca.html">
+<a
+class="structure"
+href="pca.html"
+>
 PCA
 </a>
 
-<a class="structure" href="basilar-artery.html">
+<a
+class="structure"
+href="basilar-artery.html"
+>
 Basilar Artery
 </a>
 
-<a class="structure" href="circle-of-willis.html">
+<a
+class="structure"
+href="circle-of-willis.html"
+>
 Circle of Willis
 </a>
 
@@ -439,6 +544,8 @@ Circle of Willis
 </div>
 
 
+<!-- NO RESULTS -->
+
 <p
 id="noResults"
 class="no-results"
@@ -449,6 +556,10 @@ No matching structures found.
 
 </main>
 
+
+<!-- =========================
+     SEARCH SCRIPT
+========================= -->
 
 <script>
 
@@ -462,48 +573,51 @@ const noResults =
 document.getElementById("noResults");
 
 
-search.addEventListener("input",function(){
+search.addEventListener(
+"input",
+function(){
 
-const query =
-search.value.toLowerCase().trim();
+    const query =
+    search.value.toLowerCase().trim();
 
-let visible = 0;
-
-
-categories.forEach(function(category){
-
-const text =
-category.innerText.toLowerCase();
+    let visible = 0;
 
 
-if(text.includes(query)){
+    categories.forEach(
+    function(category){
 
-category.style.display = "";
-
-visible++;
-
-}
-
-else{
-
-category.style.display = "none";
-
-}
-
-});
+        const text =
+        category.innerText.toLowerCase();
 
 
-if(visible === 0){
+        if(text.includes(query)){
 
-noResults.style.display = "block";
+            category.style.display = "";
 
-}
+            visible++;
 
-else{
+        }
 
-noResults.style.display = "none";
+        else{
 
-}
+            category.style.display = "none";
+
+        }
+
+    });
+
+
+    if(visible === 0){
+
+        noResults.style.display = "block";
+
+    }
+
+    else{
+
+        noResults.style.display = "none";
+
+    }
 
 });
 
