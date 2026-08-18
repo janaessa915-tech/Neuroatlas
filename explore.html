@@ -146,7 +146,6 @@ text-decoration:none;
 cursor:pointer;
 border:1px solid transparent;
 transition:.2s;
-font-family:Arial,sans-serif;
 }
 
 .structure:hover{
@@ -269,29 +268,29 @@ Major cortical regions and their functional roles.
 
 <div class="structures">
 
-<button class="structure disabled" type="button">
+<a class="structure disabled" href="#">
 Cerebral Cortex
-</button>
+</a>
 
-<button class="structure disabled" type="button">
+<a class="structure disabled" href="#">
 Frontal Lobe
-</button>
+</a>
 
-<button class="structure disabled" type="button">
+<a class="structure disabled" href="#">
 Parietal Lobe
-</button>
+</a>
 
-<button class="structure disabled" type="button">
+<a class="structure disabled" href="#">
 Temporal Lobe
-</button>
+</a>
 
-<button class="structure disabled" type="button">
+<a class="structure disabled" href="#">
 Occipital Lobe
-</button>
+</a>
 
-<button class="structure disabled" type="button">
+<a class="structure disabled" href="#">
 Insula
-</button>
+</a>
 
 </div>
 
@@ -311,49 +310,44 @@ Structures located beneath the cerebral cortex.
 <div class="structures">
 
 
-<button
+<a
 class="structure"
-type="button"
-onclick="openPage('hippocampus.html')"
+href="https://janaessa915-tech.github.io/Neuroatlas/hippocampus.html"
 >
 Hippocampus
-</button>
+</a>
 
 
-<button
+<a
 class="structure"
-type="button"
-onclick="openPage('thalamus.html')"
+href="https://janaessa915-tech.github.io/Neuroatlas/thalamus.html"
 >
 Thalamus
-</button>
+</a>
 
 
-<button
+<a
 class="structure"
-type="button"
-onclick="openPage('hypothalamus.html')"
+href="https://janaessa915-tech.github.io/Neuroatlas/hypothalamus.html"
 >
 Hypothalamus
-</button>
+</a>
 
 
-<button
+<a
 class="structure"
-type="button"
-onclick="openPage('amygdala.html')"
+href="https://janaessa915-tech.github.io/Neuroatlas/amygdala.html"
 >
 Amygdala
-</button>
+</a>
 
 
-<button
+<a
 class="structure"
-type="button"
-onclick="openPage('basal-ganglia.html')"
+href="https://janaessa915-tech.github.io/Neuroatlas/basal-ganglia.html"
 >
 Basal Ganglia
-</button>
+</a>
 
 
 </div>
@@ -373,17 +367,17 @@ Core structures connecting the brain with the spinal cord.
 
 <div class="structures">
 
-<button class="structure disabled" type="button">
+<a class="structure disabled" href="#">
 Midbrain
-</button>
+</a>
 
-<button class="structure disabled" type="button">
+<a class="structure disabled" href="#">
 Pons
-</button>
+</a>
 
-<button class="structure disabled" type="button">
+<a class="structure disabled" href="#">
 Medulla
-</button>
+</a>
 
 </div>
 
@@ -402,17 +396,17 @@ Important for coordination, balance, and motor learning.
 
 <div class="structures">
 
-<button class="structure disabled" type="button">
+<a class="structure disabled" href="#">
 Cerebellar Cortex
-</button>
+</a>
 
-<button class="structure disabled" type="button">
+<a class="structure disabled" href="#">
 Cerebellar Vermis
-</button>
+</a>
 
-<button class="structure disabled" type="button">
+<a class="structure disabled" href="#">
 Deep Cerebellar Nuclei
-</button>
+</a>
 
 </div>
 
@@ -431,21 +425,21 @@ The interconnected spaces containing cerebrospinal fluid.
 
 <div class="structures">
 
-<button class="structure disabled" type="button">
+<a class="structure disabled" href="#">
 Lateral Ventricles
-</button>
+</a>
 
-<button class="structure disabled" type="button">
+<a class="structure disabled" href="#">
 Third Ventricle
-</button>
+</a>
 
-<button class="structure disabled" type="button">
+<a class="structure disabled" href="#">
 Cerebral Aqueduct
-</button>
+</a>
 
-<button class="structure disabled" type="button">
+<a class="structure disabled" href="#">
 Fourth Ventricle
-</button>
+</a>
 
 </div>
 
@@ -464,25 +458,25 @@ Major arteries supplying the brain.
 
 <div class="structures">
 
-<button class="structure disabled" type="button">
+<a class="structure disabled" href="#">
 ACA
-</button>
+</a>
 
-<button class="structure disabled" type="button">
+<a class="structure disabled" href="#">
 MCA
-</button>
+</a>
 
-<button class="structure disabled" type="button">
+<a class="structure disabled" href="#">
 PCA
-</button>
+</a>
 
-<button class="structure disabled" type="button">
+<a class="structure disabled" href="#">
 Basilar Artery
-</button>
+</a>
 
-<button class="structure disabled" type="button">
+<a class="structure disabled" href="#">
 Circle of Willis
-</button>
+</a>
 
 </div>
 
@@ -504,15 +498,6 @@ No matching structures found.
 
 
 <script>
-
-
-function openPage(page){
-
-window.location.href =
-"https://janaessa915-tech.github.io/Neuroatlas/" + page;
-
-}
-
 
 const search =
 document.getElementById("search");
