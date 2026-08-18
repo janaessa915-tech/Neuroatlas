@@ -3,135 +3,192 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hippocampus | NeuroAtlas</title>
+<title>NeuroAtlas | Explore the Brain</title>
 
 <style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+font-family:Arial,sans-serif;
+background:#07111f;
+color:#f4f7fb;
+line-height:1.6;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  background: #07111f;
-  color: #f4f7fb;
-  line-height: 1.7;
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:22px 7%;
+border-bottom:1px solid rgba(255,255,255,.08);
 }
 
-nav {
-  padding: 22px 7%;
-  border-bottom: 1px solid rgba(255,255,255,.08);
+.logo{
+font-size:24px;
+font-weight:700;
 }
 
-nav a {
-  color: #aebdce;
-  text-decoration: none;
+.logo span{color:#4da6ff}
+
+nav a{
+color:#cbd5e1;
+text-decoration:none;
+margin-left:25px;
+font-size:14px;
 }
 
-.container {
-  max-width: 1000px;
-  margin: auto;
-  padding: 70px 7%;
+nav a:hover{color:white}
+
+.hero{
+min-height:75vh;
+display:flex;
+align-items:center;
+padding:80px 7%;
+background:
+radial-gradient(circle at 75% 45%,rgba(40,130,255,.18),transparent 30%),
+#07111f;
 }
 
-.label {
-  color: #4da6ff;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-size: 13px;
-  margin-bottom: 12px;
+.hero-content{max-width:720px}
+
+.eyebrow{
+color:#4da6ff;
+font-size:14px;
+letter-spacing:2px;
+text-transform:uppercase;
+margin-bottom:18px;
 }
 
-h1 {
-  font-size: clamp(42px, 7vw, 72px);
-  line-height: 1.05;
-  margin-bottom: 12px;
+h1{
+font-size:clamp(48px,8vw,88px);
+line-height:1;
+margin-bottom:25px;
 }
 
-.arabic {
-  color: #7ebcff;
-  font-size: 24px;
-  margin-bottom: 30px;
+.hero h1 span{color:#4da6ff}
+
+.hero p{
+max-width:650px;
+color:#aebdce;
+font-size:19px;
+margin-bottom:35px;
 }
 
-.intro {
-  color: #aebdce;
-  font-size: 18px;
-  max-width: 750px;
-  margin-bottom: 45px;
+.buttons{
+display:flex;
+gap:15px;
+flex-wrap:wrap;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+.btn{
+display:inline-block;
+padding:14px 23px;
+border-radius:10px;
+text-decoration:none;
+font-weight:600;
+transition:.2s;
 }
 
-.card {
-  padding: 28px;
-  background: rgba(255,255,255,.035);
-  border: 1px solid rgba(255,255,255,.08);
-  border-radius: 16px;
+.primary{
+background:#2688ff;
+color:white;
 }
 
-.card h2 {
-  font-size: 20px;
-  margin-bottom: 12px;
-  color: #ffffff;
+.secondary{
+border:1px solid #33465e;
+color:white;
 }
 
-.card p {
-  color: #aebdce;
+.btn:hover{transform:translateY(-2px)}
+
+section{padding:80px 7%}
+
+.section-label{
+color:#4da6ff;
+text-transform:uppercase;
+letter-spacing:2px;
+font-size:13px;
+margin-bottom:12px;
 }
 
-.highlight {
-  margin-top: 30px;
-  padding: 30px;
-  border-left: 3px solid #4da6ff;
-  background: #0a1728;
-  border-radius: 10px;
+h2{
+font-size:40px;
+margin-bottom:15px;
 }
 
-.quiz {
-  margin-top: 55px;
-  padding: 35px;
-  background: #0a1728;
-  border: 1px solid rgba(77,166,255,.2);
-  border-radius: 18px;
+.section-intro{
+color:#aebdce;
+max-width:650px;
+margin-bottom:40px;
 }
 
-.quiz h2 {
-  margin-bottom: 15px;
+.cards{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
 }
 
-.option {
-  display: block;
-  width: 100%;
-  text-align: left;
-  padding: 14px 16px;
-  margin-top: 10px;
-  border-radius: 10px;
-  border: 1px solid #263951;
-  background: #0d2035;
-  color: white;
-  cursor: pointer;
+.card{
+background:rgba(255,255,255,.035);
+border:1px solid rgba(255,255,255,.08);
+border-radius:16px;
+padding:28px;
+transition:.25s;
 }
 
-.option:hover {
-  border-color: #4da6ff;
+.card:hover{
+transform:translateY(-5px);
+border-color:rgba(77,166,255,.5);
 }
 
-#feedback {
-  margin-top: 20px;
-  font-weight: bold;
-  color: #7ebcff;
+.icon{
+font-size:30px;
+margin-bottom:18px;
 }
 
-@media (max-width: 700px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
+.card h3{margin-bottom:10px}
+
+.card p{
+color:#9fb0c3;
+font-size:15px;
+}
+
+.card-link{
+display:block;
+color:inherit;
+text-decoration:none;
+}
+
+.bilingual{
+text-align:center;
+background:#0a1728;
+}
+
+.bilingual p{
+color:#aebdce;
+max-width:700px;
+margin:auto;
+}
+
+footer{
+padding:35px 7%;
+border-top:1px solid rgba(255,255,255,.08);
+color:#718197;
+font-size:14px;
+text-align:center;
+}
+
+@media(max-width:800px){
+nav{
+flex-direction:column;
+gap:15px;
+}
+nav a{margin:0 8px}
+.cards{grid-template-columns:1fr}
+.hero{
+padding-top:60px;
+padding-bottom:60px;
+}
 }
 </style>
 </head>
@@ -139,125 +196,127 @@ h1 {
 <body>
 
 <nav>
-  <a href="explore.html">← Back to Explore Anatomy</a>
+<div class="logo">Neuro<span>Atlas</span></div>
+
+<div>
+<a href="explore.html">Explore</a>
+<a href="explore.html">Learn</a>
+<a href="#about">About</a>
+</div>
 </nav>
 
-<main class="container">
+<main>
 
-  <div class="label">Brain Structure</div>
+<section class="hero">
 
-  <h1>Hippocampus</h1>
+<div class="hero-content">
 
-  <div class="arabic">الحُصين</div>
+<div class="eyebrow">
+Bilingual Neuroanatomy Learning Platform
+</div>
 
-  <p class="intro">
-    A curved structure within the medial temporal lobe that plays an important
-    role in memory formation, spatial learning, and memory-related networks.
-  </p>
+<h1>
+Explore the <span>Brain.</span><br>
+Understand the Connections.
+</h1>
 
-  <div class="grid">
+<p>
+NeuroAtlas is a free English-Arabic learning platform that helps
+students visualize neuroanatomy, understand neural relationships,
+and practice neurological localization.
+</p>
 
-    <div class="card">
-      <h2>📍 Location</h2>
-      <p>
-        The hippocampus is located in the medial temporal lobe and forms part
-        of the hippocampal formation.
-      </p>
-    </div>
+<div class="buttons">
 
-    <div class="card">
-      <h2>⚙️ Main Functions</h2>
-      <p>
-        It contributes to the formation and organization of new memories,
-        spatial learning, and contextual aspects of memory.
-      </p>
-    </div>
+<a class="btn primary" href="explore.html">
+Explore Anatomy →
+</a>
 
-    <div class="card">
-      <h2>🔗 Important Connections</h2>
-      <p>
-        The hippocampal formation communicates with structures including the
-        entorhinal cortex, fornix, mammillary bodies, and anterior thalamic
-        nuclei as part of memory-related networks.
-      </p>
-    </div>
+<a class="btn secondary" href="explore.html">
+Start Learning
+</a>
 
-    <div class="card">
-      <h2>🛣️ Related Pathways</h2>
-      <p>
-        Hippocampal information travels through interconnected memory
-        circuits, including pathways involving the fornix and Papez circuit.
-      </p>
-    </div>
+</div>
 
-    <div class="card">
-      <h2>🩺 Clinical Relevance</h2>
-      <p>
-        Hippocampal dysfunction can affect memory formation and spatial
-        learning. It is studied in conditions involving memory impairment
-        and temporal-lobe dysfunction.
-      </p>
-    </div>
+</div>
 
-    <div class="card">
-      <h2>🧠 Neurosurgical Context</h2>
-      <p>
-        The hippocampus is anatomically important in temporal-lobe surgery
-        because it lies close to other structures involved in memory and
-        language-related networks.
-      </p>
-    </div>
+</section>
 
-  </div>
+<section>
 
-  <div class="highlight">
-    <strong>NeuroAtlas Insight</strong><br><br>
-    Don't memorize the hippocampus as simply "the memory structure."
-    Think about it as part of a larger network connecting cortical and
-    subcortical regions involved in learning and memory.
-  </div>
+<div class="section-label">Explore</div>
 
-  <section class="quiz">
+<h2>Navigate the nervous system.</h2>
 
-    <div class="label">Knowledge Check</div>
+<p class="section-intro">
+Move beyond memorizing isolated structures. Learn how regions,
+pathways, and functions connect.
+</p>
 
-    <h2>Which function is most strongly associated with the hippocampus?</h2>
+<div class="cards">
 
-    <button class="option" onclick="checkAnswer(false)">
-      A. Primary visual processing
-    </button>
+<a class="card card-link" href="explore.html">
+<div class="icon">🧠</div>
+<h3>Brain Structures</h3>
+<p>
+Explore cortical regions, deep brain structures,
+cerebellum, brainstem, and more.
+</p>
+</a>
 
-    <button class="option" onclick="checkAnswer(true)">
-      B. Formation of new memories
-    </button>
+<a class="card card-link" href="explore.html">
+<div class="icon">〰️</div>
+<h3>Neural Pathways</h3>
+<p>
+Follow major pathways from their origins through
+their connections and destinations.
+</p>
+</a>
 
-    <button class="option" onclick="checkAnswer(false)">
-      C. Initiation of skeletal muscle contraction
-    </button>
+<a class="card card-link" href="explore.html">
+<div class="icon">🧩</div>
+<h3>Clinical Localization</h3>
+<p>
+Practice connecting neurological findings with
+relevant anatomical regions.
+</p>
+</a>
 
-    <button class="option" onclick="checkAnswer(false)">
-      D. Regulation of breathing rhythm
-    </button>
+</div>
 
-    <div id="feedback"></div>
+</section>
 
-  </section>
+<section class="bilingual">
+
+<div class="section-label">Learn</div>
+
+<h2>Understand. Practice. Connect.</h2>
+
+<p>
+Learn neuroanatomy in English and Arabic through structured
+explanations, interactive challenges, and clinical reasoning.
+</p>
+
+</section>
+
+<section id="about">
+
+<div class="section-label">About NeuroAtlas</div>
+
+<h2>Making neuroanatomy easier to understand.</h2>
+
+<p class="section-intro">
+NeuroAtlas transforms complex anatomical relationships into
+visual and interactive learning experiences for students.
+</p>
+
+</section>
 
 </main>
 
-<script>
-function checkAnswer(correct) {
-  const feedback = document.getElementById("feedback");
-
-  if (correct) {
-    feedback.textContent =
-      "✓ Correct — the hippocampus is strongly involved in forming and organizing new memories.";
-  } else {
-    feedback.textContent =
-      "Not quite. Think about the hippocampus's role in memory and spatial learning.";
-  }
-}
-</script>
+<footer>
+NeuroAtlas · Free bilingual neuroanatomy education
+</footer>
 
 </body>
 </html>
