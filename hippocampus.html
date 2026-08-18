@@ -22,15 +22,39 @@ body {
 nav {
   padding: 22px 7%;
   border-bottom: 1px solid rgba(255,255,255,.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-nav a {
+.logo {
+  color: white;
+  text-decoration: none;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.logo span {
+  color: #4da6ff;
+}
+
+.nav-links {
+  display: flex;
+  gap: 25px;
+}
+
+.nav-links a {
   color: #aebdce;
   text-decoration: none;
+  font-size: 14px;
+}
+
+.nav-links a:hover {
+  color: white;
 }
 
 .container {
-  max-width: 1000px;
+  max-width: 1050px;
   margin: auto;
   padding: 70px 7%;
 }
@@ -44,21 +68,21 @@ nav a {
 }
 
 h1 {
-  font-size: clamp(42px, 7vw, 72px);
+  font-size: clamp(45px, 7vw, 76px);
   line-height: 1.05;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
 .arabic {
   color: #7ebcff;
-  font-size: 24px;
-  margin-bottom: 30px;
+  font-size: 25px;
+  margin-bottom: 28px;
 }
 
 .intro {
   color: #aebdce;
   font-size: 18px;
-  max-width: 750px;
+  max-width: 780px;
   margin-bottom: 45px;
 }
 
@@ -73,24 +97,33 @@ h1 {
   background: rgba(255,255,255,.035);
   border: 1px solid rgba(255,255,255,.08);
   border-radius: 16px;
+  transition: .25s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(77,166,255,.45);
 }
 
 .card h2 {
   font-size: 20px;
   margin-bottom: 12px;
-  color: #ffffff;
 }
 
 .card p {
   color: #aebdce;
 }
 
-.highlight {
+.insight {
   margin-top: 30px;
   padding: 30px;
   border-left: 3px solid #4da6ff;
   background: #0a1728;
   border-radius: 10px;
+}
+
+.insight strong {
+  color: #7ebcff;
 }
 
 .quiz {
@@ -101,8 +134,12 @@ h1 {
   border-radius: 18px;
 }
 
+.quiz .label {
+  margin-bottom: 8px;
+}
+
 .quiz h2 {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .option {
@@ -116,6 +153,7 @@ h1 {
   background: #0d2035;
   color: white;
   cursor: pointer;
+  font-size: 15px;
 }
 
 .option:hover {
@@ -124,13 +162,53 @@ h1 {
 
 #feedback {
   margin-top: 20px;
-  font-weight: bold;
   color: #7ebcff;
+  font-weight: bold;
 }
 
-@media (max-width: 700px) {
+.bottom-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: 60px;
+}
+
+.bottom-nav a {
+  padding: 13px 18px;
+  border-radius: 10px;
+  text-decoration: none;
+  border: 1px solid #263951;
+  color: #d7e2ee;
+}
+
+.bottom-nav a:hover {
+  border-color: #4da6ff;
+}
+
+footer {
+  text-align: center;
+  padding: 35px 7%;
+  border-top: 1px solid rgba(255,255,255,.08);
+  color: #718197;
+  font-size: 14px;
+}
+
+@media(max-width:700px) {
   .grid {
     grid-template-columns: 1fr;
+  }
+
+  nav {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .nav-links {
+    gap: 15px;
+  }
+
+  .bottom-nav {
+    flex-direction: column;
   }
 }
 </style>
@@ -139,7 +217,19 @@ h1 {
 <body>
 
 <nav>
-  <a href="explore.html">← Back to Explore Anatomy</a>
+
+  <a class="logo" href="index.html">
+    Neuro<span>Atlas</span>
+  </a>
+
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+
+    <a href="explore.html">
+      Explore Anatomy
+    </a>
+  </div>
+
 </nav>
 
 <main class="container">
@@ -148,80 +238,107 @@ h1 {
 
   <h1>Hippocampus</h1>
 
-  <div class="arabic">الحُصين</div>
+  <div class="arabic">
+    الحُصين
+  </div>
 
   <p class="intro">
-    A curved structure within the medial temporal lobe that plays an important
-    role in memory formation, spatial learning, and memory-related networks.
+    A curved structure within the medial temporal lobe that plays
+    an important role in memory formation, spatial learning,
+    and memory-related networks.
   </p>
 
   <div class="grid">
 
     <div class="card">
       <h2>📍 Location</h2>
+
       <p>
-        The hippocampus is located in the medial temporal lobe and forms part
-        of the hippocampal formation.
+        The hippocampus is located in the medial temporal lobe
+        and forms part of the hippocampal formation.
       </p>
     </div>
+
 
     <div class="card">
       <h2>⚙️ Main Functions</h2>
+
       <p>
-        It contributes to the formation and organization of new memories,
-        spatial learning, and contextual aspects of memory.
+        It contributes to the formation and organization of new
+        memories, spatial learning, and contextual aspects of memory.
       </p>
     </div>
+
 
     <div class="card">
       <h2>🔗 Important Connections</h2>
+
       <p>
-        The hippocampal formation communicates with structures including the
-        entorhinal cortex, fornix, mammillary bodies, and anterior thalamic
-        nuclei as part of memory-related networks.
+        The hippocampal formation communicates with structures
+        including the entorhinal cortex, fornix, mammillary bodies,
+        and anterior thalamic nuclei.
       </p>
     </div>
+
 
     <div class="card">
       <h2>🛣️ Related Pathways</h2>
+
       <p>
-        Hippocampal information travels through interconnected memory
-        circuits, including pathways involving the fornix and Papez circuit.
+        Hippocampal information travels through interconnected
+        memory circuits, including pathways involving the fornix
+        and Papez circuit.
       </p>
     </div>
+
 
     <div class="card">
       <h2>🩺 Clinical Relevance</h2>
+
       <p>
-        Hippocampal dysfunction can affect memory formation and spatial
-        learning. It is studied in conditions involving memory impairment
-        and temporal-lobe dysfunction.
+        Hippocampal dysfunction can affect memory formation
+        and spatial learning and is studied in disorders involving
+        memory impairment and temporal-lobe dysfunction.
       </p>
     </div>
+
 
     <div class="card">
       <h2>🧠 Neurosurgical Context</h2>
+
       <p>
-        The hippocampus is anatomically important in temporal-lobe surgery
-        because it lies close to other structures involved in memory and
-        language-related networks.
+        The hippocampus is anatomically important in temporal-lobe
+        surgery because of its proximity to structures involved
+        in memory and other important neural networks.
       </p>
     </div>
 
   </div>
 
-  <div class="highlight">
-    <strong>NeuroAtlas Insight</strong><br><br>
-    Don't memorize the hippocampus as simply "the memory structure."
-    Think about it as part of a larger network connecting cortical and
-    subcortical regions involved in learning and memory.
+
+  <div class="insight">
+
+    <strong>NeuroAtlas Insight</strong>
+
+    <br><br>
+
+    Don't memorize the hippocampus as simply
+    "the memory structure." Think of it as part of a
+    larger network connecting cortical and subcortical
+    regions involved in learning and memory.
+
   </div>
+
 
   <section class="quiz">
 
-    <div class="label">Knowledge Check</div>
+    <div class="label">
+      Knowledge Check
+    </div>
 
-    <h2>Which function is most strongly associated with the hippocampus?</h2>
+    <h2>
+      Which function is most strongly associated with the hippocampus?
+    </h2>
 
     <button class="option" onclick="checkAnswer(false)">
       A. Primary visual processing
@@ -243,20 +360,48 @@ h1 {
 
   </section>
 
+
+  <div class="bottom-nav">
+
+    <a href="explore.html">
+      ← Back to Explore Anatomy
+    </a>
+
+    <a href="index.html">
+      NeuroAtlas Home →
+    </a>
+
+  </div>
+
 </main>
 
+
+<footer>
+  NeuroAtlas · Free bilingual neuroanatomy education
+</footer>
+
+
 <script>
+
 function checkAnswer(correct) {
-  const feedback = document.getElementById("feedback");
+
+  const feedback =
+    document.getElementById("feedback");
 
   if (correct) {
+
     feedback.textContent =
       "✓ Correct — the hippocampus is strongly involved in forming and organizing new memories.";
+
   } else {
+
     feedback.textContent =
       "Not quite. Think about the hippocampus's role in memory and spatial learning.";
+
   }
+
 }
+
 </script>
 
 </body>
