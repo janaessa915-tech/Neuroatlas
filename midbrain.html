@@ -5,7 +5,6 @@
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Midbrain | NeuroAtlas</title>
@@ -83,6 +82,7 @@ padding:28px;
 background:#0b192b;
 border:1px solid #263951;
 border-radius:16px;
+transition:.2s;
 }
 
 .card h2{
@@ -98,24 +98,25 @@ color:#aebdce;
 width:100%;
 text-align:left;
 color:white;
-cursor:pointer;
 font-family:Arial,sans-serif;
+cursor:pointer;
 }
 
 .location-button:hover{
 border-color:#4da6ff;
+transform:translateY(-4px);
 }
 
 .location-visual{
 display:none;
-margin-top:20px;
+margin-top:25px;
 padding:30px;
 background:#0b192b;
 border:1px solid #263951;
 border-radius:16px;
 }
 
-.location-visual:target{
+.location-visual.show{
 display:block;
 }
 
@@ -290,27 +291,22 @@ the nervous system.
 
 <!-- LOCATION BUTTON -->
 
-<a
-href="#location"
-style="text-decoration:none;"
+<button
+type="button"
+class="card location-button"
+onclick="showLocation()"
 >
-
-<div class="card location-button">
 
 <h2>
 📍 Location
 </h2>
 
 <p>
-Click here to see where the midbrain is located within the brain.
+Click to visualize where the midbrain is located within the brain.
 </p>
 
-</div>
+</button>
 
-</a>
-
-
-<!-- VISUAL REFLEXES -->
 
 <div class="card">
 
@@ -319,16 +315,12 @@ Click here to see where the midbrain is located within the brain.
 </h2>
 
 <p>
-
 The superior colliculus helps coordinate movements of the eyes
 and head toward visual stimuli.
-
 </p>
 
 </div>
 
-
-<!-- AUDITORY -->
 
 <div class="card">
 
@@ -337,16 +329,12 @@ and head toward visual stimuli.
 </h2>
 
 <p>
-
 The inferior colliculus is an important relay in the auditory
 pathway and contributes to auditory reflexes.
-
 </p>
 
 </div>
 
-
-<!-- MOTOR -->
 
 <div class="card">
 
@@ -355,16 +343,12 @@ pathway and contributes to auditory reflexes.
 </h2>
 
 <p>
-
 The substantia nigra and other midbrain structures participate
 in motor control and movement.
-
 </p>
 
 </div>
 
-
-<!-- STRUCTURES -->
 
 <div class="card">
 
@@ -373,17 +357,13 @@ in motor control and movement.
 </h2>
 
 <p>
-
 Important structures include the cerebral peduncles, tectum,
 tegmentum, superior colliculus, inferior colliculus, and
 substantia nigra.
-
 </p>
 
 </div>
 
-
-<!-- CLINICAL -->
 
 <div class="card">
 
@@ -392,10 +372,8 @@ substantia nigra.
 </h2>
 
 <p>
-
 Midbrain damage can affect eye movements, motor function,
 consciousness, and important sensory and motor pathways.
-
 </p>
 
 </div>
@@ -407,7 +385,7 @@ consciousness, and important sensory and motor pathways.
 <!-- LOCATION VISUALIZATION -->
 
 <div
-id="location"
+id="locationVisual"
 class="location-visual"
 >
 
@@ -629,9 +607,7 @@ D. Lateral ventricle
 class="back"
 href="explore.html"
 >
-
 ← Back to Explore Anatomy
-
 </a>
 
 
@@ -639,6 +615,21 @@ href="explore.html"
 
 
 <script>
+
+function showLocation(){
+
+const visual =
+document.getElementById("locationVisual");
+
+visual.classList.add("show");
+
+visual.scrollIntoView({
+behavior:"smooth",
+block:"start"
+});
+
+}
+
 
 function answer(correct){
 
