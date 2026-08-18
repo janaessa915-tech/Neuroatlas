@@ -1,38 +1,65 @@
-```html id="n5z8cu"
+```html
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Midbrain | NeuroAtlas</title>
 
 <style>
 
-body{
+*{
+    box-sizing:border-box;
     margin:0;
     padding:0;
+}
+
+body{
     font-family:Arial,sans-serif;
     background:#07111f;
-    color:white;
+    color:#f4f7fb;
+    line-height:1.7;
 }
 
 nav{
-    padding:20px 7%;
-    border-bottom:1px solid rgba(255,255,255,.1);
+    padding:22px 7%;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
-nav a{
+.logo{
+    color:white;
+    text-decoration:none;
+    font-size:23px;
+    font-weight:bold;
+}
+
+.logo span{
+    color:#4da6ff;
+}
+
+.nav-links{
+    display:flex;
+    gap:25px;
+}
+
+.nav-links a{
     color:#aebdce;
     text-decoration:none;
+    font-size:14px;
 }
 
-main{
-    max-width:1000px;
+.nav-links a:hover{
+    color:white;
+}
+
+.container{
+    max-width:1100px;
     margin:auto;
     padding:70px 7%;
 }
@@ -42,19 +69,26 @@ main{
     text-transform:uppercase;
     letter-spacing:2px;
     font-size:13px;
-    margin-bottom:15px;
+    margin-bottom:12px;
 }
 
 h1{
-    font-size:70px;
-    margin:0 0 15px 0;
+    font-size:clamp(45px,7vw,76px);
+    line-height:1.05;
+    margin-bottom:10px;
+}
+
+.arabic{
+    color:#7ebcff;
+    font-size:24px;
+    margin-bottom:25px;
 }
 
 .intro{
     color:#aebdce;
-    font-size:19px;
-    max-width:750px;
-    margin-bottom:40px;
+    font-size:18px;
+    max-width:800px;
+    margin-bottom:45px;
 }
 
 .cards{
@@ -64,19 +98,140 @@ h1{
 }
 
 .card{
-    padding:25px;
-    background:#0b192b;
-    border:1px solid #263951;
-    border-radius:15px;
+    padding:28px;
+    background:rgba(255,255,255,.035);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:16px;
+    transition:.25s;
+}
+
+.card.clickable{
+    cursor:pointer;
+}
+
+.card.clickable:hover{
+    transform:translateY(-4px);
+    border-color:#4da6ff;
 }
 
 .card h2{
-    margin-top:0;
-    font-size:21px;
+    font-size:20px;
+    margin-bottom:12px;
 }
 
 .card p{
     color:#aebdce;
+}
+
+
+/* LOCATION VISUALIZATION */
+
+.location-panel{
+    display:none;
+    margin-top:25px;
+    padding:30px;
+    background:#0a1728;
+    border:1px solid rgba(77,166,255,.3);
+    border-radius:18px;
+    animation:appear .3s ease;
+}
+
+.location-panel.show{
+    display:block;
+}
+
+@keyframes appear{
+
+    from{
+        opacity:0;
+        transform:translateY(-8px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+.location-title{
+    font-size:24px;
+    margin-bottom:8px;
+}
+
+.location-description{
+    color:#aebdce;
+    margin-bottom:25px;
+}
+
+.brain-visual{
+    width:100%;
+    max-width:700px;
+    margin:auto;
+    display:block;
+}
+
+.brain-outline{
+    fill:#17283d;
+    stroke:#60758e;
+    stroke-width:3;
+}
+
+.cerebrum{
+    fill:#21364d;
+    stroke:#71869e;
+    stroke-width:2;
+}
+
+.cerebellum{
+    fill:#30465d;
+    stroke:#71869e;
+    stroke-width:2;
+}
+
+.pons{
+    fill:#31516a;
+}
+
+.medulla{
+    fill:#294459;
+}
+
+.midbrain{
+    fill:#4da6ff;
+    stroke:#b8ddff;
+    stroke-width:3;
+    animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+
+    0%,100%{
+        opacity:1;
+    }
+
+    50%{
+        opacity:.55;
+    }
+
+}
+
+.label-line{
+    stroke:#8fc7ff;
+    stroke-width:2;
+}
+
+.visual-label{
+    fill:#dceeff;
+    font-size:16px;
+    font-weight:bold;
+}
+
+.legend{
+    text-align:center;
+    color:#aebdce;
+    margin-top:15px;
+    font-size:14px;
 }
 
 .insight{
@@ -87,12 +242,20 @@ h1{
     border-radius:10px;
 }
 
+.insight strong{
+    color:#7ebcff;
+}
+
 .quiz{
     margin-top:45px;
     padding:30px;
     background:#0b192b;
     border:1px solid #263951;
     border-radius:15px;
+}
+
+.quiz h2{
+    margin-bottom:15px;
 }
 
 .option{
@@ -133,12 +296,13 @@ h1{
 
 @media(max-width:700px){
 
-    h1{
-        font-size:48px;
-    }
-
     .cards{
         grid-template-columns:1fr;
+    }
+
+    nav{
+        flex-direction:column;
+        gap:15px;
     }
 
 }
@@ -153,14 +317,29 @@ h1{
 
 <nav>
 
-<a href="index.html">
-← NeuroAtlas Home
+<a
+class="logo"
+href="index.html"
+>
+Neuro<span>Atlas</span>
 </a>
+
+<div class="nav-links">
+
+<a href="index.html">
+Home
+</a>
+
+<a href="explore.html">
+Explore Anatomy
+</a>
+
+</div>
 
 </nav>
 
 
-<main>
+<main class="container">
 
 
 <div class="label">
@@ -171,6 +350,11 @@ Brainstem
 <h1>
 Midbrain
 </h1>
+
+
+<div class="arabic">
+الدماغ الأوسط
+</div>
 
 
 <p class="intro">
@@ -186,15 +370,17 @@ the nervous system.
 <div class="cards">
 
 
-<div class="card">
+<!-- LOCATION CARD -->
+
+<div
+class="card clickable"
+onclick="toggleLocation()"
+>
 
 <h2>📍 Location</h2>
 
 <p>
-
-The midbrain lies between the diencephalon and the pons,
-forming the upper portion of the brainstem.
-
+Click to visualize where the midbrain sits within the brain.
 </p>
 
 </div>
@@ -205,10 +391,8 @@ forming the upper portion of the brainstem.
 <h2>👁️ Visual Reflexes</h2>
 
 <p>
-
 The superior colliculus helps coordinate movements of the eyes
 and head toward visual stimuli.
-
 </p>
 
 </div>
@@ -219,10 +403,8 @@ and head toward visual stimuli.
 <h2>👂 Auditory Processing</h2>
 
 <p>
-
 The inferior colliculus is an important relay in the auditory
 pathway and contributes to auditory reflexes.
-
 </p>
 
 </div>
@@ -233,10 +415,8 @@ pathway and contributes to auditory reflexes.
 <h2>🚶 Motor Control</h2>
 
 <p>
-
 The substantia nigra and other midbrain structures participate
 in motor control and movement.
-
 </p>
 
 </div>
@@ -247,11 +427,9 @@ in motor control and movement.
 <h2>🔗 Major Structures</h2>
 
 <p>
-
 Important structures include the cerebral peduncles, tectum,
 tegmentum, superior colliculus, inferior colliculus, and
 substantia nigra.
-
 </p>
 
 </div>
@@ -262,14 +440,187 @@ substantia nigra.
 <h2>🩺 Clinical Relevance</h2>
 
 <p>
-
 Midbrain damage can affect eye movements, motor function,
 consciousness, and important sensory and motor pathways.
-
 </p>
 
 </div>
 
+
+</div>
+
+
+<!-- INTERACTIVE LOCATION PANEL -->
+
+<div
+id="locationPanel"
+class="location-panel"
+>
+
+<h2 class="location-title">
+Where is the Midbrain?
+</h2>
+
+<p class="location-description">
+
+The midbrain sits between the diencephalon and the pons,
+forming the uppermost part of the brainstem.
+
+</p>
+
+
+<svg
+class="brain-visual"
+viewBox="0 0 700 520"
+xmlns="http://www.w3.org/2000/svg"
+aria-label="Simplified sagittal visualization of the brain showing the location of the midbrain"
+>
+
+
+<!-- Brain outline -->
+
+<path
+class="brain-outline"
+d="M170 90
+C190 45 260 25 345 35
+C440 45 505 105 520 185
+C530 240 510 275 485 300
+C500 325 505 355 480 380
+C450 410 395 405 360 390
+L300 400
+C245 405 195 380 170 340
+C145 300 135 245 145 190
+C150 150 155 115 170 90Z"
+/>
+
+
+<!-- Cerebrum -->
+
+<path
+class="cerebrum"
+d="M175 95
+C215 55 275 45 345 52
+C425 60 480 110 495 175
+C505 220 490 250 455 270
+C420 290 375 275 340 260
+C305 245 270 230 225 245
+C185 258 155 230 158 190
+C160 150 160 120 175 95Z"
+/>
+
+
+<!-- Cerebellum -->
+
+<path
+class="cerebellum"
+d="M395 285
+C440 260 495 275 510 315
+C525 355 500 390 460 395
+C420 400 385 375 380 340
+C377 315 382 298 395 285Z"
+/>
+
+
+<!-- Medulla -->
+
+<path
+class="medulla"
+d="M335 350
+C345 365 350 390 345 420
+L370 420
+C375 390 370 360 360 340Z"
+/>
+
+
+<!-- Pons -->
+
+<ellipse
+class="pons"
+cx="345"
+cy="330"
+rx="30"
+ry="22"
+/>
+
+
+<!-- MIDBRAIN -->
+
+<ellipse
+class="midbrain"
+cx="345"
+cy="300"
+rx="20"
+ry="17"
+/>
+
+
+<!-- Label line -->
+
+<line
+class="label-line"
+x1="365"
+y1="300"
+x2="515"
+y2="245"
+/>
+
+
+<text
+class="visual-label"
+x="525"
+y="240"
+>
+MIDBRAIN
+</text>
+
+
+<!-- Pons label -->
+
+<line
+class="label-line"
+x1="365"
+y1="330"
+x2="500"
+y2="330"
+/>
+
+<text
+class="visual-label"
+x="510"
+y="336"
+>
+Pons
+</text>
+
+
+<!-- Medulla label -->
+
+<line
+class="label-line"
+x1="355"
+y1="390"
+x2="500"
+y2="400"
+/>
+
+<text
+class="visual-label"
+x="510"
+y="406"
+>
+Medulla
+</text>
+
+
+</svg>
+
+
+<p class="legend">
+
+The highlighted region represents the approximate location of
+the midbrain in this simplified anatomical visualization.
+
+</p>
 
 </div>
 
@@ -357,6 +708,29 @@ href="explore.html"
 
 
 <script>
+
+function toggleLocation(){
+
+const panel =
+document.getElementById("locationPanel");
+
+panel.classList.toggle("show");
+
+if(panel.classList.contains("show")){
+
+setTimeout(function(){
+
+panel.scrollIntoView({
+behavior:"smooth",
+block:"start"
+});
+
+},100);
+
+}
+
+}
+
 
 function answer(correct){
 
