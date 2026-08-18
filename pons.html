@@ -1,10 +1,11 @@
-```html
+```html id="qf4y3j"
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Pons | NeuroAtlas</title>
@@ -58,9 +59,9 @@ line-height:1.05;
 margin-bottom:10px;
 }
 
-.arabic{
+.subtitle{
 color:#7ebcff;
-font-size:24px;
+font-size:22px;
 margin-bottom:25px;
 }
 
@@ -82,7 +83,6 @@ padding:28px;
 background:#0b192b;
 border:1px solid #263951;
 border-radius:16px;
-transition:.2s;
 }
 
 .card h2{
@@ -94,21 +94,7 @@ margin-bottom:12px;
 color:#aebdce;
 }
 
-.location-button{
-width:100%;
-text-align:left;
-color:white;
-font-family:Arial,sans-serif;
-cursor:pointer;
-}
-
-.location-button:hover{
-border-color:#4da6ff;
-transform:translateY(-4px);
-}
-
-.location-visual{
-display:none;
+.location{
 margin-top:25px;
 padding:30px;
 background:#0b192b;
@@ -116,22 +102,19 @@ border:1px solid #263951;
 border-radius:16px;
 }
 
-.location-visual.show{
-display:block;
+.location h2{
+margin-bottom:12px;
 }
 
-.location-visual h2{
-margin-bottom:10px;
-}
-
-.location-visual p{
+.location p{
+color:#aebdce;
 margin-bottom:25px;
 }
 
 svg{
+display:block;
 width:100%;
 max-width:750px;
-display:block;
 margin:auto;
 }
 
@@ -149,16 +132,20 @@ stroke-width:3;
 
 .midbrain{
 fill:#29465b;
+stroke:#71869e;
+stroke-width:3;
 }
 
 .pons{
 fill:#4da6ff;
-stroke:#c8e7ff;
+stroke:white;
 stroke-width:4;
 }
 
 .medulla{
 fill:#29465b;
+stroke:#71869e;
+stroke-width:3;
 }
 
 .line{
@@ -178,6 +165,7 @@ padding:25px;
 background:#0b192b;
 border-left:3px solid #4da6ff;
 border-radius:10px;
+color:#aebdce;
 }
 
 .insight strong{
@@ -251,8 +239,8 @@ grid-template-columns:1fr;
 
 <nav>
 
-<a href="index.html">
-← NeuroAtlas Home
+<a href="explore.html">
+← Back to Explore Anatomy
 </a>
 
 </nav>
@@ -271,17 +259,17 @@ Pons
 </h1>
 
 
-<div class="arabic">
+<div class="subtitle">
 الجسر
 </div>
 
 
 <p class="intro">
 
-The pons is the middle portion of the brainstem. It connects
-important regions of the brain and spinal cord and contributes
-to movement, sensation, facial functions, and regulation of
-breathing and sleep.
+The pons is the middle portion of the brainstem. It serves as
+an important communication bridge between the cerebrum,
+cerebellum, and spinal cord and contributes to movement,
+sensation, facial function, breathing, and sleep.
 
 </p>
 
@@ -289,26 +277,22 @@ breathing and sleep.
 <div class="cards">
 
 
-<!-- LOCATION -->
-
-<button
-type="button"
-class="card location-button"
-onclick="showLocation()"
->
+<div class="card">
 
 <h2>
-📍 Location
+🔬 What is the Pons?
 </h2>
 
 <p>
-Click to visualize where the pons is located within the brainstem.
+
+The pons is a major structure of the brainstem located between
+the midbrain and the medulla. It contains important neural
+pathways and cranial nerve nuclei.
+
 </p>
 
-</button>
+</div>
 
-
-<!-- CONNECTIONS -->
 
 <div class="card">
 
@@ -326,8 +310,6 @@ cerebellum, and spinal cord.
 </div>
 
 
-<!-- MOVEMENT -->
-
 <div class="card">
 
 <h2>
@@ -336,15 +318,13 @@ cerebellum, and spinal cord.
 
 <p>
 
-Pontine pathways help communicate with the cerebellum and
-contribute to the coordination of movement.
+Pontine pathways communicate with the cerebellum and help
+coordinate movement.
 
 </p>
 
 </div>
 
-
-<!-- CRANIAL NERVES -->
 
 <div class="card">
 
@@ -363,8 +343,6 @@ movement, hearing, and balance.
 </div>
 
 
-<!-- BREATHING -->
-
 <div class="card">
 
 <h2>
@@ -374,14 +352,12 @@ movement, hearing, and balance.
 <p>
 
 Pontine networks participate in regulating breathing patterns
-and transitions between different sleep states.
+and transitions between sleep states.
 
 </p>
 
 </div>
 
-
-<!-- CLINICAL -->
 
 <div class="card">
 
@@ -391,8 +367,8 @@ and transitions between different sleep states.
 
 <p>
 
-Damage to the pons can affect movement, sensation, facial
-function, coordination, breathing, and consciousness.
+Damage involving the pons can affect movement, sensation,
+facial function, coordination, breathing, and consciousness.
 
 </p>
 
@@ -402,12 +378,9 @@ function, coordination, breathing, and consciousness.
 </div>
 
 
-<!-- LOCATION VISUALIZATION -->
+<!-- LOCATION -->
 
-<div
-id="locationVisual"
-class="location-visual"
->
+<div class="location">
 
 <h2>
 📍 Where is the Pons?
@@ -453,17 +426,6 @@ C450 350 455 330 465 315Z"
 />
 
 
-<!-- MEDULLA -->
-
-<path
-class="medulla"
-d="M365 365
-C370 400 375 440 365 485
-L400 485
-C405 440 405 400 395 360Z"
-/>
-
-
 <!-- MIDBRAIN -->
 
 <ellipse
@@ -486,6 +448,17 @@ ry="30"
 />
 
 
+<!-- MEDULLA -->
+
+<path
+class="medulla"
+d="M365 365
+C370 400 375 440 365 485
+L400 485
+C405 440 405 400 395 360Z"
+/>
+
+
 <!-- PONS LABEL -->
 
 <line
@@ -495,7 +468,6 @@ y1="345"
 x2="590"
 y2="300"
 />
-
 
 <text
 class="svg-label"
@@ -516,7 +488,6 @@ x2="590"
 y2="230"
 />
 
-
 <text
 class="svg-label"
 x="605"
@@ -535,7 +506,6 @@ y1="450"
 x2="590"
 y2="440"
 />
-
 
 <text
 class="svg-label"
@@ -556,7 +526,6 @@ of the pons.
 
 </p>
 
-
 </div>
 
 
@@ -568,9 +537,9 @@ NeuroAtlas Insight
 
 <br><br>
 
-The pons acts as an important communication bridge between
-different parts of the nervous system, especially the cerebrum,
-cerebellum, and spinal cord.
+Think of the pons as a communication bridge within the
+brainstem. It helps relay information between higher brain
+regions, the cerebellum, and the spinal cord.
 
 </div>
 
@@ -582,7 +551,7 @@ cerebellum, and spinal cord.
 </h2>
 
 <p>
-Which part of the brainstem lies between the midbrain and medulla?
+Which structure lies between the midbrain and the medulla?
 </p>
 
 
@@ -614,7 +583,7 @@ C. Thalamus
 class="option"
 onclick="answer(false)"
 >
-D. Occipital lobe
+D. Occipital Lobe
 </button>
 
 
@@ -627,9 +596,7 @@ D. Occipital lobe
 class="back"
 href="explore.html"
 >
-
 ← Back to Explore Anatomy
-
 </a>
 
 
@@ -637,21 +604,6 @@ href="explore.html"
 
 
 <script>
-
-function showLocation(){
-
-const visual =
-document.getElementById("locationVisual");
-
-visual.classList.add("show");
-
-visual.scrollIntoView({
-behavior:"smooth",
-block:"start"
-});
-
-}
-
 
 function answer(correct){
 
