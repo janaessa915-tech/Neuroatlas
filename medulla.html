@@ -1,0 +1,1215 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Medulla | NeuroAtlas</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#07111f;
+    color:#f4f7fb;
+    line-height:1.7;
+}
+
+nav{
+    padding:22px 7%;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+nav a{
+    color:#aebdce;
+    text-decoration:none;
+}
+
+nav a:hover{
+    color:white;
+}
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:70px 7%;
+}
+
+.label{
+    color:#4da6ff;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    font-size:13px;
+    margin-bottom:12px;
+}
+
+h1{
+    font-size:clamp(45px,7vw,76px);
+    line-height:1.05;
+    margin-bottom:8px;
+}
+
+.subtitle{
+    color:#7ebcff;
+    font-size:22px;
+    margin-bottom:25px;
+}
+
+.intro{
+    color:#aebdce;
+    font-size:18px;
+    max-width:800px;
+    margin-bottom:30px;
+}
+
+
+/* BUTTONS */
+
+.actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-bottom:50px;
+}
+
+.action-button{
+    display:inline-block;
+    padding:13px 18px;
+    border-radius:9px;
+    border:1px solid #263951;
+    background:#10233a;
+    color:white;
+    text-decoration:none;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.action-button:hover{
+    background:#183654;
+    border-color:#4da6ff;
+}
+
+
+/* INFORMATION CARDS */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+}
+
+.card{
+    padding:28px;
+    background:#0b192b;
+    border:1px solid #263951;
+    border-radius:16px;
+}
+
+.card h2{
+    font-size:20px;
+    margin-bottom:12px;
+}
+
+.card p{
+    color:#aebdce;
+}
+
+
+/* LOCATION MODAL */
+
+.location-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(3,9,18,.96);
+    z-index:1000;
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:25px;
+}
+
+.location-overlay.active{
+    display:flex;
+}
+
+.location-window{
+    width:min(1200px,96vw);
+    height:min(800px,92vh);
+
+    background:#091625;
+
+    border:1px solid #263951;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    position:relative;
+
+    display:flex;
+    flex-direction:column;
+}
+
+
+/* MODAL HEADER */
+
+.location-header{
+    padding:20px 25px;
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+}
+
+.location-header h2{
+    font-size:22px;
+}
+
+.location-header p{
+    color:#9fb0c3;
+    font-size:14px;
+}
+
+.close-button{
+    width:42px;
+    height:42px;
+
+    border-radius:50%;
+
+    border:1px solid #263951;
+
+    background:#10233a;
+
+    color:white;
+
+    font-size:22px;
+
+    cursor:pointer;
+}
+
+.close-button:hover{
+    background:#183654;
+}
+
+
+/* 3D AREA */
+
+.viewer{
+    flex:1;
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:
+    radial-gradient(
+        circle at center,
+        #122944 0%,
+        #091625 55%,
+        #050c16 100%
+    );
+
+    cursor:grab;
+}
+
+.viewer:active{
+    cursor:grabbing;
+}
+
+
+/* MODEL */
+
+.brain-model{
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    width:360px;
+    height:430px;
+
+    transform:
+        translate(-50%,-50%)
+        rotateY(0deg);
+
+    transform-style:preserve-3d;
+
+    animation:
+        rotateBrain 12s linear infinite;
+}
+
+.brain-model.paused{
+    animation-play-state:paused;
+}
+
+
+/* CEREBRUM */
+
+.cerebrum{
+    position:absolute;
+
+    width:330px;
+    height:245px;
+
+    left:15px;
+    top:15px;
+
+    border-radius:
+        48%
+        52%
+        45%
+        48%;
+
+    background:
+        radial-gradient(
+            ellipse at 40% 35%,
+            #405a73,
+            #263d55 55%,
+            #182b40 100%
+        );
+
+    box-shadow:
+        inset -20px -20px 40px rgba(0,0,0,.35),
+        inset 15px 10px 30px rgba(255,255,255,.06);
+
+    transform:translateZ(0);
+}
+
+
+/* CEREBRAL FISSURE */
+
+.cerebrum::after{
+    content:"";
+
+    position:absolute;
+
+    width:4px;
+    height:190px;
+
+    background:rgba(5,12,22,.45);
+
+    left:50%;
+    top:28px;
+
+    border-radius:50%;
+}
+
+
+/* CEREBELLUM */
+
+.cerebellum{
+    position:absolute;
+
+    width:170px;
+    height:115px;
+
+    left:165px;
+    top:230px;
+
+    border-radius:50%;
+
+    background:
+        repeating-linear-gradient(
+            90deg,
+            #344d66 0px,
+            #344d66 5px,
+            #263d55 7px,
+            #344d66 10px
+        );
+
+    box-shadow:
+        inset -15px -15px 30px rgba(0,0,0,.35);
+
+    z-index:2;
+}
+
+
+/* BRAINSTEM */
+
+.brainstem{
+    position:absolute;
+
+    width:78px;
+    height:170px;
+
+    left:141px;
+    top:205px;
+
+    z-index:1;
+}
+
+
+/* MIDBRAIN */
+
+.midbrain{
+    position:absolute;
+
+    width:65px;
+    height:45px;
+
+    left:7px;
+    top:0;
+
+    border-radius:45%;
+
+    background:#314b63;
+}
+
+
+/* PONS */
+
+.pons{
+    position:absolute;
+
+    width:82px;
+    height:65px;
+
+    left:-2px;
+    top:37px;
+
+    border-radius:50%;
+
+    background:#35536b;
+}
+
+
+/* MEDULLA */
+
+.medulla{
+    position:absolute;
+
+    width:48px;
+    height:85px;
+
+    left:15px;
+    top:93px;
+
+    border-radius:
+        40%
+        40%
+        48%
+        48%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #8fc7ff,
+            #4da6ff 45%,
+            #176bb5 100%
+        );
+
+    box-shadow:
+        0 0 20px rgba(77,166,255,.8),
+        0 0 45px rgba(77,166,255,.35);
+
+    animation:pulseMedulla 2s ease-in-out infinite;
+}
+
+
+@keyframes pulseMedulla{
+
+    0%,100%{
+        box-shadow:
+        0 0 18px rgba(77,166,255,.7),
+        0 0 35px rgba(77,166,255,.3);
+    }
+
+    50%{
+        box-shadow:
+        0 0 28px rgba(77,166,255,1),
+        0 0 60px rgba(77,166,255,.5);
+    }
+
+}
+
+
+/* ROTATION */
+
+@keyframes rotateBrain{
+
+    from{
+        transform:
+        translate(-50%,-50%)
+        rotateY(0deg);
+    }
+
+    to{
+        transform:
+        translate(-50%,-50%)
+        rotateY(360deg);
+    }
+
+}
+
+
+/* LABEL */
+
+.medulla-label{
+    position:absolute;
+
+    left:calc(50% + 110px);
+    top:58%;
+
+    color:white;
+
+    font-weight:bold;
+
+    font-size:18px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+}
+
+.label-line{
+    width:60px;
+    height:2px;
+
+    background:#4da6ff;
+
+    box-shadow:0 0 10px #4da6ff;
+}
+
+
+/* DESCRIPTION PANEL */
+
+.location-info{
+    position:absolute;
+
+    left:25px;
+    bottom:25px;
+
+    width:300px;
+
+    padding:20px;
+
+    background:rgba(7,17,31,.88);
+
+    border:1px solid #263951;
+
+    border-radius:14px;
+
+    backdrop-filter:blur(10px);
+}
+
+.location-info h3{
+    color:#7ebcff;
+    margin-bottom:8px;
+}
+
+.location-info p{
+    color:#aebdce;
+    font-size:14px;
+}
+
+
+/* CONTROLS */
+
+.viewer-controls{
+    position:absolute;
+
+    right:25px;
+    bottom:25px;
+
+    display:flex;
+
+    gap:8px;
+}
+
+.control-button{
+    padding:10px 14px;
+
+    border-radius:8px;
+
+    border:1px solid #263951;
+
+    background:rgba(16,35,58,.9);
+
+    color:white;
+
+    cursor:pointer;
+}
+
+.control-button:hover{
+    border-color:#4da6ff;
+}
+
+
+/* INSIGHT */
+
+.insight{
+    margin-top:30px;
+
+    padding:25px;
+
+    background:#0b192b;
+
+    border-left:3px solid #4da6ff;
+
+    border-radius:10px;
+
+    color:#aebdce;
+}
+
+.insight strong{
+    color:#7ebcff;
+}
+
+
+/* QUIZ */
+
+.quiz{
+    margin-top:50px;
+
+    padding:30px;
+
+    background:#0b192b;
+
+    border:1px solid #263951;
+
+    border-radius:15px;
+}
+
+.quiz h2{
+    margin-bottom:15px;
+}
+
+.option{
+    display:block;
+
+    width:100%;
+
+    padding:13px;
+
+    margin-top:10px;
+
+    background:#10233a;
+
+    color:white;
+
+    border:1px solid #263951;
+
+    border-radius:8px;
+
+    text-align:left;
+
+    cursor:pointer;
+
+    font-size:15px;
+}
+
+.option:hover{
+    border-color:#4da6ff;
+}
+
+#feedback{
+    margin-top:15px;
+    color:#7ebcff;
+}
+
+
+.back{
+    display:inline-block;
+
+    margin-top:40px;
+
+    padding:12px 18px;
+
+    border:1px solid #263951;
+
+    border-radius:9px;
+
+    color:white;
+
+    text-decoration:none;
+}
+
+.back:hover{
+    border-color:#4da6ff;
+}
+
+
+@media(max-width:700px){
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .location-info{
+        width:240px;
+        left:15px;
+        bottom:15px;
+    }
+
+    .brain-model{
+        transform:
+        translate(-50%,-50%)
+        scale(.75);
+    }
+
+    .medulla-label{
+        display:none;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<nav>
+
+<a href="explore.html">
+← Back to Explore Anatomy
+</a>
+
+</nav>
+
+
+<main class="container">
+
+
+<div class="label">
+Brainstem
+</div>
+
+
+<h1>
+Medulla
+</h1>
+
+
+<div class="subtitle">
+Medulla Oblongata
+</div>
+
+
+<p class="intro">
+
+The medulla oblongata is the lowest part of the brainstem.
+It connects the pons to the spinal cord and contains important
+centers involved in breathing, heart rate, blood pressure,
+and protective reflexes.
+
+</p>
+
+
+<div class="actions">
+
+
+<!-- LOCATION BUTTON -->
+
+<button
+class="action-button"
+onclick="openLocation()"
+>
+📍 Location
+</button>
+
+
+<a
+class="action-button"
+href="#function"
+>
+⚡ Functions
+</a>
+
+
+<a
+class="action-button"
+href="#quiz"
+>
+🧠 Test Yourself
+</a>
+
+
+</div>
+
+
+<!-- INFORMATION -->
+
+<div
+id="function"
+class="cards"
+>
+
+
+<div class="card">
+
+<h2>
+🔬 What is the Medulla?
+</h2>
+
+<p>
+
+The medulla oblongata is the lowest major region of the
+brainstem. It continues downward into the spinal cord and
+contains important neural pathways and nuclei.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h2>
+🌬️ Breathing
+</h2>
+
+<p>
+
+The medulla contains neural networks that contribute to the
+automatic regulation of breathing.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h2>
+❤️ Cardiovascular Control
+</h2>
+
+<p>
+
+Medullary centers participate in regulating cardiovascular
+functions such as heart rate and blood vessel activity.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h2>
+🛡️ Protective Reflexes
+</h2>
+
+<p>
+
+The medulla participates in important protective reflexes
+including coughing, swallowing, sneezing, and vomiting.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h2>
+🔗 Brainstem Connections
+</h2>
+
+<p>
+
+The medulla connects the pons and higher brainstem structures
+with pathways traveling to and from the spinal cord.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h2>
+🩺 Clinical Relevance
+</h2>
+
+<p>
+
+Because the medulla contains pathways and centers involved in
+essential automatic functions, significant injury to this
+region can have serious effects on breathing and cardiovascular
+regulation.
+
+</p>
+
+</div>
+
+
+</div>
+
+
+<!-- LOCATION MODAL -->
+
+<div
+id="locationOverlay"
+class="location-overlay"
+>
+
+
+<div class="location-window">
+
+
+<div class="location-header">
+
+<div>
+
+<h2>
+📍 Medulla Location
+</h2>
+
+<p>
+Interactive brainstem visualization
+</p>
+
+</div>
+
+
+<button
+class="close-button"
+onclick="closeLocation()"
+>
+×
+</button>
+
+</div>
+
+
+<div
+id="viewer"
+class="viewer"
+>
+
+
+<!-- 3D-STYLE MODEL -->
+
+<div
+id="brainModel"
+class="brain-model"
+>
+
+
+<div class="cerebrum">
+</div>
+
+
+<div class="cerebellum">
+</div>
+
+
+<div class="brainstem">
+
+<div class="midbrain">
+</div>
+
+<div class="pons">
+</div>
+
+<div class="medulla">
+</div>
+
+</div>
+
+
+</div>
+
+
+<div class="medulla-label">
+
+<span class="label-line">
+</span>
+
+MEDULLA
+
+</div>
+
+
+<!-- INFORMATION -->
+
+<div class="location-info">
+
+<h3>
+Medulla Oblongata
+</h3>
+
+<p>
+
+The medulla is located at the lowest part of the brainstem,
+directly below the pons and continuous with the spinal cord.
+
+</p>
+
+</div>
+
+
+<!-- CONTROLS -->
+
+<div class="viewer-controls">
+
+<button
+class="control-button"
+onclick="toggleRotation()"
+>
+⏸ Pause
+</button>
+
+<button
+class="control-button"
+onclick="resetRotation()"
+>
+↻ Reset
+</button>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<!-- INSIGHT -->
+
+<div class="insight">
+
+<strong>
+NeuroAtlas Insight
+</strong>
+
+<br><br>
+
+Think of the medulla as one of the brain's major automatic
+control centers. Unlike many conscious behaviors, several
+essential functions regulated here continue automatically
+without requiring deliberate attention.
+
+</div>
+
+
+<!-- QUIZ -->
+
+<div
+id="quiz"
+class="quiz"
+>
+
+<h2>
+🧠 Knowledge Check
+</h2>
+
+<p>
+Which structure lies directly above the medulla?
+</p>
+
+
+<button
+class="option"
+onclick="answer(true)"
+>
+A. Pons
+</button>
+
+
+<button
+class="option"
+onclick="answer(false)"
+>
+B. Hippocampus
+</button>
+
+
+<button
+class="option"
+onclick="answer(false)"
+>
+C. Thalamus
+</button>
+
+
+<button
+class="option"
+onclick="answer(false)"
+>
+D. Frontal Lobe
+</button>
+
+
+<div id="feedback">
+</div>
+
+</div>
+
+
+<a
+class="back"
+href="explore.html"
+>
+← Back to Explore Anatomy
+</a>
+
+
+</main>
+
+
+<script>
+
+
+/* ==========================
+   LOCATION VIEWER
+========================== */
+
+function openLocation(){
+
+    const overlay =
+    document.getElementById("locationOverlay");
+
+    overlay.classList.add("active");
+
+}
+
+
+function closeLocation(){
+
+    const overlay =
+    document.getElementById("locationOverlay");
+
+    overlay.classList.remove("active");
+
+}
+
+
+/* ==========================
+   ROTATION CONTROL
+========================== */
+
+let paused = false;
+
+
+function toggleRotation(){
+
+    const model =
+    document.getElementById("brainModel");
+
+    const button =
+    document.querySelector(".viewer-controls .control-button");
+
+
+    paused = !paused;
+
+
+    if(paused){
+
+        model.classList.add("paused");
+
+        button.textContent =
+        "▶ Rotate";
+
+    }
+
+    else{
+
+        model.classList.remove("paused");
+
+        button.textContent =
+        "⏸ Pause";
+
+    }
+
+}
+
+
+function resetRotation(){
+
+    const model =
+    document.getElementById("brainModel");
+
+    model.style.animation = "none";
+
+    void model.offsetWidth;
+
+    model.style.animation =
+    "rotateBrain 12s linear infinite";
+
+    paused = false;
+
+    model.classList.remove("paused");
+
+}
+
+
+/* ==========================
+   CLOSE WITH ESCAPE
+========================== */
+
+document.addEventListener(
+"keydown",
+function(event){
+
+    if(event.key === "Escape"){
+
+        closeLocation();
+
+    }
+
+});
+
+
+/* ==========================
+   QUIZ
+========================== */
+
+function answer(correct){
+
+    const feedback =
+    document.getElementById("feedback");
+
+
+    if(correct){
+
+        feedback.textContent =
+        "✓ Correct! The pons lies directly above the medulla.";
+
+    }
+
+    else{
+
+        feedback.textContent =
+        "Not quite. Try again.";
+
+    }
+
+}
+
+</script>
+
+
+</body>
+
+</html>
+```
