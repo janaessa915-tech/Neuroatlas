@@ -157,7 +157,7 @@ h1 {
 
 .disabled {
   opacity: .5;
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .disabled:hover {
@@ -334,18 +334,12 @@ Hypothalamus
 </a>
 
 
-<a
-class="structure disabled"
-href="#"
->
+<a class="structure disabled" href="#">
 Amygdala
 </a>
 
 
-<a
-class="structure disabled"
-href="#"
->
+<a class="structure disabled" href="#">
 Basal Ganglia
 </a>
 
@@ -499,8 +493,7 @@ No matching structures found.
 
 <script>
 
-const search =
-document.getElementById("search");
+const search = document.getElementById("search");
 
 const categories =
 document.querySelectorAll(".category");
