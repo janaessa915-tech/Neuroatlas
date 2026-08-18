@@ -5,6 +5,7 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Explore Anatomy | NeuroAtlas</title>
@@ -27,34 +28,14 @@ line-height:1.6;
 nav{
 padding:22px 7%;
 border-bottom:1px solid rgba(255,255,255,.08);
-display:flex;
-justify-content:space-between;
-align-items:center;
 }
 
-.logo{
-color:white;
-text-decoration:none;
-font-size:23px;
-font-weight:bold;
-}
-
-.logo span{
-color:#4da6ff;
-}
-
-.nav-links{
-display:flex;
-gap:25px;
-}
-
-.nav-links a{
+nav a{
 color:#aebdce;
 text-decoration:none;
-font-size:14px;
 }
 
-.nav-links a:hover{
+nav a:hover{
 color:white;
 }
 
@@ -138,33 +119,19 @@ gap:8px;
 
 .structure{
 display:inline-block;
-padding:9px 12px;
+padding:7px 10px;
 border-radius:8px;
 background:#10233a;
 color:#c8d6e5;
 font-size:13px;
 text-decoration:none;
-border:1px solid transparent;
 transition:.2s;
 }
 
 .structure:hover{
 background:#183654;
 color:white;
-border-color:#4da6ff;
 transform:translateY(-2px);
-}
-
-.disabled{
-opacity:.45;
-cursor:not-allowed;
-}
-
-.disabled:hover{
-background:#10233a;
-color:#c8d6e5;
-border-color:transparent;
-transform:none;
 }
 
 .no-results{
@@ -173,15 +140,18 @@ color:#9fb0c3;
 margin-top:20px;
 }
 
-@media(max-width:850px){
+@media(max-width:1000px){
+
+.categories{
+grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+@media(max-width:700px){
 
 .categories{
 grid-template-columns:1fr;
-}
-
-nav{
-flex-direction:column;
-gap:15px;
 }
 
 }
@@ -196,28 +166,9 @@ gap:15px;
 
 <nav>
 
-<a
-class="logo"
-href="https://janaessa915-tech.github.io/Neuroatlas/"
->
-Neuro<span>Atlas</span>
+<a href="index.html">
+← NeuroAtlas Home
 </a>
-
-<div class="nav-links">
-
-<a
-href="https://janaessa915-tech.github.io/Neuroatlas/"
->
-Home
-</a>
-
-<a
-href="https://janaessa915-tech.github.io/Neuroatlas/explore.html"
->
-Explore
-</a>
-
-</div>
 
 </nav>
 
@@ -236,8 +187,10 @@ Navigate the Human Brain.
 
 
 <p class="intro">
-Explore major neuroanatomical regions and discover how structures
-connect to function, pathways, and clinical reasoning.
+
+Explore major neuroanatomical regions and discover how
+structures connect to function, pathways, and clinical reasoning.
+
 </p>
 
 
@@ -257,7 +210,9 @@ aria-label="Search brain structures"
 
 <div class="category">
 
-<h2>🧠 Cerebral Cortex</h2>
+<h2>
+🧠 Cerebral Cortex
+</h2>
 
 <p>
 Major cortical regions and their functional roles.
@@ -265,27 +220,45 @@ Major cortical regions and their functional roles.
 
 <div class="structures">
 
-<a class="structure disabled" href="#">
+<a
+class="structure"
+href="cerebral-cortex.html"
+>
 Cerebral Cortex
 </a>
 
-<a class="structure disabled" href="#">
+<a
+class="structure"
+href="frontal-lobe.html"
+>
 Frontal Lobe
 </a>
 
-<a class="structure disabled" href="#">
+<a
+class="structure"
+href="parietal-lobe.html"
+>
 Parietal Lobe
 </a>
 
-<a class="structure disabled" href="#">
+<a
+class="structure"
+href="temporal-lobe.html"
+>
 Temporal Lobe
 </a>
 
-<a class="structure disabled" href="#">
+<a
+class="structure"
+href="occipital-lobe.html"
+>
 Occipital Lobe
 </a>
 
-<a class="structure disabled" href="#">
+<a
+class="structure"
+href="insula.html"
+>
 Insula
 </a>
 
@@ -298,20 +271,15 @@ Insula
 
 <div class="category">
 
-<h2>🔬 Deep Brain</h2>
+<h2>
+🔬 Deep Brain
+</h2>
 
 <p>
 Structures located beneath the cerebral cortex.
 </p>
 
 <div class="structures">
-
-<a
-class="structure"
-href="hippocampus.html"
->
-Hippocampus
-</a>
 
 <a
 class="structure"
@@ -325,6 +293,13 @@ class="structure"
 href="hypothalamus.html"
 >
 Hypothalamus
+</a>
+
+<a
+class="structure"
+href="hippocampus.html"
+>
+Hippocampus
 </a>
 
 <a
@@ -350,7 +325,9 @@ Basal Ganglia
 
 <div class="category">
 
-<h2>⚡ Brainstem</h2>
+<h2>
+⚡ Brainstem
+</h2>
 
 <p>
 Core structures connecting the brain with the spinal cord.
@@ -366,15 +343,15 @@ Midbrain
 </a>
 
 <a
-class="structure disabled"
-href="#"
+class="structure"
+href="pons.html"
 >
 Pons
 </a>
 
 <a
-class="structure disabled"
-href="#"
+class="structure"
+href="medulla.html"
 >
 Medulla
 </a>
@@ -388,7 +365,9 @@ Medulla
 
 <div class="category">
 
-<h2>🎯 Cerebellum</h2>
+<h2>
+🎯 Cerebellum
+</h2>
 
 <p>
 Important for coordination, balance, and motor learning.
@@ -396,15 +375,24 @@ Important for coordination, balance, and motor learning.
 
 <div class="structures">
 
-<a class="structure disabled" href="#">
+<a
+class="structure"
+href="cerebellar-cortex.html"
+>
 Cerebellar Cortex
 </a>
 
-<a class="structure disabled" href="#">
+<a
+class="structure"
+href="cerebellar-vermis.html"
+>
 Cerebellar Vermis
 </a>
 
-<a class="structure disabled" href="#">
+<a
+class="structure"
+href="deep-cerebellar-nuclei.html"
+>
 Deep Cerebellar Nuclei
 </a>
 
@@ -417,7 +405,9 @@ Deep Cerebellar Nuclei
 
 <div class="category">
 
-<h2>🧬 Ventricular System</h2>
+<h2>
+🧬 Ventricular System
+</h2>
 
 <p>
 The interconnected spaces containing cerebrospinal fluid.
@@ -425,19 +415,31 @@ The interconnected spaces containing cerebrospinal fluid.
 
 <div class="structures">
 
-<a class="structure disabled" href="#">
+<a
+class="structure"
+href="lateral-ventricles.html"
+>
 Lateral Ventricles
 </a>
 
-<a class="structure disabled" href="#">
+<a
+class="structure"
+href="third-ventricle.html"
+>
 Third Ventricle
 </a>
 
-<a class="structure disabled" href="#">
+<a
+class="structure"
+href="cerebral-aqueduct.html"
+>
 Cerebral Aqueduct
 </a>
 
-<a class="structure disabled" href="#">
+<a
+class="structure"
+href="fourth-ventricle.html"
+>
 Fourth Ventricle
 </a>
 
@@ -446,11 +448,13 @@ Fourth Ventricle
 </div>
 
 
-<!-- CEREBRAL VASCULATURE -->
+<!-- VASCULATURE -->
 
 <div class="category">
 
-<h2>🩸 Cerebral Vasculature</h2>
+<h2>
+🩸 Cerebral Vasculature
+</h2>
 
 <p>
 Major arteries supplying the brain.
@@ -458,23 +462,38 @@ Major arteries supplying the brain.
 
 <div class="structures">
 
-<a class="structure disabled" href="#">
+<a
+class="structure"
+href="aca.html"
+>
 ACA
 </a>
 
-<a class="structure disabled" href="#">
+<a
+class="structure"
+href="mca.html"
+>
 MCA
 </a>
 
-<a class="structure disabled" href="#">
+<a
+class="structure"
+href="pca.html"
+>
 PCA
 </a>
 
-<a class="structure disabled" href="#">
+<a
+class="structure"
+href="basilar-artery.html"
+>
 Basilar Artery
 </a>
 
-<a class="structure disabled" href="#">
+<a
+class="structure"
+href="circle-of-willis.html"
+>
 Circle of Willis
 </a>
 
@@ -509,47 +528,57 @@ const noResults =
 document.getElementById("noResults");
 
 
-search.addEventListener("input",function(){
+search.addEventListener(
+"input",
+function(){
 
 const query =
-search.value.toLowerCase().trim();
+search.value
+.toLowerCase()
+.trim();
 
-let visible=0;
+let visible = 0;
 
-categories.forEach(function(category){
+
+categories.forEach(
+function(category){
 
 const text =
-category.innerText.toLowerCase();
+category.innerText
+.toLowerCase();
+
 
 if(text.includes(query)){
 
-category.style.display="";
+category.style.display = "";
+
 visible++;
 
 }
 
 else{
 
-category.style.display="none";
+category.style.display = "none";
 
 }
 
 });
 
 
-if(visible===0){
+if(visible === 0){
 
-noResults.style.display="block";
+noResults.style.display = "block";
 
 }
 
 else{
 
-noResults.style.display="none";
+noResults.style.display = "none";
 
 }
 
 });
+
 
 </script>
 
