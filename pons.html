@@ -1,0 +1,683 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Pons | NeuroAtlas</title>
+
+<style>
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+body{
+font-family:Arial,sans-serif;
+background:#07111f;
+color:#f4f7fb;
+line-height:1.7;
+}
+
+nav{
+padding:22px 7%;
+border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+nav a{
+color:#aebdce;
+text-decoration:none;
+}
+
+nav a:hover{
+color:white;
+}
+
+.container{
+max-width:1100px;
+margin:auto;
+padding:70px 7%;
+}
+
+.label{
+color:#4da6ff;
+text-transform:uppercase;
+letter-spacing:2px;
+font-size:13px;
+margin-bottom:12px;
+}
+
+h1{
+font-size:clamp(45px,7vw,76px);
+line-height:1.05;
+margin-bottom:10px;
+}
+
+.arabic{
+color:#7ebcff;
+font-size:24px;
+margin-bottom:25px;
+}
+
+.intro{
+color:#aebdce;
+font-size:18px;
+max-width:800px;
+margin-bottom:45px;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:20px;
+}
+
+.card{
+padding:28px;
+background:#0b192b;
+border:1px solid #263951;
+border-radius:16px;
+transition:.2s;
+}
+
+.card h2{
+font-size:20px;
+margin-bottom:12px;
+}
+
+.card p{
+color:#aebdce;
+}
+
+.location-button{
+width:100%;
+text-align:left;
+color:white;
+font-family:Arial,sans-serif;
+cursor:pointer;
+}
+
+.location-button:hover{
+border-color:#4da6ff;
+transform:translateY(-4px);
+}
+
+.location-visual{
+display:none;
+margin-top:25px;
+padding:30px;
+background:#0b192b;
+border:1px solid #263951;
+border-radius:16px;
+}
+
+.location-visual.show{
+display:block;
+}
+
+.location-visual h2{
+margin-bottom:10px;
+}
+
+.location-visual p{
+margin-bottom:25px;
+}
+
+svg{
+width:100%;
+max-width:750px;
+display:block;
+margin:auto;
+}
+
+.brain{
+fill:#263d55;
+stroke:#71869e;
+stroke-width:3;
+}
+
+.cerebellum{
+fill:#344d66;
+stroke:#71869e;
+stroke-width:3;
+}
+
+.midbrain{
+fill:#29465b;
+}
+
+.pons{
+fill:#4da6ff;
+stroke:#c8e7ff;
+stroke-width:4;
+}
+
+.medulla{
+fill:#29465b;
+}
+
+.line{
+stroke:#8fc7ff;
+stroke-width:2;
+}
+
+.svg-label{
+fill:white;
+font-size:18px;
+font-weight:bold;
+}
+
+.insight{
+margin-top:30px;
+padding:25px;
+background:#0b192b;
+border-left:3px solid #4da6ff;
+border-radius:10px;
+}
+
+.insight strong{
+color:#7ebcff;
+}
+
+.quiz{
+margin-top:45px;
+padding:30px;
+background:#0b192b;
+border:1px solid #263951;
+border-radius:15px;
+}
+
+.quiz h2{
+margin-bottom:15px;
+}
+
+.option{
+display:block;
+width:100%;
+padding:13px;
+margin-top:10px;
+background:#10233a;
+color:white;
+border:1px solid #263951;
+border-radius:8px;
+text-align:left;
+cursor:pointer;
+font-size:15px;
+}
+
+.option:hover{
+border-color:#4da6ff;
+}
+
+#feedback{
+margin-top:15px;
+color:#7ebcff;
+}
+
+.back{
+display:inline-block;
+margin-top:40px;
+padding:12px 18px;
+border:1px solid #263951;
+border-radius:9px;
+color:white;
+text-decoration:none;
+}
+
+.back:hover{
+border-color:#4da6ff;
+}
+
+@media(max-width:700px){
+
+.cards{
+grid-template-columns:1fr;
+}
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<nav>
+
+<a href="index.html">
+← NeuroAtlas Home
+</a>
+
+</nav>
+
+
+<main class="container">
+
+
+<div class="label">
+Brainstem
+</div>
+
+
+<h1>
+Pons
+</h1>
+
+
+<div class="arabic">
+الجسر
+</div>
+
+
+<p class="intro">
+
+The pons is the middle portion of the brainstem. It connects
+important regions of the brain and spinal cord and contributes
+to movement, sensation, facial functions, and regulation of
+breathing and sleep.
+
+</p>
+
+
+<div class="cards">
+
+
+<!-- LOCATION -->
+
+<button
+type="button"
+class="card location-button"
+onclick="showLocation()"
+>
+
+<h2>
+📍 Location
+</h2>
+
+<p>
+Click to visualize where the pons is located within the brainstem.
+</p>
+
+</button>
+
+
+<!-- CONNECTIONS -->
+
+<div class="card">
+
+<h2>
+🔗 Neural Connections
+</h2>
+
+<p>
+
+The pons contains pathways connecting the cerebral cortex,
+cerebellum, and spinal cord.
+
+</p>
+
+</div>
+
+
+<!-- MOVEMENT -->
+
+<div class="card">
+
+<h2>
+🚶 Movement
+</h2>
+
+<p>
+
+Pontine pathways help communicate with the cerebellum and
+contribute to the coordination of movement.
+
+</p>
+
+</div>
+
+
+<!-- CRANIAL NERVES -->
+
+<div class="card">
+
+<h2>
+👁️ Cranial Nerves
+</h2>
+
+<p>
+
+Several cranial nerve nuclei are associated with the pons,
+including structures involved in facial sensation, facial
+movement, hearing, and balance.
+
+</p>
+
+</div>
+
+
+<!-- BREATHING -->
+
+<div class="card">
+
+<h2>
+🌬️ Breathing & Sleep
+</h2>
+
+<p>
+
+Pontine networks participate in regulating breathing patterns
+and transitions between different sleep states.
+
+</p>
+
+</div>
+
+
+<!-- CLINICAL -->
+
+<div class="card">
+
+<h2>
+🩺 Clinical Relevance
+</h2>
+
+<p>
+
+Damage to the pons can affect movement, sensation, facial
+function, coordination, breathing, and consciousness.
+
+</p>
+
+</div>
+
+
+</div>
+
+
+<!-- LOCATION VISUALIZATION -->
+
+<div
+id="locationVisual"
+class="location-visual"
+>
+
+<h2>
+📍 Where is the Pons?
+</h2>
+
+<p>
+
+The pons lies between the midbrain and medulla and forms the
+middle portion of the brainstem.
+
+</p>
+
+
+<svg
+viewBox="0 0 800 560"
+xmlns="http://www.w3.org/2000/svg"
+>
+
+
+<!-- CEREBRUM -->
+
+<path
+class="brain"
+d="M150 100
+C200 45 300 30 400 50
+C510 70 575 150 570 235
+C568 300 525 330 470 330
+C410 330 375 285 315 275
+C255 265 190 300 150 255
+C115 215 115 145 150 100Z"
+/>
+
+
+<!-- CEREBELLUM -->
+
+<path
+class="cerebellum"
+d="M465 315
+C530 285 600 315 620 370
+C640 425 605 475 545 475
+C485 475 450 430 450 380
+C450 350 455 330 465 315Z"
+/>
+
+
+<!-- MEDULLA -->
+
+<path
+class="medulla"
+d="M365 365
+C370 400 375 440 365 485
+L400 485
+C405 440 405 400 395 360Z"
+/>
+
+
+<!-- MIDBRAIN -->
+
+<ellipse
+class="midbrain"
+cx="380"
+cy="300"
+rx="27"
+ry="21"
+/>
+
+
+<!-- PONS -->
+
+<ellipse
+class="pons"
+cx="380"
+cy="345"
+rx="42"
+ry="30"
+/>
+
+
+<!-- PONS LABEL -->
+
+<line
+class="line"
+x1="422"
+y1="345"
+x2="590"
+y2="300"
+/>
+
+
+<text
+class="svg-label"
+x="605"
+y="306"
+>
+PONS
+</text>
+
+
+<!-- MIDBRAIN LABEL -->
+
+<line
+class="line"
+x1="405"
+y1="300"
+x2="590"
+y2="230"
+/>
+
+
+<text
+class="svg-label"
+x="605"
+y="236"
+>
+MIDBRAIN
+</text>
+
+
+<!-- MEDULLA LABEL -->
+
+<line
+class="line"
+x1="390"
+y1="450"
+x2="590"
+y2="440"
+/>
+
+
+<text
+class="svg-label"
+x="605"
+y="446"
+>
+MEDULLA
+</text>
+
+
+</svg>
+
+
+<p style="text-align:center;color:#aebdce;">
+
+🔵 The highlighted region represents the approximate location
+of the pons.
+
+</p>
+
+
+</div>
+
+
+<div class="insight">
+
+<strong>
+NeuroAtlas Insight
+</strong>
+
+<br><br>
+
+The pons acts as an important communication bridge between
+different parts of the nervous system, especially the cerebrum,
+cerebellum, and spinal cord.
+
+</div>
+
+
+<div class="quiz">
+
+<h2>
+🧠 Knowledge Check
+</h2>
+
+<p>
+Which part of the brainstem lies between the midbrain and medulla?
+</p>
+
+
+<button
+class="option"
+onclick="answer(true)"
+>
+A. Pons
+</button>
+
+
+<button
+class="option"
+onclick="answer(false)"
+>
+B. Hippocampus
+</button>
+
+
+<button
+class="option"
+onclick="answer(false)"
+>
+C. Thalamus
+</button>
+
+
+<button
+class="option"
+onclick="answer(false)"
+>
+D. Occipital lobe
+</button>
+
+
+<div id="feedback"></div>
+
+</div>
+
+
+<a
+class="back"
+href="explore.html"
+>
+
+← Back to Explore Anatomy
+
+</a>
+
+
+</main>
+
+
+<script>
+
+function showLocation(){
+
+const visual =
+document.getElementById("locationVisual");
+
+visual.classList.add("show");
+
+visual.scrollIntoView({
+behavior:"smooth",
+block:"start"
+});
+
+}
+
+
+function answer(correct){
+
+const feedback =
+document.getElementById("feedback");
+
+if(correct){
+
+feedback.textContent =
+"✓ Correct! The pons lies between the midbrain and medulla.";
+
+}
+
+else{
+
+feedback.textContent =
+"Not quite. Try again.";
+
+}
+
+}
+
+</script>
+
+
+</body>
+
+</html>
+```
