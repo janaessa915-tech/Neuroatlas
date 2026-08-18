@@ -1,206 +1,144 @@
-```html
+```html id="n5z8cu"
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Midbrain | NeuroAtlas</title>
 
 <style>
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+body{
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+    background:#07111f;
+    color:white;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background: #07111f;
-    color: #f4f7fb;
-    line-height: 1.7;
+nav{
+    padding:20px 7%;
+    border-bottom:1px solid rgba(255,255,255,.1);
 }
 
-nav {
-    padding: 22px 7%;
-    border-bottom: 1px solid rgba(255,255,255,.08);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+nav a{
+    color:#aebdce;
+    text-decoration:none;
 }
 
-.logo {
-    color: white;
-    text-decoration: none;
-    font-size: 23px;
-    font-weight: bold;
+main{
+    max-width:1000px;
+    margin:auto;
+    padding:70px 7%;
 }
 
-.logo span {
-    color: #4da6ff;
+.label{
+    color:#4da6ff;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    font-size:13px;
+    margin-bottom:15px;
 }
 
-.nav-links {
-    display: flex;
-    gap: 25px;
+h1{
+    font-size:70px;
+    margin:0 0 15px 0;
 }
 
-.nav-links a {
-    color: #aebdce;
-    text-decoration: none;
-    font-size: 14px;
+.intro{
+    color:#aebdce;
+    font-size:19px;
+    max-width:750px;
+    margin-bottom:40px;
 }
 
-.nav-links a:hover {
-    color: white;
+.cards{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
 }
 
-.container {
-    max-width: 1100px;
-    margin: auto;
-    padding: 70px 7%;
+.card{
+    padding:25px;
+    background:#0b192b;
+    border:1px solid #263951;
+    border-radius:15px;
 }
 
-.label {
-    color: #4da6ff;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-size: 13px;
-    margin-bottom: 12px;
+.card h2{
+    margin-top:0;
+    font-size:21px;
 }
 
-h1 {
-    font-size: clamp(45px, 7vw, 76px);
-    line-height: 1.05;
-    margin-bottom: 10px;
+.card p{
+    color:#aebdce;
 }
 
-.arabic {
-    color: #7ebcff;
-    font-size: 24px;
-    margin-bottom: 25px;
+.insight{
+    margin-top:30px;
+    padding:25px;
+    background:#0b192b;
+    border-left:3px solid #4da6ff;
+    border-radius:10px;
 }
 
-.intro {
-    color: #aebdce;
-    font-size: 18px;
-    max-width: 800px;
-    margin-bottom: 45px;
+.quiz{
+    margin-top:45px;
+    padding:30px;
+    background:#0b192b;
+    border:1px solid #263951;
+    border-radius:15px;
 }
 
-.grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+.option{
+    display:block;
+    width:100%;
+    padding:13px;
+    margin-top:10px;
+    background:#10233a;
+    color:white;
+    border:1px solid #263951;
+    border-radius:8px;
+    text-align:left;
+    cursor:pointer;
 }
 
-.card {
-    padding: 28px;
-    background: rgba(255,255,255,.035);
-    border: 1px solid rgba(255,255,255,.08);
-    border-radius: 16px;
+.option:hover{
+    border-color:#4da6ff;
 }
 
-.card h2 {
-    font-size: 20px;
-    margin-bottom: 12px;
+#feedback{
+    margin-top:15px;
+    color:#7ebcff;
 }
 
-.card p {
-    color: #aebdce;
+.back{
+    display:inline-block;
+    margin-top:40px;
+    padding:12px 18px;
+    border:1px solid #263951;
+    border-radius:9px;
+    color:white;
+    text-decoration:none;
 }
 
-.insight {
-    margin-top: 30px;
-    padding: 30px;
-    border-left: 3px solid #4da6ff;
-    background: #0a1728;
-    border-radius: 10px;
+.back:hover{
+    border-color:#4da6ff;
 }
 
-.insight strong {
-    color: #7ebcff;
-}
+@media(max-width:700px){
 
-.quiz {
-    margin-top: 55px;
-    padding: 35px;
-    background: #0a1728;
-    border: 1px solid rgba(77,166,255,.2);
-    border-radius: 18px;
-}
-
-.quiz h2 {
-    margin-bottom: 20px;
-}
-
-.option {
-    display: block;
-    width: 100%;
-    text-align: left;
-    padding: 14px 16px;
-    margin-top: 10px;
-    border-radius: 10px;
-    border: 1px solid #263951;
-    background: #0d2035;
-    color: white;
-    cursor: pointer;
-    font-size: 15px;
-}
-
-.option:hover {
-    border-color: #4da6ff;
-}
-
-#feedback {
-    margin-top: 20px;
-    color: #7ebcff;
-    font-weight: bold;
-}
-
-.bottom-nav {
-    display: flex;
-    justify-content: space-between;
-    gap: 15px;
-    margin-top: 60px;
-}
-
-.bottom-nav a {
-    padding: 13px 18px;
-    border-radius: 10px;
-    text-decoration: none;
-    border: 1px solid #263951;
-    color: #d7e2ee;
-}
-
-.bottom-nav a:hover {
-    border-color: #4da6ff;
-}
-
-footer {
-    text-align: center;
-    padding: 35px 7%;
-    border-top: 1px solid rgba(255,255,255,.08);
-    color: #718197;
-    font-size: 14px;
-}
-
-@media (max-width: 700px) {
-
-    .grid {
-        grid-template-columns: 1fr;
+    h1{
+        font-size:48px;
     }
 
-    nav {
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .bottom-nav {
-        flex-direction: column;
+    .cards{
+        grid-template-columns:1fr;
     }
 
 }
@@ -215,29 +153,14 @@ footer {
 
 <nav>
 
-<a
-class="logo"
-href="index.html"
->
-Neuro<span>Atlas</span>
-</a>
-
-<div class="nav-links">
-
 <a href="index.html">
-Home
+← NeuroAtlas Home
 </a>
-
-<a href="explore.html">
-Explore Anatomy
-</a>
-
-</div>
 
 </nav>
 
 
-<main class="container">
+<main>
 
 
 <div class="label">
@@ -250,22 +173,17 @@ Midbrain
 </h1>
 
 
-<div class="arabic">
-الدماغ الأوسط
-</div>
-
-
 <p class="intro">
 
 The midbrain is the uppermost part of the brainstem. It plays
-important roles in eye movement, visual and auditory reflexes,
+important roles in eye movements, visual and auditory reflexes,
 motor control, and communication between different regions of
 the nervous system.
 
 </p>
 
 
-<div class="grid">
+<div class="cards">
 
 
 <div class="card">
@@ -274,8 +192,8 @@ the nervous system.
 
 <p>
 
-The midbrain is located between the diencephalon and the pons.
-It forms the upper part of the brainstem.
+The midbrain lies between the diencephalon and the pons,
+forming the upper portion of the brainstem.
 
 </p>
 
@@ -288,8 +206,8 @@ It forms the upper part of the brainstem.
 
 <p>
 
-The superior colliculus helps coordinate reflexive movements
-of the eyes and head in response to visual stimuli.
+The superior colliculus helps coordinate movements of the eyes
+and head toward visual stimuli.
 
 </p>
 
@@ -316,8 +234,8 @@ pathway and contributes to auditory reflexes.
 
 <p>
 
-The midbrain contains the substantia nigra and other structures
-that participate in movement and motor control.
+The substantia nigra and other midbrain structures participate
+in motor control and movement.
 
 </p>
 
@@ -345,9 +263,8 @@ substantia nigra.
 
 <p>
 
-Midbrain injury can affect eye movements, motor function,
-consciousness, and communication between sensory and motor
-pathways.
+Midbrain damage can affect eye movements, motor function,
+consciousness, and important sensory and motor pathways.
 
 </p>
 
@@ -363,102 +280,100 @@ pathways.
 
 <br><br>
 
-Although the midbrain is relatively small, it contains
-important pathways and nuclei involved in movement, sensory
-processing, reflexes, and alertness.
+Although relatively small, the midbrain contains important
+pathways and nuclei involved in movement, sensory processing,
+reflexes, and alertness.
 
 </div>
 
 
-<section class="quiz">
-
-<div class="label">
-Knowledge Check
-</div>
+<div class="quiz">
 
 <h2>
-Which structure is found in the midbrain?
+🧠 Knowledge Check
 </h2>
 
+<p>
+Which structure is located in the midbrain?
+</p>
+
 
 <button
 class="option"
-onclick="checkAnswer(true)"
+onclick="answer(true)"
 >
+
 A. Substantia nigra
+
 </button>
 
 
 <button
 class="option"
-onclick="checkAnswer(false)"
+onclick="answer(false)"
 >
+
 B. Hippocampus
+
 </button>
 
 
 <button
 class="option"
-onclick="checkAnswer(false)"
+onclick="answer(false)"
 >
+
 C. Cerebral cortex
+
 </button>
 
 
 <button
 class="option"
-onclick="checkAnswer(false)"
+onclick="answer(false)"
 >
+
 D. Lateral ventricle
+
 </button>
 
 
 <div id="feedback"></div>
 
-</section>
-
-
-<div class="bottom-nav">
-
-<a href="explore.html">
-← Back to Explore Anatomy
-</a>
-
-<a href="index.html">
-NeuroAtlas Home →
-</a>
-
 </div>
+
+
+<a
+class="back"
+href="explore.html"
+>
+
+← Back to Explore Anatomy
+
+</a>
 
 
 </main>
 
 
-<footer>
-
-NeuroAtlas · Free bilingual neuroanatomy education
-
-</footer>
-
-
 <script>
 
-function checkAnswer(correct) {
+function answer(correct){
 
-    const feedback =
-        document.getElementById("feedback");
+const feedback =
+document.getElementById("feedback");
 
-    if (correct) {
+if(correct){
 
-        feedback.textContent =
-        "✓ Correct — the substantia nigra is a major structure of the midbrain.";
+feedback.textContent =
+"✓ Correct! The substantia nigra is located in the midbrain.";
 
-    } else {
+}else{
 
-        feedback.textContent =
-        "Not quite. Think about the structures located in the brainstem.";
+feedback.textContent =
+"Not quite. Try again.";
 
-    }
+}
 
 }
 
