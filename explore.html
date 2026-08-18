@@ -12,147 +12,133 @@
 <style>
 
 *{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+box-sizing:border-box;
+margin:0;
+padding:0;
 }
 
 body{
-    font-family:Arial,sans-serif;
-    background:#07111f;
-    color:#f4f7fb;
-    line-height:1.6;
+font-family:Arial,sans-serif;
+background:#07111f;
+color:#f4f7fb;
+line-height:1.6;
 }
 
 nav{
-    padding:22px 7%;
-    border-bottom:1px solid rgba(255,255,255,.08);
+padding:22px 7%;
+border-bottom:1px solid rgba(255,255,255,.08);
 }
 
 nav a{
-    color:#aebdce;
-    text-decoration:none;
-}
-
-nav a:hover{
-    color:white;
+color:#aebdce;
+text-decoration:none;
 }
 
 .container{
-    max-width:1150px;
-    margin:auto;
-    padding:70px 7%;
+max-width:1150px;
+margin:auto;
+padding:70px 7%;
 }
 
 .label{
-    color:#4da6ff;
-    text-transform:uppercase;
-    letter-spacing:2px;
-    font-size:13px;
-    margin-bottom:12px;
+color:#4da6ff;
+text-transform:uppercase;
+letter-spacing:2px;
+font-size:13px;
+margin-bottom:12px;
 }
 
 h1{
-    font-size:clamp(42px,7vw,70px);
-    line-height:1.05;
-    margin-bottom:20px;
+font-size:clamp(42px,7vw,70px);
+line-height:1.05;
+margin-bottom:20px;
 }
 
 .intro{
-    color:#aebdce;
-    max-width:700px;
-    font-size:18px;
-    margin-bottom:45px;
+color:#aebdce;
+max-width:700px;
+font-size:18px;
+margin-bottom:45px;
 }
 
 .search{
-    width:100%;
-    padding:17px 20px;
-    border-radius:12px;
-    border:1px solid #263951;
-    background:#0b192b;
-    color:white;
-    font-size:16px;
-    outline:none;
-    margin-bottom:35px;
-}
-
-.search:focus{
-    border-color:#4da6ff;
+width:100%;
+padding:17px 20px;
+border-radius:12px;
+border:1px solid #263951;
+background:#0b192b;
+color:white;
+font-size:16px;
+outline:none;
+margin-bottom:35px;
 }
 
 .categories{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:20px;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
 }
 
 .category{
-    padding:28px;
-    border-radius:18px;
-    background:rgba(255,255,255,.035);
-    border:1px solid rgba(255,255,255,.08);
-    transition:.25s;
-}
-
-.category:hover{
-    transform:translateY(-5px);
-    border-color:rgba(77,166,255,.55);
+padding:28px;
+border-radius:18px;
+background:rgba(255,255,255,.035);
+border:1px solid rgba(255,255,255,.08);
 }
 
 .category h2{
-    font-size:22px;
-    margin-bottom:10px;
+font-size:22px;
+margin-bottom:10px;
 }
 
 .category p{
-    color:#9fb0c3;
-    margin-bottom:18px;
+color:#9fb0c3;
+margin-bottom:18px;
 }
 
 .structures{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
+display:flex;
+flex-wrap:wrap;
+gap:8px;
 }
 
 .structure{
-    display:inline-block;
-    padding:8px 12px;
-    border-radius:8px;
-    background:#10233a;
-    color:#c8d6e5;
-    font-size:13px;
-    text-decoration:none;
-    cursor:pointer;
-    transition:.2s;
+display:inline-block;
+padding:9px 13px;
+border-radius:8px;
+background:#10233a;
+color:#c8d6e5;
+font-size:13px;
+text-decoration:none;
+cursor:pointer;
+border:0;
+font-family:Arial,sans-serif;
 }
 
 .structure:hover{
-    background:#183654;
-    color:white;
-    transform:translateY(-2px);
+background:#183654;
+color:white;
 }
 
 .no-results{
-    display:none;
-    color:#9fb0c3;
-    margin-top:20px;
+display:none;
+color:#9fb0c3;
+margin-top:20px;
 }
 
 @media(max-width:1000px){
 
-    .categories{
-        grid-template-columns:repeat(2,1fr);
-    }
+.categories{
+grid-template-columns:repeat(2,1fr);
+}
 
 }
 
 @media(max-width:700px){
 
-    .categories{
-        grid-template-columns:1fr;
-    }
+.categories{
+grid-template-columns:1fr;
+}
 
 }
 
@@ -193,11 +179,10 @@ connect to function, pathways, and clinical reasoning.
 
 
 <input
-    id="search"
-    class="search"
-    type="text"
-    placeholder="Search a brain structure..."
-    aria-label="Search brain structures"
+id="search"
+class="search"
+type="text"
+placeholder="Search a brain structure..."
 >
 
 
@@ -210,9 +195,7 @@ connect to function, pathways, and clinical reasoning.
 
 <h2>🧠 Cerebral Cortex</h2>
 
-<p>
-Major cortical regions and their functional roles.
-</p>
+<p>Major cortical regions and their functional roles.</p>
 
 <div class="structures">
 
@@ -241,7 +224,6 @@ Insula
 </a>
 
 </div>
-
 </div>
 
 
@@ -251,9 +233,7 @@ Insula
 
 <h2>🔬 Deep Brain</h2>
 
-<p>
-Structures located beneath the cerebral cortex.
-</p>
+<p>Structures located beneath the cerebral cortex.</p>
 
 <div class="structures">
 
@@ -278,7 +258,6 @@ Basal Ganglia
 </a>
 
 </div>
-
 </div>
 
 
@@ -288,9 +267,7 @@ Basal Ganglia
 
 <h2>⚡ Brainstem</h2>
 
-<p>
-Core structures connecting the brain with the spinal cord.
-</p>
+<p>Core structures connecting the brain with the spinal cord.</p>
 
 <div class="structures">
 
@@ -298,16 +275,23 @@ Core structures connecting the brain with the spinal cord.
 Midbrain
 </a>
 
-<a class="structure" href="pons.html">
+
+<!-- PONS -->
+
+<button
+type="button"
+class="structure"
+onclick="openPons()"
+>
 Pons
-</a>
+</button>
+
 
 <a class="structure" href="medulla.html">
 Medulla
 </a>
 
 </div>
-
 </div>
 
 
@@ -317,9 +301,7 @@ Medulla
 
 <h2>🎯 Cerebellum</h2>
 
-<p>
-Important for coordination, balance, and motor learning.
-</p>
+<p>Important for coordination, balance, and motor learning.</p>
 
 <div class="structures">
 
@@ -336,7 +318,6 @@ Deep Cerebellar Nuclei
 </a>
 
 </div>
-
 </div>
 
 
@@ -346,9 +327,7 @@ Deep Cerebellar Nuclei
 
 <h2>🧬 Ventricular System</h2>
 
-<p>
-The interconnected spaces containing cerebrospinal fluid.
-</p>
+<p>The interconnected spaces containing cerebrospinal fluid.</p>
 
 <div class="structures">
 
@@ -369,7 +348,6 @@ Fourth Ventricle
 </a>
 
 </div>
-
 </div>
 
 
@@ -379,9 +357,7 @@ Fourth Ventricle
 
 <h2>🩸 Cerebral Vasculature</h2>
 
-<p>
-Major arteries supplying the brain.
-</p>
+<p>Major arteries supplying the brain.</p>
 
 <div class="structures">
 
@@ -406,14 +382,16 @@ Circle of Willis
 </a>
 
 </div>
-
 </div>
 
 
 </div>
 
 
-<p id="noResults" class="no-results">
+<p
+id="noResults"
+class="no-results"
+>
 No matching structures found.
 </p>
 
@@ -423,7 +401,24 @@ No matching structures found.
 
 <script>
 
-const search = document.getElementById("search");
+
+/* =========================
+   PONS BUTTON
+========================= */
+
+function openPons(){
+
+    window.location.href = "pons.html";
+
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+const search =
+document.getElementById("search");
 
 const categories =
 document.querySelectorAll(".category");
@@ -432,7 +427,7 @@ const noResults =
 document.getElementById("noResults");
 
 
-search.addEventListener("input", function(){
+search.addEventListener("input",function(){
 
     const query =
     search.value.toLowerCase().trim();
@@ -476,6 +471,7 @@ search.addEventListener("input", function(){
     }
 
 });
+
 
 </script>
 
