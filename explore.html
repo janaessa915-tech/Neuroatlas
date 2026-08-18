@@ -5,6 +5,7 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Explore Anatomy | NeuroAtlas</title>
@@ -32,6 +33,10 @@ border-bottom:1px solid rgba(255,255,255,.08);
 nav a{
 color:#aebdce;
 text-decoration:none;
+}
+
+nav a:hover{
+color:white;
 }
 
 .container{
@@ -73,6 +78,10 @@ outline:none;
 margin-bottom:35px;
 }
 
+.search:focus{
+border-color:#4da6ff;
+}
+
 .categories{
 display:grid;
 grid-template-columns:repeat(3,1fr);
@@ -84,6 +93,12 @@ padding:28px;
 border-radius:18px;
 background:rgba(255,255,255,.035);
 border:1px solid rgba(255,255,255,.08);
+transition:.25s;
+}
+
+.category:hover{
+transform:translateY(-5px);
+border-color:rgba(77,166,255,.55);
 }
 
 .category h2{
@@ -104,20 +119,22 @@ gap:8px;
 
 .structure{
 display:inline-block;
-padding:9px 13px;
+padding:7px 10px;
 border-radius:8px;
 background:#10233a;
 color:#c8d6e5;
 font-size:13px;
 text-decoration:none;
-cursor:pointer;
+transition:.2s;
 border:0;
+cursor:pointer;
 font-family:Arial,sans-serif;
 }
 
 .structure:hover{
 background:#183654;
 color:white;
+transform:translateY(-2px);
 }
 
 .no-results{
@@ -183,19 +200,24 @@ id="search"
 class="search"
 type="text"
 placeholder="Search a brain structure..."
+aria-label="Search brain structures"
 >
 
 
 <div class="categories">
 
 
-<!-- CEREBRAL CORTEX -->
+<!-- =========================
+     CEREBRAL CORTEX
+========================= -->
 
 <div class="category">
 
 <h2>🧠 Cerebral Cortex</h2>
 
-<p>Major cortical regions and their functional roles.</p>
+<p>
+Major cortical regions and their functional roles.
+</p>
 
 <div class="structures">
 
@@ -224,16 +246,21 @@ Insula
 </a>
 
 </div>
+
 </div>
 
 
-<!-- DEEP BRAIN -->
+<!-- =========================
+     DEEP BRAIN
+========================= -->
 
 <div class="category">
 
 <h2>🔬 Deep Brain</h2>
 
-<p>Structures located beneath the cerebral cortex.</p>
+<p>
+Structures located beneath the cerebral cortex.
+</p>
 
 <div class="structures">
 
@@ -258,50 +285,63 @@ Basal Ganglia
 </a>
 
 </div>
+
 </div>
 
 
-<!-- BRAINSTEM -->
+<!-- =========================
+     BRAINSTEM
+========================= -->
 
 <div class="category">
 
 <h2>⚡ Brainstem</h2>
 
-<p>Core structures connecting the brain with the spinal cord.</p>
+<p>
+Core structures connecting the brain with the spinal cord.
+</p>
 
 <div class="structures">
 
-<a class="structure" href="midbrain.html">
+<a
+class="structure"
+href="midbrain.html"
+>
 Midbrain
 </a>
 
 
-<!-- PONS -->
-
-<button
-type="button"
+<a
 class="structure"
-onclick="openPons()"
+href="pons.html"
 >
 Pons
-</button>
+</a>
 
 
-<a class="structure" href="medulla.html">
+<a
+class="structure"
+href="medulla.html"
+>
 Medulla
 </a>
 
 </div>
+
 </div>
 
 
-<!-- CEREBELLUM -->
+<!-- =========================
+     CEREBELLUM
+========================= -->
 
 <div class="category">
 
 <h2>🎯 Cerebellum</h2>
 
-<p>Important for coordination, balance, and motor learning.</p>
+<p>
+Important for coordination, balance, and motor learning.
+</p>
 
 <div class="structures">
 
@@ -318,16 +358,21 @@ Deep Cerebellar Nuclei
 </a>
 
 </div>
+
 </div>
 
 
-<!-- VENTRICULAR SYSTEM -->
+<!-- =========================
+     VENTRICULAR SYSTEM
+========================= -->
 
 <div class="category">
 
 <h2>🧬 Ventricular System</h2>
 
-<p>The interconnected spaces containing cerebrospinal fluid.</p>
+<p>
+The interconnected spaces containing cerebrospinal fluid.
+</p>
 
 <div class="structures">
 
@@ -348,16 +393,21 @@ Fourth Ventricle
 </a>
 
 </div>
+
 </div>
 
 
-<!-- VASCULATURE -->
+<!-- =========================
+     CEREBRAL VASCULATURE
+========================= -->
 
 <div class="category">
 
 <h2>🩸 Cerebral Vasculature</h2>
 
-<p>Major arteries supplying the brain.</p>
+<p>
+Major arteries supplying the brain.
+</p>
 
 <div class="structures">
 
@@ -382,6 +432,7 @@ Circle of Willis
 </a>
 
 </div>
+
 </div>
 
 
@@ -401,22 +452,6 @@ No matching structures found.
 
 <script>
 
-
-/* =========================
-   PONS BUTTON
-========================= */
-
-function openPons(){
-
-    window.location.href = "pons.html";
-
-}
-
-
-/* =========================
-   SEARCH
-========================= */
-
 const search =
 document.getElementById("search");
 
@@ -429,49 +464,48 @@ document.getElementById("noResults");
 
 search.addEventListener("input",function(){
 
-    const query =
-    search.value.toLowerCase().trim();
+const query =
+search.value.toLowerCase().trim();
 
-    let visible = 0;
-
-
-    categories.forEach(function(category){
-
-        const text =
-        category.innerText.toLowerCase();
+let visible = 0;
 
 
-        if(text.includes(query)){
+categories.forEach(function(category){
 
-            category.style.display = "";
-
-            visible++;
-
-        }
-
-        else{
-
-            category.style.display = "none";
-
-        }
-
-    });
+const text =
+category.innerText.toLowerCase();
 
 
-    if(visible === 0){
+if(text.includes(query)){
 
-        noResults.style.display = "block";
+category.style.display = "";
 
-    }
+visible++;
 
-    else{
+}
 
-        noResults.style.display = "none";
+else{
 
-    }
+category.style.display = "none";
+
+}
 
 });
 
+
+if(visible === 0){
+
+noResults.style.display = "block";
+
+}
+
+else{
+
+noResults.style.display = "none";
+
+}
+
+});
 
 </script>
 
