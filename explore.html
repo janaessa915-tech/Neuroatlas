@@ -145,6 +145,7 @@ font-size:13px;
 text-decoration:none;
 border:1px solid transparent;
 transition:.2s;
+cursor:pointer;
 }
 
 .structure:hover{
@@ -235,8 +236,10 @@ Navigate the Human Brain.
 
 
 <p class="intro">
+
 Explore major neuroanatomical regions and discover how structures
 connect to function, pathways, and clinical reasoning.
+
 </p>
 
 
@@ -395,15 +398,24 @@ Important for coordination, balance, and motor learning.
 
 <div class="structures">
 
-<a class="structure disabled" href="#">
+<a
+class="structure disabled"
+href="#"
+>
 Cerebellar Cortex
 </a>
 
-<a class="structure disabled" href="#">
+<a
+class="structure disabled"
+href="#"
+>
 Cerebellar Vermis
 </a>
 
-<a class="structure disabled" href="#">
+<a
+class="structure disabled"
+href="#"
+>
 Deep Cerebellar Nuclei
 </a>
 
@@ -424,19 +436,31 @@ The interconnected spaces containing cerebrospinal fluid.
 
 <div class="structures">
 
-<a class="structure disabled" href="#">
+<a
+class="structure disabled"
+href="#"
+>
 Lateral Ventricles
 </a>
 
-<a class="structure disabled" href="#">
+<a
+class="structure disabled"
+href="#"
+>
 Third Ventricle
 </a>
 
-<a class="structure disabled" href="#">
+<a
+class="structure disabled"
+href="#"
+>
 Cerebral Aqueduct
 </a>
 
-<a class="structure disabled" href="#">
+<a
+class="structure disabled"
+href="#"
+>
 Fourth Ventricle
 </a>
 
@@ -457,23 +481,38 @@ Major arteries supplying the brain.
 
 <div class="structures">
 
-<a class="structure disabled" href="#">
+<a
+class="structure disabled"
+href="#"
+>
 ACA
 </a>
 
-<a class="structure disabled" href="#">
+<a
+class="structure disabled"
+href="#"
+>
 MCA
 </a>
 
-<a class="structure disabled" href="#">
+<a
+class="structure disabled"
+href="#"
+>
 PCA
 </a>
 
-<a class="structure disabled" href="#">
+<a
+class="structure disabled"
+href="#"
+>
 Basilar Artery
 </a>
 
-<a class="structure disabled" href="#">
+<a
+class="structure disabled"
+href="#"
+>
 Circle of Willis
 </a>
 
@@ -515,17 +554,21 @@ search.value.toLowerCase().trim();
 
 let visible=0;
 
+
 categories.forEach(function(category){
 
 const text =
 category.innerText.toLowerCase();
+
 
 if(text.includes(query)){
 
 category.style.display="";
 visible++;
 
-}else{
+}
+
+else{
 
 category.style.display="none";
 
@@ -538,7 +581,9 @@ if(visible===0){
 
 noResults.style.display="block";
 
-}else{
+}
+
+else{
 
 noResults.style.display="none";
 
