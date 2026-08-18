@@ -4,7 +4,6 @@
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Explore Anatomy | NeuroAtlas</title>
@@ -156,6 +155,18 @@ border-color:#4da6ff;
 transform:translateY(-2px);
 }
 
+.disabled{
+opacity:.55;
+cursor:not-allowed;
+}
+
+.disabled:hover{
+background:#10233a;
+color:#c8d6e5;
+border-color:transparent;
+transform:none;
+}
+
 .no-results{
 display:none;
 color:#9fb0c3;
@@ -185,18 +196,25 @@ gap:15px;
 
 <nav>
 
-<a class="logo"
-href="https://janaessa915-tech.github.io/Neuroatlas/">
+<a
+class="logo"
+href="https://janaessa915-tech.github.io/Neuroatlas/"
+>
 Neuro<span>Atlas</span>
 </a>
 
+
 <div class="nav-links">
 
-<a href="https://janaessa915-tech.github.io/Neuroatlas/">
+<a
+href="https://janaessa915-tech.github.io/Neuroatlas/"
+>
 Home
 </a>
 
-<a href="https://janaessa915-tech.github.io/Neuroatlas/explore.html">
+<a
+href="https://janaessa915-tech.github.io/Neuroatlas/explore.html"
+>
 Explore
 </a>
 
@@ -252,37 +270,44 @@ Major cortical regions and their functional roles.
 
 <a
 class="structure"
-href="https://janaessa915-tech.github.io/Neuroatlas/cerebral-cortex.html"
+href="#"
 >
 Cerebral Cortex
 </a>
 
 <a
 class="structure"
-href="https://janaessa915-tech.github.io/Neuroatlas/cerebral-cortex.html"
+href="#"
 >
 Frontal Lobe
 </a>
 
 <a
 class="structure"
-href="https://janaessa915-tech.github.io/Neuroatlas/cerebral-cortex.html"
+href="#"
 >
 Parietal Lobe
 </a>
 
 <a
 class="structure"
-href="https://janaessa915-tech.github.io/Neuroatlas/cerebral-cortex.html"
+href="#"
 >
 Temporal Lobe
 </a>
 
 <a
 class="structure"
-href="https://janaessa915-tech.github.io/Neuroatlas/cerebral-cortex.html"
+href="#"
 >
 Occipital Lobe
+</a>
+
+<a
+class="structure"
+href="#"
+>
+Insula
 </a>
 
 </div>
@@ -313,14 +338,14 @@ Hippocampus
 
 <a
 class="structure"
-href="#"
+href="https://janaessa915-tech.github.io/Neuroatlas/thalamus.html"
 >
 Thalamus
 </a>
 
 
 <a
-class="structure"
+class="structure disabled"
 href="#"
 >
 Hypothalamus
@@ -328,7 +353,7 @@ Hypothalamus
 
 
 <a
-class="structure"
+class="structure disabled"
 href="#"
 >
 Amygdala
@@ -336,7 +361,7 @@ Amygdala
 
 
 <a
-class="structure"
+class="structure disabled"
 href="#"
 >
 Basal Ganglia
@@ -360,15 +385,15 @@ Core structures connecting the brain with the spinal cord.
 
 <div class="structures">
 
-<a class="structure" href="#">
+<a class="structure disabled" href="#">
 Midbrain
 </a>
 
-<a class="structure" href="#">
+<a class="structure disabled" href="#">
 Pons
 </a>
 
-<a class="structure" href="#">
+<a class="structure disabled" href="#">
 Medulla
 </a>
 
@@ -389,15 +414,15 @@ Important for coordination, balance, and motor learning.
 
 <div class="structures">
 
-<a class="structure" href="#">
+<a class="structure disabled" href="#">
 Cerebellar Cortex
 </a>
 
-<a class="structure" href="#">
+<a class="structure disabled" href="#">
 Cerebellar Vermis
 </a>
 
-<a class="structure" href="#">
+<a class="structure disabled" href="#">
 Deep Cerebellar Nuclei
 </a>
 
@@ -418,19 +443,19 @@ The interconnected spaces containing cerebrospinal fluid.
 
 <div class="structures">
 
-<a class="structure" href="#">
+<a class="structure disabled" href="#">
 Lateral Ventricles
 </a>
 
-<a class="structure" href="#">
+<a class="structure disabled" href="#">
 Third Ventricle
 </a>
 
-<a class="structure" href="#">
+<a class="structure disabled" href="#">
 Cerebral Aqueduct
 </a>
 
-<a class="structure" href="#">
+<a class="structure disabled" href="#">
 Fourth Ventricle
 </a>
 
@@ -451,23 +476,23 @@ Major arteries supplying the brain.
 
 <div class="structures">
 
-<a class="structure" href="#">
+<a class="structure disabled" href="#">
 ACA
 </a>
 
-<a class="structure" href="#">
+<a class="structure disabled" href="#">
 MCA
 </a>
 
-<a class="structure" href="#">
+<a class="structure disabled" href="#">
 PCA
 </a>
 
-<a class="structure" href="#">
+<a class="structure disabled" href="#">
 Basilar Artery
 </a>
 
-<a class="structure" href="#">
+<a class="structure disabled" href="#">
 Circle of Willis
 </a>
 
@@ -479,7 +504,10 @@ Circle of Willis
 </div>
 
 
-<p id="noResults" class="no-results">
+<p
+id="noResults"
+class="no-results"
+>
 No matching structures found.
 </p>
 
