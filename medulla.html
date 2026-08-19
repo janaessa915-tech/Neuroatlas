@@ -4,11 +4,32 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
 <title>Medulla | NeuroAtlas</title>
 
+
+<!-- =========================
+     THREE.JS IMPORT MAP
+========================= -->
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+
+
 <style>
+
+/* =========================
+   RESET
+========================= */
 
 *{
     box-sizing:border-box;
@@ -16,52 +37,79 @@
     padding:0;
 }
 
+
+/* =========================
+   BODY
+========================= */
+
 html{
     scroll-behavior:smooth;
 }
 
 body{
-    font-family:Arial, Helvetica, sans-serif;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
     background:#06101d;
+
     color:#f4f7fb;
+
     line-height:1.6;
 }
 
 
 /* =========================
-   NAVIGATION
+   NAV
 ========================= */
 
 nav{
+
     height:72px;
+
     display:flex;
+
     align-items:center;
+
     padding:0 7%;
 
-    border-bottom:1px solid rgba(255,255,255,.08);
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.08);
 
     background:#06101d;
 }
 
 nav a{
+
     color:#9fb0c3;
+
     text-decoration:none;
+
     font-size:14px;
 }
 
 nav a:hover{
+
     color:white;
 }
 
 
 /* =========================
-   CONTAINER
+   MAIN
 ========================= */
 
 .container{
+
     max-width:1200px;
+
     margin:auto;
-    padding:65px 7% 100px;
+
+    padding:
+        70px 7%
+        100px;
 }
 
 
@@ -70,74 +118,111 @@ nav a:hover{
 ========================= */
 
 .hero{
+
     max-width:850px;
+
     margin-bottom:55px;
 }
 
 .label{
+
     color:#4da6ff;
+
     text-transform:uppercase;
+
     letter-spacing:3px;
+
     font-size:12px;
+
     margin-bottom:15px;
 }
 
 h1{
-    font-size:clamp(52px,8vw,88px);
+
+    font-size:
+        clamp(
+            52px,
+            8vw,
+            88px
+        );
+
     line-height:.95;
+
     letter-spacing:-3px;
+
     margin-bottom:25px;
 }
 
 .hero-text{
+
     color:#a7b6c7;
+
     font-size:18px;
+
     line-height:1.8;
+
     max-width:780px;
 }
 
 
 /* =========================
-   QUICK FACTS
+   FACTS
 ========================= */
 
 .quick-facts{
+
     display:flex;
+
     flex-wrap:wrap;
+
     gap:10px;
+
     margin-top:25px;
 }
 
 .fact{
-    padding:9px 14px;
 
-    border:1px solid #20364e;
+    padding:
+        9px 14px;
+
+    border:
+        1px solid
+        #20364e;
+
     border-radius:999px;
 
     background:#0a1828;
 
     color:#c7d4e2;
+
     font-size:13px;
 }
 
 
 /* =========================
-   SECTION TITLE
+   SECTION TITLES
 ========================= */
 
 .section-title{
+
     margin-bottom:25px;
 }
 
 .section-title span{
+
     color:#4da6ff;
+
     font-size:12px;
+
     letter-spacing:2px;
+
     text-transform:uppercase;
 }
 
 .section-title h2{
+
     font-size:32px;
+
     margin-top:7px;
 }
 
@@ -153,34 +238,48 @@ h1{
     border-radius:22px;
 
     background:
+
         linear-gradient(
             135deg,
             rgba(77,166,255,.09),
             rgba(255,255,255,.025)
         );
 
-    border:1px solid rgba(255,255,255,.08);
+    border:
+        1px solid
+        rgba(255,255,255,.08);
 
     margin-bottom:55px;
 }
 
 .location-main{
+
     display:flex;
+
     justify-content:space-between;
+
     align-items:center;
+
     gap:20px;
 }
 
 .location-main h2{
+
     font-size:24px;
 }
 
 .location-button{
-    border:1px solid #31587c;
+
+    border:
+        1px solid
+        #31587c;
+
     background:#10263d;
+
     color:#8fc7ff;
 
-    padding:11px 17px;
+    padding:
+        11px 17px;
 
     border-radius:10px;
 
@@ -188,10 +287,12 @@ h1{
 }
 
 .location-button:hover{
+
     background:#163653;
 }
 
 .location-content{
+
     display:none;
 
     margin-top:22px;
@@ -205,7 +306,7 @@ h1{
 
 
 /* =========================
-   ANATOMY GRID
+   CARDS
 ========================= */
 
 .anatomy-grid{
@@ -228,31 +329,45 @@ h1{
 
     background:#091624;
 
-    border:1px solid rgba(255,255,255,.07);
+    border:
+        1px solid
+        rgba(255,255,255,.07);
 
     transition:.2s;
 }
 
 .card:hover{
-    transform:translateY(-3px);
+
+    transform:
+        translateY(-3px);
+
     border-color:#284764;
 }
 
 .card-number{
+
     color:#4da6ff;
+
     font-size:12px;
+
     letter-spacing:2px;
+
     margin-bottom:13px;
 }
 
 .card h3{
+
     font-size:21px;
+
     margin-bottom:12px;
 }
 
 .card p{
+
     color:#94a7bb;
+
     font-size:15px;
+
     line-height:1.75;
 }
 
@@ -281,17 +396,24 @@ h1{
 
     background:#091624;
 
-    border:1px solid rgba(255,255,255,.07);
+    border:
+        1px solid
+        rgba(255,255,255,.07);
 }
 
 .structure h3{
+
     font-size:19px;
+
     margin-bottom:9px;
 }
 
 .structure p{
+
     color:#94a7bb;
+
     font-size:14px;
+
     line-height:1.7;
 }
 
@@ -301,6 +423,7 @@ h1{
 ========================= */
 
 .viewer-section{
+
     margin-bottom:60px;
 }
 
@@ -312,7 +435,9 @@ h1{
 
     background:#020811;
 
-    border:1px solid rgba(255,255,255,.1);
+    border:
+        1px solid
+        rgba(255,255,255,.1);
 }
 
 .viewer-header{
@@ -325,39 +450,50 @@ h1{
 
     justify-content:space-between;
 
-    padding:0 22px;
+    padding:
+        0 22px;
 
-    border-bottom:1px solid rgba(255,255,255,.08);
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.08);
 }
 
 .viewer-title{
+
     color:#c5d2df;
+
     font-size:14px;
 }
 
 .viewer-status{
+
     color:#71869b;
+
     font-size:12px;
 }
 
 .viewer{
 
-    height:540px;
+    height:560px;
 
     position:relative;
 
     background:
+
         radial-gradient(
             circle at center,
-            #10243a 0%,
-            #050c15 60%,
+            #193651 0%,
+            #071321 48%,
             #02060b 100%
         );
 }
 
 canvas{
+
     display:block;
+
     width:100%;
+
     height:100%;
 }
 
@@ -378,26 +514,63 @@ canvas{
     font-size:14px;
 
     pointer-events:none;
+
+    z-index:5;
+}
+
+.model-message{
+
+    position:absolute;
+
+    bottom:18px;
+
+    left:18px;
+
+    right:18px;
+
+    padding:12px 15px;
+
+    border-radius:10px;
+
+    background:
+        rgba(3,10,18,.8);
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+
+    color:#8498ac;
+
+    font-size:12px;
+
+    z-index:4;
 }
 
 .viewer-controls{
 
     display:flex;
 
+    flex-wrap:wrap;
+
     gap:10px;
 
     padding:14px;
 
-    border-top:1px solid rgba(255,255,255,.08);
+    border-top:
+        1px solid
+        rgba(255,255,255,.08);
 }
 
 .viewer-controls button{
 
-    padding:10px 16px;
+    padding:
+        10px 16px;
 
     border-radius:9px;
 
-    border:1px solid #20364e;
+    border:
+        1px solid
+        #20364e;
 
     background:#0b1827;
 
@@ -409,6 +582,7 @@ canvas{
 .viewer-controls button:hover{
 
     background:#142b43;
+
     color:white;
 }
 
@@ -425,18 +599,19 @@ canvas{
 
     background:#0b131e;
 
-    border:1px solid rgba(255,255,255,.08);
+    border:
+        1px solid
+        rgba(255,255,255,.08);
 
     margin-bottom:65px;
 }
 
-.clinical h2{
-    margin-bottom:12px;
-}
-
 .clinical p{
+
     color:#9eafc0;
+
     max-width:900px;
+
     line-height:1.8;
 }
 
@@ -452,25 +627,32 @@ canvas{
     border-radius:24px;
 
     background:
+
         linear-gradient(
             135deg,
             rgba(77,166,255,.08),
             rgba(255,255,255,.025)
         );
 
-    border:1px solid rgba(255,255,255,.09);
+    border:
+        1px solid
+        rgba(255,255,255,.09);
 }
 
 .quiz-header{
+
     margin-bottom:30px;
 }
 
 .quiz-header h2{
+
     font-size:32px;
 }
 
 .quiz-header p{
+
     color:#91a4b8;
+
     margin-top:8px;
 }
 
@@ -482,13 +664,17 @@ canvas{
 
     background:#081321;
 
-    border:1px solid rgba(255,255,255,.07);
+    border:
+        1px solid
+        rgba(255,255,255,.07);
 
     margin-bottom:18px;
 }
 
 .question h3{
+
     font-size:16px;
+
     margin-bottom:15px;
 }
 
@@ -505,11 +691,14 @@ canvas{
 
     text-align:left;
 
-    padding:12px 15px;
+    padding:
+        12px 15px;
 
     border-radius:9px;
 
-    border:1px solid #20364e;
+    border:
+        1px solid
+        #20364e;
 
     background:#0b1929;
 
@@ -519,6 +708,7 @@ canvas{
 }
 
 .answer:hover{
+
     background:#132b43;
 }
 
@@ -552,7 +742,9 @@ canvas{
 
     background:#091a2b;
 
-    border:1px solid #254762;
+    border:
+        1px solid
+        #254762;
 
     text-align:center;
 }
@@ -572,11 +764,14 @@ canvas{
 
     margin-top:15px;
 
-    padding:11px 18px;
+    padding:
+        11px 18px;
 
     border-radius:9px;
 
-    border:1px solid #31587c;
+    border:
+        1px solid
+        #31587c;
 
     background:#10263d;
 
@@ -587,45 +782,36 @@ canvas{
 
 
 /* =========================
-   RESPONSIVE
+   MOBILE
 ========================= */
 
 @media(max-width:850px){
 
     .anatomy-grid{
+
         grid-template-columns:1fr;
     }
 
     .structures{
+
         grid-template-columns:1fr;
     }
 
     .viewer{
+
         height:430px;
+    }
+
+    .location-main{
+
+        align-items:flex-start;
+
+        flex-direction:column;
     }
 
 }
 
 </style>
-
-
-<!-- THREE.JS IMPORT MAP -->
-
-<script type="importmap">
-
-{
-    "imports":{
-
-        "three":
-        "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
-
-        "three/addons/":
-        "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
-
-    }
-}
-
-</script>
 
 </head>
 
@@ -633,10 +819,16 @@ canvas{
 <body>
 
 
+<!-- =========================
+     NAV
+========================= -->
+
 <nav>
 
 <a href="./explore.html">
+
 ← Back to Explore Anatomy
+
 </a>
 
 </nav>
@@ -664,7 +856,7 @@ Medulla
 The medulla oblongata is the most inferior part of
 the brainstem. It forms the transition between the
 brainstem and spinal cord and contains pathways,
-nuclei, and regulatory centers essential for normal
+nuclei, and regulatory networks essential for normal
 body function.
 
 </p>
@@ -689,7 +881,7 @@ CN IX–XII
 </div>
 
 <div class="fact">
-Motor pathway crossing
+Pyramidal decussation
 </div>
 
 </div>
@@ -713,7 +905,9 @@ Motor pathway crossing
 class="location-button"
 onclick="toggleLocation()"
 >
+
 Show Location
+
 </button>
 
 </div>
@@ -726,17 +920,17 @@ class="location-content"
 
 The medulla is the lowest part of the brainstem.
 
-It lies inferior to the pons and continues caudally
-until it becomes continuous with the spinal cord near
-the foramen magnum.
+It lies inferior to the pons and continues
+caudally into the spinal cord.
 
-It is positioned anterior to the cerebellum.
+It is located anterior to the cerebellum.
 
-Think of the brainstem as a vertical pathway:
+Think of the brainstem as:
 
 <br><br>
 
 <strong>
+
 Midbrain
 ↓
 Pons
@@ -744,6 +938,7 @@ Pons
 Medulla
 ↓
 Spinal cord
+
 </strong>
 
 </div>
@@ -752,7 +947,7 @@ Spinal cord
 
 
 <!-- =========================
-     WHAT IT DOES
+     FUNCTIONS
 ========================= -->
 
 <section>
@@ -776,7 +971,7 @@ What does the Medulla do?
 <div class="card">
 
 <div class="card-number">
-01 · AUTONOMIC
+01 · RESPIRATORY
 </div>
 
 <h3>
@@ -784,8 +979,10 @@ Breathing
 </h3>
 
 <p>
-Networks within the medulla contribute to the
-generation and regulation of respiratory activity.
+
+Medullary networks contribute to the generation
+and regulation of respiratory activity.
+
 </p>
 
 </div>
@@ -802,8 +999,10 @@ Heart & Blood Pressure
 </h3>
 
 <p>
-Medullary networks participate in cardiovascular
-regulation, including control of autonomic output.
+
+Medullary networks participate in autonomic
+cardiovascular regulation.
+
 </p>
 
 </div>
@@ -820,9 +1019,10 @@ Protective Reflexes
 </h3>
 
 <p>
-Medullary circuits participate in important reflexes
-including coughing, swallowing, and related protective
-responses.
+
+The medulla participates in important reflexes
+including swallowing and coughing.
+
 </p>
 
 </div>
@@ -834,7 +1034,7 @@ responses.
 
 
 <!-- =========================
-     STRUCTURES
+     KEY STRUCTURES
 ========================= -->
 
 <section>
@@ -862,10 +1062,12 @@ Pyramids
 </h3>
 
 <p>
-The anterior medulla contains the pyramids, which
-carry descending corticospinal motor fibers.
+
+The anterior medulla contains the pyramids,
+which carry descending corticospinal motor fibers.
 Many of these fibers cross at the pyramidal
-decussation before continuing in the spinal cord.
+decussation.
+
 </p>
 
 </div>
@@ -878,9 +1080,11 @@ Inferior Olivary Complex
 </h3>
 
 <p>
-The inferior olive participates in circuits connecting
-the spinal cord and brainstem with the cerebellum,
-contributing to motor learning and coordination.
+
+The inferior olive participates in circuits
+connecting the brainstem and spinal cord
+with the cerebellum.
+
 </p>
 
 </div>
@@ -893,10 +1097,12 @@ Cranial Nerves IX & X
 </h3>
 
 <p>
-The glossopharyngeal and vagus nerves are associated
-with medullary nuclei involved in swallowing,
-visceral sensation, autonomic regulation, and
-protective reflexes.
+
+Medullary nuclei are associated with the
+glossopharyngeal and vagus nerves and
+participate in swallowing, visceral sensation,
+and autonomic functions.
+
 </p>
 
 </div>
@@ -909,9 +1115,11 @@ Cranial Nerves XI & XII
 </h3>
 
 <p>
-Medullary structures are associated with the accessory
-and hypoglossal nerves. CN XII provides motor
-innervation to the tongue.
+
+The medullary region is associated with
+structures related to the accessory and
+hypoglossal nerves.
+
 </p>
 
 </div>
@@ -923,10 +1131,11 @@ innervation to the tongue.
 
 
 <!-- =========================
-     3D MODEL
+     3D
 ========================= -->
 
 <section class="viewer-section">
+
 
 <div class="section-title">
 
@@ -947,11 +1156,15 @@ Explore the Brainstem
 <div class="viewer-header">
 
 <div class="viewer-title">
+
 3D Anatomical Model
+
 </div>
 
 <div class="viewer-status">
+
 DRAG · ROTATE · SCROLL · ZOOM
+
 </div>
 
 </div>
@@ -963,22 +1176,47 @@ DRAG · ROTATE · SCROLL · ZOOM
 id="loading"
 class="loading"
 >
+
 Loading 3D model...
+
 </div>
 
-<canvas id="canvas"></canvas>
+
+<canvas
+id="canvas"
+>
+</canvas>
+
+
+<div
+class="model-message"
+>
+
+The model rotates automatically.
+Drag to inspect it from different angles.
+
+</div>
 
 </div>
 
 
 <div class="viewer-controls">
 
-<button onclick="resetView()">
+<button
+onclick="resetView()"
+>
+
 Reset View
+
 </button>
 
-<button onclick="toggleRotation()">
+
+<button
+onclick="toggleRotation()"
+>
+
 Auto Rotate
+
 </button>
 
 </div>
@@ -995,6 +1233,7 @@ Auto Rotate
 
 <section class="clinical">
 
+
 <div class="section-title">
 
 <span>
@@ -1007,15 +1246,14 @@ Why does the Medulla matter?
 
 </div>
 
+
 <p>
 
-Because the medulla contains pathways and regulatory
-systems involved in essential functions, lesions in
-this region can produce significant neurological
-effects. One example is lateral medullary syndrome,
-which can involve structures supplied by branches of
-the vertebral or posterior inferior cerebellar arterial
-circulation.
+Because the medulla contains important pathways
+and regulatory systems, damage to this region can
+produce significant neurological effects. The
+specific symptoms depend on which pathways,
+nuclei, or blood vessels are affected.
 
 </p>
 
@@ -1040,13 +1278,15 @@ Mini Test
 </h2>
 
 <p>
-Five questions. See how much you remember.
+
+Five questions. Test what you remember.
+
 </p>
 
 </div>
 
 
-<!-- Q1 -->
+<!-- QUESTION 1 -->
 
 <div class="question">
 
@@ -1054,26 +1294,46 @@ Five questions. See how much you remember.
 1. Where is the medulla located?
 </h3>
 
+
 <div class="answers">
 
-<button class="answer"
-onclick="answer(this,false)">
+<button
+class="answer"
+data-correct="false"
+>
+
 Above the midbrain
+
 </button>
 
-<button class="answer"
-onclick="answer(this,true)">
+
+<button
+class="answer"
+data-correct="true"
+>
+
 Below the pons and above the spinal cord
+
 </button>
 
-<button class="answer"
-onclick="answer(this,false)">
+
+<button
+class="answer"
+data-correct="false"
+>
+
 Inside the cerebellum
+
 </button>
 
-<button class="answer"
-onclick="answer(this,false)">
+
+<button
+class="answer"
+data-correct="false"
+>
+
 Inside the cerebral cortex
+
 </button>
 
 </div>
@@ -1081,7 +1341,7 @@ Inside the cerebral cortex
 </div>
 
 
-<!-- Q2 -->
+<!-- QUESTION 2 -->
 
 <div class="question">
 
@@ -1089,26 +1349,46 @@ Inside the cerebral cortex
 2. Which structures contain descending corticospinal fibers?
 </h3>
 
+
 <div class="answers">
 
-<button class="answer"
-onclick="answer(this,false)">
+<button
+class="answer"
+data-correct="false"
+>
+
 Olives
+
 </button>
 
-<button class="answer"
-onclick="answer(this,true)">
+
+<button
+class="answer"
+data-correct="true"
+>
+
 Pyramids
+
 </button>
 
-<button class="answer"
-onclick="answer(this,false)">
+
+<button
+class="answer"
+data-correct="false"
+>
+
 Hippocampi
+
 </button>
 
-<button class="answer"
-onclick="answer(this,false)">
+
+<button
+class="answer"
+data-correct="false"
+>
+
 Thalami
+
 </button>
 
 </div>
@@ -1116,34 +1396,54 @@ Thalami
 </div>
 
 
-<!-- Q3 -->
+<!-- QUESTION 3 -->
 
 <div class="question">
 
 <h3>
-3. Which cranial nerve is responsible for motor control of the tongue?
+3. Which cranial nerve controls tongue movement?
 </h3>
+
 
 <div class="answers">
 
-<button class="answer"
-onclick="answer(this,false)">
+<button
+class="answer"
+data-correct="false"
+>
+
 CN V
+
 </button>
 
-<button class="answer"
-onclick="answer(this,false)">
+
+<button
+class="answer"
+data-correct="false"
+>
+
 CN VII
+
 </button>
 
-<button class="answer"
-onclick="answer(this,true)">
+
+<button
+class="answer"
+data-correct="true"
+>
+
 CN XII
+
 </button>
 
-<button class="answer"
-onclick="answer(this,false)">
+
+<button
+class="answer"
+data-correct="false"
+>
+
 CN II
+
 </button>
 
 </div>
@@ -1151,7 +1451,7 @@ CN II
 </div>
 
 
-<!-- Q4 -->
+<!-- QUESTION 4 -->
 
 <div class="question">
 
@@ -1159,26 +1459,46 @@ CN II
 4. Which function is strongly associated with medullary networks?
 </h3>
 
+
 <div class="answers">
 
-<button class="answer"
-onclick="answer(this,true)">
+<button
+class="answer"
+data-correct="true"
+>
+
 Respiratory and cardiovascular regulation
+
 </button>
 
-<button class="answer"
-onclick="answer(this,false)">
+
+<button
+class="answer"
+data-correct="false"
+>
+
 Visual processing
+
 </button>
 
-<button class="answer"
-onclick="answer(this,false)">
+
+<button
+class="answer"
+data-correct="false"
+>
+
 Long-term memory storage
+
 </button>
 
-<button class="answer"
-onclick="answer(this,false)">
+
+<button
+class="answer"
+data-correct="false"
+>
+
 Language comprehension
+
 </button>
 
 </div>
@@ -1186,34 +1506,54 @@ Language comprehension
 </div>
 
 
-<!-- Q5 -->
+<!-- QUESTION 5 -->
 
 <div class="question">
 
 <h3>
-5. What happens to many corticospinal fibers at the pyramidal decussation?
+5. What happens at the pyramidal decussation?
 </h3>
+
 
 <div class="answers">
 
-<button class="answer"
-onclick="answer(this,false)">
-They disappear
+<button
+class="answer"
+data-correct="false"
+>
+
+The fibers disappear
+
 </button>
 
-<button class="answer"
-onclick="answer(this,true)">
-They cross to the opposite side
+
+<button
+class="answer"
+data-correct="true"
+>
+
+Many corticospinal fibers cross to the opposite side
+
 </button>
 
-<button class="answer"
-onclick="answer(this,false)">
-They enter the cerebellum
+
+<button
+class="answer"
+data-correct="false"
+>
+
+The fibers enter the hippocampus
+
 </button>
 
-<button class="answer"
-onclick="answer(this,false)">
-They become cranial nerves
+
+<button
+class="answer"
+data-correct="false"
+>
+
+The fibers become cranial nerves
+
 </button>
 
 </div>
@@ -1221,23 +1561,32 @@ They become cranial nerves
 </div>
 
 
-<div id="result" class="result">
+<div
+id="result"
+class="result"
+>
 
 <div
 id="score"
 class="result-score"
 >
+
 0 / 5
+
 </div>
+
 
 <div id="scoreText">
 </div>
+
 
 <button
 class="restart"
 onclick="restartQuiz()"
 >
+
 Try Again
+
 </button>
 
 </div>
@@ -1255,18 +1604,25 @@ Try Again
 
 <script type="module">
 
-import * as THREE from "three";
+import * as THREE
+from "three";
+
 
 import {
     OrbitControls
 }
 from "three/addons/controls/OrbitControls.js";
 
+
 import {
     GLTFLoader
 }
 from "three/addons/loaders/GLTFLoader.js";
 
+
+/* =========================
+   ELEMENTS
+========================= */
 
 const canvas =
 document.getElementById("canvas");
@@ -1275,48 +1631,60 @@ const loading =
 document.getElementById("loading");
 
 
-/* SCENE */
+/* =========================
+   SCENE
+========================= */
 
 const scene =
 new THREE.Scene();
 
+
 scene.background =
-new THREE.Color(0x02070d);
+new THREE.Color(
+    0x02070d
+);
 
 
-/* CAMERA */
+/* =========================
+   CAMERA
+========================= */
 
 const camera =
 new THREE.PerspectiveCamera(
-    40,
+    35,
     1,
     0.001,
     1000
 );
 
 
-/* RENDERER */
+/* =========================
+   RENDERER
+========================= */
 
 const renderer =
 new THREE.WebGLRenderer({
 
     canvas:canvas,
 
-    antialias:true,
-
-    alpha:false
+    antialias:true
 
 });
 
+
 renderer.setPixelRatio(
+
     Math.min(
         window.devicePixelRatio,
         2
     )
+
 );
 
 
-/* CONTROLS */
+/* =========================
+   CONTROLS
+========================= */
 
 const controls =
 new OrbitControls(
@@ -1324,62 +1692,88 @@ new OrbitControls(
     renderer.domElement
 );
 
-controls.enableDamping = true;
 
-controls.dampingFactor = .07;
+controls.enableDamping =
+true;
 
-controls.minDistance = .05;
+controls.dampingFactor =
+0.07;
 
-controls.maxDistance = 20;
+controls.enableZoom =
+true;
 
-controls.autoRotate = true;
+controls.enablePan =
+false;
 
-controls.autoRotateSpeed = .5;
+controls.autoRotate =
+true;
+
+controls.autoRotateSpeed =
+0.65;
 
 
-/* LIGHTS */
+/* =========================
+   LIGHTING
+========================= */
 
 const ambient =
 new THREE.HemisphereLight(
     0xffffff,
-    0x18283a,
-    2.5
+    0x17283a,
+    3
 );
 
 scene.add(ambient);
 
 
-const key =
+const light1 =
 new THREE.DirectionalLight(
     0xffffff,
-    3
-);
-
-key.position.set(
-    4,
-    6,
-    6
-);
-
-scene.add(key);
-
-
-const fill =
-new THREE.DirectionalLight(
-    0x8fc9ff,
-    2
-);
-
-fill.position.set(
-    -5,
-    2,
     4
 );
 
-scene.add(fill);
+light1.position.set(
+    5,
+    8,
+    7
+);
+
+scene.add(light1);
 
 
-/* MODEL */
+const light2 =
+new THREE.DirectionalLight(
+    0x72baff,
+    3
+);
+
+light2.position.set(
+    -5,
+    3,
+    5
+);
+
+scene.add(light2);
+
+
+const light3 =
+new THREE.PointLight(
+    0xffffff,
+    2
+);
+
+light3.position.set(
+    0,
+    -2,
+    5
+);
+
+scene.add(light3);
+
+
+/* =========================
+   MODEL
+========================= */
 
 const loader =
 new GLTFLoader();
@@ -1389,48 +1783,223 @@ loader.load(
 
     "./brainstem.glb",
 
+
     function(gltf){
+
+        console.log(
+            "GLB LOADED SUCCESSFULLY"
+        );
+
 
         const model =
         gltf.scene;
 
+
         scene.add(model);
 
 
-        /* Find bounding box */
+        let medullaFound =
+        false;
+
+
+        /* =========================
+           INSPECT EVERY MESH
+        ========================= */
+
+        model.traverse(
+            function(object){
+
+                if(!object.isMesh){
+                    return;
+                }
+
+
+                console.log(
+                    "3D PART:",
+                    object.name
+                );
+
+
+                object.visible =
+                true;
+
+
+                /*
+                   Clone material so we
+                   can safely modify it.
+                */
+
+                if(object.material){
+
+                    object.material =
+                        object.material.clone();
+
+                }
+
+
+                /*
+                   Default appearance
+                */
+
+                if(object.material){
+
+                    object.material.color.set(
+                        0xaeb8c2
+                    );
+
+                    object.material.roughness =
+                        0.72;
+
+                    object.material.metalness =
+                        0;
+
+                }
+
+
+                /* =========================
+                   FIND MEDULLA BY NAME
+                ========================= */
+
+                const objectName =
+                    (
+                        object.name ||
+                        ""
+                    ).toLowerCase();
+
+
+                if(
+
+                    objectName.includes(
+                        "medulla"
+                    )
+
+                    ||
+
+                    objectName.includes(
+                        "oblongata"
+                    )
+
+                ){
+
+                    medullaFound =
+                    true;
+
+
+                    console.log(
+                        "MEDULLA FOUND:",
+                        object.name
+                    );
+
+
+                    if(object.material){
+
+                        object.material.color.set(
+                            0xff3f78
+                        );
+
+
+                        object.material.emissive =
+                            new THREE.Color(
+                                0x8a1238
+                            );
+
+
+                        object.material.emissiveIntensity =
+                            0.8;
+
+
+                        object.material.roughness =
+                            0.35;
+
+                    }
+
+                }
+
+            }
+        );
+
+
+        if(medullaFound){
+
+            loading.textContent =
+                "Medulla highlighted";
+
+            setTimeout(
+                function(){
+
+                    loading.style.display =
+                        "none";
+
+                },
+                700
+            );
+
+        }else{
+
+            /*
+              The model loaded, but it does
+              not contain a mesh named Medulla.
+            */
+
+            console.warn(
+                "No Medulla mesh name found."
+            );
+
+
+            loading.textContent =
+                "3D model loaded";
+
+
+            setTimeout(
+                function(){
+
+                    loading.style.display =
+                        "none";
+
+                },
+                700
+            );
+
+        }
+
+
+        /* =========================
+           CENTER MODEL
+        ========================= */
 
         const box =
-        new THREE.Box3()
-        .setFromObject(model);
+            new THREE.Box3()
+            .setFromObject(model);
 
 
         const center =
-        box.getCenter(
-            new THREE.Vector3()
-        );
+            box.getCenter(
+                new THREE.Vector3()
+            );
+
 
         const size =
-        box.getSize(
-            new THREE.Vector3()
+            box.getSize(
+                new THREE.Vector3()
+            );
+
+
+        model.position.sub(
+            center
         );
 
-
-        /* Center */
-
-        model.position.sub(center);
-
-
-        /* Calculate scale */
 
         const maxDimension =
-        Math.max(
-            size.x,
-            size.y,
-            size.z
-        );
+            Math.max(
+                size.x,
+                size.y,
+                size.z
+            );
 
 
-        if(maxDimension > 0){
+        if(
+            maxDimension > 0
+        ){
 
             model.scale.setScalar(
                 3 / maxDimension
@@ -1439,117 +2008,138 @@ loader.load(
         }
 
 
-        /* Recalculate after scaling */
+        /* =========================
+           CAMERA POSITION
+        ========================= */
 
         const finalBox =
-        new THREE.Box3()
-        .setFromObject(model);
+            new THREE.Box3()
+            .setFromObject(model);
 
-
-        const finalCenter =
-        finalBox.getCenter(
-            new THREE.Vector3()
-        );
 
         const finalSize =
-        finalBox.getSize(
-            new THREE.Vector3()
-        );
+            finalBox.getSize(
+                new THREE.Vector3()
+            );
 
 
-        const maxFinal =
-        Math.max(
-            finalSize.x,
-            finalSize.y,
-            finalSize.z
-        );
+        const finalMax =
+            Math.max(
+                finalSize.x,
+                finalSize.y,
+                finalSize.z
+            );
 
-
-        /* Camera */
 
         camera.position.set(
-            maxFinal * 1.6,
-            maxFinal * .8,
-            maxFinal * 1.6
+
+            finalMax * 1.7,
+
+            finalMax * 0.8,
+
+            finalMax * 1.7
+
         );
 
 
         camera.near =
-        Math.max(
-            maxFinal / 1000,
-            0.0001
-        );
+            Math.max(
+                finalMax / 1000,
+                0.0001
+            );
+
 
         camera.far =
-        maxFinal * 100;
+            finalMax * 100;
+
 
         camera.updateProjectionMatrix();
 
 
-        controls.target.copy(
-            finalCenter
+        controls.target.set(
+            0,
+            0,
+            0
         );
+
 
         controls.update();
 
-
-        loading.style.display =
-        "none";
-
     },
 
+
+    /* =========================
+       PROGRESS
+    ========================= */
 
     function(xhr){
 
         if(xhr.total){
 
+            const percent =
+                Math.round(
+                    xhr.loaded /
+                    xhr.total *
+                    100
+                );
+
+
             loading.textContent =
-            "Loading 3D model... " +
-            Math.round(
-                xhr.loaded /
-                xhr.total *
-                100
-            ) +
-            "%";
+                "Loading 3D model... " +
+                percent +
+                "%";
 
         }
 
     },
 
 
+    /* =========================
+       ERROR
+    ========================= */
+
     function(error){
 
         console.error(
-            "3D MODEL ERROR:",
+            "GLB ERROR:",
             error
         );
 
+
         loading.textContent =
-        "3D model could not be displayed.";
+            "Could not load brainstem.glb";
 
     }
 
 );
 
 
-/* RESIZE */
+/* =========================
+   RESIZE
+========================= */
 
 function resize(){
 
     const width =
-    canvas.clientWidth;
+        canvas.clientWidth;
 
     const height =
-    canvas.clientHeight;
+        canvas.clientHeight;
 
 
-    if(!width || !height){
+    if(
+        width === 0 ||
+        height === 0
+    ){
+
         return;
+
     }
 
 
     camera.aspect =
-    width / height;
+        width / height;
+
 
     camera.updateProjectionMatrix();
 
@@ -1569,7 +2159,9 @@ window.addEventListener(
 );
 
 
-/* ANIMATION */
+/* =========================
+   ANIMATION
+========================= */
 
 function animate(){
 
@@ -1577,7 +2169,9 @@ function animate(){
         animate
     );
 
+
     controls.update();
+
 
     renderer.render(
         scene,
@@ -1592,7 +2186,9 @@ resize();
 animate();
 
 
-/* RESET */
+/* =========================
+   RESET
+========================= */
 
 window.resetView =
 function(){
@@ -1603,24 +2199,28 @@ function(){
         4
     );
 
+
     controls.target.set(
         0,
         0,
         0
     );
 
+
     controls.update();
 
 };
 
 
-/* ROTATION */
+/* =========================
+   ROTATION
+========================= */
 
 window.toggleRotation =
 function(){
 
     controls.autoRotate =
-    !controls.autoRotate;
+        !controls.autoRotate;
 
 };
 
@@ -1628,17 +2228,22 @@ function(){
 
 
 <!-- =========================
-     LOCATION SCRIPT
+     PAGE JAVASCRIPT
 ========================= -->
 
 <script>
 
+/* =========================
+   LOCATION
+========================= */
+
 function toggleLocation(){
 
     const box =
-    document.getElementById(
-        "locationContent"
-    );
+        document.getElementById(
+            "locationContent"
+        );
+
 
     if(
         box.style.display ===
@@ -1646,12 +2251,12 @@ function toggleLocation(){
     ){
 
         box.style.display =
-        "none";
+            "none";
 
     }else{
 
         box.style.display =
-        "block";
+            "block";
 
     }
 
@@ -1667,129 +2272,167 @@ let score = 0;
 let answered = 0;
 
 
-function answer(button,isCorrect){
-
-    const question =
-    button.closest(
-        ".question"
-    );
+const questions =
+document.querySelectorAll(
+    ".question"
+);
 
 
-    if(
-        question.dataset.answered
-    ){
-        return;
-    }
-
-
-    question.dataset.answered =
-    "true";
-
-    answered++;
-
-
-    if(isCorrect){
-
-        button.classList.add(
-            "correct"
-        );
-
-        score++;
-
-    }else{
-
-        button.classList.add(
-            "wrong"
-        );
-
+questions.forEach(
+    function(question){
 
         const buttons =
-        question.querySelectorAll(
-            ".answer"
-        );
+            question.querySelectorAll(
+                ".answer"
+            );
 
 
         buttons.forEach(
-            function(btn){
+            function(button){
 
-                if(
-                    btn.getAttribute(
-                        "onclick"
-                    ).includes(
-                        "true"
-                    )
-                ){
+                button.addEventListener(
+                    "click",
+                    function(){
 
-                    btn.classList.add(
-                        "correct"
-                    );
+                        /*
+                           Don't allow the same
+                           question to be answered twice.
+                        */
 
-                }
+                        if(
+                            question.dataset.answered
+                        ){
+
+                            return;
+
+                        }
+
+
+                        question.dataset.answered =
+                            "true";
+
+
+                        answered++;
+
+
+                        const correct =
+                            button.dataset.correct ===
+                            "true";
+
+
+                        if(correct){
+
+                            button.classList.add(
+                                "correct"
+                            );
+
+                            score++;
+
+                        }else{
+
+                            button.classList.add(
+                                "wrong"
+                            );
+
+
+                            buttons.forEach(
+                                function(other){
+
+                                    if(
+                                        other.dataset.correct ===
+                                        "true"
+                                    ){
+
+                                        other.classList.add(
+                                            "correct"
+                                        );
+
+                                    }
+
+                                }
+                            );
+
+                        }
+
+
+                        if(
+                            answered ===
+                            questions.length
+                        ){
+
+                            showResult();
+
+                        }
+
+                    }
+                );
 
             }
         );
 
     }
+);
 
 
-    if(answered === 5){
-
-        showResult();
-
-    }
-
-}
-
+/* =========================
+   SHOW RESULT
+========================= */
 
 function showResult(){
 
     const result =
-    document.getElementById(
-        "result"
-    );
+        document.getElementById(
+            "result"
+        );
+
 
     const scoreElement =
-    document.getElementById(
-        "score"
-    );
+        document.getElementById(
+            "score"
+        );
+
 
     const scoreText =
-    document.getElementById(
-        "scoreText"
-    );
+        document.getElementById(
+            "scoreText"
+        );
 
 
     scoreElement.textContent =
-    score + " / 5";
+        score + " / 5";
 
 
     if(score === 5){
 
         scoreText.textContent =
-        "Perfect. You know your medulla.";
+            "Perfect. You know your medulla.";
 
     }
 
     else if(score >= 3){
 
         scoreText.textContent =
-        "Good job. Review the structures once more.";
+            "Great job. Review the structures once more.";
 
     }
 
     else{
 
         scoreText.textContent =
-        "Keep exploring. The anatomy will stick with practice.";
+            "Keep exploring NeuroAtlas and try again.";
 
     }
 
 
     result.style.display =
-    "block";
+        "block";
 
 }
 
+
+/* =========================
+   RESTART
+========================= */
 
 function restartQuiz(){
 
@@ -1798,16 +2441,19 @@ function restartQuiz(){
     answered = 0;
 
 
-    document.querySelectorAll(
-        ".question"
-    ).forEach(
+    questions.forEach(
         function(question){
 
             delete question.dataset.answered;
 
-            question.querySelectorAll(
-                ".answer"
-            ).forEach(
+
+            const buttons =
+                question.querySelectorAll(
+                    ".answer"
+                );
+
+
+            buttons.forEach(
                 function(button){
 
                     button.classList.remove(
@@ -1825,7 +2471,7 @@ function restartQuiz(){
     document.getElementById(
         "result"
     ).style.display =
-    "none";
+        "none";
 
 }
 
