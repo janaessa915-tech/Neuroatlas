@@ -2,177 +2,392 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Medulla | NeuroAtlas</title>
 
 <style>
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background: #07111f;
-    color: #f4f7fb;
-    line-height: 1.6;
+body{
+    font-family:Inter,Arial,sans-serif;
+    background:#050b14;
+    color:#eef4fb;
 }
 
-nav {
-    padding: 22px 7%;
-    border-bottom: 1px solid rgba(255,255,255,.08);
+/* NAV */
+
+nav{
+    height:72px;
+    display:flex;
+    align-items:center;
+    padding:0 7%;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    background:rgba(5,11,20,.92);
 }
 
-nav a {
-    color: #aebdce;
-    text-decoration: none;
+nav a{
+    color:#9fb1c5;
+    text-decoration:none;
+    font-size:14px;
 }
 
-nav a:hover {
-    color: white;
+nav a:hover{
+    color:white;
 }
 
-.container {
-    max-width: 1200px;
-    margin: auto;
-    padding: 60px 7%;
+
+/* MAIN */
+
+.container{
+    max-width:1250px;
+    margin:auto;
+    padding:65px 7% 90px;
 }
 
-.label {
-    color: #4da6ff;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-size: 13px;
-    margin-bottom: 12px;
+
+/* HERO */
+
+.hero{
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    gap:55px;
+    align-items:center;
+    margin-bottom:55px;
 }
 
-h1 {
-    font-size: clamp(45px, 7vw, 72px);
-    line-height: 1.05;
-    margin-bottom: 20px;
+.label{
+    color:#58a6ff;
+    font-size:12px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    margin-bottom:18px;
 }
 
-.intro {
-    color: #aebdce;
-    max-width: 800px;
-    font-size: 18px;
-    margin-bottom: 30px;
+h1{
+    font-size:clamp(50px,7vw,82px);
+    line-height:.95;
+    letter-spacing:-3px;
+    margin-bottom:25px;
 }
 
-.buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 25px;
+.hero p{
+    max-width:650px;
+    color:#9fb1c5;
+    font-size:18px;
+    line-height:1.8;
 }
 
-button {
-    padding: 13px 20px;
-    border-radius: 10px;
-    border: 1px solid #263951;
-    background: #10233a;
-    color: white;
-    font-size: 15px;
-    cursor: pointer;
+
+/* QUICK FACTS */
+
+.facts{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:28px;
 }
 
-button:hover {
-    background: #183654;
+.fact{
+    padding:10px 14px;
+    border-radius:100px;
+    background:#0c1828;
+    border:1px solid #20344d;
+    color:#c7d5e4;
+    font-size:13px;
 }
 
-.location {
-    display: none;
-    margin-bottom: 25px;
-    padding: 22px;
-    border-radius: 15px;
-    background: #0b192b;
-    border: 1px solid #263951;
-    color: #c8d6e5;
+
+/* 3D CARD */
+
+.model-card{
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(55,120,180,.12),
+            transparent 65%
+        ),
+        #07111f;
+
+    border:1px solid rgba(255,255,255,.1);
+
+    border-radius:26px;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.35);
 }
 
-.viewer {
-    width: 100%;
-    height: 600px;
-    background: #020812;
-    border-radius: 20px;
-    overflow: hidden;
-    border: 1px solid rgba(255,255,255,.1);
-    position: relative;
+.model-header{
+    height:60px;
+    padding:0 20px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    border-bottom:1px solid rgba(255,255,255,.07);
 }
 
-#canvas {
-    width: 100%;
-    height: 100%;
-    display: block;
+.model-title{
+    font-size:13px;
+    color:#b9c9da;
 }
 
-.loading {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #aebdce;
-    font-size: 17px;
-    z-index: 2;
-    pointer-events: none;
+.status{
+    display:flex;
+    align-items:center;
+    gap:7px;
+
+    font-size:12px;
+    color:#8295aa;
 }
 
-.error {
-    display: none;
-    margin-top: 20px;
-    padding: 18px;
-    border-radius: 12px;
-    background: #2a1115;
-    border: 1px solid #71313b;
-    color: #ffb8c0;
+.dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#4da6ff;
 }
 
-.info {
-    margin-top: 30px;
-    padding: 28px;
-    border-radius: 18px;
-    background: rgba(255,255,255,.035);
-    border: 1px solid rgba(255,255,255,.08);
+
+/* VIEWER */
+
+.viewer{
+    height:500px;
+    position:relative;
+    background:#020710;
 }
 
-.info h2 {
-    margin-bottom: 12px;
+canvas{
+    width:100%;
+    height:100%;
+    display:block;
 }
 
-.info p {
-    color: #aebdce;
-    line-height: 1.8;
-    margin-bottom: 15px;
+.loading{
+    position:absolute;
+    inset:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:#8ea1b5;
+    font-size:14px;
+
+    pointer-events:none;
 }
 
-@media(max-width:700px) {
 
-    .viewer {
-        height: 450px;
+/* CONTROLS */
+
+.controls{
+    display:flex;
+    gap:8px;
+    padding:14px;
+
+    border-top:1px solid rgba(255,255,255,.07);
+}
+
+.controls button{
+    flex:1;
+
+    padding:11px;
+
+    border-radius:9px;
+
+    border:1px solid #20344d;
+
+    background:#0b1727;
+
+    color:#b9c9da;
+
+    cursor:pointer;
+}
+
+.controls button:hover{
+    background:#13243a;
+    color:white;
+}
+
+
+/* LOCATION */
+
+.location-section{
+    margin-top:30px;
+
+    padding:30px;
+
+    border-radius:22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(77,166,255,.07),
+            rgba(255,255,255,.025)
+        );
+
+    border:1px solid rgba(255,255,255,.08);
+}
+
+.location-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    margin-bottom:15px;
+}
+
+.location-top h2{
+    font-size:24px;
+}
+
+.location-button{
+    padding:11px 17px;
+
+    border-radius:9px;
+
+    border:1px solid #2b5378;
+
+    background:#10263d;
+
+    color:#8fc6ff;
+
+    cursor:pointer;
+}
+
+.location-button:hover{
+    background:#163653;
+}
+
+.location-text{
+    display:none;
+
+    color:#aabacc;
+
+    line-height:1.8;
+
+    max-width:900px;
+}
+
+
+/* INFORMATION */
+
+.information{
+    margin-top:45px;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:18px;
+}
+
+.info-card{
+    padding:27px;
+
+    border-radius:20px;
+
+    background:#091524;
+
+    border:1px solid rgba(255,255,255,.07);
+}
+
+.info-card span{
+    display:block;
+
+    color:#4da6ff;
+
+    font-size:12px;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+    margin-bottom:12px;
+}
+
+.info-card h2{
+    font-size:21px;
+
+    margin-bottom:12px;
+}
+
+.info-card p{
+    color:#93a6bb;
+
+    line-height:1.75;
+
+    font-size:15px;
+}
+
+
+/* ERROR */
+
+.error{
+    display:none;
+
+    padding:18px;
+
+    color:#ffb5bd;
+
+    background:#251016;
+
+    border:1px solid #632c37;
+
+    font-size:14px;
+}
+
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+    .hero{
+        grid-template-columns:1fr;
+    }
+
+    .information{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .container{
+        padding-left:5%;
+        padding-right:5%;
+    }
+
+    .viewer{
+        height:400px;
     }
 
 }
 
 </style>
 
-<!-- FIX FOR THE "three" MODULE ERROR -->
 
 <script type="importmap">
-
 {
-    "imports": {
-        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
-        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    "imports":{
+        "three":
+        "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+
+        "three/addons/":
+        "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
     }
 }
-
 </script>
 
 </head>
@@ -184,7 +399,7 @@ button:hover {
 <nav>
 
 <a href="./explore.html">
-← Back to Explore
+← Back to Explore Anatomy
 </a>
 
 </nav>
@@ -193,65 +408,82 @@ button:hover {
 <main class="container">
 
 
-<div class="label">
-Brainstem
-</div>
+<!-- HERO -->
 
+<section class="hero">
+
+
+<div>
+
+<div class="label">
+Brainstem · NeuroAtlas
+</div>
 
 <h1>
 Medulla
 </h1>
 
+<p>
 
-<p class="intro">
-
-The medulla oblongata is the lowest part of the brainstem.
-It connects the pons to the spinal cord and contains important
-centers involved in breathing, cardiovascular regulation,
-swallowing, and other essential functions.
+The medulla oblongata is the lowest portion of the
+brainstem. It forms an important connection between
+the brain and spinal cord and participates in several
+essential autonomic functions.
 
 </p>
 
 
-<div class="buttons">
+<div class="facts">
 
-<button onclick="showLocation()">
-📍 Location
-</button>
+<div class="fact">
+Brainstem
+</div>
 
-<button onclick="resetView()">
-🔄 Reset View
-</button>
+<div class="fact">
+Below the pons
+</div>
 
-<button onclick="toggleRotation()">
-⏯ Auto Rotate
-</button>
+<div class="fact">
+Above the spinal cord
+</div>
+
+<div class="fact">
+Autonomic functions
+</div>
+
+</div>
 
 </div>
 
 
-<div id="locationBox" class="location">
+<!-- MODEL -->
 
-<strong>📍 Location of the Medulla</strong>
+<div class="model-card">
 
-<br><br>
+<div class="model-header">
 
-The medulla is the lowest portion of the brainstem.
-It is located below the pons and continues downward
-into the spinal cord.
+<div class="model-title">
+Interactive 3D Model
+</div>
 
-<br><br>
+<div class="status">
 
-It sits near the base of the brain and helps connect
-the brain with the spinal cord.
+<div class="dot"></div>
+
+3D VIEWER
+
+</div>
 
 </div>
 
 
 <div class="viewer">
 
-<div id="loading" class="loading">
-Loading 3D brainstem...
+<div
+id="loading"
+class="loading"
+>
+Loading anatomical model...
 </div>
 
 <canvas id="canvas"></canvas>
@@ -259,22 +491,93 @@ Loading 3D brainstem...
 </div>
 
 
-<div id="errorBox" class="error"></div>
+<div class="controls">
+
+<button onclick="resetView()">
+Reset
+</button>
+
+<button onclick="toggleRotation()">
+Rotate
+</button>
+
+</div>
 
 
-<div class="info">
+</div>
+
+
+</section>
+
+
+<!-- LOCATION -->
+
+<section class="location-section">
+
+<div class="location-top">
 
 <h2>
-What is the Medulla?
+📍 Anatomical Location
+</h2>
+
+<button
+class="location-button"
+onclick="toggleLocation()"
+>
+Show Location
+</button>
+
+</div>
+
+
+<div
+id="locationText"
+class="location-text"
+>
+
+The medulla is the lowest part of the brainstem.
+
+It lies inferior to the pons and continues downward
+until it becomes continuous with the spinal cord.
+
+In anatomical orientation, it is positioned near the
+base of the brain and sits in front of the cerebellum.
+
+</div>
+
+</section>
+
+
+<!-- INFORMATION -->
+
+<section class="information">
+
+
+<div class="info-card">
+
+<span>
+01 · Structure
+</span>
+
+<h2>
+Where is it?
 </h2>
 
 <p>
 
-The medulla oblongata is one of the three major
-parts of the brainstem, together with the midbrain
-and pons.
+The medulla forms the lower part of the brainstem,
+between the pons above and the spinal cord below.
 
 </p>
+
+</div>
+
+
+<div class="info-card">
+
+<span>
+02 · Function
+</span>
 
 <h2>
 What does it do?
@@ -282,26 +585,45 @@ What does it do?
 
 <p>
 
-The medulla contains pathways and neural centers
-involved in important involuntary functions such as
-breathing, heart-rate regulation, blood pressure,
-swallowing, and coughing.
+It participates in regulation of breathing,
+cardiovascular activity, swallowing, coughing,
+and other involuntary responses.
 
 </p>
 
+</div>
+
+
+<div class="info-card">
+
+<span>
+03 · Connections
+</span>
+
 <h2>
-Why is it important?
+What connects to it?
 </h2>
 
 <p>
 
-Because the medulla participates in essential
-automatic functions, damage to this region can
-seriously affect the body's ability to maintain
-normal physiological functions.
+Major neural pathways pass through the medulla,
+allowing communication between higher brain regions
+and the spinal cord.
 
 </p>
 
+</div>
+
+
+</section>
+
+
+<div
+id="error"
+class="error"
+style="margin-top:25px;"
+>
+The 3D model could not be loaded.
 </div>
 
 
@@ -312,16 +634,16 @@ normal physiological functions.
 
 import * as THREE from "three";
 
-import { OrbitControls } from
-"three/addons/controls/OrbitControls.js";
+import {
+    OrbitControls
+}
+from "three/addons/controls/OrbitControls.js";
 
-import { GLTFLoader } from
-"three/addons/loaders/GLTFLoader.js";
+import {
+    GLTFLoader
+}
+from "three/addons/loaders/GLTFLoader.js";
 
-
-/* -------------------------
-   BASIC SETUP
-------------------------- */
 
 const canvas =
 document.getElementById("canvas");
@@ -329,20 +651,20 @@ document.getElementById("canvas");
 const loading =
 document.getElementById("loading");
 
-const errorBox =
-document.getElementById("errorBox");
+const error =
+document.getElementById("error");
 
+
+/* SCENE */
 
 const scene =
 new THREE.Scene();
 
 scene.background =
-new THREE.Color(0x020812);
+new THREE.Color(0x020710);
 
 
-/* -------------------------
-   CAMERA
-------------------------- */
+/* CAMERA */
 
 const camera =
 new THREE.PerspectiveCamera(
@@ -354,29 +676,28 @@ new THREE.PerspectiveCamera(
 
 camera.position.set(
     0,
-    1.5,
+    1,
     4
 );
 
 
-/* -------------------------
-   RENDERER
-------------------------- */
+/* RENDERER */
 
 const renderer =
 new THREE.WebGLRenderer({
-    canvas: canvas,
-    antialias: true
+    canvas:canvas,
+    antialias:true
 });
 
 renderer.setPixelRatio(
-    Math.min(window.devicePixelRatio, 2)
+    Math.min(
+        window.devicePixelRatio,
+        2
+    )
 );
 
 
-/* -------------------------
-   CONTROLS
-------------------------- */
+/* CONTROLS */
 
 const controls =
 new OrbitControls(
@@ -386,63 +707,58 @@ new OrbitControls(
 
 controls.enableDamping = true;
 
-controls.dampingFactor = 0.06;
+controls.dampingFactor = .06;
 
-controls.minDistance = 0.5;
+controls.minDistance = .5;
 
 controls.maxDistance = 10;
 
 controls.autoRotate = true;
 
-controls.autoRotateSpeed = 1;
+controls.autoRotateSpeed = .7;
 
 
-/* -------------------------
-   LIGHTING
-------------------------- */
+/* LIGHTING */
 
-const ambient =
-new THREE.AmbientLight(
-    0xffffff,
-    2
+scene.add(
+    new THREE.AmbientLight(
+        0xffffff,
+        2
+    )
 );
 
-scene.add(ambient);
 
-
-const light1 =
+const light =
 new THREE.DirectionalLight(
     0xffffff,
     3
 );
 
-light1.position.set(
+light.position.set(
     4,
     5,
     5
 );
 
-scene.add(light1);
+scene.add(light);
 
 
-const light2 =
+const fill =
 new THREE.DirectionalLight(
-    0x88bbff,
-    2
+    0x7db8ff,
+    1.5
 );
 
-light2.position.set(
+fill.position.set(
     -4,
     2,
     3
 );
 
-scene.add(light2);
+scene.add(fill);
 
 
-/* -------------------------
-   LOAD 3D MODEL
-------------------------- */
+/* LOAD MODEL */
 
 const loader =
 new GLTFLoader();
@@ -452,7 +768,7 @@ loader.load(
 
     "./brainstem.glb",
 
-    function(gltf) {
+    function(gltf){
 
         const model =
         gltf.scene;
@@ -460,18 +776,16 @@ loader.load(
         scene.add(model);
 
 
-        /* Find model dimensions */
+        /* CENTER MODEL */
 
         const box =
         new THREE.Box3()
         .setFromObject(model);
 
-
         const center =
         box.getCenter(
             new THREE.Vector3()
         );
-
 
         const size =
         box.getSize(
@@ -479,18 +793,12 @@ loader.load(
         );
 
 
-        /* Center model */
-
-        model.position.x -= center.x;
-
-        model.position.y -= center.y;
-
-        model.position.z -= center.z;
+        model.position.sub(center);
 
 
-        /* Scale model */
+        /* SCALE */
 
-        const maxSize =
+        const maxDimension =
         Math.max(
             size.x,
             size.y,
@@ -498,24 +806,30 @@ loader.load(
         );
 
 
-        if(maxSize > 0) {
+        if(maxDimension > 0){
 
-            const scale =
-            3 / maxSize;
-
-            model.scale.setScalar(scale);
+            model.scale.setScalar(
+                3 / maxDimension
+            );
 
         }
 
 
-        /* Make model visible */
+        /* MATERIAL */
 
         model.traverse(
-            function(object) {
+            function(object){
 
-                if(object.isMesh) {
+                if(object.isMesh){
 
                     object.visible = true;
+
+                    if(object.material){
+
+                        object.material
+                        .roughness = .65;
+
+                    }
 
                 }
 
@@ -538,19 +852,19 @@ loader.load(
     },
 
 
-    function(progress) {
+    function(xhr){
 
-        if(progress.total > 0) {
+        if(xhr.total){
 
             const percent =
             Math.round(
-                progress.loaded /
-                progress.total *
+                xhr.loaded /
+                xhr.total *
                 100
             );
 
             loading.textContent =
-            "Loading 3D brainstem... " +
+            "Loading anatomical model... " +
             percent +
             "%";
 
@@ -559,22 +873,17 @@ loader.load(
     },
 
 
-    function(error) {
+    function(err){
 
         loading.style.display =
         "none";
 
-        errorBox.style.display =
+        error.style.display =
         "block";
 
-        errorBox.innerHTML =
-        "<strong>3D model could not load.</strong><br><br>" +
-        "The file brainstem.glb was found, " +
-        "but the 3D model could not be displayed.";
-
         console.error(
-            "GLB ERROR:",
-            error
+            "GLB loading error:",
+            err
         );
 
     }
@@ -582,56 +891,43 @@ loader.load(
 );
 
 
-/* -------------------------
-   LOCATION BUTTON
-------------------------- */
+/* LOCATION */
 
-function showLocation() {
+function toggleLocation(){
 
-    const box =
+    const text =
     document.getElementById(
-        "locationBox"
+        "locationText"
     );
 
-
     if(
-        box.style.display ===
+        text.style.display ===
         "block"
-    ) {
+    ){
 
-        box.style.display =
+        text.style.display =
         "none";
 
-    }
+    }else{
 
-    else {
-
-        box.style.display =
+        text.style.display =
         "block";
-
-        box.scrollIntoView({
-            behavior: "smooth",
-            block: "center"
-        });
 
     }
 
 }
 
+window.toggleLocation =
+toggleLocation;
 
-window.showLocation =
-showLocation;
 
+/* RESET */
 
-/* -------------------------
-   RESET CAMERA
-------------------------- */
-
-function resetView() {
+function resetView(){
 
     camera.position.set(
         0,
-        1.5,
+        1,
         4
     );
 
@@ -645,32 +941,26 @@ function resetView() {
 
 }
 
-
 window.resetView =
 resetView;
 
 
-/* -------------------------
-   AUTO ROTATION
-------------------------- */
+/* ROTATION */
 
-function toggleRotation() {
+function toggleRotation(){
 
     controls.autoRotate =
     !controls.autoRotate;
 
 }
 
-
 window.toggleRotation =
 toggleRotation;
 
 
-/* -------------------------
-   RESIZE
-------------------------- */
+/* RESIZE */
 
-function resize() {
+function resize(){
 
     const width =
     canvas.clientWidth;
@@ -679,7 +969,10 @@ function resize() {
     canvas.clientHeight;
 
 
-    if(width === 0 || height === 0) {
+    if(
+        width === 0 ||
+        height === 0
+    ){
         return;
     }
 
@@ -705,11 +998,9 @@ window.addEventListener(
 );
 
 
-/* -------------------------
-   ANIMATION
-------------------------- */
+/* ANIMATION */
 
-function animate() {
+function animate(){
 
     requestAnimationFrame(
         animate
@@ -733,5 +1024,4 @@ animate();
 
 
 </body>
-
 </html>
