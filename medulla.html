@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
@@ -156,7 +155,7 @@ h1{
 
 
 /* =========================================================
-   MEDULLA LABEL
+   LABEL
 ========================================================= */
 
 .medulla-label{
@@ -164,7 +163,7 @@ h1{
     z-index:10;
     pointer-events:none;
 
-    transform:translate(-50%,-100%);
+    transform:translate(-50%,-120%);
 
     display:none;
 }
@@ -178,7 +177,7 @@ h1{
 
     border-radius:9px;
 
-    background:rgba(5,10,17,.95);
+    background:rgba(5,10,17,.96);
 
     border:1px solid #ff477d;
 
@@ -192,8 +191,7 @@ h1{
     white-space:nowrap;
 
     box-shadow:
-        0 0 20px rgba(255,71,125,.25),
-        0 0 45px rgba(255,71,125,.12);
+        0 0 20px rgba(255,71,125,.25);
 }
 
 
@@ -240,7 +238,7 @@ h1{
 
 
 /* =========================================================
-   INFO
+   INFORMATION
 ========================================================= */
 
 .section{
@@ -287,10 +285,6 @@ h1{
     line-height:1.75;
 }
 
-
-/* =========================================================
-   MOBILE
-========================================================= */
 
 @media(max-width:800px){
 
@@ -353,12 +347,11 @@ protective reflexes.
 </div>
 
 
-<!-- =====================================================
+<!-- =========================================================
      3D VIEWER
-===================================================== -->
+========================================================= -->
 
 <div class="viewer">
-
 
 <div class="viewer-header">
 
@@ -375,7 +368,6 @@ DRAG TO ROTATE · SCROLL TO ZOOM
 
 <div class="scene">
 
-
 <div
 id="loading"
 class="loading"
@@ -384,9 +376,7 @@ Building 3D brain...
 </div>
 
 
-<canvas
-id="brainCanvas"
-></canvas>
+<canvas id="brainCanvas"></canvas>
 
 
 <div
@@ -400,7 +390,6 @@ MEDULLA OBLONGATA
 
 </div>
 
-
 </div>
 
 
@@ -413,7 +402,6 @@ class="active"
 🔴 Highlight Medulla
 </button>
 
-
 <button
 id="rotate"
 class="active"
@@ -421,22 +409,18 @@ class="active"
 ⟳ Auto Rotate
 </button>
 
-
-<button
-id="reset"
->
+<button id="reset">
 ↻ Reset View
 </button>
 
 </div>
 
-
 </div>
 
 
-<!-- =====================================================
+<!-- =========================================================
      INFORMATION
-===================================================== -->
+========================================================= -->
 
 <section class="section">
 
@@ -450,7 +434,6 @@ Important Structures
 
 
 <div class="cards">
-
 
 <div class="card">
 
@@ -497,7 +480,6 @@ visceral functions.
 
 </div>
 
-
 </div>
 
 </section>
@@ -506,13 +488,9 @@ visceral functions.
 </main>
 
 
-<!-- =====================================================
+<!-- =========================================================
      THREE.JS
-     
-     DIRECT CDN IMPORTS
-     NO IMPORTMAP
-     NO GLB
-===================================================== -->
+========================================================= -->
 
 <script type="module">
 
@@ -523,9 +501,9 @@ import { OrbitControls } from
 "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js";
 
 
-/* =====================================================
+/* =========================================================
    ELEMENTS
-===================================================== */
+========================================================= */
 
 const canvas =
 document.getElementById("brainCanvas");
@@ -537,17 +515,17 @@ const medullaLabel =
 document.getElementById("medullaLabel");
 
 
-/* =====================================================
+/* =========================================================
    SCENE
-===================================================== */
+========================================================= */
 
 const scene =
 new THREE.Scene();
 
 
-/* =====================================================
+/* =========================================================
    CAMERA
-===================================================== */
+========================================================= */
 
 const camera =
 new THREE.PerspectiveCamera(
@@ -557,32 +535,22 @@ new THREE.PerspectiveCamera(
     100
 );
 
-
-/*
-   Slightly zoomed out so the
-   entire brain is visible.
-*/
-
 camera.position.set(
     0,
-    1.0,
-    11.5
+    1.4,
+    12
 );
 
 
-/* =====================================================
+/* =========================================================
    RENDERER
-===================================================== */
+========================================================= */
 
 const renderer =
 new THREE.WebGLRenderer({
-
     canvas:canvas,
-
     antialias:true,
-
     alpha:true
-
 });
 
 renderer.setPixelRatio(
@@ -596,9 +564,9 @@ renderer.outputColorSpace =
 THREE.SRGBColorSpace;
 
 
-/* =====================================================
+/* =========================================================
    CONTROLS
-===================================================== */
+========================================================= */
 
 const controls =
 new OrbitControls(
@@ -607,37 +575,28 @@ new OrbitControls(
 );
 
 controls.enableRotate = true;
-
-controls.rotateSpeed = .75;
-
-controls.enableDamping = true;
-
-controls.dampingFactor = .07;
-
 controls.enableZoom = true;
-
-controls.zoomSpeed = .7;
-
-controls.minDistance = 6;
-
-controls.maxDistance = 18;
-
 controls.enablePan = false;
 
+controls.rotateSpeed = .75;
+controls.zoomSpeed = .75;
+
+controls.enableDamping = true;
+controls.dampingFactor = .07;
+
 controls.autoRotate = true;
+controls.autoRotateSpeed = .22;
 
-controls.autoRotateSpeed = .28;
 
-
-/* =====================================================
+/* =========================================================
    LIGHTING
-===================================================== */
+========================================================= */
 
 const hemisphere =
 new THREE.HemisphereLight(
     0xffffff,
-    0x142334,
-    3.0
+    0x16283a,
+    2.8
 );
 
 scene.add(hemisphere);
@@ -652,7 +611,7 @@ new THREE.DirectionalLight(
 keyLight.position.set(
     5,
     8,
-    9
+    10
 );
 
 scene.add(keyLight);
@@ -660,7 +619,7 @@ scene.add(keyLight);
 
 const fillLight =
 new THREE.DirectionalLight(
-    0x63baff,
+    0x6abaff,
     1.8
 );
 
@@ -675,8 +634,8 @@ scene.add(fillLight);
 
 const rimLight =
 new THREE.DirectionalLight(
-    0xa7d8ff,
-    1.2
+    0xffffff,
+    1.5
 );
 
 rimLight.position.set(
@@ -688,9 +647,9 @@ rimLight.position.set(
 scene.add(rimLight);
 
 
-/* =====================================================
+/* =========================================================
    MAIN BRAIN GROUP
-===================================================== */
+========================================================= */
 
 const brain =
 new THREE.Group();
@@ -698,16 +657,16 @@ new THREE.Group();
 scene.add(brain);
 
 
-/* =====================================================
+/* =========================================================
    MATERIALS
-===================================================== */
+========================================================= */
 
 const brainMaterial =
 new THREE.MeshStandardMaterial({
 
-    color:0xcbd2d9,
+    color:0xc8cfd7,
 
-    roughness:.88,
+    roughness:.82,
 
     metalness:0
 
@@ -717,9 +676,9 @@ new THREE.MeshStandardMaterial({
 const darkerBrainMaterial =
 new THREE.MeshStandardMaterial({
 
-    color:0xaab5bf,
+    color:0xaeb8c2,
 
-    roughness:.94,
+    roughness:.9,
 
     metalness:0
 
@@ -729,7 +688,7 @@ new THREE.MeshStandardMaterial({
 const grooveMaterial =
 new THREE.MeshStandardMaterial({
 
-    color:0x657482,
+    color:0x657585,
 
     roughness:1,
 
@@ -738,10 +697,10 @@ new THREE.MeshStandardMaterial({
 });
 
 
-const darkGrooveMaterial =
+const darkMaterial =
 new THREE.MeshStandardMaterial({
 
-    color:0x354553,
+    color:0x111d28,
 
     roughness:1,
 
@@ -753,11 +712,11 @@ new THREE.MeshStandardMaterial({
 const medullaMaterial =
 new THREE.MeshStandardMaterial({
 
-    color:0xff3e79,
+    color:0xff3975,
 
-    emissive:0xff124d,
+    emissive:0xff1454,
 
-    emissiveIntensity:2.7,
+    emissiveIntensity:3,
 
     roughness:.3,
 
@@ -766,9 +725,9 @@ new THREE.MeshStandardMaterial({
 });
 
 
-/* =====================================================
-   CEREBRAL HEMISPHERE
-===================================================== */
+/* =========================================================
+   BRAIN HEMISPHERE
+========================================================= */
 
 function createHemisphere(side){
 
@@ -777,43 +736,36 @@ function createHemisphere(side){
 
 
     /*
-       --------------------------------------------------
-       MAIN CEREBRAL MASS
-       --------------------------------------------------
+       The main hemisphere is deliberately
+       wider than it is tall, producing a
+       much more recognizable cerebral shape.
     */
 
-    const main =
-    new THREE.Mesh(
-
-        new THREE.SphereGeometry(
-            1.8,
-            64,
-            48
-        ),
-
-        brainMaterial
-
+    const geometry =
+    new THREE.SphereGeometry(
+        2.05,
+        64,
+        48
     );
 
 
-    /*
-       The important part:
+    const main =
+    new THREE.Mesh(
+        geometry,
+        brainMaterial
+    );
 
-       X = hemisphere width
-       Y = height
-       Z = front/back length
-    */
 
     main.scale.set(
-        .98,
-        1.12,
-        1.42
+        1.0,
+        1.02,
+        1.22
     );
 
 
     main.position.set(
-        side * .82,
-        1.02,
+        side * .94,
+        .55,
         0
     );
 
@@ -822,394 +774,252 @@ function createHemisphere(side){
 
 
     /*
-       --------------------------------------------------
-       FRONTAL POLE
-       --------------------------------------------------
+       Frontal lobe
     */
 
     const frontal =
     new THREE.Mesh(
-
         new THREE.SphereGeometry(
-            1.05,
+            1.22,
             48,
-            36
+            32
         ),
-
         brainMaterial
-
     );
-
 
     frontal.scale.set(
-        .82,
         1.02,
-        1.18
+        .88,
+        1.03
     );
-
 
     frontal.position.set(
-        side * .82,
-        1.08,
-        1.05
+        side * 1.28,
+        .78,
+        .88
     );
-
 
     group.add(frontal);
 
 
     /*
-       --------------------------------------------------
-       OCCIPITAL POLE
-       --------------------------------------------------
+       Parietal lobe
     */
 
-    const occipital =
+    const parietal =
     new THREE.Mesh(
-
         new THREE.SphereGeometry(
-            .88,
+            1.12,
             48,
-            36
+            32
         ),
-
         brainMaterial
-
     );
 
-
-    occipital.scale.set(
-        .9,
-        .96,
-        1.15
+    parietal.scale.set(
+        1.02,
+        1.0,
+        1.04
     );
 
-
-    occipital.position.set(
-        side * .82,
-        .92,
-        -1.15
+    parietal.position.set(
+        side * 1.18,
+        1.28,
+        -.05
     );
 
-
-    group.add(occipital);
+    group.add(parietal);
 
 
     /*
-       --------------------------------------------------
-       TEMPORAL LOBE
-       --------------------------------------------------
+       Temporal lobe
     */
 
     const temporal =
     new THREE.Mesh(
-
         new THREE.SphereGeometry(
-            .82,
-            40,
+            .98,
+            48,
             32
         ),
-
-        darkerBrainMaterial
-
+        brainMaterial
     );
-
 
     temporal.scale.set(
-        .9,
-        .7,
-        1.15
+        1.12,
+        .75,
+        1.2
     );
-
 
     temporal.position.set(
-        side * 1.02,
-        .25,
-        -.15
+        side * 1.22,
+        -.05,
+        .55
     );
-
 
     group.add(temporal);
 
 
     /*
-       --------------------------------------------------
-       SUPERIOR BRAIN CONTOUR
-       --------------------------------------------------
-
-       These are NOT random balls.
-       They follow the natural longitudinal
-       contour of a cerebral hemisphere.
+       Occipital lobe
     */
 
-    const superiorContour = [
+    const occipital =
+    new THREE.Mesh(
+        new THREE.SphereGeometry(
+            1.05,
+            48,
+            32
+        ),
+        darkerBrainMaterial
+    );
 
-        [-.48,1.82,.90,.43],
-        [-.20,1.98,.72,.46],
-        [.08,2.06,.48,.45],
-        [.35,2.00,.20,.44],
-        [.54,1.88,-.12,.42],
+    occipital.scale.set(
+        .92,
+        .94,
+        1.1
+    );
 
-        [-.50,1.78,.28,.40],
-        [-.28,1.94,.02,.42],
-        [.00,2.02,-.25,.43],
-        [.28,1.95,-.55,.41],
-        [.48,1.78,-.82,.38],
+    occipital.position.set(
+        side * .98,
+        .65,
+        -1.02
+    );
 
-        [-.38,1.70,-.72,.38],
-        [-.08,1.82,-.96,.39],
-        [.20,1.78,-1.12,.37]
+    group.add(occipital);
 
+
+    /*
+       Organic cortical bumps.
+       These are small enough to blend into
+       the hemisphere instead of looking like
+       separate balls.
+    */
+
+    const bumps = [
+
+        [-.55,1.55,.15,.42],
+        [.10,1.72,.05,.38],
+        [.62,1.48,.10,.42],
+
+        [-.82,.98,.30,.38],
+        [.78,.92,.42,.4],
+
+        [-.88,.35,.72,.38],
+        [.86,.30,.76,.4],
+
+        [-.70,-.18,.45,.42],
+        [.72,-.15,.52,.42],
+
+        [-.45,-.45,-.25,.4],
+        [.40,-.40,-.28,.42],
+
+        [-.25,.48,-1.00,.45],
+        [.30,.50,-1.02,.45]
     ];
 
 
-    superiorContour.forEach(
-    function(data){
+    bumps.forEach(data => {
 
-        const fold =
+        const bump =
         new THREE.Mesh(
-
             new THREE.SphereGeometry(
                 data[3],
                 28,
                 20
             ),
-
             brainMaterial
-
         );
 
 
-        fold.scale.set(
-            1.18,
+        bump.scale.set(
+            1.08,
             .62,
-            1.08
+            1.0
         );
 
 
-        fold.position.set(
+        bump.position.set(
 
             side * (
-                .82 +
+                .94 +
                 data[0] * .48
             ),
 
-            data[1],
+            .55 +
+            data[1] * .48,
 
             data[2]
 
         );
 
 
-        group.add(fold);
+        group.add(bump);
 
     });
 
 
     /*
-       --------------------------------------------------
-       LATERAL CONTOUR
-       --------------------------------------------------
+       CORTICAL FOLDS
+       Curved dark grooves following
+       the surface of each hemisphere.
     */
 
-    const lateralContour = [
-
-        [-.92,1.45,.82,.42],
-        [-1.00,1.12,.55,.44],
-        [-1.03,.78,.25,.45],
-        [-1.02,.43,-.05,.43],
-        [-.98,.15,-.38,.41],
-        [-.90,.02,-.70,.37],
-
-        [.82,1.42,.88,.39],
-        [.90,1.08,.62,.42],
-        [.96,.74,.32,.43],
-        [.94,.42,.02,.42],
-        [.90,.15,-.32,.39],
-        [.82,.02,-.62,.35]
-
-    ];
-
-
-    lateralContour.forEach(
-    function(data){
-
-        const bulge =
-        new THREE.Mesh(
-
-            new THREE.SphereGeometry(
-                data[3],
-                28,
-                20
-            ),
-
-            brainMaterial
-
-        );
-
-
-        bulge.scale.set(
-            .65,
-            .78,
-            1.18
-        );
-
-
-        bulge.position.set(
-
-            side * (
-                .82 +
-                data[0] * .40
-            ),
-
-            data[1],
-
-            data[2]
-
-        );
-
-
-        group.add(bulge);
-
-    });
-
-
-    /*
-       --------------------------------------------------
-       CORTICAL SULCI
-       --------------------------------------------------
-
-       Long curved dark grooves make the surface
-       read much more like a cerebral cortex.
-    */
-
-    for(
-        let i = 0;
-        i < 15;
-        i++
-    ){
+    for(let i=0;i<14;i++){
 
         const groove =
         new THREE.Mesh(
 
             new THREE.TorusGeometry(
-                1.48,
-                .028,
+                1.42 - i*.018,
+                .026,
                 8,
-                64,
-                Math.PI * .62
+                80,
+                Math.PI * .58
             ),
 
-            grooveMaterial.clone()
-
-        );
-
-
-        groove.material.color.set(
-            0x6e7d8b
-        );
-
-
-        groove.rotation.set(
-
-            -1.18 +
-            i * .16,
-
-            side * (
-                .32 +
-                Math.sin(i * .7) * .08
-            ),
-
-            side * .30
-
-        );
-
-
-        groove.scale.set(
-            .93,
-            .72,
-            1.18
+            grooveMaterial
         );
 
 
         groove.position.set(
 
-            side * .83,
-
-            1.05 +
-            Math.sin(i * .72) * .20,
-
-            .98 -
-            i * .14
-
-        );
-
-
-        group.add(groove);
-
-    }
-
-
-    /*
-       Additional shorter cortical grooves
-    */
-
-    for(
-        let i = 0;
-        i < 12;
-        i++
-    ){
-
-        const groove =
-        new THREE.Mesh(
-
-            new THREE.TorusGeometry(
-                .82,
-                .022,
-                7,
-                42,
-                Math.PI * .52
+            side * (
+                .96 +
+                Math.sin(i*.73)*.18
             ),
 
-            darkGrooveMaterial.clone()
+            .72 +
+            Math.sin(i*.61)*.82,
+
+            .02 +
+            Math.cos(i*.8)*.78
 
         );
 
 
         groove.rotation.set(
 
-            Math.PI / 2.4,
-
-            side * (
-                .25 +
-                Math.sin(i) * .08
-            ),
-
-            .15
-
-        );
-
-
-        groove.scale.set(
-            1.35,
-            .72,
-            .65
-        );
-
-
-        groove.position.set(
+            .18 +
+            i*.055,
 
             side * (
                 .82 +
-                Math.sin(i * 1.7) * .12
+                Math.sin(i)*.12
             ),
 
-            .82 +
-            i * .085,
+            side * (
+                .18 +
+                i*.025
+            )
 
-            .90 -
-            i * .17
+        );
 
+
+        groove.scale.set(
+            1.0,
+            .72,
+            1.0
         );
 
 
@@ -1223,135 +1033,83 @@ function createHemisphere(side){
 }
 
 
-/* =====================================================
-   CREATE LEFT + RIGHT
-===================================================== */
+/* =========================================================
+   LEFT + RIGHT HEMISPHERES
+========================================================= */
 
-const leftBrain =
+const left =
 createHemisphere(-1);
 
-const rightBrain =
+const right =
 createHemisphere(1);
 
-
-brain.add(leftBrain);
-
-brain.add(rightBrain);
+brain.add(left);
+brain.add(right);
 
 
-/* =====================================================
-   CENTRAL LONGITUDINAL FISSURE
-===================================================== */
+/* =========================================================
+   LONGITUDINAL FISSURE
+========================================================= */
 
 const fissure =
 new THREE.Mesh(
 
     new THREE.BoxGeometry(
-        .13,
-        3.35,
-        3.35
+        .16,
+        3.9,
+        2.7
     ),
 
-    new THREE.MeshStandardMaterial({
-
-        color:0x07101a,
-
-        roughness:1
-
-    })
-
+    darkMaterial
 );
-
 
 fissure.position.set(
     0,
-    1.03,
+    .75,
     0
 );
 
-
-fissure.scale.z =
-.82;
-
+fissure.rotation.x =
+    -.05;
 
 brain.add(fissure);
 
 
-/* =====================================================
-   CORPUS CALLOSUM HINT
-===================================================== */
-
-const corpusCallosum =
-new THREE.Mesh(
-
-    new THREE.TorusGeometry(
-        .45,
-        .055,
-        12,
-        40,
-        Math.PI
-    ),
-
-    darkerBrainMaterial
-
-);
+/* =========================================================
+   CENTRAL BRAINSTEM
+========================================================= */
 
 
-corpusCallosum.rotation.x =
-Math.PI / 2;
-
-
-corpusCallosum.position.set(
-    0,
-    .65,
-    .12
-);
-
-
-brain.add(corpusCallosum);
-
-
-/* =====================================================
-   BRAINSTEM
-===================================================== */
-
-
-/*
-   MIDBRAIN
-*/
+/* MIDBRAIN */
 
 const midbrain =
 new THREE.Mesh(
 
-    new THREE.CylinderGeometry(
-        .30,
-        .38,
-        .72,
-        40
+    new THREE.SphereGeometry(
+        .48,
+        40,
+        32
     ),
 
-    brainMaterial
-
+    darkerBrainMaterial
 );
 
+midbrain.scale.set(
+    1.0,
+    1.25,
+    .8
+);
 
 midbrain.position.set(
     0,
-    -.30,
+    -.55,
     0
 );
-
-
-midbrain.rotation.z =
-Math.PI;
-
 
 brain.add(midbrain);
 
 
-/*
-   PONS
-*/
+/* PONS */
 
 const pons =
 new THREE.Mesh(
@@ -1359,34 +1117,30 @@ new THREE.Mesh(
     new THREE.SphereGeometry(
         .62,
         48,
-        36
+        32
     ),
 
-    brainMaterial
-
+    darkerBrainMaterial
 );
-
-
-pons.position.set(
-    0,
-    -.78,
-    .02
-);
-
 
 pons.scale.set(
-    1.18,
-    .78,
+    1.25,
+    .9,
     .82
 );
 
+pons.position.set(
+    0,
+    -1.02,
+    0
+);
 
 brain.add(pons);
 
 
-/* =====================================================
+/* =========================================================
    MEDULLA
-===================================================== */
+========================================================= */
 
 const medullaGeometry =
 new THREE.CapsuleGeometry(
@@ -1397,33 +1151,30 @@ new THREE.CapsuleGeometry(
 );
 
 
+/* normal medulla */
+
 const medulla =
 new THREE.Mesh(
     medullaGeometry,
     brainMaterial
 );
 
+medulla.scale.set(
+    .92,
+    1.08,
+    .75
+);
 
 medulla.position.set(
     0,
-    -1.52,
-    .02
+    -1.85,
+    0
 );
-
-
-medulla.scale.set(
-    .90,
-    1.02,
-    .74
-);
-
 
 brain.add(medulla);
 
 
-/*
-   Highlight layer
-*/
+/* highlighted layer */
 
 const medullaHighlight =
 new THREE.Mesh(
@@ -1431,260 +1182,242 @@ new THREE.Mesh(
     medullaMaterial
 );
 
-
-medullaHighlight.position.copy(
-    medulla.position
-);
-
-
 medullaHighlight.scale.copy(
     medulla.scale
 );
 
+medullaHighlight.position.copy(
+    medulla.position
+);
 
 brain.add(
     medullaHighlight
 );
 
 
-/* =====================================================
-   PYRAMID DETAIL
-===================================================== */
+/* =========================================================
+   PYRAMIDS
+========================================================= */
 
-const pyramidMaterial =
-new THREE.MeshStandardMaterial({
+const pyramidGeometry =
+new THREE.CapsuleGeometry(
+    .12,
+    .55,
+    12,
+    20
+);
 
-    color:0xe0e5e9,
-
-    roughness:.8
-
-});
-
-
-for(
-    let side = -1;
-    side <= 1;
-    side += 2
-){
+for(let side of [-1,1]){
 
     const pyramid =
     new THREE.Mesh(
-
-        new THREE.ConeGeometry(
-            .10,
-            .48,
-            16
-        ),
-
-        pyramidMaterial
-
+        pyramidGeometry,
+        medullaMaterial
     );
 
-
-    pyramid.rotation.z =
-    side * Math.PI / 2;
-
-
-    pyramid.rotation.y =
-    Math.PI / 2;
-
+    pyramid.scale.set(
+        .7,
+        1.0,
+        .55
+    );
 
     pyramid.position.set(
-        side * .12,
-        -1.58,
+        side*.14,
+        -1.94,
         .27
     );
 
+    pyramid.rotation.z =
+        side*.08;
 
     brain.add(pyramid);
 
 }
 
 
-/* =====================================================
+/* =========================================================
    SPINAL CORD
-===================================================== */
+========================================================= */
 
 const spinalCord =
 new THREE.Mesh(
 
     new THREE.CylinderGeometry(
-        .25,
-        .30,
-        1.25,
+        .23,
+        .28,
+        1.35,
         32
     ),
 
-    brainMaterial
-
+    darkerBrainMaterial
 );
-
 
 spinalCord.position.set(
     0,
-    -2.48,
-    .02
+    -2.72,
+    0
 );
-
 
 brain.add(spinalCord);
 
 
-/* =====================================================
+/* =========================================================
    CEREBELLUM
-===================================================== */
+========================================================= */
 
 const cerebellum =
 new THREE.Mesh(
 
     new THREE.SphereGeometry(
-        .93,
-        56,
+        1.02,
+        64,
         40
     ),
 
     darkerBrainMaterial
-
 );
-
-
-cerebellum.position.set(
-    0,
-    -.68,
-    -.92
-);
-
 
 cerebellum.scale.set(
-    1.45,
-    .72,
+    1.55,
+    .78,
     .82
 );
 
+cerebellum.position.set(
+    0,
+    -.95,
+    -1.18
+);
 
 brain.add(cerebellum);
 
 
-/* =====================================================
+/* =========================================================
    CEREBELLAR FOLIA
-===================================================== */
+========================================================= */
 
-for(
-    let i = 0;
-    i < 12;
-    i++
-){
+for(let i=0;i<13;i++){
 
-    const fold =
+    const folia =
     new THREE.Mesh(
 
         new THREE.TorusGeometry(
-            .66,
-            .022,
-            7,
-            48
+            .72,
+            .025,
+            8,
+            60
         ),
 
-        grooveMaterial.clone()
-
+        grooveMaterial
     );
 
+    folia.rotation.x =
+        Math.PI/2;
 
-    fold.material.color.set(
-        0x667582
-    );
+    folia.scale.x =
+        1.45;
 
-
-    fold.rotation.x =
-    Math.PI / 2;
-
-
-    fold.scale.set(
-        1.30,
-        1,
-        .60
-    );
-
-
-    fold.position.set(
-
+    folia.position.set(
         0,
-
-        -.92 +
-        i * .07,
-
-        -1.00
-
+        -1.48 + i*.085,
+        -1.95
     );
 
-
-    brain.add(fold);
+    brain.add(folia);
 
 }
 
 
-/* =====================================================
+/* =========================================================
    MEDULLA GLOW
-===================================================== */
+========================================================= */
 
 const medullaGlow =
 new THREE.PointLight(
     0xff3975,
     3.8,
-    2.8
+    2.7
 );
-
 
 medullaGlow.position.set(
     0,
-    -1.52,
-    .40
+    -1.85,
+    .38
 );
-
 
 brain.add(
     medullaGlow
 );
 
 
-/* =====================================================
-   MEDULLA LABEL
-===================================================== */
+/* =========================================================
+   SMALL MEDULLA OUTLINE
+========================================================= */
+
+const outlineGeometry =
+new THREE.CapsuleGeometry(
+    .37,
+    .91,
+    24,
+    32
+);
+
+const outline =
+new THREE.Mesh(
+
+    outlineGeometry,
+
+    new THREE.MeshBasicMaterial({
+        color:0xff477d,
+        transparent:true,
+        opacity:.15,
+        side:THREE.BackSide
+    })
+
+);
+
+outline.scale.set(
+    1.0,
+    1.08,
+    .8
+);
+
+outline.position.copy(
+    medulla.position
+);
+
+brain.add(outline);
+
+
+/* =========================================================
+   LABEL POSITION
+========================================================= */
 
 function updateLabel(){
 
     const position =
     new THREE.Vector3();
 
-
     medulla.getWorldPosition(
         position
     );
-
-
-    position.y -= .10;
-
 
     position.project(
         camera
     );
 
-
     const x =
-        (position.x + 1)
-        / 2
-        * canvas.clientWidth;
-
+        (position.x + 1) /
+        2 *
+        canvas.clientWidth;
 
     const y =
-        (-position.y + 1)
-        / 2
-        * canvas.clientHeight;
-
+        (-position.y + 1) /
+        2 *
+        canvas.clientHeight;
 
     medullaLabel.style.left =
         x + "px";
-
 
     medullaLabel.style.top =
         y + "px";
@@ -1692,9 +1425,9 @@ function updateLabel(){
 }
 
 
-/* =====================================================
+/* =========================================================
    RESIZE
-===================================================== */
+========================================================= */
 
 function resize(){
 
@@ -1704,7 +1437,6 @@ function resize(){
     const height =
     canvas.clientHeight;
 
-
     if(
         width <= 0 ||
         height <= 0
@@ -1712,13 +1444,10 @@ function resize(){
         return;
     }
 
-
     camera.aspect =
-    width / height;
-
+        width / height;
 
     camera.updateProjectionMatrix();
-
 
     renderer.setSize(
         width,
@@ -1728,98 +1457,89 @@ function resize(){
 
 }
 
-
 window.addEventListener(
     "resize",
     resize
 );
 
 
-/* =====================================================
+/* =========================================================
    HIGHLIGHT
-===================================================== */
+========================================================= */
 
-let highlighted =
-true;
-
+let highlighted = true;
 
 const highlightButton =
 document.getElementById(
     "highlight"
 );
 
-
 highlightButton.addEventListener(
 "click",
 function(){
 
     highlighted =
-    !highlighted;
-
+        !highlighted;
 
     medullaHighlight.visible =
-    highlighted;
+        highlighted;
 
+    outline.visible =
+        highlighted;
 
     medullaGlow.visible =
-    highlighted;
-
+        highlighted;
 
     medullaLabel.classList.toggle(
         "show",
         highlighted
     );
 
-
     highlightButton.classList.toggle(
         "active",
         highlighted
     );
 
-
     highlightButton.textContent =
-    highlighted
-    ? "🔴 Highlight Medulla"
-    : "⚪ Show Medulla";
+        highlighted
+        ? "🔴 Highlight Medulla"
+        : "⚪ Show Medulla";
 
 });
 
 
-/* =====================================================
+/* =========================================================
    ROTATION
-===================================================== */
+========================================================= */
 
 const rotateButton =
 document.getElementById(
     "rotate"
 );
 
-
 rotateButton.addEventListener(
 "click",
 function(){
 
     controls.autoRotate =
-    !controls.autoRotate;
-
+        !controls.autoRotate;
 
     rotateButton.classList.toggle(
         "active",
         controls.autoRotate
     );
 
-
     rotateButton.textContent =
-    controls.autoRotate
-    ? "⟳ Auto Rotate"
-    : "▶ Auto Rotate";
+        controls.autoRotate
+        ? "⟳ Auto Rotate"
+        : "▶ Auto Rotate";
 
 });
 
 
-/* =====================================================
+/* =========================================================
    RESET
-===================================================== */
+========================================================= */
 
 document
 .getElementById("reset")
@@ -1829,10 +1549,9 @@ function(){
 
     camera.position.set(
         0,
-        1.0,
-        11.5
+        1.4,
+        12
     );
-
 
     controls.target.set(
         0,
@@ -1840,18 +1559,16 @@ function(){
         0
     );
 
-
     controls.update();
 
 });
 
 
-/* =====================================================
+/* =========================================================
    ANIMATION
-===================================================== */
+========================================================= */
 
 let time = 0;
-
 
 function animate(){
 
@@ -1859,44 +1576,36 @@ function animate(){
         animate
     );
 
-
     time += .035;
 
 
     /*
-       Medulla pulsing highlight
+       Medulla pulse
     */
 
     if(highlighted){
 
         const pulse =
-        1 +
-        Math.sin(time * 3) * .055;
-
+            1 +
+            Math.sin(time*3)*
+            .055;
 
         medullaHighlight.scale.set(
-
-            medulla.scale.x * pulse,
-
-            medulla.scale.y * pulse,
-
-            medulla.scale.z * pulse
-
+            medulla.scale.x*pulse,
+            medulla.scale.y*pulse,
+            medulla.scale.z*pulse
         );
 
-
         medullaGlow.intensity =
-        3.8 +
-        Math.sin(time * 3) * .65;
+            3.8 +
+            Math.sin(time*3)*.65;
 
     }
 
 
     controls.update();
 
-
     updateLabel();
-
 
     renderer.render(
         scene,
@@ -1906,9 +1615,9 @@ function animate(){
 }
 
 
-/* =====================================================
+/* =========================================================
    START
-===================================================== */
+========================================================= */
 
 resize();
 
@@ -1916,9 +1625,7 @@ animate();
 
 
 /*
-   Give the browser a moment to
-   render the first frame before
-   removing the loading screen.
+   Show label after the model is ready.
 */
 
 setTimeout(
@@ -1927,7 +1634,6 @@ function(){
     loading.classList.add(
         "hide"
     );
-
 
     medullaLabel.classList.add(
         "show"
@@ -1940,5 +1646,4 @@ function(){
 </script>
 
 </body>
-
 </html>
