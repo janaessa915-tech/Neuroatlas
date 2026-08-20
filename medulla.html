@@ -53,9 +53,7 @@ nav a:hover{
 }
 
 
-/* =========================================================
-   HERO
-========================================================= */
+/* ================= HERO ================= */
 
 .hero{
     max-width:850px;
@@ -101,9 +99,7 @@ h1{
 }
 
 
-/* =========================================================
-   SECTIONS
-========================================================= */
+/* ================= SECTIONS ================= */
 
 .section{
     margin-bottom:65px;
@@ -123,9 +119,7 @@ h1{
 }
 
 
-/* =========================================================
-   LOCATION
-========================================================= */
+/* ================= LOCATION ================= */
 
 .location{
     padding:30px;
@@ -178,9 +172,7 @@ h1{
 }
 
 
-/* =========================================================
-   FUNCTION CARDS
-========================================================= */
+/* ================= CARDS ================= */
 
 .grid{
     display:grid;
@@ -214,9 +206,7 @@ h1{
 }
 
 
-/* =========================================================
-   STRUCTURES
-========================================================= */
+/* ================= STRUCTURES ================= */
 
 .structures{
     display:grid;
@@ -243,9 +233,7 @@ h1{
 }
 
 
-/* =========================================================
-   3D VIEWER
-========================================================= */
+/* ================= 3D VIEWER ================= */
 
 .viewer-section{
     margin-top:70px;
@@ -297,11 +285,6 @@ h1{
     width:100%;
     height:100%;
     display:block;
-    cursor:grab;
-}
-
-#brainCanvas:active{
-    cursor:grabbing;
 }
 
 .loading{
@@ -340,32 +323,45 @@ h1{
     }
 }
 
+.model-error{
+    display:none;
 
-/* =========================================================
-   MEDULLA LABEL
-========================================================= */
+    position:absolute;
+
+    left:20px;
+    right:20px;
+    top:20px;
+
+    padding:18px;
+
+    border-radius:12px;
+
+    background:#291117;
+    border:1px solid #71313e;
+
+    color:#ffb7c1;
+
+    z-index:20;
+}
+
+
+/* ================= MEDULLA LABEL ================= */
 
 .medulla-label{
     position:absolute;
 
     left:50%;
-    top:72%;
+    top:75%;
 
     transform:translate(-50%,-50%);
 
     pointer-events:none;
+
     z-index:8;
 
     display:flex;
     flex-direction:column;
     align-items:center;
-
-    opacity:0;
-    transition:opacity .5s;
-}
-
-.medulla-label.visible{
-    opacity:1;
 }
 
 .medulla-dot{
@@ -402,7 +398,7 @@ h1{
 
     border-radius:8px;
 
-    background:rgba(5,10,17,.88);
+    background:rgba(5,10,17,.85);
 
     border:1px solid rgba(255,71,125,.45);
 
@@ -434,9 +430,7 @@ h1{
 }
 
 
-/* =========================================================
-   CONTROLS
-========================================================= */
+/* ================= CONTROLS ================= */
 
 .controls{
     display:flex;
@@ -468,9 +462,7 @@ h1{
 }
 
 
-/* =========================================================
-   CLINICAL
-========================================================= */
+/* ================= CLINICAL ================= */
 
 .clinical{
     padding:30px;
@@ -487,9 +479,7 @@ h1{
 }
 
 
-/* =========================================================
-   QUIZ
-========================================================= */
+/* ================= QUIZ ================= */
 
 .quiz{
     padding:35px;
@@ -598,9 +588,7 @@ h1{
 }
 
 
-/* =========================================================
-   MOBILE
-========================================================= */
+/* ================= MOBILE ================= */
 
 @media(max-width:850px){
 
@@ -635,9 +623,7 @@ h1{
 <body>
 
 
-<!-- =======================================================
-     NAVIGATION
-======================================================= -->
+<!-- ================= NAV ================= -->
 
 <nav>
 
@@ -651,9 +637,7 @@ h1{
 <main class="container">
 
 
-<!-- =======================================================
-     HERO
-======================================================= -->
+<!-- ================= HERO ================= -->
 
 <section class="hero">
 
@@ -676,13 +660,16 @@ protective reflexes.
 
 </p>
 
-
 <div class="tags">
 
 <div class="tag">Brainstem</div>
+
 <div class="tag">Inferior to Pons</div>
+
 <div class="tag">Superior to Spinal Cord</div>
+
 <div class="tag">Pyramidal Decussation</div>
+
 <div class="tag">CN IX–XII</div>
 
 </div>
@@ -690,9 +677,7 @@ protective reflexes.
 </section>
 
 
-<!-- =======================================================
-     LOCATION
-======================================================= -->
+<!-- ================= LOCATION ================= -->
 
 <section class="section">
 
@@ -758,9 +743,7 @@ spinal cord.
 </section>
 
 
-<!-- =======================================================
-     FUNCTIONS
-======================================================= -->
+<!-- ================= FUNCTIONS ================= -->
 
 <section class="section">
 
@@ -833,9 +816,7 @@ such as swallowing and coughing.
 </section>
 
 
-<!-- =======================================================
-     ANATOMY
-======================================================= -->
+<!-- ================= ANATOMY ================= -->
 
 <section class="section">
 
@@ -915,9 +896,7 @@ nerves.
 </section>
 
 
-<!-- =======================================================
-     3D MODEL
-======================================================= -->
+<!-- ================= 3D MODEL ================= -->
 
 <section class="viewer-section">
 
@@ -934,7 +913,7 @@ Explore the Medulla in 3D
 <div class="viewer-header">
 
 <div class="viewer-title">
-Human Brain · Interactive 3D
+Human Brain · Interactive 3D Model
 </div>
 
 <div class="viewer-status">
@@ -960,6 +939,13 @@ Building 3D brain...
 </div>
 
 
+<div
+id="modelError"
+class="model-error"
+>
+</div>
+
+
 <canvas
 id="brainCanvas"
 ></canvas>
@@ -967,7 +953,7 @@ id="brainCanvas"
 
 <div
 id="medullaLabel"
-class="medulla-label visible"
+class="medulla-label"
 >
 
 <div class="medulla-dot"></div>
@@ -1004,9 +990,7 @@ MEDULLA OBLONGATA
 </section>
 
 
-<!-- =======================================================
-     CLINICAL
-======================================================= -->
+<!-- ================= CLINICAL ================= -->
 
 <section class="section clinical">
 
@@ -1033,9 +1017,7 @@ affected.
 </section>
 
 
-<!-- =======================================================
-     QUIZ
-======================================================= -->
+<!-- ================= QUIZ ================= -->
 
 <section class="section quiz">
 
@@ -1222,22 +1204,20 @@ Try Again
 </main>
 
 
-<!-- =======================================================
+<!-- =========================================================
      THREE.JS
-======================================================= -->
+========================================================= -->
 
 <script type="module">
 
 import * as THREE from
-"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js";
+"https://esm.sh/three@0.160.0";
 
 import { OrbitControls } from
-"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js";
+"https://esm.sh/three@0.160.0/examples/jsm/controls/OrbitControls.js";
 
 
-/* =========================================================
-   ELEMENTS
-========================================================= */
+/* ================= ELEMENTS ================= */
 
 const canvas =
 document.getElementById("brainCanvas");
@@ -1245,18 +1225,17 @@ document.getElementById("brainCanvas");
 const loading =
 document.getElementById("loading");
 
+const loadingText =
+document.getElementById("loadingText");
 
-/* =========================================================
-   SCENE
-========================================================= */
+
+/* ================= SCENE ================= */
 
 const scene =
 new THREE.Scene();
 
 
-/* =========================================================
-   CAMERA
-========================================================= */
+/* ================= CAMERA ================= */
 
 const camera =
 new THREE.PerspectiveCamera(
@@ -1268,21 +1247,21 @@ new THREE.PerspectiveCamera(
 
 camera.position.set(
     0,
-    1,
-    8
+    0.8,
+    7
 );
 
 
-/* =========================================================
-   RENDERER
-========================================================= */
+/* ================= RENDERER ================= */
 
 const renderer =
 new THREE.WebGLRenderer({
 
     canvas:canvas,
 
-    antialias:true
+    antialias:true,
+
+    alpha:true
 
 });
 
@@ -1297,9 +1276,7 @@ renderer.outputColorSpace =
 THREE.SRGBColorSpace;
 
 
-/* =========================================================
-   ORBIT CONTROLS
-========================================================= */
+/* ================= CONTROLS ================= */
 
 const controls =
 new OrbitControls(
@@ -1320,10 +1297,16 @@ controls.enablePan =
 false;
 
 controls.minDistance =
-4;
+3;
 
 controls.maxDistance =
-14;
+12;
+
+controls.autoRotate =
+false;
+
+controls.autoRotateSpeed =
+0.6;
 
 controls.target.set(
     0,
@@ -1332,102 +1315,76 @@ controls.target.set(
 );
 
 
-/* =========================================================
-   LIGHTING
-========================================================= */
+/* ================= LIGHTING ================= */
 
-const hemisphere =
+const ambient =
 new THREE.HemisphereLight(
     0xffffff,
-    0x172638,
-    2.5
+    0x152338,
+    2.8
 );
 
-scene.add(
-    hemisphere
-);
+scene.add(ambient);
 
 
-const keyLight =
+const key =
 new THREE.DirectionalLight(
     0xffffff,
     4
 );
 
-keyLight.position.set(
+key.position.set(
     5,
-    7,
+    6,
     8
 );
 
-scene.add(
-    keyLight
-);
+scene.add(key);
 
 
-const fillLight =
+const fill =
 new THREE.DirectionalLight(
     0x65baff,
-    2.5
+    2
 );
 
-fillLight.position.set(
+fill.position.set(
     -5,
-    3,
+    2,
     5
 );
 
-scene.add(
-    fillLight
-);
+scene.add(fill);
 
 
-/* =========================================================
-   BRAIN GROUP
-========================================================= */
+/* ================= BRAIN ================= */
 
 const brain =
 new THREE.Group();
 
-scene.add(
-    brain
-);
+scene.add(brain);
 
 
-/* =========================================================
-   MATERIALS
-========================================================= */
+/* ================= MATERIALS ================= */
 
-const brainMaterial =
+const cortexMaterial =
 new THREE.MeshStandardMaterial({
 
-    color:0xb9c2cc,
+    color:0xc5ccd4,
 
-    roughness:.82,
+    roughness:0.85,
 
     metalness:0
 
 });
 
 
-const cerebellumMaterial =
+const lowerBrainMaterial =
 new THREE.MeshStandardMaterial({
 
-    color:0x8f9ba7,
+    color:0x9da8b4,
 
-    roughness:.86,
-
-    metalness:0
-
-});
-
-
-const stemMaterial =
-new THREE.MeshStandardMaterial({
-
-    color:0xaeb8c3,
-
-    roughness:.8,
+    roughness:0.9,
 
     metalness:0
 
@@ -1437,24 +1394,22 @@ new THREE.MeshStandardMaterial({
 const medullaMaterial =
 new THREE.MeshStandardMaterial({
 
-    color:0xff3d78,
+    color:0xff3b78,
 
-    emissive:0xff174f,
+    emissive:0xff124d,
 
-    emissiveIntensity:2,
+    emissiveIntensity:2.2,
 
-    roughness:.4,
+    roughness:0.4,
 
     metalness:0
 
 });
 
 
-/* =========================================================
-   HELPER
-========================================================= */
+/* ================= BRAIN PART HELPER ================= */
 
-function createBrainPart(
+function makePart(
     x,
     y,
     z,
@@ -1464,16 +1419,15 @@ function createBrainPart(
     material
 ){
 
-    const geometry =
-    new THREE.SphereGeometry(
-        1,
-        48,
-        32
-    );
-
     const mesh =
     new THREE.Mesh(
-        geometry,
+
+        new THREE.SphereGeometry(
+            1,
+            48,
+            32
+        ),
+
         material
     );
 
@@ -1489,97 +1443,85 @@ function createBrainPart(
         sz
     );
 
-    brain.add(
-        mesh
-    );
+    brain.add(mesh);
 
     return mesh;
 }
 
 
-/* =========================================================
-   LEFT CEREBRAL HEMISPHERE
-========================================================= */
+/* ================= LEFT HEMISPHERE ================= */
 
-createBrainPart(
-    -0.95,
-    1,
-    0,
-    1.65,
-    1.55,
-    1.42,
-    brainMaterial
-);
-
-
-/* =========================================================
-   RIGHT CEREBRAL HEMISPHERE
-========================================================= */
-
-createBrainPart(
+makePart(
+    -0.82,
     0.95,
-    1,
     0,
-    1.65,
     1.55,
-    1.42,
-    brainMaterial
+    1.48,
+    1.38,
+    cortexMaterial
 );
 
 
-/* =========================================================
-   EXTRA BRAIN SHAPE
-========================================================= */
+/* ================= RIGHT HEMISPHERE ================= */
 
-createBrainPart(
-    -1.3,
-    1.25,
-    .3,
-    1.05,
+makePart(
+    0.82,
+    0.95,
+    0,
+    1.55,
+    1.48,
+    1.38,
+    cortexMaterial
+);
+
+
+/* ================= FRONTAL AREAS ================= */
+
+makePart(
+    -1.12,
     1.15,
-    1.2,
-    brainMaterial
-);
-
-createBrainPart(
-    1.3,
-    1.25,
-    .3,
-    1.05,
+    0.42,
     1.15,
-    1.2,
-    brainMaterial
-);
-
-
-/* =========================================================
-   TEMPORAL AREAS
-========================================================= */
-
-createBrainPart(
-    -1.35,
-    .45,
-    -.15,
     1.05,
-    .7,
-    1.25,
-    brainMaterial
-);
-
-createBrainPart(
-    1.35,
-    .45,
-    -.15,
     1.05,
-    .7,
-    1.25,
-    brainMaterial
+    cortexMaterial
+);
+
+makePart(
+    1.12,
+    1.15,
+    0.42,
+    1.15,
+    1.05,
+    1.05,
+    cortexMaterial
 );
 
 
-/* =========================================================
-   CEREBELLUM
-========================================================= */
+/* ================= TEMPORAL AREAS ================= */
+
+makePart(
+    -1.18,
+    0.25,
+    -0.15,
+    1.05,
+    0.68,
+    1.15,
+    cortexMaterial
+);
+
+makePart(
+    1.18,
+    0.25,
+    -0.15,
+    1.05,
+    0.68,
+    1.15,
+    cortexMaterial
+);
+
+
+/* ================= CEREBELLUM ================= */
 
 const cerebellum =
 new THREE.Mesh(
@@ -1590,20 +1532,20 @@ new THREE.Mesh(
         32
     ),
 
-    cerebellumMaterial
+    lowerBrainMaterial
 
 );
 
 cerebellum.position.set(
     0,
-    -.15,
-    -1
+    -0.18,
+    -1.0
 );
 
 cerebellum.scale.set(
-    1.25,
-    .72,
-    .82
+    1.22,
+    0.72,
+    0.82
 );
 
 brain.add(
@@ -1611,9 +1553,7 @@ brain.add(
 );
 
 
-/* =========================================================
-   PONS
-========================================================= */
+/* ================= PONS ================= */
 
 const pons =
 new THREE.Mesh(
@@ -1621,23 +1561,23 @@ new THREE.Mesh(
     new THREE.SphereGeometry(
         1,
         40,
-        28
+        30
     ),
 
-    stemMaterial
+    lowerBrainMaterial
 
 );
 
 pons.position.set(
     0,
-    -.72,
+    -0.72,
     0
 );
 
 pons.scale.set(
-    .52,
-    .52,
-    .46
+    0.52,
+    0.52,
+    0.48
 );
 
 brain.add(
@@ -1645,16 +1585,14 @@ brain.add(
 );
 
 
-/* =========================================================
-   MEDULLA
-========================================================= */
+/* ================= MEDULLA ================= */
 
 const medulla =
 new THREE.Mesh(
 
     new THREE.CapsuleGeometry(
-        .32,
-        .9,
+        0.30,
+        0.85,
         16,
         32
     ),
@@ -1665,7 +1603,7 @@ new THREE.Mesh(
 
 medulla.position.set(
     0,
-    -1.5,
+    -1.48,
     0
 );
 
@@ -1674,27 +1612,25 @@ brain.add(
 );
 
 
-/* =========================================================
-   SPINAL CORD
-========================================================= */
+/* ================= SPINAL CORD ================= */
 
 const spinalCord =
 new THREE.Mesh(
 
     new THREE.CylinderGeometry(
-        .17,
-        .21,
+        0.16,
+        0.20,
         1.1,
         32
     ),
 
-    stemMaterial
+    lowerBrainMaterial
 
 );
 
 spinalCord.position.set(
     0,
-    -2.45,
+    -2.4,
     0
 );
 
@@ -1703,36 +1639,32 @@ brain.add(
 );
 
 
-/* =========================================================
-   MEDULLA GLOW
-========================================================= */
+/* ================= MEDULLA LIGHT ================= */
 
-const medullaLight =
+const medullaGlow =
 new THREE.PointLight(
     0xff2868,
-    4,
+    5,
     3
 );
 
-medullaLight.position.copy(
+medullaGlow.position.copy(
     medulla.position
 );
 
 brain.add(
-    medullaLight
+    medullaGlow
 );
 
 
-/* =========================================================
-   MEDULLA RING
-========================================================= */
+/* ================= MEDULLA RING ================= */
 
 const ring =
 new THREE.Mesh(
 
     new THREE.TorusGeometry(
-        .36,
-        .025,
+        0.36,
+        0.025,
         12,
         48
     ),
@@ -1755,52 +1687,87 @@ brain.add(
 );
 
 
-/* =========================================================
-   SMALL ANATOMICAL DETAILS
-========================================================= */
+/* ================= SUBTLE BRAIN DETAILS ================= */
 
-const detailMaterial =
-new THREE.MeshStandardMaterial({
-
-    color:0x707c88,
-
-    roughness:.9
-
+const grooveMaterial =
+new THREE.MeshBasicMaterial({
+    color:0x7e8b98
 });
 
 
-/* Cerebral central groove */
+function addGroove(
+    x,
+    y,
+    z,
+    rotationZ,
+    length
+){
 
-const groove =
-new THREE.Mesh(
+    const groove =
+    new THREE.Mesh(
 
-    new THREE.BoxGeometry(
-        .035,
-        2.3,
-        2.3
-    ),
+        new THREE.TorusGeometry(
+            0.72,
+            0.018,
+            8,
+            32,
+            Math.PI
+        ),
 
-    detailMaterial
+        grooveMaterial
 
+    );
+
+    groove.position.set(
+        x,
+        y,
+        z
+    );
+
+    groove.rotation.z =
+    rotationZ;
+
+    groove.scale.x =
+    length;
+
+    brain.add(
+        groove
+    );
+}
+
+
+/* A few anatomical surface markings */
+
+addGroove(
+    -0.75,
+    1.55,
+    1.25,
+    0.25,
+    0.8
 );
 
-groove.position.set(
+addGroove(
+    0.75,
+    1.55,
+    1.25,
+    -0.25,
+    0.8
+);
+
+
+/* ================= INITIAL VIEW ================= */
+
+brain.position.set(
     0,
-    1,
+    0.35,
     0
 );
 
-groove.rotation.x =
-.15;
 
-brain.add(
-    groove
-);
+/* ================= LOADING ================= */
 
-
-/* =========================================================
-   MODEL READY
-========================================================= */
+loadingText.textContent =
+"Brain loaded ✓";
 
 setTimeout(
 function(){
@@ -1813,9 +1780,7 @@ function(){
 );
 
 
-/* =========================================================
-   RESIZE
-========================================================= */
+/* ================= RESIZE ================= */
 
 function resize(){
 
@@ -1829,9 +1794,7 @@ function resize(){
         width <= 0 ||
         height <= 0
     ){
-
         return;
-
     }
 
     camera.aspect =
@@ -1853,85 +1816,80 @@ window.addEventListener(
 );
 
 
-/* =========================================================
-   RESET BUTTON
-========================================================= */
+/* ================= RESET ================= */
 
 document
 .getElementById("resetButton")
 .addEventListener(
-"click",
-function(){
+    "click",
+    function(){
 
-    camera.position.set(
-        0,
-        1,
-        8
-    );
+        camera.position.set(
+            0,
+            0.8,
+            7
+        );
 
-    controls.target.set(
-        0,
-        0,
-        0
-    );
+        controls.target.set(
+            0,
+            0,
+            0
+        );
 
-    controls.update();
+        brain.rotation.set(
+            0,
+            0,
+            0
+        );
 
-}
+        controls.update();
+
+    }
 );
 
 
-/* =========================================================
-   ROTATION BUTTON
-========================================================= */
+/* ================= AUTO ROTATION ================= */
 
 document
 .getElementById("rotateButton")
 .addEventListener(
-"click",
-function(){
+    "click",
+    function(){
 
-    controls.autoRotate =
-    !controls.autoRotate;
+        controls.autoRotate =
+        !controls.autoRotate;
 
-    controls.autoRotateSpeed =
-    .6;
-
-}
+    }
 );
 
 
-/* =========================================================
-   FOCUS MEDULLA
-========================================================= */
+/* ================= FOCUS MEDULLA ================= */
 
 document
 .getElementById("focusButton")
 .addEventListener(
-"click",
-function(){
+    "click",
+    function(){
 
-    camera.position.set(
-        2.2,
-        -.9,
-        3.3
-    );
+        camera.position.set(
+            2.2,
+            -0.8,
+            3.2
+        );
 
-    controls.target.set(
-        0,
-        -1.35,
-        0
-    );
+        controls.target.set(
+            0,
+            -1.15,
+            0
+        );
 
-    controls.update();
+        controls.update();
 
-}
+    }
 );
 
 
-/* =========================================================
-   ANIMATION
-========================================================= */
+/* ================= ANIMATION ================= */
 
 function animate(){
 
@@ -1955,16 +1913,14 @@ animate();
 </script>
 
 
-<!-- =======================================================
-     NORMAL PAGE JAVASCRIPT
-======================================================= -->
+<!-- =========================================================
+     NORMAL JAVASCRIPT
+========================================================= -->
 
 <script>
 
 
-/* =========================================================
-   LOCATION BUTTON
-========================================================= */
+/* ================= LOCATION ================= */
 
 const locationButton =
 document.getElementById(
@@ -1977,39 +1933,35 @@ document.getElementById(
 );
 
 locationButton.addEventListener(
-"click",
-function(){
+    "click",
+    function(){
 
-    if(
-        locationInfo.style.display ===
-        "block"
-    ){
+        if(
+            locationInfo.style.display ===
+            "block"
+        ){
 
-        locationInfo.style.display =
-        "none";
+            locationInfo.style.display =
+            "none";
 
-        locationButton.textContent =
-        "Show Location";
+            locationButton.textContent =
+            "Show Location";
+
+        }else{
+
+            locationInfo.style.display =
+            "block";
+
+            locationButton.textContent =
+            "Hide Location";
+
+        }
 
     }
-
-    else{
-
-        locationInfo.style.display =
-        "block";
-
-        locationButton.textContent =
-        "Hide Location";
-
-    }
-
-}
 );
 
 
-/* =========================================================
-   QUIZ
-========================================================= */
+/* ================= QUIZ ================= */
 
 let score = 0;
 
@@ -2040,11 +1992,8 @@ function(question){
             if(
                 question.dataset.done
             ){
-
                 return;
-
             }
-
 
             question.dataset.done =
             "true";
@@ -2065,9 +2014,7 @@ function(question){
                     "correct"
                 );
 
-            }
-
-            else{
+            }else{
 
                 button.classList.add(
                     "wrong"
@@ -2109,9 +2056,7 @@ function(question){
 });
 
 
-/* =========================================================
-   QUIZ RESULT
-========================================================= */
+/* ================= QUIZ RESULT ================= */
 
 function showQuizResult(){
 
@@ -2163,55 +2108,54 @@ function showQuizResult(){
 }
 
 
-/* =========================================================
-   RESTART QUIZ
-========================================================= */
+/* ================= RESTART ================= */
 
 document
 .getElementById("restartButton")
 .addEventListener(
-"click",
-function(){
+    "click",
+    function(){
 
-    score = 0;
+        score = 0;
 
-    answered = 0;
-
-
-    questions.forEach(
-    function(question){
-
-        delete question.dataset.done;
+        answered = 0;
 
 
-        const answers =
-        question.querySelectorAll(
-            ".answer"
-        );
+        questions.forEach(
+        function(question){
+
+            delete question.dataset.done;
 
 
-        answers.forEach(
-        function(button){
-
-            button.classList.remove(
-                "correct",
-                "wrong"
+            const answers =
+            question.querySelectorAll(
+                ".answer"
             );
+
+
+            answers.forEach(
+            function(button){
+
+                button.classList.remove(
+                    "correct",
+                    "wrong"
+                );
+
+            });
 
         });
 
-    });
 
+        document.getElementById(
+            "quizResult"
+        ).style.display =
+        "none";
 
-    document.getElementById(
-        "quizResult"
-    ).style.display =
-    "none";
-
-}
+    }
 );
 
 </script>
+
 
 </body>
 
