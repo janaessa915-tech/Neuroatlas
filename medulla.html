@@ -1,14 +1,13 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>NeuroAtlas | Medulla</title>
 
 <style>
-
 *{
     box-sizing:border-box;
     margin:0;
@@ -47,197 +46,29 @@ nav a:hover{
 .container{
     max-width:1200px;
     margin:auto;
-    padding:70px 7% 100px;
-}
-
-
-/* =========================================================
-   HERO
-========================================================= */
-
-.hero{
-    max-width:850px;
-    margin-bottom:55px;
+    padding:60px 7% 100px;
 }
 
 .eyebrow{
     color:#61b5ff;
-    font-size:12px;
     letter-spacing:3px;
+    font-size:12px;
     text-transform:uppercase;
-    margin-bottom:16px;
+    margin-bottom:15px;
 }
 
 h1{
-    font-size:clamp(55px,8vw,90px);
-    letter-spacing:-4px;
+    font-size:clamp(60px,8vw,90px);
     line-height:.95;
+    letter-spacing:-4px;
     margin-bottom:25px;
 }
 
 .hero p{
     color:#a6b6c7;
+    max-width:780px;
     font-size:18px;
     line-height:1.8;
-    max-width:780px;
-}
-
-.tags{
-    display:flex;
-    flex-wrap:wrap;
-    gap:9px;
-    margin-top:25px;
-}
-
-.tag{
-    border:1px solid #20384f;
-    background:#0a1624;
-    color:#b9c9d8;
-    border-radius:999px;
-    padding:8px 13px;
-    font-size:12px;
-}
-
-
-/* =========================================================
-   SECTIONS
-========================================================= */
-
-.section{
-    margin-bottom:65px;
-}
-
-.section-label{
-    color:#61b5ff;
-    font-size:11px;
-    letter-spacing:2px;
-    text-transform:uppercase;
-    margin-bottom:7px;
-}
-
-.section h2{
-    font-size:32px;
-    margin-bottom:25px;
-}
-
-
-/* =========================================================
-   LOCATION
-========================================================= */
-
-.location{
-    padding:30px;
-    border-radius:22px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(74,158,235,.10),
-            rgba(255,255,255,.025)
-        );
-
-    border:1px solid rgba(255,255,255,.08);
-}
-
-.location-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:20px;
-}
-
-.location h3{
-    font-size:23px;
-}
-
-.location-button{
-    background:#10263b;
-    color:#91caff;
-    border:1px solid #2b5576;
-    border-radius:10px;
-    padding:11px 17px;
-    cursor:pointer;
-}
-
-.location-button:hover{
-    background:#173852;
-}
-
-.location-info{
-    display:none;
-    margin-top:22px;
-    color:#9fb0c1;
-    max-width:850px;
-    line-height:1.8;
-}
-
-.location-info strong{
-    color:#eaf2f9;
-}
-
-
-/* =========================================================
-   FUNCTION CARDS
-========================================================= */
-
-.grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:17px;
-}
-
-.card{
-    padding:27px;
-    border-radius:20px;
-    background:#091522;
-    border:1px solid rgba(255,255,255,.07);
-}
-
-.card-number{
-    color:#61b5ff;
-    font-size:11px;
-    letter-spacing:2px;
-    margin-bottom:12px;
-}
-
-.card h3{
-    font-size:20px;
-    margin-bottom:11px;
-}
-
-.card p{
-    color:#91a5b8;
-    font-size:14px;
-    line-height:1.75;
-}
-
-
-/* =========================================================
-   STRUCTURES
-========================================================= */
-
-.structures{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:16px;
-}
-
-.structure{
-    padding:25px;
-    border-radius:18px;
-    background:#091522;
-    border:1px solid rgba(255,255,255,.07);
-}
-
-.structure h3{
-    font-size:19px;
-    margin-bottom:9px;
-}
-
-.structure p{
-    color:#91a5b8;
-    font-size:14px;
-    line-height:1.75;
 }
 
 
@@ -245,25 +76,21 @@ h1{
    3D VIEWER
 ========================================================= */
 
-.viewer-section{
-    margin-top:70px;
-    margin-bottom:70px;
-}
-
 .viewer{
+    margin-top:60px;
     border:1px solid rgba(255,255,255,.10);
-    border-radius:25px;
+    border-radius:24px;
     overflow:hidden;
-    background:#01050a;
-    box-shadow:0 20px 80px rgba(0,0,0,.45);
+    background:#02060b;
+    box-shadow:0 25px 80px rgba(0,0,0,.45);
 }
 
 .viewer-header{
     min-height:65px;
+    padding:0 22px;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:0 22px;
     border-bottom:1px solid rgba(255,255,255,.08);
 }
 
@@ -280,13 +107,14 @@ h1{
 
 .scene{
     position:relative;
+    width:100%;
     height:600px;
 
     background:
         radial-gradient(
-            circle at 50% 45%,
-            #17334b 0%,
-            #091522 43%,
+            circle at 50% 42%,
+            #193b55 0%,
+            #0b1b2b 42%,
             #02060b 100%
         );
 }
@@ -302,46 +130,41 @@ h1{
     cursor:grabbing;
 }
 
+
+/* =========================================================
+   LOADING
+========================================================= */
+
 .loading{
     position:absolute;
     inset:0;
+    z-index:20;
 
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
 
-    color:#8fa4b8;
+    background:#02060b;
+
+    color:#9db0c3;
     font-size:14px;
 
-    z-index:10;
-    pointer-events:none;
-
-    background:
-        radial-gradient(
-            circle,
-            #10263a,
-            #02060b 70%
-        );
-
     transition:opacity .5s;
+    pointer-events:none;
 }
 
 .loading.hide{
     opacity:0;
 }
 
-.loading-spinner{
+.spinner{
     width:38px;
     height:38px;
-
+    border-radius:50%;
     border:3px solid rgba(255,255,255,.12);
     border-top-color:#61b5ff;
-
-    border-radius:50%;
-
     animation:spin 1s linear infinite;
-
     margin-bottom:15px;
 }
 
@@ -358,53 +181,78 @@ h1{
 
 .medulla-label{
     position:absolute;
-
-    z-index:8;
+    z-index:10;
     pointer-events:none;
 
-    display:none;
-
     transform:translate(-50%,-100%);
+
+    display:none;
 }
 
 .medulla-label.show{
     display:block;
 }
 
+.label-line{
+    width:2px;
+    height:48px;
+    margin:auto;
+
+    background:linear-gradient(
+        #ff477d,
+        rgba(255,71,125,0)
+    );
+}
+
+.label-dot{
+    width:15px;
+    height:15px;
+    border-radius:50%;
+
+    background:#ff3975;
+
+    box-shadow:
+        0 0 10px #ff3975,
+        0 0 25px #ff3975,
+        0 0 45px rgba(255,57,117,.7);
+
+    margin:auto;
+
+    animation:pulse 1.4s infinite;
+}
+
 .label-box{
-    padding:7px 12px;
+    margin-top:5px;
 
-    border-radius:8px;
+    padding:8px 13px;
 
-    background:rgba(5,10,17,.94);
+    border-radius:9px;
+
+    background:rgba(5,10,17,.95);
 
     border:1px solid #ff477d;
 
     color:#ff8eae;
 
-    font-size:11px;
-
+    font-size:12px;
     font-weight:bold;
 
-    letter-spacing:1px;
+    letter-spacing:.8px;
 
     white-space:nowrap;
 
     box-shadow:
-        0 0 20px rgba(255,71,125,.3);
+        0 0 20px rgba(255,71,125,.25);
 }
 
-.label-line{
-    width:2px;
-    height:30px;
+@keyframes pulse{
+    0%,100%{
+        transform:scale(1);
+    }
 
-    margin:auto;
-
-    background:
-        linear-gradient(
-            #ff477d,
-            transparent
-        );
+    50%{
+        transform:scale(1.35);
+    }
 }
 
 
@@ -423,13 +271,13 @@ h1{
 }
 
 .controls button{
-    padding:10px 16px;
+    padding:11px 17px;
 
     border-radius:9px;
 
     background:#0b1928;
 
-    border:1px solid #223c55;
+    border:1px solid #31516d;
 
     color:#bdd0e0;
 
@@ -451,132 +299,79 @@ h1{
 
 
 /* =========================================================
-   CLINICAL
+   INFO
 ========================================================= */
 
-.clinical{
-    padding:30px;
-    border-radius:22px;
-
-    background:#09131e;
-
-    border:1px solid rgba(255,255,255,.08);
+.section{
+    margin-top:70px;
 }
 
-.clinical p{
-    color:#9aabba;
-    line-height:1.8;
+.section-label{
+    color:#61b5ff;
+    letter-spacing:2px;
+    font-size:11px;
+    text-transform:uppercase;
+    margin-bottom:8px;
+}
+
+.section h2{
+    font-size:32px;
+    margin-bottom:25px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.card{
+    padding:27px;
+
+    background:#091522;
+
+    border:1px solid #172b3e;
+
+    border-radius:18px;
+}
+
+.card h3{
+    font-size:20px;
+    margin-bottom:10px;
+}
+
+.card p{
+    color:#91a5b8;
+    font-size:14px;
+    line-height:1.75;
 }
 
 
 /* =========================================================
-   QUIZ
+   EXTRA PAGE CONTENT
 ========================================================= */
 
-.quiz{
-    padding:35px;
-    border-radius:24px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(74,158,235,.08),
-            rgba(255,255,255,.025)
-        );
-
-    border:1px solid rgba(255,255,255,.08);
-}
-
-.question{
-    padding:23px;
-
-    border-radius:17px;
-
-    background:#07111d;
-
-    border:1px solid rgba(255,255,255,.07);
-
-    margin-bottom:17px;
-}
-
-.question h3{
-    font-size:16px;
-    margin-bottom:15px;
-}
-
-.answers{
+.content-grid{
     display:grid;
-    gap:8px;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
 }
 
-.answer{
-    text-align:left;
-
-    padding:12px 14px;
-
-    border-radius:9px;
-
-    background:#0b1928;
-
-    border:1px solid #20384f;
-
-    color:#bdccda;
-
-    cursor:pointer;
+.info-box{
+    padding:27px;
+    border-radius:18px;
+    background:#091522;
+    border:1px solid #172b3e;
 }
 
-.answer:hover{
-    background:#142b42;
+.info-box h3{
+    margin-bottom:10px;
 }
 
-.answer.correct{
-    background:#103421;
-    border-color:#2b7a4c;
-    color:#a9e9c1;
-}
-
-.answer.wrong{
-    background:#35151b;
-    border-color:#77313d;
-    color:#ffb9c1;
-}
-
-.result{
-    display:none;
-
-    text-align:center;
-
-    margin-top:25px;
-
-    padding:22px;
-
-    border-radius:15px;
-
-    background:#091b2b;
-
-    border:1px solid #284a65;
-}
-
-.score{
-    font-size:35px;
-    color:#6dbaff;
-    font-weight:bold;
-}
-
-.restart{
-    margin-top:15px;
-
-    padding:10px 17px;
-
-    border-radius:9px;
-
-    background:#10263b;
-
-    border:1px solid #31597a;
-
-    color:#acd6fa;
-
-    cursor:pointer;
+.info-box p{
+    color:#91a5b8;
+    font-size:14px;
+    line-height:1.8;
 }
 
 
@@ -584,13 +379,10 @@ h1{
    MOBILE
 ========================================================= */
 
-@media(max-width:850px){
+@media(max-width:800px){
 
-    .grid{
-        grid-template-columns:1fr;
-    }
-
-    .structures{
+    .cards,
+    .content-grid{
         grid-template-columns:1fr;
     }
 
@@ -601,205 +393,112 @@ h1{
     .viewer-status{
         display:none;
     }
-
-    .location-top{
-        flex-direction:column;
-        align-items:flex-start;
-    }
-
 }
-
 </style>
 </head>
 
 
 <body>
 
-
 <nav>
-<a href="./explore.html">
-← Back to Explore
-</a>
+    <a href="./explore.html">← Back to Explore</a>
 </nav>
 
 
 <main class="container">
 
-
-<!-- =======================================================
-     HERO
-======================================================= -->
-
-<section class="hero">
-
 <div class="eyebrow">
-Brainstem · NeuroAtlas
+    Brainstem · NeuroAtlas
 </div>
 
 <h1>
-Medulla
+    Medulla
 </h1>
 
+<div class="hero">
+
 <p>
-The medulla oblongata is the most inferior part of the
-brainstem. It connects the pons with the spinal cord and
-contains important pathways and neural networks involved
-in breathing, cardiovascular regulation, swallowing,
-and protective reflexes.
+The medulla oblongata is the most inferior part
+of the brainstem. It connects the pons with the
+spinal cord and participates in breathing,
+cardiovascular regulation, swallowing, and
+protective reflexes.
 </p>
 
-<div class="tags">
-
-<div class="tag">Brainstem</div>
-<div class="tag">Inferior to Pons</div>
-<div class="tag">Superior to Spinal Cord</div>
-<div class="tag">Pyramidal Decussation</div>
-<div class="tag">CN IX–XII</div>
-
 </div>
-
-</section>
 
 
 <!-- =======================================================
-     LOCATION
+     3D VIEWER
 ======================================================= -->
 
-<section class="section">
+<div class="viewer">
 
-<div class="section-label">
-01 · Location
+<div class="viewer-header">
+
+<div class="viewer-title">
+    Human Brain · Interactive 3D
 </div>
 
-<h2>
-Where is the Medulla?
-</h2>
+<div class="viewer-status">
+    DRAG TO ROTATE · SCROLL TO ZOOM
+</div>
 
-<div class="location">
+</div>
 
-<div class="location-top">
 
-<h3>
-📍 Brainstem → Medulla
-</h3>
+<div class="scene">
 
-<button
-id="locationButton"
-class="location-button"
->
-Show Location
+<div id="loading" class="loading">
+
+    <div class="spinner"></div>
+
+    <div id="loadingText">
+        Building 3D brain...
+    </div>
+
+</div>
+
+
+<canvas id="brainCanvas"></canvas>
+
+
+<div id="medullaLabel" class="medulla-label">
+
+    <div class="label-dot"></div>
+
+    <div class="label-line"></div>
+
+    <div class="label-box">
+        MEDULLA OBLONGATA
+    </div>
+
+</div>
+
+</div>
+
+
+<div class="controls">
+
+<button id="highlight" class="active">
+    🔴 Highlight Medulla
+</button>
+
+<button id="rotate" class="active">
+    ⟳ Auto Rotate
+</button>
+
+<button id="reset">
+    ↻ Reset View
+</button>
+
+<button id="front">
+    ◉ Front View
 </button>
 
 </div>
 
-<div
-id="locationInfo"
-class="location-info"
->
-
-The medulla is the
-<strong>lowest part of the brainstem</strong>.
-
-<br><br>
-
-From top to bottom, the basic arrangement is:
-
-<br><br>
-
-<strong>
-Midbrain
-↓
-Pons
-↓
-Medulla
-↓
-Spinal cord
-</strong>
-
-<br><br>
-
-The medulla lies anterior to the cerebellum and forms
-the transition between the brainstem and spinal cord.
-
 </div>
-
-</div>
-
-</section>
-
-
-<!-- =======================================================
-     FUNCTIONS
-======================================================= -->
-
-<section class="section">
-
-<div class="section-label">
-02 · Functions
-</div>
-
-<h2>
-What does it do?
-</h2>
-
-<div class="grid">
-
-<div class="card">
-
-<div class="card-number">
-01 · RESPIRATION
-</div>
-
-<h3>
-Breathing
-</h3>
-
-<p>
-Neural networks in the medulla contribute to the
-generation and regulation of respiratory activity.
-</p>
-
-</div>
-
-
-<div class="card">
-
-<div class="card-number">
-02 · CARDIOVASCULAR
-</div>
-
-<h3>
-Heart & Blood Pressure
-</h3>
-
-<p>
-Medullary autonomic networks participate in regulation
-of cardiovascular activity.
-</p>
-
-</div>
-
-
-<div class="card">
-
-<div class="card-number">
-03 · REFLEXES
-</div>
-
-<h3>
-Protective Reflexes
-</h3>
-
-<p>
-The medulla participates in important reflexes such
-as swallowing and coughing.
-</p>
-
-</div>
-
-</div>
-
-</section>
 
 
 <!-- =======================================================
@@ -809,69 +508,56 @@ as swallowing and coughing.
 <section class="section">
 
 <div class="section-label">
-03 · Anatomy
+    Medulla Anatomy
 </div>
 
 <h2>
-Important Structures
+    Important Structures
 </h2>
 
-<div class="structures">
+<div class="cards">
 
-<div class="structure">
+<div class="card">
 
 <h3>
-Pyramids
+    Pyramids
 </h3>
 
 <p>
-The anterior medulla contains the pyramids, which
-carry descending corticospinal motor fibers. Many
-of these fibers cross at the pyramidal decussation.
+The pyramids contain descending corticospinal
+motor fibers. Many of these fibers cross at
+the pyramidal decussation.
 </p>
 
 </div>
 
 
-<div class="structure">
+<div class="card">
 
 <h3>
-Inferior Olive
+    Inferior Olive
 </h3>
 
 <p>
 The inferior olivary complex participates in
-connections between the brainstem, spinal cord,
+important connections between the brainstem
 and cerebellum.
 </p>
 
 </div>
 
 
-<div class="structure">
+<div class="card">
 
 <h3>
-Cranial Nerves IX & X
+    Cranial Nerves IX–XII
 </h3>
 
 <p>
-Medullary nuclei are associated with the
-glossopharyngeal and vagus nerves and participate
-in swallowing and visceral functions.
-</p>
-
-</div>
-
-
-<div class="structure">
-
-<h3>
-Cranial Nerves XI & XII
-</h3>
-
-<p>
-Structures in the medullary region are associated
-with the accessory and hypoglossal nerves.
+The medullary region contains important
+cranial nerve nuclei and pathways associated
+with swallowing, tongue movement, and
+visceral functions.
 </p>
 
 </div>
@@ -881,306 +567,45 @@ with the accessory and hypoglossal nerves.
 </section>
 
 
-<!-- =======================================================
-     3D MODEL
-======================================================= -->
-
-<section class="viewer-section">
+<section class="section">
 
 <div class="section-label">
-04 · Interactive 3D
+    Location
 </div>
 
 <h2>
-Explore the Medulla in 3D
+    Where is the Medulla?
 </h2>
 
+<div class="content-grid">
 
-<div class="viewer">
+<div class="info-box">
 
-<div class="viewer-header">
-
-<div class="viewer-title">
-Human Brain · Interactive 3D
-</div>
-
-<div class="viewer-status">
-DRAG TO ROTATE · SCROLL TO ZOOM
-</div>
-
-</div>
-
-
-<div class="scene">
-
-<div
-id="loading"
-class="loading"
->
-
-<div class="loading-spinner"></div>
-
-<div>
-Building 3D brain...
-</div>
-
-</div>
-
-
-<canvas id="brainCanvas"></canvas>
-
-
-<div
-id="medullaLabel"
-class="medulla-label"
->
-
-<div class="label-box">
-MEDULLA OBLONGATA
-</div>
-
-<div class="label-line"></div>
-
-</div>
-
-</div>
-
-
-<div class="controls">
-
-<button
-id="highlightButton"
-class="active"
->
-🔴 Highlight Medulla
-</button>
-
-<button
-id="rotateButton"
-class="active"
->
-⟳ Auto Rotate
-</button>
-
-<button
-id="resetButton"
->
-↻ Reset View
-</button>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- =======================================================
-     CLINICAL
-======================================================= -->
-
-<section class="section clinical">
-
-<div class="section-label">
-05 · Clinical Connection
-</div>
-
-<h2>
-Why is the Medulla important?
-</h2>
+<h3>
+    Brainstem Position
+</h3>
 
 <p>
-The medulla contains important neural pathways and
-regulatory networks. Because of this, disruption of
-the medulla can affect functions such as breathing,
-cardiovascular regulation, swallowing, and motor or
-sensory pathways. The exact effects depend on the
-structures affected.
+The medulla is the lowest portion of the
+brainstem, positioned below the pons and
+continuous inferiorly with the spinal cord.
 </p>
 
-</section>
-
-
-<!-- =======================================================
-     QUIZ
-======================================================= -->
-
-<section class="section quiz">
-
-<div class="section-label">
-06 · Knowledge Check
 </div>
 
-<h2>
-Mini Test
-</h2>
-
-
-<div class="question">
+<div class="info-box">
 
 <h3>
-1. Where is the medulla located?
+    Why it matters
 </h3>
 
-<div class="answers">
-
-<button class="answer" data-correct="false">
-Above the midbrain
-</button>
-
-<button class="answer" data-correct="true">
-Below the pons and above the spinal cord
-</button>
-
-<button class="answer" data-correct="false">
-Inside the cerebellum
-</button>
-
-<button class="answer" data-correct="false">
-Inside the cerebral cortex
-</button>
+<p>
+The medulla contains pathways and neural
+networks involved in vital autonomic functions
+and important protective reflexes.
+</p>
 
 </div>
-
-</div>
-
-
-<div class="question">
-
-<h3>
-2. Which structure contains descending corticospinal fibers?
-</h3>
-
-<div class="answers">
-
-<button class="answer" data-correct="false">
-Inferior olive
-</button>
-
-<button class="answer" data-correct="true">
-Pyramids
-</button>
-
-<button class="answer" data-correct="false">
-Hippocampus
-</button>
-
-<button class="answer" data-correct="false">
-Thalamus
-</button>
-
-</div>
-
-</div>
-
-
-<div class="question">
-
-<h3>
-3. Which cranial nerve controls tongue movement?
-</h3>
-
-<div class="answers">
-
-<button class="answer" data-correct="false">
-CN V
-</button>
-
-<button class="answer" data-correct="false">
-CN VII
-</button>
-
-<button class="answer" data-correct="true">
-CN XII
-</button>
-
-<button class="answer" data-correct="false">
-CN II
-</button>
-
-</div>
-
-</div>
-
-
-<div class="question">
-
-<h3>
-4. Which function is strongly associated with medullary networks?
-</h3>
-
-<div class="answers">
-
-<button class="answer" data-correct="true">
-Respiratory and cardiovascular regulation
-</button>
-
-<button class="answer" data-correct="false">
-Visual processing
-</button>
-
-<button class="answer" data-correct="false">
-Long-term memory storage
-</button>
-
-<button class="answer" data-correct="false">
-Language comprehension
-</button>
-
-</div>
-
-</div>
-
-
-<div class="question">
-
-<h3>
-5. What happens at the pyramidal decussation?
-</h3>
-
-<div class="answers">
-
-<button class="answer" data-correct="false">
-The fibers disappear
-</button>
-
-<button class="answer" data-correct="true">
-Many corticospinal fibers cross to the opposite side
-</button>
-
-<button class="answer" data-correct="false">
-The fibers enter the hippocampus
-</button>
-
-<button class="answer" data-correct="false">
-The fibers become cranial nerves
-</button>
-
-</div>
-
-</div>
-
-
-<div
-id="quizResult"
-class="result"
->
-
-<div
-id="quizScore"
-class="score"
->
-0 / 5
-</div>
-
-<div id="quizMessage"></div>
-
-<button
-id="restartButton"
-class="restart"
->
-Try Again
-</button>
 
 </div>
 
@@ -1192,6 +617,9 @@ Try Again
 
 <!-- =======================================================
      THREE.JS
+     DIRECT CDN IMPORTS
+     NO GLB
+     NO SPLINE
 ======================================================= -->
 
 <script type="module">
@@ -1201,8 +629,7 @@ import * as THREE from
 
 import {
     OrbitControls
-}
-from
+} from
 "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js";
 
 
@@ -1215,6 +642,9 @@ document.getElementById("brainCanvas");
 
 const loading =
 document.getElementById("loading");
+
+const loadingText =
+document.getElementById("loadingText");
 
 const medullaLabel =
 document.getElementById("medullaLabel");
@@ -1234,16 +664,16 @@ new THREE.Scene();
 
 const camera =
 new THREE.PerspectiveCamera(
-    32,
+    35,
     1,
-    0.01,
+    .01,
     100
 );
 
 camera.position.set(
     0,
-    1.0,
-    9.2
+    1.4,
+    8.7
 );
 
 
@@ -1259,7 +689,6 @@ new THREE.WebGLRenderer({
     antialias:true,
 
     alpha:true
-
 });
 
 renderer.setPixelRatio(
@@ -1283,43 +712,45 @@ new OrbitControls(
     canvas
 );
 
+controls.enableDamping = true;
+controls.dampingFactor = .075;
+
 controls.enableRotate = true;
+controls.rotateSpeed = .8;
+
 controls.enableZoom = true;
+controls.zoomSpeed = .8;
+
 controls.enablePan = false;
 
-controls.rotateSpeed = .75;
-controls.zoomSpeed = .65;
-
-controls.enableDamping = true;
-controls.dampingFactor = .07;
+controls.minDistance = 5;
+controls.maxDistance = 14;
 
 controls.autoRotate = true;
-controls.autoRotateSpeed = .22;
+controls.autoRotateSpeed = .35;
 
 
 /* =========================================================
    LIGHTING
 ========================================================= */
 
-const hemisphere =
-new THREE.HemisphereLight(
-    0xffffff,
-    0x152638,
-    2.7
+scene.add(
+    new THREE.HemisphereLight(
+        0xffffff,
+        0x142638,
+        2.7
+    )
 );
-
-scene.add(hemisphere);
-
 
 const keyLight =
 new THREE.DirectionalLight(
     0xffffff,
-    4.5
+    4
 );
 
 keyLight.position.set(
     5,
-    8,
+    7,
     8
 );
 
@@ -1328,14 +759,14 @@ scene.add(keyLight);
 
 const fillLight =
 new THREE.DirectionalLight(
-    0x68baff,
-    1.8
+    0x5db9ff,
+    2
 );
 
 fillLight.position.set(
     -6,
-    3,
-    6
+    2,
+    5
 );
 
 scene.add(fillLight);
@@ -1343,21 +774,21 @@ scene.add(fillLight);
 
 const rimLight =
 new THREE.DirectionalLight(
-    0x8ccfff,
+    0xff6c9b,
     1.2
 );
 
 rimLight.position.set(
     0,
-    -2,
-    -7
+    -3,
+    -6
 );
 
 scene.add(rimLight);
 
 
 /* =========================================================
-   MAIN BRAIN GROUP
+   BRAIN GROUP
 ========================================================= */
 
 const brain =
@@ -1370,54 +801,67 @@ scene.add(brain);
    MATERIALS
 ========================================================= */
 
-const brainMaterial =
+const cortexMaterial =
 new THREE.MeshStandardMaterial({
 
-    color:0xc8d0d8,
+    color:0xc9d1d9,
 
     roughness:.9,
 
     metalness:0
-
 });
 
 
 const grooveMaterial =
 new THREE.MeshStandardMaterial({
 
-    color:0x667582,
+    color:0x566575,
 
     roughness:1,
 
     metalness:0
-
 });
 
 
-const darkGrooveMaterial =
-new THREE.MeshBasicMaterial({
+const cerebellumMaterial =
+new THREE.MeshStandardMaterial({
 
-    color:0x34424e
+    color:0xb8c2cc,
 
+    roughness:.92,
+
+    metalness:0
+});
+
+
+const brainstemMaterial =
+new THREE.MeshStandardMaterial({
+
+    color:0xaebac6,
+
+    roughness:.9,
+
+    metalness:0
 });
 
 
 const medullaMaterial =
 new THREE.MeshStandardMaterial({
 
-    color:0xff3f79,
+    color:0xff3975,
 
-    emissive:0xff164f,
+    emissive:0xff1454,
 
-    emissiveIntensity:2.5,
+    emissiveIntensity:2.7,
 
-    roughness:.3
+    roughness:.3,
 
+    metalness:0
 });
 
 
 /* =========================================================
-   CREATE ORGANIC HEMISPHERE
+   BRAIN HEMISPHERE
 ========================================================= */
 
 function createHemisphere(side){
@@ -1427,269 +871,188 @@ function createHemisphere(side){
 
 
     /*
-       High resolution sphere.
-
-       We deform the actual vertices instead of stacking
-       spheres. This is what gives the brain a continuous
-       organic silhouette.
+       High-resolution organic hemisphere.
     */
 
     const geometry =
     new THREE.SphereGeometry(
         1.9,
-        96,
-        64
+        72,
+        56
     );
 
 
-    const positions =
-    geometry.attributes.position;
-
-
-    for(
-        let i=0;
-        i<positions.count;
-        i++
-    ){
-
-        let x =
-        positions.getX(i);
-
-        let y =
-        positions.getY(i);
-
-        let z =
-        positions.getZ(i);
-
-
-        /*
-           Normalize first.
-        */
-
-        const length =
-        Math.sqrt(
-            x*x +
-            y*y +
-            z*z
-        );
-
-
-        let nx = x / length;
-        let ny = y / length;
-        let nz = z / length;
-
-
-        /*
-           Brain-like longitudinal folds.
-
-           These are subtle surface deformations,
-           not separate objects.
-        */
-
-        const fold1 =
-        Math.sin(
-            ny * 15 +
-            nz * 4
-        ) * .035;
-
-        const fold2 =
-        Math.sin(
-            nz * 19 -
-            ny * 5
-        ) * .025;
-
-        const fold3 =
-        Math.sin(
-            nx * 13 +
-            ny * 7
-        ) * .018;
-
-
-        const deformation =
-        1 +
-        fold1 +
-        fold2 +
-        fold3;
-
-
-        x *= deformation;
-        y *= deformation;
-        z *= deformation;
-
-
-        /*
-           Make the superior brain broad,
-           lower brain slightly narrower.
-        */
-
-        const verticalShape =
-            1 +
-            .07 * ny -
-            .10 * Math.max(
-                -ny,
-                0
-            );
-
-
-        x *= verticalShape;
-        z *= verticalShape;
-
-
-        positions.setXYZ(
-            i,
-            x,
-            y,
-            z
-        );
-
-    }
-
-
-    geometry.computeVertexNormals();
-
-
-    const hemisphere =
+    const mesh =
     new THREE.Mesh(
         geometry,
-        brainMaterial
+        cortexMaterial
     );
+
+
+    mesh.scale.set(
+        .98,
+        1.04,
+        1.20
+    );
+
+
+    mesh.position.set(
+        side * .86,
+        .55,
+        0
+    );
+
+
+    group.add(mesh);
 
 
     /*
-       Flatten slightly at the medial surface
-       and elongate front/back.
+       Extra cortical lobes.
+       These make the silhouette much
+       less like a simple sphere.
     */
 
-    hemisphere.scale.set(
-        1.0,
-        1.02,
-        1.16
-    );
+    const lobes = [
+
+        [-.72,.92,.10,.58],
+        [-.25,1.22,.03,.50],
+        [.28,1.18,.02,.54],
+        [.73,.82,.08,.52],
+
+        [-.82,.42,.02,.52],
+        [.82,.38,.08,.54],
+
+        [-.72,-.08,.02,.50],
+        [.74,-.08,.06,.48],
+
+        [-.50,-.48,.05,.55],
+        [.12,-.52,.03,.58],
+        [.62,-.40,.08,.46]
+    ];
 
 
-    hemisphere.position.x =
-        side * .88;
+    lobes.forEach(
+    data => {
 
-
-    group.add(
-        hemisphere
-    );
-
-
-    /*
-       Additional organic cortical ridges.
-       These are curved tubes that follow the
-       surface rather than floating toruses.
-    */
-
-    for(
-        let i=0;
-        i<13;
-        i++
-    ){
-
-        const curve =
-        new THREE.CatmullRomCurve3([]);
-
-
-        const points = [];
-
-
-        const zOffset =
-            -1.0 +
-            i * .17;
-
-
-        for(
-            let j=0;
-            j<=24;
-            j++
-        ){
-
-            const t =
-                j / 24;
-
-            const y =
-                1.35 -
-                t * 2.25;
-
-            const x =
-                side *
-                (
-                    .92 +
-                    .25 *
-                    Math.sin(
-                        t * Math.PI * 2 +
-                        i * .7
-                    )
-                );
-
-            const z =
-                zOffset +
-                .18 *
-                Math.sin(
-                    t * Math.PI * 3 +
-                    i
-                );
-
-
-            points.push(
-                new THREE.Vector3(
-                    x,
-                    y,
-                    z
-                )
-            );
-
-        }
-
-
-        curve.points =
-            points;
-
-
-        const tube =
+        const lobe =
         new THREE.Mesh(
-            new THREE.TubeGeometry(
-                curve,
-                28,
-                .018,
-                6,
-                false
+            new THREE.SphereGeometry(
+                data[3],
+                32,
+                24
             ),
+            cortexMaterial
+        );
+
+
+        lobe.scale.set(
+            1.15,
+            .68,
+            1.08
+        );
+
+
+        lobe.position.set(
+
+            side * (
+                .86 +
+                data[0] * .55
+            ),
+
+            .55 +
+            data[1] * .55,
+
+            data[2]
+        );
+
+
+        group.add(lobe);
+
+    });
+
+
+    /*
+       Cortical sulci.
+
+       Curved dark grooves are placed
+       over the hemispheres so the surface
+       reads as folded cortex rather than
+       smooth balls.
+    */
+
+    for(let i=0;i<15;i++){
+
+        const groove =
+        new THREE.Mesh(
+
+            new THREE.TorusGeometry(
+                1.28,
+                .027,
+                8,
+                48,
+                Math.PI * .72
+            ),
+
             grooveMaterial
         );
 
 
-        group.add(
-            tube
+        groove.position.set(
+
+            side * (
+                .86 +
+                Math.sin(i*.8)*.13
+            ),
+
+            .45 +
+            (i-7)*.105,
+
+            .18 +
+            Math.cos(i*.65)*.18
         );
+
+
+        groove.rotation.set(
+
+            .25 +
+            Math.sin(i*.45)*.45,
+
+            side * (
+                .52 +
+                Math.sin(i)*.18
+            ),
+
+            side * (
+                -.35 +
+                Math.cos(i*.5)*.18
+            )
+        );
+
+
+        groove.scale.set(
+            1.0,
+            .72,
+            1.15
+        );
+
+
+        group.add(groove);
 
     }
 
 
     return group;
-
 }
 
 
-/* =========================================================
-   HEMISPHERES
-========================================================= */
-
-const leftHemisphere =
+const left =
 createHemisphere(-1);
 
-const rightHemisphere =
+const right =
 createHemisphere(1);
 
-brain.add(
-    leftHemisphere
-);
-
-brain.add(
-    rightHemisphere
-);
+brain.add(left);
+brain.add(right);
 
 
 /* =========================================================
@@ -1700,63 +1063,60 @@ const fissure =
 new THREE.Mesh(
 
     new THREE.BoxGeometry(
-        .11,
-        3.45,
-        1.9
+        .14,
+        3.25,
+        2.15
     ),
 
-    new THREE.MeshBasicMaterial({
-        color:0x03070c
-    })
+    new THREE.MeshStandardMaterial({
 
+        color:0x050b12,
+
+        roughness:1
+
+    })
 );
 
 fissure.position.set(
     0,
-    .35,
-    .08
+    .58,
+    .02
 );
 
-fissure.scale.z =
-.58;
+fissure.scale.z = .5;
 
-brain.add(
-    fissure
-);
+brain.add(fissure);
 
 
 /* =========================================================
-   MEDIAL BRAIN CONNECTION
+   MIDBRAIN
 ========================================================= */
 
-const bridge =
+const midbrain =
 new THREE.Mesh(
 
     new THREE.SphereGeometry(
-        .48,
+        .40,
         40,
-        24
+        28
     ),
 
-    brainMaterial
-
+    brainstemMaterial
 );
 
-bridge.scale.set(
-    1.5,
-    .35,
-    .75
-);
-
-bridge.position.set(
+midbrain.position.set(
     0,
-    .05,
-    -.05
+    -.48,
+    0
 );
 
-brain.add(
-    bridge
+midbrain.scale.set(
+    .85,
+    1.1,
+    .8
 );
+
+brain.add(midbrain);
 
 
 /* =========================================================
@@ -1767,30 +1127,27 @@ const pons =
 new THREE.Mesh(
 
     new THREE.SphereGeometry(
-        .58,
+        .60,
         48,
         32
     ),
 
-    brainMaterial
-
+    brainstemMaterial
 );
 
 pons.position.set(
     0,
-    -1.02,
+    -1.03,
     0
 );
 
 pons.scale.set(
-    1.2,
-    .75,
-    .82
+    1.18,
+    .83,
+    .85
 );
 
-brain.add(
-    pons
-);
+brain.add(pons);
 
 
 /* =========================================================
@@ -1800,7 +1157,7 @@ brain.add(
 const medullaGeometry =
 new THREE.CapsuleGeometry(
     .34,
-    .82,
+    .86,
     24,
     40
 );
@@ -1809,47 +1166,70 @@ new THREE.CapsuleGeometry(
 const medulla =
 new THREE.Mesh(
     medullaGeometry,
-    brainMaterial
+    medullaMaterial
 );
 
 medulla.position.set(
     0,
-    -1.72,
-    .03
+    -1.85,
+    0
 );
 
 medulla.scale.set(
-    .88,
+    .86,
     1.05,
-    .75
+    .76
 );
 
-brain.add(
-    medulla
-);
+brain.add(medulla);
 
 
 /* =========================================================
-   MEDULLA HIGHLIGHT
+   MEDULLA CENTRAL DETAIL
 ========================================================= */
 
-const medullaHighlight =
-new THREE.Mesh(
-    medullaGeometry.clone(),
-    medullaMaterial
-);
+const medullaStripeMaterial =
+new THREE.MeshStandardMaterial({
 
-medullaHighlight.position.copy(
-    medulla.position
-);
+    color:0xff9ab7,
 
-medullaHighlight.scale.copy(
-    medulla.scale
-);
+    emissive:0xff3975,
 
-brain.add(
-    medullaHighlight
-);
+    emissiveIntensity:1.5,
+
+    roughness:.4
+});
+
+
+for(let i=0;i<3;i++){
+
+    const stripe =
+    new THREE.Mesh(
+
+        new THREE.TorusGeometry(
+            .22,
+            .018,
+            8,
+            30
+        ),
+
+        medullaStripeMaterial
+    );
+
+    stripe.rotation.x =
+        Math.PI/2;
+
+    stripe.scale.x =
+        1.15;
+
+    stripe.position.set(
+        0,
+        -1.55 - i*.18,
+        .25
+    );
+
+    brain.add(stripe);
+}
 
 
 /* =========================================================
@@ -1860,25 +1240,22 @@ const spinalCord =
 new THREE.Mesh(
 
     new THREE.CylinderGeometry(
-        .24,
-        .30,
-        1.25,
-        40
+        .23,
+        .28,
+        1.15,
+        32
     ),
 
-    brainMaterial
-
+    brainstemMaterial
 );
 
 spinalCord.position.set(
     0,
-    -2.65,
-    .02
+    -2.72,
+    0
 );
 
-brain.add(
-    spinalCord
-);
+brain.add(spinalCord);
 
 
 /* =========================================================
@@ -1889,124 +1266,65 @@ const cerebellum =
 new THREE.Mesh(
 
     new THREE.SphereGeometry(
-        1,
+        .95,
         64,
         40
     ),
 
-    brainMaterial
-
+    cerebellumMaterial
 );
 
 cerebellum.position.set(
     0,
-    -.92,
-    -.95
+    -.72,
+    -.98
 );
 
 cerebellum.scale.set(
-    1.35,
-    .72,
+    1.55,
+    .76,
     .82
 );
 
-brain.add(
-    cerebellum
-);
+brain.add(cerebellum);
 
 
 /* =========================================================
    CEREBELLAR FOLIA
 ========================================================= */
 
-for(
-    let i=0;
-    i<14;
-    i++
-){
-
-    const curve =
-    new THREE.CatmullRomCurve3([
-        new THREE.Vector3(
-            -.95,
-            -.95 + i*.07,
-            -.93
-        ),
-
-        new THREE.Vector3(
-            0,
-            -1.02 + i*.07,
-            -1.15
-        ),
-
-        new THREE.Vector3(
-            .95,
-            -.95 + i*.07,
-            -.93
-        )
-    ]);
-
+for(let i=0;i<14;i++){
 
     const folia =
     new THREE.Mesh(
 
-        new THREE.TubeGeometry(
-            curve,
-            24,
-            .018,
-            6,
-            false
+        new THREE.TorusGeometry(
+            .72,
+            .025,
+            8,
+            48
         ),
 
         grooveMaterial
-
     );
 
-    brain.add(
-        folia
-    );
+    folia.rotation.x =
+        Math.PI/2;
 
-}
+    folia.scale.x =
+        1.3;
 
+    folia.position.set(
 
-/* =========================================================
-   BRAINSTEM CENTRAL GROOVES
-========================================================= */
-
-for(
-    let i=0;
-    i<5;
-    i++
-){
-
-    const groove =
-    new THREE.Mesh(
-
-        new THREE.TorusGeometry(
-            .40 + i*.025,
-            .012,
-            6,
-            24,
-            Math.PI
-        ),
-
-        darkGrooveMaterial
-
-    );
-
-    groove.rotation.x =
-        Math.PI / 2;
-
-    groove.position.set(
         0,
-        -.35 - i*.08,
-        .02
+
+        -1.28 +
+        i*.085,
+
+        -.99
     );
 
-    brain.add(
-        groove
-    );
-
+    brain.add(folia);
 }
 
 
@@ -2017,19 +1335,17 @@ for(
 const medullaGlow =
 new THREE.PointLight(
     0xff3975,
-    3.2,
+    4,
     2.8
 );
 
 medullaGlow.position.set(
     0,
-    -1.72,
+    -1.85,
     .35
 );
 
-brain.add(
-    medullaGlow
-);
+brain.add(medullaGlow);
 
 
 /* =========================================================
@@ -2038,39 +1354,37 @@ brain.add(
 
 function updateLabel(){
 
-    const position =
+    if(!medulla.visible){
+        return;
+    }
+
+    const worldPosition =
     new THREE.Vector3();
 
-
     medulla.getWorldPosition(
-        position
+        worldPosition
     );
 
-
-    position.project(
-        camera
-    );
+    worldPosition.project(camera);
 
 
     const x =
-        (position.x + 1) /
-        2 *
-        canvas.clientWidth;
+        (worldPosition.x + 1)
+        / 2
+        * canvas.clientWidth;
 
 
     const y =
-        (-position.y + 1) /
-        2 *
-        canvas.clientHeight;
+        (-worldPosition.y + 1)
+        / 2
+        * canvas.clientHeight;
 
 
     medullaLabel.style.left =
         x + "px";
 
-
     medullaLabel.style.top =
-        (y - 15) + "px";
-
+        y + "px";
 }
 
 
@@ -2086,30 +1400,21 @@ function resize(){
     const height =
     canvas.clientHeight;
 
-
-    if(
-        width <= 0 ||
-        height <= 0
-    ){
+    if(width <= 0 || height <= 0){
         return;
     }
-
 
     camera.aspect =
         width / height;
 
-
     camera.updateProjectionMatrix();
-
 
     renderer.setSize(
         width,
         height,
         false
     );
-
 }
-
 
 window.addEventListener(
     "resize",
@@ -2118,86 +1423,77 @@ window.addEventListener(
 
 
 /* =========================================================
-   HIGHLIGHT
+   BUTTONS
 ========================================================= */
 
-let highlighted =
-true;
+let highlighted = true;
 
 
 const highlightButton =
 document.getElementById(
-    "highlightButton"
+    "highlight"
 );
 
 
 highlightButton.addEventListener(
-    "click",
-    function(){
+"click",
+function(){
 
-        highlighted =
-            !highlighted;
+    highlighted =
+        !highlighted;
 
+    medulla.visible =
+        true;
 
-        medullaHighlight.visible =
-            highlighted;
+    medulla.material =
+        highlighted
+        ? medullaMaterial
+        : brainstemMaterial;
 
-        medullaGlow.visible =
-            highlighted;
+    medullaGlow.visible =
+        highlighted;
 
+    medullaLabel.classList.toggle(
+        "show",
+        highlighted
+    );
 
-        medullaLabel.classList.toggle(
-            "show",
-            highlighted
-        );
+    highlightButton.classList.toggle(
+        "active",
+        highlighted
+    );
 
+    highlightButton.textContent =
+        highlighted
+        ? "🔴 Highlight Medulla"
+        : "⚪ Show Medulla";
 
-        highlightButton.classList.toggle(
-            "active",
-            highlighted
-        );
-
-
-        highlightButton.textContent =
-            highlighted
-            ? "🔴 Highlight Medulla"
-            : "⚪ Show Medulla";
-
-    }
-);
-
-
-/* =========================================================
-   AUTO ROTATE
-========================================================= */
+});
+    
 
 const rotateButton =
 document.getElementById(
-    "rotateButton"
+    "rotate"
 );
 
 
 rotateButton.addEventListener(
-    "click",
-    function(){
+"click",
+function(){
 
-        controls.autoRotate =
-            !controls.autoRotate;
+    controls.autoRotate =
+        !controls.autoRotate;
 
+    rotateButton.classList.toggle(
+        "active",
+        controls.autoRotate
+    );
 
-        rotateButton.classList.toggle(
-            "active",
-            controls.autoRotate
-        );
-
-
-        rotateButton.textContent =
-            controls.autoRotate
-            ? "⟳ Auto Rotate"
-            : "▶ Auto Rotate";
-
-    }
-);
+    rotateButton.textContent =
+        controls.autoRotate
+        ? "⟳ Auto Rotate"
+        : "▶ Auto Rotate";
+});
 
 
 /* =========================================================
@@ -2205,29 +1501,53 @@ rotateButton.addEventListener(
 ========================================================= */
 
 document
-.getElementById("resetButton")
+.getElementById("reset")
 .addEventListener(
-    "click",
-    function(){
+"click",
+function(){
 
-        camera.position.set(
-            0,
-            1.0,
-            9.2
-        );
+    camera.position.set(
+        0,
+        1.4,
+        8.7
+    );
+
+    controls.target.set(
+        0,
+        -.35,
+        0
+    );
+
+    controls.update();
+
+});
 
 
-        controls.target.set(
-            0,
-            -.25,
-            0
-        );
+/* =========================================================
+   FRONT VIEW
+========================================================= */
 
+document
+.getElementById("front")
+.addEventListener(
+"click",
+function(){
 
-        controls.update();
+    camera.position.set(
+        0,
+        .25,
+        8.7
+    );
 
-    }
-);
+    controls.target.set(
+        0,
+        -.35,
+        0
+    );
+
+    controls.update();
+
+});
 
 
 /* =========================================================
@@ -2243,40 +1563,29 @@ function animate(){
         animate
     );
 
-
     time += .035;
 
-
-    /*
-       Gentle medulla pulse.
-    */
 
     if(highlighted){
 
         const pulse =
             1 +
-            Math.sin(
-                time * 3
-            ) * .055;
+            Math.sin(time*3)*
+            .055;
 
+        medulla.scale.set(
 
-        medullaHighlight.scale.set(
+            .86 * pulse,
 
-            medulla.scale.x * pulse,
+            1.05 * pulse,
 
-            medulla.scale.y * pulse,
-
-            medulla.scale.z * pulse
+            .76 * pulse
 
         );
 
-
         medullaGlow.intensity =
-            3.2 +
-            Math.sin(
-                time * 3
-            ) * .6;
-
+            3.5 +
+            Math.sin(time*3)*.8;
     }
 
 
@@ -2288,7 +1597,6 @@ function animate(){
         scene,
         camera
     );
-
 }
 
 
@@ -2298,23 +1606,20 @@ function animate(){
 
 resize();
 
-
 controls.target.set(
     0,
-    -.25,
+    -.35,
     0
 );
 
 controls.update();
 
+medullaLabel.classList.add(
+    "show"
+);
 
-animate();
-
-
-/*
-   Give Three.js a moment to render before
-   removing the loading screen.
-*/
+loadingText.textContent =
+    "Brain ready ✓";
 
 setTimeout(
 function(){
@@ -2323,282 +1628,14 @@ function(){
         "hide"
     );
 
-    medullaLabel.classList.add(
-        "show"
-    );
-
-    setTimeout(
-    function(){
-        loading.style.display =
-            "none";
-    },
-    600
-    );
-
 },
-800
+700
 );
+
+animate();
 
 </script>
-
-
-<!-- =======================================================
-     NORMAL PAGE JAVASCRIPT
-======================================================= -->
-
-<script>
-
-
-/* =========================================================
-   LOCATION
-========================================================= */
-
-const locationButton =
-document.getElementById(
-    "locationButton"
-);
-
-const locationInfo =
-document.getElementById(
-    "locationInfo"
-);
-
-
-locationButton.addEventListener(
-    "click",
-    function(){
-
-        if(
-            locationInfo.style.display ===
-            "block"
-        ){
-
-            locationInfo.style.display =
-                "none";
-
-            locationButton.textContent =
-                "Show Location";
-
-        }else{
-
-            locationInfo.style.display =
-                "block";
-
-            locationButton.textContent =
-                "Hide Location";
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   QUIZ
-========================================================= */
-
-let score = 0;
-
-let answered = 0;
-
-
-const questions =
-document.querySelectorAll(
-    ".question"
-);
-
-
-questions.forEach(
-function(question){
-
-    const answers =
-    question.querySelectorAll(
-        ".answer"
-    );
-
-
-    answers.forEach(
-    function(button){
-
-        button.addEventListener(
-        "click",
-        function(){
-
-            if(
-                question.dataset.done
-            ){
-                return;
-            }
-
-
-            question.dataset.done =
-                "true";
-
-
-            answered++;
-
-
-            const isCorrect =
-                button.dataset.correct ===
-                "true";
-
-
-            if(isCorrect){
-
-                score++;
-
-                button.classList.add(
-                    "correct"
-                );
-
-            }else{
-
-                button.classList.add(
-                    "wrong"
-                );
-
-
-                answers.forEach(
-                function(answer){
-
-                    if(
-                        answer.dataset.correct ===
-                        "true"
-                    ){
-
-                        answer.classList.add(
-                            "correct"
-                        );
-
-                    }
-
-                });
-
-            }
-
-
-            if(
-                answered ===
-                questions.length
-            ){
-
-                showQuizResult();
-
-            }
-
-        });
-
-    });
-
-});
-
-
-/* =========================================================
-   QUIZ RESULT
-========================================================= */
-
-function showQuizResult(){
-
-    const result =
-    document.getElementById(
-        "quizResult"
-    );
-
-
-    const scoreBox =
-    document.getElementById(
-        "quizScore"
-    );
-
-
-    const message =
-    document.getElementById(
-        "quizMessage"
-    );
-
-
-    scoreBox.textContent =
-        score + " / 5";
-
-
-    if(score === 5){
-
-        message.textContent =
-            "Perfect! You really know your medulla.";
-
-    }
-
-    else if(score >= 3){
-
-        message.textContent =
-            "Great job! Review the anatomy once more.";
-
-    }
-
-    else{
-
-        message.textContent =
-            "Keep exploring NeuroAtlas and try again.";
-
-    }
-
-
-    result.style.display =
-        "block";
-
-}
-
-
-/* =========================================================
-   RESTART QUIZ
-========================================================= */
-
-document
-.getElementById("restartButton")
-.addEventListener(
-    "click",
-    function(){
-
-        score = 0;
-
-        answered = 0;
-
-
-        questions.forEach(
-        function(question){
-
-            delete question.dataset.done;
-
-
-            const answers =
-            question.querySelectorAll(
-                ".answer"
-            );
-
-
-            answers.forEach(
-            function(button){
-
-                button.classList.remove(
-                    "correct",
-                    "wrong"
-                );
-
-            });
-
-        });
-
-
-        document.getElementById(
-            "quizResult"
-        ).style.display =
-            "none";
-
-    }
-);
-
-</script>
-
 
 </body>
 </html>
+```
