@@ -1,874 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>NeuroAtlas | Medulla</title>
-
-<style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    background:#050b13;
-    color:#eef4fa;
-    font-family:Arial,Helvetica,sans-serif;
-    line-height:1.6;
-}
-
-nav{
-    height:70px;
-    display:flex;
-    align-items:center;
-    padding:0 7%;
-    border-bottom:1px solid rgba(255,255,255,.08);
-}
-
-nav a{
-    color:#9db0c3;
-    text-decoration:none;
-    font-size:14px;
-}
-
-nav a:hover{
-    color:white;
-}
-
-.container{
-    max-width:1200px;
-    margin:auto;
-    padding:70px 7% 100px;
-}
-
-.hero{
-    max-width:850px;
-    margin-bottom:55px;
-}
-
-.eyebrow{
-    color:#61b5ff;
-    font-size:12px;
-    letter-spacing:3px;
-    text-transform:uppercase;
-    margin-bottom:16px;
-}
-
-h1{
-    font-size:clamp(55px,8vw,90px);
-    letter-spacing:-4px;
-    line-height:.95;
-    margin-bottom:25px;
-}
-
-.hero p{
-    color:#a6b6c7;
-    font-size:18px;
-    line-height:1.8;
-    max-width:780px;
-}
-
-.tags{
-    display:flex;
-    flex-wrap:wrap;
-    gap:9px;
-    margin-top:25px;
-}
-
-.tag{
-    border:1px solid #20384f;
-    background:#0a1624;
-    color:#b9c9d8;
-    border-radius:999px;
-    padding:8px 13px;
-    font-size:12px;
-}
-
-.section{
-    margin-bottom:65px;
-}
-
-.section-label{
-    color:#61b5ff;
-    font-size:11px;
-    letter-spacing:2px;
-    text-transform:uppercase;
-    margin-bottom:7px;
-}
-
-.section h2{
-    font-size:32px;
-    margin-bottom:25px;
-}
-
-.location{
-    padding:30px;
-    border-radius:22px;
-    background:linear-gradient(
-        135deg,
-        rgba(74,158,235,.10),
-        rgba(255,255,255,.025)
-    );
-    border:1px solid rgba(255,255,255,.08);
-}
-
-.location-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:20px;
-}
-
-.location h3{
-    font-size:23px;
-}
-
-.location-button{
-    background:#10263b;
-    color:#91caff;
-    border:1px solid #2b5576;
-    border-radius:10px;
-    padding:11px 17px;
-    cursor:pointer;
-}
-
-.location-info{
-    display:none;
-    margin-top:22px;
-    color:#9fb0c1;
-    max-width:850px;
-    line-height:1.8;
-}
-
-.location-info strong{
-    color:#eaf2f9;
-}
-
-.grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:17px;
-}
-
-.card{
-    padding:27px;
-    border-radius:20px;
-    background:#091522;
-    border:1px solid rgba(255,255,255,.07);
-}
-
-.card-number{
-    color:#61b5ff;
-    font-size:11px;
-    letter-spacing:2px;
-    margin-bottom:12px;
-}
-
-.card h3{
-    font-size:20px;
-    margin-bottom:11px;
-}
-
-.card p{
-    color:#91a5b8;
-    font-size:14px;
-    line-height:1.75;
-}
-
-.structures{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:16px;
-}
-
-.structure{
-    padding:25px;
-    border-radius:18px;
-    background:#091522;
-    border:1px solid rgba(255,255,255,.07);
-}
-
-.structure h3{
-    font-size:19px;
-    margin-bottom:9px;
-}
-
-.structure p{
-    color:#91a5b8;
-    font-size:14px;
-    line-height:1.75;
-}
-
-/* ===============================
-   3D VIEWER
-================================ */
-
-.viewer-section{
-    margin-top:70px;
-    margin-bottom:70px;
-}
-
-.viewer{
-    border:1px solid rgba(255,255,255,.10);
-    border-radius:25px;
-    overflow:hidden;
-    background:#01050a;
-    box-shadow:0 20px 80px rgba(0,0,0,.45);
-}
-
-.viewer-header{
-    min-height:65px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 22px;
-    border-bottom:1px solid rgba(255,255,255,.08);
-}
-
-.viewer-title{
-    font-size:14px;
-    color:#d2dce6;
-}
-
-.viewer-status{
-    color:#708499;
-    font-size:11px;
-    letter-spacing:1px;
-}
-
-.scene{
-    position:relative;
-    height:620px;
-    background:
-        radial-gradient(
-            circle at 50% 45%,
-            #17334b 0%,
-            #091522 43%,
-            #02060b 100%
-        );
-}
-
-#brainCanvas{
-    width:100%;
-    height:100%;
-    display:block;
-}
-
-.medulla-label{
-    position:absolute;
-    left:50%;
-    bottom:70px;
-    transform:translateX(-50%);
-    pointer-events:none;
-    z-index:5;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-}
-
-.medulla-dot{
-    width:15px;
-    height:15px;
-    border-radius:50%;
-    background:#ff477d;
-    box-shadow:
-        0 0 10px #ff477d,
-        0 0 25px #ff477d,
-        0 0 45px rgba(255,71,125,.6);
-    animation:pulse 1.5s infinite;
-}
-
-.medulla-line{
-    width:2px;
-    height:35px;
-    background:linear-gradient(
-        #ff477d,
-        rgba(255,71,125,0)
-    );
-}
-
-.medulla-text{
-    padding:6px 11px;
-    border-radius:8px;
-    background:rgba(5,10,17,.88);
-    border:1px solid rgba(255,71,125,.45);
-    color:#ff8eae;
-    font-size:12px;
-    letter-spacing:1px;
-    white-space:nowrap;
-}
-
-@keyframes pulse{
-    0%{
-        transform:scale(1);
-        opacity:1;
-    }
-
-    50%{
-        transform:scale(1.3);
-        opacity:.65;
-    }
-
-    100%{
-        transform:scale(1);
-        opacity:1;
-    }
-}
-
-.controls{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-    padding:15px;
-    border-top:1px solid rgba(255,255,255,.08);
-}
-
-.controls button{
-    padding:10px 16px;
-    border-radius:9px;
-    background:#0b1928;
-    border:1px solid #223c55;
-    color:#bdd0e0;
-    cursor:pointer;
-}
-
-.controls button:hover{
-    background:#14304a;
-    color:white;
-}
-
-.clinical{
-    padding:30px;
-    border-radius:22px;
-    background:#09131e;
-    border:1px solid rgba(255,255,255,.08);
-}
-
-.clinical p{
-    color:#9aabba;
-    line-height:1.8;
-}
-
-.quiz{
-    padding:35px;
-    border-radius:24px;
-    background:
-        linear-gradient(
-            135deg,
-            rgba(74,158,235,.08),
-            rgba(255,255,255,.025)
-        );
-    border:1px solid rgba(255,255,255,.08);
-}
-
-.question{
-    padding:23px;
-    border-radius:17px;
-    background:#07111d;
-    border:1px solid rgba(255,255,255,.07);
-    margin-bottom:17px;
-}
-
-.question h3{
-    font-size:16px;
-    margin-bottom:15px;
-}
-
-.answers{
-    display:grid;
-    gap:8px;
-}
-
-.answer{
-    text-align:left;
-    padding:12px 14px;
-    border-radius:9px;
-    background:#0b1928;
-    border:1px solid #20384f;
-    color:#bdccda;
-    cursor:pointer;
-}
-
-.answer:hover{
-    background:#142b42;
-}
-
-.answer.correct{
-    background:#103421;
-    border-color:#2b7a4c;
-    color:#a9e9c1;
-}
-
-.answer.wrong{
-    background:#35151b;
-    border-color:#77313d;
-    color:#ffb9c1;
-}
-
-.result{
-    display:none;
-    text-align:center;
-    margin-top:25px;
-    padding:22px;
-    border-radius:15px;
-    background:#091b2b;
-    border:1px solid #284a65;
-}
-
-.score{
-    font-size:35px;
-    color:#6dbaff;
-    font-weight:bold;
-}
-
-.restart{
-    margin-top:15px;
-    padding:10px 17px;
-    border-radius:9px;
-    background:#10263b;
-    border:1px solid #31597a;
-    color:#acd6fa;
-    cursor:pointer;
-}
-
-@media(max-width:850px){
-
-    .grid{
-        grid-template-columns:1fr;
-    }
-
-    .structures{
-        grid-template-columns:1fr;
-    }
-
-    .scene{
-        height:470px;
-    }
-
-    .viewer-status{
-        display:none;
-    }
-
-    .location-top{
-        flex-direction:column;
-        align-items:flex-start;
-    }
-}
-</style>
-</head>
-
-<body>
-
-<nav>
-<a href="./explore.html">
-← Back to Explore
-</a>
-</nav>
-
-<main class="container">
-
-<section class="hero">
-
-<div class="eyebrow">
-Brainstem · NeuroAtlas
-</div>
-
-<h1>Medulla</h1>
-
-<p>
-The medulla oblongata is the most inferior part of
-the brainstem. It connects the pons with the spinal
-cord and contains important pathways and neural
-networks involved in breathing, cardiovascular
-regulation, swallowing, and protective reflexes.
-</p>
-
-<div class="tags">
-<div class="tag">Brainstem</div>
-<div class="tag">Inferior to Pons</div>
-<div class="tag">Superior to Spinal Cord</div>
-<div class="tag">Pyramidal Decussation</div>
-<div class="tag">CN IX–XII</div>
-</div>
-
-</section>
-
-<section class="section">
-
-<div class="section-label">
-01 · Location
-</div>
-
-<h2>Where is the Medulla?</h2>
-
-<div class="location">
-
-<div class="location-top">
-
-<h3>📍 Brainstem → Medulla</h3>
-
-<button
-id="locationButton"
-class="location-button"
->
-Show Location
-</button>
-
-</div>
-
-<div
-id="locationInfo"
-class="location-info"
->
-
-The medulla is the <strong>lowest part of the
-brainstem</strong>.
-
-<br><br>
-
-<strong>
-Midbrain ↓ Pons ↓ Medulla ↓ Spinal cord
-</strong>
-
-<br><br>
-
-It lies anterior to the cerebellum and forms the
-transition between the brainstem and spinal cord.
-
-</div>
-
-</div>
-
-</section>
-
-<section class="section">
-
-<div class="section-label">
-02 · Functions
-</div>
-
-<h2>What does it do?</h2>
-
-<div class="grid">
-
-<div class="card">
-<div class="card-number">01 · RESPIRATION</div>
-<h3>Breathing</h3>
-<p>
-Neural networks in the medulla contribute to the
-generation and regulation of respiratory activity.
-</p>
-</div>
-
-<div class="card">
-<div class="card-number">02 · CARDIOVASCULAR</div>
-<h3>Heart & Blood Pressure</h3>
-<p>
-Medullary autonomic networks participate in
-regulation of cardiovascular activity.
-</p>
-</div>
-
-<div class="card">
-<div class="card-number">03 · REFLEXES</div>
-<h3>Protective Reflexes</h3>
-<p>
-The medulla participates in important reflexes
-such as swallowing and coughing.
-</p>
-</div>
-
-</div>
-</section>
-
-<section class="section">
-
-<div class="section-label">
-03 · Anatomy
-</div>
-
-<h2>Important Structures</h2>
-
-<div class="structures">
-
-<div class="structure">
-<h3>Pyramids</h3>
-<p>
-The anterior medulla contains the pyramids, which
-carry descending corticospinal motor fibers.
-</p>
-</div>
-
-<div class="structure">
-<h3>Inferior Olive</h3>
-<p>
-The inferior olivary complex participates in
-connections between the brainstem and cerebellum.
-</p>
-</div>
-
-<div class="structure">
-<h3>Cranial Nerves IX & X</h3>
-<p>
-Medullary nuclei associated with the glossopharyngeal
-and vagus nerves participate in swallowing and
-visceral functions.
-</p>
-</div>
-
-<div class="structure">
-<h3>Cranial Nerves XI & XII</h3>
-<p>
-Structures in the medullary region are associated
-with the accessory and hypoglossal nerves.
-</p>
-</div>
-
-</div>
-</section>
-
-<!-- ===============================
-     3D BRAIN
-================================ -->
-
-<section class="viewer-section">
-
-<div class="section-label">
-04 · Interactive 3D
-</div>
-
-<h2>Explore the Medulla in 3D</h2>
-
-<div class="viewer">
-
-<div class="viewer-header">
-
-<div class="viewer-title">
-Human Brain · Interactive Anatomical Model
-</div>
-
-<div class="viewer-status">
-DRAG TO ROTATE · SCROLL TO ZOOM
-</div>
-
-</div>
-
-<div class="scene">
-
-<canvas id="brainCanvas"></canvas>
-
-<div class="medulla-label">
-
-<div class="medulla-dot"></div>
-
-<div class="medulla-line"></div>
-
-<div class="medulla-text">
-MEDULLA OBLONGATA
-</div>
-
-</div>
-
-</div>
-
-<div class="controls">
-
-<button id="resetButton">
-↻ Reset View
-</button>
-
-<button id="rotateButton">
-⟳ Toggle Rotation
-</button>
-
-<button id="focusButton">
-🔴 Focus Medulla
-</button>
-
-</div>
-
-</div>
-
-</section>
-
-<section class="section clinical">
-
-<div class="section-label">
-05 · Clinical Connection
-</div>
-
-<h2>Why is the Medulla important?</h2>
-
-<p>
-The medulla contains important neural pathways
-and regulatory networks. Disruption of the medulla
-can affect breathing, cardiovascular regulation,
-swallowing, and motor or sensory pathways.
-The exact effects depend on the structures affected.
-</p>
-
-</section>
-
-<section class="section quiz">
-
-<div class="section-label">
-06 · Knowledge Check
-</div>
-
-<h2>Mini Test</h2>
-
-<div class="question">
-
-<h3>1. Where is the medulla located?</h3>
-
-<div class="answers">
-
-<button class="answer" data-correct="false">
-Above the midbrain
-</button>
-
-<button class="answer" data-correct="true">
-Below the pons and above the spinal cord
-</button>
-
-<button class="answer" data-correct="false">
-Inside the cerebellum
-</button>
-
-<button class="answer" data-correct="false">
-Inside the cerebral cortex
-</button>
-
-</div>
-</div>
-
-<div class="question">
-
-<h3>2. Which structure contains descending corticospinal fibers?</h3>
-
-<div class="answers">
-
-<button class="answer" data-correct="false">
-Inferior olive
-</button>
-
-<button class="answer" data-correct="true">
-Pyramids
-</button>
-
-<button class="answer" data-correct="false">
-Hippocampus
-</button>
-
-<button class="answer" data-correct="false">
-Thalamus
-</button>
-
-</div>
-</div>
-
-<div class="question">
-
-<h3>3. Which cranial nerve controls tongue movement?</h3>
-
-<div class="answers">
-
-<button class="answer" data-correct="false">
-CN V
-</button>
-
-<button class="answer" data-correct="false">
-CN VII
-</button>
-
-<button class="answer" data-correct="true">
-CN XII
-</button>
-
-<button class="answer" data-correct="false">
-CN II
-</button>
-
-</div>
-</div>
-
-<div class="question">
-
-<h3>4. Which function is strongly associated with medullary networks?</h3>
-
-<div class="answers">
-
-<button class="answer" data-correct="true">
-Respiratory and cardiovascular regulation
-</button>
-
-<button class="answer" data-correct="false">
-Visual processing
-</button>
-
-<button class="answer" data-correct="false">
-Long-term memory storage
-</button>
-
-<button class="answer" data-correct="false">
-Language comprehension
-</button>
-
-</div>
-</div>
-
-<div class="question">
-
-<h3>5. What happens at the pyramidal decussation?</h3>
-
-<div class="answers">
-
-<button class="answer" data-correct="false">
-The fibers disappear
-</button>
-
-<button class="answer" data-correct="true">
-Many corticospinal fibers cross to the opposite side
-</button>
-
-<button class="answer" data-correct="false">
-The fibers enter the hippocampus
-</button>
-
-<button class="answer" data-correct="false">
-The fibers become cranial nerves
-</button>
-
-</div>
-</div>
-
-<div id="quizResult" class="result">
-
-<div id="quizScore" class="score">
-0 / 5
-</div>
-
-<div id="quizMessage"></div>
-
-<button id="restartButton" class="restart">
-Try Again
-</button>
-
-</div>
-
-</section>
-
-</main>
-
-<!-- THREE.JS -->
-
 <script type="module">
 
 import * as THREE from
@@ -878,36 +7,42 @@ import { OrbitControls } from
 "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js";
 
 
-const canvas =
-document.getElementById("brainCanvas");
+const canvas = document.getElementById("brainCanvas");
 
-const scene =
-new THREE.Scene();
 
-const camera =
-new THREE.PerspectiveCamera(
-    38,
+/* =========================
+   SCENE
+========================= */
+
+const scene = new THREE.Scene();
+
+
+/* =========================
+   CAMERA
+========================= */
+
+const camera = new THREE.PerspectiveCamera(
+    40,
     1,
     0.1,
     100
 );
 
-camera.position.set(
-    0,
-    0.3,
-    7.8
-);
+camera.position.set(0, 0.4, 8);
 
 
-const renderer =
-new THREE.WebGLRenderer({
-    canvas:canvas,
-    antialias:true,
-    alpha:true
+/* =========================
+   RENDERER
+========================= */
+
+const renderer = new THREE.WebGLRenderer({
+    canvas: canvas,
+    antialias: true,
+    alpha: true
 });
 
 renderer.setPixelRatio(
-    Math.min(window.devicePixelRatio,2)
+    Math.min(window.devicePixelRatio || 1, 2)
 );
 
 renderer.outputColorSpace =
@@ -915,83 +50,67 @@ THREE.SRGBColorSpace;
 
 
 /* =========================
-   LIGHTING
+   LIGHTS
 ========================= */
 
-const hemi =
-new THREE.HemisphereLight(
-    0xffffff,
-    0x172638,
-    3
+scene.add(
+    new THREE.HemisphereLight(
+        0xffffff,
+        0x152536,
+        3
+    )
 );
 
-scene.add(hemi);
-
-const key =
-new THREE.DirectionalLight(
+const light = new THREE.DirectionalLight(
     0xffffff,
     4
 );
 
-key.position.set(4,6,7);
+light.position.set(4,6,8);
 
-scene.add(key);
+scene.add(light);
 
-const fill =
-new THREE.DirectionalLight(
-    0x70bfff,
+const blueLight = new THREE.DirectionalLight(
+    0x5ebcff,
     2
 );
 
-fill.position.set(-5,2,5);
+blueLight.position.set(-5,2,5);
 
-scene.add(fill);
+scene.add(blueLight);
 
 
 /* =========================
-   BRAIN GROUP
+   BRAIN
 ========================= */
 
-const brain =
-new THREE.Group();
+const brain = new THREE.Group();
 
 scene.add(brain);
 
 
 /* =========================
-   MATERIALS
+   MATERIAL
 ========================= */
 
 const brainMaterial =
 new THREE.MeshStandardMaterial({
 
-    color:0xc8ced5,
+    color:0xc7ced6,
 
-    roughness:.78,
+    roughness:0.8,
 
-    metalness:0,
-
-    flatShading:false
+    metalness:0
 
 });
 
 
-const cerebellumMaterial =
+const darkMaterial =
 new THREE.MeshStandardMaterial({
 
-    color:0xb8c1ca,
+    color:0x8e9aa6,
 
-    roughness:.82
-
-});
-
-
-const stemMaterial =
-new THREE.MeshStandardMaterial({
-
-    color:0xb5bec8,
-
-    roughness:.8
+    roughness:0.85
 
 });
 
@@ -999,73 +118,85 @@ new THREE.MeshStandardMaterial({
 const medullaMaterial =
 new THREE.MeshStandardMaterial({
 
-    color:0xff477d,
+    color:0xff3973,
 
-    emissive:0xff174f,
+    emissive:0xff1550,
 
-    emissiveIntensity:2.2,
+    emissiveIntensity:2.5,
 
-    roughness:.35
+    roughness:0.35
 
 });
 
 
 /* =========================
-   CREATE BRAIN HEMISPHERES
+   CEREBRAL HEMISPHERES
 ========================= */
 
-function createHemisphere(side){
+const hemisphereGeometry =
+new THREE.SphereGeometry(
+    2.25,
+    48,
+    32
+);
 
-    const geometry =
-    new THREE.SphereGeometry(
-        2.25,
-        64,
-        48
-    );
 
-    const mesh =
-    new THREE.Mesh(
-        geometry,
-        brainMaterial.clone()
-    );
-
-    mesh.scale.set(
-        1.02,
-        1.08,
-        1.15
-    );
-
-    mesh.position.x =
-    side * 1.05;
-
-    mesh.position.y =
-    .45;
-
-    mesh.position.z =
-    0;
-
-    brain.add(mesh);
-
-    return mesh;
-}
+/* LEFT */
 
 const left =
-createHemisphere(-1);
+new THREE.Mesh(
+    hemisphereGeometry,
+    brainMaterial
+);
+
+left.scale.set(
+    1.05,
+    1.15,
+    1.25
+);
+
+left.position.set(
+    -1.05,
+    0.5,
+    0
+);
+
+brain.add(left);
+
+
+/* RIGHT */
 
 const right =
-createHemisphere(1);
+new THREE.Mesh(
+    hemisphereGeometry.clone(),
+    brainMaterial.clone()
+);
+
+right.scale.set(
+    1.05,
+    1.15,
+    1.25
+);
+
+right.position.set(
+    1.05,
+    0.5,
+    0
+);
+
+brain.add(right);
 
 
 /* =========================
-   BRAIN FISSURE
+   CENTER FISSURE
 ========================= */
 
 const fissure =
 new THREE.Mesh(
 
     new THREE.BoxGeometry(
-        .10,
-        3.9,
+        0.12,
+        4,
         3.5
     ),
 
@@ -1075,78 +206,74 @@ new THREE.Mesh(
 
 );
 
-fissure.position.set(
-    0,
-    .5,
-    .02
-);
+fissure.position.y =
+0.5;
 
 brain.add(fissure);
 
 
 /* =========================
-   CORTICAL FOLDS
+   BRAIN FOLDS
 ========================= */
 
-function addFold(
+function fold(
     x,
     y,
     z,
-    sx,
-    sy,
-    sz,
-    rotation
+    scaleX,
+    rotationZ
 ){
 
-    const geo =
+    const geometry =
     new THREE.TorusGeometry(
-        .62,
-        .045,
+        0.65,
+        0.045,
         8,
-        32,
-        Math.PI * 1.45
+        32
     );
 
-    const fold =
+    const mesh =
     new THREE.Mesh(
-        geo,
-        new THREE.MeshStandardMaterial({
-            color:0x8996a3,
-            roughness:.9
-        })
+        geometry,
+        darkMaterial
     );
 
-    fold.position.set(
-        x,y,z
+    mesh.position.set(
+        x,
+        y,
+        z
     );
 
-    fold.scale.set(
-        sx,sy,sz
+    mesh.scale.set(
+        scaleX,
+        0.45,
+        0.55
     );
 
-    fold.rotation.set(
-        rotation[0],
-        rotation[1],
-        rotation[2]
-    );
+    mesh.rotation.x =
+    Math.PI / 2;
 
-    brain.add(fold);
+    mesh.rotation.z =
+    rotationZ;
+
+    brain.add(mesh);
 }
 
 
-/* left folds */
+/* LEFT FOLDS */
 
-addFold(-1.55,.9,1.95,.9,.55,.35,[1.4,0,.2]);
-addFold(-1.8,.3,2.05,.85,.55,.3,[1.3,0,-.2]);
-addFold(-1.65,-.35,1.95,.8,.5,.3,[1.2,0,.15]);
-addFold(-1.2,1.45,1.6,.8,.45,.25,[1.4,.2,0]);
+fold(-1.6,1.2,1.9,.9,.2);
+fold(-1.8,.6,2.0,1.0,-.15);
+fold(-1.65,0.0,2.0,.9,.2);
+fold(-1.3,-.55,1.85,.8,-.2);
 
-/* right folds */
 
-addFold(1.55,.9,1.95,.9,.55,.35,[1.4,0,-.2]);
-addFold(1.8,.3,2.05,.85,.55,.3,[1.3,0,.2]);
-addFold(1.65,-.35,1.95,.8,.5,.3,[1.2,0,-.15]);
-addFold(1.2,1.45,1.6,.8,.45,.25,[1.4,-.2,0]);
+/* RIGHT FOLDS */
+
+fold(1.6,1.2,1.9,.9,-.2);
+fold(1.8,.6,2.0,1.0,.15);
+fold(1.65,0.0,2.0,.9,-.2);
+fold(1.3,-.55,1.85,.8,.2);
 
 
 /* =========================
@@ -1157,23 +284,23 @@ const cerebellum =
 new THREE.Mesh(
 
     new THREE.SphereGeometry(
-        1.25,
-        48,
-        32
+        1.15,
+        40,
+        28
     ),
 
-    cerebellumMaterial
+    darkMaterial
 );
 
 cerebellum.scale.set(
-    1.35,
-    .72,
-    .9
+    1.4,
+    0.7,
+    0.9
 );
 
 cerebellum.position.set(
     0,
-    -.75,
+    -0.75,
     -1.75
 );
 
@@ -1181,80 +308,29 @@ brain.add(cerebellum);
 
 
 /* =========================
-   CEREBELLAR FOLDS
-========================= */
-
-for(let i=0;i<9;i++){
-
-    const fold =
-    new THREE.Mesh(
-
-        new THREE.TorusGeometry(
-            .55,
-            .035,
-            8,
-            28
-        ),
-
-        new THREE.MeshStandardMaterial({
-            color:0x87939f,
-            roughness:.9
-        })
-
-    );
-
-    fold.scale.set(
-        1.5,
-        .25,
-        .7
-    );
-
-    fold.position.set(
-        0,
-        -.45 + i*.08,
-        -2.45
-    );
-
-    fold.rotation.x =
-    Math.PI/2;
-
-    fold.rotation.z =
-    (i%2 ? .08 : -.08);
-
-    brain.add(fold);
-}
-
-
-/* =========================
    BRAINSTEM
 ========================= */
 
-const pons =
+const brainstem =
 new THREE.Mesh(
 
     new THREE.CapsuleGeometry(
-        .48,
-        .85,
-        16,
-        32
+        0.4,
+        1.5,
+        12,
+        24
     ),
 
-    stemMaterial
+    darkMaterial
 );
 
-pons.position.set(
+brainstem.position.set(
     0,
-    -.95,
-    -.65
+    -1.25,
+    -0.55
 );
 
-pons.scale.set(
-    1.25,
-    1,
-    .8
-);
-
-brain.add(pons);
+brain.add(brainstem);
 
 
 /* =========================
@@ -1265,25 +341,25 @@ const medulla =
 new THREE.Mesh(
 
     new THREE.CapsuleGeometry(
-        .30,
-        .85,
-        16,
-        32
+        0.27,
+        0.7,
+        12,
+        24
     ),
 
     medullaMaterial
 );
 
-medulla.position.set(
-    0,
-    -1.85,
-    -.55
+medulla.scale.set(
+    0.9,
+    1.2,
+    0.8
 );
 
-medulla.scale.set(
-    .75,
-    1.15,
-    .7
+medulla.position.set(
+    0,
+    -2.05,
+    -0.55
 );
 
 brain.add(medulla);
@@ -1293,26 +369,26 @@ brain.add(medulla);
    SPINAL CORD
 ========================= */
 
-const spinal =
+const spinalCord =
 new THREE.Mesh(
 
     new THREE.CylinderGeometry(
-        .19,
-        .25,
-        1.25,
-        32
+        0.18,
+        0.22,
+        1.1,
+        24
     ),
 
-    stemMaterial
+    darkMaterial
 );
 
-spinal.position.set(
+spinalCord.position.set(
     0,
-    -2.75,
-    -.55
+    -2.9,
+    -0.55
 );
 
-brain.add(spinal);
+brain.add(spinalCord);
 
 
 /* =========================
@@ -1321,9 +397,9 @@ brain.add(spinal);
 
 const glow =
 new THREE.PointLight(
-    0xff2468,
-    3.5,
-    2.4
+    0xff286d,
+    3,
+    2
 );
 
 glow.position.copy(
@@ -1331,40 +407,6 @@ glow.position.copy(
 );
 
 brain.add(glow);
-
-
-/* =========================
-   MEDULLA MARKER
-========================= */
-
-const marker =
-new THREE.Mesh(
-
-    new THREE.SphereGeometry(
-        .13,
-        24,
-        24
-    ),
-
-    new THREE.MeshStandardMaterial({
-
-        color:0xff477d,
-
-        emissive:0xff164f,
-
-        emissiveIntensity:4
-
-    })
-
-);
-
-marker.position.set(
-    0,
-    -1.85,
-    .02
-);
-
-brain.add(marker);
 
 
 /* =========================
@@ -1379,23 +421,19 @@ new OrbitControls(
 
 controls.enableDamping = true;
 
-controls.dampingFactor = .07;
-
-controls.enablePan = false;
+controls.dampingFactor = 0.07;
 
 controls.enableZoom = true;
+
+controls.enablePan = false;
 
 controls.minDistance = 5;
 
 controls.maxDistance = 12;
 
-controls.autoRotate = false;
-
-controls.autoRotateSpeed = .45;
-
 controls.target.set(
     0,
-    -.2,
+    -0.3,
     0
 );
 
@@ -1412,7 +450,7 @@ function resize(){
     const height =
     canvas.clientHeight;
 
-    if(width <= 0 || height <= 0)
+    if(width === 0 || height === 0)
         return;
 
     camera.aspect =
@@ -1434,6 +472,62 @@ window.addEventListener(
 
 
 /* =========================
+   BUTTONS
+========================= */
+
+document
+.getElementById("resetButton")
+.onclick = function(){
+
+    camera.position.set(
+        0,
+        0.4,
+        8
+    );
+
+    controls.target.set(
+        0,
+        -0.3,
+        0
+    );
+
+    controls.update();
+};
+
+
+document
+.getElementById("rotateButton")
+.onclick = function(){
+
+    controls.autoRotate =
+    !controls.autoRotate;
+
+    controls.autoRotateSpeed =
+    0.6;
+};
+
+
+document
+.getElementById("focusButton")
+.onclick = function(){
+
+    camera.position.set(
+        1.4,
+        -1.5,
+        4
+    );
+
+    controls.target.set(
+        0,
+        -2,
+        -0.5
+    );
+
+    controls.update();
+};
+
+
+/* =========================
    ANIMATION
 ========================= */
 
@@ -1451,284 +545,9 @@ function animate(){
     );
 }
 
+
 resize();
 
 animate();
 
-
-/* =========================
-   BUTTONS
-========================= */
-
-document
-.getElementById("resetButton")
-.addEventListener(
-    "click",
-    function(){
-
-        camera.position.set(
-            0,
-            .3,
-            7.8
-        );
-
-        controls.target.set(
-            0,
-            -.2,
-            0
-        );
-
-        controls.update();
-
-    }
-);
-
-
-document
-.getElementById("rotateButton")
-.addEventListener(
-    "click",
-    function(){
-
-        controls.autoRotate =
-        !controls.autoRotate;
-
-    }
-);
-
-
-document
-.getElementById("focusButton")
-.addEventListener(
-    "click",
-    function(){
-
-        camera.position.set(
-            1.4,
-            -1.4,
-            4.0
-        );
-
-        controls.target.set(
-            0,
-            -1.6,
-            -.4
-        );
-
-        controls.update();
-
-    }
-);
-
-
-/* =========================
-   LOCATION
-========================= */
-
-const locationButton =
-document.getElementById(
-    "locationButton"
-);
-
-const locationInfo =
-document.getElementById(
-    "locationInfo"
-);
-
-locationButton.addEventListener(
-    "click",
-    function(){
-
-        if(
-            locationInfo.style.display ===
-            "block"
-        ){
-
-            locationInfo.style.display =
-            "none";
-
-            locationButton.textContent =
-            "Show Location";
-
-        }else{
-
-            locationInfo.style.display =
-            "block";
-
-            locationButton.textContent =
-            "Hide Location";
-
-        }
-
-    }
-);
-
-
-/* =========================
-   QUIZ
-========================= */
-
-let score = 0;
-
-let answered = 0;
-
-const questions =
-document.querySelectorAll(
-    ".question"
-);
-
-questions.forEach(
-function(question){
-
-    const answers =
-    question.querySelectorAll(
-        ".answer"
-    );
-
-    answers.forEach(
-    function(button){
-
-        button.addEventListener(
-        "click",
-        function(){
-
-            if(question.dataset.done)
-                return;
-
-            question.dataset.done =
-            "true";
-
-            answered++;
-
-            const correct =
-            button.dataset.correct ===
-            "true";
-
-            if(correct){
-
-                score++;
-
-                button.classList.add(
-                    "correct"
-                );
-
-            }else{
-
-                button.classList.add(
-                    "wrong"
-                );
-
-                answers.forEach(
-                function(answer){
-
-                    if(
-                        answer.dataset.correct ===
-                        "true"
-                    ){
-
-                        answer.classList.add(
-                            "correct"
-                        );
-
-                    }
-
-                });
-
-            }
-
-            if(
-                answered ===
-                questions.length
-            ){
-
-                showResult();
-
-            }
-
-        });
-
-    });
-
-});
-
-
-function showResult(){
-
-    const result =
-    document.getElementById(
-        "quizResult"
-    );
-
-    document.getElementById(
-        "quizScore"
-    ).textContent =
-    score + " / 5";
-
-    const message =
-    document.getElementById(
-        "quizMessage"
-    );
-
-    if(score === 5){
-
-        message.textContent =
-        "Perfect! You really know your medulla.";
-
-    }else if(score >= 3){
-
-        message.textContent =
-        "Great job! Review the anatomy once more.";
-
-    }else{
-
-        message.textContent =
-        "Keep exploring NeuroAtlas and try again.";
-
-    }
-
-    result.style.display =
-    "block";
-}
-
-
-document
-.getElementById("restartButton")
-.addEventListener(
-    "click",
-    function(){
-
-        score = 0;
-
-        answered = 0;
-
-        questions.forEach(
-        function(question){
-
-            delete question.dataset.done;
-
-            question
-            .querySelectorAll(".answer")
-            .forEach(
-            function(button){
-
-                button.classList.remove(
-                    "correct",
-                    "wrong"
-                );
-
-            });
-
-        });
-
-        document.getElementById(
-            "quizResult"
-        ).style.display =
-        "none";
-
-    }
-);
-
 </script>
-
-</body>
-</html>
