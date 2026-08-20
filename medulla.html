@@ -68,6 +68,7 @@ h1{
     color:#a6b6c7;
     font-size:18px;
     line-height:1.8;
+    max-width:780px;
 }
 
 .tags{
@@ -103,7 +104,10 @@ h1{
     margin-bottom:25px;
 }
 
-/* 3D */
+
+/* =========================================================
+   3D VIEWER
+========================================================= */
 
 .viewer{
     border:1px solid rgba(255,255,255,.1);
@@ -115,10 +119,13 @@ h1{
 
 .viewer-header{
     min-height:65px;
+
     display:flex;
     align-items:center;
     justify-content:space-between;
+
     padding:0 22px;
+
     border-bottom:1px solid rgba(255,255,255,.08);
 }
 
@@ -135,121 +142,247 @@ h1{
 
 .scene{
     position:relative;
-    height:600px;
+    height:650px;
+
     background:
         radial-gradient(
             circle at 50% 45%,
-            #17334b,
+            #17334b 0%,
             #091522 45%,
             #02060b 100%
         );
 }
 
+
+/* =========================================================
+   SPLINE
+========================================================= */
+
 spline-viewer{
+    position:absolute;
+
+    inset:0;
+
     width:100%;
     height:100%;
+
     display:block;
+
+    z-index:1;
 }
 
-/* MEDULLA HIGHLIGHT */
 
-.medulla-highlight{
+/* =========================================================
+   MEDULLA MARKER
+========================================================= */
+
+.marker-layer{
+    position:absolute;
+
+    inset:0;
+
+    pointer-events:none;
+
+    z-index:10;
+}
+
+
+/*
+   The marker is intentionally positioned over the
+   inferior brainstem region.
+*/
+
+.medulla-marker{
     position:absolute;
 
     left:50%;
-    top:76%;
+    top:72%;
 
-    transform:translate(-50%,-50%);
-
-    pointer-events:none;
+    transform:
+        translate(-50%,-50%);
 
     display:flex;
     flex-direction:column;
     align-items:center;
 
-    z-index:10;
+    pointer-events:none;
+
+    transition:
+        left .45s ease,
+        top .45s ease;
+
+    filter:
+        drop-shadow(0 0 8px rgba(255,45,110,.9));
 }
 
-.medulla-ring{
-    width:55px;
-    height:55px;
 
-    border:3px solid #ff3f79;
+/* glowing target */
+
+.target{
+    position:relative;
+
+    width:58px;
+    height:58px;
+
     border-radius:50%;
 
+    border:
+        3px solid #ff3f79;
+
     box-shadow:
-        0 0 12px #ff3f79,
-        0 0 30px #ff3f79,
-        0 0 60px rgba(255,63,121,.7);
+        0 0 8px #ff3f79,
+        0 0 20px #ff3f79,
+        0 0 40px #ff3f79,
+        inset 0 0 18px rgba(255,63,121,.35);
 
-    animation:pulse 1.5s infinite;
+    animation:
+        targetPulse 1.5s infinite;
 }
 
-.medulla-line{
-    width:3px;
-    height:45px;
 
-    background:linear-gradient(
-        #ff3f79,
-        rgba(255,63,121,0)
-    );
+/* center */
 
-    box-shadow:0 0 10px #ff3f79;
+.target::after{
+    content:"";
+
+    position:absolute;
+
+    width:10px;
+    height:10px;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:#ff3f79;
+
+    box-shadow:
+        0 0 10px #ff3f79,
+        0 0 25px #ff3f79;
 }
 
-.medulla-label{
-    padding:8px 14px;
+
+/* crosshair */
+
+.target::before{
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    top:-14px;
+
+    width:2px;
+    height:86px;
+
+    transform:translateX(-50%);
+
+    background:
+        linear-gradient(
+            transparent,
+            #ff3f79,
+            transparent
+        );
+
+    opacity:.7;
+}
+
+
+.marker-line{
+    width:2px;
+    height:42px;
+
+    background:
+        linear-gradient(
+            #ff3f79,
+            rgba(255,63,121,0)
+        );
+
+    box-shadow:
+        0 0 8px #ff3f79;
+}
+
+
+.marker-label{
+    padding:8px 13px;
 
     border-radius:9px;
 
-    background:rgba(5,10,17,.92);
+    background:
+        rgba(4,9,16,.94);
 
-    border:1px solid rgba(255,63,121,.6);
+    border:
+        1px solid
+        rgba(255,63,121,.7);
 
     color:#ff8caf;
 
-    font-size:13px;
+    font-size:12px;
+
     font-weight:bold;
 
     letter-spacing:1px;
 
+    white-space:nowrap;
+
     box-shadow:
-        0 0 15px rgba(255,63,121,.2);
+        0 8px 25px
+        rgba(0,0,0,.45);
 }
 
-@keyframes pulse{
-    0%,100%{
-        transform:scale(.9);
-        opacity:.8;
+
+@keyframes targetPulse{
+
+    0%{
+        transform:scale(.88);
+        opacity:.75;
     }
 
     50%{
-        transform:scale(1.15);
+        transform:scale(1.12);
         opacity:1;
+    }
+
+    100%{
+        transform:scale(.88);
+        opacity:.75;
     }
 }
 
-/* CONTROLS */
+
+/* =========================================================
+   CONTROLS
+========================================================= */
 
 .controls{
     display:flex;
     gap:10px;
     flex-wrap:wrap;
+
     padding:15px;
 
-    border-top:1px solid rgba(255,255,255,.08);
+    border-top:
+        1px solid
+        rgba(255,255,255,.08);
 }
 
 .controls button{
-    padding:10px 16px;
+    padding:11px 17px;
+
     border-radius:9px;
 
     background:#0b1928;
+
     border:1px solid #223c55;
 
     color:#bdd0e0;
 
     cursor:pointer;
+
+    transition:.2s;
 }
 
 .controls button:hover{
@@ -257,17 +390,36 @@ spline-viewer{
     color:white;
 }
 
+.controls button.active{
+    background:#401426;
+    border-color:#ff3f79;
+    color:#ff9db8;
+}
+
+
+/* =========================================================
+   INFO CARDS
+========================================================= */
+
 .card-grid{
     display:grid;
-    grid-template-columns:repeat(3,1fr);
+
+    grid-template-columns:
+        repeat(3,1fr);
+
     gap:17px;
 }
 
 .card{
     padding:27px;
+
     border-radius:20px;
+
     background:#091522;
-    border:1px solid rgba(255,255,255,.07);
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
 }
 
 .card h3{
@@ -277,19 +429,33 @@ spline-viewer{
 .card p{
     color:#91a5b8;
     font-size:14px;
+    line-height:1.75;
 }
+
+
+/* =========================================================
+   QUIZ
+========================================================= */
 
 .quiz{
     padding:35px;
+
     border-radius:24px;
+
     background:#091522;
-    border:1px solid rgba(255,255,255,.08);
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
 }
 
 .question{
     padding:23px;
+
     margin-bottom:17px;
+
     border-radius:17px;
+
     background:#07111d;
 }
 
@@ -304,64 +470,105 @@ spline-viewer{
 
 .answer{
     text-align:left;
+
     padding:12px 14px;
+
     border-radius:9px;
+
     background:#0b1928;
+
     border:1px solid #20384f;
+
     color:#bdccda;
+
     cursor:pointer;
+}
+
+.answer:hover{
+    background:#142b42;
 }
 
 .answer.correct{
     background:#103421;
     border-color:#2b7a4c;
+    color:#a9e9c1;
 }
 
 .answer.wrong{
     background:#35151b;
     border-color:#77313d;
+    color:#ffb9c1;
 }
 
 .result{
     display:none;
+
     text-align:center;
+
     margin-top:25px;
+
     padding:22px;
+
     border-radius:15px;
+
     background:#091b2b;
 }
 
 .score{
     font-size:35px;
+
     color:#6dbaff;
+
     font-weight:bold;
 }
 
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
 @media(max-width:850px){
+
     .card-grid{
         grid-template-columns:1fr;
     }
 
     .scene{
-        height:450px;
+        height:480px;
     }
 
     .viewer-status{
         display:none;
     }
+
+    .marker-label{
+        font-size:10px;
+    }
+
 }
 </style>
+
 </head>
+
 
 <body>
 
+
 <nav>
+
 <a href="./explore.html">
 ← Back to Explore
 </a>
+
 </nav>
 
+
 <main class="container">
+
+
+<!-- =======================================================
+     HERO
+======================================================= -->
 
 <section class="hero">
 
@@ -369,37 +576,67 @@ spline-viewer{
 Brainstem · NeuroAtlas
 </div>
 
-<h1>Medulla</h1>
+<h1>
+Medulla
+</h1>
 
 <p>
+
 The medulla oblongata is the most inferior part
 of the brainstem. It connects the pons with the
 spinal cord and contains important pathways and
 neural networks involved in breathing,
 cardiovascular regulation, swallowing, and
 protective reflexes.
+
 </p>
 
+
 <div class="tags">
-<div class="tag">Brainstem</div>
-<div class="tag">Inferior to Pons</div>
-<div class="tag">Superior to Spinal Cord</div>
-<div class="tag">Pyramidal Decussation</div>
-<div class="tag">CN IX–XII</div>
+
+<div class="tag">
+Brainstem
+</div>
+
+<div class="tag">
+Inferior to Pons
+</div>
+
+<div class="tag">
+Superior to Spinal Cord
+</div>
+
+<div class="tag">
+Pyramidal Decussation
+</div>
+
+<div class="tag">
+CN IX–XII
+</div>
+
 </div>
 
 </section>
 
 
+
+<!-- =======================================================
+     3D
+======================================================= -->
+
 <section class="section">
 
 <div class="section-label">
-Interactive 3D
+01 · Interactive 3D
 </div>
 
-<h2>Explore the Medulla</h2>
+<h2>
+Explore the Medulla
+</h2>
+
 
 <div class="viewer">
+
 
 <div class="viewer-header">
 
@@ -413,14 +650,17 @@ DRAG TO ROTATE · SCROLL TO ZOOM
 
 </div>
 
+
 <div class="scene">
 
-<!-- YOUR SPLINE MODEL -->
+
+<!-- SPLINE MODEL -->
 
 <script
 type="module"
 src="https://unpkg.com/@splinetool/viewer@1.12.98/build/spline-viewer.js">
 </script>
+
 
 <spline-viewer
 id="brainViewer"
@@ -428,18 +668,23 @@ url="https://prod.spline.design/bIPa5BBLBPg0xLXo/scene.splinecode">
 </spline-viewer>
 
 
-<!-- MEDULLA HIGHLIGHT -->
+<!-- MARKER -->
 
 <div
-id="medullaHighlight"
-class="medulla-highlight"
+class="marker-layer"
+id="markerLayer"
 >
 
-<div class="medulla-ring"></div>
+<div
+class="medulla-marker"
+id="medullaMarker"
+>
 
-<div class="medulla-line"></div>
+<div class="target"></div>
 
-<div class="medulla-label">
+<div class="marker-line"></div>
+
+<div class="marker-label">
 MEDULLA OBLONGATA
 </div>
 
@@ -447,100 +692,168 @@ MEDULLA OBLONGATA
 
 </div>
 
+
+</div>
+
+
+<!-- CONTROLS -->
+
 <div class="controls">
 
-<button id="focusButton">
-🔴 Focus Medulla
+<button
+id="focusButton"
+>
+🔴 Highlight Medulla
 </button>
 
-<button id="highlightButton">
-✨ Toggle Highlight
+
+<button
+id="toggleButton"
+class="active"
+>
+✨ Hide Highlight
 </button>
 
-<button id="resetButton">
-↻ Reset View
+
+<button
+id="resetButton"
+>
+↻ Reset Marker
 </button>
 
 </div>
+
 
 </div>
 
 </section>
 
 
+
+<!-- =======================================================
+     ANATOMY
+======================================================= -->
+
 <section class="section">
 
 <div class="section-label">
-Anatomy
+02 · Anatomy
 </div>
 
-<h2>Important Structures</h2>
+<h2>
+Important Structures
+</h2>
+
 
 <div class="card-grid">
 
+
 <div class="card">
-<h3>Pyramids</h3>
+
+<h3>
+Pyramids
+</h3>
+
 <p>
 The anterior medulla contains the pyramids,
 which carry descending corticospinal motor
 fibers. Many cross at the pyramidal decussation.
 </p>
+
 </div>
 
+
 <div class="card">
-<h3>Inferior Olive</h3>
+
+<h3>
+Inferior Olive
+</h3>
+
 <p>
 The inferior olivary complex participates in
 connections involving the brainstem, spinal
 cord, and cerebellum.
 </p>
+
 </div>
 
+
 <div class="card">
-<h3>Cranial Nerves IX–XII</h3>
+
+<h3>
+Cranial Nerves IX–XII
+</h3>
+
 <p>
 The medullary region contains nuclei and
 pathways associated with important cranial
 nerve functions.
 </p>
+
 </div>
+
 
 </div>
 
 </section>
 
 
+
+<!-- =======================================================
+     QUIZ
+======================================================= -->
+
 <section class="section">
 
 <div class="section-label">
-Knowledge Check
+03 · Knowledge Check
 </div>
 
-<h2>Mini Test</h2>
+<h2>
+Mini Test
+</h2>
+
 
 <div class="quiz">
+
 
 <div class="question">
 
 <h3>
-Where is the medulla located?
+1. Where is the medulla located?
 </h3>
+
 
 <div class="answers">
 
-<button class="answer" data-correct="false">
+<button
+class="answer"
+data-correct="false"
+>
 Above the midbrain
 </button>
 
-<button class="answer" data-correct="true">
+
+<button
+class="answer"
+data-correct="true"
+>
 Below the pons and above the spinal cord
 </button>
 
-<button class="answer" data-correct="false">
+
+<button
+class="answer"
+data-correct="false"
+>
 Inside the cerebellum
 </button>
 
-<button class="answer" data-correct="false">
+
+<button
+class="answer"
+data-correct="false"
+>
 Inside the cerebral cortex
 </button>
 
@@ -549,33 +862,51 @@ Inside the cerebral cortex
 </div>
 
 
+
 <div class="question">
 
 <h3>
-Which structure contains descending corticospinal fibers?
+2. Which structure contains descending corticospinal fibers?
 </h3>
+
 
 <div class="answers">
 
-<button class="answer" data-correct="false">
+<button
+class="answer"
+data-correct="false"
+>
 Inferior olive
 </button>
 
-<button class="answer" data-correct="true">
+
+<button
+class="answer"
+data-correct="true"
+>
 Pyramids
 </button>
 
-<button class="answer" data-correct="false">
+
+<button
+class="answer"
+data-correct="false"
+>
 Hippocampus
 </button>
 
-<button class="answer" data-correct="false">
+
+<button
+class="answer"
+data-correct="false"
+>
 Thalamus
 </button>
 
 </div>
 
 </div>
+
 
 
 <div
@@ -585,7 +916,8 @@ class="result"
 
 <div
 id="quizScore"
-class="score">
+class="score"
+>
 0 / 2
 </div>
 
@@ -593,69 +925,129 @@ class="score">
 
 </div>
 
+
 </div>
 
 </section>
 
+
 </main>
+
 
 
 <script>
 
-/* ==========================================
-   MEDULLA HIGHLIGHT
-========================================== */
+/* =========================================================
+   ELEMENTS
+========================================================= */
 
-const highlight =
-document.getElementById("medullaHighlight");
+const marker =
+document.getElementById(
+    "medullaMarker"
+);
 
-const highlightButton =
-document.getElementById("highlightButton");
+const toggleButton =
+document.getElementById(
+    "toggleButton"
+);
 
-let highlighted = true;
+const focusButton =
+document.getElementById(
+    "focusButton"
+);
+
+const resetButton =
+document.getElementById(
+    "resetButton"
+);
 
 
-highlightButton.addEventListener(
+/* =========================================================
+   HIGHLIGHT TOGGLE
+========================================================= */
+
+let highlightVisible = true;
+
+
+toggleButton.addEventListener(
 "click",
 function(){
 
-    highlighted = !highlighted;
+    highlightVisible =
+        !highlightVisible;
 
-    highlight.style.display =
-        highlighted ? "flex" : "none";
+
+    if(highlightVisible){
+
+        marker.style.display =
+            "flex";
+
+        toggleButton.textContent =
+            "✨ Hide Highlight";
+
+        toggleButton.classList.add(
+            "active"
+        );
+
+    }
+
+    else{
+
+        marker.style.display =
+            "none";
+
+        toggleButton.textContent =
+            "✨ Show Highlight";
+
+        toggleButton.classList.remove(
+            "active"
+        );
+
+    }
 
 });
 
 
-/* ==========================================
-   FOCUS BUTTON
-========================================== */
+/* =========================================================
+   FOCUS MEDULLA
+========================================================= */
 
-document
-.getElementById("focusButton")
-.addEventListener(
+focusButton.addEventListener(
 "click",
 function(){
 
-    /*
-       Spline handles its own camera.
-       We make the anatomical target visually
-       obvious instead of trying to control
-       Spline's internal camera from outside.
-    */
+    highlightVisible = true;
 
-    highlight.style.display = "flex";
+    marker.style.display = "flex";
 
-    document
-    .getElementById("medullaHighlight")
-    .animate(
+    toggleButton.textContent =
+        "✨ Hide Highlight";
+
+    toggleButton.classList.add(
+        "active"
+    );
+
+
+    marker.animate(
         [
-            {transform:"translate(-50%,-50%) scale(.8)"},
-            {transform:"translate(-50%,-50%) scale(1.15)"},
-            {transform:"translate(-50%,-50%) scale(1)"}
+            {
+                transform:
+                "translate(-50%,-50%) scale(.65)"
+            },
+
+            {
+                transform:
+                "translate(-50%,-50%) scale(1.25)"
+            },
+
+            {
+                transform:
+                "translate(-50%,-50%) scale(1)"
+            }
         ],
+
         {
-            duration:700,
+            duration:800,
             easing:"ease-out"
         }
     );
@@ -663,36 +1055,59 @@ function(){
 });
 
 
-/* ==========================================
-   RESET
-========================================== */
+/* =========================================================
+   RESET MARKER
+========================================================= */
 
-document
-.getElementById("resetButton")
-.addEventListener(
+resetButton.addEventListener(
 "click",
 function(){
 
-    highlight.style.display = "flex";
+    marker.style.left =
+        "50%";
+
+    marker.style.top =
+        "72%";
+
+    marker.style.display =
+        "flex";
+
+    highlightVisible =
+        true;
+
+    toggleButton.textContent =
+        "✨ Hide Highlight";
+
+    toggleButton.classList.add(
+        "active"
+    );
 
 });
 
 
-/* ==========================================
+/* =========================================================
    QUIZ
-========================================== */
+========================================================= */
 
 let score = 0;
+
 let answered = 0;
 
+
 const questions =
-document.querySelectorAll(".question");
+document.querySelectorAll(
+    ".question"
+);
+
 
 questions.forEach(
 function(question){
 
     const answers =
-    question.querySelectorAll(".answer");
+    question.querySelectorAll(
+        ".answer"
+    );
+
 
     answers.forEach(
     function(button){
@@ -701,23 +1116,38 @@ function(question){
         "click",
         function(){
 
-            if(question.dataset.done){
+            if(
+                question.dataset.done
+            ){
                 return;
             }
 
-            question.dataset.done = "true";
+
+            question.dataset.done =
+                "true";
 
             answered++;
 
-            if(button.dataset.correct === "true"){
+
+            if(
+                button.dataset.correct ===
+                "true"
+            ){
 
                 score++;
 
-                button.classList.add("correct");
+                button.classList.add(
+                    "correct"
+                );
 
-            }else{
+            }
 
-                button.classList.add("wrong");
+            else{
+
+                button.classList.add(
+                    "wrong"
+                );
+
 
                 answers.forEach(
                 function(answer){
@@ -727,7 +1157,9 @@ function(question){
                         "true"
                     ){
 
-                        answer.classList.add("correct");
+                        answer.classList.add(
+                            "correct"
+                        );
 
                     }
 
@@ -735,23 +1167,35 @@ function(question){
 
             }
 
-            if(answered === questions.length){
 
-                document
-                .getElementById("quizResult")
-                .style.display = "block";
+            if(
+                answered ===
+                questions.length
+            ){
 
-                document
-                .getElementById("quizScore")
-                .textContent =
-                score + " / " + questions.length;
+                const result =
+                    document.getElementById(
+                        "quizResult"
+                    );
 
-                document
-                .getElementById("quizMessage")
-                .textContent =
-                score === questions.length
-                ? "Perfect! 🧠"
-                : "Good job — review the anatomy and try again.";
+                result.style.display =
+                    "block";
+
+
+                document.getElementById(
+                    "quizScore"
+                ).textContent =
+                    score +
+                    " / " +
+                    questions.length;
+
+
+                document.getElementById(
+                    "quizMessage"
+                ).textContent =
+                    score === questions.length
+                    ? "Perfect! 🧠"
+                    : "Good job — review the anatomy and try again.";
 
             }
 
