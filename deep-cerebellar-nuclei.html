@@ -193,6 +193,11 @@ h1{
     transition:width .3s;
 }
 
+
+/* ==================================================
+   LABELS
+================================================== */
+
 .nucleus-label{
     position:absolute;
     z-index:50;
@@ -216,6 +221,7 @@ h1{
     font-weight:bold;
     letter-spacing:.8px;
     white-space:nowrap;
+
     box-shadow:
         0 0 12px rgba(255,255,255,.3),
         0 0 30px rgba(255,255,255,.12);
@@ -230,6 +236,11 @@ h1{
     bottom:-35px;
     transform:translateX(-50%);
 }
+
+
+/* ==================================================
+   CONTROLS
+================================================== */
 
 .controls{
     display:flex;
@@ -260,6 +271,11 @@ h1{
     color:white;
 }
 
+
+/* ==================================================
+   SECTIONS
+================================================== */
+
 .section{
     margin-top:70px;
 }
@@ -284,6 +300,11 @@ h1{
     line-height:1.9;
     margin-bottom:30px;
 }
+
+
+/* ==================================================
+   CARDS
+================================================== */
 
 .cards{
     display:grid;
@@ -316,6 +337,11 @@ h1{
     line-height:1.8;
 }
 
+
+/* ==================================================
+   CLINICAL
+================================================== */
+
 .clinical-section{
     margin-top:65px;
 }
@@ -335,6 +361,11 @@ h1{
     margin-bottom:18px;
 }
 
+
+/* ==================================================
+   INSIGHT
+================================================== */
+
 .insight{
     margin-top:30px;
     padding:25px;
@@ -347,6 +378,11 @@ h1{
 .insight strong{
     color:white;
 }
+
+
+/* ==================================================
+   FACTS
+================================================== */
 
 .facts-grid{
     display:grid;
@@ -381,6 +417,11 @@ h1{
     font-size:13px;
     line-height:1.7;
 }
+
+
+/* ==================================================
+   QUIZ
+================================================== */
 
 .quiz{
     margin-top:65px;
@@ -468,6 +509,11 @@ h1{
     color:white;
 }
 
+
+/* ==================================================
+   BACK
+================================================== */
+
 .back{
     display:inline-block;
     margin-top:40px;
@@ -481,6 +527,11 @@ h1{
 .back:hover{
     border-color:white;
 }
+
+
+/* ==================================================
+   MOBILE
+================================================== */
 
 @media(max-width:900px){
 
@@ -526,6 +577,7 @@ h1{
 
 </head>
 
+
 <body>
 
 <nav>
@@ -535,6 +587,7 @@ h1{
 </a>
 
 </nav>
+
 
 <main class="container">
 
@@ -571,17 +624,29 @@ fastigial nuclei.
 
 </div>
 
+
 <div class="actions">
 
-<a class="action-button" href="#anatomy">
+<a
+class="action-button"
+href="#anatomy"
+>
 🧠 Nuclei Anatomy
 </a>
 
-<a class="action-button" href="#quiz">
+<a
+class="action-button"
+href="#quiz"
+>
 🧪 Test Yourself
 </a>
 
 </div>
+
+
+<!-- ==================================================
+     3D VIEWER
+================================================== -->
 
 <div class="viewer">
 
@@ -597,9 +662,13 @@ DRAG TO ROTATE · SCROLL TO ZOOM
 
 </div>
 
+
 <div class="scene">
 
-<div id="loading" class="loading">
+<div
+id="loading"
+class="loading"
+>
 
 <span id="loadText">
 Loading real brain model...
@@ -607,15 +676,23 @@ Loading real brain model...
 
 <div class="loading-bar">
 
-<div id="loadBar" class="loading-bar-inner"></div>
+<div
+id="loadBar"
+class="loading-bar-inner"
+></div>
 
 </div>
 
 </div>
+
 
 <canvas id="brainCanvas"></canvas>
 
-<div id="nucleusLabel" class="nucleus-label">
+
+<div
+id="nucleusLabel"
+class="nucleus-label"
+>
 
 <div class="label-box">
 DEEP CEREBELLAR NUCLEI
@@ -626,17 +703,26 @@ DEEP CEREBELLAR NUCLEI
 
 </div>
 
+
 <div class="controls">
 
-<button id="highlight" class="active">
+<button
+id="highlight"
+class="active"
+>
 ⚪ Highlight Deep Nuclei
 </button>
 
-<button id="rotate" class="active">
+<button
+id="rotate"
+class="active"
+>
 ⟳ Auto Rotate
 </button>
 
-<button id="reset">
+<button
+id="reset"
+>
 ↻ Reset View
 </button>
 
@@ -644,7 +730,15 @@ DEEP CEREBELLAR NUCLEI
 
 </div>
 
-<section id="anatomy" class="section">
+
+<!-- ==================================================
+     ANATOMY
+================================================== -->
+
+<section
+id="anatomy"
+class="section"
+>
 
 <div class="section-label">
 Deep Cerebellar Nuclei · النوى العميقة
@@ -668,6 +762,7 @@ emboliform, globose, and fastigial.
 توجد النواة المسننة ثم الصمية ثم الكروية ثم السريعة.
 
 </p>
+
 
 <div class="cards">
 
@@ -694,6 +789,7 @@ movement.
 
 </div>
 
+
 <div class="card">
 
 <h3>
@@ -715,6 +811,7 @@ movement.
 
 </div>
 
+
 <div class="card">
 
 <h3>
@@ -734,6 +831,7 @@ nucleus and participates in cerebellar motor circuitry.
 </p>
 
 </div>
+
 
 <div class="card">
 
@@ -756,6 +854,7 @@ posture, and axial control.
 
 </div>
 
+
 <div class="card">
 
 <h3>
@@ -776,6 +875,7 @@ white matter.
 </p>
 
 </div>
+
 
 <div class="card">
 
@@ -801,6 +901,11 @@ system.
 </div>
 
 </section>
+
+
+<!-- ==================================================
+     CLINICAL
+================================================== -->
 
 <div class="clinical-section">
 
@@ -835,6 +940,7 @@ and the precision of voluntary movement.
 
 </div>
 
+
 <div class="insight">
 
 <strong>
@@ -856,6 +962,11 @@ cerebellum.
 
 </div>
 
+
+<!-- ==================================================
+     QUICK FACTS
+================================================== -->
+
 <div class="section">
 
 <div class="section-label">
@@ -870,7 +981,9 @@ Deep Nuclei at a Glance
 
 <div class="fact">
 
-<span>01</span>
+<span>
+01
+</span>
 
 <strong>
 Number · العدد
@@ -882,9 +995,12 @@ Four major paired nuclei
 
 </div>
 
+
 <div class="fact">
 
-<span>02</span>
+<span>
+02
+</span>
 
 <strong>
 Most Lateral · الأكثر وحشية
@@ -896,9 +1012,12 @@ Dentate nucleus
 
 </div>
 
+
 <div class="fact">
 
-<span>03</span>
+<span>
+03
+</span>
 
 <strong>
 Most Medial · الأكثر إنسية
@@ -910,9 +1029,12 @@ Fastigial nucleus
 
 </div>
 
+
 <div class="fact">
 
-<span>04</span>
+<span>
+04
+</span>
 
 <strong>
 Location · الموقع
@@ -928,13 +1050,25 @@ Deep within cerebellar white matter
 
 </div>
 
-<div id="quiz" class="quiz">
+
+<!-- ==================================================
+     QUIZ
+================================================== -->
+
+<div
+id="quiz"
+class="quiz"
+>
 
 <h2>
 🧠 Mini Test · اختبار قصير
 </h2>
 
-<div class="question-block" data-answer="B">
+
+<div
+class="question-block"
+data-answer="B"
+>
 
 <div class="question-number">
 Question 01 · السؤال الأول
@@ -944,9 +1078,13 @@ Question 01 · السؤال الأول
 Where are the deep cerebellar nuclei located?
 </div>
 
-<div class="question-ar" dir="rtl">
+<div
+class="question-ar"
+dir="rtl"
+>
 أين تقع النوى العميقة للمخيخ؟
 </div>
+
 
 <button class="option" data-option="A">
 A. Outside the brain
@@ -968,7 +1106,11 @@ D. On the surface of the medulla
 
 </div>
 
-<div class="question-block" data-answer="A">
+
+<div
+class="question-block"
+data-answer="A"
+>
 
 <div class="question-number">
 Question 02 · السؤال الثاني
@@ -978,9 +1120,13 @@ Question 02 · السؤال الثاني
 Which nucleus is the most lateral?
 </div>
 
-<div class="question-ar" dir="rtl">
+<div
+class="question-ar"
+dir="rtl"
+>
 أي نواة تقع بشكل أكثر وحشية؟
 </div>
+
 
 <button class="option" data-option="A">
 A. Dentate
@@ -1002,7 +1148,11 @@ D. Emboliform
 
 </div>
 
-<div class="question-block" data-answer="D">
+
+<div
+class="question-block"
+data-answer="D"
+>
 
 <div class="question-number">
 Question 03 · السؤال الثالث
@@ -1012,9 +1162,13 @@ Question 03 · السؤال الثالث
 Which nucleus is the most medial?
 </div>
 
-<div class="question-ar" dir="rtl">
+<div
+class="question-ar"
+dir="rtl"
+>
 أي نواة تقع بشكل أكثر إنسية؟
 </div>
+
 
 <button class="option" data-option="A">
 A. Dentate
@@ -1036,7 +1190,11 @@ D. Fastigial
 
 </div>
 
-<div id="quizResult" class="quiz-result">
+
+<div
+id="quizResult"
+class="quiz-result"
+>
 
 Answer all three questions to see your final score.
 <br>
@@ -1047,11 +1205,21 @@ Answer all three questions to see your final score.
 
 </div>
 
-<a class="back" href="explore.html">
+
+<a
+class="back"
+href="explore.html"
+>
 ← Back to Explore Anatomy
 </a>
 
+
 </main>
+
+
+<!-- ==================================================
+     THREE.JS
+================================================== -->
 
 <script type="importmap">
 
@@ -1068,6 +1236,7 @@ Answer all three questions to see your final score.
 }
 
 </script>
+
 
 <script type="module">
 
@@ -1234,6 +1403,7 @@ keyLight.position.set(
 
 scene.add(keyLight);
 
+
 const fillLight =
 new THREE.DirectionalLight(
     0x8ca9bd,
@@ -1347,13 +1517,14 @@ function makeNucleus(
 
     mesh.name = name;
 
-    mesh.position.copy(
-        position
-    );
+    /*
+       LOCAL coordinates inside brainRoot.
+       These move WITH the brain.
+    */
 
-    mesh.scale.copy(
-        scale
-    );
+    mesh.position.copy(position);
+
+    mesh.scale.copy(scale);
 
     mesh.renderOrder = 20;
 
@@ -1375,6 +1546,12 @@ function createDeepNuclei(){
     nucleiGroup =
     new THREE.Group();
 
+    /*
+       Nuclei are attached to brainRoot.
+       They therefore rotate and move with
+       the same anatomical coordinate system.
+    */
+
     brainRoot.add(
         nucleiGroup
     );
@@ -1383,166 +1560,179 @@ function createDeepNuclei(){
     /*
        UPDATED POSITIONING
 
-       The nuclei are now:
+       The nuclei have been moved substantially
+       UPWARD and made SMALLER.
 
-       • HIGHER inside the cerebellum
-       • SMALLER
-       • TIGHTER TOGETHER
-       • NOT FLOATING OUTSIDE
-
-       Y was raised significantly from
-       around -0.7 to around -0.30.
+       X = left/right
+       Y = superior/inferior
+       Z = anterior/posterior
     */
 
 
-    /* LEFT DENTATE */
+    /* ------------------------------------------
+       LEFT DENTATE
+    ------------------------------------------ */
 
     makeNucleus(
         "Left Dentate Nucleus",
 
         new THREE.Vector3(
-            -0.34,
-            -0.30,
-             0.05
+            -0.28,
+             0.02,
+             0.03
         ),
 
         new THREE.Vector3(
             .115,
             .080,
-            .155
+            .165
         )
     );
 
 
-    /* RIGHT DENTATE */
+    /* ------------------------------------------
+       RIGHT DENTATE
+    ------------------------------------------ */
 
     makeNucleus(
         "Right Dentate Nucleus",
 
         new THREE.Vector3(
-             0.34,
-            -0.30,
-             0.05
+             0.28,
+             0.02,
+             0.03
         ),
 
         new THREE.Vector3(
             .115,
             .080,
-            .155
+            .165
         )
     );
 
 
-    /* LEFT EMBOLIFORM */
+    /* ------------------------------------------
+       LEFT EMBOLIFORM
+    ------------------------------------------ */
 
     makeNucleus(
         "Left Emboliform Nucleus",
 
         new THREE.Vector3(
-            -0.23,
-            -0.34,
+            -0.18,
+             0.07,
              0.02
         ),
 
         new THREE.Vector3(
             .065,
-            .055,
-            .095
+            .060,
+            .100
         )
     );
 
 
-    /* RIGHT EMBOLIFORM */
+    /* ------------------------------------------
+       RIGHT EMBOLIFORM
+    ------------------------------------------ */
 
     makeNucleus(
         "Right Emboliform Nucleus",
 
         new THREE.Vector3(
-             0.23,
-            -0.34,
+             0.18,
+             0.07,
              0.02
         ),
 
         new THREE.Vector3(
             .065,
-            .055,
-            .095
+            .060,
+            .100
         )
     );
 
 
-    /* LEFT GLOBOSE */
+    /* ------------------------------------------
+       LEFT GLOBOSE
+    ------------------------------------------ */
 
     makeNucleus(
         "Left Globose Nucleus",
 
         new THREE.Vector3(
-            -0.15,
-            -0.36,
+            -0.11,
+             0.08,
              0.02
         ),
 
         new THREE.Vector3(
             .055,
             .055,
-            .075
+            .085
         )
     );
 
 
-    /* RIGHT GLOBOSE */
+    /* ------------------------------------------
+       RIGHT GLOBOSE
+    ------------------------------------------ */
 
     makeNucleus(
         "Right Globose Nucleus",
 
         new THREE.Vector3(
-             0.15,
-            -0.36,
+             0.11,
+             0.08,
              0.02
         ),
 
         new THREE.Vector3(
             .055,
             .055,
-            .075
+            .085
         )
     );
 
 
-    /* LEFT FASTIGIAL */
+    /* ------------------------------------------
+       LEFT FASTIGIAL
+    ------------------------------------------ */
 
     makeNucleus(
         "Left Fastigial Nucleus",
 
         new THREE.Vector3(
-            -0.07,
-            -0.35,
-             0.02
+            -0.055,
+             0.10,
+             0.015
         ),
 
         new THREE.Vector3(
             .050,
-            .070,
-            .060
+            .065,
+            .070
         )
     );
 
 
-    /* RIGHT FASTIGIAL */
+    /* ------------------------------------------
+       RIGHT FASTIGIAL
+    ------------------------------------------ */
 
     makeNucleus(
         "Right Fastigial Nucleus",
 
         new THREE.Vector3(
-             0.07,
-            -0.35,
-             0.02
+             0.055,
+             0.10,
+             0.015
         ),
 
         new THREE.Vector3(
             .050,
-            .070,
-            .060
+            .065,
+            .070
         )
     );
 
@@ -1558,16 +1748,20 @@ function loadBrain(){
     const loader =
     new GLTFLoader();
 
+
     const draco =
     new DRACOLoader();
+
 
     draco.setDecoderPath(
         "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/"
     );
 
+
     loader.setDRACOLoader(
         draco
     );
+
 
     const url =
     "https://cdn.jsdelivr.net/gh/itayinbarr/brainproject@main/brain-atlas/models/brain.glb";
@@ -1593,15 +1787,18 @@ function loadBrain(){
                 brainModel
             );
 
+
             const center =
             box.getCenter(
                 new THREE.Vector3()
             );
 
+
             const size =
             box.getSize(
                 new THREE.Vector3()
             );
+
 
             const maxDim =
             Math.max(
@@ -1611,16 +1808,18 @@ function loadBrain(){
             );
 
 
-            /* ==================================
-               NORMALIZE MODEL
-            ================================== */
+            /*
+               Normalize model.
+            */
 
             const scale =
             4.5 / maxDim;
 
+
             brainModel.scale.setScalar(
                 scale
             );
+
 
             brainModel.position.set(
                 0,
@@ -1628,11 +1827,17 @@ function loadBrain(){
                 0
             );
 
+
             brainModel.position.sub(
                 center.multiplyScalar(
                     scale
                 )
             );
+
+
+            /*
+               Brain vertical placement.
+            */
 
             brainModel.position.y -= .60;
 
@@ -1649,9 +1854,11 @@ function loadBrain(){
                 )
                     return;
 
+
                 child.castShadow = true;
 
                 child.receiveShadow = true;
+
 
                 child.material =
                 brainMaterial.clone();
@@ -1665,8 +1872,8 @@ function loadBrain(){
 
 
             /*
-               CREATE THE NUCLEI AFTER
-               THE BRAIN IS NORMALIZED.
+               CREATE NUCLEI AFTER THE BRAIN
+               HAS BEEN LOADED.
             */
 
             createDeepNuclei();
@@ -1674,6 +1881,7 @@ function loadBrain(){
 
             loadBar.style.width =
             "100%";
+
 
             loadText.textContent =
             "Deep nuclei loaded";
@@ -1708,6 +1916,7 @@ function loadBrain(){
                     progress.total *
                     95
                 );
+
 
                 loadBar.style.width =
                 percent + "%";
@@ -1757,7 +1966,9 @@ function updateLabel(){
         const p =
         new THREE.Vector3();
 
+
         mesh.getWorldPosition(p);
+
 
         center.add(p);
 
@@ -1819,7 +2030,9 @@ function resize(){
     camera.aspect =
     width / height;
 
+
     camera.updateProjectionMatrix();
+
 
     renderer.setSize(
         width,
@@ -1926,11 +2139,13 @@ function(){
         8.5
     );
 
+
     controls.target.set(
         0,
         -.25,
         0
     );
+
 
     controls.update();
 
@@ -1947,9 +2162,12 @@ function animate(){
         animate
     );
 
+
     controls.update();
 
+
     updateLabel();
+
 
     renderer.render(
         scene,
@@ -2039,12 +2257,15 @@ function(question){
 
                 score++;
 
+
                 option.classList.add(
                     "correct"
                 );
 
+
                 feedback.textContent =
                 "✓ Correct! · إجابة صحيحة";
+
 
                 feedback.style.color =
                 "#78e0a0";
@@ -2077,6 +2298,7 @@ function(question){
 
                 feedback.textContent =
                 "✗ Incorrect · إجابة غير صحيحة";
+
 
                 feedback.style.color =
                 "#ff8792";
