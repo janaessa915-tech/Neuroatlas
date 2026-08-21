@@ -1,14 +1,15 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>NeuroAtlas | Deep Cerebellar Nuclei</title>
 
 <style>
+
 *{
     box-sizing:border-box;
     margin:0;
@@ -206,14 +207,23 @@ h1{
 
 .label-box{
     position:relative;
+
     padding:8px 13px;
+
     border-radius:9px;
+
     background:rgba(5,10,17,.97);
+
     border:1.5px solid white;
+
     color:white;
+
     font-size:11px;
+
     font-weight:bold;
+
     letter-spacing:.8px;
+
     white-space:nowrap;
 
     box-shadow:
@@ -223,11 +233,17 @@ h1{
 
 .label-line{
     position:absolute;
+
     width:1.5px;
+
     height:35px;
+
     background:white;
+
     left:50%;
+
     bottom:-35px;
+
     transform:translateX(-50%);
 }
 
@@ -235,17 +251,25 @@ h1{
     display:flex;
     gap:10px;
     flex-wrap:wrap;
+
     padding:15px;
+
     border-top:1px solid rgba(255,255,255,.08);
 }
 
 .controls button{
     padding:11px 17px;
+
     border-radius:9px;
+
     background:#0b1928;
+
     border:1px solid #31516d;
+
     color:#bdd0e0;
+
     cursor:pointer;
+
     transition:.2s;
 }
 
@@ -293,9 +317,13 @@ h1{
 
 .card{
     padding:27px;
+
     background:#091522;
+
     border:1px solid #172b3e;
+
     border-radius:18px;
+
     transition:.2s;
 }
 
@@ -322,9 +350,13 @@ h1{
 
 .clinical-box{
     padding:30px;
+
     background:#091522;
+
     border:1px solid #172b3e;
+
     border-left:3px solid white;
+
     border-radius:18px;
 }
 
@@ -337,10 +369,15 @@ h1{
 
 .insight{
     margin-top:30px;
+
     padding:25px;
+
     background:#091522;
+
     border-left:3px solid white;
+
     border-radius:10px;
+
     color:#aebdce;
 }
 
@@ -356,37 +393,53 @@ h1{
 
 .fact{
     padding:22px;
+
     background:#091522;
+
     border:1px solid #172b3e;
+
     border-radius:16px;
 }
 
 .fact span{
     display:block;
+
     color:white;
+
     font-size:11px;
+
     letter-spacing:2px;
+
     margin-bottom:12px;
 }
 
 .fact strong{
     display:block;
+
     color:#eef4fa;
+
     font-size:14px;
+
     margin-bottom:8px;
 }
 
 .fact p{
     color:#8195a8;
+
     font-size:13px;
+
     line-height:1.7;
 }
 
 .quiz{
     margin-top:65px;
+
     padding:30px;
+
     background:#091522;
+
     border:1px solid #172b3e;
+
     border-radius:18px;
 }
 
@@ -397,43 +450,65 @@ h1{
 
 .question-block{
     padding:22px;
+
     margin-bottom:18px;
+
     background:#07111d;
+
     border:1px solid #172b3e;
+
     border-radius:14px;
 }
 
 .question-number{
     color:#61b5ff;
+
     font-size:12px;
+
     letter-spacing:2px;
+
     text-transform:uppercase;
+
     margin-bottom:8px;
 }
 
 .question-en{
     color:#eef4fa;
+
     font-size:16px;
+
     margin-bottom:5px;
 }
 
 .question-ar{
     color:#91a5b8;
+
     font-size:15px;
+
     margin-bottom:15px;
 }
 
 .option{
     display:block;
+
     width:100%;
+
     padding:13px;
+
     margin-top:10px;
+
     background:#10233a;
+
     color:white;
+
     border:1px solid #263951;
+
     border-radius:8px;
+
     text-align:left;
+
     cursor:pointer;
+
     font-size:14px;
 }
 
@@ -459,22 +534,35 @@ h1{
 
 .quiz-result{
     margin-top:25px;
+
     padding:20px;
+
     border-radius:12px;
+
     background:#07111d;
+
     border:1px solid #263951;
+
     text-align:center;
+
     font-size:17px;
+
     color:white;
 }
 
 .back{
     display:inline-block;
+
     margin-top:40px;
+
     padding:12px 18px;
+
     border:1px solid #263951;
+
     border-radius:9px;
+
     color:white;
+
     text-decoration:none;
 }
 
@@ -483,6 +571,7 @@ h1{
 }
 
 @media(max-width:900px){
+
     .cards{
         grid-template-columns:repeat(2,1fr);
     }
@@ -490,9 +579,11 @@ h1{
     .facts-grid{
         grid-template-columns:repeat(2,1fr);
     }
+
 }
 
 @media(max-width:800px){
+
     .scene{
         height:450px;
     }
@@ -500,9 +591,11 @@ h1{
     .viewer-status{
         display:none;
     }
+
 }
 
 @media(max-width:600px){
+
     .cards{
         grid-template-columns:1fr;
     }
@@ -514,17 +607,24 @@ h1{
     h1{
         letter-spacing:-2px;
     }
+
 }
+
 </style>
+
 </head>
+
 
 <body>
 
 <nav>
+
 <a href="./explore.html">
 ← Back to Explore Anatomy
 </a>
+
 </nav>
+
 
 <main class="container">
 
@@ -543,6 +643,7 @@ Deep Cerebellar Nuclei
 <div class="hero">
 
 <p>
+
 The deep cerebellar nuclei are four paired groups of
 gray matter embedded deep within the cerebellum. They
 form major output stations of the cerebellar circuitry
@@ -555,21 +656,30 @@ fastigial nuclei.
 الرمادية تقع في عمق المخيخ. وتُعد من أهم مناطق خروج
 الإشارات من دوائر المخيخ، وتشمل النواة المسننة،
 والصمية، والكروية، والسريعة.
+
 </p>
 
 </div>
 
+
 <div class="actions">
 
-<a class="action-button" href="#anatomy">
+<a
+class="action-button"
+href="#anatomy"
+>
 🧠 Nuclei Anatomy
 </a>
 
-<a class="action-button" href="#quiz">
+<a
+class="action-button"
+href="#quiz"
+>
 🧪 Test Yourself
 </a>
 
 </div>
+
 
 <div class="viewer">
 
@@ -585,23 +695,37 @@ DRAG TO ROTATE · SCROLL TO ZOOM
 
 </div>
 
+
 <div class="scene">
 
-<div id="loading" class="loading">
+<div
+id="loading"
+class="loading"
+>
 
 <span id="loadText">
 Loading real brain model...
 </span>
 
 <div class="loading-bar">
-<div id="loadBar" class="loading-bar-inner"></div>
+
+<div
+id="loadBar"
+class="loading-bar-inner"
+></div>
+
 </div>
 
 </div>
+
 
 <canvas id="brainCanvas"></canvas>
 
-<div id="nucleusLabel" class="nucleus-label">
+
+<div
+id="nucleusLabel"
+class="nucleus-label"
+>
 
 <div class="label-box">
 DEEP CEREBELLAR NUCLEI
@@ -612,17 +736,26 @@ DEEP CEREBELLAR NUCLEI
 
 </div>
 
+
 <div class="controls">
 
-<button id="highlight" class="active">
+<button
+id="highlight"
+class="active"
+>
 ⚪ Highlight Deep Nuclei
 </button>
 
-<button id="rotate" class="active">
+<button
+id="rotate"
+class="active"
+>
 ⟳ Auto Rotate
 </button>
 
-<button id="reset">
+<button
+id="reset"
+>
 ↻ Reset View
 </button>
 
@@ -630,7 +763,11 @@ DEEP CEREBELLAR NUCLEI
 
 </div>
 
-<section id="anatomy" class="section">
+
+<section
+id="anatomy"
+class="section"
+>
 
 <div class="section-label">
 Deep Cerebellar Nuclei · النوى العميقة
@@ -655,6 +792,7 @@ emboliform, globose, and fastigial.
 
 </p>
 
+
 <div class="cards">
 
 <div class="card">
@@ -664,6 +802,7 @@ Dentate Nucleus · النواة المسننة
 </h3>
 
 <p>
+
 The dentate nucleus is the largest and most lateral
 deep cerebellar nucleus. It is strongly associated
 with planning, timing, and coordination of voluntary
@@ -674,9 +813,11 @@ movement.
 النواة المسننة هي أكبر وأكثر النوى العميقة وقوعًا
 إلى الجانب الوحشي، وترتبط بتخطيط وتوقيت وتنسيق
 الحركات الإرادية.
+
 </p>
 
 </div>
+
 
 <div class="card">
 
@@ -685,6 +826,7 @@ Emboliform Nucleus · النواة الصمية
 </h3>
 
 <p>
+
 The emboliform nucleus lies medial to the dentate
 nucleus and contributes to cerebellar control of
 movement.
@@ -693,9 +835,11 @@ movement.
 
 تقع النواة الصمية إلى الداخل من النواة المسننة
 وتساهم في التحكم المخيخي في الحركة.
+
 </p>
 
 </div>
+
 
 <div class="card">
 
@@ -704,6 +848,7 @@ Globose Nucleus · النواة الكروية
 </h3>
 
 <p>
+
 The globose nucleus lies medial to the emboliform
 nucleus and participates in cerebellar motor circuitry.
 
@@ -711,9 +856,11 @@ nucleus and participates in cerebellar motor circuitry.
 
 تقع النواة الكروية إلى الداخل من النواة الصمية
 وتشارك في دوائر التحكم الحركي للمخيخ.
+
 </p>
 
 </div>
+
 
 <div class="card">
 
@@ -722,6 +869,7 @@ Fastigial Nucleus · النواة السريعة
 </h3>
 
 <p>
+
 The fastigial nucleus is the most medial of the deep
 cerebellar nuclei and is closely related to balance,
 posture, and axial control.
@@ -730,9 +878,11 @@ posture, and axial control.
 
 النواة السريعة هي أكثر النوى العميقة وقوعًا في
 المنتصف وترتبط بالتوازن والوضعية والتحكم في الجذع.
+
 </p>
 
 </div>
+
 
 <div class="card">
 
@@ -741,6 +891,7 @@ Deep Location · الموقع العميق
 </h3>
 
 <p>
+
 Unlike structures on the surface of the cerebellum,
 the deep nuclei are embedded within the cerebellar
 white matter.
@@ -749,9 +900,11 @@ white matter.
 
 على عكس التراكيب الموجودة على سطح المخيخ، تقع النوى
 العميقة داخل المادة البيضاء للمخيخ.
+
 </p>
 
 </div>
+
 
 <div class="card">
 
@@ -760,6 +913,7 @@ Major Output · المخرج الرئيسي
 </h3>
 
 <p>
+
 The deep nuclei provide major output pathways from
 the cerebellar circuitry to other parts of the nervous
 system.
@@ -768,6 +922,7 @@ system.
 
 توفر النوى العميقة مسارات خروج رئيسية من دوائر
 المخيخ إلى أجزاء أخرى من الجهاز العصبي.
+
 </p>
 
 </div>
@@ -775,6 +930,7 @@ system.
 </div>
 
 </section>
+
 
 <div class="clinical-section">
 
@@ -789,21 +945,26 @@ Why the Deep Nuclei Matter
 <div class="clinical-box">
 
 <p>
+
 Because the deep cerebellar nuclei are major output
 stations of the cerebellum, disruption of their
 circuits can affect coordination, balance, posture,
 and the precision of voluntary movement.
+
 </p>
 
 <p dir="rtl">
+
 لأن النوى العميقة للمخيخ تمثل محطات رئيسية لخروج
 إشارات المخيخ، فإن اضطراب دوائرها يمكن أن يؤثر على
 التنسيق والتوازن والوضعية ودقة الحركات الإرادية.
+
 </p>
 
 </div>
 
 </div>
+
 
 <div class="insight">
 
@@ -826,6 +987,7 @@ cerebellum.
 
 </div>
 
+
 <div class="section">
 
 <div class="section-label">
@@ -839,40 +1001,83 @@ Deep Nuclei at a Glance
 <div class="facts-grid">
 
 <div class="fact">
+
 <span>01</span>
-<strong>Number · العدد</strong>
-<p>Four major paired nuclei</p>
+
+<strong>
+Number · العدد
+</strong>
+
+<p>
+Four major paired nuclei
+</p>
+
 </div>
 
+
 <div class="fact">
+
 <span>02</span>
-<strong>Most Lateral · الأكثر وحشية</strong>
-<p>Dentate nucleus</p>
+
+<strong>
+Most Lateral · الأكثر وحشية
+</strong>
+
+<p>
+Dentate nucleus
+</p>
+
 </div>
 
+
 <div class="fact">
+
 <span>03</span>
-<strong>Most Medial · الأكثر إنسية</strong>
-<p>Fastigial nucleus</p>
+
+<strong>
+Most Medial · الأكثر إنسية
+</strong>
+
+<p>
+Fastigial nucleus
+</p>
+
 </div>
+
 
 <div class="fact">
+
 <span>04</span>
-<strong>Location · الموقع</strong>
-<p>Deep within cerebellar white matter</p>
-</div>
+
+<strong>
+Location · الموقع
+</strong>
+
+<p>
+Deep within cerebellar white matter
+</p>
 
 </div>
 
 </div>
 
-<div id="quiz" class="quiz">
+</div>
+
+
+<div
+id="quiz"
+class="quiz"
+>
 
 <h2>
 🧠 Mini Test · اختبار قصير
 </h2>
 
-<div class="question-block" data-answer="B">
+
+<div
+class="question-block"
+data-answer="B"
+>
 
 <div class="question-number">
 Question 01 · السؤال الأول
@@ -882,7 +1087,10 @@ Question 01 · السؤال الأول
 Where are the deep cerebellar nuclei located?
 </div>
 
-<div class="question-ar" dir="rtl">
+<div
+class="question-ar"
+dir="rtl"
+>
 أين تقع النوى العميقة للمخيخ؟
 </div>
 
@@ -906,7 +1114,11 @@ D. On the surface of the medulla
 
 </div>
 
-<div class="question-block" data-answer="A">
+
+<div
+class="question-block"
+data-answer="A"
+>
 
 <div class="question-number">
 Question 02 · السؤال الثاني
@@ -916,7 +1128,10 @@ Question 02 · السؤال الثاني
 Which nucleus is the most lateral?
 </div>
 
-<div class="question-ar" dir="rtl">
+<div
+class="question-ar"
+dir="rtl"
+>
 أي نواة تقع بشكل أكثر وحشية؟
 </div>
 
@@ -940,7 +1155,11 @@ D. Emboliform
 
 </div>
 
-<div class="question-block" data-answer="D">
+
+<div
+class="question-block"
+data-answer="D"
+>
 
 <div class="question-number">
 Question 03 · السؤال الثالث
@@ -950,7 +1169,10 @@ Question 03 · السؤال الثالث
 Which nucleus is the most medial?
 </div>
 
-<div class="question-ar" dir="rtl">
+<div
+class="question-ar"
+dir="rtl"
+>
 أي نواة تقع بشكل أكثر إنسية؟
 </div>
 
@@ -974,7 +1196,11 @@ D. Fastigial
 
 </div>
 
-<div id="quizResult" class="quiz-result">
+
+<div
+id="quizResult"
+class="quiz-result"
+>
 
 Answer all three questions to see your final score.
 <br>
@@ -984,23 +1210,33 @@ Answer all three questions to see your final score.
 
 </div>
 
-<a class="back" href="explore.html">
+
+<a
+class="back"
+href="explore.html"
+>
 ← Back to Explore Anatomy
 </a>
 
 </main>
 
+
 <script type="importmap">
+
 {
     "imports": {
+
         "three":
         "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
 
         "three/addons/":
         "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+
     }
 }
+
 </script>
+
 
 <script type="module">
 
@@ -1191,6 +1427,7 @@ new THREE.Group();
 
 scene.add(brainRoot);
 
+
 let brainModel = null;
 
 let nucleiGroup = null;
@@ -1280,9 +1517,8 @@ function makeNucleus(
     mesh.name = name;
 
     /*
-       LOCAL coordinates.
-       These are children of brainRoot,
-       so they follow the brain.
+       LOCAL coordinates inside brainRoot.
+       The nuclei therefore move with the brain.
     */
 
     mesh.position.copy(
@@ -1300,6 +1536,7 @@ function makeNucleus(
     nucleusMeshes.push(mesh);
 
     return mesh;
+
 }
 
 
@@ -1318,183 +1555,194 @@ function createDeepNuclei(){
 
 
     /*
-       UPDATED POSITIONING
+       IMPORTANT:
 
-       The nuclei are now:
-       - MUCH HIGHER
-       - SMALLER
-       - STILL INSIDE THE CEREBELLAR REGION
+       These are intentionally MUCH HIGHER
+       than the previous version.
 
-       They remain children of brainRoot.
+       Previous Y:
+       approximately -0.72 to -0.79
+
+       NEW Y:
+       approximately -0.34 to -0.42
+
+       Increasing Y moves them UP.
+
+       They remain inside the brain/cerebellar
+       region because they are still positioned
+       within the normalized brainRoot.
+
+       They are also SMALLER than before.
     */
 
 
-    /* ------------------------------------------
+    /* ==========================================
        LEFT DENTATE
-    ------------------------------------------ */
+    ========================================== */
 
     makeNucleus(
         "Left Dentate Nucleus",
 
         new THREE.Vector3(
-            -0.30,
-             0.02,
-             0.04
+            -0.34,
+            -0.40,
+             0.05
         ),
 
         new THREE.Vector3(
-            .12,
-            .085,
-            .17
+            .135,
+            .095,
+            .185
         )
     );
 
 
-    /* ------------------------------------------
+    /* ==========================================
        RIGHT DENTATE
-    ------------------------------------------ */
+    ========================================== */
 
     makeNucleus(
         "Right Dentate Nucleus",
 
         new THREE.Vector3(
-             0.30,
-             0.02,
-             0.04
+             0.34,
+            -0.40,
+             0.05
         ),
 
         new THREE.Vector3(
-            .12,
-            .085,
-            .17
+            .135,
+            .095,
+            .185
         )
     );
 
 
-    /* ------------------------------------------
+    /* ==========================================
        LEFT EMBOLIFORM
-    ------------------------------------------ */
+    ========================================== */
 
     makeNucleus(
         "Left Emboliform Nucleus",
 
         new THREE.Vector3(
-            -0.20,
-             0.00,
-             0.03
+            -0.23,
+            -0.43,
+             0.02
         ),
 
         new THREE.Vector3(
+            .075,
             .065,
-            .06,
-            .10
+            .11
         )
     );
 
 
-    /* ------------------------------------------
+    /* ==========================================
        RIGHT EMBOLIFORM
-    ------------------------------------------ */
+    ========================================== */
 
     makeNucleus(
         "Right Emboliform Nucleus",
 
         new THREE.Vector3(
-             0.20,
-             0.00,
-             0.03
+             0.23,
+            -0.43,
+             0.02
         ),
 
         new THREE.Vector3(
+            .075,
             .065,
-            .06,
-            .10
+            .11
         )
     );
 
 
-    /* ------------------------------------------
+    /* ==========================================
        LEFT GLOBOSE
-    ------------------------------------------ */
+    ========================================== */
 
     makeNucleus(
         "Left Globose Nucleus",
 
         new THREE.Vector3(
-            -0.13,
-            0.00,
-            0.02
+            -0.15,
+            -0.45,
+             0.02
         ),
 
         new THREE.Vector3(
-            .055,
-            .055,
-            .08
+            .065,
+            .065,
+            .09
         )
     );
 
 
-    /* ------------------------------------------
+    /* ==========================================
        RIGHT GLOBOSE
-    ------------------------------------------ */
+    ========================================== */
 
     makeNucleus(
         "Right Globose Nucleus",
 
         new THREE.Vector3(
-             0.13,
-             0.00,
+             0.15,
+            -0.45,
              0.02
         ),
 
         new THREE.Vector3(
-            .055,
-            .055,
-            .08
+            .065,
+            .065,
+            .09
         )
     );
 
 
-    /* ------------------------------------------
+    /* ==========================================
        LEFT FASTIGIAL
-    ------------------------------------------ */
+    ========================================== */
 
     makeNucleus(
         "Left Fastigial Nucleus",
 
         new THREE.Vector3(
-            -0.055,
-             0.01,
-             0.01
+            -0.07,
+            -0.43,
+             0.02
         ),
 
         new THREE.Vector3(
-            .05,
-            .065,
-            .065
+            .055,
+            .075,
+            .07
         )
     );
 
 
-    /* ------------------------------------------
+    /* ==========================================
        RIGHT FASTIGIAL
-    ------------------------------------------ */
+    ========================================== */
 
     makeNucleus(
         "Right Fastigial Nucleus",
 
         new THREE.Vector3(
-             0.055,
-             0.01,
-             0.01
+             0.07,
+            -0.43,
+             0.02
         ),
 
         new THREE.Vector3(
-            .05,
-            .065,
-            .065
+            .055,
+            .075,
+            .07
         )
     );
+
 }
 
 
@@ -1521,6 +1769,7 @@ function loadBrain(){
     const url =
     "https://cdn.jsdelivr.net/gh/itayinbarr/brainproject@main/brain-atlas/models/brain.glb";
 
+
     loader.load(
 
         url,
@@ -1529,6 +1778,11 @@ function loadBrain(){
 
             brainModel =
             gltf.scene;
+
+
+            /* ==================================
+               ORIGINAL MODEL BOUNDS
+            ================================== */
 
             const box =
             new THREE.Box3()
@@ -1553,6 +1807,11 @@ function loadBrain(){
                 size.z
             );
 
+
+            /* ==================================
+               NORMALIZE MODEL
+            ================================== */
+
             const scale =
             4.5 / maxDim;
 
@@ -1574,6 +1833,10 @@ function loadBrain(){
 
             brainModel.position.y -= .60;
 
+
+            /* ==================================
+               APPLY BRAIN MATERIAL
+            ================================== */
 
             brainModel.traverse(
             function(child){
@@ -1599,9 +1862,10 @@ function loadBrain(){
 
 
             /*
-               IMPORTANT:
-               Nuclei are created AFTER the
-               brain is normalized.
+               CREATE THE NUCLEI AFTER THE BRAIN
+               HAS BEEN NORMALIZED.
+
+               They are children of brainRoot.
             */
 
             createDeepNuclei();
@@ -1612,6 +1876,7 @@ function loadBrain(){
 
             loadText.textContent =
             "Deep nuclei loaded";
+
 
             setTimeout(
             function(){
@@ -1624,9 +1889,12 @@ function loadBrain(){
                     "show"
                 );
 
-            },600);
+            },
+            600
+            );
 
         },
+
 
         function(progress){
 
@@ -1644,9 +1912,11 @@ function loadBrain(){
 
                 loadBar.style.width =
                 percent + "%";
+
             }
 
         },
+
 
         function(error){
 
@@ -1659,7 +1929,9 @@ function loadBrain(){
             "Could not load brain model.";
 
         }
+
     );
+
 }
 
 
@@ -1675,8 +1947,10 @@ function updateLabel(){
     )
         return;
 
+
     const center =
     new THREE.Vector3();
+
 
     nucleusMeshes.forEach(
     function(mesh){
@@ -1690,29 +1964,36 @@ function updateLabel(){
 
     });
 
+
     center.divideScalar(
         nucleusMeshes.length
     );
 
+
     center.project(
         camera
     );
+
 
     const x =
     (center.x + 1) /
     2 *
     canvas.clientWidth;
 
+
     const y =
     (-center.y + 1) /
     2 *
     canvas.clientHeight;
 
+
     nucleusLabel.style.left =
     x + "px";
 
+
     nucleusLabel.style.top =
     (y - 50) + "px";
+
 }
 
 
@@ -1728,11 +2009,13 @@ function resize(){
     const height =
     canvas.clientHeight;
 
+
     if(
         width <= 0 ||
         height <= 0
     )
         return;
+
 
     camera.aspect =
     width / height;
@@ -1744,7 +2027,9 @@ function resize(){
         height,
         false
     );
+
 }
+
 
 window.addEventListener(
     "resize",
@@ -1765,6 +2050,7 @@ function(){
     highlighted =
     !highlighted;
 
+
     if(nucleiGroup){
 
         nucleiGroup.visible =
@@ -1772,21 +2058,22 @@ function(){
 
     }
 
+
     nucleusLabel.classList.toggle(
         "show",
         highlighted
     );
+
 
     this.classList.toggle(
         "active",
         highlighted
     );
 
+
     this.textContent =
     highlighted
-
     ? "⚪ Highlight Deep Nuclei"
-
     : "⚫ Show Deep Nuclei";
 
 });
@@ -1805,16 +2092,16 @@ function(){
     controls.autoRotate =
     !controls.autoRotate;
 
+
     this.classList.toggle(
         "active",
         controls.autoRotate
     );
 
+
     this.textContent =
     controls.autoRotate
-
     ? "⟳ Auto Rotate"
-
     : "▶ Auto Rotate";
 
 });
@@ -1836,11 +2123,13 @@ function(){
         8.5
     );
 
+
     controls.target.set(
         0,
         -.25,
         0
     );
+
 
     controls.update();
 
@@ -1865,6 +2154,7 @@ function animate(){
         scene,
         camera
     );
+
 }
 
 
@@ -1887,10 +2177,12 @@ let score = 0;
 
 let answered = 0;
 
+
 const questions =
 document.querySelectorAll(
     ".question-block"
 );
+
 
 questions.forEach(
 function(question){
@@ -1898,17 +2190,21 @@ function(question){
     const correct =
     question.dataset.answer;
 
+
     const options =
     question.querySelectorAll(
         ".option"
     );
+
 
     const feedback =
     question.querySelector(
         ".question-feedback"
     );
 
+
     let done = false;
+
 
     options.forEach(
     function(option){
@@ -1920,10 +2216,13 @@ function(question){
             if(done)
                 return;
 
+
             done = true;
+
 
             const selected =
             option.dataset.option;
+
 
             options.forEach(
             function(btn){
@@ -1931,6 +2230,7 @@ function(question){
                 btn.disabled = true;
 
             });
+
 
             if(
                 selected === correct
@@ -1956,6 +2256,7 @@ function(question){
                     "wrong"
                 );
 
+
                 options.forEach(
                 function(btn){
 
@@ -1972,6 +2273,7 @@ function(question){
 
                 });
 
+
                 feedback.textContent =
                 "✗ Incorrect · إجابة غير صحيحة";
 
@@ -1980,7 +2282,9 @@ function(question){
 
             }
 
+
             answered++;
+
 
             if(
                 answered ===
@@ -2009,7 +2313,9 @@ function showScore(){
         "quizResult"
     );
 
+
     let message;
+
 
     if(score === 3){
 
@@ -2039,6 +2345,7 @@ function showScore(){
 
     }
 
+
     result.innerHTML =
 
     "<strong>" +
@@ -2052,10 +2359,11 @@ function showScore(){
     score +
 
     " / 3";
+
 }
 
 </script>
 
 </body>
+
 </html>
-```
