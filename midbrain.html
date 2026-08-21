@@ -79,7 +79,7 @@ h1{
 }
 
 .arabic-title{
-    color:#ffb6c9;
+    color:#ffffff;
     font-size:25px;
     margin-bottom:25px;
 }
@@ -117,7 +117,7 @@ h1{
 .action-button:hover{
     background:#14304a;
     color:white;
-    border-color:#ffb6c9;
+    border-color:#ffffff;
 }
 
 /* =========================
@@ -216,7 +216,7 @@ h1{
     width:0%;
     height:100%;
 
-    background:#ffb6c9;
+    background:#ffffff;
 
     transition:width .3s;
 }
@@ -250,9 +250,9 @@ h1{
 
     background:rgba(5,10,17,.96);
 
-    border:1.5px solid #ffb6c9;
+    border:1.5px solid #ffffff;
 
-    color:#ffd5df;
+    color:#ffffff;
 
     font-size:12px;
 
@@ -263,8 +263,8 @@ h1{
     white-space:nowrap;
 
     box-shadow:
-        0 0 12px rgba(255,182,201,.18),
-        0 0 25px rgba(255,182,201,.08);
+        0 0 15px rgba(255,255,255,.25),
+        0 0 30px rgba(255,255,255,.10);
 }
 
 .label-box::after{
@@ -278,7 +278,7 @@ h1{
     width:1.5px;
     height:15px;
 
-    background:#ffb6c9;
+    background:#ffffff;
 
     transform:translateX(-50%);
 }
@@ -319,11 +319,11 @@ h1{
 }
 
 .controls button.active{
-    background:#241c20;
+    background:#17191c;
 
-    border-color:#ffb6c9;
+    border-color:#ffffff;
 
-    color:#ffd5df;
+    color:#ffffff;
 }
 
 /* =========================
@@ -451,7 +451,7 @@ h1{
 }
 
 .midbrain{
-    fill:#ffb6c9;
+    fill:#ffffff;
     stroke:#ffffff;
     stroke-width:4;
 }
@@ -469,7 +469,7 @@ h1{
 }
 
 .line{
-    stroke:#ffb6c9;
+    stroke:#ffffff;
     stroke-width:2;
 }
 
@@ -500,7 +500,7 @@ h1{
 
     border:1px solid #172b3e;
 
-    border-left:3px solid #ffb6c9;
+    border-left:3px solid #ffffff;
 
     border-radius:18px;
 }
@@ -527,7 +527,7 @@ h1{
 
     background:#091522;
 
-    border-left:3px solid #ffb6c9;
+    border-left:3px solid #ffffff;
 
     border-radius:10px;
 
@@ -535,7 +535,7 @@ h1{
 }
 
 .insight strong{
-    color:#ffd5df;
+    color:#ffffff;
 }
 
 /* =========================
@@ -561,7 +561,7 @@ h1{
 .fact span{
     display:block;
 
-    color:#ffb6c9;
+    color:#ffffff;
 
     font-size:11px;
 
@@ -608,30 +608,50 @@ h1{
 
 .quiz h2{
     font-size:27px;
-    margin-bottom:15px;
+    margin-bottom:25px;
 }
 
-.quiz-question-block{
-    margin-top:30px;
-    padding-top:25px;
-    border-top:1px solid #172b3e;
+.quiz-question-box{
+    margin-bottom:35px;
+
+    padding-bottom:25px;
+
+    border-bottom:1px solid #172b3e;
 }
 
-.quiz-question-block:first-of-type{
-    margin-top:10px;
-    padding-top:0;
-    border-top:none;
+.quiz-question-box:last-child{
+    border-bottom:none;
+    margin-bottom:0;
+}
+
+.quiz-number{
+    color:#ffffff;
+
+    font-size:12px;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+    margin-bottom:8px;
 }
 
 .quiz-question{
-    color:#aebdce;
-    line-height:1.8;
-    margin-bottom:15px;
+    color:#eef4fa;
+
+    font-size:16px;
+
+    margin-bottom:3px;
 }
 
-.quiz-question strong{
-    color:#eef4fa;
-    font-size:16px;
+.quiz-arabic{
+    color:#91a5b8;
+
+    font-size:15px;
+
+    margin-bottom:15px;
+
+    direction:rtl;
 }
 
 .option{
@@ -657,62 +677,61 @@ h1{
 
     font-size:15px;
 
-    line-height:1.6;
-
-    transition:
-        background .2s,
-        border-color .2s,
-        transform .15s;
+    transition:.2s;
 }
 
 .option:hover{
-    border-color:#ffb6c9;
-    transform:translateX(2px);
+    border-color:#ffffff;
+    background:#142d46;
 }
 
 .option.correct{
-    background:#182b27;
-    border-color:#72d6a0;
-    color:#b9f3d0;
+    border-color:#ffffff;
+    background:#1d2024;
+    color:#ffffff;
 }
 
-.option.incorrect{
-    background:#2b1b22;
-    border-color:#ff7f9c;
-    color:#ffc4d0;
+.option.wrong{
+    border-color:#71869e;
+    background:#101820;
+    color:#9db0c3;
 }
 
-.option.disabled{
-    cursor:default;
-}
+.question-feedback{
+    margin-top:13px;
 
-.quiz-feedback{
-    margin-top:12px;
     min-height:24px;
+
+    color:#ffffff;
+
     font-size:14px;
+
     font-weight:bold;
 }
+
+/* =========================
+   SCORE
+========================= */
 
 .quiz-score{
     margin-top:30px;
 
-    padding:20px;
+    padding:18px;
 
-    border-radius:12px;
-
-    background:#0d1b2a;
+    background:#050b13;
 
     border:1px solid #263951;
 
-    color:#ffb6c9;
+    border-radius:12px;
 
     text-align:center;
 
-    font-size:17px;
+    color:#aebdce;
+}
 
+#scoreText{
+    color:#ffffff;
     font-weight:bold;
-
-    line-height:1.6;
 }
 
 /* =========================
@@ -736,7 +755,7 @@ h1{
 }
 
 .back:hover{
-    border-color:#ffb6c9;
+    border-color:#ffffff;
 }
 
 /* =========================
@@ -835,9 +854,9 @@ Midbrain
 <p>
 
 The midbrain is the uppermost part of the brainstem. It connects
-the pons with higher regions of the brain and contains important
-structures involved in movement, eye movements, visual and
-auditory reflexes, arousal, and sensory processing.
+the pons with higher regions of the brain and plays important roles
+in movement, eye movements, visual and auditory processing,
+arousal, and reflexes.
 
 </p>
 
@@ -947,7 +966,7 @@ MIDBRAIN · الدماغ الأوسط
 id="highlight"
 class="active"
 >
-⚫ Highlight Midbrain
+⚪ Highlight Midbrain
 </button>
 
 
@@ -992,16 +1011,16 @@ Midbrain · الدماغ الأوسط
 
 <p class="section-intro">
 
-The midbrain is the uppermost section of the brainstem. It lies
-between the diencephalon and the pons and contains structures
-that are important for motor control, eye movements, reflexes,
-arousal, and sensory processing.
+The midbrain is the superior part of the brainstem. It lies
+between the pons and the diencephalon and contains important
+structures involved in movement, eye control, sensory processing,
+arousal, and reflexes.
 
 <br><br>
 
-الدماغ الأوسط هو الجزء العلوي من جذع الدماغ. يقع بين الدماغ
-البيني والجسر، ويحتوي على تراكيب مهمة للتحكم في الحركة،
-وحركات العين، والمنعكسات، واليقظة، ومعالجة المعلومات الحسية.
+الدماغ الأوسط هو الجزء العلوي من جذع الدماغ. يقع بين الجسر
+والدماغ البيني، ويحتوي على تراكيب مهمة للحركة والتحكم في العين
+ومعالجة المعلومات الحسية واليقظة وردود الفعل الانعكاسية.
 
 </p>
 
@@ -1014,17 +1033,18 @@ arousal, and sensory processing.
 <div class="card">
 
 <h3>
-Brainstem Position · موقعه في جذع الدماغ
+Cerebral Connections · الاتصالات المخية
 </h3>
 
 <p>
 
-The midbrain forms the upper portion of the brainstem and lies
-superior to the pons.
+The midbrain provides pathways connecting higher brain regions
+with the pons, medulla, and spinal cord.
 
 <br><br>
 
-يشكل الدماغ الأوسط الجزء العلوي من جذع الدماغ ويقع أعلى الجسر.
+يحتوي الدماغ الأوسط على مسارات تربط المناطق العليا من الدماغ
+بالجسر والنخاع المستطيل والحبل الشوكي.
 
 </p>
 
@@ -1036,18 +1056,18 @@ superior to the pons.
 <div class="card">
 
 <h3>
-Cerebral Connections · الاتصالات الدماغية
+Motor Control · التحكم الحركي
 </h3>
 
 <p>
 
-The midbrain contains pathways connecting higher brain regions
-with the pons, spinal cord, and other brainstem structures.
+The midbrain contains important motor structures including
+the substantia nigra and pathways involved in voluntary movement.
 
 <br><br>
 
-يحتوي الدماغ الأوسط على مسارات تربط المناطق العليا من الدماغ
-بالجسر والحبل الشوكي وباقي تراكيب جذع الدماغ.
+يحتوي الدماغ الأوسط على تراكيب حركية مهمة مثل المادة السوداء
+ومسارات تشارك في التحكم في الحركة الإرادية.
 
 </p>
 
@@ -1059,17 +1079,18 @@ with the pons, spinal cord, and other brainstem structures.
 <div class="card">
 
 <h3>
-Motor Control · التحكم في الحركة
+Eye Movements · حركة العين
 </h3>
 
 <p>
 
-Structures within the midbrain contribute to the initiation,
-modulation, and coordination of movement.
+The midbrain contains nuclei of cranial nerves III and IV,
+which are important for controlling several eye movements.
 
 <br><br>
 
-تساهم تراكيب الدماغ الأوسط في بدء الحركة وتنظيمها وتنسيقها.
+يحتوي الدماغ الأوسط على أنوية العصبين القحفيين الثالث والرابع،
+وهما مهمان للتحكم في العديد من حركات العين.
 
 </p>
 
@@ -1081,18 +1102,18 @@ modulation, and coordination of movement.
 <div class="card">
 
 <h3>
-Substantia Nigra · المادة السوداء
+Visual Processing · المعالجة البصرية
 </h3>
 
 <p>
 
-The substantia nigra is an important midbrain structure involved
-in motor control and dopamine-related signaling.
+The superior colliculus participates in visual reflexes and
+helps orient the eyes and head toward visual stimuli.
 
 <br><br>
 
-المادة السوداء تركيب مهم في الدماغ الأوسط يشارك في التحكم
-الحركي والإشارات المرتبطة بالدوبامين.
+تشارك الحدبة العلوية في المنعكسات البصرية وتساعد على توجيه
+العينين والرأس نحو المنبهات البصرية.
 
 </p>
 
@@ -1104,17 +1125,18 @@ in motor control and dopamine-related signaling.
 <div class="card">
 
 <h3>
-Red Nucleus · النواة الحمراء
+Auditory Processing · المعالجة السمعية
 </h3>
 
 <p>
 
-The red nucleus is involved in motor pathways and coordination
-of movement.
+The inferior colliculus is an important relay center in
+auditory pathways and contributes to auditory reflexes.
 
 <br><br>
 
-تشارك النواة الحمراء في المسارات الحركية وتنسيق الحركة.
+تُعد الحدبة السفلية مركزًا مهمًا في المسارات السمعية
+وتشارك في بعض المنعكسات السمعية.
 
 </p>
 
@@ -1126,18 +1148,18 @@ of movement.
 <div class="card">
 
 <h3>
-Visual Reflexes · المنعكسات البصرية
+Substantia Nigra · المادة السوداء
 </h3>
 
 <p>
 
-The superior colliculus participates in orienting movements
-and reflexive responses to visual stimuli.
+The substantia nigra is involved in motor control through
+dopaminergic signaling and connections with the basal ganglia.
 
 <br><br>
 
-يشارك التل العلوي في توجيه الحركة والاستجابات الانعكاسية
-للمثيرات البصرية.
+تشارك المادة السوداء في التحكم الحركي من خلال الإشارات
+الدوبامينية واتصالاتها مع العقد القاعدية.
 
 </p>
 
@@ -1149,18 +1171,18 @@ and reflexive responses to visual stimuli.
 <div class="card">
 
 <h3>
-Auditory Reflexes · المنعكسات السمعية
+Red Nucleus · النواة الحمراء
 </h3>
 
 <p>
 
-The inferior colliculus is an important midbrain structure
-involved in auditory processing and reflex pathways.
+The red nucleus is involved in motor coordination and
+communication between motor systems.
 
 <br><br>
 
-يعد التل السفلي تركيبًا مهمًا في الدماغ الأوسط لمعالجة
-المعلومات السمعية والمسارات الانعكاسية.
+تشارك النواة الحمراء في التنسيق الحركي والتواصل بين
+الأنظمة الحركية المختلفة.
 
 </p>
 
@@ -1172,18 +1194,18 @@ involved in auditory processing and reflex pathways.
 <div class="card">
 
 <h3>
-Eye Movements · حركات العين
+Reticular Formation · التكوين الشبكي
 </h3>
 
 <p>
 
-The midbrain contains nuclei associated with cranial nerves
-III and IV, which contribute to control of eye movements.
+Midbrain regions contribute to the reticular formation,
+which participates in arousal, attention, and consciousness.
 
 <br><br>
 
-يحتوي الدماغ الأوسط على أنوية مرتبطة بالعصبين القحفيين
-الثالث والرابع، وهما مهمان للتحكم في حركات العين.
+تساهم مناطق الدماغ الأوسط في التكوين الشبكي الذي يشارك
+في اليقظة والانتباه والوعي.
 
 </p>
 
@@ -1195,18 +1217,18 @@ III and IV, which contribute to control of eye movements.
 <div class="card">
 
 <h3>
-Pupillary Reflex · منعكس الحدقة
+Cerebral Peduncles · السويقات المخية
 </h3>
 
 <p>
 
-Midbrain pathways participate in the pupillary light reflex,
-helping the eyes respond to changes in light.
+Cerebral peduncles contain major descending motor fibers
+traveling from the cerebral cortex toward the brainstem and spinal cord.
 
 <br><br>
 
-تشارك مسارات الدماغ الأوسط في منعكس الضوء الحدقي، مما يساعد
-العين على الاستجابة لتغيرات الإضاءة.
+تحتوي السويقات المخية على ألياف حركية نازلة مهمة تنتقل
+من القشرة المخية نحو جذع الدماغ والحبل الشوكي.
 
 </p>
 
@@ -1218,18 +1240,18 @@ helping the eyes respond to changes in light.
 <div class="card">
 
 <h3>
-Arousal · اليقظة
+Sensory Pathways · المسارات الحسية
 </h3>
 
 <p>
 
-The midbrain contains components of neural systems involved
-in alertness, arousal, and consciousness.
+Ascending sensory pathways pass through or interact with
+midbrain structures as information travels toward the brain.
 
 <br><br>
 
-يحتوي الدماغ الأوسط على أجزاء من أنظمة عصبية مرتبطة باليقظة
-والاستثارة والوعي.
+تمر مسارات حسية صاعدة عبر تراكيب الدماغ الأوسط أو تتفاعل
+معها أثناء انتقال المعلومات نحو الدماغ.
 
 </p>
 
@@ -1241,18 +1263,18 @@ in alertness, arousal, and consciousness.
 <div class="card">
 
 <h3>
-Ascending Pathways · المسارات الصاعدة
+Reflexes · المنعكسات
 </h3>
 
 <p>
 
-Several ascending sensory pathways travel through the midbrain
-toward higher areas of the brain.
+Midbrain structures help coordinate rapid visual and auditory
+responses to important environmental stimuli.
 
 <br><br>
 
-تمر عدة مسارات حسية صاعدة عبر الدماغ الأوسط في طريقها
-إلى المناطق الأعلى من الدماغ.
+تساعد تراكيب الدماغ الأوسط في تنسيق الاستجابات السريعة
+للمثيرات البصرية والسمعية المهمة.
 
 </p>
 
@@ -1264,18 +1286,18 @@ toward higher areas of the brain.
 <div class="card">
 
 <h3>
-Descending Pathways · المسارات النازلة
+Brainstem Position · موقعه في جذع الدماغ
 </h3>
 
 <p>
 
-Motor pathways descending from the cerebral cortex pass through
-the midbrain toward lower brainstem structures and the spinal cord.
+The midbrain is the uppermost portion of the brainstem,
+located above the pons and below the diencephalon.
 
 <br><br>
 
-تمر المسارات الحركية النازلة من القشرة المخية عبر الدماغ الأوسط
-نحو الأجزاء السفلية من جذع الدماغ والحبل الشوكي.
+الدماغ الأوسط هو الجزء العلوي من جذع الدماغ، ويقع فوق الجسر
+وتحت الدماغ البيني.
 
 </p>
 
@@ -1304,14 +1326,16 @@ class="location"
 
 <p class="location-intro">
 
-The midbrain is the uppermost part of the brainstem. It lies
-<strong>above the pons</strong> and below the diencephalon.
-It is positioned anterior to the cerebellum.
+The midbrain forms the upper part of the brainstem.
+It lies <strong>above the pons</strong> and
+<strong>below the diencephalon</strong>. The cerebellum lies
+posterior to the brainstem.
 
 <br><br>
 
-يقع الدماغ الأوسط في الجزء العلوي من جذع الدماغ، فوق
-<strong>الجسر</strong> وأسفل الدماغ البيني، ويقع أمام المخيخ.
+يشكل الدماغ الأوسط الجزء العلوي من جذع الدماغ.
+يقع <strong>فوق الجسر</strong> و<strong>أسفل الدماغ البيني</strong>،
+بينما يقع المخيخ خلف جذع الدماغ.
 
 </p>
 
@@ -1364,7 +1388,7 @@ ry="21"
 />
 
 
-<!-- PONS -->
+<!-- PONS NOT HIGHLIGHTED -->
 
 <ellipse
 class="pons"
@@ -1375,7 +1399,7 @@ ry="30"
 />
 
 
-<!-- MEDULLA -->
+<!-- MEDULLA NOT HIGHLIGHTED -->
 
 <path
 class="medulla"
@@ -1390,7 +1414,7 @@ C405 440 405 400 395 360Z"
 
 <line
 class="line"
-x1="405"
+x1="407"
 y1="300"
 x2="570"
 y2="230"
@@ -1409,7 +1433,7 @@ MIDBRAIN
 <!-- PONS LABEL -->
 
 <line
-class="line"
+style="stroke:#71869e;"
 x1="422"
 y1="345"
 x2="570"
@@ -1429,7 +1453,7 @@ PONS
 <!-- MEDULLA LABEL -->
 
 <line
-class="line"
+style="stroke:#71869e;"
 x1="390"
 y1="450"
 x2="570"
@@ -1451,7 +1475,7 @@ MEDULLA
 
 <p class="location-caption">
 
-🌸 The highlighted pink region represents the approximate
+⚪ The highlighted white region represents the approximate
 location of the midbrain.
 
 </p>
@@ -1485,10 +1509,10 @@ Why the Midbrain Matters
 <p>
 
 Because the midbrain contains important motor pathways,
-cranial nerve nuclei, visual and auditory reflex centers,
-and arousal-related systems, damage to this region can affect
-eye movements, movement control, alertness, reflexes,
-and sensory processing.
+cranial nerve nuclei, sensory pathways, and structures involved
+in arousal and reflexes, damage to this region can affect
+eye movements, movement, coordination, consciousness,
+and visual or auditory responses.
 
 </p>
 
@@ -1496,9 +1520,9 @@ and sensory processing.
 <p dir="rtl">
 
 لأن الدماغ الأوسط يحتوي على مسارات حركية مهمة وأنوية أعصاب
-قحفية ومراكز للمنعكسات البصرية والسمعية وأنظمة مرتبطة باليقظة،
-فإن حدوث ضرر في هذه المنطقة قد يؤثر على حركات العين والتحكم
-في الحركة واليقظة والمنعكسات ومعالجة المعلومات الحسية.
+قحفية ومسارات حسية وتراكيب مرتبطة باليقظة والمنعكسات، فإن
+حدوث ضرر في هذه المنطقة قد يؤثر على حركة العين والحركة
+والتنسيق والوعي والاستجابات البصرية أو السمعية.
 
 </p>
 
@@ -1510,7 +1534,7 @@ and sensory processing.
 
 <!-- ==================================================
      INSIGHT
-========================================================= -->
+================================================== -->
 
 <div class="insight">
 
@@ -1521,23 +1545,23 @@ NeuroAtlas Insight
 <br><br>
 
 Think of the midbrain as an important control and relay center
-at the top of the brainstem. It helps connect higher brain
-regions with lower neural pathways while participating in
-movement, eye control, reflexes, and arousal.
+at the top of the brainstem. It helps coordinate movement,
+eye movements, visual and auditory reflexes, and levels of
+arousal.
 
 <br><br>
 
 فكر في الدماغ الأوسط باعتباره مركزًا مهمًا للتحكم ونقل
-المعلومات في الجزء العلوي من جذع الدماغ. فهو يساعد على ربط
-المناطق العليا من الدماغ بالمسارات العصبية السفلية، كما يشارك
-في الحركة وحركات العين والمنعكسات واليقظة.
+المعلومات في الجزء العلوي من جذع الدماغ. فهو يساعد في
+تنسيق الحركة وحركات العين والمنعكسات البصرية والسمعية
+ومستوى اليقظة.
 
 </div>
 
 
 <!-- ==================================================
      QUICK FACTS
-========================================================= -->
+================================================== -->
 
 <div class="section">
 
@@ -1580,11 +1604,11 @@ Upper portion of the brainstem ·
 </span>
 
 <strong>
-Below · أسفل منه
+Above · أعلى منه
 </strong>
 
 <p>
-Pons · الجسر
+Diencephalon · الدماغ البيني
 </p>
 
 </div>
@@ -1597,12 +1621,11 @@ Pons · الجسر
 </span>
 
 <strong>
-Important Structures · تراكيب مهمة
+Below · أسفل منه
 </strong>
 
 <p>
-Substantia nigra and colliculi ·
-المادة السوداء والتلال
+Pons · الجسر
 </p>
 
 </div>
@@ -1619,8 +1642,8 @@ Major Roles · الوظائف الأساسية
 </strong>
 
 <p>
-Movement, reflexes, eye control, arousal ·
-الحركة والمنعكسات وحركات العين واليقظة
+Movement, eye control, reflexes & arousal ·
+الحركة وحركة العين والمنعكسات واليقظة
 </p>
 
 </div>
@@ -1633,7 +1656,7 @@ Movement, reflexes, eye control, arousal ·
 
 <!-- ==================================================
      MINI TEST
-========================================================= -->
+================================================== -->
 
 <div
 id="quiz"
@@ -1646,34 +1669,36 @@ class="quiz"
 </h2>
 
 
-<!-- ================= QUESTION 1 ================= -->
+<!-- QUESTION 1 -->
 
-<div class="quiz-question-block">
+<div class="quiz-question-box">
+
+<div class="quiz-number">
+Question 01 · السؤال الأول
+</div>
 
 <p class="quiz-question">
-
-<strong>
-Question 1 · السؤال الأول
-</strong>
-
-<br><br>
-
-Where is the midbrain located?
-
-<br>
-
-أين يقع الدماغ الأوسط؟
-
+Which part of the brainstem lies above the pons?
 </p>
+
+<p class="quiz-arabic">
+أي جزء من جذع الدماغ يقع فوق الجسر؟
+</p>
+
+
+<button
+class="option"
+onclick="checkAnswer(1,false,this)"
+>
+A. Medulla · النخاع المستطيل
+</button>
 
 
 <button
 class="option"
 onclick="checkAnswer(1,true,this)"
 >
-A. Between the forebrain and pons
-<br>
-بين الدماغ الأمامي والجسر
+B. Midbrain · الدماغ الأوسط
 </button>
 
 
@@ -1681,9 +1706,7 @@ A. Between the forebrain and pons
 class="option"
 onclick="checkAnswer(1,false,this)"
 >
-B. Between the pons and medulla
-<br>
-بين الجسر والنخاع المستطيل
+C. Cerebellum · المخيخ
 </button>
 
 
@@ -1691,49 +1714,32 @@ B. Between the pons and medulla
 class="option"
 onclick="checkAnswer(1,false,this)"
 >
-C. Inside the cerebellum
-<br>
-داخل المخيخ
-</button>
-
-
-<button
-class="option"
-onclick="checkAnswer(1,false,this)"
->
-D. Inside the spinal cord
-<br>
-داخل الحبل الشوكي
+D. Thalamus · المهاد
 </button>
 
 
 <div
 id="feedback1"
-class="quiz-feedback"
->
-</div>
+class="question-feedback"
+></div>
 
 </div>
 
 
-<!-- ================= QUESTION 2 ================= -->
+<!-- QUESTION 2 -->
 
-<div class="quiz-question-block">
+<div class="quiz-question-box">
+
+<div class="quiz-number">
+Question 02 · السؤال الثاني
+</div>
 
 <p class="quiz-question">
+Which midbrain structure is strongly associated with motor control and dopamine?
+</p>
 
-<strong>
-Question 2 · السؤال الثاني
-</strong>
-
-<br><br>
-
-Which structure is strongly associated with visual and auditory reflexes?
-
-<br>
-
-أي تركيب يرتبط بشكل مهم بالمنعكسات البصرية والسمعية؟
-
+<p class="quiz-arabic">
+أي تركيب في الدماغ الأوسط يرتبط بشكل كبير بالتحكم الحركي والدوبامين؟
 </p>
 
 
@@ -1741,9 +1747,7 @@ Which structure is strongly associated with visual and auditory reflexes?
 class="option"
 onclick="checkAnswer(2,true,this)"
 >
-A. Midbrain
-<br>
-الدماغ الأوسط
+A. Substantia Nigra · المادة السوداء
 </button>
 
 
@@ -1751,9 +1755,7 @@ A. Midbrain
 class="option"
 onclick="checkAnswer(2,false,this)"
 >
-B. Medulla
-<br>
-النخاع المستطيل
+B. Hippocampus · الحُصين
 </button>
 
 
@@ -1761,9 +1763,7 @@ B. Medulla
 class="option"
 onclick="checkAnswer(2,false,this)"
 >
-C. Hippocampus
-<br>
-الحُصين
+C. Medulla · النخاع المستطيل
 </button>
 
 
@@ -1771,49 +1771,48 @@ C. Hippocampus
 class="option"
 onclick="checkAnswer(2,false,this)"
 >
-D. Spinal cord
-<br>
-الحبل الشوكي
+D. Cerebellum · المخيخ
 </button>
 
 
 <div
 id="feedback2"
-class="quiz-feedback"
->
-</div>
+class="question-feedback"
+></div>
 
 </div>
 
 
-<!-- ================= QUESTION 3 ================= -->
+<!-- QUESTION 3 -->
 
-<div class="quiz-question-block">
+<div class="quiz-question-box">
+
+<div class="quiz-number">
+Question 03 · السؤال الثالث
+</div>
 
 <p class="quiz-question">
-
-<strong>
-Question 3 · السؤال الثالث
-</strong>
-
-<br><br>
-
-Which cranial nerve nuclei are associated with the midbrain?
-
-<br>
-
-أي من أنوية الأعصاب القحفية التالية ترتبط بالدماغ الأوسط؟
-
+Which cranial nerves have nuclei associated with the midbrain?
 </p>
+
+<p class="quiz-arabic">
+أي أعصاب قحفية ترتبط أنويتها بالدماغ الأوسط؟
+</p>
+
+
+<button
+class="option"
+onclick="checkAnswer(3,false,this)"
+>
+A. Cranial nerves V and VII · الخامس والسابع
+</button>
 
 
 <button
 class="option"
 onclick="checkAnswer(3,true,this)"
 >
-A. Oculomotor and trochlear nuclei
-<br>
-نواة العصب المحرك للعين ونواة العصب البكري
+B. Cranial nerves III and IV · الثالث والرابع
 </button>
 
 
@@ -1821,9 +1820,7 @@ A. Oculomotor and trochlear nuclei
 class="option"
 onclick="checkAnswer(3,false,this)"
 >
-B. Facial and vestibulocochlear nuclei
-<br>
-نواة العصب الوجهي والعصب الدهليزي القوقعي
+C. Cranial nerves IX and X · التاسع والعاشر
 </button>
 
 
@@ -1831,49 +1828,33 @@ B. Facial and vestibulocochlear nuclei
 class="option"
 onclick="checkAnswer(3,false,this)"
 >
-C. Hypoglossal and vagus nuclei
-<br>
-نواة العصب تحت اللسان والعصب الحائر
-</button>
-
-
-<button
-class="option"
-onclick="checkAnswer(3,false,this)"
->
-D. Facial and trigeminal nuclei only
-<br>
-نواة العصب الوجهي والثلاثي التوائم فقط
+D. Cranial nerves XI and XII · الحادي عشر والثاني عشر
 </button>
 
 
 <div
 id="feedback3"
-class="quiz-feedback"
->
-</div>
+class="question-feedback"
+></div>
 
 </div>
 
 
-<!-- ================= SCORE ================= -->
+<!-- SCORE -->
 
-<div
-id="quizScore"
-class="quiz-score"
->
-Answer all three questions to see your final score.
-<br>
-أجيبي عن الأسئلة الثلاثة لرؤية نتيجتك النهائية.
-</div>
+<div class="quiz-score">
 
+Your Score · نتيجتك:
+
+<span id="scoreText">
+0 / 3
+</span>
 
 </div>
 
 
-<!-- =========================
-     BACK
-========================= -->
+</div>
+
 
 <a
 class="back"
@@ -1933,29 +1914,19 @@ import {
 ========================================= */
 
 const canvas =
-document.getElementById(
-    "brainCanvas"
-);
+document.getElementById("brainCanvas");
 
 const loading =
-document.getElementById(
-    "loading"
-);
+document.getElementById("loading");
 
 const loadText =
-document.getElementById(
-    "loadText"
-);
+document.getElementById("loadText");
 
 const loadBar =
-document.getElementById(
-    "loadBar"
-);
+document.getElementById("loadBar");
 
 const midbrainLabel =
-document.getElementById(
-    "midbrainLabel"
-);
+document.getElementById("midbrainLabel");
 
 
 /* =========================================
@@ -2068,7 +2039,7 @@ scene.add(ambient);
 
 const hemi =
 new THREE.HemisphereLight(
-    0xffdce6,
+    0xffffff,
     0x081018,
     0.75
 );
@@ -2078,7 +2049,7 @@ scene.add(hemi);
 
 const keyLight =
 new THREE.DirectionalLight(
-    0xfff5f0,
+    0xffffff,
     1.4
 );
 
@@ -2126,10 +2097,10 @@ let highlighted = true;
 
 
 /* =========================================
-   BABY PINK BRAIN
+   NORMAL BRAIN MATERIAL
 ========================================= */
 
-const brainPinkMaterial =
+const brainMaterial =
 new THREE.MeshPhysicalMaterial({
 
     color:0xf1c5d0,
@@ -2148,21 +2119,21 @@ new THREE.MeshPhysicalMaterial({
 
 
 /* =========================================
-   BLACK MIDBRAIN HIGHLIGHT
+   WHITE MIDBRAIN HIGHLIGHT
 ========================================= */
 
-const midbrainBlackMaterial =
+const midbrainWhiteMaterial =
 new THREE.MeshPhysicalMaterial({
 
-    color:0x15151a,
+    color:0xffffff,
 
-    roughness:0.42,
+    roughness:0.28,
 
     metalness:0.02,
 
-    clearcoat:0.25,
+    clearcoat:0.5,
 
-    clearcoatRoughness:0.35,
+    clearcoatRoughness:0.2,
 
     side:THREE.DoubleSide
 
@@ -2170,17 +2141,17 @@ new THREE.MeshPhysicalMaterial({
 
 
 /* =========================================
-   PINK OUTLINE
+   WHITE OUTLINE
 ========================================= */
 
 const outlineMaterial =
 new THREE.MeshBasicMaterial({
 
-    color:0xffb6c9,
+    color:0xffffff,
 
     transparent:true,
 
-    opacity:0.9,
+    opacity:0.95,
 
     side:THREE.BackSide
 
@@ -2195,34 +2166,33 @@ function createMidbrainMarker(){
 
     const geometry =
     new THREE.SphereGeometry(
-        0.25,
-        24,
-        18
+        0.24,
+        28,
+        20
     );
 
 
     midbrainHighlightMesh =
     new THREE.Mesh(
         geometry,
-        midbrainBlackMaterial
+        midbrainWhiteMaterial
     );
 
 
     /*
-       Midbrain is above the pons.
-       This marker is only used if the GLB
-       does not expose a named midbrain mesh.
+       Midbrain is above the pons
+       and below the higher brain regions.
     */
 
     midbrainHighlightMesh.position.set(
         0,
-        0.05,
+        -0.18,
         0.08
     );
 
 
     midbrainHighlightMesh.scale.set(
-        0.95,
+        1.05,
         0.85,
         0.85
     );
@@ -2241,9 +2211,9 @@ function createMidbrainMarker(){
 
 
     midbrainOutline.scale.set(
-        1.15,
-        1.15,
-        1.10
+        1.14,
+        1.14,
+        1.12
     );
 
 
@@ -2410,7 +2380,9 @@ function loadRealBrain(){
 
                         name.includes("mesencephalic") ||
 
-                        name.includes("mesencephalon")
+                        name.includes("mid_brain") ||
+
+                        name.includes("mid-brain")
 
                     ){
 
@@ -2418,16 +2390,16 @@ function loadRealBrain(){
                         child;
 
 
-                        /* =============================
-                           BLACK HIGHLIGHT
-                        ============================= */
+                        /* =========================
+                           WHITE HIGHLIGHT
+                        ========================= */
 
                         midbrainHighlightMesh =
                         child.clone();
 
 
                         midbrainHighlightMesh.material =
-                        midbrainBlackMaterial.clone();
+                        midbrainWhiteMaterial.clone();
 
 
                         midbrainHighlightMesh.scale.multiplyScalar(
@@ -2440,9 +2412,9 @@ function loadRealBrain(){
                         );
 
 
-                        /* =============================
-                           PINK OUTLINE
-                        ============================= */
+                        /* =========================
+                           WHITE OUTLINE
+                        ========================= */
 
                         midbrainOutline =
                         child.clone();
@@ -2475,7 +2447,7 @@ function loadRealBrain(){
                         ){
 
                             child.material =
-                            brainPinkMaterial.clone();
+                            brainMaterial.clone();
 
                         }
 
@@ -2490,9 +2462,9 @@ function loadRealBrain(){
 
 
                 /*
-                   If the model doesn't contain
-                   a specifically named midbrain,
-                   create a fallback marker.
+                   If the GLB doesn't expose
+                   a named midbrain mesh,
+                   use fallback marker.
                 */
 
                 if(
@@ -2733,7 +2705,7 @@ function(){
 
     highlighted
 
-    ? "⚫ Highlight Midbrain"
+    ? "⚪ Highlight Midbrain"
 
     : "⚪ Show Midbrain";
 
@@ -2840,38 +2812,33 @@ animate();
 loadRealBrain();
 
 
-/* ==================================================
-   QUIZ
-================================================== */
+/* =========================================
+   QUIZ SYSTEM
+========================================= */
 
 let score = 0;
 
-
 const answered = {
-
     1:false,
-
     2:false,
-
     3:false
-
 };
 
 
 window.checkAnswer =
 function(
-    question,
+    questionNumber,
     correct,
     button
 ){
 
     /*
        Prevent answering the same
-       question more than once.
+       question multiple times.
     */
 
     if(
-        answered[question]
+        answered[questionNumber]
     ){
 
         return;
@@ -2879,44 +2846,32 @@ function(
     }
 
 
-    answered[question] =
+    answered[questionNumber] =
     true;
 
 
     const feedback =
     document.getElementById(
-        "feedback" + question
+        "feedback" +
+        questionNumber
     );
 
 
     const buttons =
-    button.parentElement
+    button
+    .parentElement
     .querySelectorAll(
         ".option"
     );
 
 
-    /*
-       Disable all choices
-       for this question.
-    */
-
     buttons.forEach(
     function(btn){
 
-        btn.classList.add(
-            "disabled"
-        );
-
-        btn.style.cursor =
-        "default";
+        btn.disabled = true;
 
     });
 
-
-    /* =========================
-       CORRECT
-    ========================= */
 
     if(correct){
 
@@ -2931,48 +2886,29 @@ function(
         feedback.textContent =
         "✓ Correct! · إجابة صحيحة!";
 
-
-        feedback.style.color =
-        "#72d6a0";
-
     }
-
-
-    /* =========================
-       INCORRECT
-    ========================= */
 
     else{
 
         button.classList.add(
-            "incorrect"
+            "wrong"
         );
 
 
         feedback.textContent =
-        "✗ Incorrect. · إجابة غير صحيحة.";
-
-
-        feedback.style.color =
-        "#ff7f9c";
-
+        "✕ Not quite. Try again next time. · إجابة غير صحيحة، حاول مرة أخرى.";
 
         /*
-           Highlight the correct answer.
+           Highlight the correct answer
         */
 
         buttons.forEach(
         function(btn){
 
-            const onclick =
-            btn.getAttribute(
-                "onclick"
-            );
-
-
             if(
-                onclick &&
-                onclick.includes(
+                btn.getAttribute(
+                    "onclick"
+                ).includes(
                     "true"
                 )
             ){
@@ -2988,113 +2924,12 @@ function(
     }
 
 
-    updateScore();
+    document.getElementById(
+        "scoreText"
+    ).textContent =
+    score + " / 3";
 
 };
-
-
-/* =========================================
-   UPDATE SCORE
-========================================= */
-
-function updateScore(){
-
-    const scoreBox =
-    document.getElementById(
-        "quizScore"
-    );
-
-
-    const answeredCount =
-    Object.values(
-        answered
-    )
-    .filter(Boolean)
-    .length;
-
-
-    /*
-       Questions still remaining.
-    */
-
-    if(
-        answeredCount < 3
-    ){
-
-        scoreBox.innerHTML =
-
-        "Score · النتيجة: " +
-
-        score +
-
-        " / " +
-
-        answeredCount +
-
-        "<br><br>" +
-
-        "Answer the remaining questions · أجيبي عن باقي الأسئلة";
-
-        return;
-
-    }
-
-
-    /* =========================
-       FINAL RESULT
-    ========================= */
-
-    let message = "";
-
-
-    if(
-        score === 3
-    ){
-
-        message =
-        "🌟 Perfect! Excellent work! · ممتاز! كل الإجابات صحيحة!";
-
-    }
-
-    else if(
-        score === 2
-    ){
-
-        message =
-        "👏 Great job! · شغل ممتاز!";
-
-    }
-
-    else if(
-        score === 1
-    ){
-
-        message =
-        "💡 Keep learning! · كمّلي مذاكرة وهتوصلي!";
-
-    }
-
-    else{
-
-        message =
-        "🧠 Review the section and try again! · راجعي الجزء وحاولي تاني!";
-
-    }
-
-
-    scoreBox.innerHTML =
-
-    "Final Score · النتيجة النهائية: " +
-
-    score +
-
-    " / 3" +
-
-    "<br><br>" +
-
-    message;
-
-}
 
 </script>
 
