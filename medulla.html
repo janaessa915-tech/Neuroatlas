@@ -6,7 +6,6 @@
 <title>NeuroAtlas | Medulla</title>
 
 <style>
-
 * {
     box-sizing: border-box;
     margin: 0;
@@ -19,10 +18,6 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.6;
 }
-
-/* =========================
-   NAVIGATION
-========================= */
 
 nav {
     height: 70px;
@@ -42,19 +37,11 @@ nav a:hover {
     color: white;
 }
 
-/* =========================
-   MAIN CONTAINER
-========================= */
-
 .container {
     max-width: 1200px;
     margin: auto;
     padding: 60px 7% 100px;
 }
-
-/* =========================
-   HERO
-========================= */
 
 .eyebrow {
     color: #61b5ff;
@@ -79,11 +66,163 @@ h1 {
 }
 
 /* =========================
+   LOCATION
+========================= */
+
+.location-section {
+    margin-top: 45px;
+    padding: 25px 28px;
+    background: #091522;
+    border: 1px solid #172b3e;
+    border-radius: 18px;
+}
+
+.location-title {
+    color: #ffb6c9;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.location-section h2 {
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.location-section p {
+    color: #91a5b8;
+    font-size: 14px;
+    max-width: 850px;
+}
+
+.location-btn {
+    margin-top: 18px;
+    padding: 11px 18px;
+    border-radius: 9px;
+    background: #0b1928;
+    border: 1px solid #31516d;
+    color: #bdd0e0;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.location-btn:hover {
+    background: #14304a;
+    color: white;
+}
+
+.location-diagram {
+    display: none;
+    margin-top: 25px;
+    padding: 25px;
+    background: #050b13;
+    border: 1px solid #24384a;
+    border-radius: 15px;
+}
+
+.location-diagram.show {
+    display: block;
+}
+
+.diagram-title {
+    text-align: center;
+    color: #dce7ef;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.brainstem-diagram {
+    width: 260px;
+    height: 420px;
+    margin: auto;
+    position: relative;
+}
+
+.diagram-part {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 145px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #17202a;
+    font-size: 13px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.midbrain {
+    top: 45px;
+    height: 85px;
+    width: 130px;
+    background: #e8c2cc;
+    border-radius: 48% 48% 35% 35%;
+}
+
+.pons {
+    top: 125px;
+    height: 105px;
+    width: 180px;
+    background: #efcbd4;
+    border-radius: 45% 45% 50% 50%;
+}
+
+.medulla-diagram {
+    top: 225px;
+    height: 130px;
+    width: 105px;
+    background: #111318;
+    border: 5px solid #ffb6c9;
+    border-radius: 35% 35% 48% 48%;
+    color: white;
+    box-shadow: 0 0 0 4px rgba(255,182,201,.08);
+}
+
+.spinal-cord {
+    top: 345px;
+    height: 65px;
+    width: 65px;
+    background: #d9b7c1;
+    border-radius: 30% 30% 45% 45%;
+}
+
+.diagram-label {
+    position: absolute;
+    font-size: 11px;
+    color: #9db0c3;
+    white-space: nowrap;
+}
+
+.label-midbrain {
+    right: -75px;
+    top: 70px;
+}
+
+.label-pons {
+    left: -70px;
+    top: 165px;
+}
+
+.label-medulla {
+    right: -95px;
+    top: 275px;
+    color: #ffb6c9;
+    font-weight: bold;
+}
+
+.label-spinal {
+    left: -80px;
+    top: 365px;
+}
+
+/* =========================
    3D VIEWER
 ========================= */
 
 .viewer {
-    margin-top: 60px;
+    margin-top: 35px;
     border: 1px solid rgba(255,255,255,.10);
     border-radius: 24px;
     overflow: hidden;
@@ -131,10 +270,6 @@ h1 {
     display: block;
 }
 
-/* =========================
-   LOADING
-========================= */
-
 .loading {
     position: absolute;
     inset: 0;
@@ -179,19 +314,11 @@ h1 {
     transition: width .3s;
 }
 
-/* =========================
-   MEDULLA LABEL
-========================= */
-
 .medulla-label {
     position: absolute;
-
     z-index: 30;
-
     pointer-events: none;
-
     transform: translate(-50%, -100%);
-
     display: none;
 }
 
@@ -241,10 +368,6 @@ h1 {
     transform: translateX(-50%);
 }
 
-/* =========================
-   CONTROLS
-========================= */
-
 .controls {
     display: flex;
     gap: 10px;
@@ -278,14 +401,12 @@ h1 {
 
 .controls button.active {
     background: #241c20;
-
     border-color: #ffb6c9;
-
     color: #ffd5df;
 }
 
 /* =========================
-   INFORMATION SECTIONS
+   INFORMATION
 ========================= */
 
 .section {
@@ -294,44 +415,28 @@ h1 {
 
 .section-label {
     color: #61b5ff;
-
     letter-spacing: 2px;
-
     font-size: 11px;
-
     text-transform: uppercase;
-
     margin-bottom: 8px;
 }
 
 .section h2 {
     font-size: 32px;
-
     margin-bottom: 25px;
 }
 
 .section-intro {
     color: #91a5b8;
-
     max-width: 900px;
-
     font-size: 15px;
-
     line-height: 1.9;
-
     margin-bottom: 30px;
 }
 
-/* =========================
-   ANATOMY CARDS
-========================= */
-
 .cards {
     display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
 }
 
@@ -351,31 +456,21 @@ h1 {
 
 .card:hover {
     transform: translateY(-3px);
-
     border-color: #2b506c;
 }
 
 .card h3 {
     font-size: 18px;
-
     margin-bottom: 13px;
-
     color: #eef4fa;
-
     line-height: 1.45;
 }
 
 .card p {
     color: #91a5b8;
-
     font-size: 14px;
-
     line-height: 1.8;
 }
-
-/* =========================
-   CLINICAL IMPORTANCE
-========================= */
 
 .clinical-section {
     margin-top: 65px;
@@ -395,11 +490,8 @@ h1 {
 
 .clinical-box p {
     color: #a7b7c6;
-
     font-size: 15px;
-
     line-height: 1.9;
-
     margin-bottom: 18px;
 }
 
@@ -407,59 +499,124 @@ h1 {
     margin-bottom: 0;
 }
 
-/* =========================
-   QUICK FACTS
-========================= */
-
 .facts-grid {
     display: grid;
-
-    grid-template-columns:
-        repeat(4, 1fr);
-
+    grid-template-columns: repeat(4, 1fr);
     gap: 15px;
 }
 
 .fact {
     padding: 22px;
-
     background: #091522;
-
     border: 1px solid #172b3e;
-
     border-radius: 16px;
 }
 
 .fact span {
     display: block;
-
     color: #ffb6c9;
-
     font-size: 11px;
-
     letter-spacing: 2px;
-
     margin-bottom: 12px;
 }
 
 .fact strong {
     display: block;
-
     color: #eef4fa;
-
     font-size: 14px;
-
     margin-bottom: 8px;
-
     line-height: 1.5;
 }
 
 .fact p {
     color: #8195a8;
-
     font-size: 13px;
-
     line-height: 1.7;
+}
+
+/* =========================
+   MINI TEST
+========================= */
+
+.quiz {
+    margin-top: 80px;
+    padding: 30px;
+
+    background: #091522;
+
+    border: 1px solid #172b3e;
+
+    border-radius: 20px;
+}
+
+.quiz h2 {
+    margin-bottom: 8px;
+}
+
+.quiz-intro {
+    color: #91a5b8;
+    margin-bottom: 25px;
+}
+
+.question {
+    padding: 20px;
+    margin-bottom: 15px;
+
+    background: #050b13;
+
+    border: 1px solid #172b3e;
+
+    border-radius: 14px;
+}
+
+.question h3 {
+    font-size: 15px;
+    margin-bottom: 14px;
+}
+
+.option {
+    display: block;
+    margin: 8px 0;
+    padding: 10px 12px;
+
+    background: #091522;
+
+    border: 1px solid #21384b;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    color: #b9c8d5;
+}
+
+.option:hover {
+    border-color: #ffb6c9;
+}
+
+.option input {
+    margin-right: 8px;
+}
+
+.quiz-submit {
+    padding: 12px 20px;
+
+    border: 0;
+    border-radius: 9px;
+
+    background: #ffb6c9;
+
+    color: #171217;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.quiz-result {
+    margin-top: 18px;
+    font-weight: bold;
+    color: #ffb6c9;
 }
 
 /* =========================
@@ -467,20 +624,16 @@ h1 {
 ========================= */
 
 @media(max-width:900px) {
-
     .cards {
-        grid-template-columns:
-            repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .facts-grid {
-        grid-template-columns:
-            repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media(max-width:800px) {
-
     .scene {
         height: 450px;
     }
@@ -491,7 +644,6 @@ h1 {
 }
 
 @media(max-width:600px) {
-
     .cards {
         grid-template-columns: 1fr;
     }
@@ -504,31 +656,16 @@ h1 {
         letter-spacing: -2px;
     }
 }
-
 </style>
 </head>
 
 <body>
 
-<!-- =========================
-     NAVIGATION
-========================= -->
-
 <nav>
-
-<a href="./explore.html">
-← Back to Explore
-</a>
-
+<a href="./explore.html">← Back to Explore</a>
 </nav>
 
-
 <main class="container">
-
-
-<!-- =========================
-     HERO
-========================= -->
 
 <div class="eyebrow">
 Brainstem · NeuroAtlas
@@ -539,23 +676,95 @@ Medulla
 </h1>
 
 <div class="hero">
-
 <p>
 The medulla oblongata is the most inferior part of the brainstem.
 It connects the pons with the spinal cord and participates in breathing,
 cardiovascular regulation, swallowing, and protective reflexes.
 </p>
+</div>
+
+<!-- =========================
+     LOCATION
+========================= -->
+
+<section class="location-section">
+
+<div class="location-title">
+Location · الموقع
+</div>
+
+<h2>
+Where is the Medulla?
+</h2>
+
+<p>
+The medulla oblongata is located at the lowest part of the brainstem,
+below the pons and directly above the spinal cord.
+</p>
+
+<button
+class="location-btn"
+id="locationBtn">
+
+Show Location
+
+</button>
+
+<div
+class="location-diagram"
+id="locationDiagram">
+
+<div class="diagram-title">
+Brainstem Orientation · Brainstem Location
+</div>
+
+<div class="brainstem-diagram">
+
+<div class="diagram-part midbrain">
+Midbrain
+</div>
+
+<div class="diagram-part pons">
+Pons
+</div>
+
+<div class="diagram-part medulla-diagram">
+Medulla
+</div>
+
+<div class="diagram-part spinal-cord">
+Spinal Cord
+</div>
+
+<div class="diagram-label label-midbrain">
+Midbrain · الدماغ الأوسط
+</div>
+
+<div class="diagram-label label-pons">
+Pons · الجسر
+</div>
+
+<div class="diagram-label label-medulla">
+★ Medulla · النخاع المستطيل
+</div>
+
+<div class="diagram-label label-spinal">
+Spinal Cord · الحبل الشوكي
+</div>
 
 </div>
+
+</div>
+
+</section>
 
 
 <!-- =========================
      3D VIEWER
-     UNCHANGED
+     SAME MODEL
 ========================= -->
 
 <div class="viewer">
-
 
 <div class="viewer-header">
 
@@ -569,9 +778,7 @@ DRAG TO ROTATE · SCROLL TO ZOOM
 
 </div>
 
-
 <div class="scene">
-
 
 <div id="loading" class="loading">
 
@@ -580,23 +787,14 @@ Loading real brain model...
 </span>
 
 <div class="loading-bar">
-
-<div
-id="loadBar"
-class="loading-bar-inner">
+<div id="loadBar" class="loading-bar-inner"></div>
 </div>
 
 </div>
-
-</div>
-
 
 <canvas id="brainCanvas"></canvas>
 
-
-<div
-id="medullaLabel"
-class="medulla-label">
+<div id="medullaLabel" class="medulla-label">
 
 <div class="label-box">
 MEDULLA OBLONGATA
@@ -604,58 +802,40 @@ MEDULLA OBLONGATA
 
 </div>
 
-
 </div>
-
 
 <div class="controls">
 
-<button
-id="highlight"
-class="active">
-
+<button id="highlight" class="active">
 ⚫ Highlight Medulla
-
 </button>
 
-
-<button
-id="rotate"
-class="active">
-
+<button id="rotate" class="active">
 ⟳ Auto Rotate
-
 </button>
-
 
 <button id="reset">
-
 ↻ Reset View
-
 </button>
 
 </div>
 
-
 </div>
 
 
-<!-- ==================================================
-     DETAILED MEDULLA INFORMATION
-================================================== -->
+<!-- =========================
+     MEDULLA INFORMATION
+========================= -->
 
 <section class="section">
-
 
 <div class="section-label">
 Medulla Anatomy · تشريح النخاع المستطيل
 </div>
 
-
 <h2>
 Medulla Oblongata · النخاع المستطيل
 </h2>
-
 
 <p class="section-intro">
 
@@ -672,503 +852,369 @@ and protective reflexes.
 
 </p>
 
-
 <div class="cards">
 
-
-<!-- =========================
-     CARD 1
-========================= -->
-
 <div class="card">
-
-<h3>
-Respiratory Control · التحكم في التنفس
-</h3>
-
+<h3>Respiratory Control · التحكم في التنفس</h3>
 <p>
-
 The medulla contains neural circuits that help generate and regulate
 the basic rhythm of breathing. It works with other regions of the
 brainstem to adjust breathing according to the body's needs.
-
 <br><br>
-
 يحتوي النخاع المستطيل على دوائر عصبية تساعد في توليد وتنظيم
-الإيقاع الأساسي للتنفس، ويعمل مع أجزاء أخرى من جذع الدماغ
-لتعديل التنفس حسب احتياجات الجسم.
-
+الإيقاع الأساسي للتنفس.
 </p>
-
 </div>
 
-
-<!-- =========================
-     CARD 2
-========================= -->
-
 <div class="card">
-
-<h3>
-Cardiovascular Control · تنظيم القلب والدورة الدموية
-</h3>
-
+<h3>Cardiovascular Control · تنظيم القلب والدورة الدموية</h3>
 <p>
-
 Medullary centers contribute to the regulation of heart rate,
 blood vessel tone, and blood pressure through autonomic pathways.
-
 <br><br>
-
 تساهم مراكز النخاع المستطيل في تنظيم معدل ضربات القلب،
-وتوتر الأوعية الدموية، وضغط الدم من خلال المسارات
-الجهازية اللاإرادية.
-
+وتوتر الأوعية الدموية، وضغط الدم.
 </p>
-
 </div>
 
-
-<!-- =========================
-     CARD 3
-========================= -->
-
 <div class="card">
-
-<h3>
-Swallowing · البلع
-</h3>
-
+<h3>Swallowing · البلع</h3>
 <p>
-
 The medulla contains nuclei involved in the coordinated
-movements required for swallowing. These circuits interact
-with several cranial nerves.
-
+movements required for swallowing.
 <br><br>
-
 يحتوي النخاع المستطيل على أنوية تشارك في تنسيق الحركات
-اللازمة لعملية البلع، وتتفاعل هذه الدوائر مع عدة أعصاب قحفية.
-
+اللازمة لعملية البلع.
 </p>
-
 </div>
 
-
-<!-- =========================
-     CARD 4
-========================= -->
-
 <div class="card">
-
-<h3>
-Protective Reflexes · المنعكسات الوقائية
-</h3>
-
+<h3>Protective Reflexes · المنعكسات الوقائية</h3>
 <p>
-
-The medulla participates in important protective reflexes,
-including coughing, sneezing, gagging, and vomiting.
-
+The medulla participates in protective reflexes including
+coughing, sneezing, gagging, and vomiting.
 <br><br>
-
-يشارك النخاع المستطيل في منعكسات وقائية مهمة، مثل السعال
-والعطس ومنعكس البلعوم والقيء.
-
+يشارك النخاع المستطيل في منعكسات وقائية مهمة مثل السعال
+والعطس والقيء.
 </p>
-
 </div>
 
-
-<!-- =========================
-     CARD 5
-========================= -->
-
 <div class="card">
-
-<h3>
-Pyramids · الأهرامات
-</h3>
-
+<h3>Pyramids · الأهرامات</h3>
 <p>
-
 The medullary pyramids contain descending corticospinal fibers.
-These fibers carry voluntary motor commands from the cerebral
-cortex toward the spinal cord.
-
 <br><br>
-
-تحتوي أهرامات النخاع المستطيل على ألياف القناة القشرية
-الشوكية النازلة، والتي تنقل الأوامر الحركية الإرادية من
-القشرة المخية نحو الحبل الشوكي.
-
+تحتوي أهرامات النخاع المستطيل على ألياف القناة القشرية الشوكية
+النازلة التي تنقل الأوامر الحركية.
 </p>
-
 </div>
 
-
-<!-- =========================
-     CARD 6
-========================= -->
-
 <div class="card">
-
-<h3>
-Pyramidal Decussation · تقاطع الأهرامات
-</h3>
-
+<h3>Pyramidal Decussation · تقاطع الأهرامات</h3>
 <p>
-
-Near the lower part of the medulla, many corticospinal fibers
-cross to the opposite side. This crossing is called the
-pyramidal decussation.
-
+Many corticospinal fibers cross to the opposite side near
+the lower medulla.
 <br><br>
-
-بالقرب من الجزء السفلي للنخاع المستطيل، تعبر نسبة كبيرة
-من ألياف القناة القشرية الشوكية إلى الجانب المقابل.
-ويُعرف هذا العبور باسم تقاطع الأهرامات.
-
+تعبر نسبة كبيرة من ألياف القناة القشرية الشوكية إلى الجانب
+المقابل بالقرب من الجزء السفلي للنخاع.
 </p>
-
 </div>
 
-
-<!-- =========================
-     CARD 7
-========================= -->
-
 <div class="card">
-
-<h3>
-Inferior Olive · الزيتونة السفلية
-</h3>
-
+<h3>Inferior Olive · الزيتونة السفلية</h3>
 <p>
-
-The inferior olivary nuclei communicate strongly with the
-cerebellum and contribute to motor coordination and motor learning.
-
+The inferior olivary nuclei communicate with the cerebellum
+and contribute to motor coordination and motor learning.
 <br><br>
-
-تتواصل النوى الزيتونية السفلية بشكل مهم مع المخيخ، وتساهم
-في تنسيق الحركة والتعلم الحركي.
-
+تتواصل النوى الزيتونية السفلية مع المخيخ وتساهم في
+تنسيق الحركة والتعلم الحركي.
 </p>
-
 </div>
 
-
-<!-- =========================
-     CARD 8
-========================= -->
-
 <div class="card">
-
-<h3>
-Cranial Nerves · الأعصاب القحفية
-</h3>
-
+<h3>Cranial Nerves · الأعصاب القحفية</h3>
 <p>
-
 The medullary region contains important nuclei and pathways
 associated with cranial nerves IX, X, XI, and XII.
-These are involved in swallowing, voice, tongue movement,
-and visceral functions.
-
 <br><br>
-
-تحتوي منطقة النخاع المستطيل على أنوية ومسارات مهمة مرتبطة
-بالأعصاب القحفية التاسع والعاشر والحادي عشر والثاني عشر،
-والتي ترتبط بالبلع والصوت وحركة اللسان وبعض الوظائف الحشوية.
-
+تحتوي منطقة النخاع المستطيل على أنوية ومسارات مرتبطة
+بالأعصاب القحفية التاسع والعاشر والحادي عشر والثاني عشر.
 </p>
-
 </div>
 
-
-<!-- =========================
-     CARD 9
-========================= -->
-
 <div class="card">
-
-<h3>
-Autonomic Functions · الوظائف اللاإرادية
-</h3>
-
+<h3>Autonomic Functions · الوظائف اللاإرادية</h3>
 <p>
-
 The medulla helps regulate essential functions that normally
-occur without conscious control, especially cardiovascular
-and respiratory activity.
-
+occur without conscious control.
 <br><br>
-
 يساعد النخاع المستطيل في تنظيم وظائف أساسية تحدث عادةً
-دون تحكم واعٍ، وخاصة نشاط الجهازين التنفسي والقلب والأوعية الدموية.
-
+دون تحكم واعٍ.
 </p>
-
 </div>
 
-
-<!-- =========================
-     CARD 10
-========================= -->
-
 <div class="card">
-
-<h3>
-Sensory Pathways · المسارات الحسية
-</h3>
-
+<h3>Sensory Pathways · المسارات الحسية</h3>
 <p>
-
 The medulla contains important ascending sensory pathways
-that carry information from the body toward higher regions
-of the brain.
-
+that carry information toward higher regions of the brain.
 <br><br>
-
-يحتوي النخاع المستطيل على مسارات حسية صاعدة مهمة تنقل
-المعلومات من الجسم إلى المناطق الأعلى في الدماغ.
-
+يحتوي النخاع المستطيل على مسارات حسية صاعدة تنقل
+المعلومات إلى مناطق أعلى في الدماغ.
 </p>
-
 </div>
 
-
-<!-- =========================
-     CARD 11
-========================= -->
-
 <div class="card">
-
-<h3>
-Motor Pathways · المسارات الحركية
-</h3>
-
+<h3>Motor Pathways · المسارات الحركية</h3>
 <p>
-
 Several major motor pathways pass through the medulla,
-allowing signals from the brain to reach the spinal cord
-and influence movement.
-
+allowing signals from the brain to reach the spinal cord.
 <br><br>
-
-تمر عدة مسارات حركية رئيسية عبر النخاع المستطيل، مما يسمح
-للإشارات القادمة من الدماغ بالوصول إلى الحبل الشوكي والمساهمة
-في التحكم في الحركة.
-
+تمر عدة مسارات حركية رئيسية عبر النخاع المستطيل.
 </p>
-
 </div>
-
-
-<!-- =========================
-     CARD 12
-========================= -->
 
 <div class="card">
-
-<h3>
-Brainstem Connection · اتصال جذع الدماغ
-</h3>
-
+<h3>Brainstem Connection · اتصال جذع الدماغ</h3>
 <p>
-
 The medulla forms an important transition between the pons
-above and the spinal cord below, making it a major pathway
-between the brain and the rest of the nervous system.
-
+above and the spinal cord below.
 <br><br>
-
-يمثل النخاع المستطيل منطقة انتقال مهمة بين الجسر في الأعلى
-والحبل الشوكي في الأسفل، ويعمل كطريق رئيسي بين الدماغ
-وباقي الجهاز العصبي.
-
+يمثل النخاع المستطيل منطقة انتقال مهمة بين الجسر
+والحبل الشوكي.
 </p>
+</div>
 
 </div>
 
-
-</div>
-
-
-<!-- ==================================================
-     CLINICAL IMPORTANCE
-================================================== -->
 
 <div class="section clinical-section">
-
 
 <div class="section-label">
 Clinical Importance · الأهمية السريرية
 </div>
 
-
 <h2>
 Why the Medulla Matters
 </h2>
 
-
 <div class="clinical-box">
 
-
 <p>
-
 Because the medulla contains pathways and centers involved
 in vital functions, damage to this region can affect breathing,
 cardiovascular regulation, swallowing, movement, and other
 neurological functions.
-
 </p>
-
 
 <p dir="rtl">
-
 لأن النخاع المستطيل يحتوي على مسارات ومراكز تشارك في وظائف
 حيوية، فإن حدوث ضرر في هذه المنطقة قد يؤثر على التنفس،
-وتنظيم الدورة الدموية، والبلع، والحركة، وغيرها من الوظائف العصبية.
-
+وتنظيم الدورة الدموية، والبلع، والحركة.
 </p>
 
-
 </div>
 
 </div>
 
-
-<!-- ==================================================
-     QUICK FACTS
-================================================== -->
 
 <div class="section">
-
 
 <div class="section-label">
 Quick Facts · معلومات سريعة
 </div>
 
-
 <h2>
 Medulla at a Glance
 </h2>
 
-
 <div class="facts-grid">
 
+<div class="fact">
+<span>01</span>
+<strong>Location · الموقع</strong>
+<p>
+Lowest part of the brainstem · الجزء السفلي من جذع الدماغ
+</p>
+</div>
 
 <div class="fact">
-
-<span>
-01
-</span>
-
-<strong>
-Location · الموقع
-</strong>
-
+<span>02</span>
+<strong>Connects · يربط</strong>
 <p>
-
-Lowest part of the brainstem ·
-الجزء السفلي من جذع الدماغ
-
+Pons and spinal cord · الجسر والحبل الشوكي
 </p>
-
 </div>
-
 
 <div class="fact">
-
-<span>
-02
-</span>
-
-<strong>
-Connects · يربط
-</strong>
-
+<span>03</span>
+<strong>Major Role · الوظيفة الأساسية</strong>
 <p>
-
-Pons and spinal cord ·
-الجسر والحبل الشوكي
-
+Regulation of vital automatic functions · تنظيم الوظائف الحيوية
 </p>
-
 </div>
-
 
 <div class="fact">
-
-<span>
-03
-</span>
-
-<strong>
-Major Role · الوظيفة الأساسية
-</strong>
-
+<span>04</span>
+<strong>Motor Pathway · المسار الحركي</strong>
 <p>
+Contains corticospinal fibers · يحتوي على ألياف القناة القشرية الشوكية
+</p>
+</div>
 
-Regulation of vital automatic functions ·
-تنظيم الوظائف الحيوية اللاإرادية
+</div>
 
+</div>
+
+
+<!-- =========================
+     MINI TEST
+========================= -->
+
+<section class="quiz">
+
+<div class="section-label">
+Mini Test
+</div>
+
+<h2>
+Test Your Knowledge
+</h2>
+
+<p class="quiz-intro">
+Choose the best answer for each question.
 </p>
 
-</div>
+<div class="question">
 
+<h3>
+1. Where is the medulla oblongata located?
+</h3>
 
-<div class="fact">
+<label class="option">
+<input type="radio" name="q1" value="a">
+Between the cerebrum and cerebellum
+</label>
 
-<span>
-04
-</span>
+<label class="option">
+<input type="radio" name="q1" value="b">
+Between the pons and spinal cord
+</label>
 
-<strong>
-Motor Pathway · المسار الحركي
-</strong>
-
-<p>
-
-Contains corticospinal fibers ·
-يحتوي على ألياف القناة القشرية الشوكية
-
-</p>
-
-</div>
-
+<label class="option">
+<input type="radio" name="q1" value="c">
+Inside the cerebral cortex
+</label>
 
 </div>
 
+
+<div class="question">
+
+<h3>
+2. Which function is strongly associated with the medulla?
+</h3>
+
+<label class="option">
+<input type="radio" name="q2" value="a">
+Regulation of breathing
+</label>
+
+<label class="option">
+<input type="radio" name="q2" value="b">
+Vision
+</label>
+
+<label class="option">
+<input type="radio" name="q2" value="c">
+Long-term memory storage
+</label>
+
 </div>
 
+
+<div class="question">
+
+<h3>
+3. What happens at the pyramidal decussation?
+</h3>
+
+<label class="option">
+<input type="radio" name="q3" value="a">
+Cerebrospinal fluid is produced
+</label>
+
+<label class="option">
+<input type="radio" name="q3" value="b">
+Many corticospinal fibers cross sides
+</label>
+
+<label class="option">
+<input type="radio" name="q3" value="c">
+The cerebellum produces hormones
+</label>
+
+</div>
+
+
+<div class="question">
+
+<h3>
+4. Which cranial nerve is associated with the medullary region?
+</h3>
+
+<label class="option">
+<input type="radio" name="q4" value="a">
+Cranial nerve XII
+</label>
+
+<label class="option">
+<input type="radio" name="q4" value="b">
+Cranial nerve II
+</label>
+
+<label class="option">
+<input type="radio" name="q4" value="c">
+Cranial nerve VIII only
+</label>
+
+</div>
+
+
+<button
+class="quiz-submit"
+id="quizSubmit">
+
+Check Answers
+
+</button>
+
+<div
+class="quiz-result"
+id="quizResult">
+</div>
 
 </section>
 
+</section>
 
 </main>
 
 
-<!-- ==================================================
-     THREE.JS IMPORT MAP
-================================================== -->
+<!-- =========================
+     THREE.JS
+========================= -->
 
 <script type="importmap">
-
 {
     "imports": {
-
         "three":
         "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
 
         "three/addons/":
         "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
-
     }
 }
-
 </script>
 
 
@@ -1194,29 +1240,19 @@ import {
 ========================================= */
 
 const canvas =
-document.getElementById(
-    "brainCanvas"
-);
+document.getElementById("brainCanvas");
 
 const loading =
-document.getElementById(
-    "loading"
-);
+document.getElementById("loading");
 
 const loadText =
-document.getElementById(
-    "loadText"
-);
+document.getElementById("loadText");
 
 const loadBar =
-document.getElementById(
-    "loadBar"
-);
+document.getElementById("loadBar");
 
 const medullaLabel =
-document.getElementById(
-    "medullaLabel"
-);
+document.getElementById("medullaLabel");
 
 
 /* =========================================
@@ -1385,7 +1421,7 @@ let isRealModel = false;
 
 
 /* =========================================
-   BABY PINK BRAIN MATERIAL
+   BABY PINK BRAIN
 ========================================= */
 
 const brainPinkMaterial =
@@ -1407,7 +1443,7 @@ new THREE.MeshPhysicalMaterial({
 
 
 /* =========================================
-   BLACK MEDULLA MATERIAL
+   BLACK MEDULLA
 ========================================= */
 
 const medullaBlackMaterial =
@@ -1429,7 +1465,7 @@ new THREE.MeshPhysicalMaterial({
 
 
 /* =========================================
-   MEDULLA OUTLINE
+   PINK OUTLINE
 ========================================= */
 
 const outlineMaterial =
@@ -1497,7 +1533,6 @@ function createMedullaMarker() {
     medullaHighlightMesh.add(
         medullaOutline
     );
-
 }
 
 
@@ -1562,19 +1597,13 @@ function loadRealBrain() {
 
             url,
 
-
             function(gltf) {
 
                 isRealModel = true;
 
-
                 const model =
                 gltf.scene;
 
-
-                /* =================================
-                   CENTER + SCALE
-                ================================= */
 
                 const box =
                 new THREE.Box3()
@@ -1620,26 +1649,15 @@ function loadRealBrain() {
 
 
                 /*
-                 =================================
-                 MODEL POSITION
-                 =================================
-
-                 THIS IS THE ONLY POSITION CHANGE:
-
-                 The model is moved down to -0.60
-                 so it sits lower in the viewer.
+                   MODEL POSITION
+                   DO NOT CHANGE
                 */
 
                 model.position.y -= 0.60;
 
 
-                /* =================================
-                   PROCESS MODEL
-                ================================= */
-
                 model.traverse(
                 function(child) {
-
 
                     if (!child.isMesh)
                         return;
@@ -1656,10 +1674,6 @@ function loadRealBrain() {
                     ).toLowerCase();
 
 
-                    /* =================================
-                       MEDULLA DETECTION
-                    ================================= */
-
                     if (
 
                         name.includes("medulla") ||
@@ -1670,12 +1684,9 @@ function loadRealBrain() {
 
                     ) {
 
-
                         medullaMesh =
                         child;
 
-
-                        /* BLACK MEDULLA */
 
                         medullaHighlightMesh =
                         child.clone();
@@ -1694,8 +1705,6 @@ function loadRealBrain() {
                             medullaHighlightMesh
                         );
 
-
-                        /* PINK OUTLINE */
 
                         medullaOutline =
                         child.clone();
@@ -1718,9 +1727,6 @@ function loadRealBrain() {
 
                     else {
 
-
-                        /* BABY PINK BRAIN */
-
                         if (
                             child.material
                         ) {
@@ -1739,8 +1745,6 @@ function loadRealBrain() {
                     model
                 );
 
-
-                /* FALLBACK MEDULLA */
 
                 if (
                     !medullaMesh
@@ -1761,7 +1765,6 @@ function loadRealBrain() {
 
 
             function(progress) {
-
 
                 if (
                     progress.total > 0
@@ -1786,12 +1789,10 @@ function loadRealBrain() {
 
             function(error) {
 
-
                 console.warn(
                     "Model failed:",
                     error
                 );
-
 
                 tryLoad();
 
@@ -1893,7 +1894,6 @@ function resize() {
     const width =
     canvas.clientWidth;
 
-
     const height =
     canvas.clientHeight;
 
@@ -1940,7 +1940,6 @@ document.getElementById(
 highlightBtn.addEventListener(
 "click",
 function() {
-
 
     highlighted =
     !highlighted;
@@ -2003,7 +2002,6 @@ rotateBtn.addEventListener(
 "click",
 function() {
 
-
     controls.autoRotate =
     !controls.autoRotate;
 
@@ -2035,7 +2033,6 @@ document.getElementById(
 "click",
 function() {
 
-
     camera.position.set(
         3.2,
         0.3,
@@ -2056,6 +2053,136 @@ function() {
 
 
 /* =========================================
+   LOCATION BUTTON
+========================================= */
+
+const locationBtn =
+document.getElementById(
+    "locationBtn"
+);
+
+const locationDiagram =
+document.getElementById(
+    "locationDiagram"
+);
+
+
+locationBtn.addEventListener(
+"click",
+function() {
+
+    locationDiagram.classList.toggle(
+        "show"
+    );
+
+
+    if (
+        locationDiagram.classList.contains(
+            "show"
+        )
+    ) {
+
+        locationBtn.textContent =
+        "Hide Location";
+
+    }
+
+    else {
+
+        locationBtn.textContent =
+        "Show Location";
+
+    }
+
+});
+
+
+/* =========================================
+   MINI TEST
+========================================= */
+
+document.getElementById(
+    "quizSubmit"
+).addEventListener(
+"click",
+function() {
+
+    const answers = {
+        q1: "b",
+        q2: "a",
+        q3: "b",
+        q4: "a"
+    };
+
+
+    let score = 0;
+
+
+    Object.keys(
+        answers
+    ).forEach(
+    function(question) {
+
+        const selected =
+        document.querySelector(
+            'input[name="' +
+            question +
+            '"]:checked'
+        );
+
+
+        if (
+            selected &&
+            selected.value ===
+            answers[question]
+        ) {
+
+            score++;
+
+        }
+
+    });
+
+
+    const result =
+    document.getElementById(
+        "quizResult"
+    );
+
+
+    if (
+        score === 4
+    ) {
+
+        result.textContent =
+        "Excellent! 4/4 — You mastered the medulla.";
+
+    }
+
+    else if (
+        score >= 2
+    ) {
+
+        result.textContent =
+        "Good job! You scored " +
+        score +
+        "/4.";
+
+    }
+
+    else {
+
+        result.textContent =
+        "Keep studying! You scored " +
+        score +
+        "/4.";
+
+    }
+
+});
+
+
+/* =========================================
    ANIMATION
 ========================================= */
 
@@ -2067,7 +2194,6 @@ function animate() {
 
 
     controls.update();
-
 
     updateLabel();
 
