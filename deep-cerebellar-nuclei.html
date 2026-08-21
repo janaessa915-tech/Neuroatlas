@@ -105,6 +105,65 @@ h1{
     border-color:white;
 }
 
+
+/* ==================================================
+   LOCATION PANEL
+================================================== */
+
+.location-panel{
+    display:none;
+    margin-top:20px;
+    padding:22px;
+    background:#091522;
+    border:1px solid #172b3e;
+    border-radius:18px;
+}
+
+.location-panel.show{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:25px;
+    align-items:center;
+}
+
+.location-image{
+    width:100%;
+    max-height:300px;
+    object-fit:contain;
+    background:#02060b;
+    border-radius:12px;
+    border:1px solid #263951;
+}
+
+.location-info h3{
+    font-size:22px;
+    margin-bottom:10px;
+}
+
+.location-info p{
+    color:#91a5b8;
+    font-size:14px;
+    line-height:1.8;
+}
+
+.location-tag{
+    display:inline-block;
+    margin-bottom:12px;
+    padding:5px 10px;
+    border-radius:6px;
+    background:#10233a;
+    border:1px solid #31516d;
+    color:#61b5ff;
+    font-size:10px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+}
+
+
+/* ==================================================
+   VIEWER
+================================================== */
+
 .viewer{
     margin-top:60px;
     border:1px solid rgba(255,255,255,.10);
@@ -581,6 +640,10 @@ h1{
         grid-template-columns:repeat(2,1fr);
     }
 
+    .location-panel.show{
+        grid-template-columns:1fr;
+    }
+
 }
 
 @media(max-width:800px){
@@ -676,7 +739,62 @@ href="#quiz"
 🧪 Test Yourself
 </a>
 
+<button
+class="action-button"
+id="locationButton"
+type="button"
+>
+📍 View Location
+</button>
+
 </div>
+
+
+<!-- ==================================================
+     LOCATION
+================================================== -->
+
+<div
+id="locationPanel"
+class="location-panel"
+>
+
+<img
+class="location-image"
+src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Cerebellum_NIH.png"
+alt="Human brain with the cerebellum highlighted"
+>
+
+<div class="location-info">
+
+<div class="location-tag">
+ORGAN LOCATION
+</div>
+
+<h3>
+Where is the cerebellum?
+</h3>
+
+<p>
+
+The cerebellum is located at the posterior part of
+the brain, beneath the occipital lobes and behind the
+brainstem. The deep cerebellar nuclei are embedded
+inside the cerebellum rather than sitting on its outer
+surface.
+
+<br><br>
+
+يقع المخيخ في الجزء الخلفي من الدماغ، أسفل الفصوص
+القذالية وخلف جذع الدماغ. أما النوى العميقة فتوجد
+داخل المخيخ نفسه وليست على سطحه الخارجي.
+
+</p>
+
+</div>
+
+</div>
+
 
 <div class="viewer">
 
@@ -755,6 +873,7 @@ id="reset"
 </div>
 
 </div>
+
 
 <section
 id="anatomy"
@@ -917,6 +1036,7 @@ system.
 
 </section>
 
+
 <div class="clinical-section">
 
 <div class="section-label">
@@ -950,6 +1070,7 @@ and the precision of voluntary movement.
 
 </div>
 
+
 <div class="insight">
 
 <strong>
@@ -971,6 +1092,7 @@ cerebellum.
 
 </div>
 
+
 <div class="section">
 
 <div class="section-label">
@@ -985,9 +1107,7 @@ Deep Nuclei at a Glance
 
 <div class="fact">
 
-<span>
-01
-</span>
+<span>01</span>
 
 <strong>
 Number · العدد
@@ -1001,9 +1121,7 @@ Four major paired nuclei
 
 <div class="fact">
 
-<span>
-02
-</span>
+<span>02</span>
 
 <strong>
 Most Lateral · الأكثر وحشية
@@ -1017,9 +1135,7 @@ Dentate nucleus
 
 <div class="fact">
 
-<span>
-03
-</span>
+<span>03</span>
 
 <strong>
 Most Medial · الأكثر إنسية
@@ -1033,9 +1149,7 @@ Fastigial nucleus
 
 <div class="fact">
 
-<span>
-04
-</span>
+<span>04</span>
 
 <strong>
 Location · الموقع
@@ -1050,6 +1164,7 @@ Deep within cerebellar white matter
 </div>
 
 </div>
+
 
 <div
 id="quiz"
@@ -1100,6 +1215,7 @@ D. On the surface of the medulla
 
 </div>
 
+
 <div
 class="question-block"
 data-answer="A"
@@ -1139,6 +1255,7 @@ D. Emboliform
 <div class="question-feedback"></div>
 
 </div>
+
 
 <div
 class="question-block"
@@ -1180,6 +1297,7 @@ D. Fastigial
 
 </div>
 
+
 <div
 id="quizResult"
 class="quiz-result"
@@ -1194,6 +1312,7 @@ Answer all three questions to see your final score.
 
 </div>
 
+
 <a
 class="back"
 href="explore.html"
@@ -1202,6 +1321,7 @@ href="explore.html"
 </a>
 
 </main>
+
 
 <script type="importmap">
 
@@ -1218,6 +1338,7 @@ href="explore.html"
 }
 
 </script>
+
 
 <script type="module">
 
@@ -1254,6 +1375,45 @@ document.getElementById("loadBar");
 
 const nucleusLabel =
 document.getElementById("nucleusLabel");
+
+
+/* ==================================================
+   LOCATION BUTTON
+================================================== */
+
+const locationButton =
+document.getElementById("locationButton");
+
+const locationPanel =
+document.getElementById("locationPanel");
+
+locationButton.addEventListener(
+    "click",
+    function(){
+
+        locationPanel.classList.toggle(
+            "show"
+        );
+
+        if(
+            locationPanel.classList.contains(
+                "show"
+            )
+        ){
+
+            locationButton.textContent =
+            "📍 Hide Location";
+
+        }
+        else{
+
+            locationButton.textContent =
+            "📍 View Location";
+
+        }
+
+    }
+);
 
 
 /* ==================================================
@@ -1525,53 +1685,24 @@ function createDeepNuclei(){
     nucleiGroup =
     new THREE.Group();
 
-    /*
-       The nuclei remain INSIDE brainRoot,
-       so they move and rotate together
-       with the brain.
-    */
-
     brainRoot.add(
         nucleiGroup
     );
 
 
-    /*
-       ==========================================
-       FINAL HIGHER POSITION
-       ==========================================
-
-       These are intentionally MUCH HIGHER
-       than the previous version.
-
-       Previous approximate Y values:
-       Dentate   0.34
-       Emboliform 0.29
-       Globose   0.27
-       Fastigial 0.25
-
-       NEW Y values:
-       Dentate   0.82
-       Emboliform 0.76
-       Globose   0.72
-       Fastigial 0.68
-
-       This moves the entire nucleus cluster
-       significantly upward while keeping the
-       nuclei small.
+    /* HIGHER + SMALLER
+       Nothing else in the model changed.
     */
 
 
-    /* ------------------------------------------
-       LEFT DENTATE
-    ------------------------------------------ */
+    /* LEFT DENTATE */
 
     makeNucleus(
         "Left Dentate Nucleus",
 
         new THREE.Vector3(
             -0.34,
-             0.82,
+             0.34,
              0.05
         ),
 
@@ -1583,16 +1714,14 @@ function createDeepNuclei(){
     );
 
 
-    /* ------------------------------------------
-       RIGHT DENTATE
-    ------------------------------------------ */
+    /* RIGHT DENTATE */
 
     makeNucleus(
         "Right Dentate Nucleus",
 
         new THREE.Vector3(
              0.34,
-             0.82,
+             0.34,
              0.05
         ),
 
@@ -1604,16 +1733,14 @@ function createDeepNuclei(){
     );
 
 
-    /* ------------------------------------------
-       LEFT EMBOLIFORM
-    ------------------------------------------ */
+    /* LEFT EMBOLIFORM */
 
     makeNucleus(
         "Left Emboliform Nucleus",
 
         new THREE.Vector3(
             -0.22,
-             0.76,
+             0.29,
              0.02
         ),
 
@@ -1625,16 +1752,14 @@ function createDeepNuclei(){
     );
 
 
-    /* ------------------------------------------
-       RIGHT EMBOLIFORM
-    ------------------------------------------ */
+    /* RIGHT EMBOLIFORM */
 
     makeNucleus(
         "Right Emboliform Nucleus",
 
         new THREE.Vector3(
              0.22,
-             0.76,
+             0.29,
              0.02
         ),
 
@@ -1646,16 +1771,14 @@ function createDeepNuclei(){
     );
 
 
-    /* ------------------------------------------
-       LEFT GLOBOSE
-    ------------------------------------------ */
+    /* LEFT GLOBOSE */
 
     makeNucleus(
         "Left Globose Nucleus",
 
         new THREE.Vector3(
             -0.14,
-             0.72,
+             0.27,
              0.02
         ),
 
@@ -1667,16 +1790,14 @@ function createDeepNuclei(){
     );
 
 
-    /* ------------------------------------------
-       RIGHT GLOBOSE
-    ------------------------------------------ */
+    /* RIGHT GLOBOSE */
 
     makeNucleus(
         "Right Globose Nucleus",
 
         new THREE.Vector3(
              0.14,
-             0.72,
+             0.27,
              0.02
         ),
 
@@ -1688,16 +1809,14 @@ function createDeepNuclei(){
     );
 
 
-    /* ------------------------------------------
-       LEFT FASTIGIAL
-    ------------------------------------------ */
+    /* LEFT FASTIGIAL */
 
     makeNucleus(
         "Left Fastigial Nucleus",
 
         new THREE.Vector3(
             -0.065,
-             0.68,
+             0.25,
              0.02
         ),
 
@@ -1709,16 +1828,14 @@ function createDeepNuclei(){
     );
 
 
-    /* ------------------------------------------
-       RIGHT FASTIGIAL
-    ------------------------------------------ */
+    /* RIGHT FASTIGIAL */
 
     makeNucleus(
         "Right Fastigial Nucleus",
 
         new THREE.Vector3(
              0.065,
-             0.68,
+             0.25,
              0.02
         ),
 
@@ -1765,10 +1882,6 @@ function loadBrain(){
             gltf.scene;
 
 
-            /* ==================================
-               FIND ORIGINAL BOUNDS
-            ================================== */
-
             const box =
             new THREE.Box3()
             .setFromObject(
@@ -1793,10 +1906,6 @@ function loadBrain(){
             );
 
 
-            /* ==================================
-               NORMALIZE MODEL
-            ================================== */
-
             const scale =
             4.5 / maxDim;
 
@@ -1818,10 +1927,6 @@ function loadBrain(){
 
             brainModel.position.y -= .60;
 
-
-            /* ==================================
-               BRAIN MATERIAL
-            ================================== */
 
             brainModel.traverse(
             function(child){
@@ -1845,11 +1950,6 @@ function loadBrain(){
                 brainModel
             );
 
-
-            /*
-               CREATE THE NUCLEI AFTER THE BRAIN
-               HAS BEEN NORMALIZED.
-            */
 
             createDeepNuclei();
 
