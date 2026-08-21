@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -111,19 +112,30 @@ h1{
 
 .viewer{
     margin-top:60px;
+
     border:1px solid rgba(255,255,255,.10);
+
     border-radius:24px;
+
     overflow:hidden;
+
     background:#02060b;
-    box-shadow:0 25px 80px rgba(0,0,0,.45);
+
+    box-shadow:
+        0 25px 80px rgba(0,0,0,.45);
 }
 
 .viewer-header{
     min-height:65px;
+
     padding:0 22px;
+
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
+
     border-bottom:1px solid rgba(255,255,255,.08);
 }
 
@@ -140,7 +152,9 @@ h1{
 
 .scene{
     position:relative;
+
     width:100%;
+
     height:700px;
 
     background:
@@ -158,14 +172,24 @@ h1{
     display:block;
 }
 
+
+/* ==================================================
+   LOADING
+================================================== */
+
 .loading{
     position:absolute;
+
     inset:0;
+
     z-index:20;
 
     display:flex;
+
     align-items:center;
+
     justify-content:center;
+
     flex-direction:column;
 
     gap:16px;
@@ -173,6 +197,7 @@ h1{
     background:#02060b;
 
     color:#9db0c3;
+
     font-size:14px;
 
     transition:opacity .8s;
@@ -185,24 +210,40 @@ h1{
 
 .loading-bar{
     width:180px;
+
     height:2px;
+
     background:rgba(255,255,255,.08);
+
     border-radius:2px;
+
     overflow:hidden;
 }
 
 .loading-bar-inner{
     width:0%;
+
     height:100%;
+
     background:#ffffff;
+
     transition:width .3s;
 }
 
+
+/* ==================================================
+   NUCLEUS LABEL
+================================================== */
+
 .nucleus-label{
     position:absolute;
+
     z-index:50;
+
     pointer-events:none;
+
     transform:translate(-50%,-50%);
+
     display:none;
 }
 
@@ -252,9 +293,16 @@ h1{
     transform:translateX(-50%);
 }
 
+
+/* ==================================================
+   CONTROLS
+================================================== */
+
 .controls{
     display:flex;
+
     gap:10px;
+
     flex-wrap:wrap;
 
     padding:15px;
@@ -280,12 +328,15 @@ h1{
 
 .controls button:hover{
     background:#14304a;
+
     color:white;
 }
 
 .controls button.active{
     background:#17191c;
+
     border-color:white;
+
     color:white;
 }
 
@@ -300,22 +351,31 @@ h1{
 
 .section-label{
     color:#61b5ff;
+
     letter-spacing:2px;
+
     font-size:11px;
+
     text-transform:uppercase;
+
     margin-bottom:8px;
 }
 
 .section h2{
     font-size:32px;
+
     margin-bottom:25px;
 }
 
 .section-intro{
     color:#91a5b8;
+
     max-width:900px;
+
     font-size:15px;
+
     line-height:1.9;
+
     margin-bottom:30px;
 }
 
@@ -326,7 +386,9 @@ h1{
 
 .cards{
     display:grid;
+
     grid-template-columns:repeat(3,1fr);
+
     gap:20px;
 }
 
@@ -344,18 +406,25 @@ h1{
 
 .card:hover{
     transform:translateY(-3px);
+
     border-color:#2b506c;
 }
 
 .card h3{
     font-size:18px;
+
     margin-bottom:13px;
+
     color:#eef4fa;
+
+    line-height:1.45;
 }
 
 .card p{
     color:#91a5b8;
+
     font-size:14px;
+
     line-height:1.8;
 }
 
@@ -366,6 +435,7 @@ h1{
 
 .location{
     margin-top:70px;
+
     padding:32px;
 
     background:#091522;
@@ -377,68 +447,18 @@ h1{
 
 .location h2{
     font-size:30px;
+
     margin-bottom:12px;
 }
 
 .location-intro{
     color:#91a5b8;
+
     max-width:900px;
+
     line-height:1.9;
+
     margin-bottom:25px;
-}
-
-
-/* ==================================================
-   LOCATION IMAGES
-================================================== */
-
-.location-images{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:20px;
-    margin-top:25px;
-}
-
-.location-card{
-    background:#050b13;
-    border:1px solid #20364b;
-    border-radius:16px;
-    padding:16px;
-    overflow:hidden;
-}
-
-.location-card img{
-    display:block;
-    width:100%;
-    height:330px;
-    object-fit:contain;
-    background:#02060b;
-    border-radius:12px;
-}
-
-.location-card-title{
-    margin-top:15px;
-    color:#ffffff;
-    font-size:16px;
-    font-weight:bold;
-}
-
-.location-card-text{
-    margin-top:7px;
-    color:#8fa2b5;
-    font-size:13px;
-    line-height:1.7;
-}
-
-.location-source{
-    margin-top:10px;
-    color:#62778c;
-    font-size:10px;
-    line-height:1.6;
-}
-
-.location-source a{
-    color:#7faed0;
 }
 
 
@@ -448,6 +468,7 @@ h1{
 
 .location-diagram{
     margin-top:25px;
+
     padding:20px;
 
     background:#050b13;
@@ -459,50 +480,67 @@ h1{
 
 .brain-svg{
     display:block;
+
     width:100%;
+
     max-width:850px;
+
     height:auto;
+
     margin:auto;
 }
 
 .svg-brain{
     fill:#263d55;
+
     stroke:#71869e;
+
     stroke-width:3;
 }
 
 .svg-cerebellum{
     fill:#344d66;
+
     stroke:#71869e;
+
     stroke-width:3;
 }
 
 .svg-brainstem{
     fill:#29465b;
+
     stroke:#71869e;
+
     stroke-width:3;
 }
 
 .svg-nuclei{
     fill:#ffffff;
+
     stroke:#ffffff;
+
     stroke-width:3;
 }
 
 .svg-line{
     stroke:#ffffff;
+
     stroke-width:2;
 }
 
 .svg-label{
     fill:white;
+
     font-size:18px;
+
     font-weight:bold;
 }
 
 .location-caption{
     text-align:center;
+
     color:#9fb0c3;
+
     margin-top:15px;
 }
 
@@ -529,10 +567,22 @@ h1{
 
 .clinical-box p{
     color:#a7b7c6;
+
     font-size:15px;
+
     line-height:1.9;
+
     margin-bottom:18px;
 }
+
+.clinical-box p:last-child{
+    margin-bottom:0;
+}
+
+
+/* ==================================================
+   INSIGHT
+================================================== */
 
 .insight{
     margin-top:30px;
@@ -559,7 +609,9 @@ h1{
 
 .facts-grid{
     display:grid;
+
     grid-template-columns:repeat(4,1fr);
+
     gap:15px;
 }
 
@@ -575,22 +627,33 @@ h1{
 
 .fact span{
     display:block;
+
     color:white;
+
     font-size:11px;
+
     letter-spacing:2px;
+
     margin-bottom:12px;
 }
 
 .fact strong{
     display:block;
+
     color:#eef4fa;
+
     font-size:14px;
+
     margin-bottom:8px;
+
+    line-height:1.5;
 }
 
 .fact p{
     color:#8195a8;
+
     font-size:13px;
+
     line-height:1.7;
 }
 
@@ -613,11 +676,13 @@ h1{
 
 .quiz h2{
     font-size:27px;
+
     margin-bottom:25px;
 }
 
 .question-block{
     padding:22px;
+
     margin-bottom:18px;
 
     background:#07111d;
@@ -629,28 +694,39 @@ h1{
 
 .question-number{
     color:#61b5ff;
+
     font-size:12px;
+
     letter-spacing:2px;
+
     text-transform:uppercase;
+
     margin-bottom:8px;
 }
 
 .question-en{
     color:#eef4fa;
+
     font-size:16px;
+
     margin-bottom:5px;
 }
 
 .question-ar{
     color:#91a5b8;
+
     font-size:15px;
+
     margin-bottom:15px;
 }
 
 .option{
     display:block;
+
     width:100%;
+
     padding:13px;
+
     margin-top:10px;
 
     background:#10233a;
@@ -674,22 +750,27 @@ h1{
 
 .option.correct{
     background:#17251f;
+
     border-color:#78e0a0;
 }
 
 .option.wrong{
     background:#291a1d;
+
     border-color:#ff8792;
 }
 
 .question-feedback{
     margin-top:12px;
+
     font-size:14px;
+
     min-height:22px;
 }
 
 .quiz-result{
     margin-top:25px;
+
     padding:20px;
 
     border-radius:12px;
@@ -712,7 +793,9 @@ h1{
 
 .back{
     display:inline-block;
+
     margin-top:40px;
+
     padding:12px 18px;
 
     border:1px solid #263951;
@@ -741,10 +824,6 @@ h1{
 
     .facts-grid{
         grid-template-columns:repeat(2,1fr);
-    }
-
-    .location-images{
-        grid-template-columns:1fr;
     }
 
 }
@@ -779,10 +858,6 @@ h1{
         padding:20px;
     }
 
-    .location-card img{
-        height:250px;
-    }
-
 }
 
 </style>
@@ -804,6 +879,10 @@ h1{
 
 <main class="container">
 
+
+<!-- ==================================================
+     HERO
+================================================== -->
 
 <div class="eyebrow">
 Cerebellum · NeuroAtlas
@@ -842,6 +921,10 @@ fastigial nuclei.
 </div>
 
 
+<!-- ==================================================
+     ACTIONS
+================================================== -->
+
 <div class="actions">
 
 <a
@@ -851,12 +934,14 @@ href="#location"
 📍 View Location
 </a>
 
+
 <a
 class="action-button"
 href="#anatomy"
 >
 🧠 Nuclei Anatomy
 </a>
+
 
 <a
 class="action-button"
@@ -888,6 +973,7 @@ DRAG TO ROTATE · SCROLL TO ZOOM
 
 
 <div class="scene">
+
 
 <div
 id="loading"
@@ -1153,95 +1239,17 @@ class="location"
 
 <p class="location-intro">
 
-The cerebellum lies posterior to the brainstem and
-inferior to the occipital lobes. The deep cerebellar
-nuclei are embedded within the cerebellum beneath its
-cortical surface.
+The deep cerebellar nuclei are located deep inside the
+cerebellum, beneath the cerebellar cortex and within
+the cerebellar white matter.
 
 <br><br>
 
-يقع المخيخ خلف جذع الدماغ وأسفل الفصوص القذالية،
-بينما تقع النوى العميقة مدفونة داخل المخيخ أسفل
-سطحه القشري.
+تقع النوى العميقة للمخيخ في عمق المخيخ، أسفل القشرة
+المخيخية وداخل المادة البيضاء للمخيخ.
 
 </p>
 
-
-<div class="location-images">
-
-
-<!-- FULL BRAIN LOCATION -->
-
-<div class="location-card">
-
-<img
-src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Brain_anatomy.png"
-alt="Longitudinal anatomical section of the human brain showing the cerebellum and brainstem"
->
-
-<div class="location-card-title">
-Where is the cerebellum?
-</div>
-
-<div class="location-card-text">
-
-This view shows the cerebellum in relation to the
-cerebrum and brainstem, making its overall position
-inside the posterior part of the brain easier to see.
-
-<br><br>
-
-يوضح هذا المنظر موقع المخيخ بالنسبة للمخ وجذع
-الدماغ، مما يجعل مكانه داخل الجزء الخلفي من الدماغ
-أوضح.
-
-</div>
-
-<div class="location-source">
-Image: Wikimedia Commons — “Brain anatomy.png”.
-Used under the license stated on the source page.
-</div>
-
-</div>
-
-
-<!-- DEEP NUCLEI LOCATION -->
-
-<div class="location-card">
-
-<img
-src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Posterior_view_of_the_human_cerebellum.png"
-alt="Posterior view of the human cerebellum showing deep nuclei"
->
-
-<div class="location-card-title">
-Where are the deep nuclei?
-</div>
-
-<div class="location-card-text">
-
-This posterior anatomical view specifically shows the
-cerebellum and the deep nuclei embedded beneath the
-cerebellar cortex.
-
-<br><br>
-
-يوضح هذا المنظر الخلفي للمخيخ النوى العميقة
-مدفونة داخل المخيخ أسفل القشرة المخيخية.
-
-</div>
-
-<div class="location-source">
-Image: Mosconi et al. (2015), via Wikimedia Commons,
-CC BY 4.0.
-</div>
-
-</div>
-
-</div>
-
-
-<!-- SIMPLE LOCATION DIAGRAM -->
 
 <div class="location-diagram">
 
@@ -1249,106 +1257,122 @@ CC BY 4.0.
 class="brain-svg"
 viewBox="0 0 900 600"
 xmlns="http://www.w3.org/2000/svg"
-aria-label="Simplified deep cerebellar nuclei location diagram"
+aria-label="Simplified location of the deep cerebellar nuclei"
 >
 
 
-<!-- BRAIN -->
+<!-- ================================================
+     CEREBRUM
+================================================ -->
 
 <path
 class="svg-brain"
 d="
-M120 250
-C110 150 185 80 300 60
-C420 40 560 75 635 160
-C690 220 700 300 665 355
-C630 405 555 425 470 420
-C350 415 235 395 165 345
-C135 325 120 290 120 250Z"
+M105 225
+C92 135 170 70 285 48
+C405 25 555 55 650 145
+C710 202 725 280 690 335
+C655 392 585 420 485 415
+C370 410 235 390 160 335
+C120 305 105 265 105 225Z
+"
 />
 
 
-<!-- BRAINSTEM -->
+<!-- ================================================
+     BRAINSTEM
+================================================ -->
 
 <path
 class="svg-brainstem"
 d="
-M405 320
-C415 365 420 420 410 475
-L450 475
-C455 420 450 365 435 320Z
-"/>
+M405 315
+C414 355 418 405 410 475
+L452 475
+C458 410 452 355 438 315Z
+"
+/>
 
 
-<!-- LEFT CEREBELLAR HEMISPHERE -->
+<!-- ================================================
+     LEFT CEREBELLAR HEMISPHERE
+================================================ -->
 
 <path
 class="svg-cerebellum"
 d="
-M300 350
-C245 340 195 370 180 425
-C165 475 210 520 270 520
-C320 520 350 480 350 425
-C350 390 330 360 300 350Z
-"/>
+M285 350
+C225 345 180 380 170 430
+C158 480 200 525 262 525
+C315 525 352 490 352 430
+C352 390 325 360 285 350Z
+"
+/>
 
 
-<!-- RIGHT CEREBELLAR HEMISPHERE -->
+<!-- ================================================
+     RIGHT CEREBELLAR HEMISPHERE
+================================================ -->
 
 <path
 class="svg-cerebellum"
 d="
-M510 350
-C565 340 615 370 630 425
-C645 475 600 520 540 520
-C490 520 460 480 460 425
-C460 390 480 360 510 350Z
-"/>
+M515 350
+C575 345 620 380 630 430
+C642 480 600 525 538 525
+C485 525 448 490 448 430
+C448 390 475 360 515 350Z
+"
+/>
 
 
-<!-- DEEP NUCLEI -->
+<!-- ================================================
+     DEEP CEREBELLAR NUCLEI
+================================================ -->
 
 <ellipse
 class="svg-nuclei"
-cx="325"
+cx="315"
 cy="425"
-rx="20"
-ry="13"
+rx="19"
+ry="12"
 />
 
 
 <ellipse
 class="svg-nuclei"
-cx="575"
+cx="585"
 cy="425"
-rx="20"
-ry="13"
+rx="19"
+ry="12"
 />
 
 
 <ellipse
 class="svg-nuclei"
-cx="355"
-cy="440"
-rx="13"
-ry="9"
+cx="350"
+cy="443"
+rx="11"
+ry="8"
 />
 
 
 <ellipse
 class="svg-nuclei"
-cx="545"
-cy="440"
-rx="13"
-ry="9"
+cx="550"
+cy="443"
+rx="11"
+ry="8"
 />
 
 
-<!-- NUCLEI LINE -->
+<!-- ================================================
+     NUCLEI LABEL
+================================================ -->
 
 <line
 class="svg-line"
-x1="570"
+x1="585"
 y1="425"
 x2="700"
 y2="300"
@@ -1373,12 +1397,14 @@ y="322"
 </text>
 
 
-<!-- CEREBELLAR HEMISPHERE -->
+<!-- ================================================
+     CEREBELLUM LABEL
+================================================ -->
 
 <line
 class="svg-line"
-x1="540"
-y1="475"
+x1="525"
+y1="480"
 x2="700"
 y2="455"
 />
@@ -1389,11 +1415,13 @@ class="svg-label"
 x="710"
 y="460"
 >
-CEREBELLAR HEMISPHERE
+CEREBELLUM
 </text>
 
 
-<!-- BRAINSTEM -->
+<!-- ================================================
+     BRAINSTEM LABEL
+================================================ -->
 
 <line
 class="svg-line"
@@ -1412,17 +1440,18 @@ y="535"
 BRAINSTEM
 </text>
 
+
 </svg>
 
 
 <p class="location-caption">
 
-⚪ The white internal structures represent the deep
-cerebellar nuclei.
+⚪ The white structures inside the cerebellum represent
+the deep cerebellar nuclei.
 
 <br>
 
-التركيبات البيضاء الداخلية تمثل النوى العميقة للمخيخ.
+التركيبات البيضاء داخل المخيخ تمثل النوى العميقة للمخيخ.
 
 </p>
 
@@ -1612,11 +1641,9 @@ data-answer="B"
 Question 01 · السؤال الأول
 </div>
 
-
 <div class="question-en">
 Where are the deep cerebellar nuclei located?
 </div>
-
 
 <div
 class="question-ar"
@@ -1625,38 +1652,21 @@ dir="rtl"
 أين تقع النوى العميقة للمخيخ؟
 </div>
 
-
-<button
-class="option"
-data-option="A"
->
+<button class="option" data-option="A">
 A. Outside the brain
 </button>
 
-
-<button
-class="option"
-data-option="B"
->
+<button class="option" data-option="B">
 B. Deep within the cerebellum
 </button>
 
-
-<button
-class="option"
-data-option="C"
->
+<button class="option" data-option="C">
 C. Inside the frontal lobe
 </button>
 
-
-<button
-class="option"
-data-option="D"
->
+<button class="option" data-option="D">
 D. On the surface of the medulla
 </button>
-
 
 <div class="question-feedback"></div>
 
@@ -1672,11 +1682,9 @@ data-answer="A"
 Question 02 · السؤال الثاني
 </div>
 
-
 <div class="question-en">
 Which nucleus is the most lateral?
 </div>
-
 
 <div
 class="question-ar"
@@ -1685,38 +1693,21 @@ dir="rtl"
 أي نواة تقع بشكل أكثر وحشية؟
 </div>
 
-
-<button
-class="option"
-data-option="A"
->
+<button class="option" data-option="A">
 A. Dentate
 </button>
 
-
-<button
-class="option"
-data-option="B"
->
+<button class="option" data-option="B">
 B. Fastigial
 </button>
 
-
-<button
-class="option"
-data-option="C"
->
+<button class="option" data-option="C">
 C. Globose
 </button>
 
-
-<button
-class="option"
-data-option="D"
->
+<button class="option" data-option="D">
 D. Emboliform
 </button>
-
 
 <div class="question-feedback"></div>
 
@@ -1732,11 +1723,9 @@ data-answer="D"
 Question 03 · السؤال الثالث
 </div>
 
-
 <div class="question-en">
 Which nucleus is the most medial?
 </div>
-
 
 <div
 class="question-ar"
@@ -1745,38 +1734,21 @@ dir="rtl"
 أي نواة تقع بشكل أكثر إنسية؟
 </div>
 
-
-<button
-class="option"
-data-option="A"
->
+<button class="option" data-option="A">
 A. Dentate
 </button>
 
-
-<button
-class="option"
-data-option="B"
->
+<button class="option" data-option="B">
 B. Globose
 </button>
 
-
-<button
-class="option"
-data-option="C"
->
+<button class="option" data-option="C">
 C. Emboliform
 </button>
 
-
-<button
-class="option"
-data-option="D"
->
+<button class="option" data-option="D">
 D. Fastigial
 </button>
-
 
 <div class="question-feedback"></div>
 
@@ -1809,6 +1781,10 @@ href="explore.html"
 </main>
 
 
+<!-- ==================================================
+     THREE.JS IMPORT MAP
+================================================== -->
+
 <script type="importmap">
 
 {
@@ -1825,6 +1801,10 @@ href="explore.html"
 
 </script>
 
+
+<!-- ==================================================
+     THREE.JS
+================================================== -->
 
 <script type="module">
 
@@ -2015,6 +1995,7 @@ new THREE.Group();
 
 scene.add(brainRoot);
 
+
 let brainModel = null;
 
 let nucleiGroup = null;
@@ -2118,6 +2099,7 @@ function makeNucleus(
     nucleusMeshes.push(mesh);
 
     return mesh;
+
 }
 
 
@@ -2130,14 +2112,16 @@ function createDeepNuclei(){
     nucleiGroup =
     new THREE.Group();
 
+
+    /*
+       SAME HIGHER POSITIONS
+       AND SAME SMALL SIZES
+       FROM THE VERSION YOU APPROVED.
+    */
+
     brainRoot.add(
         nucleiGroup
     );
-
-
-    /* ==========================================
-       SAME HIGH POSITION YOU SPECIFIED
-    ========================================== */
 
 
     /* LEFT DENTATE */
@@ -2303,12 +2287,15 @@ function loadBrain(){
     const loader =
     new GLTFLoader();
 
+
     const draco =
     new DRACOLoader();
+
 
     draco.setDecoderPath(
         "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/"
     );
+
 
     loader.setDRACOLoader(
         draco
@@ -2316,7 +2303,7 @@ function loadBrain(){
 
 
     /*
-       SAME MODEL
+       SAME REAL BRAIN MODEL
     */
 
     const url =
@@ -2326,6 +2313,7 @@ function loadBrain(){
     loader.load(
 
         url,
+
 
         function(gltf){
 
@@ -2410,6 +2398,11 @@ function loadBrain(){
                 brainModel
             );
 
+
+            /*
+               CREATE THE NUCLEI AFTER
+               THE BRAIN IS NORMALIZED.
+            */
 
             createDeepNuclei();
 
@@ -2556,6 +2549,7 @@ function resize(){
 
     const width =
     canvas.clientWidth;
+
 
     const height =
     canvas.clientHeight;
@@ -2941,6 +2935,8 @@ function showScore(){
 
 </script>
 
+
 </body>
 
 </html>
+```
