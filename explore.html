@@ -4,10 +4,9 @@
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Explore Anatomy | NeuroAtlas</title>
+<title>NeuroAtlas | Explore Anatomy</title>
 
 <style>
 
@@ -22,354 +21,596 @@ html{
 }
 
 body{
+    background:#050b13;
+    color:#eef4fa;
     font-family:Arial,Helvetica,sans-serif;
-    background:#07111f;
-    color:#f4f7fb;
     line-height:1.6;
 }
 
-/* ==================================================
-   NAVIGATION
-================================================== */
+/* =========================
+   NAV
+========================= */
 
 nav{
-    padding:22px 7%;
+    height:70px;
+    padding:0 7%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
     border-bottom:1px solid rgba(255,255,255,.08);
+    background:rgba(5,11,19,.92);
+    position:sticky;
+    top:0;
+    z-index:100;
+    backdrop-filter:blur(12px);
 }
 
-nav a{
-    color:#aebdce;
+.logo{
+    color:white;
     text-decoration:none;
-    transition:.2s;
+    font-size:18px;
+    font-weight:bold;
+    letter-spacing:2px;
 }
 
-nav a:hover{
+.nav-right{
+    display:flex;
+    gap:25px;
+}
+
+.nav-right a{
+    color:#91a5b8;
+    text-decoration:none;
+    font-size:13px;
+}
+
+.nav-right a:hover{
     color:white;
 }
 
-
-/* ==================================================
-   MAIN CONTAINER
-================================================== */
+/* =========================
+   CONTAINER
+========================= */
 
 .container{
-    max-width:1150px;
+    max-width:1250px;
     margin:auto;
-    padding:70px 7%;
+    padding:70px 7% 100px;
 }
 
+/* =========================
+   HERO
+========================= */
 
-/* ==================================================
-   HEADER
-================================================== */
-
-.label{
-    color:#4da6ff;
+.eyebrow{
+    color:#61b5ff;
+    font-size:11px;
+    letter-spacing:3px;
     text-transform:uppercase;
-    letter-spacing:2px;
-    font-size:13px;
-    margin-bottom:12px;
+    margin-bottom:15px;
 }
 
 h1{
-    font-size:clamp(42px,7vw,70px);
-    line-height:1.05;
+    font-size:clamp(55px,8vw,95px);
+    line-height:.9;
+    letter-spacing:-5px;
     margin-bottom:20px;
 }
 
-.intro{
-    color:#aebdce;
-    max-width:750px;
-    font-size:18px;
-    margin-bottom:45px;
+.hero{
+    max-width:900px;
 }
 
+.hero p{
+    color:#9cafc0;
+    font-size:17px;
+    line-height:1.9;
+}
 
-/* ==================================================
+/* =========================
    SEARCH
-================================================== */
+========================= */
 
-.search{
-    width:100%;
+.search-area{
+    margin-top:40px;
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
 
-    padding:17px 20px;
-
-    border-radius:12px;
-
-    border:1px solid #263951;
-
-    background:#0b192b;
-
+.search-box{
+    flex:1;
+    min-width:250px;
+    padding:15px 18px;
+    border-radius:10px;
+    background:#091522;
+    border:1px solid #20364b;
     color:white;
-
-    font-size:16px;
-
     outline:none;
+    font-size:14px;
+}
 
-    margin-bottom:35px;
+.search-box:focus{
+    border-color:#61b5ff;
+}
+
+.clear-btn{
+    padding:14px 20px;
+    border-radius:10px;
+    border:1px solid #31516d;
+    background:#0b1928;
+    color:#c5d5e3;
+    cursor:pointer;
+}
+
+.clear-btn:hover{
+    border-color:white;
+    color:white;
+}
+
+/* =========================
+   CATEGORY NAV
+========================= */
+
+.category-nav{
+    margin-top:45px;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.category-btn{
+    padding:10px 16px;
+    border-radius:20px;
+    border:1px solid #233b52;
+    background:#08131f;
+    color:#91a5b8;
+    cursor:pointer;
+    font-size:13px;
+}
+
+.category-btn:hover,
+.category-btn.active{
+    background:#12263a;
+    color:white;
+    border-color:#61b5ff;
+}
+
+/* =========================
+   SECTION
+========================= */
+
+.section{
+    margin-top:80px;
+}
+
+.section-header{
+    margin-bottom:30px;
+}
+
+.section-label{
+    color:#61b5ff;
+    font-size:11px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    margin-bottom:8px;
+}
+
+.section h2{
+    font-size:35px;
+    margin-bottom:8px;
+}
+
+.section-description{
+    color:#7f94a8;
+    max-width:800px;
+    font-size:14px;
+}
+
+/* =========================
+   ANATOMY GRID
+========================= */
+
+.anatomy-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.anatomy-card{
+    position:relative;
+    overflow:hidden;
+
+    min-height:250px;
+
+    padding:28px;
+
+    background:
+        radial-gradient(
+            circle at 85% 15%,
+            rgba(97,181,255,.08),
+            transparent 35%
+        ),
+        #091522;
+
+    border:1px solid #172b3e;
+    border-radius:20px;
+
+    transition:
+        transform .25s,
+        border-color .25s,
+        box-shadow .25s;
+}
+
+.anatomy-card:hover{
+    transform:translateY(-6px);
+    border-color:#31516d;
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,.35);
+}
+
+.card-number{
+    color:#48657d;
+    font-size:11px;
+    letter-spacing:2px;
+    margin-bottom:25px;
+}
+
+.card-icon{
+    width:48px;
+    height:48px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:14px;
+
+    background:#102235;
+    border:1px solid #29465f;
+
+    font-size:23px;
+
+    margin-bottom:22px;
+}
+
+.anatomy-card h3{
+    font-size:22px;
+    line-height:1.25;
+    margin-bottom:8px;
+}
+
+.arabic{
+    color:#c4d2de;
+    font-size:15px;
+    margin-bottom:15px;
+}
+
+.anatomy-card p{
+    color:#8297aa;
+    font-size:13px;
+    line-height:1.8;
+}
+
+.explore-link{
+    display:inline-block;
+    margin-top:22px;
+
+    padding:9px 14px;
+
+    border:1px solid #29465f;
+    border-radius:8px;
+
+    color:#c6d8e7;
+    text-decoration:none;
+
+    font-size:12px;
 
     transition:.2s;
 }
 
-.search::placeholder{
-    color:#71859a;
+.explore-link:hover{
+    background:#12263a;
+    border-color:#61b5ff;
+    color:white;
 }
 
-.search:focus{
-    border-color:#4da6ff;
-    box-shadow:0 0 0 3px rgba(77,166,255,.08);
-}
+/* =========================
+   CEREBELLUM FEATURE
+========================= */
 
+.cerebellum-feature{
+    margin-top:35px;
 
-/* ==================================================
-   CATEGORIES
-================================================== */
-
-.categories{
     display:grid;
-
-    grid-template-columns:
-    repeat(3,1fr);
-
+    grid-template-columns:1.2fr .8fr;
     gap:20px;
 }
 
+.feature-main{
+    min-height:310px;
+    padding:35px;
 
-/* ==================================================
-   CATEGORY CARD
-================================================== */
-
-.category{
-
-    padding:28px;
-
-    border-radius:18px;
+    border-radius:22px;
 
     background:
-    rgba(255,255,255,.035);
+        radial-gradient(
+            circle at 75% 30%,
+            rgba(255,255,255,.07),
+            transparent 35%
+        ),
+        #091522;
 
-    border:
-    1px solid
-    rgba(255,255,255,.08);
+    border:1px solid #20364b;
 
-    transition:
-    transform .25s,
-    border-color .25s,
-    box-shadow .25s;
+    position:relative;
+    overflow:hidden;
 }
 
-.category:hover{
+.feature-main::before{
+    content:"CEREBELLUM";
 
-    transform:translateY(-5px);
+    position:absolute;
 
-    border-color:
-    rgba(77,166,255,.55);
+    right:-20px;
+    bottom:-30px;
 
-    box-shadow:
-    0 15px 40px
-    rgba(0,0,0,.2);
+    font-size:100px;
+    font-weight:bold;
+
+    color:rgba(255,255,255,.025);
+
+    pointer-events:none;
 }
 
+.feature-label{
+    color:#61b5ff;
+    letter-spacing:2px;
+    font-size:11px;
+    text-transform:uppercase;
+    margin-bottom:15px;
+}
 
-.category h2{
-
-    font-size:22px;
-
+.feature-main h3{
+    font-size:38px;
     margin-bottom:10px;
 }
 
+.feature-main .arabic{
+    font-size:20px;
+}
 
-.category p{
-
-    color:#9fb0c3;
-
-    margin-bottom:18px;
-
+.feature-main p{
+    max-width:650px;
+    color:#91a5b8;
+    line-height:1.9;
     font-size:14px;
+}
 
+.feature-list{
+    margin-top:22px;
+
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.feature-pill{
+    padding:9px 13px;
+    background:#0e2032;
+    border:1px solid #263f55;
+    border-radius:9px;
+    color:#c2d2df;
+    font-size:12px;
+}
+
+/* =========================
+   CEREBELLUM SIDE
+========================= */
+
+.feature-side{
+    display:grid;
+    gap:15px;
+}
+
+.mini-card{
+    padding:23px;
+
+    background:#091522;
+
+    border:1px solid #172b3e;
+
+    border-radius:17px;
+
+    transition:.2s;
+}
+
+.mini-card:hover{
+    border-color:#31516d;
+    transform:translateX(3px);
+}
+
+.mini-card h4{
+    font-size:17px;
+    margin-bottom:5px;
+}
+
+.mini-card .mini-ar{
+    color:#c1d0dc;
+    font-size:13px;
+    margin-bottom:8px;
+}
+
+.mini-card p{
+    color:#8195a8;
+    font-size:12px;
     line-height:1.7;
 }
 
+/* =========================
+   QUICK MAP
+========================= */
 
-/* ==================================================
-   STRUCTURE LINKS
-================================================== */
+.map{
+    margin-top:80px;
 
-.structures{
+    padding:35px;
 
-    display:flex;
+    border-radius:22px;
 
-    flex-wrap:wrap;
+    background:#091522;
 
-    gap:8px;
+    border:1px solid #172b3e;
 }
 
-
-.structure{
-
-    display:inline-block;
-
-    padding:8px 12px;
-
-    border-radius:8px;
-
-    background:#10233a;
-
-    color:#c8d6e5;
-
-    font-size:13px;
-
-    text-decoration:none;
-
-    border:
-    1px solid
-    transparent;
-
-    transition:
-    background .2s,
-    color .2s,
-    transform .2s,
-    border-color .2s;
+.map h2{
+    font-size:30px;
+    margin-bottom:25px;
 }
 
-
-.structure:hover{
-
-    background:#183654;
-
-    color:white;
-
-    transform:translateY(-2px);
-
-    border-color:
-    rgba(255,255,255,.15);
+.map-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
 }
 
-
-/* ==================================================
-   CEREBRAL CORTEX SPECIAL LINKS
-================================================== */
-
-.cortex-category{
-
-    border-color:
-    rgba(255,255,255,.10);
-}
-
-.cortex-category:hover{
-
-    border-color:
-    rgba(255,255,255,.65);
-
-    box-shadow:
-    0 15px 45px
-    rgba(255,255,255,.04);
-}
-
-
-.cortex-category .structure:first-child{
-
-    border-color:
-    rgba(255,255,255,.25);
-
-    background:#14263a;
-}
-
-
-/* ==================================================
-   BRAINSTEM SPECIAL LINKS
-================================================== */
-
-.brainstem-category:hover{
-
-    border-color:
-    rgba(77,166,255,.7);
-}
-
-
-/* ==================================================
-   NO RESULTS
-================================================== */
-
-.no-results{
-
-    display:none;
-
-    color:#9fb0c3;
-
-    margin-top:20px;
-
+.map-item{
     padding:20px;
 
-    border-radius:12px;
+    background:#07111d;
 
-    background:#0b192b;
+    border:1px solid #1b3043;
 
-    border:1px solid #263951;
+    border-radius:14px;
+}
+
+.map-item span{
+    display:block;
+    color:#61b5ff;
+    font-size:10px;
+    letter-spacing:2px;
+    margin-bottom:10px;
+}
+
+.map-item strong{
+    display:block;
+    font-size:15px;
+    margin-bottom:6px;
+}
+
+.map-item p{
+    color:#7e92a6;
+    font-size:12px;
+}
+
+/* =========================
+   EMPTY
+========================= */
+
+.no-results{
+    display:none;
+
+    padding:40px;
+
+    text-align:center;
+
+    background:#091522;
+
+    border:1px solid #172b3e;
+
+    border-radius:18px;
+
+    color:#8195a8;
+}
+
+.no-results.show{
+    display:block;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    margin-top:100px;
+
+    padding-top:30px;
+
+    border-top:1px solid rgba(255,255,255,.08);
+
+    color:#63788c;
+
+    font-size:12px;
 
     text-align:center;
 }
 
+/* =========================
+   HIDDEN
+========================= */
 
-/* ==================================================
-   FOOTER NOTE
-================================================== */
-
-.explore-note{
-
-    margin-top:50px;
-
-    padding:25px;
-
-    border-left:3px solid #4da6ff;
-
-    background:#091522;
-
-    border-radius:10px;
-
-    color:#9fb0c3;
-
-    font-size:14px;
+.hidden{
+    display:none !important;
 }
 
-
-/* ==================================================
+/* =========================
    MOBILE
-================================================== */
+========================= */
 
-@media(max-width:1000px){
+@media(max-width:950px){
 
-    .categories{
+    .anatomy-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
 
-        grid-template-columns:
-        repeat(2,1fr);
+    .cerebellum-feature{
+        grid-template-columns:1fr;
+    }
 
+    .map-grid{
+        grid-template-columns:repeat(2,1fr);
     }
 
 }
 
+@media(max-width:650px){
 
-@media(max-width:700px){
+    nav{
+        padding:0 5%;
+    }
+
+    .nav-right{
+        display:none;
+    }
 
     .container{
-
-        padding:
-        50px 6% 80px;
-
+        padding:50px 5% 80px;
     }
 
+    h1{
+        font-size:58px;
+        letter-spacing:-3px;
+    }
 
-    .categories{
-
+    .anatomy-grid{
         grid-template-columns:1fr;
-
     }
 
+    .map-grid{
+        grid-template-columns:1fr;
+    }
 
-    .category{
+    .feature-main{
+        padding:25px;
+    }
 
-        padding:24px;
-
+    .feature-main h3{
+        font-size:30px;
     }
 
 }
@@ -382,273 +623,1260 @@ h1{
 <body>
 
 
-<!-- ==================================================
+<!-- =========================
      NAVIGATION
-================================================== -->
+========================= -->
 
 <nav>
 
-<a href="index.html">
-← NeuroAtlas Home
+<a
+class="logo"
+href="index.html"
+>
+NEUROATLAS
 </a>
+
+<div class="nav-right">
+
+<a href="#cerebrum">
+Cerebrum
+</a>
+
+<a href="#cerebellum">
+Cerebellum
+</a>
+
+<a href="#brainstem">
+Brainstem
+</a>
+
+</div>
 
 </nav>
 
 
-
-<!-- ==================================================
-     MAIN
-================================================== -->
-
 <main class="container">
 
 
-<!-- ==================================================
-     HEADER
-================================================== -->
+<!-- =========================
+     HERO
+========================= -->
 
-<div class="label">
-Explore Anatomy
+<div class="eyebrow">
+NeuroAtlas · Interactive Anatomy
 </div>
 
-
 <h1>
-Navigate the Human Brain.
+Explore Anatomy
 </h1>
 
+<div class="hero">
 
-<p class="intro">
+<p>
 
-Explore major neuroanatomical regions and discover how
-structures connect to function, pathways, and clinical reasoning.
+Explore the major regions of the human brain and discover
+their structures, functions, locations, and clinical importance.
 
 <br><br>
 
-استكشفي أهم مناطق الجهاز العصبي وتعرفي على التراكيب ووظائفها
-وعلاقاتها والمسارات العصبية والأهمية السريرية لكل تركيب.
+استكشفي أهم مناطق الدماغ وتعرّفي على تراكيبها ووظائفها
+ومواقعها وأهميتها السريرية بطريقة تفاعلية.
 
 </p>
 
+</div>
 
 
-<!-- ==================================================
+<!-- =========================
      SEARCH
-================================================== -->
+========================= -->
+
+<div class="search-area">
 
 <input
-
 id="search"
-
-class="search"
-
+class="search-box"
 type="text"
-
-placeholder="Search a brain structure..."
-
-aria-label="Search brain structures"
-
+placeholder="Search brain structures..."
 >
 
+<button
+id="clear"
+class="clear-btn"
+>
+Clear
+</button>
+
+</div>
 
 
-<!-- ==================================================
-     CATEGORIES
-================================================== -->
+<!-- =========================
+     CATEGORY BUTTONS
+========================= -->
 
-<div class="categories">
+<div class="category-nav">
+
+<button
+class="category-btn active"
+data-filter="all"
+>
+All
+</button>
+
+<button
+class="category-btn"
+data-filter="cerebrum"
+>
+Cerebrum
+</button>
+
+<button
+class="category-btn"
+data-filter="cerebellum"
+>
+Cerebellum
+</button>
+
+<button
+class="category-btn"
+data-filter="brainstem"
+>
+Brainstem
+</button>
+
+</div>
 
 
+<!-- =========================
+     CEREBRUM
+========================= -->
 
-<!-- ==================================================
-     CEREBRAL CORTEX
-================================================== -->
+<section
+id="cerebrum"
+class="section"
+data-section="cerebrum"
+>
 
-<div class="category cortex-category">
+<div class="section-header">
+
+<div class="section-label">
+01 · Cerebrum
+</div>
 
 <h2>
-🧠 Cerebral Cortex
+Cerebral Lobes · فصوص المخ
 </h2>
 
+<p class="section-description">
 
-<p>
-
-Major cortical regions and their functional roles.
-
-<br>
-
-المناطق الرئيسية للقشرة المخية ووظائفها.
+The cerebral cortex is organized into major lobes that
+support different but interconnected functions.
 
 </p>
 
+</div>
 
-<div class="structures">
+
+<div class="anatomy-grid">
 
 
-<a
-class="structure"
-href="cerebral-cortex.html"
+<!-- FRONTAL -->
+
+<article
+class="anatomy-card"
+data-category="cerebrum"
+data-search="frontal lobe frontal الفص الجبهي executive motor personality"
 >
-Cerebral Cortex
-</a>
 
+<div class="card-number">
+CEREBRUM · 01
+</div>
 
-<a
-class="structure"
-href="frontal-lobe.html"
->
+<div class="card-icon">
+🧠
+</div>
+
+<h3>
 Frontal Lobe
-</a>
+</h3>
 
+<div class="arabic">
+الفص الجبهي
+</div>
+
+<p>
+
+Important for executive functions, voluntary movement,
+planning, decision-making, and aspects of behavior.
+
+</p>
 
 <a
-class="structure"
-href="parietal-lobe.html"
+class="explore-link"
+href="frontal.html"
 >
+Explore →
+</a>
+
+</article>
+
+
+<!-- PARIETAL -->
+
+<article
+class="anatomy-card"
+data-category="cerebrum"
+data-search="parietal lobe parietal الفص الجداري sensory spatial"
+>
+
+<div class="card-number">
+CEREBRUM · 02
+</div>
+
+<div class="card-icon">
+✦
+</div>
+
+<h3>
 Parietal Lobe
-</a>
+</h3>
 
+<div class="arabic">
+الفص الجداري
+</div>
+
+<p>
+
+Processes somatosensory information and contributes to
+spatial awareness and integration of sensory signals.
+
+</p>
 
 <a
-class="structure"
-href="temporal-lobe.html"
+class="explore-link"
+href="parietal.html"
 >
+Explore →
+</a>
+
+</article>
+
+
+<!-- TEMPORAL -->
+
+<article
+class="anatomy-card"
+data-category="cerebrum"
+data-search="temporal lobe temporal الفص الصدغي hearing memory language"
+>
+
+<div class="card-number">
+CEREBRUM · 03
+</div>
+
+<div class="card-icon">
+◉
+</div>
+
+<h3>
 Temporal Lobe
-</a>
+</h3>
 
+<div class="arabic">
+الفص الصدغي
+</div>
+
+<p>
+
+Important for auditory processing, memory, language,
+and aspects of recognition and emotion.
+
+</p>
 
 <a
-class="structure"
-href="occipital-lobe.html"
+class="explore-link"
+href="temporal.html"
 >
-Occipital Lobe
+Explore →
 </a>
 
+</article>
+
+
+<!-- OCCIPITAL -->
+
+<article
+class="anatomy-card"
+data-category="cerebrum"
+data-search="occipital lobe occipital الفص القذالي vision visual"
+>
+
+<div class="card-number">
+CEREBRUM · 04
+</div>
+
+<div class="card-icon">
+◌
+</div>
+
+<h3>
+Occipital Lobe
+</h3>
+
+<div class="arabic">
+الفص القذالي
+</div>
+
+<p>
+
+Primarily involved in processing and interpreting
+visual information.
+
+</p>
 
 <a
-class="structure"
+class="explore-link"
+href="occipital.html"
+>
+Explore →
+</a>
+
+</article>
+
+
+<!-- INSULA -->
+
+<article
+class="anatomy-card"
+data-category="cerebrum"
+data-search="insula insular cortex insula الجزيرة"
+>
+
+<div class="card-number">
+CEREBRUM · 05
+</div>
+
+<div class="card-icon">
+◇
+</div>
+
+<h3>
+Insular Cortex
+</h3>
+
+<div class="arabic">
+القشرة الجزيرية
+</div>
+
+<p>
+
+A deep cortical region involved in interoception,
+sensory integration, and several emotional processes.
+
+</p>
+
+<a
+class="explore-link"
 href="insula.html"
 >
-Insula
+Explore →
 </a>
 
+</article>
 
+
+<!-- LIMBIC -->
+
+<article
+class="anatomy-card"
+data-category="cerebrum"
+data-search="limbic system limbic system الجهاز الحوفي emotion memory"
+>
+
+<div class="card-number">
+CEREBRUM · 06
 </div>
 
+<div class="card-icon">
+◎
 </div>
 
+<h3>
+Limbic System
+</h3>
 
-
-<!-- ==================================================
-     DEEP BRAIN
-================================================== -->
-
-<div class="category">
-
-<h2>
-🔬 Deep Brain
-</h2>
-
+<div class="arabic">
+الجهاز الحوفي
+</div>
 
 <p>
 
-Structures located beneath the cerebral cortex.
+A network of structures involved in memory, emotion,
+motivation, and behavioral responses.
 
-<br>
+</p>
 
-تراكيب تقع أسفل القشرة المخية.
+<a
+class="explore-link"
+href="limbic.html"
+>
+Explore →
+</a>
+
+</article>
+
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     CEREBELLUM
+========================= -->
+
+<section
+id="cerebellum"
+class="section"
+data-section="cerebellum"
+>
+
+<div class="section-header">
+
+<div class="section-label">
+02 · Cerebellum
+</div>
+
+<h2>
+Cerebellum · المخيخ
+</h2>
+
+<p class="section-description">
+
+The cerebellum plays an important role in coordination,
+balance, posture, and motor learning.
+
+</p>
+
+</div>
+
+
+<div class="cerebellum-feature">
+
+
+<div class="feature-main">
+
+<div class="feature-label">
+Cerebellar System
+</div>
+
+<h3>
+Cerebellum
+</h3>
+
+<div class="arabic">
+المخيخ
+</div>
+
+<p>
+
+The cerebellum is located in the posterior cranial fossa,
+inferior to the occipital lobes and behind the brainstem.
+Its highly organized circuits help fine-tune movement,
+maintain balance, and support motor learning.
+
+<br><br>
+
+يقع المخيخ في الجزء الخلفي من الجمجمة أسفل الفصوص القذالية
+وخلف جذع الدماغ. وتساعد دوائره المنظمة بشكل دقيق على تنسيق
+الحركة والحفاظ على التوازن والتعلم الحركي.
 
 </p>
 
 
-<div class="structures">
+<div class="feature-list">
 
+<div class="feature-pill">
+Coordination · التناسق
+</div>
 
-<a
-class="structure"
-href="thalamus.html"
->
-Thalamus
-</a>
+<div class="feature-pill">
+Balance · التوازن
+</div>
 
+<div class="feature-pill">
+Motor Learning · التعلم الحركي
+</div>
 
-<a
-class="structure"
-href="hypothalamus.html"
->
-Hypothalamus
-</a>
-
-
-<a
-class="structure"
-href="hippocampus.html"
->
-Hippocampus
-</a>
-
-
-<a
-class="structure"
-href="amygdala.html"
->
-Amygdala
-</a>
-
-
-<a
-class="structure"
-href="basal-ganglia.html"
->
-Basal Ganglia
-</a>
-
+<div class="feature-pill">
+Posture · وضعية الجسم
+</div>
 
 </div>
 
 </div>
 
 
+<div class="feature-side">
 
-<!-- ==================================================
+
+<!-- CORTEX -->
+
+<div
+class="mini-card"
+data-category="cerebellum"
+data-search="cerebellar cortex cortex قشرة المخيخ"
+>
+
+<h4>
+Cerebellar Cortex
+</h4>
+
+<div class="mini-ar">
+قشرة المخيخ
+</div>
+
+<p>
+
+The outer gray-matter layer of the cerebellum that
+contains organized circuits involved in coordinating
+and refining movement.
+
+</p>
+
+<a
+class="explore-link"
+href="cerebellar-cortex.html"
+>
+Explore →
+</a>
+
+</div>
+
+
+<!-- VERMIS -->
+
+<div
+class="mini-card"
+data-category="cerebellum"
+data-search="cerebellar vermis vermis دودة المخيخ"
+>
+
+<h4>
+Cerebellar Vermis
+</h4>
+
+<div class="mini-ar">
+دودة المخيخ
+</div>
+
+<p>
+
+The central midline region of the cerebellum that is
+particularly associated with control of axial posture
+and coordinated movements.
+
+</p>
+
+<a
+class="explore-link"
+href="cerebellar-vermis.html"
+>
+Explore →
+</a>
+
+</div>
+
+
+<!-- DEEP NUCLEI -->
+
+<div
+class="mini-card"
+data-category="cerebellum"
+data-search="deep cerebellar nuclei deep nuclei النوى العميقة للمخيخ"
+>
+
+<h4>
+Deep Cerebellar Nuclei
+</h4>
+
+<div class="mini-ar">
+النوى العميقة للمخيخ
+</div>
+
+<p>
+
+Groups of neurons deep within the cerebellum that
+provide major output pathways from cerebellar circuits.
+
+</p>
+
+<a
+class="explore-link"
+href="deep-cerebellar-nuclei.html"
+>
+Explore →
+</a>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
      BRAINSTEM
-================================================== -->
+========================= -->
 
-<div class="category brainstem-category">
+<section
+id="brainstem"
+class="section"
+data-section="brainstem"
+>
+
+<div class="section-header">
+
+<div class="section-label">
+03 · Brainstem
+</div>
 
 <h2>
-⚡ Brainstem
+Brainstem · جذع الدماغ
 </h2>
 
+<p class="section-description">
 
-<p>
-
-Core structures connecting the brain with the spinal cord.
-
-<br>
-
-تراكيب أساسية تربط الدماغ بالحبل الشوكي.
+The brainstem connects the brain with the spinal cord
+and contains pathways and nuclei essential for many
+basic neurological functions.
 
 </p>
 
+</div>
 
-<div class="structures">
 
+<div class="anatomy-grid">
+
+
+<!-- MIDBRAIN -->
+
+<article
+class="anatomy-card"
+data-category="brainstem"
+data-search="midbrain mesencephalon midbrain الدماغ الأوسط"
+>
+
+<div class="card-number">
+BRAINSTEM · 01
+</div>
+
+<div class="card-icon">
+│
+</div>
+
+<h3>
+Midbrain
+</h3>
+
+<div class="arabic">
+الدماغ الأوسط
+</div>
+
+<p>
+
+The upper portion of the brainstem, involved in motor
+control and several sensory pathways.
+
+</p>
 
 <a
-class="structure"
+class="explore-link"
 href="midbrain.html"
 >
-Midbrain
+Explore →
 </a>
 
+</article>
+
+
+<!-- PONS -->
+
+<article
+class="anatomy-card"
+data-category="brainstem"
+data-search="pons pons الجسر brainstem"
+>
+
+<div class="card-number">
+BRAINSTEM · 02
+</div>
+
+<div class="card-icon">
+●
+</div>
+
+<h3>
+Pons
+</h3>
+
+<div class="arabic">
+الجسر
+</div>
+
+<p>
+
+A prominent part of the brainstem that contains
+important pathways and connections with the cerebellum.
+
+</p>
 
 <a
-class="structure"
+class="explore-link"
 href="pons.html"
 >
-Pons
+Explore →
 </a>
 
+</article>
+
+
+<!-- MEDULLA -->
+
+<article
+class="anatomy-card"
+data-category="brainstem"
+data-search="medulla medulla oblongata النخاع المستطيل brainstem"
+>
+
+<div class="card-number">
+BRAINSTEM · 03
+</div>
+
+<div class="card-icon">
+▼
+</div>
+
+<h3>
+Medulla
+</h3>
+
+<div class="arabic">
+النخاع المستطيل
+</div>
+
+<p>
+
+The lower part of the brainstem, containing important
+pathways and nuclei involved in vital autonomic functions.
+
+</p>
 
 <a
-class="structure"
+class="explore-link"
+href="medulla.html"
+>
+Explore →
+</a>
+
+</article>
+
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     QUICK MAP
+========================= -->
+
+<section class="map">
+
+<h2>
+🧠 NeuroAtlas Quick Map
+</h2>
+
+
+<div class="map-grid">
+
+
+<div class="map-item">
+
+<span>
+CEREBRUM
+</span>
+
+<strong>
+Frontal
+</strong>
+
+<p>
+Planning · movement · executive function
+</p>
+
+</div>
+
+
+<div class="map-item">
+
+<span>
+CEREBRUM
+</span>
+
+<strong>
+Parietal
+</strong>
+
+<p>
+Sensation · spatial processing
+</p>
+
+</div>
+
+
+<div class="map-item">
+
+<span>
+CEREBRUM
+</span>
+
+<strong>
+Temporal
+</strong>
+
+<p>
+Hearing · memory · language
+</p>
+
+</div>
+
+
+<div class="map-item">
+
+<span>
+CEREBRUM
+</span>
+
+<strong>
+Occipital
+</strong>
+
+<p>
+Visual processing
+</p>
+
+</div>
+
+
+<div class="map-item">
+
+<span>
+CEREBELLUM
+</span>
+
+<strong>
+Cerebellar Cortex
+</strong>
+
+<p>
+Movement refinement
+</p>
+
+</div>
+
+
+<div class="map-item">
+
+<span>
+CEREBELLUM
+</span>
+
+<strong>
+Vermis
+</strong>
+
+<p>
+Posture · axial coordination
+</p>
+
+</div>
+
+
+<div class="map-item">
+
+<span>
+CEREBELLUM
+</span>
+
+<strong>
+Deep Nuclei
+</strong>
+
+<p>
+Major cerebellar output
+</p>
+
+</div>
+
+
+<div class="map-item">
+
+<span>
+BRAINSTEM
+</span>
+
+<strong>
+Medulla
+</strong>
+
+<p>
+Autonomic and neural pathways
+</p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     NO RESULTS
+========================= -->
+
+<div
+id="noResults"
+class="no-results"
+>
+
+No structures found.
+
+<br>
+
+لم يتم العثور على تركيب مطابق للبحث.
+
+</div>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+NeuroAtlas · Interactive Human Neuroanatomy
+
+<br><br>
+
+Explore · Understand · Remember
+
+</footer>
+
+
+</main>
+
+
+<script>
+
+/* =========================================
+   SEARCH + FILTER
+========================================= */
+
+const search =
+document.getElementById("search");
+
+const clearBtn =
+document.getElementById("clear");
+
+const cards =
+document.querySelectorAll(
+".anatomy-card, .mini-card"
+);
+
+const sections =
+document.querySelectorAll(
+"section[data-section]"
+);
+
+const categoryButtons =
+document.querySelectorAll(
+".category-btn"
+);
+
+const noResults =
+document.getElementById("noResults");
+
+
+let currentFilter = "all";
+
+
+function filterCards(){
+
+    const query =
+    search.value
+    .toLowerCase()
+    .trim();
+
+    let visibleCount = 0;
+
+
+    cards.forEach(card => {
+
+        const text =
+        (
+            card.dataset.search ||
+            card.innerText
+        ).toLowerCase();
+
+
+        const category =
+        card.dataset.category;
+
+
+        const matchesSearch =
+        text.includes(query);
+
+
+        const matchesCategory =
+        currentFilter === "all" ||
+        category === currentFilter;
+
+
+        if(
+            matchesSearch &&
+            matchesCategory
+        ){
+
+            card.classList.remove(
+                "hidden"
+            );
+
+            visibleCount++;
+
+        }
+
+        else{
+
+            card.classList.add(
+                "hidden"
+            );
+
+        }
+
+    });
+
+
+    sections.forEach(section => {
+
+        const sectionCards =
+        section.querySelectorAll(
+            ".anatomy-card, .mini-card"
+        );
+
+
+        let hasVisible = false;
+
+
+        sectionCards.forEach(card => {
+
+            if(
+                !card.classList.contains(
+                    "hidden"
+                )
+            ){
+
+                hasVisible = true;
+
+            }
+
+        });
+
+
+        if(
+            hasVisible
+        ){
+
+            section.classList.remove(
+                "hidden"
+            );
+
+        }
+
+        else{
+
+            section.classList.add(
+                "hidden"
+            );
+
+        }
+
+    });
+
+
+    if(
+        visibleCount === 0
+    ){
+
+        noResults.classList.add(
+            "show"
+        );
+
+    }
+
+    else{
+
+        noResults.classList.remove(
+            "show"
+        );
+
+    }
+
+}
+
+
+/* =========================================
+   SEARCH
+========================================= */
+
+search.addEventListener(
+"input",
+filterCards
+);
+
+
+/* =========================================
+   CLEAR
+========================================= */
+
+clearBtn.addEventListener(
+"click",
+function(){
+
+    search.value = "";
+
+    currentFilter = "all";
+
+
+    categoryButtons.forEach(btn => {
+
+        btn.classList.remove(
+            "active"
+        );
+
+    });
+
+
+    document
+    .querySelector(
+        '[data-filter="all"]'
+    )
+    .classList.add(
+        "active"
+    );
+
+
+    filterCards();
+
+});
+
+
+
+/* =========================================
+   CATEGORY FILTER
+========================================= */
+
+categoryButtons.forEach(
+button => {
+
+    button.addEventListener(
+    "click",
+    function(){
+
+        currentFilter =
+        button.dataset.filter;
+
+
+        categoryButtons.forEach(
+        btn => {
+
+            btn.classList.remove(
+                "active"
+            );
+
+        });
+
+
+        button.classList.add(
+            "active"
+        );
+
+
+        filterCards();
+
+    });
+
+});
+
+
+/* =========================================
+   INITIAL
+========================================= */
+
+filterCards();
+
+
+/* =========================================
+   SMOOTH REVEAL
+========================================= */
+
+const observer =
+new IntersectionObserver(
+entries => {
+
+    entries.forEach(entry => {
+
+        if(
+            entry.isIntersecting
+        ){
+
+            entry.target.style.opacity =
+            "1";
+
+            entry.target.style.transform =
+            "translateY(0)";
+
+        }
+
+    });
+
+},
+{
+    threshold:.08
+});
+
+
+cards.forEach(card => {
+
+    card.style.opacity = "0";
+
+    card.style.transform =
+    "translateY(15px)";
+
+    card.style.transition =
+    "opacity .5s ease, transform .5s ease, border-color .25s, box-shadow .25s";
+
+    observer.observe(card);
+
+});
+
+</script>
+
+
+</body>
+
+</html>
