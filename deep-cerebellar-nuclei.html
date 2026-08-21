@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -614,7 +615,6 @@ h1{
 
 </head>
 
-
 <body>
 
 <nav>
@@ -624,7 +624,6 @@ h1{
 </a>
 
 </nav>
-
 
 <main class="container">
 
@@ -661,7 +660,6 @@ fastigial nuclei.
 
 </div>
 
-
 <div class="actions">
 
 <a
@@ -680,7 +678,6 @@ href="#quiz"
 
 </div>
 
-
 <div class="viewer">
 
 <div class="viewer-header">
@@ -694,7 +691,6 @@ DRAG TO ROTATE · SCROLL TO ZOOM
 </div>
 
 </div>
-
 
 <div class="scene">
 
@@ -718,9 +714,7 @@ class="loading-bar-inner"
 
 </div>
 
-
 <canvas id="brainCanvas"></canvas>
-
 
 <div
 id="nucleusLabel"
@@ -735,7 +729,6 @@ DEEP CEREBELLAR NUCLEI
 </div>
 
 </div>
-
 
 <div class="controls">
 
@@ -762,7 +755,6 @@ id="reset"
 </div>
 
 </div>
-
 
 <section
 id="anatomy"
@@ -792,7 +784,6 @@ emboliform, globose, and fastigial.
 
 </p>
 
-
 <div class="cards">
 
 <div class="card">
@@ -818,7 +809,6 @@ movement.
 
 </div>
 
-
 <div class="card">
 
 <h3>
@@ -840,7 +830,6 @@ movement.
 
 </div>
 
-
 <div class="card">
 
 <h3>
@@ -860,7 +849,6 @@ nucleus and participates in cerebellar motor circuitry.
 </p>
 
 </div>
-
 
 <div class="card">
 
@@ -883,7 +871,6 @@ posture, and axial control.
 
 </div>
 
-
 <div class="card">
 
 <h3>
@@ -904,7 +891,6 @@ white matter.
 </p>
 
 </div>
-
 
 <div class="card">
 
@@ -930,7 +916,6 @@ system.
 </div>
 
 </section>
-
 
 <div class="clinical-section">
 
@@ -965,7 +950,6 @@ and the precision of voluntary movement.
 
 </div>
 
-
 <div class="insight">
 
 <strong>
@@ -987,7 +971,6 @@ cerebellum.
 
 </div>
 
-
 <div class="section">
 
 <div class="section-label">
@@ -1002,7 +985,9 @@ Deep Nuclei at a Glance
 
 <div class="fact">
 
-<span>01</span>
+<span>
+01
+</span>
 
 <strong>
 Number · العدد
@@ -1014,10 +999,11 @@ Four major paired nuclei
 
 </div>
 
-
 <div class="fact">
 
-<span>02</span>
+<span>
+02
+</span>
 
 <strong>
 Most Lateral · الأكثر وحشية
@@ -1029,10 +1015,11 @@ Dentate nucleus
 
 </div>
 
-
 <div class="fact">
 
-<span>03</span>
+<span>
+03
+</span>
 
 <strong>
 Most Medial · الأكثر إنسية
@@ -1044,10 +1031,11 @@ Fastigial nucleus
 
 </div>
 
-
 <div class="fact">
 
-<span>04</span>
+<span>
+04
+</span>
 
 <strong>
 Location · الموقع
@@ -1063,7 +1051,6 @@ Deep within cerebellar white matter
 
 </div>
 
-
 <div
 id="quiz"
 class="quiz"
@@ -1072,7 +1059,6 @@ class="quiz"
 <h2>
 🧠 Mini Test · اختبار قصير
 </h2>
-
 
 <div
 class="question-block"
@@ -1114,7 +1100,6 @@ D. On the surface of the medulla
 
 </div>
 
-
 <div
 class="question-block"
 data-answer="A"
@@ -1154,7 +1139,6 @@ D. Emboliform
 <div class="question-feedback"></div>
 
 </div>
-
 
 <div
 class="question-block"
@@ -1196,7 +1180,6 @@ D. Fastigial
 
 </div>
 
-
 <div
 id="quizResult"
 class="quiz-result"
@@ -1204,12 +1187,12 @@ class="quiz-result"
 
 Answer all three questions to see your final score.
 <br>
+
 أجب عن الأسئلة الثلاثة لرؤية نتيجتك النهائية.
 
 </div>
 
 </div>
-
 
 <a
 class="back"
@@ -1219,7 +1202,6 @@ href="explore.html"
 </a>
 
 </main>
-
 
 <script type="importmap">
 
@@ -1236,7 +1218,6 @@ href="explore.html"
 }
 
 </script>
-
 
 <script type="module">
 
@@ -1516,11 +1497,6 @@ function makeNucleus(
 
     mesh.name = name;
 
-    /*
-       LOCAL coordinates inside brainRoot.
-       The nuclei therefore move with the brain.
-    */
-
     mesh.position.copy(
         position
     );
@@ -1549,197 +1525,207 @@ function createDeepNuclei(){
     nucleiGroup =
     new THREE.Group();
 
+    /*
+       The nuclei remain INSIDE brainRoot,
+       so they move and rotate together
+       with the brain.
+    */
+
     brainRoot.add(
         nucleiGroup
     );
 
 
     /*
-       IMPORTANT:
+       ==========================================
+       FINAL HIGHER POSITION
+       ==========================================
 
        These are intentionally MUCH HIGHER
        than the previous version.
 
-       Previous Y:
-       approximately -0.72 to -0.79
+       Previous approximate Y values:
+       Dentate   0.34
+       Emboliform 0.29
+       Globose   0.27
+       Fastigial 0.25
 
-       NEW Y:
-       approximately -0.34 to -0.42
+       NEW Y values:
+       Dentate   0.82
+       Emboliform 0.76
+       Globose   0.72
+       Fastigial 0.68
 
-       Increasing Y moves them UP.
-
-       They remain inside the brain/cerebellar
-       region because they are still positioned
-       within the normalized brainRoot.
-
-       They are also SMALLER than before.
+       This moves the entire nucleus cluster
+       significantly upward while keeping the
+       nuclei small.
     */
 
 
-    /* ==========================================
+    /* ------------------------------------------
        LEFT DENTATE
-    ========================================== */
+    ------------------------------------------ */
 
     makeNucleus(
         "Left Dentate Nucleus",
 
         new THREE.Vector3(
             -0.34,
-            -0.40,
+             0.82,
              0.05
         ),
 
         new THREE.Vector3(
-            .135,
-            .095,
-            .185
+            .105,
+            .075,
+            .145
         )
     );
 
 
-    /* ==========================================
+    /* ------------------------------------------
        RIGHT DENTATE
-    ========================================== */
+    ------------------------------------------ */
 
     makeNucleus(
         "Right Dentate Nucleus",
 
         new THREE.Vector3(
              0.34,
-            -0.40,
+             0.82,
              0.05
         ),
 
         new THREE.Vector3(
-            .135,
-            .095,
-            .185
+            .105,
+            .075,
+            .145
         )
     );
 
 
-    /* ==========================================
+    /* ------------------------------------------
        LEFT EMBOLIFORM
-    ========================================== */
+    ------------------------------------------ */
 
     makeNucleus(
         "Left Emboliform Nucleus",
 
         new THREE.Vector3(
-            -0.23,
-            -0.43,
+            -0.22,
+             0.76,
              0.02
         ),
 
         new THREE.Vector3(
-            .075,
-            .065,
-            .11
+            .060,
+            .055,
+            .085
         )
     );
 
 
-    /* ==========================================
+    /* ------------------------------------------
        RIGHT EMBOLIFORM
-    ========================================== */
+    ------------------------------------------ */
 
     makeNucleus(
         "Right Emboliform Nucleus",
 
         new THREE.Vector3(
-             0.23,
-            -0.43,
+             0.22,
+             0.76,
              0.02
         ),
 
         new THREE.Vector3(
-            .075,
-            .065,
-            .11
+            .060,
+            .055,
+            .085
         )
     );
 
 
-    /* ==========================================
+    /* ------------------------------------------
        LEFT GLOBOSE
-    ========================================== */
+    ------------------------------------------ */
 
     makeNucleus(
         "Left Globose Nucleus",
 
         new THREE.Vector3(
-            -0.15,
-            -0.45,
+            -0.14,
+             0.72,
              0.02
         ),
 
         new THREE.Vector3(
-            .065,
-            .065,
-            .09
+            .055,
+            .055,
+            .070
         )
     );
 
 
-    /* ==========================================
+    /* ------------------------------------------
        RIGHT GLOBOSE
-    ========================================== */
+    ------------------------------------------ */
 
     makeNucleus(
         "Right Globose Nucleus",
 
         new THREE.Vector3(
-             0.15,
-            -0.45,
+             0.14,
+             0.72,
              0.02
         ),
 
         new THREE.Vector3(
-            .065,
-            .065,
-            .09
+            .055,
+            .055,
+            .070
         )
     );
 
 
-    /* ==========================================
+    /* ------------------------------------------
        LEFT FASTIGIAL
-    ========================================== */
+    ------------------------------------------ */
 
     makeNucleus(
         "Left Fastigial Nucleus",
 
         new THREE.Vector3(
-            -0.07,
-            -0.43,
+            -0.065,
+             0.68,
              0.02
         ),
 
         new THREE.Vector3(
-            .055,
-            .075,
-            .07
+            .050,
+            .065,
+            .060
         )
     );
 
 
-    /* ==========================================
+    /* ------------------------------------------
        RIGHT FASTIGIAL
-    ========================================== */
+    ------------------------------------------ */
 
     makeNucleus(
         "Right Fastigial Nucleus",
 
         new THREE.Vector3(
-             0.07,
-            -0.43,
+             0.065,
+             0.68,
              0.02
         ),
 
         new THREE.Vector3(
-            .055,
-            .075,
-            .07
+            .050,
+            .065,
+            .060
         )
     );
 
@@ -1769,7 +1755,6 @@ function loadBrain(){
     const url =
     "https://cdn.jsdelivr.net/gh/itayinbarr/brainproject@main/brain-atlas/models/brain.glb";
 
-
     loader.load(
 
         url,
@@ -1781,7 +1766,7 @@ function loadBrain(){
 
 
             /* ==================================
-               ORIGINAL MODEL BOUNDS
+               FIND ORIGINAL BOUNDS
             ================================== */
 
             const box =
@@ -1835,7 +1820,7 @@ function loadBrain(){
 
 
             /* ==================================
-               APPLY BRAIN MATERIAL
+               BRAIN MATERIAL
             ================================== */
 
             brainModel.traverse(
@@ -1864,8 +1849,6 @@ function loadBrain(){
             /*
                CREATE THE NUCLEI AFTER THE BRAIN
                HAS BEEN NORMALIZED.
-
-               They are children of brainRoot.
             */
 
             createDeepNuclei();
@@ -1889,12 +1872,9 @@ function loadBrain(){
                     "show"
                 );
 
-            },
-            600
-            );
+            },600);
 
         },
-
 
         function(progress){
 
@@ -1916,7 +1896,6 @@ function loadBrain(){
             }
 
         },
-
 
         function(error){
 
@@ -2009,13 +1988,11 @@ function resize(){
     const height =
     canvas.clientHeight;
 
-
     if(
         width <= 0 ||
         height <= 0
     )
         return;
-
 
     camera.aspect =
     width / height;
@@ -2050,7 +2027,6 @@ function(){
     highlighted =
     !highlighted;
 
-
     if(nucleiGroup){
 
         nucleiGroup.visible =
@@ -2058,18 +2034,15 @@ function(){
 
     }
 
-
     nucleusLabel.classList.toggle(
         "show",
         highlighted
     );
 
-
     this.classList.toggle(
         "active",
         highlighted
     );
-
 
     this.textContent =
     highlighted
@@ -2092,12 +2065,10 @@ function(){
     controls.autoRotate =
     !controls.autoRotate;
 
-
     this.classList.toggle(
         "active",
         controls.autoRotate
     );
-
 
     this.textContent =
     controls.autoRotate
@@ -2123,13 +2094,11 @@ function(){
         8.5
     );
 
-
     controls.target.set(
         0,
         -.25,
         0
     );
-
 
     controls.update();
 
@@ -2177,7 +2146,6 @@ let score = 0;
 
 let answered = 0;
 
-
 const questions =
 document.querySelectorAll(
     ".question-block"
@@ -2190,18 +2158,15 @@ function(question){
     const correct =
     question.dataset.answer;
 
-
     const options =
     question.querySelectorAll(
         ".option"
     );
 
-
     const feedback =
     question.querySelector(
         ".question-feedback"
     );
-
 
     let done = false;
 
@@ -2216,9 +2181,7 @@ function(question){
             if(done)
                 return;
 
-
             done = true;
-
 
             const selected =
             option.dataset.option;
@@ -2256,7 +2219,6 @@ function(question){
                     "wrong"
                 );
 
-
                 options.forEach(
                 function(btn){
 
@@ -2272,7 +2234,6 @@ function(question){
                     }
 
                 });
-
 
                 feedback.textContent =
                 "✗ Incorrect · إجابة غير صحيحة";
@@ -2312,7 +2273,6 @@ function showScore(){
     document.getElementById(
         "quizResult"
     );
-
 
     let message;
 
@@ -2367,3 +2327,4 @@ function showScore(){
 </body>
 
 </html>
+```
