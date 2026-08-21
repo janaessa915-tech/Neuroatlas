@@ -195,7 +195,7 @@ h1{
 
 
 /* ==================================================
-   LABELS
+   LABEL
 ================================================== */
 
 .nucleus-label{
@@ -1327,10 +1327,6 @@ href="explore.html"
 </main>
 
 
-<!-- ==================================================
-     THREE.JS
-================================================== -->
-
 <script type="importmap">
 
 {
@@ -1491,7 +1487,6 @@ scene.add(
     )
 );
 
-
 scene.add(
     new THREE.HemisphereLight(
         0xffffff,
@@ -1499,7 +1494,6 @@ scene.add(
         .75
     )
 );
-
 
 const keyLight =
 new THREE.DirectionalLight(
@@ -1535,6 +1529,14 @@ scene.add(fillLight);
    BRAIN ROOT
 ================================================== */
 
+/*
+   EVERYTHING — brain + nuclei — lives under
+   this same root.
+
+   Therefore the nuclei can NEVER stay behind
+   while the brain rotates.
+*/
+
 const brainRoot =
 new THREE.Group();
 
@@ -1550,6 +1552,16 @@ let nucleusMeshes = [];
 let highlighted = true;
 
 
+/*
+   These values describe the actual normalized
+   dimensions of the loaded brain.
+
+   They are filled after the GLB loads.
+*/
+
+let brainBounds = null;
+
+
 /* ==================================================
    BRAIN MATERIAL
 ================================================== */
@@ -1559,15 +1571,15 @@ new THREE.MeshPhysicalMaterial({
 
     color:0xe8bfc9,
 
-    roughness:.65,
+    roughness:.72,
 
     metalness:0,
 
-    clearcoat:.1,
+    clearcoat:.08,
 
     transparent:true,
 
-    opacity:.48,
+    opacity:.55,
 
     depthWrite:false,
 
@@ -1580,38 +1592,45 @@ new THREE.MeshPhysicalMaterial({
    NUCLEUS MATERIAL
 ================================================== */
 
-const nucleusMaterial =
-new THREE.MeshPhysicalMaterial({
+function createNucleusMaterial(){
 
-    color:0xffffff,
+    return new THREE.MeshPhysicalMaterial({
 
-    emissive:0xffffff,
+        color:0xffffff,
 
-    emissiveIntensity:1.4,
+        emissive:0xffffff,
 
-    roughness:.25,
+        emissiveIntensity:1.8,
 
-    metalness:0,
+        roughness:.3,
 
-    transparent:false,
+        metalness:0,
 
-    depthTest:false,
+        transparent:false,
 
-    depthWrite:false,
+        depthTest:true,
 
-    side:THREE.DoubleSide
+        depthWrite:false,
 
-});
+        side:THREE.DoubleSide
+
+    });
+
+}
 
 
 /* ==================================================
-   CREATE ONE NUCLEUS
+   CREATE NUCLEUS
 ================================================== */
 
 function makeNucleus(
     name,
-    position,
-    scale
+    normalizedX,
+    normalizedY,
+    normalizedZ,
+    sizeX,
+    sizeY,
+    sizeZ
 ){
 
     const geometry =
@@ -1625,35 +1644,57 @@ function makeNucleus(
     const mesh =
     new THREE.Mesh(
         geometry,
-        nucleusMaterial.clone()
+        createNucleusMaterial()
     );
 
 
-    mesh.name = name;
+    mesh.name =
+    name;
 
 
     /*
        IMPORTANT:
 
-       These coordinates are LOCAL coordinates
-       INSIDE brainRoot.
+       These are NOT arbitrary absolute
+       coordinates anymore.
 
-       They are NOT world coordinates.
-
-       Therefore they move WITH the brain.
+       They are percentages of the REAL
+       loaded brain bounding box.
     */
 
-    mesh.position.copy(
-        position
+    const x =
+    brainBounds.min.x +
+    brainBounds.size.x *
+    normalizedX;
+
+
+    const y =
+    brainBounds.min.y +
+    brainBounds.size.y *
+    normalizedY;
+
+
+    const z =
+    brainBounds.min.z +
+    brainBounds.size.z *
+    normalizedZ;
+
+
+    mesh.position.set(
+        x,
+        y,
+        z
     );
 
 
-    mesh.scale.copy(
-        scale
+    mesh.scale.set(
+        brainBounds.size.x * sizeX,
+        brainBounds.size.y * sizeY,
+        brainBounds.size.z * sizeZ
     );
 
 
-    mesh.renderOrder = 20;
+    mesh.renderOrder = 10;
 
 
     nucleiGroup.add(mesh);
@@ -1667,7 +1708,7 @@ function makeNucleus(
 
 
 /* ==================================================
-   CREATE INTERNAL NUCLEI
+   CREATE DEEP CEREBELLAR NUCLEI
 ================================================== */
 
 function createDeepNuclei(){
@@ -1676,29 +1717,30 @@ function createDeepNuclei(){
     new THREE.Group();
 
 
-    /*
-       THE NUCLEI GROUP IS A CHILD OF THE
-       BRAIN MODEL ROOT.
-
-       This is the critical difference.
-
-       Nothing is placed outside the brain
-       as an independent floating object.
-    */
-
     brainRoot.add(
         nucleiGroup
     );
 
 
     /*
-       All coordinates are intentionally
-       concentrated inside the cerebellar
-       region.
+    ==================================================
+       WHY THESE COORDINATES ARE DIFFERENT
 
-       X = left/right
-       Y = superior/inferior
-       Z = anterior/posterior
+       The cerebellum occupies the posterior/inferior
+       part of the brain.
+
+       The nuclei are therefore positioned toward:
+
+       X = around the middle of each hemisphere
+       Y = lower part of brain
+       Z = posterior part of brain
+
+       AND importantly they are placed WELL INSIDE
+       the bounding volume instead of on its edge.
+
+       The 8 structures are also tiny relative to
+       the brain.
+    ==================================================
     */
 
 
@@ -1709,17 +1751,13 @@ function createDeepNuclei(){
     makeNucleus(
         "Left Dentate Nucleus",
 
-        new THREE.Vector3(
-            -0.34,
-            -0.72,
-            0.05
-        ),
+        0.365,
+        0.285,
+        0.675,
 
-        new THREE.Vector3(
-            .18,
-            .13,
-            .25
-        )
+        0.035,
+        0.025,
+        0.055
     );
 
 
@@ -1730,17 +1768,13 @@ function createDeepNuclei(){
     makeNucleus(
         "Right Dentate Nucleus",
 
-        new THREE.Vector3(
-             0.34,
-            -0.72,
-             0.05
-        ),
+        0.635,
+        0.285,
+        0.675,
 
-        new THREE.Vector3(
-            .18,
-            .13,
-            .25
-        )
+        0.035,
+        0.025,
+        0.055
     );
 
 
@@ -1751,17 +1785,13 @@ function createDeepNuclei(){
     makeNucleus(
         "Left Emboliform Nucleus",
 
-        new THREE.Vector3(
-            -0.23,
-            -0.77,
-            0.02
-        ),
+        0.415,
+        0.275,
+        0.690,
 
-        new THREE.Vector3(
-            .10,
-            .09,
-            .15
-        )
+        0.022,
+        0.018,
+        0.035
     );
 
 
@@ -1772,17 +1802,13 @@ function createDeepNuclei(){
     makeNucleus(
         "Right Emboliform Nucleus",
 
-        new THREE.Vector3(
-             0.23,
-            -0.77,
-             0.02
-        ),
+        0.585,
+        0.275,
+        0.690,
 
-        new THREE.Vector3(
-            .10,
-            .09,
-            .15
-        )
+        0.022,
+        0.018,
+        0.035
     );
 
 
@@ -1793,17 +1819,13 @@ function createDeepNuclei(){
     makeNucleus(
         "Left Globose Nucleus",
 
-        new THREE.Vector3(
-            -0.15,
-            -0.79,
-            0.02
-        ),
+        0.455,
+        0.270,
+        0.705,
 
-        new THREE.Vector3(
-            .09,
-            .09,
-            .12
-        )
+        0.018,
+        0.018,
+        0.028
     );
 
 
@@ -1814,17 +1836,13 @@ function createDeepNuclei(){
     makeNucleus(
         "Right Globose Nucleus",
 
-        new THREE.Vector3(
-             0.15,
-            -0.79,
-             0.02
-        ),
+        0.545,
+        0.270,
+        0.705,
 
-        new THREE.Vector3(
-            .09,
-            .09,
-            .12
-        )
+        0.018,
+        0.018,
+        0.028
     );
 
 
@@ -1835,17 +1853,13 @@ function createDeepNuclei(){
     makeNucleus(
         "Left Fastigial Nucleus",
 
-        new THREE.Vector3(
-            -0.07,
-            -0.78,
-            0.02
-        ),
+        0.475,
+        0.275,
+        0.715,
 
-        new THREE.Vector3(
-            .08,
-            .11,
-            .10
-        )
+        0.015,
+        0.022,
+        0.025
     );
 
 
@@ -1856,17 +1870,13 @@ function createDeepNuclei(){
     makeNucleus(
         "Right Fastigial Nucleus",
 
-        new THREE.Vector3(
-             0.07,
-            -0.78,
-             0.02
-        ),
+        0.525,
+        0.275,
+        0.715,
 
-        new THREE.Vector3(
-            .08,
-            .11,
-            .10
-        )
+        0.015,
+        0.022,
+        0.025
     );
 
 }
@@ -1912,68 +1922,107 @@ function loadBrain(){
 
 
             /* ==================================
-               FIND ORIGINAL BOUNDS
+               ORIGINAL MODEL BOUNDS
             ================================== */
 
-            const box =
+            const originalBox =
             new THREE.Box3()
             .setFromObject(
                 brainModel
             );
 
 
-            const center =
-            box.getCenter(
+            const originalCenter =
+            originalBox.getCenter(
                 new THREE.Vector3()
             );
 
 
-            const size =
-            box.getSize(
+            const originalSize =
+            originalBox.getSize(
                 new THREE.Vector3()
             );
 
 
             const maxDim =
             Math.max(
-                size.x,
-                size.y,
-                size.z
+                originalSize.x,
+                originalSize.y,
+                originalSize.z
             );
 
 
-            /*
-               Normalize the model.
+            /* ==================================
+               NORMALIZE BRAIN
+            ================================== */
 
-               Everything beneath brainRoot
-               now uses this SAME coordinate
-               system.
-            */
-
-            const scale =
+            const modelScale =
             4.5 / maxDim;
 
 
             brainModel.scale.setScalar(
-                scale
+                modelScale
             );
 
 
-            brainModel.position.set(
-                0,
-                0,
-                0
+            brainModel.position
+            .copy(
+                originalCenter
+            )
+            .multiplyScalar(
+                -modelScale
             );
 
 
-            brainModel.position.sub(
-                center.multiplyScalar(
-                    scale
-                )
-            );
-
+            /*
+               Keep the same visual vertical
+               position as the original version.
+            */
 
             brainModel.position.y -= .60;
+
+
+            /* ==================================
+               ADD BRAIN FIRST
+            ================================== */
+
+            brainRoot.add(
+                brainModel
+            );
+
+
+            /*
+               Force matrices to update BEFORE
+               calculating the real final bounds.
+            */
+
+            brainRoot.updateMatrixWorld(
+                true
+            );
+
+
+            /* ==================================
+               FINAL BRAIN BOUNDS
+            ================================== */
+
+            brainBounds =
+            new THREE.Box3()
+            .setFromObject(
+                brainModel
+            );
+
+
+            brainBounds.size =
+            brainBounds.getSize(
+                new THREE.Vector3()
+            );
+
+
+            /*
+               The nuclei now use the actual
+               dimensions and location of THIS
+               exact GLB.
+            */
 
 
             /* ==================================
@@ -2000,19 +2049,16 @@ function loadBrain(){
             });
 
 
-            brainRoot.add(
-                brainModel
-            );
-
-
-            /*
-               NOW CREATE THE NUCLEI.
-
-               They are children of brainRoot,
-               so they rotate with the brain.
-            */
+            /* ==================================
+               CREATE NUCLEI AFTER BRAIN
+            ================================== */
 
             createDeepNuclei();
+
+
+            brainRoot.updateMatrixWorld(
+                true
+            );
 
 
             loadBar.style.width =
@@ -2020,7 +2066,7 @@ function loadBrain(){
 
 
             loadText.textContent =
-            "Deep nuclei loaded";
+            "Deep nuclei embedded";
 
 
             setTimeout(
@@ -2034,7 +2080,9 @@ function loadBrain(){
                     "show"
                 );
 
-            },600);
+            },
+            600
+            );
 
         },
 
@@ -2069,6 +2117,7 @@ function loadBrain(){
                 error
             );
 
+
             loadText.textContent =
             "Could not load brain model.";
 
@@ -2092,10 +2141,6 @@ function updateLabel(){
         return;
 
 
-    /*
-       Use the center of ALL nuclei.
-    */
-
     const center =
     new THREE.Vector3();
 
@@ -2107,7 +2152,9 @@ function updateLabel(){
         new THREE.Vector3();
 
 
-        mesh.getWorldPosition(p);
+        mesh.getWorldPosition(
+            p
+        );
 
 
         center.add(p);
@@ -2190,7 +2237,7 @@ window.addEventListener(
 
 
 /* ==================================================
-   HIGHLIGHT BUTTON
+   HIGHLIGHT
 ================================================== */
 
 document
@@ -2234,7 +2281,7 @@ function(){
 
 
 /* ==================================================
-   ROTATE BUTTON
+   AUTO ROTATE
 ================================================== */
 
 document
