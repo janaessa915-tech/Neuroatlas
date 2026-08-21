@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -78,6 +77,10 @@ h1{
     margin-bottom:35px;
 }
 
+.search::placeholder{
+    color:#71869e;
+}
+
 .search:focus{
     border-color:#4da6ff;
 }
@@ -138,6 +141,19 @@ h1{
     display:none;
     color:#9fb0c3;
     margin-top:20px;
+}
+
+
+/* CEREBRAL CORTEX SPECIAL */
+
+.cortex-link{
+    border-color:#ffffff;
+}
+
+.cortex-link:hover{
+    background:#ffffff;
+    color:#07111f;
+    border-color:#ffffff;
 }
 
 
@@ -205,7 +221,9 @@ structures connect to function, pathways, and clinical reasoning.
 </p>
 
 
-<!-- SEARCH -->
+<!-- =========================
+     SEARCH
+========================= -->
 
 <input
 id="search"
@@ -223,9 +241,9 @@ aria-label="Search brain structures"
 <div class="categories">
 
 
-<!-- =========================
+<!-- ==================================================
      CEREBRAL CORTEX
-========================= -->
+================================================== -->
 
 <div class="category">
 
@@ -239,12 +257,18 @@ Major cortical regions and their functional roles.
 
 <div class="structures">
 
+
+<!-- MAIN CEREBRAL CORTEX PAGE -->
+
 <a
-class="structure"
+class="structure cortex-link"
 href="cerebral-cortex.html"
 >
 Cerebral Cortex
 </a>
+
+
+<!-- FRONTAL LOBE -->
 
 <a
 class="structure"
@@ -253,12 +277,18 @@ href="frontal-lobe.html"
 Frontal Lobe
 </a>
 
+
+<!-- PARIETAL LOBE -->
+
 <a
 class="structure"
 href="parietal-lobe.html"
 >
 Parietal Lobe
 </a>
+
+
+<!-- TEMPORAL LOBE -->
 
 <a
 class="structure"
@@ -267,12 +297,18 @@ href="temporal-lobe.html"
 Temporal Lobe
 </a>
 
+
+<!-- OCCIPITAL LOBE -->
+
 <a
 class="structure"
 href="occipital-lobe.html"
 >
 Occipital Lobe
 </a>
+
+
+<!-- INSULA -->
 
 <a
 class="structure"
@@ -281,14 +317,15 @@ href="insula.html"
 Insula
 </a>
 
-</div>
 
 </div>
 
+</div>
 
-<!-- =========================
+
+<!-- ==================================================
      DEEP BRAIN
-========================= -->
+================================================== -->
 
 <div class="category">
 
@@ -342,9 +379,9 @@ Basal Ganglia
 </div>
 
 
-<!-- =========================
+<!-- ==================================================
      BRAINSTEM
-========================= -->
+================================================== -->
 
 <div class="category">
 
@@ -358,18 +395,12 @@ Core structures connecting the brain with the spinal cord.
 
 <div class="structures">
 
-
-<!-- MIDBRAIN -->
-
 <a
 class="structure"
 href="midbrain.html"
 >
 Midbrain
 </a>
-
-
-<!-- PONS -->
 
 <a
 class="structure"
@@ -378,9 +409,6 @@ href="pons.html"
 Pons
 </a>
 
-
-<!-- MEDULLA -->
-
 <a
 class="structure"
 href="medulla.html"
@@ -388,15 +416,14 @@ href="medulla.html"
 Medulla
 </a>
 
-
 </div>
 
 </div>
 
 
-<!-- =========================
+<!-- ==================================================
      CEREBELLUM
-========================= -->
+================================================== -->
 
 <div class="category">
 
@@ -436,9 +463,9 @@ Deep Cerebellar Nuclei
 </div>
 
 
-<!-- =========================
+<!-- ==================================================
      VENTRICULAR SYSTEM
-========================= -->
+================================================== -->
 
 <div class="category">
 
@@ -485,9 +512,9 @@ Fourth Ventricle
 </div>
 
 
-<!-- =========================
+<!-- ==================================================
      CEREBRAL VASCULATURE
-========================= -->
+================================================== -->
 
 <div class="category">
 
@@ -544,7 +571,9 @@ Circle of Willis
 </div>
 
 
-<!-- NO RESULTS -->
+<!-- =========================
+     NO RESULTS
+========================= -->
 
 <p
 id="noResults"
@@ -627,4 +656,3 @@ function(){
 </body>
 
 </html>
-```
