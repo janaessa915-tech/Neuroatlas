@@ -195,14 +195,18 @@ h1{
 
 
 /* ==================================================
-   LABELS
+   LABEL
 ================================================== */
 
 .nucleus-label{
     position:absolute;
+
     z-index:50;
+
     pointer-events:none;
+
     transform:translate(-50%,-50%);
+
     display:none;
 }
 
@@ -212,14 +216,23 @@ h1{
 
 .label-box{
     position:relative;
+
     padding:8px 13px;
+
     border-radius:9px;
+
     background:rgba(5,10,17,.97);
+
     border:1.5px solid white;
+
     color:white;
+
     font-size:11px;
+
     font-weight:bold;
+
     letter-spacing:.8px;
+
     white-space:nowrap;
 
     box-shadow:
@@ -229,11 +242,17 @@ h1{
 
 .label-line{
     position:absolute;
+
     width:1.5px;
+
     height:35px;
+
     background:white;
+
     left:50%;
+
     bottom:-35px;
+
     transform:translateX(-50%);
 }
 
@@ -246,17 +265,25 @@ h1{
     display:flex;
     gap:10px;
     flex-wrap:wrap;
+
     padding:15px;
+
     border-top:1px solid rgba(255,255,255,.08);
 }
 
 .controls button{
     padding:11px 17px;
+
     border-radius:9px;
+
     background:#0b1928;
+
     border:1px solid #31516d;
+
     color:#bdd0e0;
+
     cursor:pointer;
+
     transition:.2s;
 }
 
@@ -314,9 +341,13 @@ h1{
 
 .card{
     padding:27px;
+
     background:#091522;
+
     border:1px solid #172b3e;
+
     border-radius:18px;
+
     transition:.2s;
 }
 
@@ -348,9 +379,13 @@ h1{
 
 .clinical-box{
     padding:30px;
+
     background:#091522;
+
     border:1px solid #172b3e;
+
     border-left:3px solid white;
+
     border-radius:18px;
 }
 
@@ -368,10 +403,15 @@ h1{
 
 .insight{
     margin-top:30px;
+
     padding:25px;
+
     background:#091522;
+
     border-left:3px solid white;
+
     border-radius:10px;
+
     color:#aebdce;
 }
 
@@ -392,29 +432,41 @@ h1{
 
 .fact{
     padding:22px;
+
     background:#091522;
+
     border:1px solid #172b3e;
+
     border-radius:16px;
 }
 
 .fact span{
     display:block;
+
     color:white;
+
     font-size:11px;
+
     letter-spacing:2px;
+
     margin-bottom:12px;
 }
 
 .fact strong{
     display:block;
+
     color:#eef4fa;
+
     font-size:14px;
+
     margin-bottom:8px;
 }
 
 .fact p{
     color:#8195a8;
+
     font-size:13px;
+
     line-height:1.7;
 }
 
@@ -425,9 +477,13 @@ h1{
 
 .quiz{
     margin-top:65px;
+
     padding:30px;
+
     background:#091522;
+
     border:1px solid #172b3e;
+
     border-radius:18px;
 }
 
@@ -438,43 +494,65 @@ h1{
 
 .question-block{
     padding:22px;
+
     margin-bottom:18px;
+
     background:#07111d;
+
     border:1px solid #172b3e;
+
     border-radius:14px;
 }
 
 .question-number{
     color:#61b5ff;
+
     font-size:12px;
+
     letter-spacing:2px;
+
     text-transform:uppercase;
+
     margin-bottom:8px;
 }
 
 .question-en{
     color:#eef4fa;
+
     font-size:16px;
+
     margin-bottom:5px;
 }
 
 .question-ar{
     color:#91a5b8;
+
     font-size:15px;
+
     margin-bottom:15px;
 }
 
 .option{
     display:block;
+
     width:100%;
+
     padding:13px;
+
     margin-top:10px;
+
     background:#10233a;
+
     color:white;
+
     border:1px solid #263951;
+
     border-radius:8px;
+
     text-align:left;
+
     cursor:pointer;
+
     font-size:14px;
 }
 
@@ -500,12 +578,19 @@ h1{
 
 .quiz-result{
     margin-top:25px;
+
     padding:20px;
+
     border-radius:12px;
+
     background:#07111d;
+
     border:1px solid #263951;
+
     text-align:center;
+
     font-size:17px;
+
     color:white;
 }
 
@@ -516,11 +601,17 @@ h1{
 
 .back{
     display:inline-block;
+
     margin-top:40px;
+
     padding:12px 18px;
+
     border:1px solid #263951;
+
     border-radius:9px;
+
     color:white;
+
     text-decoration:none;
 }
 
@@ -580,6 +671,7 @@ h1{
 
 <body>
 
+
 <nav>
 
 <a href="./explore.html">
@@ -591,17 +683,21 @@ h1{
 
 <main class="container">
 
+
 <div class="eyebrow">
 Cerebellum · NeuroAtlas
 </div>
+
 
 <h1>
 Deep Cerebellar Nuclei
 </h1>
 
+
 <div class="arabic-title">
 النوى العميقة للمخيخ
 </div>
+
 
 <div class="hero">
 
@@ -665,6 +761,7 @@ DRAG TO ROTATE · SCROLL TO ZOOM
 
 <div class="scene">
 
+
 <div
 id="loading"
 class="loading"
@@ -701,6 +798,7 @@ DEEP CEREBELLAR NUCLEI
 
 </div>
 
+
 </div>
 
 
@@ -713,12 +811,14 @@ class="active"
 ⚪ Highlight Deep Nuclei
 </button>
 
+
 <button
 id="rotate"
 class="active"
 >
 ⟳ Auto Rotate
 </button>
+
 
 <button
 id="reset"
@@ -744,9 +844,11 @@ class="section"
 Deep Cerebellar Nuclei · النوى العميقة
 </div>
 
+
 <h2>
 The Four Deep Cerebellar Nuclei
 </h2>
+
 
 <p class="section-intro">
 
@@ -765,6 +867,7 @@ emboliform, globose, and fastigial.
 
 
 <div class="cards">
+
 
 <div class="card">
 
@@ -898,6 +1001,7 @@ system.
 
 </div>
 
+
 </div>
 
 </section>
@@ -913,9 +1017,11 @@ system.
 Clinical Importance · الأهمية السريرية
 </div>
 
+
 <h2>
 Why the Deep Nuclei Matter
 </h2>
+
 
 <div class="clinical-box">
 
@@ -927,6 +1033,7 @@ circuits can affect coordination, balance, posture,
 and the precision of voluntary movement.
 
 </p>
+
 
 <p dir="rtl">
 
@@ -973,11 +1080,14 @@ cerebellum.
 Quick Facts · معلومات سريعة
 </div>
 
+
 <h2>
 Deep Nuclei at a Glance
 </h2>
 
+
 <div class="facts-grid">
+
 
 <div class="fact">
 
@@ -1217,10 +1327,6 @@ href="explore.html"
 </main>
 
 
-<!-- ==================================================
-     THREE.JS
-================================================== -->
-
 <script type="importmap">
 
 {
@@ -1403,7 +1509,6 @@ keyLight.position.set(
 
 scene.add(keyLight);
 
-
 const fillLight =
 new THREE.DirectionalLight(
     0x8ca9bd,
@@ -1518,13 +1623,24 @@ function makeNucleus(
     mesh.name = name;
 
     /*
-       LOCAL coordinates inside brainRoot.
-       These move WITH the brain.
+       LOCAL COORDINATES
+       -----------------
+
+       These are coordinates inside brainRoot.
+       The nuclei therefore rotate and move
+       together with the brain.
+
+       We deliberately moved the entire group
+       MUCH HIGHER than before.
     */
 
-    mesh.position.copy(position);
+    mesh.position.copy(
+        position
+    );
 
-    mesh.scale.copy(scale);
+    mesh.scale.copy(
+        scale
+    );
 
     mesh.renderOrder = 20;
 
@@ -1533,7 +1649,6 @@ function makeNucleus(
     nucleusMeshes.push(mesh);
 
     return mesh;
-
 }
 
 
@@ -1547,9 +1662,9 @@ function createDeepNuclei(){
     new THREE.Group();
 
     /*
-       Nuclei are attached to brainRoot.
-       They therefore rotate and move with
-       the same anatomical coordinate system.
+       CRITICAL:
+       The nuclei are children of brainRoot.
+       They are NOT floating outside the brain.
     */
 
     brainRoot.add(
@@ -1558,14 +1673,25 @@ function createDeepNuclei(){
 
 
     /*
-       UPDATED POSITIONING
+       NEW PLACEMENT
 
-       The nuclei have been moved substantially
-       UPWARD and made SMALLER.
+       The previous Y positions were around:
 
-       X = left/right
-       Y = superior/inferior
-       Z = anterior/posterior
+       -0.72
+       -0.77
+       -0.79
+
+       They were too LOW.
+
+       Now they are around:
+
+       -0.25 to -0.32
+
+       This moves them substantially upward
+       while keeping them within the cerebellar
+       region of the brain model.
+
+       They are also considerably smaller.
     */
 
 
@@ -1577,15 +1703,15 @@ function createDeepNuclei(){
         "Left Dentate Nucleus",
 
         new THREE.Vector3(
-            -0.28,
-             0.02,
-             0.03
+            -0.34,
+            -0.25,
+             0.05
         ),
 
         new THREE.Vector3(
             .115,
-            .080,
-            .165
+            .085,
+            .16
         )
     );
 
@@ -1598,15 +1724,15 @@ function createDeepNuclei(){
         "Right Dentate Nucleus",
 
         new THREE.Vector3(
-             0.28,
-             0.02,
-             0.03
+             0.34,
+            -0.25,
+             0.05
         ),
 
         new THREE.Vector3(
             .115,
-            .080,
-            .165
+            .085,
+            .16
         )
     );
 
@@ -1619,15 +1745,15 @@ function createDeepNuclei(){
         "Left Emboliform Nucleus",
 
         new THREE.Vector3(
-            -0.18,
-             0.07,
+            -0.22,
+            -0.29,
              0.02
         ),
 
         new THREE.Vector3(
             .065,
             .060,
-            .100
+            .095
         )
     );
 
@@ -1640,15 +1766,15 @@ function createDeepNuclei(){
         "Right Emboliform Nucleus",
 
         new THREE.Vector3(
-             0.18,
-             0.07,
+             0.22,
+            -0.29,
              0.02
         ),
 
         new THREE.Vector3(
             .065,
             .060,
-            .100
+            .095
         )
     );
 
@@ -1661,15 +1787,15 @@ function createDeepNuclei(){
         "Left Globose Nucleus",
 
         new THREE.Vector3(
-            -0.11,
-             0.08,
+            -0.14,
+            -0.31,
              0.02
         ),
 
         new THREE.Vector3(
             .055,
             .055,
-            .085
+            .075
         )
     );
 
@@ -1682,15 +1808,15 @@ function createDeepNuclei(){
         "Right Globose Nucleus",
 
         new THREE.Vector3(
-             0.11,
-             0.08,
+             0.14,
+            -0.31,
              0.02
         ),
 
         new THREE.Vector3(
             .055,
             .055,
-            .085
+            .075
         )
     );
 
@@ -1703,15 +1829,15 @@ function createDeepNuclei(){
         "Left Fastigial Nucleus",
 
         new THREE.Vector3(
-            -0.055,
-             0.10,
-             0.015
+            -0.065,
+            -0.30,
+             0.02
         ),
 
         new THREE.Vector3(
             .050,
-            .065,
-            .070
+            .070,
+            .065
         )
     );
 
@@ -1724,15 +1850,15 @@ function createDeepNuclei(){
         "Right Fastigial Nucleus",
 
         new THREE.Vector3(
-             0.055,
-             0.10,
-             0.015
+             0.065,
+            -0.30,
+             0.02
         ),
 
         new THREE.Vector3(
             .050,
-            .065,
-            .070
+            .070,
+            .065
         )
     );
 
@@ -1748,20 +1874,16 @@ function loadBrain(){
     const loader =
     new GLTFLoader();
 
-
     const draco =
     new DRACOLoader();
-
 
     draco.setDecoderPath(
         "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/"
     );
 
-
     loader.setDRACOLoader(
         draco
     );
-
 
     const url =
     "https://cdn.jsdelivr.net/gh/itayinbarr/brainproject@main/brain-atlas/models/brain.glb";
@@ -1778,7 +1900,7 @@ function loadBrain(){
 
 
             /* ==================================
-               FIND ORIGINAL BOUNDS
+               ORIGINAL MODEL BOUNDS
             ================================== */
 
             const box =
@@ -1787,18 +1909,15 @@ function loadBrain(){
                 brainModel
             );
 
-
             const center =
             box.getCenter(
                 new THREE.Vector3()
             );
 
-
             const size =
             box.getSize(
                 new THREE.Vector3()
             );
-
 
             const maxDim =
             Math.max(
@@ -1808,18 +1927,16 @@ function loadBrain(){
             );
 
 
-            /*
-               Normalize model.
-            */
+            /* ==================================
+               NORMALIZE MODEL
+            ================================== */
 
             const scale =
             4.5 / maxDim;
 
-
             brainModel.scale.setScalar(
                 scale
             );
-
 
             brainModel.position.set(
                 0,
@@ -1827,17 +1944,11 @@ function loadBrain(){
                 0
             );
 
-
             brainModel.position.sub(
                 center.multiplyScalar(
                     scale
                 )
             );
-
-
-            /*
-               Brain vertical placement.
-            */
 
             brainModel.position.y -= .60;
 
@@ -1854,11 +1965,9 @@ function loadBrain(){
                 )
                     return;
 
-
                 child.castShadow = true;
 
                 child.receiveShadow = true;
-
 
                 child.material =
                 brainMaterial.clone();
@@ -1872,8 +1981,12 @@ function loadBrain(){
 
 
             /*
-               CREATE NUCLEI AFTER THE BRAIN
-               HAS BEEN LOADED.
+               IMPORTANT:
+               Create nuclei AFTER the brain
+               has been normalized.
+
+               They use the same coordinate
+               system as the brain.
             */
 
             createDeepNuclei();
@@ -1881,7 +1994,6 @@ function loadBrain(){
 
             loadBar.style.width =
             "100%";
-
 
             loadText.textContent =
             "Deep nuclei loaded";
@@ -1898,7 +2010,9 @@ function loadBrain(){
                     "show"
                 );
 
-            },600);
+            },
+            600
+            );
 
         },
 
@@ -1916,7 +2030,6 @@ function loadBrain(){
                     progress.total *
                     95
                 );
-
 
                 loadBar.style.width =
                 percent + "%";
@@ -1966,9 +2079,7 @@ function updateLabel(){
         const p =
         new THREE.Vector3();
 
-
         mesh.getWorldPosition(p);
-
 
         center.add(p);
 
@@ -2030,9 +2141,7 @@ function resize(){
     camera.aspect =
     width / height;
 
-
     camera.updateProjectionMatrix();
-
 
     renderer.setSize(
         width,
@@ -2050,7 +2159,7 @@ window.addEventListener(
 
 
 /* ==================================================
-   HIGHLIGHT BUTTON
+   HIGHLIGHT
 ================================================== */
 
 document
@@ -2094,7 +2203,7 @@ function(){
 
 
 /* ==================================================
-   ROTATE BUTTON
+   AUTO ROTATE
 ================================================== */
 
 document
@@ -2139,13 +2248,11 @@ function(){
         8.5
     );
 
-
     controls.target.set(
         0,
         -.25,
         0
     );
-
 
     controls.update();
 
@@ -2162,12 +2269,9 @@ function animate(){
         animate
     );
 
-
     controls.update();
 
-
     updateLabel();
-
 
     renderer.render(
         scene,
@@ -2209,18 +2313,15 @@ function(question){
     const correct =
     question.dataset.answer;
 
-
     const options =
     question.querySelectorAll(
         ".option"
     );
 
-
     const feedback =
     question.querySelector(
         ".question-feedback"
     );
-
 
     let done = false;
 
@@ -2235,9 +2336,7 @@ function(question){
             if(done)
                 return;
 
-
             done = true;
-
 
             const selected =
             option.dataset.option;
@@ -2257,15 +2356,12 @@ function(question){
 
                 score++;
 
-
                 option.classList.add(
                     "correct"
                 );
 
-
                 feedback.textContent =
                 "✓ Correct! · إجابة صحيحة";
-
 
                 feedback.style.color =
                 "#78e0a0";
@@ -2298,7 +2394,6 @@ function(question){
 
                 feedback.textContent =
                 "✗ Incorrect · إجابة غير صحيحة";
-
 
                 feedback.style.color =
                 "#ff8792";
