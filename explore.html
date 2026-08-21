@@ -11,87 +11,145 @@
 
 <style>
 
+/* ==================================================
+   RESET
+================================================== */
+
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
 }
 
+
+/* ==================================================
+   BODY
+================================================== */
+
 body{
-    font-family:Arial,sans-serif;
+    font-family:Arial,Helvetica,sans-serif;
+
     background:#07111f;
+
     color:#f4f7fb;
+
     line-height:1.6;
 }
 
-/* =========================
+
+/* ==================================================
    NAVIGATION
-========================= */
+================================================== */
 
 nav{
+
     padding:22px 7%;
-    border-bottom:1px solid rgba(255,255,255,.08);
+
+    border-bottom:
+    1px solid rgba(255,255,255,.08);
+
 }
 
 nav a{
+
     color:#aebdce;
+
     text-decoration:none;
+
+    font-size:14px;
+
+    transition:.2s;
+
 }
 
 nav a:hover{
+
     color:white;
+
 }
 
 
-/* =========================
-   MAIN
-========================= */
+/* ==================================================
+   MAIN CONTAINER
+================================================== */
 
 .container{
+
     max-width:1150px;
+
     margin:auto;
-    padding:70px 7%;
+
+    padding:70px 7% 100px;
+
 }
 
 
-/* =========================
-   HEADER
-========================= */
+/* ==================================================
+   LABEL
+================================================== */
 
 .label{
+
     color:#4da6ff;
+
     text-transform:uppercase;
+
     letter-spacing:2px;
+
     font-size:13px;
+
     margin-bottom:12px;
+
 }
+
+
+/* ==================================================
+   TITLE
+================================================== */
 
 h1{
-    font-size:clamp(42px,7vw,70px);
+
+    font-size:
+    clamp(42px,7vw,70px);
+
     line-height:1.05;
+
     margin-bottom:20px;
+
 }
+
+
+/* ==================================================
+   INTRO
+================================================== */
 
 .intro{
+
     color:#aebdce;
+
     max-width:700px;
+
     font-size:18px;
+
     margin-bottom:45px;
+
 }
 
 
-/* =========================
+/* ==================================================
    SEARCH
-========================= */
+================================================== */
 
 .search{
+
     width:100%;
 
     padding:17px 20px;
 
     border-radius:12px;
 
-    border:1px solid #263951;
+    border:
+    1px solid #263951;
 
     background:#0b192b;
 
@@ -102,34 +160,47 @@ h1{
     outline:none;
 
     margin-bottom:35px;
-}
 
-.search:focus{
-    border-color:#4da6ff;
+    transition:.2s;
+
 }
 
 .search::placeholder{
-    color:#71869e;
+
+    color:#71859a;
+
+}
+
+.search:focus{
+
+    border-color:#4da6ff;
+
+    box-shadow:
+    0 0 0 3px
+    rgba(77,166,255,.08);
+
 }
 
 
-/* =========================
-   CATEGORIES
-========================= */
+/* ==================================================
+   CATEGORIES GRID
+================================================== */
 
 .categories{
+
     display:grid;
 
     grid-template-columns:
     repeat(3,1fr);
 
     gap:20px;
+
 }
 
 
-/* =========================
+/* ==================================================
    CATEGORY CARD
-========================= */
+================================================== */
 
 .category{
 
@@ -141,11 +212,15 @@ h1{
     rgba(255,255,255,.035);
 
     border:
-    1px solid
-    rgba(255,255,255,.08);
+    1px solid rgba(255,255,255,.08);
 
-    transition:.25s;
+    transition:
+    transform .25s,
+    border-color .25s,
+    background .25s;
+
 }
+
 
 .category:hover{
 
@@ -155,31 +230,45 @@ h1{
     border-color:
     rgba(77,166,255,.55);
 
-    box-shadow:
-    0 15px 35px
-    rgba(0,0,0,.18);
+    background:
+    rgba(255,255,255,.045);
+
 }
 
+
+/* ==================================================
+   CATEGORY TITLE
+================================================== */
 
 .category h2{
 
     font-size:22px;
 
     margin-bottom:10px;
+
 }
 
+
+/* ==================================================
+   CATEGORY DESCRIPTION
+================================================== */
 
 .category p{
 
     color:#9fb0c3;
 
     margin-bottom:18px;
+
+    font-size:14px;
+
+    line-height:1.7;
+
 }
 
 
-/* =========================
+/* ==================================================
    STRUCTURES
-========================= */
+================================================== */
 
 .structures{
 
@@ -188,8 +277,13 @@ h1{
     flex-wrap:wrap;
 
     gap:8px;
+
 }
 
+
+/* ==================================================
+   STRUCTURE BUTTON
+================================================== */
 
 .structure{
 
@@ -207,11 +301,15 @@ h1{
 
     text-decoration:none;
 
-    transition:.2s;
-
     border:
-    1px solid
-    transparent;
+    1px solid transparent;
+
+    transition:
+    background .2s,
+    color .2s,
+    transform .2s,
+    border-color .2s;
+
 }
 
 
@@ -221,40 +319,31 @@ h1{
 
     color:white;
 
+    border-color:
+    rgba(255,255,255,.15);
+
     transform:
     translateY(-2px);
 
-    border-color:
-    #4da6ff;
 }
 
 
-/* =========================
-   CEREBRAL CORTEX SPECIAL
-========================= */
+/* ==================================================
+   SPECIAL CORTEX BUTTON
+================================================== */
 
-.cortex-link{
+.category:first-child
+.structure:first-child{
 
     border-color:
-    rgba(77,166,255,.25);
+    rgba(255,255,255,.10);
 
 }
 
 
-.cortex-link:hover{
-
-    border-color:
-    #4da6ff;
-
-    box-shadow:
-    0 0 15px
-    rgba(77,166,255,.15);
-}
-
-
-/* =========================
+/* ==================================================
    NO RESULTS
-========================= */
+================================================== */
 
 .no-results{
 
@@ -263,12 +352,22 @@ h1{
     color:#9fb0c3;
 
     margin-top:20px;
+
+    padding:20px;
+
+    border-radius:12px;
+
+    background:#0b192b;
+
+    border:
+    1px solid #263951;
+
 }
 
 
-/* =========================
-   MOBILE
-========================= */
+/* ==================================================
+   MOBILE / TABLET
+================================================== */
 
 @media(max-width:1000px){
 
@@ -282,12 +381,34 @@ h1{
 }
 
 
+/* ==================================================
+   MOBILE
+================================================== */
+
 @media(max-width:700px){
+
+    .container{
+
+        padding:
+        50px 6% 80px;
+
+    }
 
     .categories{
 
-        grid-template-columns:
-        1fr;
+        grid-template-columns:1fr;
+
+    }
+
+    .category{
+
+        padding:24px;
+
+    }
+
+    .intro{
+
+        font-size:16px;
 
     }
 
@@ -307,7 +428,7 @@ h1{
 
 <nav>
 
-<a href="./index.html">
+<a href="index.html">
 
 ← NeuroAtlas Home
 
@@ -365,6 +486,8 @@ placeholder="Search a brain structure..."
 
 aria-label="Search brain structures"
 
+autocomplete="off"
+
 >
 
 
@@ -399,14 +522,9 @@ Major cortical regions and their functional roles.
 <div class="structures">
 
 
-<!-- CEREBRAL CORTEX -->
-
 <a
-
-class="structure cortex-link"
-
-href="./cerebral-cortex.html"
-
+class="structure"
+href="cerebral-cortex.html"
 >
 
 Cerebral Cortex
@@ -414,14 +532,9 @@ Cerebral Cortex
 </a>
 
 
-<!-- FRONTAL -->
-
 <a
-
 class="structure"
-
-href="./frontal-lobe.html"
-
+href="frontal-lobe.html"
 >
 
 Frontal Lobe
@@ -429,14 +542,9 @@ Frontal Lobe
 </a>
 
 
-<!-- PARIETAL -->
-
 <a
-
 class="structure"
-
-href="./parietal-lobe.html"
-
+href="parietal-lobe.html"
 >
 
 Parietal Lobe
@@ -444,14 +552,9 @@ Parietal Lobe
 </a>
 
 
-<!-- TEMPORAL -->
-
 <a
-
 class="structure"
-
-href="./temporal-lobe.html"
-
+href="temporal-lobe.html"
 >
 
 Temporal Lobe
@@ -459,14 +562,9 @@ Temporal Lobe
 </a>
 
 
-<!-- OCCIPITAL -->
-
 <a
-
 class="structure"
-
-href="./occipital-lobe.html"
-
+href="occipital-lobe.html"
 >
 
 Occipital Lobe
@@ -474,14 +572,9 @@ Occipital Lobe
 </a>
 
 
-<!-- INSULA -->
-
 <a
-
 class="structure"
-
-href="./insula.html"
-
+href="insula.html"
 >
 
 Insula
@@ -491,7 +584,9 @@ Insula
 
 </div>
 
+
 </div>
+
 
 
 <!-- ==================================================
@@ -519,11 +614,8 @@ Structures located beneath the cerebral cortex.
 
 
 <a
-
 class="structure"
-
-href="./thalamus.html"
-
+href="thalamus.html"
 >
 
 Thalamus
@@ -532,11 +624,8 @@ Thalamus
 
 
 <a
-
 class="structure"
-
-href="./hypothalamus.html"
-
+href="hypothalamus.html"
 >
 
 Hypothalamus
@@ -545,11 +634,8 @@ Hypothalamus
 
 
 <a
-
 class="structure"
-
-href="./hippocampus.html"
-
+href="hippocampus.html"
 >
 
 Hippocampus
@@ -558,11 +644,8 @@ Hippocampus
 
 
 <a
-
 class="structure"
-
-href="./amygdala.html"
-
+href="amygdala.html"
 >
 
 Amygdala
@@ -571,11 +654,8 @@ Amygdala
 
 
 <a
-
 class="structure"
-
-href="./basal-ganglia.html"
-
+href="basal-ganglia.html"
 >
 
 Basal Ganglia
@@ -585,7 +665,9 @@ Basal Ganglia
 
 </div>
 
+
 </div>
+
 
 
 <!-- ==================================================
@@ -612,14 +694,9 @@ Core structures connecting the brain with the spinal cord.
 <div class="structures">
 
 
-<!-- MIDBRAIN -->
-
 <a
-
 class="structure"
-
-href="./midbrain.html"
-
+href="midbrain.html"
 >
 
 Midbrain
@@ -627,14 +704,9 @@ Midbrain
 </a>
 
 
-<!-- PONS -->
-
 <a
-
 class="structure"
-
-href="./pons.html"
-
+href="pons.html"
 >
 
 Pons
@@ -642,14 +714,9 @@ Pons
 </a>
 
 
-<!-- MEDULLA -->
-
 <a
-
 class="structure"
-
-href="./medulla.html"
-
+href="medulla.html"
 >
 
 Medulla
@@ -659,7 +726,9 @@ Medulla
 
 </div>
 
+
 </div>
+
 
 
 <!-- ==================================================
@@ -687,11 +756,8 @@ Important for coordination, balance, and motor learning.
 
 
 <a
-
 class="structure"
-
-href="./cerebellar-cortex.html"
-
+href="cerebellar-cortex.html"
 >
 
 Cerebellar Cortex
@@ -700,11 +766,8 @@ Cerebellar Cortex
 
 
 <a
-
 class="structure"
-
-href="./cerebellar-vermis.html"
-
+href="cerebellar-vermis.html"
 >
 
 Cerebellar Vermis
@@ -713,11 +776,8 @@ Cerebellar Vermis
 
 
 <a
-
 class="structure"
-
-href="./deep-cerebellar-nuclei.html"
-
+href="deep-cerebellar-nuclei.html"
 >
 
 Deep Cerebellar Nuclei
@@ -727,7 +787,9 @@ Deep Cerebellar Nuclei
 
 </div>
 
+
 </div>
+
 
 
 <!-- ==================================================
@@ -755,11 +817,8 @@ The interconnected spaces containing cerebrospinal fluid.
 
 
 <a
-
 class="structure"
-
-href="./lateral-ventricles.html"
-
+href="lateral-ventricles.html"
 >
 
 Lateral Ventricles
@@ -768,11 +827,8 @@ Lateral Ventricles
 
 
 <a
-
 class="structure"
-
-href="./third-ventricle.html"
-
+href="third-ventricle.html"
 >
 
 Third Ventricle
@@ -781,11 +837,8 @@ Third Ventricle
 
 
 <a
-
 class="structure"
-
-href="./cerebral-aqueduct.html"
-
+href="cerebral-aqueduct.html"
 >
 
 Cerebral Aqueduct
@@ -794,11 +847,8 @@ Cerebral Aqueduct
 
 
 <a
-
 class="structure"
-
-href="./fourth-ventricle.html"
-
+href="fourth-ventricle.html"
 >
 
 Fourth Ventricle
@@ -808,7 +858,9 @@ Fourth Ventricle
 
 </div>
 
+
 </div>
+
 
 
 <!-- ==================================================
@@ -836,11 +888,8 @@ Major arteries supplying the brain.
 
 
 <a
-
 class="structure"
-
-href="./aca.html"
-
+href="aca.html"
 >
 
 ACA
@@ -849,11 +898,8 @@ ACA
 
 
 <a
-
 class="structure"
-
-href="./mca.html"
-
+href="mca.html"
 >
 
 MCA
@@ -862,11 +908,8 @@ MCA
 
 
 <a
-
 class="structure"
-
-href="./pca.html"
-
+href="pca.html"
 >
 
 PCA
@@ -875,11 +918,8 @@ PCA
 
 
 <a
-
 class="structure"
-
-href="./basilar-artery.html"
-
+href="basilar-artery.html"
 >
 
 Basilar Artery
@@ -888,11 +928,8 @@ Basilar Artery
 
 
 <a
-
 class="structure"
-
-href="./circle-of-willis.html"
-
+href="circle-of-willis.html"
 >
 
 Circle of Willis
@@ -902,6 +939,7 @@ Circle of Willis
 
 </div>
 
+
 </div>
 
 
@@ -909,15 +947,12 @@ Circle of Willis
 
 
 <!-- ==================================================
-     NO RESULTS
+     NO RESULTS MESSAGE
 ================================================== -->
 
 <p
-
 id="noResults"
-
 class="no-results"
-
 >
 
 No matching structures found.
@@ -928,6 +963,7 @@ No matching structures found.
 </main>
 
 
+
 <!-- ==================================================
      SEARCH SCRIPT
 ================================================== -->
@@ -936,35 +972,23 @@ No matching structures found.
 
 
 const search =
-
-document.getElementById(
-    "search"
-);
+document.getElementById("search");
 
 
 const categories =
-
-document.querySelectorAll(
-    ".category"
-);
+document.querySelectorAll(".category");
 
 
 const noResults =
-
-document.getElementById(
-    "noResults"
-);
+document.getElementById("noResults");
 
 
 search.addEventListener(
-
 "input",
-
 function(){
 
 
     const query =
-
     search.value
     .toLowerCase()
     .trim();
@@ -974,33 +998,38 @@ function(){
 
 
     categories.forEach(
-
     function(category){
 
 
         const text =
-
         category.innerText
         .toLowerCase();
 
 
         if(
+            query === "" ||
             text.includes(query)
         ){
+
 
             category.style.display =
             "";
 
+
             visible++;
+
 
         }
 
         else{
 
+
             category.style.display =
             "none";
 
+
         }
+
 
     });
 
@@ -1009,15 +1038,19 @@ function(){
         visible === 0
     ){
 
+
         noResults.style.display =
         "block";
+
 
     }
 
     else{
 
+
         noResults.style.display =
         "none";
+
 
     }
 
