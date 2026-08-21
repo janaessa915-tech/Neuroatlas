@@ -1,3 +1,6 @@
+# NeuroAtlas — Deep Cerebellar Nuclei
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -105,9 +108,9 @@ h1{
 }
 
 
-/* =========================
-   VIEWER
-========================= */
+/* ==================================================
+   3D VIEWER
+================================================== */
 
 .viewer{
     margin-top:60px;
@@ -162,17 +165,14 @@ h1{
     position:absolute;
     inset:0;
     z-index:20;
-
     display:flex;
     align-items:center;
     justify-content:center;
     flex-direction:column;
     gap:16px;
-
     background:#02060b;
     color:#9db0c3;
     font-size:14px;
-
     transition:opacity .8s;
 }
 
@@ -197,18 +197,18 @@ h1{
 }
 
 
-/* =========================
-   LABEL
-========================= */
+/* ==================================================
+   3D LABEL
+================================================== */
 
 .nuclei-label{
     position:absolute;
     z-index:30;
     pointer-events:none;
 
-    transform:translate(-50%,-100%);
-
     display:none;
+
+    transform:translate(-50%,-50%);
 }
 
 .nuclei-label.show{
@@ -218,71 +218,101 @@ h1{
 .label-box{
     position:relative;
 
-    padding:9px 15px;
+    padding:8px 13px;
 
-    border-radius:10px;
+    border-radius:9px;
 
-    background:rgba(5,10,17,.96);
+    background:rgba(5,10,17,.94);
 
-    border:1.5px solid #ffffff;
+    border:1px solid rgba(255,255,255,.8);
 
     color:#fff;
 
-    font-size:12px;
+    font-size:11px;
+
     font-weight:bold;
-    letter-spacing:1px;
+
+    letter-spacing:.7px;
 
     white-space:nowrap;
 
     box-shadow:
-        0 0 12px rgba(255,255,255,.25),
-        0 0 30px rgba(255,255,255,.1);
+        0 0 10px rgba(255,255,255,.2),
+        0 0 25px rgba(255,255,255,.08);
 }
 
-.label-box::after{
+
+/* THE WHITE LEADER LINE */
+
+.nuclei-label::before{
+
     content:"";
 
     position:absolute;
 
-    left:50%;
-    bottom:-15px;
+    width:55px;
 
-    width:1.5px;
-    height:15px;
+    height:1px;
 
     background:#fff;
 
-    transform:translateX(-50%);
+    left:-55px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    box-shadow:
+        0 0 5px rgba(255,255,255,.5);
 }
 
 
-/* =========================
+/* small endpoint */
+
+.nuclei-label::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:5px;
+
+    height:5px;
+
+    border-radius:50%;
+
+    background:#fff;
+
+    left:-58px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    box-shadow:
+        0 0 8px rgba(255,255,255,.8);
+}
+
+
+/* ==================================================
    CONTROLS
-========================= */
+================================================== */
 
 .controls{
     display:flex;
     gap:10px;
     flex-wrap:wrap;
-
     padding:15px;
-
     border-top:1px solid rgba(255,255,255,.08);
 }
 
 .controls button{
     padding:11px 17px;
-
     border-radius:9px;
-
     background:#0b1928;
-
     border:1px solid #31516d;
-
     color:#bdd0e0;
-
     cursor:pointer;
-
     transition:.2s;
 }
 
@@ -298,9 +328,9 @@ h1{
 }
 
 
-/* =========================
+/* ==================================================
    SECTIONS
-========================= */
+================================================== */
 
 .section{
     margin-top:70px;
@@ -328,9 +358,9 @@ h1{
 }
 
 
-/* =========================
+/* ==================================================
    CARDS
-========================= */
+================================================== */
 
 .cards{
     display:grid;
@@ -340,13 +370,9 @@ h1{
 
 .card{
     padding:27px;
-
     background:#091522;
-
     border:1px solid #172b3e;
-
     border-radius:18px;
-
     transition:.2s;
 }
 
@@ -369,18 +395,15 @@ h1{
 }
 
 
-/* =========================
+/* ==================================================
    LOCATION
-========================= */
+================================================== */
 
 .location{
     margin-top:70px;
     padding:32px;
-
     background:#091522;
-
     border:1px solid #172b3e;
-
     border-radius:18px;
 }
 
@@ -398,16 +421,11 @@ h1{
 
 .location-visual{
     display:none;
-
     margin-top:25px;
     padding:20px;
-
     background:#050b13;
-
     border:1px solid #20364b;
-
     border-radius:16px;
-
     animation:fadeIn .45s ease;
 }
 
@@ -479,9 +497,9 @@ h1{
 }
 
 
-/* =========================
+/* ==================================================
    CLINICAL
-========================= */
+================================================== */
 
 .clinical-section{
     margin-top:65px;
@@ -489,13 +507,9 @@ h1{
 
 .clinical-box{
     padding:30px;
-
     background:#091522;
-
     border:1px solid #172b3e;
-
     border-left:3px solid #fff;
-
     border-radius:18px;
 }
 
@@ -511,21 +525,16 @@ h1{
 }
 
 
-/* =========================
+/* ==================================================
    INSIGHT
-========================= */
+================================================== */
 
 .insight{
     margin-top:30px;
-
     padding:25px;
-
     background:#091522;
-
     border-left:3px solid #fff;
-
     border-radius:10px;
-
     color:#aebdce;
 }
 
@@ -534,9 +543,9 @@ h1{
 }
 
 
-/* =========================
+/* ==================================================
    FACTS
-========================= */
+================================================== */
 
 .facts-grid{
     display:grid;
@@ -546,60 +555,43 @@ h1{
 
 .fact{
     padding:22px;
-
     background:#091522;
-
     border:1px solid #172b3e;
-
     border-radius:16px;
 }
 
 .fact span{
     display:block;
-
     color:#fff;
-
     font-size:11px;
-
     letter-spacing:2px;
-
     margin-bottom:12px;
 }
 
 .fact strong{
     display:block;
-
     color:#eef4fa;
-
     font-size:14px;
-
     margin-bottom:8px;
-
     line-height:1.5;
 }
 
 .fact p{
     color:#8195a8;
-
     font-size:13px;
-
     line-height:1.7;
 }
 
 
-/* =========================
+/* ==================================================
    QUIZ
-========================= */
+================================================== */
 
 .quiz{
     margin-top:65px;
-
     padding:30px;
-
     background:#091522;
-
     border:1px solid #172b3e;
-
     border-radius:18px;
 }
 
@@ -610,67 +602,44 @@ h1{
 
 .question-block{
     padding:22px;
-
     margin-bottom:18px;
-
     background:#07111d;
-
     border:1px solid #172b3e;
-
     border-radius:14px;
 }
 
 .question-number{
     color:#61b5ff;
-
     font-size:12px;
-
     letter-spacing:2px;
-
     text-transform:uppercase;
-
     margin-bottom:8px;
 }
 
 .question-en{
     color:#eef4fa;
-
     font-size:16px;
-
     margin-bottom:5px;
 }
 
 .question-ar{
     color:#91a5b8;
-
     font-size:15px;
-
     margin-bottom:15px;
 }
 
 .option{
     display:block;
-
     width:100%;
-
     padding:13px;
-
     margin-top:10px;
-
     background:#10233a;
-
     color:white;
-
     border:1px solid #263951;
-
     border-radius:8px;
-
     text-align:left;
-
     cursor:pointer;
-
     font-size:14px;
-
     transition:.2s;
 }
 
@@ -696,35 +665,22 @@ h1{
 
 .quiz-result{
     margin-top:25px;
-
     padding:20px;
-
     border-radius:12px;
-
     background:#07111d;
-
     border:1px solid #263951;
-
     text-align:center;
-
     font-size:17px;
-
     color:#fff;
 }
 
 .back{
     display:inline-block;
-
     margin-top:40px;
-
     padding:12px 18px;
-
     border:1px solid #263951;
-
     border-radius:9px;
-
     color:white;
-
     text-decoration:none;
 }
 
@@ -732,10 +688,6 @@ h1{
     border-color:#fff;
 }
 
-
-/* =========================
-   MOBILE
-========================= */
 
 @media(max-width:900px){
 
@@ -838,34 +790,28 @@ coordination, posture, and motor learning.
 
 <div class="actions">
 
-<a
-class="action-button"
-href="#location"
-id="locationButton"
->
+<a class="action-button"
+   href="#location"
+   id="locationButton">
 📍 View Location
 </a>
 
-<a
-class="action-button"
-href="#anatomy"
->
+<a class="action-button"
+   href="#anatomy">
 🧠 Deep Nuclei Anatomy
 </a>
 
-<a
-class="action-button"
-href="#quiz"
->
+<a class="action-button"
+   href="#quiz">
 🧪 Test Yourself
 </a>
 
 </div>
 
 
-<!-- =========================
+<!-- ==================================================
      3D VIEWER
-========================= -->
+================================================== -->
 
 <div class="viewer">
 
@@ -884,10 +830,7 @@ DRAG TO ROTATE · SCROLL TO ZOOM
 
 <div class="scene">
 
-<div
-id="loading"
-class="loading"
->
+<div id="loading" class="loading">
 
 <span id="loadText">
 Loading real brain model...
@@ -895,10 +838,9 @@ Loading real brain model...
 
 <div class="loading-bar">
 
-<div
-id="loadBar"
-class="loading-bar-inner"
-></div>
+<div id="loadBar"
+     class="loading-bar-inner">
+</div>
 
 </div>
 
@@ -908,15 +850,11 @@ class="loading-bar-inner"
 <canvas id="brainCanvas"></canvas>
 
 
-<div
-id="nucleiLabel"
-class="nuclei-label"
->
+<div id="nucleiLabel"
+     class="nuclei-label">
 
 <div class="label-box">
-
-DEEP CEREBELLAR NUCLEI · النوى العميقة للمخيخ
-
+DEEP CEREBELLAR NUCLEI · النوى العميقة
 </div>
 
 </div>
@@ -926,17 +864,13 @@ DEEP CEREBELLAR NUCLEI · النوى العميقة للمخيخ
 
 <div class="controls">
 
-<button
-id="highlight"
-class="active"
->
+<button id="highlight"
+        class="active">
 ⚪ Highlight Deep Cerebellar Nuclei
 </button>
 
-<button
-id="rotate"
-class="active"
->
+<button id="rotate"
+        class="active">
 ⟳ Auto Rotate
 </button>
 
@@ -949,14 +883,12 @@ class="active"
 </div>
 
 
-<!-- =========================
+<!-- ==================================================
      ANATOMY
-========================= -->
+================================================== -->
 
-<section
-id="anatomy"
-class="section"
->
+<section id="anatomy"
+         class="section">
 
 <div class="section-label">
 Deep Cerebellar Nuclei · النوى العميقة للمخيخ
@@ -1156,20 +1088,17 @@ thalamic pathways that influence motor systems.
 
 </div>
 
-
 </div>
 
 </section>
 
 
-<!-- =========================
+<!-- ==================================================
      LOCATION
-========================= -->
+================================================== -->
 
-<section
-id="location"
-class="location"
->
+<section id="location"
+         class="location">
 
 <h2>
 📍 Where are the Deep Cerebellar Nuclei? · أين تقع النوى العميقة؟
@@ -1178,26 +1107,27 @@ class="location"
 <p class="location-intro">
 
 The deep cerebellar nuclei lie within the white matter of the
-cerebellum, underneath the cerebellar cortex.
+cerebellum, underneath the cerebellar cortex. They are positioned
+between the outer cerebellar cortex and deeper brainstem-related
+pathways.
 
 <br><br>
 
 تقع النوى العميقة داخل المادة البيضاء للمخيخ أسفل القشرة
-المخيخية.
+المخيخية. وتوجد بين القشرة المخيخية الخارجية والمسارات
+الأعمق المرتبطة بجذع الدماغ.
 
 </p>
 
 
-<div
-id="locationVisual"
-class="location-visual"
->
+<div id="locationVisual"
+     class="location-visual">
 
-<svg
-class="brain-svg"
-viewBox="0 0 900 600"
-xmlns="http://www.w3.org/2000/svg"
->
+
+<svg class="brain-svg"
+     viewBox="0 0 900 600"
+     xmlns="http://www.w3.org/2000/svg">
+
 
 <path
 class="svg-cerebellum"
@@ -1231,6 +1161,7 @@ rx="48"
 ry="30"
 />
 
+
 <ellipse
 class="svg-nuclei"
 cx="500"
@@ -1262,16 +1193,15 @@ y2="180"
 <text
 class="svg-label"
 x="680"
-y="175"
->
+y="175">
 DEEP CEREBELLAR NUCLEI
 </text>
+
 
 <text
 class="svg-label"
 x="680"
-y="202"
->
+y="202">
 النوى العميقة للمخيخ
 </text>
 
@@ -1294,9 +1224,9 @@ cerebellar nuclei.
 </section>
 
 
-<!-- =========================
+<!-- ==================================================
      CLINICAL
-========================= -->
+================================================== -->
 
 <div class="clinical-section">
 
@@ -1307,6 +1237,7 @@ Clinical Importance · الأهمية السريرية
 <h2>
 Why the Deep Cerebellar Nuclei Matter
 </h2>
+
 
 <div class="clinical-box">
 
@@ -1328,9 +1259,9 @@ movements.
 </div>
 
 
-<!-- =========================
+<!-- ==================================================
      INSIGHT
-========================= -->
+================================================== -->
 
 <div class="insight">
 
@@ -1355,9 +1286,9 @@ nuclei, which act as important output hubs.
 </div>
 
 
-<!-- =========================
+<!-- ==================================================
      FACTS
-========================= -->
+================================================== -->
 
 <div class="section">
 
@@ -1368,6 +1299,7 @@ Quick Facts · معلومات سريعة
 <h2>
 Deep Cerebellar Nuclei at a Glance
 </h2>
+
 
 <div class="facts-grid">
 
@@ -1431,30 +1363,25 @@ Major output pathway of the cerebellum
 
 </div>
 
-
 </div>
 
 </div>
 
 
-<!-- =========================
+<!-- ==================================================
      QUIZ
-========================= -->
+================================================== -->
 
-<div
-id="quiz"
-class="quiz"
->
+<div id="quiz"
+     class="quiz">
 
 <h2>
 🧠 Mini Test · اختبار قصير
 </h2>
 
 
-<div
-class="question-block"
-data-answer="A"
->
+<div class="question-block"
+     data-answer="A">
 
 <div class="question-number">
 Question 01 · السؤال الأول
@@ -1464,39 +1391,29 @@ Question 01 · السؤال الأول
 Where are the deep cerebellar nuclei located?
 </div>
 
-<div
-class="question-ar"
-dir="rtl"
->
+<div class="question-ar"
+     dir="rtl">
 أين تقع النوى العميقة للمخيخ؟
 </div>
 
 
-<button
-class="option"
-data-option="A"
->
+<button class="option"
+        data-option="A">
 A. Within the cerebellar white matter · داخل المادة البيضاء للمخيخ
 </button>
 
-<button
-class="option"
-data-option="B"
->
+<button class="option"
+        data-option="B">
 B. Inside the cerebral cortex · داخل القشرة المخية
 </button>
 
-<button
-class="option"
-data-option="C"
->
+<button class="option"
+        data-option="C">
 C. Inside the spinal cord · داخل الحبل الشوكي
 </button>
 
-<button
-class="option"
-data-option="D"
->
+<button class="option"
+        data-option="D">
 D. Inside the optic nerve · داخل العصب البصري
 </button>
 
@@ -1505,10 +1422,8 @@ D. Inside the optic nerve · داخل العصب البصري
 </div>
 
 
-<div
-class="question-block"
-data-answer="C"
->
+<div class="question-block"
+     data-answer="C">
 
 <div class="question-number">
 Question 02 · السؤال الثاني
@@ -1518,39 +1433,29 @@ Question 02 · السؤال الثاني
 Which is the largest deep cerebellar nucleus?
 </div>
 
-<div
-class="question-ar"
-dir="rtl"
->
+<div class="question-ar"
+     dir="rtl">
 ما هي أكبر النوى العميقة للمخيخ؟
 </div>
 
 
-<button
-class="option"
-data-option="A"
->
+<button class="option"
+        data-option="A">
 A. Fastigial nucleus · النواة السقفية
 </button>
 
-<button
-class="option"
-data-option="B"
->
+<button class="option"
+        data-option="B">
 B. Globose nucleus · النواة الكروية
 </button>
 
-<button
-class="option"
-data-option="C"
->
+<button class="option"
+        data-option="C">
 C. Dentate nucleus · النواة المسننة
 </button>
 
-<button
-class="option"
-data-option="D"
->
+<button class="option"
+        data-option="D">
 D. Emboliform nucleus · النواة الصمية
 </button>
 
@@ -1559,10 +1464,8 @@ D. Emboliform nucleus · النواة الصمية
 </div>
 
 
-<div
-class="question-block"
-data-answer="B"
->
+<div class="question-block"
+     data-answer="B">
 
 <div class="question-number">
 Question 03 · السؤال الثالث
@@ -1572,39 +1475,29 @@ Question 03 · السؤال الثالث
 What is a major role of the deep cerebellar nuclei?
 </div>
 
-<div
-class="question-ar"
-dir="rtl"
->
+<div class="question-ar"
+     dir="rtl">
 ما هو أحد الأدوار الرئيسية للنوى العميقة للمخيخ؟
 </div>
 
 
-<button
-class="option"
-data-option="A"
->
+<button class="option"
+        data-option="A">
 A. Producing vision · إنتاج الرؤية
 </button>
 
-<button
-class="option"
-data-option="B"
->
+<button class="option"
+        data-option="B">
 B. Providing major cerebellar output · توفير مخرجات المخيخ الرئيسية
 </button>
 
-<button
-class="option"
-data-option="C"
->
+<button class="option"
+        data-option="C">
 C. Producing hormones · إنتاج الهرمونات
 </button>
 
-<button
-class="option"
-data-option="D"
->
+<button class="option"
+        data-option="D">
 D. Processing smell only · معالجة الشم فقط
 </button>
 
@@ -1613,10 +1506,8 @@ D. Processing smell only · معالجة الشم فقط
 </div>
 
 
-<div
-id="quizResult"
-class="quiz-result"
->
+<div id="quizResult"
+     class="quiz-result">
 
 Answer all three questions to see your final score.
 
@@ -1629,11 +1520,11 @@ Answer all three questions to see your final score.
 </div>
 
 
-<a
-class="back"
-href="explore.html"
->
+<a class="back"
+   href="explore.html">
+
 ← Back to Explore Anatomy
+
 </a>
 
 
@@ -1672,9 +1563,9 @@ import {
 } from "three/addons/loaders/DRACOLoader.js";
 
 
-/* =========================
+/* ==================================================
    ELEMENTS
-========================= */
+================================================== */
 
 const canvas =
 document.getElementById("brainCanvas");
@@ -1692,17 +1583,17 @@ const nucleiLabel =
 document.getElementById("nucleiLabel");
 
 
-/* =========================
+/* ==================================================
    SCENE
-========================= */
+================================================== */
 
 const scene =
 new THREE.Scene();
 
 
-/* =========================
+/* ==================================================
    CAMERA
-========================= */
+================================================== */
 
 const camera =
 new THREE.PerspectiveCamera(
@@ -1719,9 +1610,9 @@ camera.position.set(
 );
 
 
-/* =========================
+/* ==================================================
    RENDERER
-========================= */
+================================================== */
 
 const renderer =
 new THREE.WebGLRenderer({
@@ -1744,9 +1635,9 @@ renderer.toneMappingExposure =
 .75;
 
 
-/* =========================
+/* ==================================================
    CONTROLS
-========================= */
+================================================== */
 
 const controls =
 new OrbitControls(
@@ -1755,19 +1646,15 @@ new OrbitControls(
 );
 
 controls.enableDamping = true;
-
 controls.dampingFactor = .05;
 
 controls.enableZoom = true;
-
 controls.enablePan = false;
 
 controls.rotateSpeed = .6;
-
 controls.zoomSpeed = .6;
 
 controls.autoRotate = true;
-
 controls.autoRotateSpeed = .2;
 
 controls.target.set(
@@ -1777,13 +1664,12 @@ controls.target.set(
 );
 
 controls.minDistance = 3.5;
-
 controls.maxDistance = 16;
 
 
-/* =========================
+/* ==================================================
    LIGHTS
-========================= */
+================================================== */
 
 scene.add(
     new THREE.AmbientLight(
@@ -1814,6 +1700,7 @@ key.position.set(
 
 scene.add(key);
 
+
 const fill =
 new THREE.DirectionalLight(
     0x8ca9bd,
@@ -1829,9 +1716,9 @@ fill.position.set(
 scene.add(fill);
 
 
-/* =========================
+/* ==================================================
    BRAIN GROUP
-========================= */
+================================================== */
 
 const brainGroup =
 new THREE.Group();
@@ -1839,21 +1726,24 @@ new THREE.Group();
 scene.add(brainGroup);
 
 
-/*
-   These ONLY refer to objects
-   INSIDE the brain model.
-*/
+/* ==================================================
+   HIGHLIGHT VARIABLES
+================================================== */
 
 let nucleiHighlight = null;
 
-let nucleiOutline = null;
+let nucleiGlow = null;
+
+let nucleiLeader = null;
+
+let nucleiAnchor = null;
 
 let highlighted = true;
 
 
-/* =========================
+/* ==================================================
    MATERIALS
-========================= */
+================================================== */
 
 const brainMaterial =
 new THREE.MeshPhysicalMaterial({
@@ -1873,57 +1763,61 @@ new THREE.MeshPhysicalMaterial({
 });
 
 
-const whiteMaterial =
+/*
+   IMPORTANT:
+
+   This is NOT a giant white sphere.
+
+   It is a very small internal highlight.
+*/
+
+const nucleusMaterial =
 new THREE.MeshPhysicalMaterial({
 
     color:0xffffff,
 
-    roughness:.3,
+    emissive:0xffffff,
 
-    metalness:.02,
+    emissiveIntensity:1.8,
 
-    clearcoat:.4,
+    roughness:.25,
 
-    clearcoatRoughness:.2,
+    metalness:0,
+
+    transparent:true,
+
+    opacity:.96,
 
     side:THREE.DoubleSide
 
 });
 
 
-const outlineMaterial =
+const glowMaterial =
 new THREE.MeshBasicMaterial({
 
     color:0xffffff,
 
     transparent:true,
 
-    opacity:.8,
+    opacity:.16,
 
-    side:THREE.BackSide,
-
-    depthTest:true,
-
-    depthWrite:false
+    side:THREE.BackSide
 
 });
 
 
-/* =====================================================
-   INTERNAL FALLBACK
+/* ==================================================
+   CREATE INTERNAL NUCLEUS HIGHLIGHT
+================================================== */
 
-   IMPORTANT:
+function createInternalNucleusHighlight(model){
 
-   There are NO spheres placed beside the brain.
-
-   If the GLB doesn't contain separate nucleus meshes,
-   this creates the marker INSIDE the cerebellum.
-
-   Because depthTest is enabled, the cerebellar tissue
-   naturally hides the part that should be behind it.
-===================================================== */
-
-function createInternalCerebellarHighlight(model){
+    /*
+       Get the actual dimensions of the loaded brain.
+       This makes the marker relative to the model instead
+       of using an arbitrary world position.
+    */
 
     const box =
     new THREE.Box3()
@@ -1941,23 +1835,26 @@ function createInternalCerebellarHighlight(model){
 
 
     /*
-       Approximate internal cerebellar position.
+       The nucleus is deliberately positioned
+       INSIDE the cerebellar region.
 
-       The point is deliberately placed INSIDE
-       the lower/posterior portion of the brain,
-       rather than outside it.
+       It is NOT placed outside the model.
+
+       The position is relative to the brain dimensions.
     */
 
-    const position =
-    new THREE.Vector3(
-        center.x,
-        center.y - size.y * .20,
-        center.z + size.z * .02
-    );
+    const nucleusX =
+    center.x + size.x * 0.015;
+
+    const nucleusY =
+    center.y - size.y * 0.255;
+
+    const nucleusZ =
+    center.z + size.z * 0.065;
 
 
     /*
-       Small glowing internal structure.
+       Small internal nucleus shape
     */
 
     const geometry =
@@ -1972,47 +1869,44 @@ function createInternalCerebellarHighlight(model){
     );
 
 
-    const material =
-    new THREE.MeshBasicMaterial({
-
-        color:0xffffff,
-
-        transparent:true,
-
-        opacity:.95,
-
-        depthTest:true,
-
-        depthWrite:false
-
-    });
-
-
-    const marker =
+    const nucleus =
     new THREE.Mesh(
         geometry,
-        material
+        nucleusMaterial
     );
 
 
-    marker.position.copy(
-        position
+    nucleus.position.set(
+        nucleusX,
+        nucleusY,
+        nucleusZ
     );
 
 
     /*
-       VERY IMPORTANT:
-
-       Marker is added to the MODEL,
-       not beside it.
+       Slightly flattened so it reads like
+       an anatomical internal structure rather
+       than a floating ball.
     */
 
-    model.add(marker);
+    nucleus.scale.set(
+        1.35,
+        .72,
+        .85
+    );
+
+
+    brainGroup.add(
+        nucleus
+    );
+
+
+    nucleiHighlight =
+    nucleus;
 
 
     /*
-       Second slightly larger shell
-       for a subtle internal glow.
+       VERY subtle glow around the internal highlight
     */
 
     const glowGeometry =
@@ -2021,26 +1915,10 @@ function createInternalCerebellarHighlight(model){
             size.x,
             size.y,
             size.z
-        ) * .075,
+        ) * .073,
         32,
         24
     );
-
-
-    const glowMaterial =
-    new THREE.MeshBasicMaterial({
-
-        color:0xffffff,
-
-        transparent:true,
-
-        opacity:.18,
-
-        depthTest:true,
-
-        depthWrite:false
-
-    });
 
 
     const glow =
@@ -2051,54 +1929,253 @@ function createInternalCerebellarHighlight(model){
 
 
     glow.position.copy(
-        position
+        nucleus.position
     );
 
+    glow.scale.copy(
+        nucleus.scale
+    );
 
-    model.add(glow);
-
-
-    /*
-       Group them so the highlight button
-       can toggle both.
-    */
-
-    const internalHighlight =
-    new THREE.Group();
-
-    /*
-       Move objects from model into group
-       while preserving world position.
-    */
-
-    model.remove(marker);
-    model.remove(glow);
-
-    internalHighlight.add(
-        marker,
+    brainGroup.add(
         glow
     );
 
-    model.add(
-        internalHighlight
-    );
 
-
-    nucleiHighlight =
-    internalHighlight;
+    nucleiGlow =
+    glow;
 
 
     /*
-       Label follows the internal point.
+       Anchor point for the leader line.
+       This point stays attached to the highlighted
+       internal structure.
     */
 
-    return internalHighlight;
+    nucleiAnchor =
+    new THREE.Object3D();
+
+    nucleiAnchor.position.copy(
+        nucleus.position
+    );
+
+    brainGroup.add(
+        nucleiAnchor
+    );
+
+
+    /*
+       Create the white leader line.
+       It starts from the internal nucleus and
+       points toward the label.
+    */
+
+    createLeaderLine();
+
+
+    /*
+       Make sure the nucleus is rendered after
+       the brain so the highlight remains visible.
+    */
+
+    nucleus.renderOrder = 10;
+    glow.renderOrder = 9;
+
 }
 
 
-/* =========================
+/* ==================================================
+   LEADER LINE
+================================================== */
+
+function createLeaderLine(){
+
+    if(!nucleiAnchor)
+        return;
+
+
+    const points = [
+
+        new THREE.Vector3(
+            0,
+            0,
+            0
+        ),
+
+        new THREE.Vector3(
+            1.15,
+            .25,
+            .15
+        )
+
+    ];
+
+
+    const geometry =
+    new THREE.BufferGeometry()
+    .setFromPoints(points);
+
+
+    const material =
+    new THREE.LineBasicMaterial({
+
+        color:0xffffff,
+
+        transparent:true,
+
+        opacity:.9,
+
+        depthTest:false
+
+    });
+
+
+    const line =
+    new THREE.Line(
+        geometry,
+        material
+    );
+
+
+    line.renderOrder = 20;
+
+
+    /*
+       The line starts at the actual nucleus.
+    */
+
+    nucleiAnchor.add(
+        line
+    );
+
+
+    nucleiLeader =
+    line;
+
+}
+
+
+/* ==================================================
+   UPDATE LEADER LINE
+================================================== */
+
+function updateLeaderLine(){
+
+    if(
+        !nucleiAnchor ||
+        !nucleiLeader
+    )
+        return;
+
+
+    /*
+       Find where the label should be in 3D.
+       It is offset slightly toward the visible
+       side of the brain.
+    */
+
+    const start =
+    new THREE.Vector3();
+
+    nucleiAnchor.getWorldPosition(
+        start
+    );
+
+
+    const direction =
+    new THREE.Vector3(
+        1.0,
+        .25,
+        .15
+    ).normalize();
+
+
+    const length = 1.15;
+
+
+    const end =
+    start.clone()
+    .add(
+        direction.multiplyScalar(
+            length
+        )
+    );
+
+
+    /*
+       Convert end point into the local coordinate
+       system of the anchor.
+    */
+
+    const localEnd =
+    nucleiAnchor.worldToLocal(
+        end
+    );
+
+
+    const positions =
+    nucleiLeader.geometry.attributes.position.array;
+
+
+    positions[0] = 0;
+    positions[1] = 0;
+    positions[2] = 0;
+
+    positions[3] = localEnd.x;
+    positions[4] = localEnd.y;
+    positions[5] = localEnd.z;
+
+
+    nucleiLeader.geometry.attributes
+    .position.needsUpdate = true;
+
+
+    /*
+       Update HTML label from the end of the line.
+    */
+
+    updateLabelAt(
+        end
+    );
+
+}
+
+
+/* ==================================================
+   LABEL POSITION
+================================================== */
+
+function updateLabelAt(position){
+
+    const projected =
+    position.clone()
+    .project(camera);
+
+
+    const x =
+    (projected.x + 1) /
+    2 *
+    canvas.clientWidth;
+
+
+    const y =
+    (-projected.y + 1) /
+    2 *
+    canvas.clientHeight;
+
+
+    nucleiLabel.style.left =
+    x + "px";
+
+
+    nucleiLabel.style.top =
+    y + "px";
+
+}
+
+
+/* ==================================================
    LOAD MODEL
-========================= */
+================================================== */
 
 function loadBrain(){
 
@@ -2155,19 +2232,21 @@ function loadBrain(){
 
             url,
 
-            gltf => {
+            gltf=>{
 
                 const model =
                 gltf.scene;
 
 
-                /* =========================
-                   CENTER + SCALE
-                ========================= */
+                /*
+                   Normalize the entire brain model.
+                */
 
                 const box =
                 new THREE.Box3()
-                .setFromObject(model);
+                .setFromObject(
+                    model
+                );
 
 
                 const center =
@@ -2209,9 +2288,33 @@ function loadBrain(){
                 model.position.y -= .6;
 
 
-                /* =========================
-                   ADD MODEL FIRST
-                ========================= */
+                /*
+                   Apply brain material.
+                */
+
+                model.traverse(
+                child=>{
+
+                    if(!child.isMesh)
+                        return;
+
+
+                    child.castShadow =
+                    true;
+
+                    child.receiveShadow =
+                    true;
+
+
+                    child.material =
+                    brainMaterial.clone();
+
+                });
+
+
+                /*
+                   Add brain first.
+                */
 
                 brainGroup.add(
                     model
@@ -2219,209 +2322,20 @@ function loadBrain(){
 
 
                 /*
-                   Search for actual nucleus
-                   meshes inside the GLB.
-                */
-
-                const nucleusMeshes = [];
-
-
-                model.traverse(
-                child => {
-
-                    if(!child.isMesh)
-                        return;
-
-
-                    child.castShadow = true;
-
-                    child.receiveShadow = true;
-
-
-                    const name =
-                    (
-                        child.name || ""
-                    ).toLowerCase();
-
-
-                    /*
-                       Actual anatomical object
-                       names that might exist
-                       in different GLB files.
-                    */
-
-                    const isNucleus =
-
-                        name.includes("dentate") ||
-
-                        name.includes("fastigial") ||
-
-                        name.includes("globose") ||
-
-                        name.includes("emboliform") ||
-
-                        name.includes("interposed") ||
-
-                        name.includes("cerebellar_nucleus") ||
-
-                        name.includes("cerebellar nucleus") ||
-
-                        name.includes("deep_nucleus") ||
-
-                        name.includes("deep nucleus") ||
-
-                        name.includes("deepnucleus");
-
-
-                    /*
-                       Normal brain appearance.
-                    */
-
-                    child.material =
-                    brainMaterial.clone();
-
-
-                    if(isNucleus){
-
-                        nucleusMeshes.push(
-                            child
-                        );
-
-                    }
-
-                });
-
-
-                /* =========================
-                   REAL NUCLEUS FOUND
-                ========================= */
-
-                if(nucleusMeshes.length > 0){
-
-                    const highlightGroup =
-                    new THREE.Group();
-
-
-                    nucleusMeshes.forEach(
-                    child => {
-
-                        const highlight =
-                        child.clone();
-
-
-                        highlight.material =
-                        whiteMaterial.clone();
-
-
-                        /*
-                           SAME anatomical position.
-                        */
-
-                        highlight.position.copy(
-                            child.position
-                        );
-
-                        highlight.rotation.copy(
-                            child.rotation
-                        );
-
-                        highlight.scale.copy(
-                            child.scale
-                        );
-
-
-                        /*
-                           Only tiny expansion.
-                           NOT a separate external object.
-                        */
-
-                        highlight.scale.multiplyScalar(
-                            1.005
-                        );
-
-
-                        child.parent.add(
-                            highlight
-                        );
-
-
-                        highlightGroup.add(
-                            highlight
-                        );
-
-
-                        const outline =
-                        child.clone();
-
-
-                        outline.material =
-                        outlineMaterial.clone();
-
-
-                        outline.position.copy(
-                            child.position
-                        );
-
-                        outline.rotation.copy(
-                            child.rotation
-                        );
-
-                        outline.scale.copy(
-                            child.scale
-                        );
-
-
-                        outline.scale.multiplyScalar(
-                            1.015
-                        );
-
-
-                        child.parent.add(
-                            outline
-                        );
-
-
-                        highlightGroup.add(
-                            outline
-                        );
-
-                    });
-
-
-                    nucleiHighlight =
-                    highlightGroup;
-
-
-                    model.add(
-                        highlightGroup
-                    );
-
-                }
-
-
-                /*
                    IMPORTANT:
 
-                   If the GLB doesn't have
-                   separate nuclei, DO NOT create
-                   balls beside the brain.
+                   We DO NOT search for random
+                   "deep nucleus" meshes anymore.
 
-                   Instead create an INTERNAL
-                   highlight inside the model.
+                   We DO NOT create outside spheres.
+
+                   Instead, the highlight is created
+                   INSIDE the normalized brain.
                 */
 
-                else{
-
-                    console.warn(
-                        "No separate cerebellar nuclei found. Using internal anatomical highlight."
-                    );
-
-
-                    createInternalCerebellarHighlight(
-                        model
-                    );
-
-                }
+                createInternalNucleusHighlight(
+                    model
+                );
 
 
                 loadBar.style.width =
@@ -2433,7 +2347,7 @@ function loadBrain(){
             },
 
 
-            progress => {
+            progress=>{
 
                 if(progress.total){
 
@@ -2454,10 +2368,10 @@ function loadBrain(){
             },
 
 
-            error => {
+            error=>{
 
                 console.warn(
-                    "Model failed:",
+                    "Model failed",
                     error
                 );
 
@@ -2475,24 +2389,21 @@ function loadBrain(){
 }
 
 
-/* =========================
+/* ==================================================
    READY
-========================= */
+================================================== */
 
 function ready(){
 
     setTimeout(
-    () => {
+    ()=>{
 
         loading.classList.add(
             "hide"
         );
 
 
-        if(
-            highlighted &&
-            nucleiHighlight
-        ){
+        if(highlighted){
 
             nucleiLabel.classList.add(
                 "show"
@@ -2500,62 +2411,14 @@ function ready(){
 
         }
 
-    },
-    500
-    );
+    },500);
 
 }
 
 
-/* =========================
-   LABEL
-========================= */
-
-function updateLabel(){
-
-    if(!nucleiHighlight)
-        return;
-
-
-    const position =
-    new THREE.Vector3();
-
-
-    nucleiHighlight.getWorldPosition(
-        position
-    );
-
-
-    position.project(
-        camera
-    );
-
-
-    const x =
-    (position.x + 1) /
-    2 *
-    canvas.clientWidth;
-
-
-    const y =
-    (-position.y + 1) /
-    2 *
-    canvas.clientHeight;
-
-
-    nucleiLabel.style.left =
-    x + "px";
-
-
-    nucleiLabel.style.top =
-    (y - 60) + "px";
-
-}
-
-
-/* =========================
+/* ==================================================
    RESIZE
-========================= */
+================================================== */
 
 function resize(){
 
@@ -2596,9 +2459,9 @@ window.addEventListener(
 );
 
 
-/* =========================
+/* ==================================================
    HIGHLIGHT BUTTON
-========================= */
+================================================== */
 
 document
 .getElementById("highlight")
@@ -2618,6 +2481,22 @@ function(){
     }
 
 
+    if(nucleiGlow){
+
+        nucleiGlow.visible =
+        highlighted;
+
+    }
+
+
+    if(nucleiLeader){
+
+        nucleiLeader.visible =
+        highlighted;
+
+    }
+
+
     nucleiLabel.classList.toggle(
         "show",
         highlighted
@@ -2632,17 +2511,15 @@ function(){
 
     this.textContent =
     highlighted
-
     ? "⚪ Highlight Deep Cerebellar Nuclei"
-
     : "⚫ Show Deep Cerebellar Nuclei";
 
 });
 
 
-/* =========================
+/* ==================================================
    ROTATE
-========================= */
+================================================== */
 
 document
 .getElementById("rotate")
@@ -2662,17 +2539,15 @@ function(){
 
     this.textContent =
     controls.autoRotate
-
     ? "⟳ Auto Rotate"
-
     : "▶ Auto Rotate";
 
 });
 
 
-/* =========================
+/* ==================================================
    RESET
-========================= */
+================================================== */
 
 document
 .getElementById("reset")
@@ -2699,9 +2574,9 @@ function(){
 });
 
 
-/* =========================
+/* ==================================================
    ANIMATION
-========================= */
+================================================== */
 
 function animate(){
 
@@ -2713,7 +2588,12 @@ function animate(){
     controls.update();
 
 
-    updateLabel();
+    /*
+       Keep the leader line connected
+       to the internal highlighted structure.
+    */
+
+    updateLeaderLine();
 
 
     renderer.render(
@@ -2731,9 +2611,9 @@ animate();
 loadBrain();
 
 
-/* =========================
+/* ==================================================
    LOCATION
-========================= */
+================================================== */
 
 const locationButton =
 document.getElementById(
@@ -2752,22 +2632,20 @@ locationButton.addEventListener(
 function(){
 
     setTimeout(
-    () => {
+    ()=>{
 
         locationVisual.classList.add(
             "show"
         );
 
-    },
-    50
-    );
+    },50);
 
 });
 
 
-/* =========================
+/* ==================================================
    QUIZ
-========================= */
+================================================== */
 
 let score = 0;
 
@@ -2781,7 +2659,7 @@ document.querySelectorAll(
 
 
 questions.forEach(
-question => {
+question=>{
 
     const answer =
     question.dataset.answer;
@@ -2803,11 +2681,11 @@ question => {
 
 
     options.forEach(
-    option => {
+    option=>{
 
         option.addEventListener(
         "click",
-        () => {
+        ()=>{
 
             if(done)
                 return;
@@ -2821,9 +2699,10 @@ question => {
 
 
             options.forEach(
-            button => {
+            button=>{
 
-                button.disabled = true;
+                button.disabled =
+                true;
 
             });
 
@@ -2858,7 +2737,7 @@ question => {
 
 
                 options.forEach(
-                button => {
+                button=>{
 
                     if(
                         button.dataset.option ===
@@ -2959,3 +2838,4 @@ function showScore(){
 </body>
 
 </html>
+```
