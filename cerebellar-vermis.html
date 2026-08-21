@@ -1,0 +1,2958 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NeuroAtlas | Cerebellar Vermis</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#050b13;
+    color:#eef4fa;
+    font-family:Arial,Helvetica,sans-serif;
+    line-height:1.6;
+}
+
+/* ==================================================
+   NAVIGATION
+================================================== */
+
+nav{
+    height:70px;
+    padding:0 7%;
+    display:flex;
+    align-items:center;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+nav a{
+    color:#9db0c3;
+    text-decoration:none;
+    font-size:14px;
+}
+
+nav a:hover{
+    color:white;
+}
+
+
+/* ==================================================
+   MAIN
+================================================== */
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:60px 7% 100px;
+}
+
+
+/* ==================================================
+   HERO
+================================================== */
+
+.eyebrow{
+    color:#61b5ff;
+    letter-spacing:3px;
+    font-size:12px;
+    text-transform:uppercase;
+    margin-bottom:15px;
+}
+
+h1{
+    font-size:clamp(48px,7vw,82px);
+    line-height:.95;
+    letter-spacing:-4px;
+    margin-bottom:12px;
+}
+
+.arabic-title{
+    color:#ffffff;
+    font-size:25px;
+    margin-bottom:25px;
+}
+
+.hero p{
+    color:#a6b6c7;
+    max-width:900px;
+    font-size:18px;
+    line-height:1.8;
+}
+
+
+/* ==================================================
+   ACTIONS
+================================================== */
+
+.actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:28px;
+}
+
+.action-button{
+    padding:11px 17px;
+    border-radius:9px;
+    background:#0b1928;
+    border:1px solid #31516d;
+    color:#bdd0e0;
+    cursor:pointer;
+    text-decoration:none;
+    font-size:14px;
+    transition:.2s;
+}
+
+.action-button:hover{
+    background:#14304a;
+    color:white;
+    border-color:#ffffff;
+}
+
+
+/* ==================================================
+   VIEWER
+================================================== */
+
+.viewer{
+    margin-top:60px;
+    border:1px solid rgba(255,255,255,.10);
+    border-radius:24px;
+    overflow:hidden;
+    background:#02060b;
+    box-shadow:0 25px 80px rgba(0,0,0,.45);
+}
+
+.viewer-header{
+    min-height:65px;
+    padding:0 22px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.viewer-title{
+    font-size:14px;
+    color:#d2dce6;
+}
+
+.viewer-status{
+    color:#708499;
+    font-size:11px;
+    letter-spacing:1px;
+}
+
+.scene{
+    position:relative;
+    width:100%;
+    height:700px;
+
+    background:
+    radial-gradient(
+        circle at 50% 45%,
+        #203b51 0%,
+        #0d1c2e 42%,
+        #02060b 100%
+    );
+}
+
+#brainCanvas{
+    width:100%;
+    height:100%;
+    display:block;
+}
+
+
+/* ==================================================
+   LOADING
+================================================== */
+
+.loading{
+    position:absolute;
+    inset:0;
+    z-index:20;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+
+    gap:16px;
+
+    background:#02060b;
+
+    color:#9db0c3;
+    font-size:14px;
+
+    transition:opacity .8s;
+}
+
+.loading.hide{
+    opacity:0;
+    pointer-events:none;
+}
+
+.loading-bar{
+    width:180px;
+    height:2px;
+    background:rgba(255,255,255,.08);
+    border-radius:2px;
+    overflow:hidden;
+}
+
+.loading-bar-inner{
+    width:0%;
+    height:100%;
+    background:#ffffff;
+    transition:width .3s;
+}
+
+
+/* ==================================================
+   VERMIS LABEL
+================================================== */
+
+.vermis-label{
+    position:absolute;
+
+    z-index:30;
+
+    pointer-events:none;
+
+    transform:translate(-50%,-100%);
+
+    display:none;
+}
+
+.vermis-label.show{
+    display:block;
+}
+
+.label-box{
+    position:relative;
+
+    padding:9px 15px;
+
+    border-radius:10px;
+
+    background:rgba(5,10,17,.97);
+
+    border:1.5px solid #ffffff;
+
+    color:#ffffff;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+    letter-spacing:1px;
+
+    white-space:nowrap;
+
+    box-shadow:
+        0 0 12px rgba(255,255,255,.3),
+        0 0 35px rgba(255,255,255,.12);
+}
+
+.label-box::after{
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    bottom:-15px;
+
+    width:1.5px;
+    height:15px;
+
+    background:#ffffff;
+
+    transform:translateX(-50%);
+}
+
+
+/* ==================================================
+   CONTROLS
+================================================== */
+
+.controls{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+
+    padding:15px;
+
+    border-top:1px solid rgba(255,255,255,.08);
+}
+
+.controls button{
+    padding:11px 17px;
+
+    border-radius:9px;
+
+    background:#0b1928;
+
+    border:1px solid #31516d;
+
+    color:#bdd0e0;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.controls button:hover{
+    background:#14304a;
+    color:white;
+}
+
+.controls button.active{
+    background:#17191c;
+    border-color:#ffffff;
+    color:white;
+}
+
+
+/* ==================================================
+   SECTIONS
+================================================== */
+
+.section{
+    margin-top:70px;
+}
+
+.section-label{
+    color:#61b5ff;
+    letter-spacing:2px;
+    font-size:11px;
+    text-transform:uppercase;
+    margin-bottom:8px;
+}
+
+.section h2{
+    font-size:32px;
+    margin-bottom:25px;
+}
+
+.section-intro{
+    color:#91a5b8;
+    max-width:900px;
+    font-size:15px;
+    line-height:1.9;
+    margin-bottom:30px;
+}
+
+
+/* ==================================================
+   CARDS
+================================================== */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.card{
+    padding:27px;
+
+    background:#091522;
+
+    border:1px solid #172b3e;
+
+    border-radius:18px;
+
+    transition:
+    transform .2s,
+    border-color .2s;
+}
+
+.card:hover{
+    transform:translateY(-3px);
+    border-color:#2b506c;
+}
+
+.card h3{
+    font-size:18px;
+    margin-bottom:13px;
+    color:#eef4fa;
+    line-height:1.45;
+}
+
+.card p{
+    color:#91a5b8;
+    font-size:14px;
+    line-height:1.8;
+}
+
+
+/* ==================================================
+   LOCATION
+================================================== */
+
+.location{
+    margin-top:70px;
+
+    padding:32px;
+
+    background:#091522;
+
+    border:1px solid #172b3e;
+
+    border-radius:18px;
+}
+
+.location h2{
+    font-size:30px;
+    margin-bottom:12px;
+}
+
+.location-intro{
+    color:#91a5b8;
+    max-width:900px;
+    line-height:1.9;
+    margin-bottom:25px;
+}
+
+
+/* ==================================================
+   LOCATION VISUAL
+================================================== */
+
+.location-visual{
+    display:none;
+
+    margin-top:25px;
+
+    padding:20px;
+
+    background:#050b13;
+
+    border:1px solid #20364b;
+
+    border-radius:16px;
+
+    animation:fadeIn .45s ease;
+}
+
+.location-visual.show{
+    display:block;
+}
+
+@keyframes fadeIn{
+
+    from{
+        opacity:0;
+        transform:translateY(8px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+.brain-svg{
+    display:block;
+    width:100%;
+    max-width:850px;
+    height:auto;
+    margin:auto;
+}
+
+.svg-brain{
+    fill:#263d55;
+    stroke:#71869e;
+    stroke-width:3;
+}
+
+.svg-cerebellum{
+    fill:#344d66;
+    stroke:#71869e;
+    stroke-width:3;
+}
+
+.svg-brainstem{
+    fill:#29465b;
+    stroke:#71869e;
+    stroke-width:3;
+}
+
+.svg-vermis{
+    fill:#ffffff;
+    stroke:#ffffff;
+    stroke-width:4;
+}
+
+.svg-line{
+    stroke:#ffffff;
+    stroke-width:2;
+}
+
+.svg-label{
+    fill:white;
+    font-size:18px;
+    font-weight:bold;
+}
+
+.location-caption{
+    text-align:center;
+    color:#9fb0c3;
+    margin-top:15px;
+}
+
+
+/* ==================================================
+   CLINICAL
+================================================== */
+
+.clinical-section{
+    margin-top:65px;
+}
+
+.clinical-box{
+    padding:30px;
+
+    background:#091522;
+
+    border:1px solid #172b3e;
+
+    border-left:3px solid #ffffff;
+
+    border-radius:18px;
+}
+
+.clinical-box p{
+    color:#a7b7c6;
+
+    font-size:15px;
+
+    line-height:1.9;
+
+    margin-bottom:18px;
+}
+
+.clinical-box p:last-child{
+    margin-bottom:0;
+}
+
+
+/* ==================================================
+   INSIGHT
+================================================== */
+
+.insight{
+    margin-top:30px;
+
+    padding:25px;
+
+    background:#091522;
+
+    border-left:3px solid #ffffff;
+
+    border-radius:10px;
+
+    color:#aebdce;
+}
+
+.insight strong{
+    color:#ffffff;
+}
+
+
+/* ==================================================
+   QUICK FACTS
+================================================== */
+
+.facts-grid{
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:15px;
+}
+
+.fact{
+    padding:22px;
+
+    background:#091522;
+
+    border:1px solid #172b3e;
+
+    border-radius:16px;
+}
+
+.fact span{
+    display:block;
+
+    color:#ffffff;
+
+    font-size:11px;
+
+    letter-spacing:2px;
+
+    margin-bottom:12px;
+}
+
+.fact strong{
+    display:block;
+
+    color:#eef4fa;
+
+    font-size:14px;
+
+    margin-bottom:8px;
+
+    line-height:1.5;
+}
+
+.fact p{
+    color:#8195a8;
+
+    font-size:13px;
+
+    line-height:1.7;
+}
+
+
+/* ==================================================
+   QUIZ
+================================================== */
+
+.quiz{
+    margin-top:65px;
+
+    padding:30px;
+
+    background:#091522;
+
+    border:1px solid #172b3e;
+
+    border-radius:18px;
+}
+
+.quiz h2{
+    font-size:27px;
+    margin-bottom:25px;
+}
+
+.question-block{
+    padding:22px;
+
+    margin-bottom:18px;
+
+    background:#07111d;
+
+    border:1px solid #172b3e;
+
+    border-radius:14px;
+}
+
+.question-number{
+    color:#61b5ff;
+
+    font-size:12px;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+    margin-bottom:8px;
+}
+
+.question-en{
+    color:#eef4fa;
+
+    font-size:16px;
+
+    margin-bottom:5px;
+}
+
+.question-ar{
+    color:#91a5b8;
+
+    font-size:15px;
+
+    margin-bottom:15px;
+}
+
+.option{
+    display:block;
+
+    width:100%;
+
+    padding:13px;
+
+    margin-top:10px;
+
+    background:#10233a;
+
+    color:white;
+
+    border:1px solid #263951;
+
+    border-radius:8px;
+
+    text-align:left;
+
+    cursor:pointer;
+
+    font-size:14px;
+
+    transition:.2s;
+}
+
+.option:hover{
+    border-color:#ffffff;
+}
+
+.option.correct{
+    background:#17251f;
+    border-color:#78e0a0;
+}
+
+.option.wrong{
+    background:#291a1d;
+    border-color:#ff8792;
+}
+
+.question-feedback{
+    margin-top:12px;
+    font-size:14px;
+    min-height:22px;
+}
+
+.quiz-result{
+    margin-top:25px;
+
+    padding:20px;
+
+    border-radius:12px;
+
+    background:#07111d;
+
+    border:1px solid #263951;
+
+    text-align:center;
+
+    font-size:17px;
+
+    color:#ffffff;
+}
+
+
+/* ==================================================
+   BACK
+================================================== */
+
+.back{
+    display:inline-block;
+
+    margin-top:40px;
+
+    padding:12px 18px;
+
+    border:1px solid #263951;
+
+    border-radius:9px;
+
+    color:white;
+
+    text-decoration:none;
+}
+
+.back:hover{
+    border-color:#ffffff;
+}
+
+
+/* ==================================================
+   MOBILE
+================================================== */
+
+@media(max-width:900px){
+
+    .cards{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .facts-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:800px){
+
+    .scene{
+        height:450px;
+    }
+
+    .viewer-status{
+        display:none;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .facts-grid{
+        grid-template-columns:1fr;
+    }
+
+    h1{
+        letter-spacing:-2px;
+    }
+
+    .location{
+        padding:20px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<nav>
+
+<a href="./explore.html">
+← Back to Explore Anatomy
+</a>
+
+</nav>
+
+
+<main class="container">
+
+
+<!-- ==================================================
+     HERO
+================================================== -->
+
+<div class="eyebrow">
+Cerebellum · NeuroAtlas
+</div>
+
+
+<h1>
+Cerebellar Vermis
+</h1>
+
+
+<div class="arabic-title">
+دودة المخيخ
+</div>
+
+
+<div class="hero">
+
+<p>
+
+The cerebellar vermis is the central midline region of
+the cerebellum. It plays an important role in coordinating
+axial movements, posture, balance, and the control of
+movements involving the trunk and proximal muscles.
+
+<br><br>
+
+دودة المخيخ هي المنطقة المركزية التي تقع على الخط المتوسط
+للمخيخ. وتساهم بشكل مهم في تنسيق حركات الجذع، والحفاظ على
+الوضعية والتوازن، وتنظيم الحركات المرتبطة بالجذع والعضلات
+القريبة.
+
+</p>
+
+</div>
+
+
+<!-- ==================================================
+     ACTIONS
+================================================== -->
+
+<div class="actions">
+
+<a
+class="action-button"
+href="#location"
+id="locationButton"
+>
+📍 View Location
+</a>
+
+
+<a
+class="action-button"
+href="#anatomy"
+>
+🧠 Vermis Anatomy
+</a>
+
+
+<a
+class="action-button"
+href="#quiz"
+>
+🧪 Test Yourself
+</a>
+
+</div>
+
+
+<!-- ==================================================
+     3D VIEWER
+================================================== -->
+
+<div class="viewer">
+
+<div class="viewer-header">
+
+<div class="viewer-title">
+Human Brain · Interactive 3D
+</div>
+
+<div class="viewer-status">
+DRAG TO ROTATE · SCROLL TO ZOOM
+</div>
+
+</div>
+
+
+<div class="scene">
+
+<div
+id="loading"
+class="loading"
+>
+
+<span id="loadText">
+Loading real brain model...
+</span>
+
+<div class="loading-bar">
+
+<div
+id="loadBar"
+class="loading-bar-inner"
+></div>
+
+</div>
+
+</div>
+
+
+<canvas id="brainCanvas"></canvas>
+
+
+<div
+id="vermisLabel"
+class="vermis-label"
+>
+
+<div class="label-box">
+CEREBELLAR VERMIS · دودة المخيخ
+</div>
+
+</div>
+
+</div>
+
+
+<div class="controls">
+
+<button
+id="highlight"
+class="active"
+>
+⚪ Highlight Cerebellar Vermis
+</button>
+
+
+<button
+id="rotate"
+class="active"
+>
+⟳ Auto Rotate
+</button>
+
+
+<button
+id="reset"
+>
+↻ Reset View
+</button>
+
+</div>
+
+</div>
+
+
+<!-- ==================================================
+     ANATOMY
+================================================== -->
+
+<section
+id="anatomy"
+class="section"
+>
+
+<div class="section-label">
+Cerebellar Vermis · دودة المخيخ
+</div>
+
+
+<h2>
+Vermis Anatomy · تشريح دودة المخيخ
+</h2>
+
+
+<p class="section-intro">
+
+The vermis forms the central longitudinal portion of the
+cerebellum. It is anatomically positioned between the two
+cerebellar hemispheres and is closely associated with
+postural control, axial coordination, and balance.
+
+<br><br>
+
+تشكل دودة المخيخ الجزء المركزي الطولي من المخيخ، وتقع بين
+نصفي الكرة المخيخية. وترتبط بشكل وثيق بالتحكم في وضعية
+الجسم وتنسيق حركات الجذع والتوازن.
+
+</p>
+
+
+<div class="cards">
+
+
+<!-- CARD 1 -->
+
+<div class="card">
+
+<h3>
+Central Position · الموقع المركزي
+</h3>
+
+<p>
+
+The vermis lies along the midline of the cerebellum,
+separating the right and left cerebellar hemispheres.
+
+<br><br>
+
+تقع دودة المخيخ على الخط المتوسط للمخيخ وتفصل بين
+نصفي الكرة المخيخية الأيمن والأيسر.
+
+</p>
+
+</div>
+
+
+<!-- CARD 2 -->
+
+<div class="card">
+
+<h3>
+Axial Coordination · تنسيق حركات الجذع
+</h3>
+
+<p>
+
+Vermal circuits contribute to coordinating movements
+of the trunk and other axial structures.
+
+<br><br>
+
+تساهم دوائر الدودة المخيخية في تنسيق حركات الجذع
+والتراكيب المحورية الأخرى.
+
+</p>
+
+</div>
+
+
+<!-- CARD 3 -->
+
+<div class="card">
+
+<h3>
+Postural Control · التحكم في الوضعية
+</h3>
+
+<p>
+
+The vermis is strongly associated with maintaining
+appropriate posture and coordinating body position.
+
+<br><br>
+
+ترتبط دودة المخيخ بشكل كبير بالحفاظ على الوضعية
+المناسبة وتنسيق وضع الجسم.
+
+</p>
+
+</div>
+
+
+<!-- CARD 4 -->
+
+<div class="card">
+
+<h3>
+Balance · التوازن
+</h3>
+
+<p>
+
+Cerebellar circuits involving the vermis contribute
+to maintaining balance during standing and movement.
+
+<br><br>
+
+تساهم دوائر المخيخ المرتبطة بالدودة في الحفاظ على
+التوازن أثناء الوقوف والحركة.
+
+</p>
+
+</div>
+
+
+<!-- CARD 5 -->
+
+<div class="card">
+
+<h3>
+Anterior Vermis · الجزء الأمامي
+</h3>
+
+<p>
+
+The anterior vermis is associated particularly with
+control and coordination of axial and proximal
+movements.
+
+<br><br>
+
+يرتبط الجزء الأمامي من الدودة بشكل خاص بالتحكم
+وتنسيق حركات الجذع والعضلات القريبة.
+
+</p>
+
+</div>
+
+
+<!-- CARD 6 -->
+
+<div class="card">
+
+<h3>
+Posterior Vermis · الجزء الخلفي
+</h3>
+
+<p>
+
+The posterior vermis contributes to the integration
+and refinement of movement and postural information.
+
+<br><br>
+
+يساهم الجزء الخلفي من الدودة في دمج وتنظيم معلومات
+الحركة والوضعية.
+
+</p>
+
+</div>
+
+
+<!-- CARD 7 -->
+
+<div class="card">
+
+<h3>
+Vestibular Connections · الاتصالات الدهليزية
+</h3>
+
+<p>
+
+Cerebellar regions connected with vestibular pathways
+help integrate information important for balance and
+eye-head coordination.
+
+<br><br>
+
+تساعد مناطق المخيخ المرتبطة بالمسارات الدهليزية في
+دمج المعلومات المهمة للتوازن وتنسيق حركة العين والرأس.
+
+</p>
+
+</div>
+
+
+<!-- CARD 8 -->
+
+<div class="card">
+
+<h3>
+Spinocerebellar Information · المعلومات الشوكية المخيخية
+</h3>
+
+<p>
+
+Information from the spinal cord provides the cerebellum
+with feedback about body position and ongoing movement.
+
+<br><br>
+
+توفر المعلومات القادمة من الحبل الشوكي للمخيخ تغذية
+راجعة عن وضع الجسم والحركة الجارية.
+
+</p>
+
+</div>
+
+
+<!-- CARD 9 -->
+
+<div class="card">
+
+<h3>
+Motor Refinement · تنقيح الحركة
+</h3>
+
+<p>
+
+The vermis participates in cerebellar circuits that
+help movements become smoother and better coordinated.
+
+<br><br>
+
+تشارك الدودة في دوائر مخيخية تساعد على جعل الحركات
+أكثر سلاسة وتناسقًا.
+
+</p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- ==================================================
+     LOCATION
+================================================== -->
+
+<section
+id="location"
+class="location"
+>
+
+<h2>
+📍 Where is the Cerebellar Vermis? · أين تقع دودة المخيخ؟
+</h2>
+
+
+<p class="location-intro">
+
+The vermis is located in the midline of the cerebellum,
+between the two cerebellar hemispheres. The cerebellum
+itself lies posterior to the brainstem and inferior to
+the occipital lobes.
+
+<br><br>
+
+تقع دودة المخيخ على الخط المتوسط للمخيخ بين نصفي الكرة
+المخيخية. ويقع المخيخ نفسه خلف جذع الدماغ وأسفل الفصوص
+القذالية.
+
+</p>
+
+
+<div
+id="locationVisual"
+class="location-visual"
+>
+
+<svg
+class="brain-svg"
+viewBox="0 0 900 600"
+xmlns="http://www.w3.org/2000/svg"
+aria-label="Simplified cerebellar vermis location diagram"
+>
+
+
+<!-- BRAIN -->
+
+<path
+class="svg-brain"
+d="
+M120 250
+C110 150 185 80 300 60
+C420 40 560 75 635 160
+C690 220 700 300 665 355
+C630 405 555 425 470 420
+C350 415 235 395 165 345
+C135 325 120 290 120 250Z"
+/>
+
+
+<!-- BRAINSTEM -->
+
+<path
+class="svg-brainstem"
+d="
+M405 320
+C415 365 420 420 410 475
+L450 475
+C455 420 450 365 435 320Z
+"/>
+
+
+<!-- LEFT CEREBELLAR HEMISPHERE -->
+
+<path
+class="svg-cerebellum"
+d="
+M300 350
+C245 340 195 370 180 425
+C165 475 210 520 270 520
+C320 520 350 480 350 425
+C350 390 330 360 300 350Z
+"/>
+
+
+<!-- RIGHT CEREBELLAR HEMISPHERE -->
+
+<path
+class="svg-cerebellum"
+d="
+M510 350
+C565 340 615 370 630 425
+C645 475 600 520 540 520
+C490 520 460 480 460 425
+C460 390 480 360 510 350Z
+"/>
+
+
+<!-- VERMIS -->
+
+<path
+class="svg-vermis"
+d="
+M395 350
+C375 375 372 405 378 435
+C382 465 390 490 405 505
+C420 490 428 465 432 435
+C438 405 435 375 415 350
+Z
+"/>
+
+
+<!-- VERMIS LINE -->
+
+<line
+class="svg-line"
+x1="405"
+y1="425"
+x2="700"
+y2="330"
+/>
+
+
+<text
+class="svg-label"
+x="710"
+y="325"
+>
+CEREBELLAR VERMIS
+</text>
+
+
+<text
+class="svg-label"
+x="710"
+y="352"
+>
+دودة المخيخ
+</text>
+
+
+<!-- CEREBELLAR HEMISPHERE -->
+
+<line
+class="svg-line"
+x1="540"
+y1="440"
+x2="700"
+y2="455"
+/>
+
+
+<text
+class="svg-label"
+x="710"
+y="460"
+>
+CEREBELLAR HEMISPHERE
+</text>
+
+
+<!-- BRAINSTEM -->
+
+<line
+class="svg-line"
+x1="430"
+y1="470"
+x2="700"
+y2="530"
+/>
+
+
+<text
+class="svg-label"
+x="710"
+y="535"
+>
+BRAINSTEM
+</text>
+
+
+</svg>
+
+
+<p class="location-caption">
+
+⚪ The white central region represents the cerebellar vermis.
+<br>
+المنطقة البيضاء المركزية تمثل دودة المخيخ.
+
+</p>
+
+</div>
+
+</section>
+
+
+<!-- ==================================================
+     CLINICAL
+================================================== -->
+
+<div class="clinical-section">
+
+<div class="section-label">
+Clinical Importance · الأهمية السريرية
+</div>
+
+
+<h2>
+Why the Cerebellar Vermis Matters
+</h2>
+
+
+<div class="clinical-box">
+
+<p>
+
+Because the vermis contributes to postural control,
+balance, and coordination of axial movement, abnormalities
+affecting midline cerebellar structures can produce problems
+with balance and coordinated trunk movements. The exact
+clinical findings depend on the region and pathways involved.
+
+</p>
+
+
+<p dir="rtl">
+
+لأن دودة المخيخ تساهم في التحكم في الوضعية والتوازن وتنسيق
+حركات الجذع، فإن الاضطرابات التي تؤثر على المناطق المخيخية
+المتوسطة قد تؤدي إلى مشكلات في التوازن وتنسيق حركات الجسم.
+وتختلف العلامات السريرية حسب المنطقة والمسارات المتأثرة.
+
+</p>
+
+</div>
+
+</div>
+
+
+<!-- ==================================================
+     INSIGHT
+================================================== -->
+
+<div class="insight">
+
+<strong>
+NeuroAtlas Insight
+</strong>
+
+<br><br>
+
+The vermis is not simply a "bridge" between the two
+cerebellar hemispheres. Its position at the cerebellar
+midline makes it especially important for circuits involved
+in posture, balance, and coordination of the body's central
+axis.
+
+<br><br>
+
+دودة المخيخ ليست مجرد منطقة تصل بين نصفي الكرة المخيخية؛
+فموقعها في الخط المتوسط للمخيخ يجعلها مهمة بشكل خاص
+للدوائر المرتبطة بالوضعية والتوازن وتنسيق المحور المركزي
+للجسم.
+
+</div>
+
+
+<!-- ==================================================
+     QUICK FACTS
+================================================== -->
+
+<div class="section">
+
+<div class="section-label">
+Quick Facts · معلومات سريعة
+</div>
+
+
+<h2>
+Cerebellar Vermis at a Glance
+</h2>
+
+
+<div class="facts-grid">
+
+
+<div class="fact">
+
+<span>
+01
+</span>
+
+<strong>
+Location · الموقع
+</strong>
+
+<p>
+Midline of the cerebellum ·
+الخط المتوسط للمخيخ
+</p>
+
+</div>
+
+
+<div class="fact">
+
+<span>
+02
+</span>
+
+<strong>
+Main Role · الوظيفة الأساسية
+</strong>
+
+<p>
+Posture, balance, and axial coordination
+</p>
+
+</div>
+
+
+<div class="fact">
+
+<span>
+03
+</span>
+
+<strong>
+Position · الموضع
+</strong>
+
+<p>
+Between the two cerebellar hemispheres
+</p>
+
+</div>
+
+
+<div class="fact">
+
+<span>
+04
+</span>
+
+<strong>
+Major Inputs · أهم المدخلات
+</strong>
+
+<p>
+Vestibular and spinal sensory information
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ==================================================
+     QUIZ
+================================================== -->
+
+<div
+id="quiz"
+class="quiz"
+>
+
+<h2>
+🧠 Mini Test · اختبار قصير
+</h2>
+
+
+<!-- QUESTION 1 -->
+
+<div
+class="question-block"
+data-answer="B"
+>
+
+<div class="question-number">
+Question 01 · السؤال الأول
+</div>
+
+
+<div class="question-en">
+Where is the cerebellar vermis located?
+</div>
+
+
+<div
+class="question-ar"
+dir="rtl"
+>
+أين تقع دودة المخيخ؟
+</div>
+
+
+<button
+class="option"
+data-option="A"
+>
+A. On the outer surface of the frontal lobe
+</button>
+
+
+<button
+class="option"
+data-option="B"
+>
+B. Along the midline of the cerebellum
+</button>
+
+
+<button
+class="option"
+data-option="C"
+>
+C. Inside the medulla
+</button>
+
+
+<button
+class="option"
+data-option="D"
+>
+D. Within the temporal lobe
+</button>
+
+
+<div class="question-feedback"></div>
+
+</div>
+
+
+<!-- QUESTION 2 -->
+
+<div
+class="question-block"
+data-answer="C"
+>
+
+<div class="question-number">
+Question 02 · السؤال الثاني
+</div>
+
+
+<div class="question-en">
+Which function is strongly associated with the cerebellar vermis?
+</div>
+
+
+<div
+class="question-ar"
+dir="rtl"
+>
+أي وظيفة ترتبط بشكل كبير بدودة المخيخ؟
+</div>
+
+
+<button
+class="option"
+data-option="A"
+>
+A. Visual recognition
+</button>
+
+
+<button
+class="option"
+data-option="B"
+>
+B. Language comprehension
+</button>
+
+
+<button
+class="option"
+data-option="C"
+>
+C. Postural and axial coordination
+</button>
+
+
+<button
+class="option"
+data-option="D"
+>
+D. Primary hearing
+</button>
+
+
+<div class="question-feedback"></div>
+
+</div>
+
+
+<!-- QUESTION 3 -->
+
+<div
+class="question-block"
+data-answer="A"
+>
+
+<div class="question-number">
+Question 03 · السؤال الثالث
+</div>
+
+
+<div class="question-en">
+What separates the cerebellar vermis from the cerebellar hemispheres?
+</div>
+
+
+<div
+class="question-ar"
+dir="rtl"
+>
+ما علاقة دودة المخيخ بنصفي الكرة المخيخية؟
+</div>
+
+
+<button
+class="option"
+data-option="A"
+>
+A. The vermis lies between the two hemispheres
+</button>
+
+
+<button
+class="option"
+data-option="B"
+>
+B. The vermis is located inside the brainstem
+</button>
+
+
+<button
+class="option"
+data-option="C"
+>
+C. The vermis forms the cerebral cortex
+</button>
+
+
+<button
+class="option"
+data-option="D"
+>
+D. The vermis is part of the occipital lobe
+</button>
+
+
+<div class="question-feedback"></div>
+
+</div>
+
+
+<div
+id="quizResult"
+class="quiz-result"
+>
+
+Answer all three questions to see your final score.
+<br>
+
+أجب عن الأسئلة الثلاثة لرؤية نتيجتك النهائية.
+
+</div>
+
+</div>
+
+
+<a
+class="back"
+href="explore.html"
+>
+← Back to Explore Anatomy
+</a>
+
+
+</main>
+
+
+<!-- ==================================================
+     THREE.JS IMPORT MAP
+================================================== -->
+
+<script type="importmap">
+
+{
+    "imports": {
+
+        "three":
+        "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+
+        "three/addons/":
+        "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+
+    }
+}
+
+</script>
+
+
+<!-- ==================================================
+     THREE.JS
+================================================== -->
+
+<script type="module">
+
+import * as THREE from "three";
+
+import {
+    OrbitControls
+} from "three/addons/controls/OrbitControls.js";
+
+import {
+    GLTFLoader
+} from "three/addons/loaders/GLTFLoader.js";
+
+import {
+    DRACOLoader
+} from "three/addons/loaders/DRACOLoader.js";
+
+
+/* ==================================================
+   ELEMENTS
+================================================== */
+
+const canvas =
+document.getElementById("brainCanvas");
+
+const loading =
+document.getElementById("loading");
+
+const loadText =
+document.getElementById("loadText");
+
+const loadBar =
+document.getElementById("loadBar");
+
+const vermisLabel =
+document.getElementById("vermisLabel");
+
+
+/* ==================================================
+   SCENE
+================================================== */
+
+const scene =
+new THREE.Scene();
+
+
+/* ==================================================
+   CAMERA
+================================================== */
+
+const camera =
+new THREE.PerspectiveCamera(
+    30,
+    1,
+    0.01,
+    100
+);
+
+camera.position.set(
+    0,
+    0.2,
+    8.5
+);
+
+
+/* ==================================================
+   RENDERER
+================================================== */
+
+const renderer =
+new THREE.WebGLRenderer({
+
+    canvas:canvas,
+
+    antialias:true,
+
+    alpha:true
+
+});
+
+renderer.setPixelRatio(
+    Math.min(
+        window.devicePixelRatio || 1,
+        2
+    )
+);
+
+renderer.toneMapping =
+THREE.ACESFilmicToneMapping;
+
+renderer.toneMappingExposure =
+0.75;
+
+
+/* ==================================================
+   CONTROLS
+================================================== */
+
+const controls =
+new OrbitControls(
+    camera,
+    canvas
+);
+
+controls.enableRotate = true;
+
+controls.rotateSpeed = 0.6;
+
+controls.enableDamping = true;
+
+controls.dampingFactor = 0.05;
+
+controls.enableZoom = true;
+
+controls.zoomSpeed = 0.6;
+
+controls.enablePan = false;
+
+controls.autoRotate = true;
+
+controls.autoRotateSpeed = 0.18;
+
+controls.target.set(
+    0,
+    -0.35,
+    0
+);
+
+controls.minDistance = 3.5;
+
+controls.maxDistance = 16;
+
+
+/* ==================================================
+   LIGHTING
+================================================== */
+
+const ambient =
+new THREE.AmbientLight(
+    0xffffff,
+    0.55
+);
+
+scene.add(ambient);
+
+
+const hemi =
+new THREE.HemisphereLight(
+    0xffffff,
+    0x081018,
+    0.75
+);
+
+scene.add(hemi);
+
+
+const keyLight =
+new THREE.DirectionalLight(
+    0xffffff,
+    1.4
+);
+
+keyLight.position.set(
+    6,
+    10,
+    8
+);
+
+scene.add(keyLight);
+
+
+const fillLight =
+new THREE.DirectionalLight(
+    0x8ca9bd,
+    0.4
+);
+
+fillLight.position.set(
+    -7,
+    2,
+    6
+);
+
+scene.add(fillLight);
+
+
+/* ==================================================
+   BRAIN GROUP
+================================================== */
+
+const brainGroup =
+new THREE.Group();
+
+scene.add(brainGroup);
+
+
+let vermisHighlightMesh = null;
+
+let vermisOutline = null;
+
+let highlighted = true;
+
+
+/* ==================================================
+   NORMAL BRAIN MATERIAL
+================================================== */
+
+const brainMaterial =
+new THREE.MeshPhysicalMaterial({
+
+    color:0xf1c5d0,
+
+    roughness:0.62,
+
+    metalness:0,
+
+    clearcoat:0.12,
+
+    clearcoatRoughness:0.5,
+
+    side:THREE.DoubleSide
+
+});
+
+
+/* ==================================================
+   VERMIS MATERIAL
+================================================== */
+
+const vermisMaterial =
+new THREE.MeshPhysicalMaterial({
+
+    color:0xffffff,
+
+    roughness:0.22,
+
+    metalness:0.02,
+
+    clearcoat:0.5,
+
+    clearcoatRoughness:0.18,
+
+    side:THREE.DoubleSide
+
+});
+
+
+/* ==================================================
+   OUTLINE MATERIAL
+================================================== */
+
+const outlineMaterial =
+new THREE.MeshBasicMaterial({
+
+    color:0xffffff,
+
+    transparent:true,
+
+    opacity:0.85,
+
+    side:THREE.BackSide
+
+});
+
+
+/* ==================================================
+   CREATE VERMIS HIGHLIGHT
+================================================== */
+
+function createVermisMarker(){
+
+    /*
+       This marker is placed at the
+       posterior midline of the brain,
+       where the cerebellar vermis lies.
+
+       It is intentionally narrow and
+       vertical so it visually represents
+       the central vermal region rather
+       than the whole cerebellum.
+    */
+
+    const geometry =
+    new THREE.CapsuleGeometry(
+        0.25,
+        1.45,
+        16,
+        32
+    );
+
+
+    vermisHighlightMesh =
+    new THREE.Mesh(
+        geometry,
+        vermisMaterial
+    );
+
+
+    vermisHighlightMesh.position.set(
+        0,
+        -1.05,
+        -0.15
+    );
+
+
+    vermisHighlightMesh.scale.set(
+        0.75,
+        1,
+        0.55
+    );
+
+
+    brainGroup.add(
+        vermisHighlightMesh
+    );
+
+
+    vermisOutline =
+    new THREE.Mesh(
+        geometry.clone(),
+        outlineMaterial
+    );
+
+
+    vermisOutline.scale.set(
+        1.18,
+        1.06,
+        1.18
+    );
+
+
+    vermisHighlightMesh.add(
+        vermisOutline
+    );
+
+}
+
+
+/* ==================================================
+   LOAD REAL BRAIN
+================================================== */
+
+function loadRealBrain(){
+
+    const loader =
+    new GLTFLoader();
+
+
+    const dracoLoader =
+    new DRACOLoader();
+
+
+    dracoLoader.setDecoderPath(
+        "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/"
+    );
+
+
+    loader.setDRACOLoader(
+        dracoLoader
+    );
+
+
+    const urls = [
+
+        "https://cdn.jsdelivr.net/gh/itayinbarr/brainproject@main/brain-atlas/models/brain.glb",
+
+        "https://raw.githubusercontent.com/itayinbarr/brainproject/main/brain-atlas/models/brain.glb",
+
+        "https://itayinbarr.github.io/brainproject/models/brain.glb"
+
+    ];
+
+
+    let urlIndex = 0;
+
+
+    function tryLoad(){
+
+        if(
+            urlIndex >= urls.length
+        ){
+
+            createVermisMarker();
+
+            onReady();
+
+            return;
+
+        }
+
+
+        const url =
+        urls[urlIndex++];
+
+
+        loadText.textContent =
+        "Loading real brain model...";
+
+
+        loader.load(
+
+            url,
+
+
+            function(gltf){
+
+                const model =
+                gltf.scene;
+
+
+                /* =================================
+                   CENTER MODEL
+                ================================= */
+
+                const box =
+                new THREE.Box3()
+                .setFromObject(model);
+
+
+                const center =
+                box.getCenter(
+                    new THREE.Vector3()
+                );
+
+
+                const size =
+                box.getSize(
+                    new THREE.Vector3()
+                );
+
+
+                const maxDim =
+                Math.max(
+                    size.x,
+                    size.y,
+                    size.z
+                );
+
+
+                const scale =
+                4.5 / maxDim;
+
+
+                model.scale.setScalar(
+                    scale
+                );
+
+
+                model.position.sub(
+                    center.multiplyScalar(
+                        scale
+                    )
+                );
+
+
+                model.position.y -= 0.60;
+
+
+                /* =================================
+                   MODEL MATERIALS
+                ================================= */
+
+                model.traverse(
+                function(child){
+
+                    if(
+                        !child.isMesh
+                    )
+                        return;
+
+
+                    child.castShadow = true;
+
+                    child.receiveShadow = true;
+
+
+                    if(
+                        child.material
+                    ){
+
+                        child.material =
+                        brainMaterial.clone();
+
+                    }
+
+                });
+
+
+                brainGroup.add(
+                    model
+                );
+
+
+                /*
+                   IMPORTANT:
+                   The generic brain model does not
+                   reliably expose a separate vermis
+                   mesh by name.
+
+                   Therefore we use a dedicated,
+                   controlled posterior-midline
+                   highlight instead of pretending
+                   a random mesh is the vermis.
+                */
+
+                createVermisMarker();
+
+
+                loadBar.style.width =
+                "100%";
+
+
+                onReady();
+
+            },
+
+
+            function(progress){
+
+                if(
+                    progress.total > 0
+                ){
+
+                    const pct =
+                    Math.min(
+                        90,
+                        progress.loaded /
+                        progress.total *
+                        90
+                    );
+
+
+                    loadBar.style.width =
+                    pct + "%";
+
+                }
+
+            },
+
+
+            function(error){
+
+                console.warn(
+                    "Brain model failed:",
+                    error
+                );
+
+
+                tryLoad();
+
+            }
+
+        );
+
+    }
+
+
+    tryLoad();
+
+}
+
+
+/* ==================================================
+   READY
+================================================== */
+
+function onReady(){
+
+    setTimeout(
+    function(){
+
+        loading.classList.add(
+            "hide"
+        );
+
+
+        if(
+            highlighted
+        ){
+
+            vermisLabel.classList.add(
+                "show"
+            );
+
+        }
+
+    },500);
+
+}
+
+
+/* ==================================================
+   LABEL POSITION
+================================================== */
+
+function updateLabel(){
+
+    if(
+        !vermisHighlightMesh
+    )
+        return;
+
+
+    const position =
+    new THREE.Vector3();
+
+
+    vermisHighlightMesh
+    .getWorldPosition(
+        position
+    );
+
+
+    position.project(
+        camera
+    );
+
+
+    const x =
+    (position.x + 1) /
+    2 *
+    canvas.clientWidth;
+
+
+    const y =
+    (-position.y + 1) /
+    2 *
+    canvas.clientHeight;
+
+
+    vermisLabel.style.left =
+    x + "px";
+
+
+    vermisLabel.style.top =
+    (y - 75) + "px";
+
+}
+
+
+/* ==================================================
+   RESIZE
+================================================== */
+
+function resize(){
+
+    const width =
+    canvas.clientWidth;
+
+
+    const height =
+    canvas.clientHeight;
+
+
+    if(
+        width <= 0 ||
+        height <= 0
+    )
+        return;
+
+
+    camera.aspect =
+    width / height;
+
+
+    camera.updateProjectionMatrix();
+
+
+    renderer.setSize(
+        width,
+        height,
+        false
+    );
+
+}
+
+
+window.addEventListener(
+    "resize",
+    resize
+);
+
+
+/* ==================================================
+   HIGHLIGHT
+================================================== */
+
+const highlightBtn =
+document.getElementById(
+    "highlight"
+);
+
+
+highlightBtn.addEventListener(
+"click",
+function(){
+
+    highlighted =
+    !highlighted;
+
+
+    if(
+        vermisHighlightMesh
+    ){
+
+        vermisHighlightMesh.visible =
+        highlighted;
+
+    }
+
+
+    if(
+        vermisOutline
+    ){
+
+        vermisOutline.visible =
+        highlighted;
+
+    }
+
+
+    vermisLabel.classList.toggle(
+        "show",
+        highlighted
+    );
+
+
+    highlightBtn.classList.toggle(
+        "active",
+        highlighted
+    );
+
+
+    highlightBtn.textContent =
+
+    highlighted
+
+    ? "⚪ Highlight Cerebellar Vermis"
+
+    : "⚫ Show Cerebellar Vermis";
+
+});
+
+
+/* ==================================================
+   AUTO ROTATE
+================================================== */
+
+const rotateBtn =
+document.getElementById(
+    "rotate"
+);
+
+
+rotateBtn.addEventListener(
+"click",
+function(){
+
+    controls.autoRotate =
+    !controls.autoRotate;
+
+
+    rotateBtn.classList.toggle(
+        "active",
+        controls.autoRotate
+    );
+
+
+    rotateBtn.textContent =
+
+    controls.autoRotate
+
+    ? "⟳ Auto Rotate"
+
+    : "▶ Auto Rotate";
+
+});
+
+
+/* ==================================================
+   RESET
+================================================== */
+
+document.getElementById(
+    "reset"
+).addEventListener(
+"click",
+function(){
+
+    camera.position.set(
+        0,
+        0.2,
+        8.5
+    );
+
+
+    controls.target.set(
+        0,
+        -0.35,
+        0
+    );
+
+
+    controls.update();
+
+});
+
+
+/* ==================================================
+   ANIMATION
+================================================== */
+
+function animate(){
+
+    requestAnimationFrame(
+        animate
+    );
+
+
+    controls.update();
+
+
+    updateLabel();
+
+
+    renderer.render(
+        scene,
+        camera
+    );
+
+}
+
+
+/* ==================================================
+   START
+================================================== */
+
+resize();
+
+animate();
+
+loadRealBrain();
+
+
+/* ==================================================
+   LOCATION BUTTON
+================================================== */
+
+const locationButton =
+document.getElementById(
+    "locationButton"
+);
+
+const locationVisual =
+document.getElementById(
+    "locationVisual"
+);
+
+
+locationButton.addEventListener(
+"click",
+function(){
+
+    setTimeout(
+    function(){
+
+        locationVisual.classList.add(
+            "show"
+        );
+
+    },50);
+
+});
+
+
+/* ==================================================
+   QUIZ
+================================================== */
+
+let score = 0;
+
+let answered = 0;
+
+const questionBlocks =
+document.querySelectorAll(
+    ".question-block"
+);
+
+
+questionBlocks.forEach(
+function(question){
+
+    const correctAnswer =
+    question.dataset.answer;
+
+    const options =
+    question.querySelectorAll(
+        ".option"
+    );
+
+    const feedback =
+    question.querySelector(
+        ".question-feedback"
+    );
+
+
+    let alreadyAnswered =
+    false;
+
+
+    options.forEach(
+    function(option){
+
+        option.addEventListener(
+        "click",
+        function(){
+
+            if(
+                alreadyAnswered
+            )
+                return;
+
+
+            alreadyAnswered =
+            true;
+
+
+            const selected =
+            option.dataset.option;
+
+
+            options.forEach(
+            function(btn){
+
+                btn.disabled =
+                true;
+
+            });
+
+
+            if(
+                selected === correctAnswer
+            ){
+
+                score++;
+
+
+                option.classList.add(
+                    "correct"
+                );
+
+
+                feedback.textContent =
+                "✓ Correct! · إجابة صحيحة";
+
+
+                feedback.style.color =
+                "#78e0a0";
+
+            }
+
+            else{
+
+                option.classList.add(
+                    "wrong"
+                );
+
+
+                options.forEach(
+                function(btn){
+
+                    if(
+                        btn.dataset.option ===
+                        correctAnswer
+                    ){
+
+                        btn.classList.add(
+                            "correct"
+                        );
+
+                    }
+
+                });
+
+
+                feedback.textContent =
+                "✗ Incorrect. The correct answer is highlighted. · إجابة غير صحيحة، الإجابة الصحيحة موضحة.";
+
+                feedback.style.color =
+                "#ff8792";
+
+            }
+
+
+            answered++;
+
+
+            if(
+                answered ===
+                questionBlocks.length
+            ){
+
+                showFinalScore();
+
+            }
+
+        });
+
+    });
+
+});
+
+
+/* ==================================================
+   FINAL SCORE
+================================================== */
+
+function showFinalScore(){
+
+    const result =
+    document.getElementById(
+        "quizResult"
+    );
+
+
+    let message = "";
+
+
+    if(
+        score === 3
+    ){
+
+        message =
+        "🔥 Perfect! Excellent work! · ممتاز! إجاباتك كلها صحيحة!";
+
+    }
+
+    else if(
+        score === 2
+    ){
+
+        message =
+        "👏 Great job! Just one more to master it. · شغل ممتاز! باقي إجابة واحدة فقط.";
+
+    }
+
+    else if(
+        score === 1
+    ){
+
+        message =
+        "💡 Good start! Review the vermis anatomy and try again. · بداية جيدة! راجعي تشريح الدودة وجربي مرة أخرى.";
+
+    }
+
+    else{
+
+        message =
+        "🧠 Keep learning! Review the cerebellar vermis and try again. · كملي تعلم! راجعي دودة المخيخ وجربي مرة أخرى.";
+
+    }
+
+
+    result.innerHTML =
+
+    "<strong>" +
+    message +
+    "</strong>" +
+
+    "<br><br>" +
+
+    "Final Score · النتيجة النهائية: " +
+
+    score +
+
+    " / 3";
+
+}
+
+</script>
+
+
+</body>
+
+  </html>
