@@ -17,8 +17,12 @@
     padding:0;
 }
 
+html{
+    scroll-behavior:smooth;
+}
+
 body{
-    font-family:Arial,sans-serif;
+    font-family:Arial,Helvetica,sans-serif;
     background:#07111f;
     color:#f4f7fb;
     line-height:1.6;
@@ -43,8 +47,9 @@ nav a:hover{
     color:white;
 }
 
+
 /* ==================================================
-   MAIN
+   MAIN CONTAINER
 ================================================== */
 
 .container{
@@ -53,8 +58,9 @@ nav a:hover{
     padding:70px 7%;
 }
 
+
 /* ==================================================
-   HERO
+   HEADER
 ================================================== */
 
 .label{
@@ -73,10 +79,11 @@ h1{
 
 .intro{
     color:#aebdce;
-    max-width:700px;
+    max-width:750px;
     font-size:18px;
     margin-bottom:45px;
 }
+
 
 /* ==================================================
    SEARCH
@@ -84,7 +91,9 @@ h1{
 
 .search{
     width:100%;
+
     padding:17px 20px;
+
     border-radius:12px;
 
     border:1px solid #263951;
@@ -102,14 +111,15 @@ h1{
     transition:.2s;
 }
 
+.search::placeholder{
+    color:#71859a;
+}
+
 .search:focus{
     border-color:#4da6ff;
     box-shadow:0 0 0 3px rgba(77,166,255,.08);
 }
 
-.search::placeholder{
-    color:#71859a;
-}
 
 /* ==================================================
    CATEGORIES
@@ -117,94 +127,86 @@ h1{
 
 .categories{
     display:grid;
-    grid-template-columns:repeat(3,1fr);
+
+    grid-template-columns:
+    repeat(3,1fr);
+
     gap:20px;
 }
+
 
 /* ==================================================
    CATEGORY CARD
 ================================================== */
 
 .category{
+
     padding:28px;
 
     border-radius:18px;
 
-    background:rgba(255,255,255,.035);
+    background:
+    rgba(255,255,255,.035);
 
-    border:1px solid rgba(255,255,255,.08);
+    border:
+    1px solid
+    rgba(255,255,255,.08);
 
     transition:
-        transform .25s,
-        border-color .25s,
-        background .25s;
-
-    position:relative;
-
-    overflow:hidden;
-}
-
-.category::before{
-    content:"";
-
-    position:absolute;
-
-    top:0;
-    left:0;
-    right:0;
-
-    height:1px;
-
-    background:linear-gradient(
-        90deg,
-        transparent,
-        rgba(77,166,255,.7),
-        transparent
-    );
-
-    opacity:0;
-
-    transition:.25s;
+    transform .25s,
+    border-color .25s,
+    box-shadow .25s;
 }
 
 .category:hover{
+
     transform:translateY(-5px);
 
-    border-color:rgba(77,166,255,.55);
+    border-color:
+    rgba(77,166,255,.55);
 
-    background:rgba(255,255,255,.045);
+    box-shadow:
+    0 15px 40px
+    rgba(0,0,0,.2);
 }
 
-.category:hover::before{
-    opacity:1;
-}
-
-/* ==================================================
-   CATEGORY TITLE
-================================================== */
 
 .category h2{
+
     font-size:22px;
+
     margin-bottom:10px;
 }
 
+
 .category p{
+
     color:#9fb0c3;
+
     margin-bottom:18px;
+
     font-size:14px;
+
+    line-height:1.7;
 }
 
+
 /* ==================================================
-   STRUCTURES
+   STRUCTURE LINKS
 ================================================== */
 
 .structures{
+
     display:flex;
+
     flex-wrap:wrap;
+
     gap:8px;
 }
 
+
 .structure{
+
     display:inline-block;
 
     padding:8px 12px;
@@ -219,54 +221,78 @@ h1{
 
     text-decoration:none;
 
-    border:1px solid transparent;
+    border:
+    1px solid
+    transparent;
 
     transition:
-        background .2s,
-        color .2s,
-        transform .2s,
-        border-color .2s;
+    background .2s,
+    color .2s,
+    transform .2s,
+    border-color .2s;
 }
 
+
 .structure:hover{
+
     background:#183654;
 
     color:white;
 
     transform:translateY(-2px);
 
-    border-color:rgba(77,166,255,.4);
+    border-color:
+    rgba(255,255,255,.15);
 }
+
 
 /* ==================================================
-   FEATURED CORTEX LINKS
+   CEREBRAL CORTEX SPECIAL LINKS
 ================================================== */
 
-.category:first-child{
-    border-color:rgba(255,255,255,.12);
+.cortex-category{
+
+    border-color:
+    rgba(255,255,255,.10);
 }
 
-.category:first-child .structure:first-child{
-    background:#142b43;
+.cortex-category:hover{
 
-    border-color:rgba(255,255,255,.2);
+    border-color:
+    rgba(255,255,255,.65);
 
-    color:white;
-
-    font-weight:bold;
+    box-shadow:
+    0 15px 45px
+    rgba(255,255,255,.04);
 }
 
-.category:first-child .structure:first-child:hover{
-    background:#1c3d5e;
 
-    border-color:#ffffff;
+.cortex-category .structure:first-child{
+
+    border-color:
+    rgba(255,255,255,.25);
+
+    background:#14263a;
 }
+
+
+/* ==================================================
+   BRAINSTEM SPECIAL LINKS
+================================================== */
+
+.brainstem-category:hover{
+
+    border-color:
+    rgba(77,166,255,.7);
+}
+
 
 /* ==================================================
    NO RESULTS
 ================================================== */
 
 .no-results{
+
     display:none;
 
     color:#9fb0c3;
@@ -275,14 +301,37 @@ h1{
 
     padding:20px;
 
-    border:1px solid #263951;
-
     border-radius:12px;
 
     background:#0b192b;
 
+    border:1px solid #263951;
+
     text-align:center;
 }
+
+
+/* ==================================================
+   FOOTER NOTE
+================================================== */
+
+.explore-note{
+
+    margin-top:50px;
+
+    padding:25px;
+
+    border-left:3px solid #4da6ff;
+
+    background:#091522;
+
+    border-radius:10px;
+
+    color:#9fb0c3;
+
+    font-size:14px;
+}
+
 
 /* ==================================================
    MOBILE
@@ -291,40 +340,36 @@ h1{
 @media(max-width:1000px){
 
     .categories{
-        grid-template-columns:repeat(2,1fr);
+
+        grid-template-columns:
+        repeat(2,1fr);
+
     }
 
 }
+
 
 @media(max-width:700px){
 
     .container{
-        padding-top:50px;
+
+        padding:
+        50px 6% 80px;
+
     }
+
 
     .categories{
+
         grid-template-columns:1fr;
+
     }
+
 
     .category{
+
         padding:24px;
-    }
 
-}
-
-@media(max-width:450px){
-
-    h1{
-        font-size:42px;
-    }
-
-    .intro{
-        font-size:16px;
-    }
-
-    .structure{
-        font-size:12px;
-        padding:7px 10px;
     }
 
 }
@@ -343,11 +388,12 @@ h1{
 
 <nav>
 
-<a href="./index.html">
+<a href="index.html">
 ← NeuroAtlas Home
 </a>
 
 </nav>
+
 
 
 <!-- ==================================================
@@ -358,7 +404,7 @@ h1{
 
 
 <!-- ==================================================
-     HERO
+     HEADER
 ================================================== -->
 
 <div class="label">
@@ -376,7 +422,13 @@ Navigate the Human Brain.
 Explore major neuroanatomical regions and discover how
 structures connect to function, pathways, and clinical reasoning.
 
+<br><br>
+
+استكشفي أهم مناطق الجهاز العصبي وتعرفي على التراكيب ووظائفها
+وعلاقاتها والمسارات العصبية والأهمية السريرية لكل تركيب.
+
 </p>
+
 
 
 <!-- ==================================================
@@ -384,12 +436,19 @@ structures connect to function, pathways, and clinical reasoning.
 ================================================== -->
 
 <input
+
 id="search"
+
 class="search"
+
 type="text"
+
 placeholder="Search a brain structure..."
+
 aria-label="Search brain structures"
+
 >
+
 
 
 <!-- ==================================================
@@ -399,26 +458,35 @@ aria-label="Search brain structures"
 <div class="categories">
 
 
+
 <!-- ==================================================
      CEREBRAL CORTEX
 ================================================== -->
 
-<div class="category">
+<div class="category cortex-category">
 
 <h2>
 🧠 Cerebral Cortex
 </h2>
 
+
 <p>
+
 Major cortical regions and their functional roles.
+
+<br>
+
+المناطق الرئيسية للقشرة المخية ووظائفها.
+
 </p>
+
 
 <div class="structures">
 
 
 <a
 class="structure"
-href="./cerebral-cortex.html"
+href="cerebral-cortex.html"
 >
 Cerebral Cortex
 </a>
@@ -426,7 +494,7 @@ Cerebral Cortex
 
 <a
 class="structure"
-href="./frontal-lobe.html"
+href="frontal-lobe.html"
 >
 Frontal Lobe
 </a>
@@ -434,7 +502,7 @@ Frontal Lobe
 
 <a
 class="structure"
-href="./parietal-lobe.html"
+href="parietal-lobe.html"
 >
 Parietal Lobe
 </a>
@@ -442,7 +510,7 @@ Parietal Lobe
 
 <a
 class="structure"
-href="./temporal-lobe.html"
+href="temporal-lobe.html"
 >
 Temporal Lobe
 </a>
@@ -450,7 +518,7 @@ Temporal Lobe
 
 <a
 class="structure"
-href="./occipital-lobe.html"
+href="occipital-lobe.html"
 >
 Occipital Lobe
 </a>
@@ -458,7 +526,7 @@ Occipital Lobe
 
 <a
 class="structure"
-href="./insula.html"
+href="insula.html"
 >
 Insula
 </a>
@@ -467,6 +535,7 @@ Insula
 </div>
 
 </div>
+
 
 
 <!-- ==================================================
@@ -479,16 +548,24 @@ Insula
 🔬 Deep Brain
 </h2>
 
+
 <p>
+
 Structures located beneath the cerebral cortex.
+
+<br>
+
+تراكيب تقع أسفل القشرة المخية.
+
 </p>
+
 
 <div class="structures">
 
 
 <a
 class="structure"
-href="./thalamus.html"
+href="thalamus.html"
 >
 Thalamus
 </a>
@@ -496,7 +573,7 @@ Thalamus
 
 <a
 class="structure"
-href="./hypothalamus.html"
+href="hypothalamus.html"
 >
 Hypothalamus
 </a>
@@ -504,7 +581,7 @@ Hypothalamus
 
 <a
 class="structure"
-href="./hippocampus.html"
+href="hippocampus.html"
 >
 Hippocampus
 </a>
@@ -512,7 +589,7 @@ Hippocampus
 
 <a
 class="structure"
-href="./amygdala.html"
+href="amygdala.html"
 >
 Amygdala
 </a>
@@ -520,7 +597,7 @@ Amygdala
 
 <a
 class="structure"
-href="./basal-ganglia.html"
+href="basal-ganglia.html"
 >
 Basal Ganglia
 </a>
@@ -531,26 +608,35 @@ Basal Ganglia
 </div>
 
 
+
 <!-- ==================================================
      BRAINSTEM
 ================================================== -->
 
-<div class="category">
+<div class="category brainstem-category">
 
 <h2>
 ⚡ Brainstem
 </h2>
 
+
 <p>
+
 Core structures connecting the brain with the spinal cord.
+
+<br>
+
+تراكيب أساسية تربط الدماغ بالحبل الشوكي.
+
 </p>
+
 
 <div class="structures">
 
 
 <a
 class="structure"
-href="./midbrain.html"
+href="midbrain.html"
 >
 Midbrain
 </a>
@@ -558,7 +644,7 @@ Midbrain
 
 <a
 class="structure"
-href="./pons.html"
+href="pons.html"
 >
 Pons
 </a>
@@ -566,278 +652,3 @@ Pons
 
 <a
 class="structure"
-href="./medulla.html"
->
-Medulla
-</a>
-
-
-</div>
-
-</div>
-
-
-<!-- ==================================================
-     CEREBELLUM
-================================================== -->
-
-<div class="category">
-
-<h2>
-🎯 Cerebellum
-</h2>
-
-<p>
-Important for coordination, balance, and motor learning.
-</p>
-
-<div class="structures">
-
-
-<a
-class="structure"
-href="./cerebellar-cortex.html"
->
-Cerebellar Cortex
-</a>
-
-
-<a
-class="structure"
-href="./cerebellar-vermis.html"
->
-Cerebellar Vermis
-</a>
-
-
-<a
-class="structure"
-href="./deep-cerebellar-nuclei.html"
->
-Deep Cerebellar Nuclei
-</a>
-
-
-</div>
-
-</div>
-
-
-<!-- ==================================================
-     VENTRICULAR SYSTEM
-================================================== -->
-
-<div class="category">
-
-<h2>
-🧬 Ventricular System
-</h2>
-
-<p>
-The interconnected spaces containing cerebrospinal fluid.
-</p>
-
-<div class="structures">
-
-
-<a
-class="structure"
-href="./lateral-ventricles.html"
->
-Lateral Ventricles
-</a>
-
-
-<a
-class="structure"
-href="./third-ventricle.html"
->
-Third Ventricle
-</a>
-
-
-<a
-class="structure"
-href="./cerebral-aqueduct.html"
->
-Cerebral Aqueduct
-</a>
-
-
-<a
-class="structure"
-href="./fourth-ventricle.html"
->
-Fourth Ventricle
-</a>
-
-
-</div>
-
-</div>
-
-
-<!-- ==================================================
-     CEREBRAL VASCULATURE
-================================================== -->
-
-<div class="category">
-
-<h2>
-🩸 Cerebral Vasculature
-</h2>
-
-<p>
-Major arteries supplying the brain.
-</p>
-
-<div class="structures">
-
-
-<a
-class="structure"
-href="./aca.html"
->
-ACA
-</a>
-
-
-<a
-class="structure"
-href="./mca.html"
->
-MCA
-</a>
-
-
-<a
-class="structure"
-href="./pca.html"
->
-PCA
-</a>
-
-
-<a
-class="structure"
-href="./basilar-artery.html"
->
-Basilar Artery
-</a>
-
-
-<a
-class="structure"
-href="./circle-of-willis.html"
->
-Circle of Willis
-</a>
-
-
-</div>
-
-</div>
-
-
-</div>
-
-
-<!-- ==================================================
-     NO RESULTS
-================================================== -->
-
-<p
-id="noResults"
-class="no-results"
->
-No matching structures found.
-</p>
-
-
-</main>
-
-
-<!-- ==================================================
-     SEARCH SCRIPT
-================================================== -->
-
-<script>
-
-const search =
-document.getElementById("search");
-
-
-const categories =
-document.querySelectorAll(".category");
-
-
-const noResults =
-document.getElementById("noResults");
-
-
-search.addEventListener(
-"input",
-function(){
-
-    const query =
-    search.value
-        .toLowerCase()
-        .trim();
-
-
-    let visible = 0;
-
-
-    categories.forEach(
-    function(category){
-
-        const text =
-        category.innerText
-            .toLowerCase();
-
-
-        if(
-            text.includes(query)
-        ){
-
-            category.style.display =
-            "";
-
-            visible++;
-
-        }
-
-        else{
-
-            category.style.display =
-            "none";
-
-        }
-
-    });
-
-
-    if(
-        visible === 0
-    ){
-
-        noResults.style.display =
-        "block";
-
-    }
-
-    else{
-
-        noResults.style.display =
-        "none";
-
-    }
-
-});
-
-</script>
-
-
-</body>
-
-</html>
