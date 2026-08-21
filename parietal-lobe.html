@@ -1,0 +1,2835 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NeuroAtlas | Parietal Lobe</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#050b13;
+    color:#eef4fa;
+    font-family:Arial,Helvetica,sans-serif;
+    line-height:1.6;
+}
+
+/* ==================================================
+   NAV
+================================================== */
+
+nav{
+    height:70px;
+    padding:0 7%;
+    display:flex;
+    align-items:center;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+nav a{
+    color:#9db0c3;
+    text-decoration:none;
+    font-size:14px;
+}
+
+nav a:hover{
+    color:white;
+}
+
+/* ==================================================
+   MAIN
+================================================== */
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:60px 7% 100px;
+}
+
+/* ==================================================
+   HERO
+================================================== */
+
+.eyebrow{
+    color:#61b5ff;
+    letter-spacing:3px;
+    font-size:12px;
+    text-transform:uppercase;
+    margin-bottom:15px;
+}
+
+h1{
+    font-size:clamp(55px,8vw,90px);
+    line-height:.95;
+    letter-spacing:-4px;
+    margin-bottom:12px;
+}
+
+.arabic-title{
+    color:white;
+    font-size:25px;
+    margin-bottom:25px;
+}
+
+.hero p{
+    color:#a6b6c7;
+    max-width:900px;
+    font-size:18px;
+    line-height:1.8;
+}
+
+/* ==================================================
+   ACTIONS
+================================================== */
+
+.actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:28px;
+}
+
+.action-button{
+    padding:11px 17px;
+    border-radius:9px;
+    background:#0b1928;
+    border:1px solid #31516d;
+    color:#bdd0e0;
+    cursor:pointer;
+    text-decoration:none;
+    font-size:14px;
+    transition:.2s;
+}
+
+.action-button:hover{
+    background:#14304a;
+    color:white;
+    border-color:white;
+}
+
+/* ==================================================
+   3D VIEWER
+================================================== */
+
+.viewer{
+    margin-top:60px;
+    border:1px solid rgba(255,255,255,.10);
+    border-radius:24px;
+    overflow:hidden;
+    background:#02060b;
+    box-shadow:0 25px 80px rgba(0,0,0,.45);
+}
+
+.viewer-header{
+    min-height:65px;
+    padding:0 22px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.viewer-title{
+    font-size:14px;
+    color:#d2dce6;
+}
+
+.viewer-status{
+    color:#708499;
+    font-size:11px;
+    letter-spacing:1px;
+}
+
+.scene{
+    position:relative;
+    width:100%;
+    height:700px;
+
+    background:
+    radial-gradient(
+        circle at 50% 45%,
+        #203b51 0%,
+        #0d1c2e 42%,
+        #02060b 100%
+    );
+}
+
+#brainCanvas{
+    width:100%;
+    height:100%;
+    display:block;
+}
+
+/* ==================================================
+   LOADING
+================================================== */
+
+.loading{
+    position:absolute;
+    inset:0;
+    z-index:20;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+
+    gap:16px;
+
+    background:#02060b;
+
+    color:#9db0c3;
+    font-size:14px;
+
+    transition:opacity .8s;
+}
+
+.loading.hide{
+    opacity:0;
+    pointer-events:none;
+}
+
+.loading-bar{
+    width:180px;
+    height:2px;
+    background:rgba(255,255,255,.08);
+    border-radius:2px;
+    overflow:hidden;
+}
+
+.loading-bar-inner{
+    width:0%;
+    height:100%;
+    background:white;
+    transition:width .3s;
+}
+
+/* ==================================================
+   PARIETAL LABEL
+================================================== */
+
+.parietal-label{
+    position:absolute;
+    z-index:30;
+    pointer-events:none;
+
+    transform:translate(-50%,-100%);
+
+    display:none;
+}
+
+.parietal-label.show{
+    display:block;
+}
+
+.label-box{
+    position:relative;
+
+    padding:10px 16px;
+
+    border-radius:10px;
+
+    background:rgba(5,10,17,.97);
+
+    border:2px solid white;
+
+    color:white;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+    letter-spacing:1px;
+
+    white-space:nowrap;
+
+    box-shadow:
+        0 0 15px rgba(255,255,255,.45),
+        0 0 35px rgba(255,255,255,.15);
+}
+
+.label-box::after{
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    bottom:-18px;
+
+    width:2px;
+    height:18px;
+
+    background:white;
+
+    transform:translateX(-50%);
+}
+
+/* ==================================================
+   CONTROLS
+================================================== */
+
+.controls{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+
+    padding:15px;
+
+    border-top:1px solid rgba(255,255,255,.08);
+}
+
+.controls button{
+    padding:11px 17px;
+
+    border-radius:9px;
+
+    background:#0b1928;
+
+    border:1px solid #31516d;
+
+    color:#bdd0e0;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.controls button:hover{
+    background:#14304a;
+    color:white;
+}
+
+.controls button.active{
+    background:#17191c;
+    border-color:white;
+    color:white;
+}
+
+/* ==================================================
+   SECTIONS
+================================================== */
+
+.section{
+    margin-top:70px;
+}
+
+.section-label{
+    color:#61b5ff;
+    letter-spacing:2px;
+    font-size:11px;
+    text-transform:uppercase;
+    margin-bottom:8px;
+}
+
+.section h2{
+    font-size:32px;
+    margin-bottom:25px;
+}
+
+.section-intro{
+    color:#91a5b8;
+    max-width:900px;
+    font-size:15px;
+    line-height:1.9;
+    margin-bottom:30px;
+}
+
+/* ==================================================
+   CARDS
+================================================== */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.card{
+    padding:27px;
+
+    background:#091522;
+
+    border:1px solid #172b3e;
+
+    border-radius:18px;
+
+    transition:.2s;
+}
+
+.card:hover{
+    transform:translateY(-3px);
+    border-color:#2b506c;
+}
+
+.card h3{
+    font-size:18px;
+    margin-bottom:13px;
+    color:#eef4fa;
+}
+
+.card p{
+    color:#91a5b8;
+    font-size:14px;
+    line-height:1.8;
+}
+
+/* ==================================================
+   LOCATION
+================================================== */
+
+.location{
+    margin-top:70px;
+
+    padding:32px;
+
+    background:#091522;
+
+    border:1px solid #172b3e;
+
+    border-radius:18px;
+}
+
+.location h2{
+    font-size:30px;
+    margin-bottom:12px;
+}
+
+.location-intro{
+    color:#91a5b8;
+    max-width:900px;
+    line-height:1.9;
+    margin-bottom:25px;
+}
+
+/* ==================================================
+   LOCATION VISUAL
+================================================== */
+
+.location-visual{
+    display:none;
+
+    margin-top:25px;
+    padding:20px;
+
+    background:#050b13;
+
+    border:1px solid #20364b;
+
+    border-radius:16px;
+
+    animation:fadeIn .45s ease;
+}
+
+.location-visual.show{
+    display:block;
+}
+
+@keyframes fadeIn{
+
+    from{
+        opacity:0;
+        transform:translateY(8px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+.brain-svg{
+    display:block;
+    width:100%;
+    max-width:850px;
+    height:auto;
+    margin:auto;
+}
+
+.svg-brain{
+    fill:#263d55;
+    stroke:#71869e;
+    stroke-width:3;
+}
+
+.svg-parietal{
+    fill:white;
+    stroke:white;
+    stroke-width:4;
+}
+
+.svg-brainstem{
+    fill:#29465b;
+    stroke:#71869e;
+    stroke-width:3;
+}
+
+.svg-cerebellum{
+    fill:#344d66;
+    stroke:#71869e;
+    stroke-width:3;
+}
+
+.svg-line{
+    stroke:white;
+    stroke-width:2;
+}
+
+.svg-label{
+    fill:white;
+    font-size:18px;
+    font-weight:bold;
+}
+
+.location-caption{
+    text-align:center;
+    color:#9fb0c3;
+    margin-top:15px;
+}
+
+/* ==================================================
+   CLINICAL
+================================================== */
+
+.clinical-section{
+    margin-top:65px;
+}
+
+.clinical-box{
+    padding:30px;
+
+    background:#091522;
+
+    border:1px solid #172b3e;
+
+    border-left:3px solid white;
+
+    border-radius:18px;
+}
+
+.clinical-box p{
+    color:#a7b7c6;
+    font-size:15px;
+    line-height:1.9;
+    margin-bottom:18px;
+}
+
+.clinical-box p:last-child{
+    margin-bottom:0;
+}
+
+/* ==================================================
+   INSIGHT
+================================================== */
+
+.insight{
+    margin-top:30px;
+
+    padding:25px;
+
+    background:#091522;
+
+    border-left:3px solid white;
+
+    border-radius:10px;
+
+    color:#aebdce;
+}
+
+.insight strong{
+    color:white;
+}
+
+/* ==================================================
+   FACTS
+================================================== */
+
+.facts-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.fact{
+    padding:22px;
+
+    background:#091522;
+
+    border:1px solid #172b3e;
+
+    border-radius:16px;
+}
+
+.fact span{
+    display:block;
+
+    color:white;
+
+    font-size:11px;
+
+    letter-spacing:2px;
+
+    margin-bottom:12px;
+}
+
+.fact strong{
+    display:block;
+
+    color:#eef4fa;
+
+    font-size:14px;
+
+    margin-bottom:8px;
+}
+
+.fact p{
+    color:#8195a8;
+
+    font-size:13px;
+
+    line-height:1.7;
+}
+
+/* ==================================================
+   QUIZ
+================================================== */
+
+.quiz{
+    margin-top:65px;
+
+    padding:30px;
+
+    background:#091522;
+
+    border:1px solid #172b3e;
+
+    border-radius:18px;
+}
+
+.quiz h2{
+    font-size:27px;
+    margin-bottom:25px;
+}
+
+.question-block{
+    padding:22px;
+
+    margin-bottom:18px;
+
+    background:#07111d;
+
+    border:1px solid #172b3e;
+
+    border-radius:14px;
+}
+
+.question-number{
+    color:#61b5ff;
+    font-size:12px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    margin-bottom:8px;
+}
+
+.question-en{
+    color:#eef4fa;
+    font-size:16px;
+    margin-bottom:5px;
+}
+
+.question-ar{
+    color:#91a5b8;
+    font-size:15px;
+    margin-bottom:15px;
+}
+
+.option{
+    display:block;
+
+    width:100%;
+
+    padding:13px;
+
+    margin-top:10px;
+
+    background:#10233a;
+
+    color:white;
+
+    border:1px solid #263951;
+
+    border-radius:8px;
+
+    text-align:left;
+
+    cursor:pointer;
+
+    font-size:14px;
+
+    transition:.2s;
+}
+
+.option:hover{
+    border-color:white;
+}
+
+.option.correct{
+    background:#17251f;
+    border-color:#78e0a0;
+}
+
+.option.wrong{
+    background:#291a1d;
+    border-color:#ff8792;
+}
+
+.question-feedback{
+    margin-top:12px;
+    font-size:14px;
+    min-height:22px;
+}
+
+.quiz-result{
+    margin-top:25px;
+
+    padding:20px;
+
+    border-radius:12px;
+
+    background:#07111d;
+
+    border:1px solid #263951;
+
+    text-align:center;
+
+    font-size:17px;
+
+    color:white;
+}
+
+/* ==================================================
+   BACK
+================================================== */
+
+.back{
+    display:inline-block;
+
+    margin-top:40px;
+
+    padding:12px 18px;
+
+    border:1px solid #263951;
+
+    border-radius:9px;
+
+    color:white;
+
+    text-decoration:none;
+}
+
+.back:hover{
+    border-color:white;
+}
+
+/* ==================================================
+   MOBILE
+================================================== */
+
+@media(max-width:900px){
+
+    .cards{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .facts-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:800px){
+
+    .scene{
+        height:450px;
+    }
+
+    .viewer-status{
+        display:none;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .facts-grid{
+        grid-template-columns:1fr;
+    }
+
+    h1{
+        letter-spacing:-2px;
+    }
+
+    .location{
+        padding:20px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<nav>
+
+<a href="./explore.html">
+← Back to Explore Anatomy
+</a>
+
+</nav>
+
+
+<main class="container">
+
+
+<!-- ==================================================
+     HERO
+================================================== -->
+
+<div class="eyebrow">
+Cerebrum · NeuroAtlas
+</div>
+
+<h1>
+Parietal Lobe
+</h1>
+
+<div class="arabic-title">
+الفص الجداري
+</div>
+
+<div class="hero">
+
+<p>
+
+The parietal lobe is a major region of the cerebral cortex
+located behind the frontal lobe and above the temporal lobe.
+It plays an important role in processing touch and other
+somatosensory information, spatial awareness, body position,
+attention, and integration of sensory information.
+
+<br><br>
+
+الفص الجداري هو أحد المناطق الرئيسية في القشرة المخية، ويقع
+خلف الفص الجبهي وفوق الفص الصدغي. ويشارك بشكل مهم في معالجة
+اللمس والمعلومات الحسية الجسدية، والإدراك المكاني، ومعرفة
+وضعية الجسم، والانتباه، ودمج المعلومات الحسية.
+
+</p>
+
+</div>
+
+
+<!-- ==================================================
+     ACTIONS
+================================================== -->
+
+<div class="actions">
+
+<a
+class="action-button"
+href="#location"
+id="locationButton"
+>
+📍 View Location
+</a>
+
+<a
+class="action-button"
+href="#anatomy"
+>
+🧠 Parietal Anatomy
+</a>
+
+<a
+class="action-button"
+href="#quiz"
+>
+🧪 Test Yourself
+</a>
+
+</div>
+
+
+<!-- ==================================================
+     3D VIEWER
+================================================== -->
+
+<div class="viewer">
+
+<div class="viewer-header">
+
+<div class="viewer-title">
+Human Brain · Interactive 3D · Parietal Lobe
+</div>
+
+<div class="viewer-status">
+DRAG TO ROTATE · SCROLL TO ZOOM
+</div>
+
+</div>
+
+
+<div class="scene">
+
+
+<div
+id="loading"
+class="loading"
+>
+
+<span id="loadText">
+Loading real brain model...
+</span>
+
+<div class="loading-bar">
+
+<div
+id="loadBar"
+class="loading-bar-inner"
+></div>
+
+</div>
+
+</div>
+
+
+<canvas id="brainCanvas"></canvas>
+
+
+<div
+id="parietalLabel"
+class="parietal-label"
+>
+
+<div class="label-box">
+PARIETAL LOBE · الفص الجداري
+</div>
+
+</div>
+
+
+</div>
+
+
+<div class="controls">
+
+<button
+id="highlight"
+class="active"
+>
+⚪ Highlight Parietal Lobe
+</button>
+
+<button
+id="rotate"
+class="active"
+>
+⟳ Auto Rotate
+</button>
+
+<button
+id="reset"
+>
+↻ Reset View
+</button>
+
+</div>
+
+</div>
+
+
+<!-- ==================================================
+     ANATOMY
+================================================== -->
+
+<section
+id="anatomy"
+class="section"
+>
+
+<div class="section-label">
+Parietal Lobe · الفص الجداري
+</div>
+
+<h2>
+Parietal Lobe Anatomy · تشريح الفص الجداري
+</h2>
+
+<p class="section-intro">
+
+The parietal lobe occupies the superior and posterior portion
+of each cerebral hemisphere. It is separated from the frontal
+lobe by the central sulcus and from the temporal lobe by the
+lateral sulcus.
+
+<br><br>
+
+يشغل الفص الجداري الجزء العلوي والخلفي من كل نصف كرة مخية.
+ويفصل بينه وبين الفص الجبهي التلم المركزي، بينما يفصل بينه
+وبين الفص الصدغي التلم الجانبي.
+
+</p>
+
+
+<div class="cards">
+
+
+<div class="card">
+
+<h3>
+Primary Somatosensory Cortex · القشرة الحسية الجسدية الأولية
+</h3>
+
+<p>
+
+The primary somatosensory cortex is located in the
+postcentral gyrus and receives information about touch,
+pressure, pain, temperature, and body position.
+
+<br><br>
+
+تقع القشرة الحسية الجسدية الأولية في التلفيف خلف المركزي،
+وتستقبل معلومات عن اللمس والضغط والألم والحرارة ووضعية الجسم.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+Spatial Awareness · الإدراك المكاني
+</h3>
+
+<p>
+
+The parietal lobe helps the brain understand where the body
+and objects are located in relation to one another.
+
+<br><br>
+
+يساعد الفص الجداري الدماغ على فهم أماكن الجسم والأشياء
+وعلاقتها المكانية ببعضها البعض.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+Sensory Integration · دمج المعلومات الحسية
+</h3>
+
+<p>
+
+Parietal cortical networks combine information from multiple
+sensory systems to create a more complete representation
+of the body and environment.
+
+<br><br>
+
+تدمج الشبكات القشرية الجدارية المعلومات من عدة أنظمة حسية
+لتكوين تمثيل أكثر تكاملًا للجسم والبيئة المحيطة.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+Postcentral Gyrus · التلفيف خلف المركزي
+</h3>
+
+<p>
+
+The postcentral gyrus contains the primary somatosensory
+cortex and is located immediately behind the central sulcus.
+
+<br><br>
+
+يحتوي التلفيف خلف المركزي على القشرة الحسية الجسدية
+الأولية ويقع مباشرة خلف التلم المركزي.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+Attention · الانتباه
+</h3>
+
+<p>
+
+Parietal networks contribute to directing attention toward
+important sensory information and relevant locations.
+
+<br><br>
+
+تساهم الشبكات الجدارية في توجيه الانتباه نحو المعلومات
+الحسية المهمة والمواقع ذات الصلة.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+Body Position · وضعية الجسم
+</h3>
+
+<p>
+
+The parietal cortex helps the brain construct an internal
+representation of the position of different parts of the body.
+
+<br><br>
+
+تساعد القشرة الجدارية الدماغ على تكوين تمثيل داخلي
+لوضعية أجزاء الجسم المختلفة.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+Left Parietal Lobe · الفص الجداري الأيسر
+</h3>
+
+<p>
+
+The dominant parietal hemisphere can contribute to language,
+reading, writing, calculation, and learned motor sequences.
+
+<br><br>
+
+يمكن للفص الجداري في النصف المسيطر أن يساهم في اللغة
+والقراءة والكتابة والحساب وتسلسل الحركات المتعلمة.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+Right Parietal Lobe · الفص الجداري الأيمن
+</h3>
+
+<p>
+
+The nondominant parietal hemisphere is particularly important
+for aspects of spatial awareness and attention.
+
+<br><br>
+
+يعد الفص الجداري في النصف غير المسيطر مهمًا بشكل خاص
+لبعض جوانب الإدراك المكاني والانتباه.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+Central Sulcus · التلم المركزي
+</h3>
+
+<p>
+
+The central sulcus forms an important anatomical boundary
+between the frontal and parietal lobes.
+
+<br><br>
+
+يمثل التلم المركزي حدًا تشريحيًا مهمًا بين الفص الجبهي
+والفص الجداري.
+
+</p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- ==================================================
+     LOCATION
+================================================== -->
+
+<section
+id="location"
+class="location"
+>
+
+<h2>
+📍 Where is the Parietal Lobe? · أين يقع الفص الجداري؟
+</h2>
+
+<p class="location-intro">
+
+The parietal lobe is located behind the frontal lobe and above
+the temporal lobe. It occupies much of the upper posterior
+surface of the cerebral hemisphere.
+
+<br><br>
+
+يقع الفص الجداري خلف الفص الجبهي وفوق الفص الصدغي، ويشغل
+جزءًا كبيرًا من السطح العلوي الخلفي لنصف الكرة المخية.
+
+</p>
+
+
+<div
+id="locationVisual"
+class="location-visual"
+>
+
+<svg
+class="brain-svg"
+viewBox="0 0 900 600"
+xmlns="http://www.w3.org/2000/svg"
+>
+
+<!-- MAIN BRAIN -->
+
+<path
+class="svg-brain"
+d="
+M145 265
+C115 185 155 100 245 65
+C340 28 450 50 520 110
+C580 160 595 245 555 310
+C530 350 500 370 455 390
+C390 420 300 405 235 365
+C180 330 155 300 145 265Z
+"
+/>
+
+
+<!-- PARIETAL REGION -->
+
+<path
+class="svg-parietal"
+d="
+M335 62
+C405 55 475 75 520 115
+C565 155 575 220 555 275
+C540 315 510 340 475 360
+C450 330 430 295 425 255
+C420 210 405 165 375 125
+C360 105 345 85 335 62Z
+"
+/>
+
+
+<!-- BRAINSTEM -->
+
+<path
+class="svg-brainstem"
+d="
+M420 350
+C425 385 425 420 415 460
+L450 460
+C455 420 455 385 450 345Z
+"
+/>
+
+
+<!-- CEREBELLUM -->
+
+<path
+class="svg-cerebellum"
+d="
+M455 360
+C520 335 585 355 610 405
+C630 450 600 500 545 500
+C490 500 455 470 445 425
+C440 400 442 375 455 360Z
+"
+/>
+
+
+<!-- LABEL -->
+
+<line
+class="svg-line"
+x1="500"
+y1="150"
+x2="680"
+y2="105"
+/>
+
+<text
+class="svg-label"
+x="695"
+y="112"
+>
+PARIETAL LOBE
+</text>
+
+<text
+class="svg-label"
+x="695"
+y="137"
+>
+الفص الجداري
+</text>
+
+
+</svg>
+
+
+<p class="location-caption">
+
+⚪ The white region represents the parietal lobe.
+<br>
+المنطقة البيضاء تمثل الفص الجداري.
+
+</p>
+
+</div>
+
+</section>
+
+
+<!-- ==================================================
+     CLINICAL
+================================================== -->
+
+<div class="clinical-section">
+
+<div class="section-label">
+Clinical Importance · الأهمية السريرية
+</div>
+
+<h2>
+Why the Parietal Lobe Matters
+</h2>
+
+<div class="clinical-box">
+
+<p>
+
+Damage to the parietal lobe can affect sensation, spatial
+processing, attention, body awareness, and the integration
+of sensory information. The exact effects depend on the
+location and side of the lesion.
+
+</p>
+
+<p dir="rtl">
+
+يمكن أن تؤثر إصابات الفص الجداري على الإحساس والإدراك
+المكاني والانتباه والوعي بالجسم ودمج المعلومات الحسية.
+وتعتمد الأعراض على مكان الإصابة والجانب المتأثر.
+
+</p>
+
+</div>
+
+</div>
+
+
+<!-- ==================================================
+     INSIGHT
+================================================== -->
+
+<div class="insight">
+
+<strong>
+NeuroAtlas Insight
+</strong>
+
+<br><br>
+
+Think of the parietal lobe as one of the brain's major
+"body-and-space processors." It helps transform raw sensory
+signals into an organized understanding of where your body
+is and what is happening around you.
+
+<br><br>
+
+فكري في الفص الجداري باعتباره أحد أهم مراكز معالجة
+معلومات الجسم والمكان. فهو يساعد الدماغ على تحويل
+الإشارات الحسية إلى فهم منظم لمكان الجسم وما يحدث حوله.
+
+</div>
+
+
+<!-- ==================================================
+     QUICK FACTS
+================================================== -->
+
+<div class="section">
+
+<div class="section-label">
+Quick Facts · معلومات سريعة
+</div>
+
+<h2>
+Parietal Lobe at a Glance
+</h2>
+
+
+<div class="facts-grid">
+
+
+<div class="fact">
+
+<span>01</span>
+
+<strong>
+Location · الموقع
+</strong>
+
+<p>
+Behind the frontal lobe and above the temporal lobe.
+<br>
+خلف الفص الجبهي وفوق الفص الصدغي.
+</p>
+
+</div>
+
+
+<div class="fact">
+
+<span>02</span>
+
+<strong>
+Main Sensory Role · الدور الحسي
+</strong>
+
+<p>
+Processes and integrates somatosensory information.
+</p>
+
+</div>
+
+
+<div class="fact">
+
+<span>03</span>
+
+<strong>
+Key Landmark · علامة تشريحية
+</strong>
+
+<p>
+Postcentral gyrus contains the primary somatosensory cortex.
+</p>
+
+</div>
+
+
+<div class="fact">
+
+<span>04</span>
+
+<strong>
+Major Function · الوظيفة الأساسية
+</strong>
+
+<p>
+Sensation, spatial awareness, attention, and integration.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ==================================================
+     QUIZ
+================================================== -->
+
+<div
+id="quiz"
+class="quiz"
+>
+
+<h2>
+🧠 Mini Test · اختبار قصير
+</h2>
+
+
+<!-- QUESTION 1 -->
+
+<div
+class="question-block"
+data-answer="A"
+>
+
+<div class="question-number">
+Question 01 · السؤال الأول
+</div>
+
+<div class="question-en">
+Which type of information is strongly processed by the parietal lobe?
+</div>
+
+<div
+class="question-ar"
+dir="rtl"
+>
+ما نوع المعلومات التي يعالجها الفص الجداري بشكل أساسي؟
+</div>
+
+
+<button class="option" data-option="A">
+A. Somatosensory information · المعلومات الحسية الجسدية
+</button>
+
+<button class="option" data-option="B">
+B. Only visual information · المعلومات البصرية فقط
+</button>
+
+<button class="option" data-option="C">
+C. Only auditory information · المعلومات السمعية فقط
+</button>
+
+<button class="option" data-option="D">
+D. Hormone production · إنتاج الهرمونات
+</button>
+
+<div class="question-feedback"></div>
+
+</div>
+
+
+<!-- QUESTION 2 -->
+
+<div
+class="question-block"
+data-answer="C"
+>
+
+<div class="question-number">
+Question 02 · السؤال الثاني
+</div>
+
+<div class="question-en">
+Where is the primary somatosensory cortex located?
+</div>
+
+<div
+class="question-ar"
+dir="rtl"
+>
+أين تقع القشرة الحسية الجسدية الأولية؟
+</div>
+
+
+<button class="option" data-option="A">
+A. Precentral gyrus · التلفيف أمام المركزي
+</button>
+
+<button class="option" data-option="B">
+B. Occipital pole · القطب القذالي
+</button>
+
+<button class="option" data-option="C">
+C. Postcentral gyrus · التلفيف خلف المركزي
+</button>
+
+<button class="option" data-option="D">
+D. Cerebellar vermis · دودة المخيخ
+</button>
+
+<div class="question-feedback"></div>
+
+</div>
+
+
+<!-- QUESTION 3 -->
+
+<div
+class="question-block"
+data-answer="B"
+>
+
+<div class="question-number">
+Question 03 · السؤال الثالث
+</div>
+
+<div class="question-en">
+Which function is strongly associated with the parietal lobe?
+</div>
+
+<div
+class="question-ar"
+dir="rtl"
+>
+أي وظيفة ترتبط بشكل واضح بالفص الجداري؟
+</div>
+
+
+<button class="option" data-option="A">
+A. Regulation of breathing · تنظيم التنفس
+</button>
+
+<button class="option" data-option="B">
+B. Spatial awareness · الإدراك المكاني
+</button>
+
+<button class="option" data-option="C">
+C. Production of cerebrospinal fluid · إنتاج السائل الدماغي الشوكي
+</button>
+
+<button class="option" data-option="D">
+D. Control of the heartbeat · التحكم في ضربات القلب
+</button>
+
+<div class="question-feedback"></div>
+
+</div>
+
+
+<div
+id="quizResult"
+class="quiz-result"
+>
+
+Answer all three questions to see your final score.
+<br>
+أجيبي عن الأسئلة الثلاثة لرؤية نتيجتك النهائية.
+
+</div>
+
+</div>
+
+
+<a
+class="back"
+href="./explore.html"
+>
+← Back to Explore Anatomy
+</a>
+
+
+</main>
+
+
+<!-- ==================================================
+     THREE.JS IMPORT MAP
+================================================== -->
+
+<script type="importmap">
+
+{
+    "imports":{
+
+        "three":
+        "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+
+        "three/addons/":
+        "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+
+    }
+}
+
+</script>
+
+
+<!-- ==================================================
+     THREE.JS
+================================================== -->
+
+<script type="module">
+
+import * as THREE from "three";
+
+import {
+    OrbitControls
+} from "three/addons/controls/OrbitControls.js";
+
+import {
+    GLTFLoader
+} from "three/addons/loaders/GLTFLoader.js";
+
+import {
+    DRACOLoader
+} from "three/addons/loaders/DRACOLoader.js";
+
+
+/* ==================================================
+   ELEMENTS
+================================================== */
+
+const canvas =
+document.getElementById("brainCanvas");
+
+const loading =
+document.getElementById("loading");
+
+const loadText =
+document.getElementById("loadText");
+
+const loadBar =
+document.getElementById("loadBar");
+
+const parietalLabel =
+document.getElementById("parietalLabel");
+
+
+/* ==================================================
+   SCENE
+================================================== */
+
+const scene =
+new THREE.Scene();
+
+
+/* ==================================================
+   CAMERA
+================================================== */
+
+const camera =
+new THREE.PerspectiveCamera(
+    30,
+    1,
+    0.01,
+    100
+);
+
+camera.position.set(
+    3.2,
+    0.3,
+    8.5
+);
+
+
+/* ==================================================
+   RENDERER
+================================================== */
+
+const renderer =
+new THREE.WebGLRenderer({
+
+    canvas:canvas,
+
+    antialias:true,
+
+    alpha:true
+
+});
+
+renderer.setPixelRatio(
+    Math.min(
+        window.devicePixelRatio || 1,
+        2
+    )
+);
+
+renderer.toneMapping =
+THREE.ACESFilmicToneMapping;
+
+renderer.toneMappingExposure =
+0.75;
+
+
+/* ==================================================
+   CONTROLS
+================================================== */
+
+const controls =
+new OrbitControls(
+    camera,
+    canvas
+);
+
+controls.enableRotate = true;
+controls.rotateSpeed = 0.6;
+
+controls.enableDamping = true;
+controls.dampingFactor = 0.05;
+
+controls.enableZoom = true;
+controls.zoomSpeed = 0.6;
+
+controls.enablePan = false;
+
+controls.autoRotate = true;
+controls.autoRotateSpeed = 0.2;
+
+controls.target.set(
+    0,
+    -0.3,
+    0
+);
+
+controls.minDistance = 3.5;
+controls.maxDistance = 16;
+
+
+/* ==================================================
+   LIGHTING
+================================================== */
+
+scene.add(
+    new THREE.AmbientLight(
+        0xffffff,
+        0.55
+    )
+);
+
+const hemi =
+new THREE.HemisphereLight(
+    0xffffff,
+    0x081018,
+    0.75
+);
+
+scene.add(hemi);
+
+
+const keyLight =
+new THREE.DirectionalLight(
+    0xffffff,
+    1.4
+);
+
+keyLight.position.set(
+    6,
+    10,
+    8
+);
+
+scene.add(keyLight);
+
+
+const fillLight =
+new THREE.DirectionalLight(
+    0x8ca9bd,
+    0.4
+);
+
+fillLight.position.set(
+    -7,
+    2,
+    6
+);
+
+scene.add(fillLight);
+
+
+/* ==================================================
+   BRAIN GROUP
+================================================== */
+
+const brainGroup =
+new THREE.Group();
+
+scene.add(brainGroup);
+
+
+let parietalMesh = null;
+let parietalHighlight = null;
+let parietalOutline = null;
+
+let highlighted = true;
+
+
+/* ==================================================
+   NORMAL BRAIN MATERIAL
+================================================== */
+
+const brainMaterial =
+new THREE.MeshPhysicalMaterial({
+
+    color:0xf1c5d0,
+
+    roughness:0.62,
+
+    metalness:0,
+
+    clearcoat:0.12,
+
+    clearcoatRoughness:0.5,
+
+    side:THREE.DoubleSide
+
+});
+
+
+/* ==================================================
+   WHITE PARIETAL HIGHLIGHT
+================================================== */
+
+const parietalWhiteMaterial =
+new THREE.MeshPhysicalMaterial({
+
+    color:0xffffff,
+
+    roughness:0.25,
+
+    metalness:0.02,
+
+    clearcoat:0.5,
+
+    clearcoatRoughness:0.2,
+
+    side:THREE.DoubleSide
+
+});
+
+
+/* ==================================================
+   OUTLINE
+================================================== */
+
+const outlineMaterial =
+new THREE.MeshBasicMaterial({
+
+    color:0xffffff,
+
+    transparent:true,
+
+    opacity:0.9,
+
+    side:THREE.BackSide
+
+});
+
+
+/* ==================================================
+   FALLBACK PARIETAL HIGHLIGHT
+================================================== */
+
+function createParietalFallback(){
+
+    /*
+       This is a clearly visible anatomical
+       overlay for models that do not expose
+       separate lobe names.
+    */
+
+    const geometry =
+    new THREE.SphereGeometry(
+        1,
+        64,
+        48
+    );
+
+
+    parietalHighlight =
+    new THREE.Mesh(
+        geometry,
+        parietalWhiteMaterial
+    );
+
+
+    /*
+       Superior-posterior position:
+       characteristic location of the
+       parietal lobe on the cerebral surface.
+    */
+
+    parietalHighlight.scale.set(
+        1.15,
+        0.72,
+        0.72
+    );
+
+
+    parietalHighlight.position.set(
+        0.35,
+        0.58,
+        -0.42
+    );
+
+
+    parietalHighlight.renderOrder = 10;
+
+    brainGroup.add(
+        parietalHighlight
+    );
+
+
+    parietalOutline =
+    new THREE.Mesh(
+        geometry.clone(),
+        outlineMaterial
+    );
+
+
+    parietalOutline.scale.set(
+        1.22,
+        0.77,
+        0.77
+    );
+
+
+    parietalOutline.position.set(
+        0,
+        0,
+        0
+    );
+
+
+    parietalHighlight.add(
+        parietalOutline
+    );
+
+}
+
+
+/* ==================================================
+   LOAD REAL BRAIN
+================================================== */
+
+function loadRealBrain(){
+
+    const loader =
+    new GLTFLoader();
+
+
+    const dracoLoader =
+    new DRACOLoader();
+
+
+    dracoLoader.setDecoderPath(
+        "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/"
+    );
+
+
+    loader.setDRACOLoader(
+        dracoLoader
+    );
+
+
+    const urls = [
+
+        "https://cdn.jsdelivr.net/gh/itayinbarr/brainproject@main/brain-atlas/models/brain.glb",
+
+        "https://raw.githubusercontent.com/itayinbarr/brainproject/main/brain-atlas/models/brain.glb",
+
+        "https://itayinbarr.github.io/brainproject/models/brain.glb"
+
+    ];
+
+
+    let urlIndex = 0;
+
+
+    function tryLoad(){
+
+        if(
+            urlIndex >= urls.length
+        ){
+
+            createParietalFallback();
+
+            onReady();
+
+            return;
+
+        }
+
+
+        const url =
+        urls[urlIndex++];
+
+
+        loader.load(
+
+            url,
+
+            function(gltf){
+
+                const model =
+                gltf.scene;
+
+
+                /* ==========================
+                   CENTER MODEL
+                ========================== */
+
+                const box =
+                new THREE.Box3()
+                .setFromObject(model);
+
+
+                const center =
+                box.getCenter(
+                    new THREE.Vector3()
+                );
+
+
+                const size =
+                box.getSize(
+                    new THREE.Vector3()
+                );
+
+
+                const maxDim =
+                Math.max(
+                    size.x,
+                    size.y,
+                    size.z
+                );
+
+
+                const scale =
+                4.5 / maxDim;
+
+
+                model.scale.setScalar(
+                    scale
+                );
+
+
+                model.position.sub(
+                    center.multiplyScalar(scale)
+                );
+
+
+                model.position.y -= 0.60;
+
+
+                /* ==========================
+                   PROCESS MESHES
+                ========================== */
+
+                model.traverse(
+                function(child){
+
+                    if(
+                        !child.isMesh
+                    )
+                        return;
+
+
+                    child.castShadow = true;
+                    child.receiveShadow = true;
+
+
+                    const name =
+                    (
+                        child.name ||
+                        ""
+                    ).toLowerCase();
+
+
+                    /*
+                       Try to find an actual
+                       parietal mesh if the GLB
+                       contains anatomical labels.
+                    */
+
+                    const isParietal =
+
+                        name.includes("parietal") ||
+
+                        name.includes("parietal_lobe") ||
+
+                        name.includes("parietallobe") ||
+
+                        name.includes("superior_parietal") ||
+
+                        name.includes("inferior_parietal");
+
+
+                    if(
+                        isParietal &&
+                        !parietalMesh
+                    ){
+
+                        parietalMesh =
+                        child;
+
+
+                        parietalHighlight =
+                        child.clone();
+
+
+                        parietalHighlight.material =
+                        parietalWhiteMaterial.clone();
+
+
+                        parietalHighlight.scale.multiplyScalar(
+                            1.012
+                        );
+
+
+                        child.parent.add(
+                            parietalHighlight
+                        );
+
+
+                        parietalOutline =
+                        child.clone();
+
+
+                        parietalOutline.material =
+                        outlineMaterial.clone();
+
+
+                        parietalOutline.scale.multiplyScalar(
+                            1.045
+                        );
+
+
+                        child.parent.add(
+                            parietalOutline
+                        );
+
+                    }
+
+
+                    else{
+
+                        if(
+                            child.material
+                        ){
+
+                            child.material =
+                            brainMaterial.clone();
+
+                        }
+
+                    }
+
+                });
+
+
+                brainGroup.add(
+                    model
+                );
+
+
+                /*
+                   If this model doesn't expose
+                   a parietal mesh, create a very
+                   visible positional overlay.
+                */
+
+                if(
+                    !parietalMesh
+                ){
+
+                    createParietalFallback();
+
+                }
+
+
+                loadBar.style.width =
+                "100%";
+
+
+                onReady();
+
+            },
+
+            function(progress){
+
+                if(
+                    progress.total > 0
+                ){
+
+                    const pct =
+                    Math.min(
+                        90,
+                        progress.loaded /
+                        progress.total *
+                        90
+                    );
+
+                    loadBar.style.width =
+                    pct + "%";
+
+                }
+
+            },
+
+            function(error){
+
+                console.warn(
+                    "Brain model failed:",
+                    error
+                );
+
+                tryLoad();
+
+            }
+
+        );
+
+    }
+
+
+    tryLoad();
+
+}
+
+
+/* ==================================================
+   READY
+================================================== */
+
+function onReady(){
+
+    setTimeout(
+    function(){
+
+        loading.classList.add(
+            "hide"
+        );
+
+
+        if(
+            highlighted
+        ){
+
+            parietalLabel.classList.add(
+                "show"
+            );
+
+        }
+
+    },500);
+
+}
+
+
+/* ==================================================
+   LABEL POSITION
+================================================== */
+
+function updateLabel(){
+
+    if(
+        !parietalHighlight
+    )
+        return;
+
+
+    const position =
+    new THREE.Vector3();
+
+
+    parietalHighlight
+    .getWorldPosition(
+        position
+    );
+
+
+    position.project(
+        camera
+    );
+
+
+    const x =
+    (position.x + 1) /
+    2 *
+    canvas.clientWidth;
+
+
+    const y =
+    (-position.y + 1) /
+    2 *
+    canvas.clientHeight;
+
+
+    parietalLabel.style.left =
+    x + "px";
+
+
+    parietalLabel.style.top =
+    (y - 60) + "px";
+
+}
+
+
+/* ==================================================
+   RESIZE
+================================================== */
+
+function resize(){
+
+    const width =
+    canvas.clientWidth;
+
+    const height =
+    canvas.clientHeight;
+
+
+    if(
+        width <= 0 ||
+        height <= 0
+    )
+        return;
+
+
+    camera.aspect =
+    width / height;
+
+    camera.updateProjectionMatrix();
+
+
+    renderer.setSize(
+        width,
+        height,
+        false
+    );
+
+}
+
+
+window.addEventListener(
+    "resize",
+    resize
+);
+
+
+/* ==================================================
+   HIGHLIGHT BUTTON
+================================================== */
+
+const highlightBtn =
+document.getElementById(
+    "highlight"
+);
+
+
+highlightBtn.addEventListener(
+"click",
+function(){
+
+    highlighted =
+    !highlighted;
+
+
+    if(
+        parietalHighlight
+    ){
+
+        parietalHighlight.visible =
+        highlighted;
+
+    }
+
+
+    if(
+        parietalOutline
+    ){
+
+        parietalOutline.visible =
+        highlighted;
+
+    }
+
+
+    parietalLabel.classList.toggle(
+        "show",
+        highlighted
+    );
+
+
+    highlightBtn.classList.toggle(
+        "active",
+        highlighted
+    );
+
+
+    highlightBtn.textContent =
+
+    highlighted
+
+    ? "⚪ Highlight Parietal Lobe"
+
+    : "⚫ Show Parietal Lobe";
+
+});
+
+
+/* ==================================================
+   AUTO ROTATE
+================================================== */
+
+const rotateBtn =
+document.getElementById(
+    "rotate"
+);
+
+
+rotateBtn.addEventListener(
+"click",
+function(){
+
+    controls.autoRotate =
+    !controls.autoRotate;
+
+
+    rotateBtn.classList.toggle(
+        "active",
+        controls.autoRotate
+    );
+
+
+    rotateBtn.textContent =
+
+    controls.autoRotate
+
+    ? "⟳ Auto Rotate"
+
+    : "▶ Auto Rotate";
+
+});
+
+
+/* ==================================================
+   RESET
+================================================== */
+
+document.getElementById(
+    "reset"
+).addEventListener(
+"click",
+function(){
+
+    camera.position.set(
+        3.2,
+        0.3,
+        8.5
+    );
+
+
+    controls.target.set(
+        0,
+        -0.3,
+        0
+    );
+
+
+    controls.update();
+
+});
+
+
+/* ==================================================
+   ANIMATION
+================================================== */
+
+function animate(){
+
+    requestAnimationFrame(
+        animate
+    );
+
+
+    controls.update();
+
+    updateLabel();
+
+
+    renderer.render(
+        scene,
+        camera
+    );
+
+}
+
+
+/* ==================================================
+   START
+================================================== */
+
+resize();
+
+animate();
+
+loadRealBrain();
+
+
+/* ==================================================
+   LOCATION BUTTON
+================================================== */
+
+const locationButton =
+document.getElementById(
+    "locationButton"
+);
+
+const locationVisual =
+document.getElementById(
+    "locationVisual"
+);
+
+
+locationButton.addEventListener(
+"click",
+function(){
+
+    setTimeout(
+    function(){
+
+        locationVisual.classList.add(
+            "show"
+        );
+
+    },50);
+
+});
+
+
+/* ==================================================
+   QUIZ
+================================================== */
+
+let score = 0;
+
+let answered = 0;
+
+
+const questionBlocks =
+document.querySelectorAll(
+    ".question-block"
+);
+
+
+questionBlocks.forEach(
+function(question){
+
+    const correctAnswer =
+    question.dataset.answer;
+
+
+    const options =
+    question.querySelectorAll(
+        ".option"
+    );
+
+
+    const feedback =
+    question.querySelector(
+        ".question-feedback"
+    );
+
+
+    let alreadyAnswered =
+    false;
+
+
+    options.forEach(
+    function(option){
+
+        option.addEventListener(
+        "click",
+        function(){
+
+            if(
+                alreadyAnswered
+            )
+                return;
+
+
+            alreadyAnswered =
+            true;
+
+
+            const selected =
+            option.dataset.option;
+
+
+            options.forEach(
+            function(btn){
+
+                btn.disabled =
+                true;
+
+            });
+
+
+            if(
+                selected === correctAnswer
+            ){
+
+                score++;
+
+
+                option.classList.add(
+                    "correct"
+                );
+
+
+                feedback.textContent =
+                "✓ Correct! · إجابة صحيحة";
+
+                feedback.style.color =
+                "#78e0a0";
+
+            }
+
+            else{
+
+                option.classList.add(
+                    "wrong"
+                );
+
+
+                options.forEach(
+                function(btn){
+
+                    if(
+                        btn.dataset.option ===
+                        correctAnswer
+                    ){
+
+                        btn.classList.add(
+                            "correct"
+                        );
+
+                    }
+
+                });
+
+
+                feedback.textContent =
+                "✗ Incorrect. The correct answer is highlighted. · إجابة غير صحيحة، الإجابة الصحيحة موضحة.";
+
+                feedback.style.color =
+                "#ff8792";
+
+            }
+
+
+            answered++;
+
+
+            if(
+                answered ===
+                questionBlocks.length
+            ){
+
+                showFinalScore();
+
+            }
+
+        });
+
+    });
+
+});
+
+
+/* ==================================================
+   FINAL SCORE
+================================================== */
+
+function showFinalScore(){
+
+    const result =
+    document.getElementById(
+        "quizResult"
+    );
+
+
+    let message = "";
+
+
+    if(
+        score === 3
+    ){
+
+        message =
+        "🔥 Perfect! Excellent work! · ممتاز! كل إجاباتك صحيحة!";
+
+    }
+
+    else if(
+        score === 2
+    ){
+
+        message =
+        "👏 Great job! Just one more! · شغل ممتاز! إجابة واحدة بس كانت غلط!";
+
+    }
+
+    else if(
+        score === 1
+    ){
+
+        message =
+        "💡 Good start! Review the parietal lobe and try again. · بداية جيدة! راجعي الفص الجداري وجربي مرة أخرى.";
+
+    }
+
+    else{
+
+        message =
+        "🧠 Keep learning! Review the anatomy and try again. · كملي تعلم! راجعي التشريح وجربي مرة أخرى.";
+
+    }
+
+
+    result.innerHTML =
+
+    "<strong>" +
+    message +
+    "</strong>" +
+
+    "<br><br>" +
+
+    "Final Score · النتيجة النهائية: " +
+
+    score +
+
+    " / 3";
+
+}
+
+</script>
+
+</body>
+
+  </html>
