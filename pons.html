@@ -92,7 +92,7 @@ h1{
 }
 
 /* =========================
-   LOCATION BUTTON
+   ACTIONS
 ========================= */
 
 .actions{
@@ -608,12 +608,32 @@ h1{
 
 .quiz h2{
     font-size:27px;
-    margin-bottom:15px;
+    margin-bottom:25px;
 }
 
 .quiz-question{
-    color:#aebdce;
+    color:#eef4fa;
+    font-size:17px;
     margin-bottom:15px;
+}
+
+.question-block{
+    padding:22px;
+    margin-top:20px;
+
+    background:#07111d;
+
+    border:1px solid #172b3e;
+
+    border-radius:14px;
+}
+
+.question-number{
+    color:#ffb6c9;
+    font-size:11px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    margin-bottom:8px;
 }
 
 .option{
@@ -638,15 +658,81 @@ h1{
     cursor:pointer;
 
     font-size:15px;
+
+    transition:.2s;
 }
 
 .option:hover{
     border-color:#ffb6c9;
+    background:#162d43;
 }
 
-#feedback{
-    margin-top:15px;
-    color:#ffd5df;
+.option.correct{
+    border-color:#7ee2a8;
+    background:#123526;
+    color:#aaffc9;
+}
+
+.option.wrong{
+    border-color:#ff7189;
+    background:#3a1820;
+    color:#ffb6c0;
+}
+
+.option.disabled{
+    cursor:default;
+}
+
+.question-feedback{
+    margin-top:13px;
+    font-size:14px;
+    min-height:22px;
+}
+
+.feedback-correct{
+    color:#8ff0b0;
+}
+
+.feedback-wrong{
+    color:#ff9eac;
+}
+
+#finalScore{
+    display:none;
+
+    margin-top:30px;
+    padding:22px;
+
+    border-radius:14px;
+
+    background:#101d2b;
+
+    border:1px solid #ffb6c9;
+
+    text-align:center;
+}
+
+#finalScore.show{
+    display:block;
+}
+
+.score-title{
+    color:#ffb6c9;
+    font-size:12px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    margin-bottom:8px;
+}
+
+.score-number{
+    font-size:34px;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+.score-message{
+    color:#aebdce;
+    font-size:14px;
 }
 
 /* =========================
@@ -942,8 +1028,6 @@ the cerebrum, cerebellum, and spinal cord.
 <div class="cards">
 
 
-<!-- CARD 1 -->
-
 <div class="card">
 
 <h3>
@@ -964,8 +1048,6 @@ the cerebral cortex, cerebellum, and spinal cord.
 
 </div>
 
-
-<!-- CARD 2 -->
 
 <div class="card">
 
@@ -988,8 +1070,6 @@ and send signals to the cerebellum through pontocerebellar fibers.
 </div>
 
 
-<!-- CARD 3 -->
-
 <div class="card">
 
 <h3>
@@ -1010,8 +1090,6 @@ signals between the cerebral cortex and cerebellum.
 
 </div>
 
-
-<!-- CARD 4 -->
 
 <div class="card">
 
@@ -1035,8 +1113,6 @@ and balance.
 </div>
 
 
-<!-- CARD 5 -->
-
 <div class="card">
 
 <h3>
@@ -1057,8 +1133,6 @@ to help shape and regulate breathing patterns.
 
 </div>
 
-
-<!-- CARD 6 -->
 
 <div class="card">
 
@@ -1081,8 +1155,6 @@ wakefulness, and transitions between different brain states.
 </div>
 
 
-<!-- CARD 7 -->
-
 <div class="card">
 
 <h3>
@@ -1103,8 +1175,6 @@ system, which carries sensory information from the face.
 
 </div>
 
-
-<!-- CARD 8 -->
 
 <div class="card">
 
@@ -1127,8 +1197,6 @@ to voluntary movements of facial muscles.
 </div>
 
 
-<!-- CARD 9 -->
-
 <div class="card">
 
 <h3>
@@ -1149,8 +1217,6 @@ involved in auditory and vestibular information.
 
 </div>
 
-
-<!-- CARD 10 -->
 
 <div class="card">
 
@@ -1173,8 +1239,6 @@ sensory information toward higher regions of the brain.
 </div>
 
 
-<!-- CARD 11 -->
-
 <div class="card">
 
 <h3>
@@ -1195,8 +1259,6 @@ the brainstem and spinal cord pass through the pontine region.
 
 </div>
 
-
-<!-- CARD 12 -->
 
 <div class="card">
 
@@ -1567,7 +1629,7 @@ Communication and coordination ·
 
 
 <!-- ==================================================
-     MINI TEST
+     MINI TEST — 3 QUESTIONS
 ================================================== -->
 
 <div
@@ -1575,50 +1637,199 @@ id="quiz"
 class="quiz"
 >
 
-
 <h2>
-🧠 Mini Test
+🧠 Mini Test · اختبار قصير
 </h2>
 
 
+<!-- QUESTION 1 -->
+
+<div class="question-block">
+
+<div class="question-number">
+Question 01 · السؤال الأول
+</div>
+
 <p class="quiz-question">
 Which structure is located between the midbrain and the medulla?
+<br>
+أي تركيب يقع بين الدماغ الأوسط والنخاع المستطيل؟
 </p>
 
 
 <button
 class="option"
-onclick="answer(true)"
+onclick="checkAnswer(1, this, true)"
 >
-A. Pons
+A. Pons · الجسر
 </button>
 
 
 <button
 class="option"
-onclick="answer(false)"
+onclick="checkAnswer(1, this, false)"
 >
-B. Hippocampus
+B. Hippocampus · الحُصين
 </button>
 
 
 <button
 class="option"
-onclick="answer(false)"
+onclick="checkAnswer(1, this, false)"
 >
-C. Thalamus
+C. Thalamus · المهاد
 </button>
 
 
 <button
 class="option"
-onclick="answer(false)"
+onclick="checkAnswer(1, this, false)"
 >
-D. Occipital Lobe
+D. Occipital Lobe · الفص القذالي
 </button>
 
 
-<div id="feedback"></div>
+<div
+id="feedback1"
+class="question-feedback"
+></div>
+
+</div>
+
+
+<!-- QUESTION 2 -->
+
+<div class="question-block">
+
+<div class="question-number">
+Question 02 · السؤال الثاني
+</div>
+
+<p class="quiz-question">
+Which structure sends information to the cerebellum through pontocerebellar fibers?
+<br>
+أي تركيب يرسل المعلومات إلى المخيخ من خلال الألياف الجسرية المخيخية؟
+</p>
+
+
+<button
+class="option"
+onclick="checkAnswer(2, this, true)"
+>
+A. Pontine nuclei · النوى الجسرية
+</button>
+
+
+<button
+class="option"
+onclick="checkAnswer(2, this, false)"
+>
+B. Hippocampal formation · تكوين الحُصين
+</button>
+
+
+<button
+class="option"
+onclick="checkAnswer(2, this, false)"
+>
+C. Amygdala · اللوزة الدماغية
+</button>
+
+
+<button
+class="option"
+onclick="checkAnswer(2, this, false)"
+>
+D. Occipital cortex · القشرة القذالية
+</button>
+
+
+<div
+id="feedback2"
+class="question-feedback"
+></div>
+
+</div>
+
+
+<!-- QUESTION 3 -->
+
+<div class="question-block">
+
+<div class="question-number">
+Question 03 · السؤال الثالث
+</div>
+
+<p class="quiz-question">
+Which function is strongly associated with the pons?
+<br>
+أي وظيفة ترتبط بشكل مهم بالجسر؟
+</p>
+
+
+<button
+class="option"
+onclick="checkAnswer(3, this, false)"
+>
+A. Long-term memory storage · تخزين الذاكرة طويلة المدى
+</button>
+
+
+<button
+class="option"
+onclick="checkAnswer(3, this, true)"
+>
+B. Relaying information and helping regulate breathing · نقل المعلومات والمساعدة في تنظيم التنفس
+</button>
+
+
+<button
+class="option"
+onclick="checkAnswer(3, this, false)"
+>
+C. Vision processing in the retina · معالجة الرؤية في الشبكية
+</button>
+
+
+<button
+class="option"
+onclick="checkAnswer(3, this, false)"
+>
+D. Producing cerebrospinal fluid · إنتاج السائل الدماغي الشوكي
+</button>
+
+
+<div
+id="feedback3"
+class="question-feedback"
+></div>
+
+</div>
+
+
+<!-- FINAL SCORE -->
+
+<div id="finalScore">
+
+<div class="score-title">
+Final Result · النتيجة النهائية
+</div>
+
+<div
+id="scoreNumber"
+class="score-number"
+>
+0 / 3
+</div>
+
+<div
+id="scoreMessage"
+class="score-message"
+>
+Answer all three questions to see your result.
+</div>
+
+</div>
 
 
 </div>
@@ -1943,12 +2154,6 @@ function createPonsMarker(){
     );
 
 
-    /*
-       Pons is above the medulla.
-       This marker is only used if the GLB
-       does not expose a named pons mesh.
-    */
-
     ponsHighlightMesh.position.set(
         0,
         -0.55,
@@ -2106,11 +2311,6 @@ function loadRealBrain(){
                 );
 
 
-                /*
-                   KEEPING THE SAME MODEL POSITION
-                   AS YOUR MEDULLA VERSION
-                */
-
                 model.position.y -= 0.60;
 
 
@@ -2138,11 +2338,9 @@ function loadRealBrain(){
                     ).toLowerCase();
 
 
-                    /*
-                       =================================
+                    /* =================================
                        PONS DETECTION
-                       =================================
-                    */
+                    ================================= */
 
                     if(
 
@@ -2157,10 +2355,6 @@ function loadRealBrain(){
                         ponsMesh =
                         child;
 
-
-                        /*
-                           BLACK PONS HIGHLIGHT
-                        */
 
                         ponsHighlightMesh =
                         child.clone();
@@ -2179,10 +2373,6 @@ function loadRealBrain(){
                             ponsHighlightMesh
                         );
 
-
-                        /*
-                           PINK OUTLINE
-                        */
 
                         ponsOutline =
                         child.clone();
@@ -2205,11 +2395,6 @@ function loadRealBrain(){
 
                     else{
 
-                        /*
-                           EVERYTHING ELSE
-                           STAYS BABY PINK
-                        */
-
                         if(
                             child.material
                         ){
@@ -2228,12 +2413,6 @@ function loadRealBrain(){
                     model
                 );
 
-
-                /*
-                   If the model doesn't contain
-                   a mesh specifically named Pons,
-                   create a visual marker.
-                */
 
                 if(
                     !ponsMesh
@@ -2579,39 +2758,225 @@ animate();
 
 loadRealBrain();
 
+</script>
 
-/* =========================================
-   QUIZ
-========================================= */
 
-window.answer =
-function(correct){
+<!-- ==================================================
+     QUIZ JAVASCRIPT
+================================================== -->
 
-    const feedback =
-    document.getElementById(
-        "feedback"
+<script>
+
+let score = 0;
+
+let answered = {
+    1:false,
+    2:false,
+    3:false
+};
+
+
+function checkAnswer(
+    questionNumber,
+    button,
+    correct
+){
+
+    /* Prevent answering the same question twice */
+
+    if(
+        answered[questionNumber]
+    ){
+        return;
+    }
+
+
+    answered[questionNumber] = true;
+
+
+    /* Disable all options for this question */
+
+    const questionBlock =
+    button.closest(
+        ".question-block"
     );
 
 
+    const buttons =
+    questionBlock.querySelectorAll(
+        ".option"
+    );
+
+
+    buttons.forEach(
+    function(btn){
+
+        btn.classList.add(
+            "disabled"
+        );
+
+        btn.disabled = true;
+
+    });
+
+
+    const feedback =
+    document.getElementById(
+        "feedback" + questionNumber
+    );
+
+
+    /* Correct answer */
+
     if(correct){
 
+        score++;
+
+
+        button.classList.add(
+            "correct"
+        );
+
+
         feedback.textContent =
-        "✓ Correct! The pons lies between the midbrain and medulla.";
+        "✓ Correct! Great job! · إجابة صحيحة! أحسنت!";
+
+
+        feedback.className =
+        "question-feedback feedback-correct";
+
+    }
+
+    /* Wrong answer */
+
+    else{
+
+        button.classList.add(
+            "wrong"
+        );
+
+
+        feedback.textContent =
+        "✗ Not quite. Try reviewing the pons anatomy. · إجابة غير صحيحة، راجعي تشريح الجسر.";
+
+
+        feedback.className =
+        "question-feedback feedback-wrong";
+
+
+        /* Highlight the correct answer */
+
+        buttons.forEach(
+        function(btn){
+
+            if(
+                btn.getAttribute(
+                    "onclick"
+                ).includes(
+                    "true"
+                )
+            ){
+
+                btn.classList.add(
+                    "correct"
+                );
+
+            }
+
+        });
+
+    }
+
+
+    /* Check if all questions are answered */
+
+    if(
+        answered[1] &&
+        answered[2] &&
+        answered[3]
+    ){
+
+        showFinalScore();
+
+    }
+
+}
+
+
+function showFinalScore(){
+
+    const finalScore =
+    document.getElementById(
+        "finalScore"
+    );
+
+
+    const scoreNumber =
+    document.getElementById(
+        "scoreNumber"
+    );
+
+
+    const scoreMessage =
+    document.getElementById(
+        "scoreMessage"
+    );
+
+
+    scoreNumber.textContent =
+    score + " / 3";
+
+
+    if(
+        score === 3
+    ){
+
+        scoreMessage.textContent =
+        "Perfect! You really know your pons. 🧠✨ · ممتاز! إنتِ فاهمة الجسر كويس جدًا.";
+
+    }
+
+    else if(
+        score === 2
+    ){
+
+        scoreMessage.textContent =
+        "Great work! Just one more detail to review. 💪 · شغل حلو جدًا! محتاجة تراجعي تفصيلة واحدة بس.";
+
+    }
+
+    else if(
+        score === 1
+    ){
+
+        scoreMessage.textContent =
+        "Good start! Review the anatomy section and try again. 📚 · بداية كويسة! راجعي قسم التشريح وجربي تاني.";
 
     }
 
     else{
 
-        feedback.textContent =
-        "Not quite. Try again.";
+        scoreMessage.textContent =
+        "Keep learning! Review the pons sections and try again. 🧠 · كملي مذاكرة وراجعي أقسام الجسر وجربي تاني.";
 
     }
 
-};
+
+    finalScore.classList.add(
+        "show"
+    );
+
+
+    finalScore.scrollIntoView({
+        behavior:"smooth",
+        block:"center"
+    });
+
+}
 
 </script>
 
 
 </body>
 
-    </html>
+</html>
