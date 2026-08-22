@@ -29,7 +29,7 @@ body{
 
 
 /* =========================
-   NAVIGATION
+   NAV
 ========================= */
 
 nav{
@@ -52,7 +52,7 @@ nav a:hover{
 
 
 /* =========================
-   MAIN
+   CONTAINER
 ========================= */
 
 .container{
@@ -96,7 +96,7 @@ h1{
 
 
 /* =========================
-   ACTION BUTTONS
+   BUTTONS
 ========================= */
 
 .actions{
@@ -125,7 +125,7 @@ h1{
 
 
 /* =========================
-   3D VIEWER
+   VIEWER
 ========================= */
 
 .viewer{
@@ -229,13 +229,9 @@ h1{
 
 .mca-label{
     position:absolute;
-
     z-index:30;
-
     pointer-events:none;
-
     transform:translate(-50%,-100%);
-
     display:none;
 }
 
@@ -245,9 +241,7 @@ h1{
 
 .label-box{
     position:relative;
-
     padding:9px 15px;
-
     border-radius:10px;
 
     background:rgba(5,10,17,.96);
@@ -257,7 +251,6 @@ h1{
     color:#ffffff;
 
     font-size:12px;
-
     font-weight:bold;
 
     letter-spacing:1px;
@@ -294,7 +287,6 @@ h1{
     display:flex;
     gap:10px;
     flex-wrap:wrap;
-
     padding:15px;
 
     border-top:1px solid rgba(255,255,255,.08);
@@ -376,11 +368,6 @@ h1{
     line-height:1.9;
     margin-bottom:30px;
 }
-
-
-/* =========================
-   LOCATION SVG
-========================= */
 
 .brain-location{
     width:100%;
@@ -501,7 +488,7 @@ h1{
 
 
 /* =========================
-   QUICK FACTS
+   FACTS
 ========================= */
 
 .facts-grid{
@@ -590,13 +577,20 @@ h1{
     width:100%;
     padding:12px 15px;
     margin-top:9px;
+
     background:#0b1928;
+
     color:#c7d5e2;
+
     border:1px solid #263951;
     border-radius:9px;
+
     text-align:left;
+
     cursor:pointer;
+
     font-size:14px;
+
     transition:.2s;
 }
 
@@ -620,10 +614,15 @@ h1{
 .quiz-result{
     margin-top:25px;
     padding:15px;
+
     border-radius:10px;
+
     background:#0b1928;
+
     border:1px solid #263951;
+
     color:#aebdce;
+
     display:none;
 }
 
@@ -867,8 +866,6 @@ xmlns="http://www.w3.org/2000/svg"
 aria-label="Simplified lateral brain diagram showing the middle cerebral artery"
 >
 
-<!-- BRAIN -->
-
 <path
 class="location-brain"
 d="
@@ -882,28 +879,25 @@ C350 475 255 450 200 400
 C170 370 145 330 155 285Z"
 />
 
-
-<!-- MCA GLOW -->
-
 <path
 class="location-artery-glow"
 d="
 M470 220
 C430 245 390 270 350 295
 C310 320 275 350 245 385
+
 M350 295
 C330 275 315 250 300 225
+
 M350 295
 C315 305 280 315 250 325
+
 M350 295
 C330 335 315 365 300 400
+
 M430 245
 C400 225 370 205 345 180
-"
-/>
-
-
-<!-- MCA -->
+"/>
 
 <path
 class="location-artery"
@@ -911,19 +905,19 @@ d="
 M470 220
 C430 245 390 270 350 295
 C310 320 275 350 245 385
+
 M350 295
 C330 275 315 250 300 225
+
 M350 295
 C315 305 280 315 250 325
+
 M350 295
 C330 335 315 365 300 400
+
 M430 245
 C400 225 370 205 345 180
-"
-/>
-
-
-<!-- LABEL LINE -->
+"/>
 
 <line
 class="location-line"
@@ -933,14 +927,12 @@ x2="700"
 y2="165"
 />
 
-
 <text
 class="location-label"
 x="715"
 y="172">
 MCA
 </text>
-
 
 <text
 class="location-label"
@@ -949,7 +941,6 @@ y="200"
 font-size="15">
 Middle Cerebral Artery
 </text>
-
 
 </svg>
 
@@ -1238,7 +1229,7 @@ side and branch.
 
 
 <!-- =========================
-     QUICK FACTS
+     FACTS
 ========================= -->
 
 <div class="section">
@@ -1424,9 +1415,9 @@ D. Cerebellar vermis · دودة المخيخ
 <div class="question">
 
 <p>
-3. Which artery is a major source of the MCA's deep perforating branches?
+3. Which arteries provide important deep perforating branches from the MCA?
 <span class="question-ar">
-٣. ما الفروع التي تمثل مصدرًا مهمًا للإمداد العميق المرتبط بالشريان الدماغي الأوسط؟
+٣. ما الشرايين التي تمثل فروعًا نافذة عميقة مهمة من الشريان الدماغي الأوسط؟
 </span>
 </p>
 
@@ -1507,9 +1498,9 @@ import {
 } from "three/addons/loaders/DRACOLoader.js";
 
 
-/* =========================
+/* ==================================================
    ELEMENTS
-========================= */
+================================================== */
 
 const canvas =
 document.getElementById("brainCanvas");
@@ -1527,36 +1518,36 @@ const mcaLabel =
 document.getElementById("mcaLabel");
 
 
-/* =========================
+/* ==================================================
    SCENE
-========================= */
+================================================== */
 
 const scene =
 new THREE.Scene();
 
 
-/* =========================
+/* ==================================================
    CAMERA
-========================= */
+================================================== */
 
 const camera =
 new THREE.PerspectiveCamera(
-    30,
+    32,
     1,
     0.01,
     100
 );
 
 camera.position.set(
-    3.4,
-    0.35,
-    8.2
+    3.6,
+    0.45,
+    7.8
 );
 
 
-/* =========================
+/* ==================================================
    RENDERER
-========================= */
+================================================== */
 
 const renderer =
 new THREE.WebGLRenderer({
@@ -1580,12 +1571,12 @@ renderer.toneMapping =
 THREE.ACESFilmicToneMapping;
 
 renderer.toneMappingExposure =
-0.8;
+1.0;
 
 
-/* =========================
+/* ==================================================
    CONTROLS
-========================= */
+================================================== */
 
 const controls =
 new OrbitControls(
@@ -1593,51 +1584,51 @@ new OrbitControls(
     canvas
 );
 
-controls.enableRotate = true;
-
-controls.rotateSpeed = 0.6;
-
 controls.enableDamping = true;
 
-controls.dampingFactor = 0.05;
+controls.dampingFactor = 0.06;
+
+controls.enableRotate = true;
+
+controls.rotateSpeed = 0.55;
 
 controls.enableZoom = true;
 
-controls.zoomSpeed = 0.6;
+controls.zoomSpeed = 0.65;
 
 controls.enablePan = false;
 
 controls.autoRotate = true;
 
-controls.autoRotateSpeed = 0.18;
+controls.autoRotateSpeed = 0.22;
 
 controls.target.set(
     0,
-    -0.25,
+    -0.20,
     0
 );
 
-controls.minDistance = 3.5;
+controls.minDistance = 3.2;
 
-controls.maxDistance = 16;
+controls.maxDistance = 14;
 
 
-/* =========================
+/* ==================================================
    LIGHTING
-========================= */
+================================================== */
 
 scene.add(
     new THREE.AmbientLight(
         0xffffff,
-        0.6
+        0.72
     )
 );
 
 const hemi =
 new THREE.HemisphereLight(
     0xffdce6,
-    0x081018,
-    0.8
+    0x07101a,
+    1.0
 );
 
 scene.add(hemi);
@@ -1645,12 +1636,12 @@ scene.add(hemi);
 const key =
 new THREE.DirectionalLight(
     0xffffff,
-    1.5
+    1.8
 );
 
 key.position.set(
-    6,
-    10,
+    5,
+    8,
     8
 );
 
@@ -1658,54 +1649,56 @@ scene.add(key);
 
 const fill =
 new THREE.DirectionalLight(
-    0x9bb9d2,
-    0.45
+    0xa8c7df,
+    0.55
 );
 
 fill.position.set(
-    -7,
+    -6,
     3,
-    6
+    7
 );
 
 scene.add(fill);
 
 
-/* =========================
-   GROUP
-========================= */
+/* ==================================================
+   BRAIN GROUP
+================================================== */
 
 const brainGroup =
 new THREE.Group();
 
-scene.add(brainGroup);
+scene.add(
+    brainGroup
+);
 
 
-/* =========================
-   PINK BRAIN
-========================= */
+/* ==================================================
+   PINK BRAIN MATERIAL
+================================================== */
 
 const brainPinkMaterial =
 new THREE.MeshPhysicalMaterial({
 
-    color:0xf1c5d0,
+    color:0xeab7c4,
 
-    roughness:0.62,
+    roughness:0.72,
 
     metalness:0,
 
-    clearcoat:0.14,
+    clearcoat:0.12,
 
-    clearcoatRoughness:0.5,
+    clearcoatRoughness:0.55,
 
     side:THREE.DoubleSide
 
 });
 
 
-/* =========================
+/* ==================================================
    MCA MATERIAL
-========================= */
+================================================== */
 
 const mcaMaterial =
 new THREE.MeshBasicMaterial({
@@ -1716,7 +1709,9 @@ new THREE.MeshBasicMaterial({
 
     opacity:1,
 
-    depthTest:false
+    depthTest:false,
+
+    depthWrite:false
 
 });
 
@@ -1728,65 +1723,116 @@ new THREE.MeshBasicMaterial({
 
     transparent:true,
 
-    opacity:0.20,
+    opacity:0.12,
 
-    depthTest:false
+    depthTest:false,
+
+    depthWrite:false
 
 });
 
 
+let mcaGroup = null;
+
 let highlighted = true;
 
-let mcaGroup = null;
+
+/* ==================================================
+   MODEL INFORMATION
+================================================== */
+
+let brainBounds = null;
+
+let brainSize = null;
 
 
 /* ==================================================
    CREATE MCA
-   IMPORTANT:
-   This is deliberately placed INSIDE the lateral
-   cerebral hemisphere rather than outside the model.
+   -----------------------------------------------
+   The important fix:
+   MCA coordinates are calculated from the actual
+   loaded brain bounding box.
+
+   This prevents the artery from being placed
+   somewhere completely outside the brain.
 ================================================== */
 
 function createMCAOverlay(){
 
+    if(mcaGroup){
+
+        brainGroup.remove(
+            mcaGroup
+        );
+
+    }
+
+
     mcaGroup =
     new THREE.Group();
 
-    /*
-       Coordinates are kept within the normalized
-       brain volume.
 
-       Positive X = lateral side
-       Y = vertical
-       Z = front/back
+    /*
+       The real brain is centered around (0,0,0)
+       after normalization.
+
+       These coordinates describe the lateral
+       cerebral surface in NORMALIZED brain space.
+
+       The MCA stays close to the lateral surface
+       instead of floating outside.
     */
 
+    const sx =
+    brainSize.x;
+
+    const sy =
+    brainSize.y;
+
+    const sz =
+    brainSize.z;
+
+
+    /*
+       Start near the Sylvian/lateral fissure.
+       The vessel then spreads over the lateral
+       cerebral hemisphere.
+    */
+
+    const p1 =
+    new THREE.Vector3(
+        sx * 0.10,
+        sy * 0.02,
+        sz * 0.48
+    );
+
+    const p2 =
+    new THREE.Vector3(
+        sx * 0.22,
+        sy * 0.08,
+        sz * 0.50
+    );
+
+    const p3 =
+    new THREE.Vector3(
+        sx * 0.34,
+        sy * 0.17,
+        sz * 0.49
+    );
+
+    const p4 =
+    new THREE.Vector3(
+        sx * 0.43,
+        sy * 0.25,
+        sz * 0.44
+    );
+
+
     const mainPoints = [
-
-        new THREE.Vector3(
-            0.72,
-            0.05,
-            0.15
-        ),
-
-        new THREE.Vector3(
-            1.02,
-            0.20,
-            0.16
-        ),
-
-        new THREE.Vector3(
-            1.30,
-            0.38,
-            0.12
-        ),
-
-        new THREE.Vector3(
-            1.48,
-            0.55,
-            0.08
-        )
-
+        p1,
+        p2,
+        p3,
+        p4
     ];
 
 
@@ -1799,8 +1845,11 @@ function createMCAOverlay(){
     const mainGeometry =
     new THREE.TubeGeometry(
         mainCurve,
-        32,
-        0.035,
+        36,
+        Math.max(
+            sx * 0.018,
+            0.025
+        ),
         8,
         false
     );
@@ -1812,40 +1861,98 @@ function createMCAOverlay(){
         mcaMaterial
     );
 
-
     mcaGroup.add(
         mainVessel
     );
 
 
-    /* =========================
+    /* ==================================================
        CORTICAL BRANCHES
-    ========================= */
+    ================================================== */
 
     const branches = [
 
         [
-            new THREE.Vector3(1.05,.21,.16),
-            new THREE.Vector3(1.23,.48,.16),
-            new THREE.Vector3(1.35,.72,.12)
+            new THREE.Vector3(
+                sx*.25,
+                sy*.10,
+                sz*.50
+            ),
+
+            new THREE.Vector3(
+                sx*.32,
+                sy*.27,
+                sz*.50
+            ),
+
+            new THREE.Vector3(
+                sx*.38,
+                sy*.40,
+                sz*.46
+            )
         ],
 
-        [
-            new THREE.Vector3(1.20,.32,.14),
-            new THREE.Vector3(1.42,.34,.15),
-            new THREE.Vector3(1.62,.31,.12)
-        ],
 
         [
-            new THREE.Vector3(1.24,.39,.13),
-            new THREE.Vector3(1.43,.18,.10),
-            new THREE.Vector3(1.55,.02,.08)
+            new THREE.Vector3(
+                sx*.31,
+                sy*.16,
+                sz*.49
+            ),
+
+            new THREE.Vector3(
+                sx*.40,
+                sy*.18,
+                sz*.47
+            ),
+
+            new THREE.Vector3(
+                sx*.46,
+                sy*.17,
+                sz*.43
+            )
         ],
 
+
         [
-            new THREE.Vector3(1.30,.46,.10),
-            new THREE.Vector3(1.43,.60,.08),
-            new THREE.Vector3(1.55,.70,.05)
+            new THREE.Vector3(
+                sx*.32,
+                sy*.17,
+                sz*.48
+            ),
+
+            new THREE.Vector3(
+                sx*.39,
+                sy*.04,
+                sz*.45
+            ),
+
+            new THREE.Vector3(
+                sx*.44,
+                sy*-.10,
+                sz*.40
+            )
+        ],
+
+
+        [
+            new THREE.Vector3(
+                sx*.35,
+                sy*.20,
+                sz*.46
+            ),
+
+            new THREE.Vector3(
+                sx*.42,
+                sy*.32,
+                sz*.40
+            ),
+
+            new THREE.Vector3(
+                sx*.46,
+                sy*.41,
+                sz*.35
+            )
         ]
 
     ];
@@ -1862,8 +1969,11 @@ function createMCAOverlay(){
         const geometry =
         new THREE.TubeGeometry(
             curve,
-            18,
-            0.023,
+            22,
+            Math.max(
+                sx*.011,
+                .017
+            ),
             7,
             false
         );
@@ -1881,23 +1991,22 @@ function createMCAOverlay(){
     });
 
 
-    /* =========================
-       SOFT WHITE GLOW
-    ========================= */
-
-    const glowCurve =
-    new THREE.CatmullRomCurve3(
-        mainPoints
-    );
+    /* ==================================================
+       SUBTLE GLOW
+    ================================================== */
 
     const glowGeometry =
     new THREE.TubeGeometry(
-        glowCurve,
-        32,
-        0.085,
+        mainCurve,
+        36,
+        Math.max(
+            sx*.045,
+            .06
+        ),
         8,
         false
     );
+
 
     const glow =
     new THREE.Mesh(
@@ -1911,21 +2020,47 @@ function createMCAOverlay(){
 
 
     /*
-       Position the entire vascular overlay
-       INSIDE the brain model.
+       CRITICAL:
+
+       The model itself is centered and normalized.
+       Therefore the artery is added directly to the
+       same brainGroup with the SAME coordinate system.
+
+       No random offset.
+       No giant external position.
+       No scale mismatch.
     */
 
     mcaGroup.position.set(
-        -0.20,
-        -0.45,
-        0.25
+        0,
+        0,
+        0
     );
 
     mcaGroup.scale.set(
-        0.72,
-        0.72,
-        0.72
+        1,
+        1,
+        1
     );
+
+
+    /*
+       Render the white vessel above the pink brain.
+    */
+
+    mcaGroup.renderOrder = 50;
+
+
+    mcaGroup.traverse(
+    function(child){
+
+        if(child.isMesh){
+
+            child.renderOrder = 50;
+
+        }
+
+    });
 
 
     brainGroup.add(
@@ -1935,32 +2070,47 @@ function createMCAOverlay(){
 }
 
 
-/* =========================
+/* ==================================================
    LOAD REAL BRAIN
-========================= */
+================================================== */
 
 function loadRealBrain(){
 
     const loader =
     new GLTFLoader();
 
+
     const draco =
     new DRACOLoader();
+
 
     draco.setDecoderPath(
         "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/"
     );
 
-    loader.setDRACOLoader(draco);
 
+    loader.setDRACOLoader(
+        draco
+    );
+
+
+    /*
+       First try local GitHub file.
+
+       IMPORTANT:
+       If your GLB is called brainstem.glb,
+       keep it in the SAME folder as mca.html.
+    */
 
     const urls = [
 
-        "https://cdn.jsdelivr.net/gh/itayinbarr/brainproject@main/brain-atlas/models/brain.glb",
+        "./brainstem.glb",
 
-        "https://raw.githubusercontent.com/itayinbarr/brainproject/main/brain-atlas/models/brain.glb",
+        "./brain human.glb",
 
-        "https://itayinbarr.github.io/brainproject/models/brain.glb"
+        "./brainstem%20(2).glb",
+
+        "https://cdn.jsdelivr.net/gh/itayinbarr/brainproject@main/brain-atlas/models/brain.glb"
 
     ];
 
@@ -1972,9 +2122,14 @@ function loadRealBrain(){
 
         if(index >= urls.length){
 
+            console.warn(
+                "No GLB found. Using fallback."
+            );
+
             createFallbackBrain();
 
             return;
+
         }
 
 
@@ -1983,7 +2138,7 @@ function loadRealBrain(){
 
 
         loadText.textContent =
-        "Loading real brain model...";
+        "Loading brain model...";
 
 
         loader.load(
@@ -1996,33 +2151,44 @@ function loadRealBrain(){
                 gltf.scene;
 
 
-                /* =========================
-                   CENTER MODEL
-                ========================= */
+                /*
+                   FIRST:
+                   calculate original bounds.
+                */
 
-                const box =
+                const originalBox =
                 new THREE.Box3()
-                .setFromObject(model);
+                .setFromObject(
+                    model
+                );
 
-                const center =
-                box.getCenter(
+
+                const originalCenter =
+                originalBox.getCenter(
                     new THREE.Vector3()
                 );
 
-                const size =
-                box.getSize(
+
+                const originalSize =
+                originalBox.getSize(
                     new THREE.Vector3()
                 );
+
 
                 const maxDim =
                 Math.max(
-                    size.x,
-                    size.y,
-                    size.z
+                    originalSize.x,
+                    originalSize.y,
+                    originalSize.z
                 );
 
+
+                /*
+                   Normalize model.
+                */
+
                 const scale =
-                4.5 / maxDim;
+                4.4 / maxDim;
 
 
                 model.scale.setScalar(
@@ -2030,19 +2196,47 @@ function loadRealBrain(){
                 );
 
 
-                model.position.sub(
-                    center.multiplyScalar(
-                        scale
-                    )
+                /*
+                   Center model.
+                */
+
+                model.position.set(
+                    -originalCenter.x * scale,
+                    -originalCenter.y * scale - 0.35,
+                    -originalCenter.z * scale
                 );
 
 
-                model.position.y -= 0.55;
+                /*
+                   Calculate FINAL bounds after
+                   normalization.
+                */
+
+                brainGroup.add(
+                    model
+                );
 
 
-                /* =========================
-                   MAKE BRAIN PINK
-                ========================= */
+                const finalBox =
+                new THREE.Box3()
+                .setFromObject(
+                    model
+                );
+
+
+                brainBounds =
+                finalBox;
+
+
+                brainSize =
+                finalBox.getSize(
+                    new THREE.Vector3()
+                );
+
+
+                /*
+                   Make the actual brain pink.
+                */
 
                 model.traverse(
                 function(child){
@@ -2066,14 +2260,9 @@ function loadRealBrain(){
                 });
 
 
-                brainGroup.add(
-                    model
-                );
-
-
                 /*
-                   MCA overlay is added AFTER
-                   the brain is centered and scaled.
+                   NOW create MCA using the
+                   ACTUAL dimensions of this model.
                 */
 
                 createMCAOverlay();
@@ -2081,6 +2270,10 @@ function loadRealBrain(){
 
                 loadBar.style.width =
                 "100%";
+
+
+                loadText.textContent =
+                "Brain loaded";
 
 
                 onReady();
@@ -2094,9 +2287,10 @@ function loadRealBrain(){
                     const pct =
                     Math.min(
                         90,
-                        progress.loaded /
-                        progress.total *
-                        90
+                        (
+                            progress.loaded /
+                            progress.total
+                        ) * 90
                     );
 
                     loadBar.style.width =
@@ -2109,7 +2303,8 @@ function loadRealBrain(){
             function(error){
 
                 console.warn(
-                    "Brain model failed:",
+                    "Failed:",
+                    url,
                     error
                 );
 
@@ -2127,15 +2322,21 @@ function loadRealBrain(){
 }
 
 
-/* =========================
-   FALLBACK
-========================= */
+/* ==================================================
+   FALLBACK BRAIN
+================================================== */
 
 function createFallbackBrain(){
 
     loadText.textContent =
     "Creating anatomy view...";
 
+
+    /*
+       Two hemispheres.
+       This looks much more brain-like than
+       one perfect sphere.
+    */
 
     const geometry =
     new THREE.SphereGeometry(
@@ -2145,42 +2346,89 @@ function createFallbackBrain(){
     );
 
 
-    const brain =
+    const left =
     new THREE.Mesh(
         geometry,
-        brainPinkMaterial
+        brainPinkMaterial.clone()
     );
 
 
-    brain.scale.set(
-        1.15,
+    left.scale.set(
+        0.82,
         0.92,
-        0.82
+        0.90
     );
 
 
-    brain.position.y =
-    -0.45;
+    left.position.set(
+        -0.72,
+        -0.35,
+        0
+    );
+
+
+    const right =
+    new THREE.Mesh(
+        geometry,
+        brainPinkMaterial.clone()
+    );
+
+
+    right.scale.set(
+        0.82,
+        0.92,
+        0.90
+    );
+
+
+    right.position.set(
+        0.72,
+        -0.35,
+        0
+    );
 
 
     brainGroup.add(
-        brain
+        left
+    );
+
+    brainGroup.add(
+        right
+    );
+
+
+    const box =
+    new THREE.Box3()
+    .setFromObject(
+        brainGroup
+    );
+
+
+    brainBounds =
+    box;
+
+
+    brainSize =
+    box.getSize(
+        new THREE.Vector3()
     );
 
 
     createMCAOverlay();
 
+
     loadBar.style.width =
     "100%";
+
 
     onReady();
 
 }
 
 
-/* =========================
+/* ==================================================
    READY
-========================= */
+================================================== */
 
 function onReady(){
 
@@ -2195,14 +2443,14 @@ function onReady(){
             "show"
         );
 
-    },500);
+    },600);
 
 }
 
 
-/* =========================
-   LABEL
-========================= */
+/* ==================================================
+   LABEL POSITION
+================================================== */
 
 function updateLabel(){
 
@@ -2210,33 +2458,41 @@ function updateLabel(){
         return;
 
 
-    const position =
+    /*
+       Label is attached to a point near the
+       proximal MCA instead of a random screen
+       coordinate.
+    */
+
+    const localPosition =
     new THREE.Vector3(
-        0.95,
-        0.05,
-        0.25
+        brainSize.x * 0.34,
+        brainSize.y * 0.17,
+        brainSize.z * 0.50
     );
 
 
     mcaGroup.localToWorld(
-        position
+        localPosition
     );
 
 
-    position.project(
+    localPosition.project(
         camera
     );
 
 
     const x =
-    (position.x + 1) /
-    2 *
+    (
+        localPosition.x + 1
+    ) / 2 *
     canvas.clientWidth;
 
 
     const y =
-    (-position.y + 1) /
-    2 *
+    (
+        -localPosition.y + 1
+    ) / 2 *
     canvas.clientHeight;
 
 
@@ -2245,14 +2501,14 @@ function updateLabel(){
 
 
     mcaLabel.style.top =
-    (y - 30) + "px";
+    (y - 18) + "px";
 
 }
 
 
-/* =========================
+/* ==================================================
    RESIZE
-========================= */
+================================================== */
 
 function resize(){
 
@@ -2263,12 +2519,16 @@ function resize(){
     canvas.clientHeight;
 
 
-    if(width <= 0 || height <= 0)
+    if(
+        width <= 0 ||
+        height <= 0
+    )
         return;
 
 
     camera.aspect =
     width / height;
+
 
     camera.updateProjectionMatrix();
 
@@ -2281,15 +2541,16 @@ function resize(){
 
 }
 
+
 window.addEventListener(
     "resize",
     resize
 );
 
 
-/* =========================
-   HIGHLIGHT
-========================= */
+/* ==================================================
+   HIGHLIGHT BUTTON
+================================================== */
 
 const highlightBtn =
 document.getElementById(
@@ -2336,9 +2597,9 @@ function(){
 });
 
 
-/* =========================
-   ROTATE
-========================= */
+/* ==================================================
+   AUTO ROTATE
+================================================== */
 
 const rotateBtn =
 document.getElementById(
@@ -2371,9 +2632,9 @@ function(){
 });
 
 
-/* =========================
+/* ==================================================
    RESET
-========================= */
+================================================== */
 
 document.getElementById(
     "reset"
@@ -2382,25 +2643,27 @@ document.getElementById(
 function(){
 
     camera.position.set(
-        3.4,
-        0.35,
-        8.2
+        3.6,
+        0.45,
+        7.8
     );
+
 
     controls.target.set(
         0,
-        -0.25,
+        -0.20,
         0
     );
+
 
     controls.update();
 
 });
 
 
-/* =========================
+/* ==================================================
    ANIMATION
-========================= */
+================================================== */
 
 function animate(){
 
@@ -2408,9 +2671,12 @@ function animate(){
         animate
     );
 
+
     controls.update();
 
+
     updateLabel();
+
 
     renderer.render(
         scene,
@@ -2420,9 +2686,9 @@ function animate(){
 }
 
 
-/* =========================
+/* ==================================================
    START
-========================= */
+================================================== */
 
 resize();
 
@@ -2434,29 +2700,54 @@ loadRealBrain();
 
 
 <!-- ==================================================
-     QUIZ JAVASCRIPT
+     QUIZ
 ================================================== -->
 
 <script>
 
-function checkAnswer(button,correct){
+let answered = 0;
 
-    const parent =
-    button.parentElement;
+let correctAnswers = 0;
+
+
+function checkAnswer(
+    button,
+    correct
+){
+
+    const question =
+    button.closest(
+        ".question"
+    );
+
 
     const options =
-    parent.querySelectorAll(
+    question.querySelectorAll(
         ".option"
     );
+
+
+    /*
+       Prevent answering the same
+       question multiple times.
+    */
+
+    if(
+        question.dataset.answered === "true"
+    ){
+        return;
+    }
+
+
+    question.dataset.answered =
+    "true";
 
 
     options.forEach(
     function(option){
 
-        option.classList.remove(
-            "correct",
-            "wrong"
-        );
+        option.disabled =
+        true;
 
     });
 
@@ -2467,6 +2758,8 @@ function checkAnswer(button,correct){
             "correct"
         );
 
+        correctAnswers++;
+
     }
 
     else{
@@ -2475,17 +2768,38 @@ function checkAnswer(button,correct){
             "wrong"
         );
 
+
+        options.forEach(
+        function(option){
+
+            if(
+                option.getAttribute(
+                    "onclick"
+                ) &&
+                option.getAttribute(
+                    "onclick"
+                ).includes(
+                    "true"
+                )
+            ){
+
+                option.classList.add(
+                    "correct"
+                );
+
+            }
+
+        });
+
     }
+
+
+    answered++;
 
 
     updateQuizScore();
 
 }
-
-
-let answered = 0;
-
-let correctAnswers = 0;
 
 
 function updateQuizScore(){
@@ -2496,57 +2810,60 @@ function updateQuizScore(){
     );
 
 
-    answered = 0;
-
-    correctAnswers = 0;
-
-
-    const questions =
-    document.querySelectorAll(
-        ".question"
-    );
+    result.style.display =
+    "block";
 
 
-    questions.forEach(
-    function(question){
-
-        const selected =
-        question.querySelector(
-            ".correct, .wrong"
-        );
-
-
-        if(selected){
-
-            answered++;
-
-
-            if(
-                selected.classList.contains(
-                    "correct"
-                )
-            ){
-
-                correctAnswers++;
-
-            }
-
-        }
-
-    });
-
-
-    if(answered > 0){
-
-        result.style.display =
-        "block";
-
+    if(answered < 3){
 
         result.textContent =
         "Score · النتيجة: " +
         correctAnswers +
         " / " +
-        answered;
+        answered +
+        " — Keep going! · كملي!";
+
+    }
+
+    else{
+
+        let message = "";
+
+
+        if(correctAnswers === 3){
+
+            message =
+            "Perfect! 🎉 · ممتاز!";
+
+        }
+
+        else if(correctAnswers === 2){
+
+            message =
+            "Great job! 🧠 · شغل ممتاز!";
+
+        }
+
+        else if(correctAnswers === 1){
+
+            message =
+            "Good start! Review the anatomy and try again. · بداية كويسة! راجعي التشريح وجربي تاني.";
+
+        }
+
+        else{
+
+            message =
+            "Review the MCA section and try again. · راجعي جزء الـMCA وحاولي تاني.";
+
+        }
+
+
+        result.textContent =
+        "Final Score · النتيجة النهائية: " +
+        correctAnswers +
+        " / 3 — " +
+        message;
 
     }
 
