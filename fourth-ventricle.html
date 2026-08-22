@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NeuroAtlas | Fourth Ventricle</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:#050b13;color:#eef4fa;font-family:Arial,Helvetica,sans-serif;line-height:1.6}
+nav{height:70px;padding:0 7%;display:flex;align-items:center;border-bottom:1px solid rgba(255,255,255,.08)}
+nav a{color:#9db0c3;text-decoration:none;font-size:14px}
+nav a:hover{color:white}
+.container{max-width:1200px;margin:auto;padding:60px 7% 100px}
+.eyebrow{color:#61b5ff;letter-spacing:3px;font-size:12px;text-transform:uppercase;margin-bottom:15px}
+h1{font-size:clamp(48px,7vw,82px);line-height:.95;letter-spacing:-4px;margin-bottom:12px}
+.arabic-title{color:#fff;font-size:25px;margin-bottom:25px}
+.hero p{color:#a6b6c7;max-width:900px;font-size:18px;line-height:1.8}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.action-button{padding:11px 17px;border-radius:9px;background:#0b1928;border:1px solid #31516d;color:#bdd0e0;text-decoration:none;font-size:14px;transition:.2s}
+.action-button:hover{background:#14304a;color:white;border-color:white}
+.viewer{margin-top:60px;border:1px solid rgba(255,255,255,.10);border-radius:24px;overflow:hidden;background:#02060b;box-shadow:0 25px 80px rgba(0,0,0,.45)}
+.viewer-header{min-height:65px;padding:0 22px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.08)}
+.viewer-title{font-size:14px;color:#d2dce6}.viewer-status{color:#708499;font-size:11px;letter-spacing:1px}
+.scene{position:relative;width:100%;height:700px;background:radial-gradient(circle at 50% 45%,#203b51 0%,#0d1c2e 42%,#02060b 100%)}
+#brainCanvas{width:100%;height:100%;display:block}
+.loading{position:absolute;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;background:#02060b;color:#9db0c3;font-size:14px;transition:opacity .8s}
+.loading.hide{opacity:0;pointer-events:none}.loading-bar{width:180px;height:2px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden}.loading-bar-inner{width:0%;height:100%;background:#fff;transition:width .3s}
+.structure-label{position:absolute;z-index:50;pointer-events:none;transform:translate(-50%,-50%);display:none}.structure-label.show{display:block}
+.label-box{position:relative;padding:8px 13px;border-radius:9px;background:rgba(5,10,17,.97);border:1.5px solid #fff;color:#fff;font-size:11px;font-weight:bold;letter-spacing:.8px;white-space:nowrap;box-shadow:0 0 12px rgba(255,255,255,.3),0 0 30px rgba(255,255,255,.12)}
+.label-line{position:absolute;width:1.5px;height:35px;background:#fff;left:50%;bottom:-35px;transform:translateX(-50%)}
+.controls{display:flex;gap:10px;flex-wrap:wrap;padding:15px;border-top:1px solid rgba(255,255,255,.08)}
+.controls button{padding:11px 17px;border-radius:9px;background:#0b1928;border:1px solid #31516d;color:#bdd0e0;cursor:pointer;transition:.2s}.controls button:hover{background:#14304a;color:white}.controls button.active{background:#17191c;border-color:#fff;color:#fff}
+.section{margin-top:70px}.section-label{color:#61b5ff;letter-spacing:2px;font-size:11px;text-transform:uppercase;margin-bottom:8px}.section h2{font-size:32px;margin-bottom:25px}.section-intro{color:#91a5b8;max-width:900px;font-size:15px;line-height:1.9;margin-bottom:30px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.card{padding:27px;background:#091522;border:1px solid #172b3e;border-radius:18px;transition:.2s}.card:hover{transform:translateY(-3px);border-color:#2b506c}.card h3{font-size:18px;margin-bottom:13px;color:#eef4fa;line-height:1.45}.card p{color:#91a5b8;font-size:14px;line-height:1.8}
+.location{margin-top:70px;padding:32px;background:#091522;border:1px solid #172b3e;border-radius:18px}.location h2{font-size:30px;margin-bottom:12px}.location-intro{color:#91a5b8;max-width:900px;line-height:1.9;margin-bottom:25px}.location-diagram{margin-top:25px;padding:20px;background:#050b13;border:1px solid #20364b;border-radius:16px}.brain-svg{display:block;width:100%;max-width:850px;height:auto;margin:auto}.svg-cerebrum{fill:#263d55;stroke:#71869e;stroke-width:3}.svg-ventricle{fill:#fff;stroke:#fff;stroke-width:3}.svg-cerebellum{fill:#344d66;stroke:#71869e;stroke-width:3}.svg-brainstem{fill:#29465b;stroke:#71869e;stroke-width:3}.svg-line{stroke:#fff;stroke-width:2}.svg-label{fill:#fff;font-size:18px;font-weight:bold}.location-caption{text-align:center;color:#9fb0c3;margin-top:15px}
+.clinical-section{margin-top:65px}.clinical-box{padding:30px;background:#091522;border:1px solid #172b3e;border-left:3px solid #fff;border-radius:18px}.clinical-box p{color:#a7b7c6;font-size:15px;line-height:1.9;margin-bottom:18px}.clinical-box p:last-child{margin-bottom:0}
+.insight{margin-top:30px;padding:25px;background:#091522;border-left:3px solid #fff;border-radius:10px;color:#aebdce}.insight strong{color:#fff}
+.facts-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.fact{padding:22px;background:#091522;border:1px solid #172b3e;border-radius:16px}.fact span{display:block;color:#fff;font-size:11px;letter-spacing:2px;margin-bottom:12px}.fact strong{display:block;color:#eef4fa;font-size:14px;margin-bottom:8px;line-height:1.5}.fact p{color:#8195a8;font-size:13px;line-height:1.7}
+.quiz{margin-top:65px;padding:30px;background:#091522;border:1px solid #172b3e;border-radius:18px}.quiz h2{font-size:27px;margin-bottom:25px}.question-block{padding:22px;margin-bottom:18px;background:#07111d;border:1px solid #172b3e;border-radius:14px}.question-number{color:#61b5ff;font-size:12px;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}.question-en{color:#eef4fa;font-size:16px;margin-bottom:5px}.question-ar{color:#91a5b8;font-size:15px;margin-bottom:15px}.option{display:block;width:100%;padding:13px;margin-top:10px;background:#10233a;color:white;border:1px solid #263951;border-radius:8px;text-align:left;cursor:pointer;font-size:14px}.option:hover{border-color:#fff}.option.correct{background:#17251f;border-color:#78e0a0}.option.wrong{background:#291a1d;border-color:#ff8792}.question-feedback{margin-top:12px;font-size:14px;min-height:22px}.quiz-result{margin-top:25px;padding:20px;border-radius:12px;background:#07111d;border:1px solid #263951;text-align:center;font-size:17px;color:white}
+.back{display:inline-block;margin-top:40px;padding:12px 18px;border:1px solid #263951;border-radius:9px;color:#fff;text-decoration:none}.back:hover{border-color:#fff}
+@media(max-width:900px){.cards{grid-template-columns:repeat(2,1fr)}.facts-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:800px){.scene{height:450px}.viewer-status{display:none}}
+@media(max-width:600px){.cards{grid-template-columns:1fr}.facts-grid{grid-template-columns:1fr}h1{letter-spacing:-2px}.location{padding:20px}}
+</style>
+</head>
+<body>
+<nav><a href="./explore.html">← Back to Explore Anatomy</a></nav>
+<main class="container">
+<div class="eyebrow">Ventricular System · NeuroAtlas</div>
+<h1>Fourth Ventricle</h1>
+<div class="arabic-title">البطين الرابع</div>
+<div class="hero"><p>
+The fourth ventricle is a cavity of the ventricular system located between the brainstem and cerebellum. It receives cerebrospinal fluid from the cerebral aqueduct and communicates with the subarachnoid space through its apertures.
+<br><br>
+البطين الرابع هو تجويف من الجهاز البطيني يقع بين جذع الدماغ والمخيخ. يستقبل السائل الدماغي الشوكي من القناة الدماغية ويتصل بالحيز تحت العنكبوتية من خلال فتحاته.
+</p></div>
+<div class="actions"><a class="action-button" href="#location">📍 View Location</a><a class="action-button" href="#anatomy">🧠 Ventricle Anatomy</a><a class="action-button" href="#quiz">🧪 Test Yourself</a></div>
+<div class="viewer">
+<div class="viewer-header"><div class="viewer-title">Human Brain · Fourth Ventricle</div><div class="viewer-status">DRAG TO ROTATE · SCROLL TO ZOOM</div></div>
+<div class="scene">
+<div id="loading" class="loading"><span id="loadText">Loading real brain model...</span><div class="loading-bar"><div id="loadBar" class="loading-bar-inner"></div></div></div>
+<canvas id="brainCanvas"></canvas>
+<div id="structureLabel" class="structure-label"><div class="label-box">FOURTH VENTRICLE · البطين الرابع<div class="label-line"></div></div></div>
+</div>
+<div class="controls"><button id="highlight" class="active">⚪ Highlight Fourth Ventricle</button><button id="rotate" class="active">⟳ Auto Rotate</button><button id="reset">↻ Reset View</button></div>
+</div>
+<section id="anatomy" class="section">
+<div class="section-label">Fourth Ventricle · البطين الرابع</div><h2>Fourth Ventricle Anatomy · تشريح البطين الرابع</h2>
+<p class="section-intro">The fourth ventricle is a diamond-shaped cavity positioned between the pons and upper medulla anteriorly and the cerebellum posteriorly. It continues from the cerebral aqueduct and is connected to the subarachnoid space through several openings.<br><br>البطين الرابع هو تجويف يشبه الماسة يقع بين الجسر والنخاع المستطيل من الأمام والمخيخ من الخلف. ويستمر من القناة الدماغية ويتصل بالحيز تحت العنكبوتية عبر عدة فتحات.</p>
+<div class="cards">
+<div class="card"><h3>Floor · القاع</h3><p>The floor of the fourth ventricle is formed mainly by the dorsal surfaces of the pons and upper medulla.<br><br>يتكون قاع البطين الرابع بشكل أساسي من الأسطح الظهرية للجسر والجزء العلوي من النخاع المستطيل.</p></div>
+<div class="card"><h3>Roof · السقف</h3><p>The roof is formed by structures associated with the cerebellum and medullary vela.<br><br>يتكون سقف البطين الرابع من تراكيب مرتبطة بالمخيخ والستائر النخاعية.</p></div>
+<div class="card"><h3>Cerebral Aqueduct · القناة الدماغية</h3><p>The cerebral aqueduct connects the fourth ventricle to the third ventricle.<br><br>تربط القناة الدماغية البطين الرابع بالبطين الثالث.</p></div>
+<div class="card"><h3>Median Aperture · الفتحة المتوسطة</h3><p>The median aperture provides a central connection from the fourth ventricle to the subarachnoid space.<br><br>توفر الفتحة المتوسطة اتصالًا مركزيًا بين البطين الرابع والحيز تحت العنكبوتية.</p></div>
+<div class="card"><h3>Lateral Apertures · الفتحات الجانبية</h3><p>The lateral apertures provide additional pathways from the fourth ventricle to the subarachnoid space.<br><br>توفر الفتحات الجانبية مسارات إضافية من البطين الرابع إلى الحيز تحت العنكبوتية.</p></div>
+<div class="card"><h3>Cerebrospinal Fluid · السائل الدماغي الشوكي</h3><p>CSF passes into the fourth ventricle before exiting toward the subarachnoid space and continuing its circulation.<br><br>يمر السائل الدماغي الشوكي إلى البطين الرابع قبل خروجه نحو الحيز تحت العنكبوتية واستمرار دورانه.</p></div>
+<div class="card"><h3>Cerebellar Relation · علاقته بالمخيخ</h3><p>The fourth ventricle lies directly anterior to the cerebellum.<br><br>يقع البطين الرابع مباشرة أمام المخيخ.</p></div>
+<div class="card"><h3>Brainstem Relation · علاقته بجذع الدماغ</h3><p>Its floor is closely related to the pons and upper medulla.<br><br>يرتبط قاعه بشكل وثيق بالجسر والنخاع المستطيل العلوي.</p></div>
+<div class="card"><h3>Ventricular Continuity · استمرارية الجهاز البطيني</h3><p>It forms the downstream chamber after the cerebral aqueduct and continues into the central canal inferiorly.<br><br>يشكل التجويف التالي بعد القناة الدماغية ويستمر سفليًا نحو القناة المركزية.</p></div>
+</div></section>
+<section id="location" class="location">
+<h2>📍 Where is the Fourth Ventricle? · أين يقع البطين الرابع؟</h2>
+<p class="location-intro">The fourth ventricle is located between the cerebellum posteriorly and the pons and upper medulla anteriorly. It sits below the cerebral aqueduct and above the central canal, forming a key part of the CSF pathway through the posterior fossa.<br><br>يقع البطين الرابع بين المخيخ من الخلف والجسر والنخاع المستطيل العلوي من الأمام. ويوجد أسفل القناة الدماغية وفوق القناة المركزية، ويشكل جزءًا مهمًا من مسار السائل الدماغي الشوكي في الحفرة الخلفية.</p>
+<div class="location-diagram">
+<svg class="brain-svg" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg" aria-label="Simplified location diagram of the fourth ventricle">
+<path class="svg-cerebrum" d="M115 185 C105 100 190 58 300 45 C420 30 555 55 650 125 C700 162 720 215 705 260 C685 315 630 345 560 350 C465 355 345 335 250 305 C175 280 130 235 115 185Z"/>
+<path class="svg-cerebellum" d="M470 300 C410 300 355 340 345 405 C338 460 385 505 450 512 C515 505 562 460 555 405 C545 340 490 300 430 300Z"/>
+<path class="svg-brainstem" d="M420 275 C405 315 405 350 415 390 L485 390 C495 350 495 315 480 275Z"/>
+<path class="svg-ventricle" d="M425 315 C435 300 465 300 475 315 L490 375 C480 395 420 395 410 375Z"/>
+<path class="svg-ventricle" d="M446 245 C442 267 442 290 446 315 L454 315 C458 290 458 267 454 245Z"/>
+<path class="svg-ventricle" d="M447 390 C446 410 448 430 450 448 C452 430 454 410 453 390Z"/>
+<path class="svg-brainstem" d="M420 408 C412 445 416 490 430 528 L472 528 C486 490 490 445 480 408Z"/>
+<line class="svg-line" x1="450" y1="355" x2="690" y2="190"/><text class="svg-label" x="700" y="185">FOURTH VENTRICLE</text><text class="svg-label" x="700" y="212">البطين الرابع</text>
+<line class="svg-line" x1="515" y1="420" x2="690" y2="330"/><text class="svg-label" x="700" y="335">CEREBELLUM</text>
+<line class="svg-line" x1="445" y1="330" x2="690" y2="425"/><text class="svg-label" x="700" y="430">BRAINSTEM</text>
+</svg>
+<p class="location-caption">⚪ The small white cavity between the brainstem and cerebellum represents the fourth ventricle.<br>التجويف الأبيض الصغير بين جذع الدماغ والمخيخ يمثل البطين الرابع.</p>
+</div></section>
+<div class="clinical-section"><div class="section-label">Clinical Importance · الأهمية السريرية</div><h2>Why the Fourth Ventricle Matters</h2><div class="clinical-box"><p>Because the fourth ventricle is a major part of the CSF pathway and lies close to the brainstem and cerebellum, abnormalities or obstruction in this region can interfere with normal CSF circulation and may affect nearby neurological structures.</p><p dir="rtl">لأن البطين الرابع جزء مهم من مسار السائل الدماغي الشوكي ويقع بالقرب من جذع الدماغ والمخيخ، فإن الاضطرابات أو الانسدادات في هذه المنطقة قد تؤثر على حركة السائل الطبيعية وقد تؤثر أيضًا في التراكيب العصبية القريبة.</p></div></div>
+<div class="insight"><strong>NeuroAtlas Insight</strong><br><br>The fourth ventricle is positioned at a crossroads between the brainstem, cerebellum, and the wider CSF circulation system. Its small cavity is therefore both an important anatomical landmark and an important pathway for cerebrospinal fluid.<br><br>يقع البطين الرابع عند نقطة التقاء بين جذع الدماغ والمخيخ ومسار دوران السائل الدماغي الشوكي. لذلك فهو علامة تشريحية مهمة ومسار أساسي للسائل الدماغي الشوكي.</div>
+<div class="section"><div class="section-label">Quick Facts · معلومات سريعة</div><h2>Fourth Ventricle at a Glance</h2><div class="facts-grid"><div class="fact"><span>01</span><strong>Location · الموقع</strong><p>Between the brainstem and cerebellum</p></div><div class="fact"><span>02</span><strong>Above · أعلى</strong><p>Cerebral aqueduct</p></div><div class="fact"><span>03</span><strong>Main Content · المحتوى</strong><p>Cerebrospinal fluid</p></div><div class="fact"><span>04</span><strong>Connection · الاتصال</strong><p>Subarachnoid space through apertures</p></div></div></div>
+<div id="quiz" class="quiz"><h2>🧠 Mini Test · اختبار قصير</h2>
+<div class="question-block" data-answer="B"><div class="question-number">Question 01 · السؤال الأول</div><div class="question-en">Where is the fourth ventricle located?</div><div class="question-ar" dir="rtl">أين يقع البطين الرابع؟</div><button class="option" data-option="A">A. Between the frontal lobes</button><button class="option" data-option="B">B. Between the brainstem and cerebellum</button><button class="option" data-option="C">C. Inside the temporal lobe</button><button class="option" data-option="D">D. Inside the spinal cord only</button><div class="question-feedback"></div></div>
+<div class="question-block" data-answer="C"><div class="question-number">Question 02 · السؤال الثاني</div><div class="question-en">Which structure lies directly posterior to the fourth ventricle?</div><div class="question-ar" dir="rtl">أي تركيب يقع مباشرة خلف البطين الرابع؟</div><button class="option" data-option="A">A. Thalamus</button><button class="option" data-option="B">B. Frontal lobe</button><button class="option" data-option="C">C. Cerebellum</button><button class="option" data-option="D">D. Hippocampus</button><div class="question-feedback"></div></div>
+<div class="question-block" data-answer="A"><div class="question-number">Question 03 · السؤال الثالث</div><div class="question-en">What fluid normally passes through the fourth ventricle?</div><div class="question-ar" dir="rtl">ما السائل الذي يمر عبر البطين الرابع؟</div><button class="option" data-option="A">A. Cerebrospinal fluid</button><button class="option" data-option="B">B. Blood</button><button class="option" data-option="C">C. Lymph</button><button class="option" data-option="D">D. Bile</button><div class="question-feedback"></div></div>
+<div id="quizResult" class="quiz-result">Answer all three questions to see your final score.<br>أجب عن الأسئلة الثلاثة لرؤية نتيجتك النهائية.</div></div>
+<a class="back" href="explore.html">← Back to Explore Anatomy</a>
+</main>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from "three";
+import {OrbitControls} from "three/addons/controls/OrbitControls.js";
+import {GLTFLoader} from "three/addons/loaders/GLTFLoader.js";
+import {DRACOLoader} from "three/addons/loaders/DRACOLoader.js";
+const canvas=document.getElementById("brainCanvas"),loading=document.getElementById("loading"),loadText=document.getElementById("loadText"),loadBar=document.getElementById("loadBar"),structureLabel=document.getElementById("structureLabel");
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(30,1,.01,100);camera.position.set(0,.15,8.5);
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));renderer.setSize(canvas.clientWidth,canvas.clientHeight,false);renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=.8;
+const controls=new OrbitControls(camera,canvas);controls.enableDamping=true;controls.dampingFactor=.05;controls.enablePan=false;controls.enableZoom=true;controls.autoRotate=true;controls.autoRotateSpeed=.18;controls.minDistance=3.5;controls.maxDistance=16;controls.target.set(0,-.25,0);
+scene.add(new THREE.AmbientLight(0xffffff,.65));scene.add(new THREE.HemisphereLight(0xffffff,0x081018,.75));
+const keyLight=new THREE.DirectionalLight(0xffffff,1.5);keyLight.position.set(6,10,8);scene.add(keyLight);
+const fillLight=new THREE.DirectionalLight(0x8ca9bd,.45);fillLight.position.set(-7,2,6);scene.add(fillLight);
+const brainRoot=new THREE.Group();scene.add(brainRoot);
+let brainModel=null,ventricleGroup=null,ventricleMesh=null,highlighted=true;
+const brainMaterial=new THREE.MeshPhysicalMaterial({color:0xe8bfc9,roughness:.65,metalness:0,clearcoat:.1,transparent:true,opacity:.48,depthWrite:false,side:THREE.DoubleSide});
+const ventricleMaterial=new THREE.MeshPhysicalMaterial({color:0xffffff,emissive:0x000000,emissiveIntensity:0,roughness:.42,metalness:0,transparent:false,depthTest:false,depthWrite:false,side:THREE.DoubleSide});
+function createFourthVentricle(){
+ ventricleGroup=new THREE.Group();brainRoot.add(ventricleGroup);
+ const geometry=new THREE.OctahedronGeometry(1,2);
+ ventricleMesh=new THREE.Mesh(geometry,ventricleMaterial);ventricleMesh.name="Fourth Ventricle";
+ ventricleMesh.position.set(0, 0.55, -0.18);ventricleMesh.scale.set(.042,.075,.028);ventricleMesh.renderOrder=20;ventricleGroup.add(ventricleMesh);
+}
+function loadBrain(){
+ const loader=new GLTFLoader(),draco=new DRACOLoader();draco.setDecoderPath("https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/");loader.setDRACOLoader(draco);
+ const url="https://cdn.jsdelivr.net/gh/itayinbarr/brainproject@main/brain-atlas/models/brain.glb";
+ loader.load(url,gltf=>{
+  brainModel=gltf.scene;const box=new THREE.Box3().setFromObject(brainModel),center=box.getCenter(new THREE.Vector3()),size=box.getSize(new THREE.Vector3()),maxDim=Math.max(size.x,size.y,size.z),scale=4.5/maxDim;
+  brainModel.scale.setScalar(scale);brainModel.position.set(0,0,0);brainModel.position.sub(center.multiplyScalar(scale));brainModel.position.y-=.60;
+  brainModel.traverse(child=>{if(!child.isMesh)return;child.castShadow=true;child.receiveShadow=true;child.material=brainMaterial.clone();});
+  brainRoot.add(brainModel);createFourthVentricle();loadBar.style.width="100%";loadText.textContent="Fourth ventricle loaded";setTimeout(()=>{loading.classList.add("hide");structureLabel.classList.add("show")},600);
+ },progress=>{if(progress.total)loadBar.style.width=Math.min(95,progress.loaded/progress.total*95)+"%"},error=>{console.error(error);loadText.textContent="Could not load brain model."});
+}
+function updateLabel(){if(!ventricleMesh)return;const point=new THREE.Vector3();ventricleMesh.getWorldPosition(point);point.project(camera);structureLabel.style.left=((point.x+1)/2*canvas.clientWidth)+"px";structureLabel.style.top=((-point.y+1)/2*canvas.clientHeight-60)+"px";}
+function resize(){const w=canvas.clientWidth,h=canvas.clientHeight;if(w<=0||h<=0)return;camera.aspect=w/h;camera.updateProjectionMatrix();renderer.setSize(w,h,false)}
+window.addEventListener("resize",resize);
+document.getElementById("highlight").addEventListener("click",function(){highlighted=!highlighted;if(ventricleGroup)ventricleGroup.visible=highlighted;structureLabel.classList.toggle("show",highlighted);this.classList.toggle("active",highlighted);this.textContent=highlighted?"⚪ Highlight Fourth Ventricle":"⚫ Show Fourth Ventricle"});
+document.getElementById("rotate").addEventListener("click",function(){controls.autoRotate=!controls.autoRotate;this.classList.toggle("active",controls.autoRotate);this.textContent=controls.autoRotate?"⟳ Auto Rotate":"▶ Auto Rotate"});
+document.getElementById("reset").addEventListener("click",function(){camera.position.set(0,.15,8.5);controls.target.set(0,-.25,0);controls.update()});
+function animate(){requestAnimationFrame(animate);controls.update();updateLabel();renderer.render(scene,camera)}resize();animate();loadBrain();
+let score=0,answered=0;const questions=document.querySelectorAll(".question-block");questions.forEach(question=>{const correct=question.dataset.answer,options=question.querySelectorAll(".option"),feedback=question.querySelector(".question-feedback");let done=false;options.forEach(option=>option.addEventListener("click",()=>{if(done)return;done=true;const selected=option.dataset.option;options.forEach(btn=>btn.disabled=true);if(selected===correct){score++;option.classList.add("correct");feedback.textContent="✓ Correct! · إجابة صحيحة";feedback.style.color="#78e0a0"}else{option.classList.add("wrong");options.forEach(btn=>{if(btn.dataset.option===correct)btn.classList.add("correct")});feedback.textContent="✗ Incorrect · إجابة غير صحيحة";feedback.style.color="#ff8792"}answered++;if(answered===questions.length)showScore()}))});
+function showScore(){const result=document.getElementById("quizResult");let message=score===3?"🔥 Perfect! Excellent work!":score===2?"👏 Great job!":score===1?"💡 Good start! Review the fourth ventricle.":"🧠 Review the fourth ventricle and try again.";result.innerHTML="<strong>"+message+"</strong><br><br>Final Score · النتيجة النهائية: "+score+" / 3"}
+</script>
+</body>
+</html>
