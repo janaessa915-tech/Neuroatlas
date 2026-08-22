@@ -28,9 +28,9 @@ body{
 }
 
 
-/* =========================
+/* ==================================================
    NAV
-========================= */
+================================================== */
 
 nav{
     height:70px;
@@ -47,13 +47,13 @@ nav a{
 }
 
 nav a:hover{
-    color:white;
+    color:#fff;
 }
 
 
-/* =========================
-   CONTAINER
-========================= */
+/* ==================================================
+   MAIN
+================================================== */
 
 .container{
     max-width:1200px;
@@ -62,9 +62,9 @@ nav a:hover{
 }
 
 
-/* =========================
+/* ==================================================
    HERO
-========================= */
+================================================== */
 
 .eyebrow{
     color:#61b5ff;
@@ -89,15 +89,15 @@ h1{
 
 .hero p{
     color:#a6b6c7;
-    max-width:850px;
+    max-width:900px;
     font-size:18px;
     line-height:1.8;
 }
 
 
-/* =========================
+/* ==================================================
    BUTTONS
-========================= */
+================================================== */
 
 .actions{
     display:flex;
@@ -119,14 +119,14 @@ h1{
 
 .action-button:hover{
     background:#14304a;
-    color:white;
+    color:#fff;
     border-color:#61b5ff;
 }
 
 
-/* =========================
-   VIEWER
-========================= */
+/* ==================================================
+   3D VIEWER
+================================================== */
 
 .viewer{
     margin-top:60px;
@@ -178,9 +178,9 @@ h1{
 }
 
 
-/* =========================
+/* ==================================================
    LOADING
-========================= */
+================================================== */
 
 .loading{
     position:absolute;
@@ -218,20 +218,24 @@ h1{
 .loading-bar-inner{
     width:0%;
     height:100%;
-    background:#ffffff;
+    background:#fff;
     transition:width .3s;
 }
 
 
-/* =========================
+/* ==================================================
    MCA LABEL
-========================= */
+================================================== */
 
 .mca-label{
     position:absolute;
+
     z-index:30;
+
     pointer-events:none;
+
     transform:translate(-50%,-100%);
+
     display:none;
 }
 
@@ -241,16 +245,19 @@ h1{
 
 .label-box{
     position:relative;
+
     padding:9px 15px;
+
     border-radius:10px;
 
     background:rgba(5,10,17,.96);
 
-    border:1.5px solid #ffffff;
+    border:1.5px solid #fff;
 
-    color:#ffffff;
+    color:#fff;
 
     font-size:12px;
+
     font-weight:bold;
 
     letter-spacing:1px;
@@ -268,25 +275,26 @@ h1{
     position:absolute;
 
     left:50%;
-    bottom:-15px;
+    bottom:-14px;
 
     width:1.5px;
-    height:15px;
+    height:14px;
 
-    background:#ffffff;
+    background:#fff;
 
     transform:translateX(-50%);
 }
 
 
-/* =========================
+/* ==================================================
    CONTROLS
-========================= */
+================================================== */
 
 .controls{
     display:flex;
     gap:10px;
     flex-wrap:wrap;
+
     padding:15px;
 
     border-top:1px solid rgba(255,255,255,.08);
@@ -310,19 +318,19 @@ h1{
 
 .controls button:hover{
     background:#14304a;
-    color:white;
+    color:#fff;
 }
 
 .controls button.active{
     background:#1b1e23;
-    border-color:#ffffff;
-    color:#ffffff;
+    border-color:#fff;
+    color:#fff;
 }
 
 
-/* =========================
+/* ==================================================
    SECTIONS
-========================= */
+================================================== */
 
 .section{
     margin-top:70px;
@@ -350,9 +358,9 @@ h1{
 }
 
 
-/* =========================
+/* ==================================================
    LOCATION
-========================= */
+================================================== */
 
 .location{
     margin-top:70px;
@@ -390,7 +398,7 @@ h1{
 
 .location-artery{
     fill:none;
-    stroke:#ffffff;
+    stroke:#fff;
     stroke-width:8;
     stroke-linecap:round;
     stroke-linejoin:round;
@@ -398,19 +406,19 @@ h1{
 
 .location-artery-glow{
     fill:none;
-    stroke:#ffffff;
+    stroke:#fff;
     stroke-width:18;
     opacity:.18;
     filter:blur(7px);
 }
 
 .location-line{
-    stroke:#ffffff;
+    stroke:#fff;
     stroke-width:2;
 }
 
 .location-label{
-    fill:#ffffff;
+    fill:#fff;
     font-size:20px;
     font-weight:bold;
 }
@@ -422,9 +430,9 @@ h1{
 }
 
 
-/* =========================
+/* ==================================================
    CARDS
-========================= */
+================================================== */
 
 .cards{
     display:grid;
@@ -459,9 +467,9 @@ h1{
 }
 
 
-/* =========================
+/* ==================================================
    CLINICAL
-========================= */
+================================================== */
 
 .clinical-section{
     margin-top:65px;
@@ -471,7 +479,7 @@ h1{
     padding:30px;
     background:#091522;
     border:1px solid #172b3e;
-    border-left:3px solid #ffffff;
+    border-left:3px solid #fff;
     border-radius:18px;
 }
 
@@ -487,9 +495,9 @@ h1{
 }
 
 
-/* =========================
+/* ==================================================
    FACTS
-========================= */
+================================================== */
 
 .facts-grid{
     display:grid;
@@ -506,7 +514,7 @@ h1{
 
 .fact span{
     display:block;
-    color:#ffffff;
+    color:#fff;
     font-size:11px;
     letter-spacing:2px;
     margin-bottom:12px;
@@ -527,9 +535,9 @@ h1{
 }
 
 
-/* =========================
+/* ==================================================
    QUIZ
-========================= */
+================================================== */
 
 .quiz{
     margin-top:65px;
@@ -553,10 +561,6 @@ h1{
     margin-bottom:35px;
 }
 
-.question:last-child{
-    margin-bottom:0;
-}
-
 .question p{
     color:#eef4fa;
     font-size:16px;
@@ -577,25 +581,18 @@ h1{
     width:100%;
     padding:12px 15px;
     margin-top:9px;
-
     background:#0b1928;
-
     color:#c7d5e2;
-
     border:1px solid #263951;
     border-radius:9px;
-
     text-align:left;
-
     cursor:pointer;
-
     font-size:14px;
-
     transition:.2s;
 }
 
 .option:hover{
-    border-color:#ffffff;
+    border-color:#fff;
     background:#111e2c;
 }
 
@@ -614,22 +611,17 @@ h1{
 .quiz-result{
     margin-top:25px;
     padding:15px;
-
     border-radius:10px;
-
     background:#0b1928;
-
     border:1px solid #263951;
-
     color:#aebdce;
-
     display:none;
 }
 
 
-/* =========================
+/* ==================================================
    MOBILE
-========================= */
+================================================== */
 
 @media(max-width:900px){
 
@@ -695,17 +687,15 @@ h1{
 <main class="container">
 
 
-<!-- =========================
+<!-- ==================================================
      HERO
-========================= -->
+================================================== -->
 
 <div class="eyebrow">
 Cerebral Vasculature · NeuroAtlas
 </div>
 
-<h1>
-MCA
-</h1>
+<h1>MCA</h1>
 
 <div class="arabic-title">
 الشريان الدماغي الأوسط
@@ -719,23 +709,19 @@ The middle cerebral artery (MCA) is one of the major arteries
 supplying the brain. It is a terminal branch of the internal
 carotid artery and supplies large portions of the lateral
 cerebral hemisphere, including important motor, sensory,
-language, and visual association regions.
+language, and association areas.
 
 <br><br>
 
 الشريان الدماغي الأوسط هو أحد الشرايين الرئيسية التي تغذي الدماغ.
 وهو فرع نهائي من الشريان السباتي الداخلي، ويغذي أجزاء كبيرة من
 السطح الجانبي لنصف الكرة المخية، بما في ذلك مناطق مهمة للحركة
-والإحساس واللغة وبعض الوظائف البصرية الترابطية.
+والإحساس واللغة وبعض الوظائف الترابطية.
 
 </p>
 
 </div>
 
-
-<!-- =========================
-     ACTIONS
-========================= -->
 
 <div class="actions">
 
@@ -754,9 +740,9 @@ language, and visual association regions.
 </div>
 
 
-<!-- =========================
+<!-- ==================================================
      3D VIEWER
-========================= -->
+================================================== -->
 
 <div class="viewer">
 
@@ -796,12 +782,10 @@ class="loading-bar-inner">
 <canvas id="brainCanvas"></canvas>
 
 
-<div
-id="mcaLabel"
-class="mca-label">
+<div id="mcaLabel" class="mca-label">
 
 <div class="label-box">
-MIDDLE CEREBRAL ARTERY · MCA
+MCA TERRITORY · منطقة الـMCA
 </div>
 
 </div>
@@ -828,9 +812,9 @@ MIDDLE CEREBRAL ARTERY · MCA
 </div>
 
 
-<!-- =========================
+<!-- ==================================================
      LOCATION
-========================= -->
+================================================== -->
 
 <section id="location" class="location">
 
@@ -851,8 +835,9 @@ much of the lateral surface of the cerebral hemisphere.
 <br><br>
 
 يمتد الشريان الدماغي الأوسط من الشريان السباتي الداخلي
-باتجاه الجانب الجانبي للدماغ، ويدخل في الشق الجانبي، ثم
-تنتشر فروعه على مساحة كبيرة من السطح الجانبي لنصف الكرة المخية.
+باتجاه الجانب الجانبي للدماغ، ويدخل في الشق الجانبي،
+ثم تنتشر فروعه على مساحة كبيرة من السطح الجانبي لنصف
+الكرة المخية.
 
 </p>
 
@@ -863,7 +848,6 @@ much of the lateral surface of the cerebral hemisphere.
 class="location-svg"
 viewBox="0 0 900 570"
 xmlns="http://www.w3.org/2000/svg"
-aria-label="Simplified lateral brain diagram showing the middle cerebral artery"
 >
 
 <path
@@ -878,6 +862,7 @@ C650 480 555 495 455 485
 C350 475 255 450 200 400
 C170 370 145 330 155 285Z"
 />
+
 
 <path
 class="location-artery-glow"
@@ -897,7 +882,9 @@ C330 335 315 365 300 400
 
 M430 245
 C400 225 370 205 345 180
-"/>
+"
+/>
+
 
 <path
 class="location-artery"
@@ -917,7 +904,9 @@ C330 335 315 365 300 400
 
 M430 245
 C400 225 370 205 345 180
-"/>
+"
+/>
+
 
 <line
 class="location-line"
@@ -926,6 +915,7 @@ y1="220"
 x2="700"
 y2="165"
 />
+
 
 <text
 class="location-label"
@@ -946,8 +936,7 @@ Middle Cerebral Artery
 
 <p class="location-caption">
 
-⚪ The white vessel represents the approximate course of the
-middle cerebral artery and its major cortical branches.
+⚪ White indicates the approximate MCA territory and course.
 
 </p>
 
@@ -956,9 +945,9 @@ middle cerebral artery and its major cortical branches.
 </section>
 
 
-<!-- =========================
+<!-- ==================================================
      INFORMATION
-========================= -->
+================================================== -->
 
 <section id="information" class="section">
 
@@ -997,13 +986,11 @@ Origin · المنشأ
 
 <p>
 
-The MCA arises from the internal carotid artery at the
-cerebral arterial circle.
+The MCA arises from the internal carotid artery.
 
 <br><br>
 
-ينشأ الشريان الدماغي الأوسط من الشريان السباتي الداخلي
-بالقرب من دائرة شرايين الدماغ.
+ينشأ الشريان الدماغي الأوسط من الشريان السباتي الداخلي.
 
 </p>
 
@@ -1034,7 +1021,7 @@ to branches that spread over the lateral cerebral surface.
 <div class="card">
 
 <h3>
-Lateral Cerebral Cortex · القشرة الجانبية
+Lateral Cortex · القشرة الجانبية
 </h3>
 
 <p>
@@ -1061,8 +1048,8 @@ Motor Areas · المناطق الحركية
 <p>
 
 MCA branches supply important portions of the lateral
-primary motor cortex, particularly regions controlling
-the face and upper limb.
+primary motor cortex, especially areas controlling the
+face and upper limb.
 
 <br><br>
 
@@ -1082,14 +1069,12 @@ Sensory Areas · المناطق الحسية
 
 <p>
 
-The MCA also supplies lateral portions of the primary
-somatosensory cortex involved in processing sensory
-information.
+The MCA supplies lateral portions of the primary
+somatosensory cortex.
 
 <br><br>
 
-تغذي فروعه أيضًا أجزاء جانبية من القشرة الحسية الجسدية
-الأولية التي تعالج المعلومات الحسية.
+تغذي فروعه أجزاء جانبية من القشرة الحسية الجسدية الأولية.
 
 </p>
 
@@ -1105,7 +1090,7 @@ Language · اللغة
 <p>
 
 In the language-dominant hemisphere, MCA branches supply
-cortical regions important for language processing.
+important cortical language regions.
 
 <br><br>
 
@@ -1120,19 +1105,19 @@ cortical regions important for language processing.
 <div class="card">
 
 <h3>
-Deep Perforating Branches · الفروع العميقة
+Deep Branches · الفروع العميقة
 </h3>
 
 <p>
 
-Small penetrating branches, including the lenticulostriate
-arteries, supply deep structures such as portions of the
-basal ganglia and internal capsule.
+The lenticulostriate arteries are deep perforating branches
+that supply structures including portions of the basal ganglia
+and internal capsule.
 
 <br><br>
 
-تغذي الفروع النافذة العميقة، ومنها الشرايين العدسية المخططة،
-تراكيب عميقة مثل أجزاء من العقد القاعدية والمحفظة الداخلية.
+الشرايين العدسية المخططة هي فروع نافذة عميقة تغذي تراكيب
+منها أجزاء من العقد القاعدية والمحفظة الداخلية.
 
 </p>
 
@@ -1147,13 +1132,12 @@ Cortical Branches · الفروع القشرية
 
 <p>
 
-The MCA gives rise to multiple cortical branches that spread
-across the lateral surface of the cerebral hemisphere.
+Multiple cortical branches spread over the lateral cerebral
+surface.
 
 <br><br>
 
-يعطي الشريان الدماغي الأوسط عدة فروع قشرية تنتشر على
-السطح الجانبي لنصف الكرة المخية.
+تنتشر عدة فروع قشرية فوق السطح الجانبي لنصف الكرة المخية.
 
 </p>
 
@@ -1163,20 +1147,18 @@ across the lateral surface of the cerebral hemisphere.
 <div class="card">
 
 <h3>
-Major Blood Supply · الإمداد الدموي
+Clinical Importance · الأهمية السريرية
 </h3>
 
 <p>
 
-Because the MCA supplies such a large and functionally
-important territory, interruption of its blood flow can
-produce significant neurological deficits.
+The MCA supplies a large and functionally important territory,
+making it one of the most clinically important cerebral arteries.
 
 <br><br>
 
-نظرًا لأن الشريان الدماغي الأوسط يغذي مساحة كبيرة ومهمة
-وظيفيًا، فإن انقطاع تدفق الدم فيه قد يؤدي إلى أعراض عصبية
-مهمة.
+يغذي الشريان الدماغي الأوسط منطقة واسعة ومهمة وظيفيًا،
+مما يجعله من أهم الشرايين الدماغية سريريًا.
 
 </p>
 
@@ -1186,9 +1168,9 @@ produce significant neurological deficits.
 </div>
 
 
-<!-- =========================
+<!-- ==================================================
      CLINICAL
-========================= -->
+================================================== -->
 
 <div class="clinical-section">
 
@@ -1204,22 +1186,19 @@ Why the MCA Matters
 
 <p>
 
-The MCA is one of the most clinically important cerebral
-arteries because it supplies large regions involved in
-movement, sensation, language, and other higher cortical
-functions. An MCA stroke can therefore produce a characteristic
-pattern of neurological deficits depending on the affected
-side and branch.
+The MCA supplies large regions involved in movement,
+sensation, language, and higher cortical functions.
+An MCA stroke can therefore produce neurological deficits
+depending on the affected hemisphere and vascular territory.
 
 </p>
 
 <p dir="rtl">
 
-يُعد الشريان الدماغي الأوسط من أهم الشرايين الدماغية سريريًا،
-لأنه يغذي مناطق واسعة مسؤولة عن الحركة والإحساس واللغة
-وغيرها من الوظائف القشرية العليا. لذلك يمكن أن تؤدي السكتة
-الدماغية في منطقة الشريان الدماغي الأوسط إلى مجموعة مميزة
-من الأعراض العصبية تختلف حسب الجانب والفرع المصاب.
+يغذي الشريان الدماغي الأوسط مناطق واسعة مسؤولة عن الحركة
+والإحساس واللغة والوظائف القشرية العليا. لذلك يمكن أن تؤدي
+السكتة الدماغية في منطقة الشريان الدماغي الأوسط إلى أعراض
+عصبية تختلف حسب نصف الكرة والمنطقة الوعائية المصابة.
 
 </p>
 
@@ -1228,9 +1207,9 @@ side and branch.
 </div>
 
 
-<!-- =========================
-     FACTS
-========================= -->
+<!-- ==================================================
+     QUICK FACTS
+================================================== -->
 
 <div class="section">
 
@@ -1313,9 +1292,9 @@ Major artery involved in ischemic stroke ·
 </div>
 
 
-<!-- =========================
+<!-- ==================================================
      QUIZ
-========================= -->
+================================================== -->
 
 <div id="quiz" class="quiz">
 
@@ -1328,9 +1307,13 @@ Mini Test · اختبار قصير
 </h2>
 
 <p class="quiz-intro">
+
 Choose the best answer for each question.
+
 <br>
+
 اختاري أفضل إجابة لكل سؤال.
+
 </p>
 
 
@@ -1339,34 +1322,51 @@ Choose the best answer for each question.
 <div class="question">
 
 <p>
+
 1. Where does the MCA originate?
+
 <span class="question-ar">
+
 ١. من أين ينشأ الشريان الدماغي الأوسط؟
+
 </span>
+
 </p>
+
 
 <button
 class="option"
 onclick="checkAnswer(this,true)">
+
 A. Internal carotid artery · الشريان السباتي الداخلي
+
 </button>
+
 
 <button
 class="option"
 onclick="checkAnswer(this,false)">
+
 B. Basilar artery · الشريان القاعدي
+
 </button>
+
 
 <button
 class="option"
 onclick="checkAnswer(this,false)">
+
 C. Posterior cerebral artery · الشريان الدماغي الخلفي
+
 </button>
+
 
 <button
 class="option"
 onclick="checkAnswer(this,false)">
+
 D. Anterior cerebral artery · الشريان الدماغي الأمامي
+
 </button>
 
 </div>
@@ -1377,34 +1377,51 @@ D. Anterior cerebral artery · الشريان الدماغي الأمامي
 <div class="question">
 
 <p>
+
 2. Which region is largely supplied by the MCA?
+
 <span class="question-ar">
+
 ٢. أي منطقة يغذيها الشريان الدماغي الأوسط بدرجة كبيرة؟
+
 </span>
+
 </p>
+
 
 <button
 class="option"
 onclick="checkAnswer(this,false)">
+
 A. Medulla · النخاع المستطيل
+
 </button>
+
 
 <button
 class="option"
 onclick="checkAnswer(this,true)">
+
 B. Lateral cerebral hemisphere · السطح الجانبي لنصف الكرة المخية
+
 </button>
+
 
 <button
 class="option"
 onclick="checkAnswer(this,false)">
+
 C. Spinal cord · الحبل الشوكي
+
 </button>
+
 
 <button
 class="option"
 onclick="checkAnswer(this,false)">
-D. Cerebellar vermis · دودة المخيخ
+
+D. Cerebellum · المخيخ
+
 </button>
 
 </div>
@@ -1415,40 +1432,60 @@ D. Cerebellar vermis · دودة المخيخ
 <div class="question">
 
 <p>
-3. Which arteries provide important deep perforating branches from the MCA?
+
+3. Which arteries are important deep perforating branches
+associated with the MCA?
+
 <span class="question-ar">
-٣. ما الشرايين التي تمثل فروعًا نافذة عميقة مهمة من الشريان الدماغي الأوسط؟
+
+٣. ما الشرايين التي تمثل فروعًا نافذة عميقة مهمة مرتبطة بالـMCA؟
+
 </span>
+
 </p>
+
 
 <button
 class="option"
 onclick="checkAnswer(this,false)">
+
 A. Anterior spinal arteries · الشرايين الشوكية الأمامية
+
 </button>
+
 
 <button
 class="option"
 onclick="checkAnswer(this,true)">
+
 B. Lenticulostriate arteries · الشرايين العدسية المخططة
+
 </button>
+
 
 <button
 class="option"
 onclick="checkAnswer(this,false)">
+
 C. Posterior communicating arteries · الشرايين الموصلة الخلفية
+
 </button>
+
 
 <button
 class="option"
 onclick="checkAnswer(this,false)">
+
 D. Superior cerebellar arteries · الشرايين المخيخية العلوية
+
 </button>
 
 </div>
 
 
-<div id="quizResult" class="quiz-result">
+<div
+id="quizResult"
+class="quiz-result">
 </div>
 
 </div>
@@ -1461,7 +1498,7 @@ D. Superior cerebellar arteries · الشرايين المخيخية العلو�
 
 
 <!-- ==================================================
-     THREE.JS
+     THREE.JS IMPORT MAP
 ================================================== -->
 
 <script type="importmap">
@@ -1487,15 +1524,18 @@ import * as THREE from "three";
 
 import {
     OrbitControls
-} from "three/addons/controls/OrbitControls.js";
+}
+from "three/addons/controls/OrbitControls.js";
 
 import {
     GLTFLoader
-} from "three/addons/loaders/GLTFLoader.js";
+}
+from "three/addons/loaders/GLTFLoader.js";
 
 import {
     DRACOLoader
-} from "three/addons/loaders/DRACOLoader.js";
+}
+from "three/addons/loaders/DRACOLoader.js";
 
 
 /* ==================================================
@@ -1532,16 +1572,16 @@ new THREE.Scene();
 
 const camera =
 new THREE.PerspectiveCamera(
-    32,
+    30,
     1,
     0.01,
     100
 );
 
 camera.position.set(
-    3.6,
-    0.45,
-    7.8
+    3.4,
+    0.35,
+    8.2
 );
 
 
@@ -1571,7 +1611,7 @@ renderer.toneMapping =
 THREE.ACESFilmicToneMapping;
 
 renderer.toneMappingExposure =
-1.0;
+0.9;
 
 
 /* ==================================================
@@ -1584,33 +1624,33 @@ new OrbitControls(
     canvas
 );
 
-controls.enableDamping = true;
-
-controls.dampingFactor = 0.06;
-
 controls.enableRotate = true;
 
-controls.rotateSpeed = 0.55;
+controls.rotateSpeed = 0.6;
+
+controls.enableDamping = true;
+
+controls.dampingFactor = 0.05;
 
 controls.enableZoom = true;
 
-controls.zoomSpeed = 0.65;
+controls.zoomSpeed = 0.6;
 
 controls.enablePan = false;
 
 controls.autoRotate = true;
 
-controls.autoRotateSpeed = 0.22;
+controls.autoRotateSpeed = 0.18;
 
 controls.target.set(
     0,
-    -0.20,
+    -0.25,
     0
 );
 
-controls.minDistance = 3.2;
+controls.minDistance = 3.5;
 
-controls.maxDistance = 14;
+controls.maxDistance = 16;
 
 
 /* ==================================================
@@ -1620,15 +1660,15 @@ controls.maxDistance = 14;
 scene.add(
     new THREE.AmbientLight(
         0xffffff,
-        0.72
+        0.65
     )
 );
 
 const hemi =
 new THREE.HemisphereLight(
     0xffdce6,
-    0x07101a,
-    1.0
+    0x081018,
+    0.85
 );
 
 scene.add(hemi);
@@ -1636,12 +1676,12 @@ scene.add(hemi);
 const key =
 new THREE.DirectionalLight(
     0xffffff,
-    1.8
+    1.5
 );
 
 key.position.set(
-    5,
-    8,
+    6,
+    10,
     8
 );
 
@@ -1649,14 +1689,14 @@ scene.add(key);
 
 const fill =
 new THREE.DirectionalLight(
-    0xa8c7df,
-    0.55
+    0x9bb9d2,
+    0.45
 );
 
 fill.position.set(
-    -6,
+    -7,
     3,
-    7
+    6
 );
 
 scene.add(fill);
@@ -1669,9 +1709,7 @@ scene.add(fill);
 const brainGroup =
 new THREE.Group();
 
-scene.add(
-    brainGroup
-);
+scene.add(brainGroup);
 
 
 /* ==================================================
@@ -1681,15 +1719,15 @@ scene.add(
 const brainPinkMaterial =
 new THREE.MeshPhysicalMaterial({
 
-    color:0xeab7c4,
+    color:0xf1c5d0,
 
-    roughness:0.72,
+    roughness:0.62,
 
     metalness:0,
 
-    clearcoat:0.12,
+    clearcoat:0.15,
 
-    clearcoatRoughness:0.55,
+    clearcoatRoughness:0.5,
 
     side:THREE.DoubleSide
 
@@ -1697,7 +1735,7 @@ new THREE.MeshPhysicalMaterial({
 
 
 /* ==================================================
-   MCA MATERIAL
+   MCA WHITE MATERIAL
 ================================================== */
 
 const mcaMaterial =
@@ -1707,360 +1745,198 @@ new THREE.MeshBasicMaterial({
 
     transparent:true,
 
-    opacity:1,
+    opacity:0.92,
 
     depthTest:false,
 
-    depthWrite:false
+    depthWrite:false,
+
+    side:THREE.DoubleSide
 
 });
 
-
-const mcaGlowMaterial =
-new THREE.MeshBasicMaterial({
-
-    color:0xffffff,
-
-    transparent:true,
-
-    opacity:0.12,
-
-    depthTest:false,
-
-    depthWrite:false
-
-});
-
-
-let mcaGroup = null;
 
 let highlighted = true;
 
-
-/* ==================================================
-   MODEL INFORMATION
-================================================== */
-
-let brainBounds = null;
-
-let brainSize = null;
+let mcaGroup = null;
 
 
 /* ==================================================
-   CREATE MCA
-   -----------------------------------------------
-   The important fix:
-   MCA coordinates are calculated from the actual
-   loaded brain bounding box.
+   MCA INTERNAL HIGHLIGHT
 
-   This prevents the artery from being placed
-   somewhere completely outside the brain.
+   IMPORTANT:
+
+   There is NO white tube outside the brain.
+
+   The highlight is a flattened white region
+   embedded into the lateral cerebral hemisphere.
 ================================================== */
 
 function createMCAOverlay(){
-
-    if(mcaGroup){
-
-        brainGroup.remove(
-            mcaGroup
-        );
-
-    }
-
 
     mcaGroup =
     new THREE.Group();
 
 
     /*
-       The real brain is centered around (0,0,0)
-       after normalization.
+       Main MCA territory.
 
-       These coordinates describe the lateral
-       cerebral surface in NORMALIZED brain space.
-
-       The MCA stays close to the lateral surface
-       instead of floating outside.
+       It is intentionally a flat,
+       rounded cortical patch instead
+       of a floating vessel.
     */
 
-    const sx =
-    brainSize.x;
-
-    const sy =
-    brainSize.y;
-
-    const sz =
-    brainSize.z;
-
-
-    /*
-       Start near the Sylvian/lateral fissure.
-       The vessel then spreads over the lateral
-       cerebral hemisphere.
-    */
-
-    const p1 =
-    new THREE.Vector3(
-        sx * 0.10,
-        sy * 0.02,
-        sz * 0.48
-    );
-
-    const p2 =
-    new THREE.Vector3(
-        sx * 0.22,
-        sy * 0.08,
-        sz * 0.50
-    );
-
-    const p3 =
-    new THREE.Vector3(
-        sx * 0.34,
-        sy * 0.17,
-        sz * 0.49
-    );
-
-    const p4 =
-    new THREE.Vector3(
-        sx * 0.43,
-        sy * 0.25,
-        sz * 0.44
+    const geometry =
+    new THREE.SphereGeometry(
+        1,
+        64,
+        32
     );
 
 
-    const mainPoints = [
-        p1,
-        p2,
-        p3,
-        p4
-    ];
+    const material =
+    mcaMaterial.clone();
 
 
-    const mainCurve =
-    new THREE.CatmullRomCurve3(
-        mainPoints
-    );
-
-
-    const mainGeometry =
-    new THREE.TubeGeometry(
-        mainCurve,
-        36,
-        Math.max(
-            sx * 0.018,
-            0.025
-        ),
-        8,
-        false
-    );
-
-
-    const mainVessel =
+    const territory =
     new THREE.Mesh(
-        mainGeometry,
-        mcaMaterial
-    );
-
-    mcaGroup.add(
-        mainVessel
-    );
-
-
-    /* ==================================================
-       CORTICAL BRANCHES
-    ================================================== */
-
-    const branches = [
-
-        [
-            new THREE.Vector3(
-                sx*.25,
-                sy*.10,
-                sz*.50
-            ),
-
-            new THREE.Vector3(
-                sx*.32,
-                sy*.27,
-                sz*.50
-            ),
-
-            new THREE.Vector3(
-                sx*.38,
-                sy*.40,
-                sz*.46
-            )
-        ],
-
-
-        [
-            new THREE.Vector3(
-                sx*.31,
-                sy*.16,
-                sz*.49
-            ),
-
-            new THREE.Vector3(
-                sx*.40,
-                sy*.18,
-                sz*.47
-            ),
-
-            new THREE.Vector3(
-                sx*.46,
-                sy*.17,
-                sz*.43
-            )
-        ],
-
-
-        [
-            new THREE.Vector3(
-                sx*.32,
-                sy*.17,
-                sz*.48
-            ),
-
-            new THREE.Vector3(
-                sx*.39,
-                sy*.04,
-                sz*.45
-            ),
-
-            new THREE.Vector3(
-                sx*.44,
-                sy*-.10,
-                sz*.40
-            )
-        ],
-
-
-        [
-            new THREE.Vector3(
-                sx*.35,
-                sy*.20,
-                sz*.46
-            ),
-
-            new THREE.Vector3(
-                sx*.42,
-                sy*.32,
-                sz*.40
-            ),
-
-            new THREE.Vector3(
-                sx*.46,
-                sy*.41,
-                sz*.35
-            )
-        ]
-
-    ];
-
-
-    branches.forEach(
-    function(points){
-
-        const curve =
-        new THREE.CatmullRomCurve3(
-            points
-        );
-
-        const geometry =
-        new THREE.TubeGeometry(
-            curve,
-            22,
-            Math.max(
-                sx*.011,
-                .017
-            ),
-            7,
-            false
-        );
-
-        const vessel =
-        new THREE.Mesh(
-            geometry,
-            mcaMaterial
-        );
-
-        mcaGroup.add(
-            vessel
-        );
-
-    });
-
-
-    /* ==================================================
-       SUBTLE GLOW
-    ================================================== */
-
-    const glowGeometry =
-    new THREE.TubeGeometry(
-        mainCurve,
-        36,
-        Math.max(
-            sx*.045,
-            .06
-        ),
-        8,
-        false
-    );
-
-
-    const glow =
-    new THREE.Mesh(
-        glowGeometry,
-        mcaGlowMaterial
-    );
-
-    mcaGroup.add(
-        glow
+        geometry,
+        material
     );
 
 
     /*
-       CRITICAL:
+       Make it wide and thin.
 
-       The model itself is centered and normalized.
-       Therefore the artery is added directly to the
-       same brainGroup with the SAME coordinate system.
+       This creates a cortical highlight
+       rather than a separate object.
+    */
 
-       No random offset.
-       No giant external position.
-       No scale mismatch.
+    territory.scale.set(
+        1.18,
+        0.68,
+        0.055
+    );
+
+
+    /*
+       LATERAL SURFACE
+
+       This is intentionally kept within
+       the brain silhouette.
+    */
+
+    territory.position.set(
+        0.82,
+        0.02,
+        0.02
+    );
+
+
+    mcaGroup.add(
+        territory
+    );
+
+
+    /*
+       Smaller superior extension.
+    */
+
+    const superiorGeometry =
+    new THREE.SphereGeometry(
+        0.65,
+        48,
+        24
+    );
+
+
+    const superior =
+    new THREE.Mesh(
+        superiorGeometry,
+        material.clone()
+    );
+
+
+    superior.scale.set(
+        0.72,
+        0.38,
+        0.045
+    );
+
+
+    superior.position.set(
+        0.78,
+        0.43,
+        0.02
+    );
+
+
+    mcaGroup.add(
+        superior
+    );
+
+
+    /*
+       Smaller inferior extension.
+    */
+
+    const inferior =
+    new THREE.Mesh(
+        new THREE.SphereGeometry(
+            0.65,
+            48,
+            24
+        ),
+        material.clone()
+    );
+
+
+    inferior.scale.set(
+        0.78,
+        0.36,
+        0.045
+    );
+
+
+    inferior.position.set(
+        0.78,
+        -0.38,
+        0.02
+    );
+
+
+    mcaGroup.add(
+        inferior
+    );
+
+
+    /*
+       Keep the whole highlight embedded
+       in the brain.
     */
 
     mcaGroup.position.set(
-        0,
-        0,
-        0
+        -0.40,
+        -0.48,
+        0.02
     );
 
+
     mcaGroup.scale.set(
-        1,
-        1,
-        1
+        0.72,
+        0.72,
+        0.72
     );
 
 
     /*
-       Render the white vessel above the pink brain.
+       VERY IMPORTANT:
+
+       Render the brain first and the highlight
+       only slightly above its surface.
     */
 
-    mcaGroup.renderOrder = 50;
-
-
-    mcaGroup.traverse(
-    function(child){
-
-        if(child.isMesh){
-
-            child.renderOrder = 50;
-
-        }
-
-    });
+    mcaGroup.renderOrder = 10;
 
 
     brainGroup.add(
@@ -2095,22 +1971,14 @@ function loadRealBrain(){
 
 
     /*
-       First try local GitHub file.
-
-       IMPORTANT:
-       If your GLB is called brainstem.glb,
-       keep it in the SAME folder as mca.html.
+       Keep your real model URL here.
     */
 
     const urls = [
 
-        "./brainstem.glb",
+        "https://cdn.jsdelivr.net/gh/itayinbarr/brainproject@main/brain-atlas/models/brain.glb",
 
-        "./brain human.glb",
-
-        "./brainstem%20(2).glb",
-
-        "https://cdn.jsdelivr.net/gh/itayinbarr/brainproject@main/brain-atlas/models/brain.glb"
+        "https://raw.githubusercontent.com/itayinbarr/brainproject/main/brain-atlas/models/brain.glb"
 
     ];
 
@@ -2121,10 +1989,6 @@ function loadRealBrain(){
     function tryLoad(){
 
         if(index >= urls.length){
-
-            console.warn(
-                "No GLB found. Using fallback."
-            );
 
             createFallbackBrain();
 
@@ -2138,7 +2002,7 @@ function loadRealBrain(){
 
 
         loadText.textContent =
-        "Loading brain model...";
+        "Loading real brain model...";
 
 
         loader.load(
@@ -2152,90 +2016,59 @@ function loadRealBrain(){
 
 
                 /*
-                   FIRST:
-                   calculate original bounds.
+                   Calculate dimensions.
                 */
 
-                const originalBox =
+                const box =
                 new THREE.Box3()
-                .setFromObject(
-                    model
-                );
+                .setFromObject(model);
 
 
-                const originalCenter =
-                originalBox.getCenter(
+                const center =
+                box.getCenter(
                     new THREE.Vector3()
                 );
 
 
-                const originalSize =
-                originalBox.getSize(
+                const size =
+                box.getSize(
                     new THREE.Vector3()
                 );
 
 
                 const maxDim =
                 Math.max(
-                    originalSize.x,
-                    originalSize.y,
-                    originalSize.z
+                    size.x,
+                    size.y,
+                    size.z
                 );
+
+
+                const scale =
+                4.5 / maxDim;
 
 
                 /*
                    Normalize model.
                 */
 
-                const scale =
-                4.4 / maxDim;
-
-
                 model.scale.setScalar(
                     scale
                 );
 
 
-                /*
-                   Center model.
-                */
-
-                model.position.set(
-                    -originalCenter.x * scale,
-                    -originalCenter.y * scale - 0.35,
-                    -originalCenter.z * scale
+                model.position.sub(
+                    center.multiplyScalar(
+                        scale
+                    )
                 );
 
 
-                /*
-                   Calculate FINAL bounds after
-                   normalization.
-                */
-
-                brainGroup.add(
-                    model
-                );
-
-
-                const finalBox =
-                new THREE.Box3()
-                .setFromObject(
-                    model
-                );
-
-
-                brainBounds =
-                finalBox;
-
-
-                brainSize =
-                finalBox.getSize(
-                    new THREE.Vector3()
-                );
+                model.position.y -= 0.55;
 
 
                 /*
-                   Make the actual brain pink.
+                   Make REAL brain pink.
                 */
 
                 model.traverse(
@@ -2245,24 +2078,26 @@ function loadRealBrain(){
                         return;
 
 
-                    child.castShadow = true;
+                    child.castShadow =
+                    true;
 
-                    child.receiveShadow = true;
+                    child.receiveShadow =
+                    true;
 
 
-                    if(child.material){
-
-                        child.material =
-                        brainPinkMaterial.clone();
-
-                    }
+                    child.material =
+                    brainPinkMaterial.clone();
 
                 });
 
 
+                brainGroup.add(
+                    model
+                );
+
+
                 /*
-                   NOW create MCA using the
-                   ACTUAL dimensions of this model.
+                   Create internal MCA highlight.
                 */
 
                 createMCAOverlay();
@@ -2270,10 +2105,6 @@ function loadRealBrain(){
 
                 loadBar.style.width =
                 "100%";
-
-
-                loadText.textContent =
-                "Brain loaded";
 
 
                 onReady();
@@ -2287,10 +2118,9 @@ function loadRealBrain(){
                     const pct =
                     Math.min(
                         90,
-                        (
-                            progress.loaded /
-                            progress.total
-                        ) * 90
+                        progress.loaded /
+                        progress.total *
+                        90
                     );
 
                     loadBar.style.width =
@@ -2303,10 +2133,10 @@ function loadRealBrain(){
             function(error){
 
                 console.warn(
-                    "Failed:",
-                    url,
+                    "Brain model failed:",
                     error
                 );
+
 
                 tryLoad();
 
@@ -2332,12 +2162,6 @@ function createFallbackBrain(){
     "Creating anatomy view...";
 
 
-    /*
-       Two hemispheres.
-       This looks much more brain-like than
-       one perfect sphere.
-    */
-
     const geometry =
     new THREE.SphereGeometry(
         2.05,
@@ -2346,71 +2170,26 @@ function createFallbackBrain(){
     );
 
 
-    const left =
+    const brain =
     new THREE.Mesh(
         geometry,
-        brainPinkMaterial.clone()
+        brainPinkMaterial
     );
 
 
-    left.scale.set(
-        0.82,
+    brain.scale.set(
+        1.15,
         0.92,
-        0.90
+        0.82
     );
 
 
-    left.position.set(
-        -0.72,
-        -0.35,
-        0
-    );
-
-
-    const right =
-    new THREE.Mesh(
-        geometry,
-        brainPinkMaterial.clone()
-    );
-
-
-    right.scale.set(
-        0.82,
-        0.92,
-        0.90
-    );
-
-
-    right.position.set(
-        0.72,
-        -0.35,
-        0
-    );
+    brain.position.y =
+    -0.45;
 
 
     brainGroup.add(
-        left
-    );
-
-    brainGroup.add(
-        right
-    );
-
-
-    const box =
-    new THREE.Box3()
-    .setFromObject(
-        brainGroup
-    );
-
-
-    brainBounds =
-    box;
-
-
-    brainSize =
-    box.getSize(
-        new THREE.Vector3()
+        brain
     );
 
 
@@ -2443,13 +2222,18 @@ function onReady(){
             "show"
         );
 
-    },600);
+    },
+    500
+    );
 
 }
 
 
 /* ==================================================
    LABEL POSITION
+
+   Kept very close to the highlighted
+   region rather than floating outside.
 ================================================== */
 
 function updateLabel(){
@@ -2458,41 +2242,33 @@ function updateLabel(){
         return;
 
 
-    /*
-       Label is attached to a point near the
-       proximal MCA instead of a random screen
-       coordinate.
-    */
-
-    const localPosition =
+    const position =
     new THREE.Vector3(
-        brainSize.x * 0.34,
-        brainSize.y * 0.17,
-        brainSize.z * 0.50
+        0.80,
+        0.10,
+        0.08
     );
 
 
     mcaGroup.localToWorld(
-        localPosition
+        position
     );
 
 
-    localPosition.project(
+    position.project(
         camera
     );
 
 
     const x =
-    (
-        localPosition.x + 1
-    ) / 2 *
+    (position.x + 1) /
+    2 *
     canvas.clientWidth;
 
 
     const y =
-    (
-        -localPosition.y + 1
-    ) / 2 *
+    (-position.y + 1) /
+    2 *
     canvas.clientHeight;
 
 
@@ -2501,7 +2277,7 @@ function updateLabel(){
 
 
     mcaLabel.style.top =
-    (y - 18) + "px";
+    y + "px";
 
 }
 
@@ -2519,10 +2295,7 @@ function resize(){
     canvas.clientHeight;
 
 
-    if(
-        width <= 0 ||
-        height <= 0
-    )
+    if(width <= 0 || height <= 0)
         return;
 
 
@@ -2598,7 +2371,7 @@ function(){
 
 
 /* ==================================================
-   AUTO ROTATE
+   ROTATION BUTTON
 ================================================== */
 
 const rotateBtn =
@@ -2643,15 +2416,15 @@ document.getElementById(
 function(){
 
     camera.position.set(
-        3.6,
-        0.45,
-        7.8
+        3.4,
+        0.35,
+        8.2
     );
 
 
     controls.target.set(
         0,
-        -0.20,
+        -0.25,
         0
     );
 
@@ -2700,7 +2473,7 @@ loadRealBrain();
 
 
 <!-- ==================================================
-     QUIZ
+     QUIZ JAVASCRIPT
 ================================================== -->
 
 <script>
@@ -2710,10 +2483,7 @@ let answered = 0;
 let correctAnswers = 0;
 
 
-function checkAnswer(
-    button,
-    correct
-){
+function checkAnswer(button, correct){
 
     const question =
     button.closest(
@@ -2728,14 +2498,16 @@ function checkAnswer(
 
 
     /*
-       Prevent answering the same
-       question multiple times.
+       Prevent answering the same question
+       multiple times.
     */
 
     if(
         question.dataset.answered === "true"
     ){
+
         return;
+
     }
 
 
@@ -2775,12 +2547,8 @@ function checkAnswer(
             if(
                 option.getAttribute(
                     "onclick"
-                ) &&
-                option.getAttribute(
-                    "onclick"
-                ).includes(
-                    "true"
-                )
+                ) ===
+                "checkAnswer(this,true)"
             ){
 
                 option.classList.add(
@@ -2797,13 +2565,6 @@ function checkAnswer(
     answered++;
 
 
-    updateQuizScore();
-
-}
-
-
-function updateQuizScore(){
-
     const result =
     document.getElementById(
         "quizResult"
@@ -2814,56 +2575,17 @@ function updateQuizScore(){
     "block";
 
 
-    if(answered < 3){
-
-        result.textContent =
-        "Score · النتيجة: " +
-        correctAnswers +
-        " / " +
-        answered +
-        " — Keep going! · كملي!";
-
-    }
-
-    else{
-
-        let message = "";
+    result.textContent =
+    "Score · النتيجة: " +
+    correctAnswers +
+    " / " +
+    answered;
 
 
-        if(correctAnswers === 3){
+    if(answered === 3){
 
-            message =
-            "Perfect! 🎉 · ممتاز!";
-
-        }
-
-        else if(correctAnswers === 2){
-
-            message =
-            "Great job! 🧠 · شغل ممتاز!";
-
-        }
-
-        else if(correctAnswers === 1){
-
-            message =
-            "Good start! Review the anatomy and try again. · بداية كويسة! راجعي التشريح وجربي تاني.";
-
-        }
-
-        else{
-
-            message =
-            "Review the MCA section and try again. · راجعي جزء الـMCA وحاولي تاني.";
-
-        }
-
-
-        result.textContent =
-        "Final Score · النتيجة النهائية: " +
-        correctAnswers +
-        " / 3 — " +
-        message;
+        result.textContent +=
+        "  ·  Quiz Complete! 🎉";
 
     }
 
