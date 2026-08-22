@@ -1,0 +1,2807 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NeuroAtlas | ACA</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#050b13;
+    color:#eef4fa;
+    font-family:Arial,Helvetica,sans-serif;
+    line-height:1.7;
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+nav{
+    height:70px;
+    padding:0 7%;
+    display:flex;
+    align-items:center;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+nav a{
+    color:#9db0c3;
+    text-decoration:none;
+    font-size:14px;
+}
+
+nav a:hover{
+    color:white;
+}
+
+
+/* =========================
+   MAIN CONTAINER
+========================= */
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:60px 7% 100px;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.eyebrow{
+    color:#61b5ff;
+    letter-spacing:3px;
+    font-size:12px;
+    text-transform:uppercase;
+    margin-bottom:15px;
+}
+
+h1{
+    font-size:clamp(55px,8vw,90px);
+    line-height:.95;
+    letter-spacing:-4px;
+    margin-bottom:10px;
+}
+
+.arabic-title{
+    color:#ffb6c9;
+    font-size:24px;
+    margin-bottom:25px;
+}
+
+.hero p{
+    color:#a6b6c7;
+    max-width:850px;
+    font-size:18px;
+    line-height:1.8;
+}
+
+
+/* =========================
+   ACTION BUTTONS
+========================= */
+
+.actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:30px;
+}
+
+.action-button{
+    padding:11px 17px;
+    border-radius:9px;
+    background:#0b1928;
+    border:1px solid #31516d;
+    color:#bdd0e0;
+    text-decoration:none;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.action-button:hover{
+    background:#14304a;
+    color:white;
+    border-color:#61b5ff;
+}
+
+
+/* =========================
+   3D VIEWER
+========================= */
+
+.viewer{
+    margin-top:60px;
+    border:1px solid rgba(255,255,255,.10);
+    border-radius:24px;
+    overflow:hidden;
+    background:#02060b;
+    box-shadow:0 25px 80px rgba(0,0,0,.45);
+}
+
+.viewer-header{
+    min-height:65px;
+    padding:0 22px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.viewer-title{
+    font-size:14px;
+    color:#d2dce6;
+}
+
+.viewer-status{
+    color:#708499;
+    font-size:11px;
+    letter-spacing:1px;
+}
+
+.scene{
+    position:relative;
+    width:100%;
+    height:700px;
+
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            #203b51 0%,
+            #0d1c2e 42%,
+            #02060b 100%
+        );
+}
+
+#brainCanvas{
+    width:100%;
+    height:100%;
+    display:block;
+}
+
+
+/* =========================
+   LOADING
+========================= */
+
+.loading{
+    position:absolute;
+    inset:0;
+    z-index:20;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+
+    gap:16px;
+
+    background:#02060b;
+
+    color:#9db0c3;
+    font-size:14px;
+
+    transition:opacity .8s;
+}
+
+.loading.hide{
+    opacity:0;
+    pointer-events:none;
+}
+
+.loading-bar{
+    width:180px;
+    height:2px;
+
+    background:rgba(255,255,255,.08);
+
+    border-radius:2px;
+    overflow:hidden;
+}
+
+.loading-bar-inner{
+    width:0%;
+    height:100%;
+
+    background:#61b5ff;
+
+    transition:width .3s;
+}
+
+
+/* =========================
+   ACA LABEL
+========================= */
+
+.aca-label{
+    position:absolute;
+
+    z-index:30;
+
+    pointer-events:none;
+
+    transform:translate(-50%,-100%);
+
+    display:none;
+}
+
+.aca-label.show{
+    display:block;
+}
+
+.label-box{
+    position:relative;
+
+    padding:9px 15px;
+
+    border-radius:10px;
+
+    background:rgba(5,10,17,.96);
+
+    border:1.5px solid #ffb6c9;
+
+    color:#ffd5df;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+    letter-spacing:1px;
+
+    white-space:nowrap;
+
+    box-shadow:
+        0 0 12px rgba(255,182,201,.18),
+        0 0 25px rgba(255,182,201,.08);
+}
+
+.label-box::after{
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    bottom:-15px;
+
+    width:1.5px;
+    height:15px;
+
+    background:#ffb6c9;
+
+    transform:translateX(-50%);
+}
+
+
+/* =========================
+   CONTROLS
+========================= */
+
+.controls{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+
+    padding:15px;
+
+    border-top:1px solid rgba(255,255,255,.08);
+}
+
+.controls button{
+    padding:11px 17px;
+
+    border-radius:9px;
+
+    background:#0b1928;
+
+    border:1px solid #31516d;
+
+    color:#bdd0e0;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.controls button:hover{
+    background:#14304a;
+    color:white;
+}
+
+.controls button.active{
+    background:#241c20;
+
+    border-color:#ffb6c9;
+
+    color:#ffd5df;
+}
+
+
+/* =========================
+   INFORMATION
+========================= */
+
+.section{
+    margin-top:70px;
+}
+
+.section-label{
+    color:#61b5ff;
+    letter-spacing:2px;
+    font-size:11px;
+    text-transform:uppercase;
+    margin-bottom:8px;
+}
+
+.section h2{
+    font-size:32px;
+    margin-bottom:25px;
+}
+
+.section-intro{
+    color:#91a5b8;
+    max-width:900px;
+    font-size:15px;
+    line-height:1.9;
+    margin-bottom:30px;
+}
+
+
+/* =========================
+   LOCATION
+========================= */
+
+.location{
+    margin-top:70px;
+
+    padding:35px;
+
+    background:#091522;
+
+    border:1px solid #172b3e;
+
+    border-radius:18px;
+}
+
+.location h2{
+    font-size:32px;
+    margin-bottom:12px;
+}
+
+.location-intro{
+    color:#91a5b8;
+
+    max-width:900px;
+
+    line-height:1.9;
+
+    margin-bottom:30px;
+}
+
+.brain-visual{
+    width:100%;
+    overflow:hidden;
+}
+
+.location-svg{
+    display:block;
+    width:100%;
+    max-width:850px;
+    height:auto;
+    margin:auto;
+}
+
+
+/* =========================
+   SIMPLE BRAIN DIAGRAM
+========================= */
+
+.brain-outline{
+    fill:#263d55;
+    stroke:#71869e;
+    stroke-width:3;
+}
+
+.cerebellum{
+    fill:#344d66;
+    stroke:#71869e;
+    stroke-width:3;
+}
+
+.artery{
+    fill:none;
+    stroke:#ffb6c9;
+    stroke-width:9;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.artery-glow{
+    fill:none;
+    stroke:#ffb6c9;
+    stroke-width:18;
+    opacity:.25;
+    filter:blur(7px);
+    stroke-linecap:round;
+}
+
+.location-line{
+    stroke:#8fc7ff;
+    stroke-width:2;
+}
+
+.aca-line{
+    stroke:#ffb6c9;
+    stroke-width:3;
+}
+
+.location-svg-label{
+    fill:white;
+    font-size:18px;
+    font-weight:bold;
+}
+
+.aca-svg-label{
+    fill:#ffb6c9;
+    font-size:21px;
+    font-weight:bold;
+}
+
+.location-arabic-label{
+    fill:#ffdce5;
+    font-size:16px;
+    font-weight:bold;
+}
+
+.location-caption{
+    text-align:center;
+    color:#9fb0c3;
+    margin-top:15px;
+}
+
+
+/* =========================
+   CARDS
+========================= */
+
+.cards{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:20px;
+}
+
+.card{
+    padding:27px;
+
+    background:#091522;
+
+    border:1px solid #172b3e;
+
+    border-radius:18px;
+
+    transition:
+        transform .2s,
+        border-color .2s;
+}
+
+.card:hover{
+    transform:translateY(-3px);
+
+    border-color:#2b506c;
+}
+
+.card h3{
+    font-size:18px;
+
+    margin-bottom:13px;
+
+    color:#eef4fa;
+
+    line-height:1.45;
+}
+
+.card p{
+    color:#91a5b8;
+
+    font-size:14px;
+
+    line-height:1.8;
+}
+
+
+/* =========================
+   CLINICAL
+========================= */
+
+.clinical-section{
+    margin-top:65px;
+}
+
+.clinical-box{
+    padding:30px;
+
+    background:#091522;
+
+    border:1px solid #172b3e;
+
+    border-left:3px solid #ffb6c9;
+
+    border-radius:18px;
+}
+
+.clinical-box p{
+    color:#a7b7c6;
+
+    font-size:15px;
+
+    line-height:1.9;
+
+    margin-bottom:18px;
+}
+
+.clinical-box p:last-child{
+    margin-bottom:0;
+}
+
+
+/* =========================
+   QUICK FACTS
+========================= */
+
+.facts-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:15px;
+}
+
+.fact{
+    padding:22px;
+
+    background:#091522;
+
+    border:1px solid #172b3e;
+
+    border-radius:16px;
+}
+
+.fact span{
+    display:block;
+
+    color:#ffb6c9;
+
+    font-size:11px;
+
+    letter-spacing:2px;
+
+    margin-bottom:12px;
+}
+
+.fact strong{
+    display:block;
+
+    color:#eef4fa;
+
+    font-size:14px;
+
+    margin-bottom:8px;
+
+    line-height:1.5;
+}
+
+.fact p{
+    color:#8195a8;
+
+    font-size:13px;
+
+    line-height:1.7;
+}
+
+
+/* =========================
+   MINI TEST
+========================= */
+
+.quiz{
+    margin-top:65px;
+
+    padding:30px;
+
+    background:#091522;
+
+    border:1px solid #172b3e;
+
+    border-radius:18px;
+}
+
+.quiz h2{
+    font-size:28px;
+
+    margin-bottom:10px;
+}
+
+.quiz-intro{
+    color:#91a5b8;
+
+    margin-bottom:25px;
+}
+
+.question{
+    margin-bottom:30px;
+}
+
+.question:last-child{
+    margin-bottom:0;
+}
+
+.question p{
+    color:#eef4fa;
+
+    font-size:16px;
+
+    margin-bottom:12px;
+
+    font-weight:bold;
+}
+
+.option{
+    display:block;
+
+    width:100%;
+
+    padding:12px 15px;
+
+    margin-top:9px;
+
+    background:#0b1928;
+
+    color:#c7d5e2;
+
+    border:1px solid #263951;
+
+    border-radius:9px;
+
+    text-align:left;
+
+    cursor:pointer;
+
+    font-size:14px;
+
+    transition:.2s;
+}
+
+.option:hover{
+    border-color:#ffb6c9;
+
+    background:#111e2c;
+}
+
+.option.correct{
+    border-color:#8fd3a8;
+
+    background:#14291e;
+
+    color:#b9f0c9;
+}
+
+.option.wrong{
+    border-color:#d88b9b;
+
+    background:#2a171d;
+
+    color:#ffc2cc;
+}
+
+.quiz-result{
+    margin-top:25px;
+
+    padding:15px;
+
+    border-radius:10px;
+
+    background:#0b1928;
+
+    border:1px solid #263951;
+
+    color:#aebdce;
+
+    display:none;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:900px){
+
+    .cards{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .facts-grid{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:800px){
+
+    .scene{
+        height:450px;
+    }
+
+    .viewer-status{
+        display:none;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .facts-grid{
+        grid-template-columns:1fr;
+    }
+
+    h1{
+        letter-spacing:-2px;
+    }
+
+    .location{
+        padding:20px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVIGATION
+========================= -->
+
+<nav>
+
+<a href="./explore.html">
+← Back to Explore
+</a>
+
+</nav>
+
+
+<main class="container">
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<div class="eyebrow">
+Cerebral Vasculature · NeuroAtlas
+</div>
+
+<h1>
+ACA
+</h1>
+
+<div class="arabic-title">
+الشريان الدماغي الأمامي
+</div>
+
+<div class="hero">
+
+<p>
+
+The anterior cerebral artery (ACA) is one of the major arteries
+supplying the cerebral hemispheres. It arises from the internal
+carotid artery and primarily supplies the medial surfaces of the
+frontal and parietal lobes.
+
+</p>
+
+</div>
+
+
+<!-- =========================
+     ACTION BUTTONS
+========================= -->
+
+<div class="actions">
+
+<a
+class="action-button"
+href="#location"
+>
+📍 Show Location
+</a>
+
+<a
+class="action-button"
+href="#information"
+>
+🧠 Learn About the ACA
+</a>
+
+<a
+class="action-button"
+href="#quiz"
+>
+📝 Test Yourself
+</a>
+
+</div>
+
+
+<!-- =========================
+     3D VIEWER
+========================= -->
+
+<div class="viewer">
+
+<div class="viewer-header">
+
+<div class="viewer-title">
+Human Brain · Cerebral Vasculature
+</div>
+
+<div class="viewer-status">
+DRAG TO ROTATE · SCROLL TO ZOOM
+</div>
+
+</div>
+
+
+<div class="scene">
+
+
+<div id="loading" class="loading">
+
+<span id="loadText">
+Loading brain model...
+</span>
+
+<div class="loading-bar">
+
+<div
+id="loadBar"
+class="loading-bar-inner">
+</div>
+
+</div>
+
+</div>
+
+
+<canvas id="brainCanvas"></canvas>
+
+
+<div
+id="acaLabel"
+class="aca-label">
+
+<div class="label-box">
+ANTERIOR CEREBRAL ARTERY
+</div>
+
+</div>
+
+
+</div>
+
+
+<div class="controls">
+
+<button
+id="highlight"
+class="active">
+
+🩸 Highlight ACA
+
+</button>
+
+
+<button
+id="rotate"
+class="active">
+
+⟳ Auto Rotate
+
+</button>
+
+
+<button id="reset">
+
+↻ Reset View
+
+</button>
+
+</div>
+
+
+</div>
+
+
+<!-- ==================================================
+     LOCATION
+================================================== -->
+
+<section
+id="location"
+class="location"
+>
+
+
+<div class="section-label">
+Location · الموقع
+</div>
+
+
+<h2>
+📍 Where is the ACA?
+</h2>
+
+
+<p class="location-intro">
+
+The anterior cerebral artery is a branch of the internal carotid
+artery. It travels forward and medially near the longitudinal
+fissure between the cerebral hemispheres and supplies much of
+the medial surface of the frontal and parietal lobes.
+
+<br><br>
+
+الشريان الدماغي الأمامي هو أحد فروع الشريان السباتي الداخلي.
+يتجه إلى الأمام وإلى الداخل بالقرب من الشق الطولي بين نصفي
+الكرة المخية، ويغذي جزءًا كبيرًا من السطح الإنسي للفصين الجبهي
+والجداري.
+
+</p>
+
+
+<div class="brain-visual">
+
+
+<svg
+class="location-svg"
+viewBox="0 0 900 600"
+xmlns="http://www.w3.org/2000/svg"
+aria-label="Simplified diagram showing the location of the anterior cerebral artery"
+>
+
+
+<!-- =========================
+     BRAIN
+========================= -->
+
+<path
+class="brain-outline"
+d="M180 110
+C245 55 340 45 430 65
+C530 85 620 130 670 210
+C710 275 690 350 630 390
+C580 425 515 420 460 405
+C410 390 370 405 315 425
+C250 448 180 420 145 365
+C105 300 120 165 180 110Z"
+/>
+
+
+<!-- =========================
+     CEREBELLUM
+========================= -->
+
+<path
+class="cerebellum"
+d="M610 350
+C680 330 745 360 760 420
+C775 475 735 520 670 520
+C610 520 575 475 580 425
+C582 390 595 365 610 350Z"
+/>
+
+
+<!-- =========================
+     INTERNAL CAROTID
+========================= -->
+
+<path
+class="artery"
+d="M420 500
+C425 460 430 425 430 390
+C430 350 425 320 410 290"
+/>
+
+
+<!-- =========================
+     ACA GLOW
+========================= -->
+
+<path
+class="artery-glow"
+d="M410 290
+C380 260 350 225 325 190
+C300 155 280 130 250 115"
+/>
+
+
+<!-- =========================
+     ACA
+========================= -->
+
+<path
+class="artery"
+d="M410 290
+C380 260 350 225 325 190
+C300 155 280 130 250 115"
+/>
+
+
+<!-- =========================
+     ACA BRANCH
+========================= -->
+
+<path
+class="artery"
+d="M325 190
+C345 165 360 140 370 110"
+/>
+
+
+<!-- =========================
+     SECOND BRANCH
+========================= -->
+
+<path
+class="artery"
+d="M300 155
+C270 145 240 135 210 125"
+/>
+
+
+<!-- =========================
+     BRAIN LABEL
+========================= -->
+
+<line
+class="location-line"
+x1="580"
+y1="210"
+x2="745"
+y2="175"
+/>
+
+<text
+class="location-svg-label"
+x="760"
+y="181"
+>
+CEREBRUM
+</text>
+
+
+<!-- =========================
+     ACA LABEL
+========================= -->
+
+<line
+class="aca-line"
+x1="325"
+y1="190"
+x2="570"
+y2="120"
+/>
+
+<text
+class="aca-svg-label"
+x="590"
+y="126"
+>
+ACA
+</text>
+
+
+<text
+class="location-arabic-label"
+x="590"
+y="153"
+>
+الشريان الدماغي الأمامي
+</text>
+
+
+</svg>
+
+
+<p class="location-caption">
+
+🌸 The highlighted pathway represents the approximate course
+of the anterior cerebral artery.
+
+</p>
+
+
+</div>
+
+</section>
+
+
+<!-- ==================================================
+     INFORMATION
+================================================== -->
+
+<section
+id="information"
+class="section"
+>
+
+
+<div class="section-label">
+ACA Anatomy · تشريح الشريان الدماغي الأمامي
+</div>
+
+
+<h2>
+Anterior Cerebral Artery · ACA
+</h2>
+
+
+<p class="section-intro">
+
+The anterior cerebral artery is a major branch of the internal
+carotid artery and an important component of the cerebral arterial
+circulation. It primarily supplies the medial portions of the
+frontal and parietal lobes and contributes to blood supply of
+several deep structures.
+
+<br><br>
+
+الشريان الدماغي الأمامي هو فرع رئيسي من الشريان السباتي الداخلي
+وعنصر مهم في الدورة الدموية الدماغية. يغذي بشكل أساسي الأجزاء
+الإنسية من الفصين الجبهي والجداري، ويساهم أيضًا في تغذية بعض
+التراكيب العميقة.
+
+</p>
+
+
+<div class="cards">
+
+
+<!-- CARD 1 -->
+
+<div class="card">
+
+<h3>
+Origin · المنشأ
+</h3>
+
+<p>
+
+The ACA arises from the internal carotid artery near the base
+of the brain.
+
+<br><br>
+
+ينشأ الشريان الدماغي الأمامي من الشريان السباتي الداخلي
+بالقرب من قاعدة الدماغ.
+
+</p>
+
+</div>
+
+
+<!-- CARD 2 -->
+
+<div class="card">
+
+<h3>
+Medial Frontal Lobe · الفص الجبهي الإنسي
+</h3>
+
+<p>
+
+The ACA supplies important regions of the medial frontal lobe,
+including areas involved in motor and behavioral functions.
+
+<br><br>
+
+يغذي الشريان الدماغي الأمامي مناطق مهمة من السطح الإنسي
+للفص الجبهي، والتي تشارك في وظائف حركية وسلوكية.
+
+</p>
+
+</div>
+
+
+<!-- CARD 3 -->
+
+<div class="card">
+
+<h3>
+Medial Parietal Lobe · الفص الجداري الإنسي
+</h3>
+
+<p>
+
+Branches of the ACA supply portions of the medial parietal
+cortex.
+
+<br><br>
+
+تغذي فروع الشريان الدماغي الأمامي أجزاء من القشرة الجدارية
+الإنسية.
+
+</p>
+
+</div>
+
+
+<!-- CARD 4 -->
+
+<div class="card">
+
+<h3>
+Lower Limb Motor Area · المنطقة الحركية للطرف السفلي
+</h3>
+
+<p>
+
+The ACA supplies much of the medial primary motor cortex,
+which contains representations associated with the lower limb.
+
+<br><br>
+
+يغذي الشريان الدماغي الأمامي جزءًا كبيرًا من القشرة الحركية
+الأولية الإنسية، والتي تحتوي على تمثيل حركي مهم للطرف السفلي.
+
+</p>
+
+</div>
+
+
+<!-- CARD 5 -->
+
+<div class="card">
+
+<h3>
+Anterior Communicating Artery · الشريان الموصل الأمامي
+</h3>
+
+<p>
+
+The right and left ACAs are connected near their proximal
+segments by the anterior communicating artery.
+
+<br><br>
+
+يرتبط الشريانان الدماغيان الأماميان الأيمن والأيسر بالقرب
+من أجزائهما القريبة بواسطة الشريان الموصل الأمامي.
+
+</p>
+
+</div>
+
+
+<!-- CARD 6 -->
+
+<div class="card">
+
+<h3>
+Pericallosal Artery · الشريان حول الثفني
+</h3>
+
+<p>
+
+The pericallosal artery is a major distal continuation of the
+ACA that courses along the corpus callosum.
+
+<br><br>
+
+يُعد الشريان حول الثفني امتدادًا بعيدًا مهمًا للشريان الدماغي
+الأمامي ويسير بمحاذاة الجسم الثفني.
+
+</p>
+
+</div>
+
+
+<!-- CARD 7 -->
+
+<div class="card">
+
+<h3>
+Callosomarginal Artery · الشريان الهامشي الثفني
+</h3>
+
+<p>
+
+The callosomarginal artery is an important ACA branch that
+supplies parts of the medial frontal region.
+
+<br><br>
+
+الشريان الهامشي الثفني هو أحد الفروع المهمة للشريان الدماغي
+الأمامي ويغذي أجزاء من المنطقة الجبهية الإنسية.
+
+</p>
+
+</div>
+
+
+<!-- CARD 8 -->
+
+<div class="card">
+
+<h3>
+Corpus Callosum · الجسم الثفني
+</h3>
+
+<p>
+
+Branches of the ACA contribute to the blood supply of portions
+of the corpus callosum.
+
+<br><br>
+
+تساهم فروع الشريان الدماغي الأمامي في تغذية أجزاء من الجسم الثفني.
+
+</p>
+
+</div>
+
+
+<!-- CARD 9 -->
+
+<div class="card">
+
+<h3>
+Deep Structures · التراكيب العميقة
+</h3>
+
+<p>
+
+Small branches of the ACA contribute to blood supply of
+structures near the anterior and medial portions of the brain.
+
+<br><br>
+
+تساهم فروع صغيرة من الشريان الدماغي الأمامي في تغذية تراكيب
+بالقرب من المناطق الأمامية والإنسية للدماغ.
+
+</p>
+
+</div>
+
+
+<!-- CARD 10 -->
+
+<div class="card">
+
+<h3>
+Anterior Circulation · الدورة الأمامية
+</h3>
+
+<p>
+
+The ACA is part of the anterior cerebral circulation and works
+with the MCA and communicating arteries within the arterial
+network of the brain.
+
+<br><br>
+
+ينتمي الشريان الدماغي الأمامي إلى الدورة الدموية الدماغية
+الأمامية ويعمل مع الشريان الدماغي الأوسط والشرايين الموصلة
+ضمن شبكة شرايين الدماغ.
+
+</p>
+
+</div>
+
+
+<!-- CARD 11 -->
+
+<div class="card">
+
+<h3>
+Motor Function · الوظيفة الحركية
+</h3>
+
+<p>
+
+Because the ACA supplies medial motor regions, disruption of
+its blood flow can particularly affect movement of the
+contralateral lower limb.
+
+<br><br>
+
+لأن الشريان الدماغي الأمامي يغذي مناطق حركية إنسية، فإن
+اضطراب تدفق الدم فيه قد يؤثر بشكل خاص على حركة الطرف السفلي
+في الجانب المقابل.
+
+</p>
+
+</div>
+
+
+<!-- CARD 12 -->
+
+<div class="card">
+
+<h3>
+
+Frontal Lobe Functions · وظائف الفص الجبهي
+
+</h3>
+
+<p>
+
+ACA territory includes medial frontal regions involved in
+aspects of behavior, motivation, attention, and motor control.
+
+<br><br>
+
+تشمل منطقة تغذية الشريان الدماغي الأمامي مناطق جبهية إنسية
+تشارك في بعض جوانب السلوك والدافعية والانتباه والتحكم الحركي.
+
+</p>
+
+</div>
+
+
+</div>
+
+
+<!-- ==================================================
+     CLINICAL IMPORTANCE
+================================================== -->
+
+<div class="clinical-section">
+
+
+<div class="section-label">
+Clinical Importance · الأهمية السريرية
+</div>
+
+
+<h2>
+Why the ACA Matters
+</h2>
+
+
+<div class="clinical-box">
+
+
+<p>
+
+An ACA stroke can affect the medial frontal and parietal regions.
+Because these areas include important motor and behavioral networks,
+patients may develop weakness that is often more pronounced in
+the opposite lower limb, along with possible behavioral or
+executive changes.
+
+</p>
+
+
+<p dir="rtl">
+
+يمكن أن تؤثر السكتة الدماغية في منطقة الشريان الدماغي الأمامي
+على المناطق الإنسية من الفصين الجبهي والجداري. وبما أن هذه
+المناطق تحتوي على شبكات حركية وسلوكية مهمة، فقد يظهر ضعف
+يكون أكثر وضوحًا غالبًا في الطرف السفلي المقابل، بالإضافة
+إلى احتمالية حدوث تغيرات سلوكية أو تنفيذية.
+
+</p>
+
+
+</div>
+
+</div>
+
+
+<!-- ==================================================
+     QUICK FACTS
+================================================== -->
+
+<div class="section">
+
+
+<div class="section-label">
+Quick Facts · معلومات سريعة
+</div>
+
+
+<h2>
+ACA at a Glance
+</h2>
+
+
+<div class="facts-grid">
+
+
+<div class="fact">
+
+<span>
+01
+</span>
+
+<strong>
+Full Name · الاسم الكامل
+</strong>
+
+<p>
+
+Anterior Cerebral Artery ·
+الشريان الدماغي الأمامي
+
+</p>
+
+</div>
+
+
+<div class="fact">
+
+<span>
+02
+</span>
+
+<strong>
+Origin · المنشأ
+</strong>
+
+<p>
+
+Internal carotid artery ·
+الشريان السباتي الداخلي
+
+</p>
+
+</div>
+
+
+<div class="fact">
+
+<span>
+03
+</span>
+
+<strong>
+Main Territory · منطقة التغذية
+</strong>
+
+<p>
+
+Medial frontal and parietal surfaces ·
+الأسطح الإنسية للفصين الجبهي والجداري
+
+</p>
+
+</div>
+
+
+<div class="fact">
+
+<span>
+04
+</span>
+
+<strong>
+Major Connection · الاتصال الرئيسي
+</strong>
+
+<p>
+
+Anterior communicating artery ·
+الشريان الموصل الأمامي
+
+</p>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<!-- ==================================================
+     MINI TEST
+================================================== -->
+
+<div
+id="quiz"
+class="quiz"
+>
+
+
+<div class="section-label">
+Mini Test
+</div>
+
+
+<h2>
+🧠 Test Yourself
+</h2>
+
+
+<p class="quiz-intro">
+
+Choose the best answer for each question.
+
+</p>
+
+
+<!-- QUESTION 1 -->
+
+<div class="question">
+
+<p>
+1. The ACA primarily supplies which surface of the cerebral hemispheres?
+</p>
+
+
+<button
+class="option"
+onclick="checkAnswer(this,true)"
+>
+A. Medial surface
+</button>
+
+
+<button
+class="option"
+onclick="checkAnswer(this,false)"
+>
+B. Lateral surface only
+</button>
+
+
+<button
+class="option"
+onclick="checkAnswer(this,false)"
+>
+C. Inferior cerebellar surface
+</button>
+
+
+<button
+class="option"
+onclick="checkAnswer(this,false)"
+>
+D. Brainstem only
+</button>
+
+</div>
+
+
+<!-- QUESTION 2 -->
+
+<div class="question">
+
+<p>
+2. The ACA arises primarily from which artery?
+</p>
+
+
+<button
+class="option"
+onclick="checkAnswer(this,false)"
+>
+A. Basilar artery
+</button>
+
+
+<button
+class="option"
+onclick="checkAnswer(this,true)"
+>
+B. Internal carotid artery
+</button>
+
+
+<button
+class="option"
+onclick="checkAnswer(this,false)"
+>
+C. Vertebral artery
+</button>
+
+
+<button
+class="option"
+onclick="checkAnswer(this,false)"
+>
+D. External carotid artery
+</button>
+
+</div>
+
+
+<!-- QUESTION 3 -->
+
+<div class="question">
+
+<p>
+3. An ACA stroke commonly affects which motor region?
+</p>
+
+
+<button
+class="option"
+onclick="checkAnswer(this,false)"
+>
+A. Face only
+</button>
+
+
+<button
+class="option"
+onclick="checkAnswer(this,true)"
+>
+B. Lower limb region
+</button>
+
+
+<button
+class="option"
+onclick="checkAnswer(this,false)"
+>
+C. Eye muscles only
+</button>
+
+
+<button
+class="option"
+onclick="checkAnswer(this,false)"
+>
+D. Tongue only
+</button>
+
+</div>
+
+
+<div
+id="quizResult"
+class="quiz-result"
+>
+</div>
+
+
+</div>
+
+
+</section>
+
+
+</main>
+
+
+<!-- ==================================================
+     THREE.JS IMPORT MAP
+================================================== -->
+
+<script type="importmap">
+
+{
+    "imports": {
+
+        "three":
+        "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+
+        "three/addons/":
+        "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+
+    }
+}
+
+</script>
+
+
+<script type="module">
+
+import * as THREE from "three";
+
+import {
+    OrbitControls
+} from "three/addons/controls/OrbitControls.js";
+
+import {
+    GLTFLoader
+} from "three/addons/loaders/GLTFLoader.js";
+
+import {
+    DRACOLoader
+} from "three/addons/loaders/DRACOLoader.js";
+
+
+/* =========================================
+   ELEMENTS
+========================================= */
+
+const canvas =
+document.getElementById(
+    "brainCanvas"
+);
+
+const loading =
+document.getElementById(
+    "loading"
+);
+
+const loadText =
+document.getElementById(
+    "loadText"
+);
+
+const loadBar =
+document.getElementById(
+    "loadBar"
+);
+
+const acaLabel =
+document.getElementById(
+    "acaLabel"
+);
+
+
+/* =========================================
+   SCENE
+========================================= */
+
+const scene =
+new THREE.Scene();
+
+
+/* =========================================
+   CAMERA
+========================================= */
+
+const camera =
+new THREE.PerspectiveCamera(
+    30,
+    1,
+    0.01,
+    100
+);
+
+camera.position.set(
+    3.2,
+    0.3,
+    8.5
+);
+
+
+/* =========================================
+   RENDERER
+========================================= */
+
+const renderer =
+new THREE.WebGLRenderer({
+
+    canvas:canvas,
+
+    antialias:true,
+
+    alpha:true
+
+});
+
+renderer.setPixelRatio(
+    Math.min(
+        window.devicePixelRatio || 1,
+        2
+    )
+);
+
+renderer.toneMapping =
+THREE.ACESFilmicToneMapping;
+
+renderer.toneMappingExposure =
+0.75;
+
+
+/* =========================================
+   CONTROLS
+========================================= */
+
+const controls =
+new OrbitControls(
+    camera,
+    canvas
+);
+
+controls.enableRotate = true;
+
+controls.rotateSpeed = 0.6;
+
+controls.enableDamping = true;
+
+controls.dampingFactor = 0.05;
+
+controls.enableZoom = true;
+
+controls.zoomSpeed = 0.6;
+
+controls.enablePan = false;
+
+controls.autoRotate = true;
+
+controls.autoRotateSpeed = 0.2;
+
+controls.target.set(
+    0,
+    -0.3,
+    0
+);
+
+controls.minDistance = 3.5;
+
+controls.maxDistance = 16;
+
+
+/* =========================================
+   LIGHTING
+========================================= */
+
+const ambient =
+new THREE.AmbientLight(
+    0xffffff,
+    0.55
+);
+
+scene.add(ambient);
+
+const hemi =
+new THREE.HemisphereLight(
+    0xffdce6,
+    0x081018,
+    0.75
+);
+
+scene.add(hemi);
+
+const keyLight =
+new THREE.DirectionalLight(
+    0xfff5f0,
+    1.4
+);
+
+keyLight.position.set(
+    6,
+    10,
+    8
+);
+
+scene.add(keyLight);
+
+const fillLight =
+new THREE.DirectionalLight(
+    0x8ca9bd,
+    0.4
+);
+
+fillLight.position.set(
+    -7,
+    2,
+    6
+);
+
+scene.add(fillLight);
+
+
+/* =========================================
+   BRAIN GROUP
+========================================= */
+
+const brainGroup =
+new THREE.Group();
+
+scene.add(brainGroup);
+
+let acaMesh = null;
+
+let acaHighlightMesh = null;
+
+let acaOutline = null;
+
+let highlighted = true;
+
+
+/* =========================================
+   BRAIN MATERIAL
+========================================= */
+
+const brainPinkMaterial =
+new THREE.MeshPhysicalMaterial({
+
+    color:0xf1c5d0,
+
+    roughness:0.62,
+
+    metalness:0,
+
+    clearcoat:0.12,
+
+    clearcoatRoughness:0.5,
+
+    side:THREE.DoubleSide
+
+});
+
+
+/* =========================================
+   ACA MATERIAL
+========================================= */
+
+const acaMaterial =
+new THREE.MeshPhysicalMaterial({
+
+    color:0x15151a,
+
+    roughness:0.38,
+
+    metalness:0.02,
+
+    clearcoat:0.25,
+
+    clearcoatRoughness:0.35,
+
+    side:THREE.DoubleSide
+
+});
+
+
+/* =========================================
+   OUTLINE
+========================================= */
+
+const outlineMaterial =
+new THREE.MeshBasicMaterial({
+
+    color:0xffb6c9,
+
+    transparent:true,
+
+    opacity:0.95,
+
+    side:THREE.BackSide
+
+});
+
+
+/* =========================================
+   FALLBACK ACA
+========================================= */
+
+function createACAMarker(){
+
+    const arteryMaterial =
+    new THREE.MeshBasicMaterial({
+
+        color:0xffb6c9
+
+    });
+
+
+    const arteryGroup =
+    new THREE.Group();
+
+
+    const mainGeometry =
+    new THREE.TubeGeometry(
+
+        new THREE.CatmullRomCurve3([
+
+            new THREE.Vector3(
+                0,
+                -0.35,
+                0
+            ),
+
+            new THREE.Vector3(
+                -0.12,
+                0.05,
+                0.04
+            ),
+
+            new THREE.Vector3(
+                -0.35,
+                0.45,
+                0.06
+            ),
+
+            new THREE.Vector3(
+                -0.75,
+                0.82,
+                0.05
+            ),
+
+            new THREE.Vector3(
+                -1.15,
+                1.10,
+                0.04
+            )
+
+        ]),
+
+        10,
+        0.075,
+        12,
+        false
+
+    );
+
+
+    acaHighlightMesh =
+    new THREE.Mesh(
+        mainGeometry,
+        arteryMaterial
+    );
+
+
+    arteryGroup.add(
+        acaHighlightMesh
+    );
+
+
+    brainGroup.add(
+        arteryGroup
+    );
+
+}
+
+
+/* =========================================
+   LOAD REAL BRAIN MODEL
+========================================= */
+
+function loadRealBrain(){
+
+    const loader =
+    new GLTFLoader();
+
+    const dracoLoader =
+    new DRACOLoader();
+
+    dracoLoader.setDecoderPath(
+        "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/"
+    );
+
+    loader.setDRACOLoader(
+        dracoLoader
+    );
+
+
+    const urls = [
+
+        "https://cdn.jsdelivr.net/gh/itayinbarr/brainproject@main/brain-atlas/models/brain.glb",
+
+        "https://raw.githubusercontent.com/itayinbarr/brainproject/main/brain-atlas/models/brain.glb",
+
+        "https://itayinbarr.github.io/brainproject/models/brain.glb"
+
+    ];
+
+
+    let urlIndex = 0;
+
+
+    function tryLoad(){
+
+        if(
+            urlIndex >= urls.length
+        ){
+
+            createACAMarker();
+
+            onReady();
+
+            return;
+
+        }
+
+
+        const url =
+        urls[urlIndex++];
+
+
+        loadText.textContent =
+        "Loading real brain model...";
+
+
+        loader.load(
+
+            url,
+
+
+            function(gltf){
+
+                const model =
+                gltf.scene;
+
+
+                const box =
+                new THREE.Box3()
+                .setFromObject(
+                    model
+                );
+
+
+                const center =
+                box.getCenter(
+                    new THREE.Vector3()
+                );
+
+
+                const size =
+                box.getSize(
+                    new THREE.Vector3()
+                );
+
+
+                const maxDim =
+                Math.max(
+                    size.x,
+                    size.y,
+                    size.z
+                );
+
+
+                const scale =
+                4.5 / maxDim;
+
+
+                model.scale.setScalar(
+                    scale
+                );
+
+
+                model.position.sub(
+                    center.multiplyScalar(
+                        scale
+                    )
+                );
+
+
+                model.position.y -= 0.60;
+
+
+                model.traverse(
+                function(child){
+
+                    if(
+                        !child.isMesh
+                    )
+                        return;
+
+
+                    child.castShadow =
+                    true;
+
+
+                    child.receiveShadow =
+                    true;
+
+
+                    if(
+                        child.material
+                    ){
+
+                        child.material =
+                        brainPinkMaterial.clone();
+
+                    }
+
+                });
+
+
+                brainGroup.add(
+                    model
+                );
+
+
+                /*
+                 * The vascular structure is represented
+                 * by an interactive ACA overlay so the
+                 * artery remains visible even if the
+                 * imported brain model does not contain
+                 * named arterial meshes.
+                 */
+
+                createACAMarker();
+
+
+                loadBar.style.width =
+                "100%";
+
+
+                onReady();
+
+            },
+
+
+            function(progress){
+
+                if(
+                    progress.total > 0
+                ){
+
+                    const pct =
+                    Math.min(
+                        90,
+                        progress.loaded /
+                        progress.total *
+                        90
+                    );
+
+
+                    loadBar.style.width =
+                    pct + "%";
+
+                }
+
+            },
+
+
+            function(error){
+
+                console.warn(
+                    "Model failed:",
+                    error
+                );
+
+
+                tryLoad();
+
+            }
+
+        );
+
+    }
+
+
+    tryLoad();
+
+}
+
+
+/* =========================================
+   READY
+========================================= */
+
+function onReady(){
+
+    setTimeout(
+    function(){
+
+        loading.classList.add(
+            "hide"
+        );
+
+
+        if(
+            highlighted
+        ){
+
+            acaLabel.classList.add(
+                "show"
+            );
+
+        }
+
+    },500);
+
+}
+
+
+/* =========================================
+   LABEL POSITION
+========================================= */
+
+function updateLabel(){
+
+    if(
+        !acaHighlightMesh
+    )
+        return;
+
+
+    const position =
+    new THREE.Vector3();
+
+
+    acaHighlightMesh
+    .getWorldPosition(
+        position
+    );
+
+
+    position.project(
+        camera
+    );
+
+
+    const x =
+    (position.x + 1) /
+    2 *
+    canvas.clientWidth;
+
+
+    const y =
+    (-position.y + 1) /
+    2 *
+    canvas.clientHeight;
+
+
+    acaLabel.style.left =
+    x + "px";
+
+
+    acaLabel.style.top =
+    (y - 45) + "px";
+
+}
+
+
+/* =========================================
+   RESIZE
+========================================= */
+
+function resize(){
+
+    const width =
+    canvas.clientWidth;
+
+
+    const height =
+    canvas.clientHeight;
+
+
+    if(
+        width <= 0 ||
+        height <= 0
+    )
+        return;
+
+
+    camera.aspect =
+    width / height;
+
+
+    camera.updateProjectionMatrix();
+
+
+    renderer.setSize(
+        width,
+        height,
+        false
+    );
+
+}
+
+
+window.addEventListener(
+    "resize",
+    resize
+);
+
+
+/* =========================================
+   HIGHLIGHT BUTTON
+========================================= */
+
+const highlightBtn =
+document.getElementById(
+    "highlight"
+);
+
+
+highlightBtn.addEventListener(
+"click",
+function(){
+
+    highlighted =
+    !highlighted;
+
+
+    if(
+        acaHighlightMesh
+    ){
+
+        acaHighlightMesh.visible =
+        highlighted;
+
+    }
+
+
+    if(
+        acaOutline
+    ){
+
+        acaOutline.visible =
+        highlighted;
+
+    }
+
+
+    acaLabel.classList.toggle(
+        "show",
+        highlighted
+    );
+
+
+    highlightBtn.classList.toggle(
+        "active",
+        highlighted
+    );
+
+
+    highlightBtn.textContent =
+
+    highlighted
+
+    ? "🩸 Highlight ACA"
+
+    : "⚪ Show ACA";
+
+});
+
+
+/* =========================================
+   AUTO ROTATE
+========================================= */
+
+const rotateBtn =
+document.getElementById(
+    "rotate"
+);
+
+
+rotateBtn.addEventListener(
+"click",
+function(){
+
+    controls.autoRotate =
+    !controls.autoRotate;
+
+
+    rotateBtn.classList.toggle(
+        "active",
+        controls.autoRotate
+    );
+
+
+    rotateBtn.textContent =
+
+    controls.autoRotate
+
+    ? "⟳ Auto Rotate"
+
+    : "▶ Auto Rotate";
+
+});
+
+
+/* =========================================
+   RESET
+========================================= */
+
+document.getElementById(
+    "reset"
+).addEventListener(
+"click",
+function(){
+
+    camera.position.set(
+        3.2,
+        0.3,
+        8.5
+    );
+
+
+    controls.target.set(
+        0,
+        -0.3,
+        0
+    );
+
+
+    controls.update();
+
+});
+
+
+/* =========================================
+   ANIMATION
+========================================= */
+
+function animate(){
+
+    requestAnimationFrame(
+        animate
+    );
+
+
+    controls.update();
+
+
+    updateLabel();
+
+
+    renderer.render(
+        scene,
+        camera
+    );
+
+}
+
+
+/* =========================================
+   START
+========================================= */
+
+resize();
+
+animate();
+
+loadRealBrain();
+
+</script>
+
+
+<!-- ==================================================
+     MINI TEST JAVASCRIPT
+================================================== -->
+
+<script>
+
+function checkAnswer(button,correct){
+
+    const parent =
+    button.parentElement;
+
+
+    const options =
+    parent.querySelectorAll(
+        ".option"
+    );
+
+
+    options.forEach(function(option){
+
+        option.classList.remove(
+            "correct",
+            "wrong"
+        );
+
+    });
+
+
+    if(correct){
+
+        button.classList.add(
+            "correct"
+        );
+
+    }
+
+    else{
+
+        button.classList.add(
+            "wrong"
+        );
+
+    }
+
+
+    updateQuizScore();
+
+}
+
+
+let answered = 0;
+
+let correctAnswers = 0;
+
+
+function updateQuizScore(){
+
+    const result =
+    document.getElementById(
+        "quizResult"
+    );
+
+
+    answered = 0;
+
+    correctAnswers = 0;
+
+
+    const questions =
+    document.querySelectorAll(
+        ".question"
+    );
+
+
+    questions.forEach(function(question){
+
+        const selected =
+        question.querySelector(
+            ".correct, .wrong"
+        );
+
+
+        if(selected){
+
+            answered++;
+
+
+            if(
+                selected.classList.contains(
+                    "correct"
+                )
+            ){
+
+                correctAnswers++;
+
+            }
+
+        }
+
+    });
+
+
+    if(answered > 0){
+
+        result.style.display =
+        "block";
+
+
+        result.textContent =
+        "Score: " +
+        correctAnswers +
+        " / " +
+        answered;
+
+    }
+
+}
+
+</script>
+
+
+</body>
+
+  </html>
