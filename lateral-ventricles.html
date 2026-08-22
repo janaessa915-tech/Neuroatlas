@@ -1,0 +1,3080 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NeuroAtlas | Lateral Ventricles</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#050b13;
+    color:#eef4fa;
+    font-family:Arial,Helvetica,sans-serif;
+    line-height:1.6;
+}
+
+/* ==================================================
+   NAVIGATION
+================================================== */
+
+nav{
+    height:70px;
+
+    padding:0 7%;
+
+    display:flex;
+
+    align-items:center;
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+nav a{
+    color:#9db0c3;
+
+    text-decoration:none;
+
+    font-size:14px;
+}
+
+nav a:hover{
+    color:white;
+}
+
+
+/* ==================================================
+   MAIN
+================================================== */
+
+.container{
+    max-width:1200px;
+
+    margin:auto;
+
+    padding:60px 7% 100px;
+}
+
+
+/* ==================================================
+   HERO
+================================================== */
+
+.eyebrow{
+    color:#61b5ff;
+
+    letter-spacing:3px;
+
+    font-size:12px;
+
+    text-transform:uppercase;
+
+    margin-bottom:15px;
+}
+
+h1{
+    font-size:clamp(48px,7vw,82px);
+
+    line-height:.95;
+
+    letter-spacing:-4px;
+
+    margin-bottom:12px;
+}
+
+.arabic-title{
+    color:#ffffff;
+
+    font-size:25px;
+
+    margin-bottom:25px;
+}
+
+.hero p{
+    color:#a6b6c7;
+
+    max-width:900px;
+
+    font-size:18px;
+
+    line-height:1.8;
+}
+
+
+/* ==================================================
+   ACTIONS
+================================================== */
+
+.actions{
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+    margin-top:28px;
+}
+
+.action-button{
+    padding:11px 17px;
+
+    border-radius:9px;
+
+    background:#0b1928;
+
+    border:1px solid #31516d;
+
+    color:#bdd0e0;
+
+    cursor:pointer;
+
+    text-decoration:none;
+
+    font-size:14px;
+
+    transition:.2s;
+}
+
+.action-button:hover{
+    background:#14304a;
+
+    color:white;
+
+    border-color:white;
+}
+
+
+/* ==================================================
+   VIEWER
+================================================== */
+
+.viewer{
+    margin-top:60px;
+
+    border:1px solid rgba(255,255,255,.10);
+
+    border-radius:24px;
+
+    overflow:hidden;
+
+    background:#02060b;
+
+    box-shadow:
+        0 25px 80px rgba(0,0,0,.45);
+}
+
+.viewer-header{
+    min-height:65px;
+
+    padding:0 22px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.viewer-title{
+    font-size:14px;
+
+    color:#d2dce6;
+}
+
+.viewer-status{
+    color:#708499;
+
+    font-size:11px;
+
+    letter-spacing:1px;
+}
+
+.scene{
+    position:relative;
+
+    width:100%;
+
+    height:700px;
+
+    background:
+    radial-gradient(
+        circle at 50% 45%,
+        #203b51 0%,
+        #0d1c2e 42%,
+        #02060b 100%
+    );
+}
+
+#brainCanvas{
+    width:100%;
+
+    height:100%;
+
+    display:block;
+}
+
+
+/* ==================================================
+   LOADING
+================================================== */
+
+.loading{
+    position:absolute;
+
+    inset:0;
+
+    z-index:20;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    flex-direction:column;
+
+    gap:16px;
+
+    background:#02060b;
+
+    color:#9db0c3;
+
+    font-size:14px;
+
+    transition:opacity .8s;
+}
+
+.loading.hide{
+    opacity:0;
+
+    pointer-events:none;
+}
+
+.loading-bar{
+    width:180px;
+
+    height:2px;
+
+    background:rgba(255,255,255,.08);
+
+    border-radius:2px;
+
+    overflow:hidden;
+}
+
+.loading-bar-inner{
+    width:0%;
+
+    height:100%;
+
+    background:white;
+
+    transition:width .3s;
+}
+
+
+/* ==================================================
+   VENTRICLE LABEL
+================================================== */
+
+.ventricle-label{
+    position:absolute;
+
+    z-index:50;
+
+    pointer-events:none;
+
+    transform:translate(-50%,-50%);
+
+    display:none;
+}
+
+.ventricle-label.show{
+    display:block;
+}
+
+.label-box{
+    position:relative;
+
+    padding:8px 13px;
+
+    border-radius:9px;
+
+    background:rgba(5,10,17,.97);
+
+    border:1.5px solid white;
+
+    color:white;
+
+    font-size:11px;
+
+    font-weight:bold;
+
+    letter-spacing:.8px;
+
+    white-space:nowrap;
+
+    box-shadow:
+        0 0 12px rgba(255,255,255,.3),
+        0 0 30px rgba(255,255,255,.12);
+}
+
+.label-line{
+    position:absolute;
+
+    width:1.5px;
+
+    height:35px;
+
+    background:white;
+
+    left:50%;
+
+    bottom:-35px;
+
+    transform:translateX(-50%);
+}
+
+
+/* ==================================================
+   CONTROLS
+================================================== */
+
+.controls{
+    display:flex;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+
+    padding:15px;
+
+    border-top:1px solid rgba(255,255,255,.08);
+}
+
+.controls button{
+    padding:11px 17px;
+
+    border-radius:9px;
+
+    background:#0b1928;
+
+    border:1px solid #31516d;
+
+    color:#bdd0e0;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.controls button:hover{
+    background:#14304a;
+
+    color:white;
+}
+
+.controls button.active{
+    background:#17191c;
+
+    border-color:white;
+
+    color:white;
+}
+
+
+/* ==================================================
+   SECTIONS
+================================================== */
+
+.section{
+    margin-top:70px;
+}
+
+.section-label{
+    color:#61b5ff;
+
+    letter-spacing:2px;
+
+    font-size:11px;
+
+    text-transform:uppercase;
+
+    margin-bottom:8px;
+}
+
+.section h2{
+    font-size:32px;
+
+    margin-bottom:25px;
+}
+
+.section-intro{
+    color:#91a5b8;
+
+    max-width:900px;
+
+    font-size:15px;
+
+    line-height:1.9;
+
+    margin-bottom:30px;
+}
+
+
+/* ==================================================
+   CARDS
+================================================== */
+
+.cards{
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:20px;
+}
+
+.card{
+    padding:27px;
+
+    background:#091522;
+
+    border:1px solid #172b3e;
+
+    border-radius:18px;
+
+    transition:.2s;
+}
+
+.card:hover{
+    transform:translateY(-3px);
+
+    border-color:#2b506c;
+}
+
+.card h3{
+    font-size:18px;
+
+    margin-bottom:13px;
+
+    color:#eef4fa;
+
+    line-height:1.45;
+}
+
+.card p{
+    color:#91a5b8;
+
+    font-size:14px;
+
+    line-height:1.8;
+}
+
+
+/* ==================================================
+   LOCATION
+================================================== */
+
+.location{
+    margin-top:70px;
+
+    padding:32px;
+
+    background:#091522;
+
+    border:1px solid #172b3e;
+
+    border-radius:18px;
+}
+
+.location h2{
+    font-size:30px;
+
+    margin-bottom:12px;
+}
+
+.location-intro{
+    color:#91a5b8;
+
+    max-width:900px;
+
+    line-height:1.9;
+
+    margin-bottom:25px;
+}
+
+
+/* ==================================================
+   LOCATION DIAGRAM
+================================================== */
+
+.location-diagram{
+    margin-top:25px;
+
+    padding:20px;
+
+    background:#050b13;
+
+    border:1px solid #20364b;
+
+    border-radius:16px;
+}
+
+.brain-svg{
+    display:block;
+
+    width:100%;
+
+    max-width:850px;
+
+    height:auto;
+
+    margin:auto;
+}
+
+.svg-brain{
+    fill:#263d55;
+
+    stroke:#71869e;
+
+    stroke-width:3;
+}
+
+.svg-cerebrum{
+    fill:#263d55;
+
+    stroke:#71869e;
+
+    stroke-width:3;
+}
+
+.svg-ventricle{
+    fill:#ffffff;
+
+    stroke:#ffffff;
+
+    stroke-width:3;
+}
+
+.svg-brainstem{
+    fill:#29465b;
+
+    stroke:#71869e;
+
+    stroke-width:3;
+}
+
+.svg-line{
+    stroke:#ffffff;
+
+    stroke-width:2;
+}
+
+.svg-label{
+    fill:white;
+
+    font-size:18px;
+
+    font-weight:bold;
+}
+
+.location-caption{
+    text-align:center;
+
+    color:#9fb0c3;
+
+    margin-top:15px;
+}
+
+
+/* ==================================================
+   CLINICAL
+================================================== */
+
+.clinical-section{
+    margin-top:65px;
+}
+
+.clinical-box{
+    padding:30px;
+
+    background:#091522;
+
+    border:1px solid #172b3e;
+
+    border-left:3px solid white;
+
+    border-radius:18px;
+}
+
+.clinical-box p{
+    color:#a7b7c6;
+
+    font-size:15px;
+
+    line-height:1.9;
+
+    margin-bottom:18px;
+}
+
+.clinical-box p:last-child{
+    margin-bottom:0;
+}
+
+
+/* ==================================================
+   INSIGHT
+================================================== */
+
+.insight{
+    margin-top:30px;
+
+    padding:25px;
+
+    background:#091522;
+
+    border-left:3px solid white;
+
+    border-radius:10px;
+
+    color:#aebdce;
+}
+
+.insight strong{
+    color:white;
+}
+
+
+/* ==================================================
+   FACTS
+================================================== */
+
+.facts-grid{
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:15px;
+}
+
+.fact{
+    padding:22px;
+
+    background:#091522;
+
+    border:1px solid #172b3e;
+
+    border-radius:16px;
+}
+
+.fact span{
+    display:block;
+
+    color:white;
+
+    font-size:11px;
+
+    letter-spacing:2px;
+
+    margin-bottom:12px;
+}
+
+.fact strong{
+    display:block;
+
+    color:#eef4fa;
+
+    font-size:14px;
+
+    margin-bottom:8px;
+
+    line-height:1.5;
+}
+
+.fact p{
+    color:#8195a8;
+
+    font-size:13px;
+
+    line-height:1.7;
+}
+
+
+/* ==================================================
+   QUIZ
+================================================== */
+
+.quiz{
+    margin-top:65px;
+
+    padding:30px;
+
+    background:#091522;
+
+    border:1px solid #172b3e;
+
+    border-radius:18px;
+}
+
+.quiz h2{
+    font-size:27px;
+
+    margin-bottom:25px;
+}
+
+.question-block{
+    padding:22px;
+
+    margin-bottom:18px;
+
+    background:#07111d;
+
+    border:1px solid #172b3e;
+
+    border-radius:14px;
+}
+
+.question-number{
+    color:#61b5ff;
+
+    font-size:12px;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+    margin-bottom:8px;
+}
+
+.question-en{
+    color:#eef4fa;
+
+    font-size:16px;
+
+    margin-bottom:5px;
+}
+
+.question-ar{
+    color:#91a5b8;
+
+    font-size:15px;
+
+    margin-bottom:15px;
+}
+
+.option{
+    display:block;
+
+    width:100%;
+
+    padding:13px;
+
+    margin-top:10px;
+
+    background:#10233a;
+
+    color:white;
+
+    border:1px solid #263951;
+
+    border-radius:8px;
+
+    text-align:left;
+
+    cursor:pointer;
+
+    font-size:14px;
+}
+
+.option:hover{
+    border-color:white;
+}
+
+.option.correct{
+    background:#17251f;
+
+    border-color:#78e0a0;
+}
+
+.option.wrong{
+    background:#291a1d;
+
+    border-color:#ff8792;
+}
+
+.question-feedback{
+    margin-top:12px;
+
+    font-size:14px;
+
+    min-height:22px;
+}
+
+.quiz-result{
+    margin-top:25px;
+
+    padding:20px;
+
+    border-radius:12px;
+
+    background:#07111d;
+
+    border:1px solid #263951;
+
+    text-align:center;
+
+    font-size:17px;
+
+    color:white;
+}
+
+
+/* ==================================================
+   BACK
+================================================== */
+
+.back{
+    display:inline-block;
+
+    margin-top:40px;
+
+    padding:12px 18px;
+
+    border:1px solid #263951;
+
+    border-radius:9px;
+
+    color:white;
+
+    text-decoration:none;
+}
+
+.back:hover{
+    border-color:white;
+}
+
+
+/* ==================================================
+   MOBILE
+================================================== */
+
+@media(max-width:900px){
+
+    .cards{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .facts-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:800px){
+
+    .scene{
+        height:450px;
+    }
+
+    .viewer-status{
+        display:none;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .facts-grid{
+        grid-template-columns:1fr;
+    }
+
+    h1{
+        letter-spacing:-2px;
+    }
+
+    .location{
+        padding:20px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<nav>
+
+<a href="./explore.html">
+← Back to Explore Anatomy
+</a>
+
+</nav>
+
+
+<main class="container">
+
+
+<!-- ==================================================
+     HERO
+================================================== -->
+
+<div class="eyebrow">
+Ventricular System · NeuroAtlas
+</div>
+
+
+<h1>
+Lateral Ventricles
+</h1>
+
+
+<div class="arabic-title">
+البطينات الجانبية
+</div>
+
+
+<div class="hero">
+
+<p>
+
+The lateral ventricles are two large interconnected
+cavities within the cerebral hemispheres. They contain
+cerebrospinal fluid and are important components of the
+brain's ventricular system.
+
+<br><br>
+
+البطينات الجانبية هي تجويفان كبيران داخل نصفي الكرة
+المخية. يحتويان على السائل الدماغي الشوكي ويشكلان جزءًا
+أساسيًا من الجهاز البطيني للدماغ.
+
+</p>
+
+</div>
+
+
+<!-- ==================================================
+     ACTIONS
+================================================== -->
+
+<div class="actions">
+
+<a
+class="action-button"
+href="#location"
+>
+📍 View Location
+</a>
+
+
+<a
+class="action-button"
+href="#anatomy"
+>
+🧠 Ventricle Anatomy
+</a>
+
+
+<a
+class="action-button"
+href="#quiz"
+>
+🧪 Test Yourself
+</a>
+
+</div>
+
+
+<!-- ==================================================
+     3D VIEWER
+================================================== -->
+
+<div class="viewer">
+
+<div class="viewer-header">
+
+<div class="viewer-title">
+Human Brain · Lateral Ventricles
+</div>
+
+<div class="viewer-status">
+DRAG TO ROTATE · SCROLL TO ZOOM
+</div>
+
+</div>
+
+
+<div class="scene">
+
+
+<div
+id="loading"
+class="loading"
+>
+
+<span id="loadText">
+Loading real brain model...
+</span>
+
+<div class="loading-bar">
+
+<div
+id="loadBar"
+class="loading-bar-inner"
+></div>
+
+</div>
+
+</div>
+
+
+<canvas id="brainCanvas"></canvas>
+
+
+<div
+id="ventricleLabel"
+class="ventricle-label"
+>
+
+<div class="label-box">
+
+LATERAL VENTRICLES · البطينات الجانبية
+
+<div class="label-line"></div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="controls">
+
+<button
+id="highlight"
+class="active"
+>
+⚪ Highlight Lateral Ventricles
+</button>
+
+
+<button
+id="rotate"
+class="active"
+>
+⟳ Auto Rotate
+</button>
+
+
+<button
+id="reset"
+>
+↻ Reset View
+</button>
+
+</div>
+
+</div>
+
+
+<!-- ==================================================
+     ANATOMY
+================================================== -->
+
+<section
+id="anatomy"
+class="section"
+>
+
+<div class="section-label">
+Lateral Ventricles · البطينات الجانبية
+</div>
+
+
+<h2>
+Lateral Ventricle Anatomy · تشريح البطينات الجانبية
+</h2>
+
+
+<p class="section-intro">
+
+Each lateral ventricle has a complex C-shaped configuration
+and extends through several regions of the cerebral hemisphere.
+Its major parts include the anterior horn, body, atrium,
+posterior horn, and inferior horn.
+
+<br><br>
+
+يمتلك كل بطين جانبي شكلًا مقوسًا ومعقدًا ويمتد داخل عدة
+مناطق من نصف الكرة المخية. وتشمل أجزاؤه الرئيسية القرن
+الأمامي والجسم والدهليز والقرن الخلفي والقرن السفلي.
+
+</p>
+
+
+<div class="cards">
+
+
+<div class="card">
+
+<h3>
+Anterior Horn · القرن الأمامي
+</h3>
+
+<p>
+
+The anterior horn extends into the frontal lobe and lies
+anterior to the interventricular foramen.
+
+<br><br>
+
+يمتد القرن الأمامي داخل الفص الجبهي ويقع أمام
+الثقبة بين البطينين.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+Body · جسم البطين
+</h3>
+
+<p>
+
+The body of the lateral ventricle lies mainly beneath
+the corpus callosum and forms part of the central portion
+of the ventricular cavity.
+
+<br><br>
+
+يقع جسم البطين الجانبي بشكل رئيسي أسفل الجسم الثفني
+ويشكل جزءًا من المنطقة المركزية للتجويف البطيني.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+Atrium · الدهليز
+</h3>
+
+<p>
+
+The atrium is the region where the body, posterior horn,
+and inferior horn meet.
+
+<br><br>
+
+الدهليز هو المنطقة التي يلتقي فيها الجسم مع القرن
+الخلفي والقرن السفلي.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+Posterior Horn · القرن الخلفي
+</h3>
+
+<p>
+
+The posterior horn extends into the occipital lobe.
+
+<br><br>
+
+يمتد القرن الخلفي للبطين الجانبي داخل الفص القذالي.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+Inferior Horn · القرن السفلي
+</h3>
+
+<p>
+
+The inferior horn curves into the temporal lobe and
+passes near important medial temporal structures.
+
+<br><br>
+
+ينحني القرن السفلي داخل الفص الصدغي ويمر بالقرب من
+تراكيب مهمة في المنطقة الصدغية الإنسية.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+Choroid Plexus · الضفيرة المشيمية
+</h3>
+
+<p>
+
+The choroid plexus is associated with the ventricular
+system and contributes to production of cerebrospinal fluid.
+
+<br><br>
+
+ترتبط الضفيرة المشيمية بالجهاز البطيني وتساهم في
+إنتاج السائل الدماغي الشوكي.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+Cerebrospinal Fluid · السائل الدماغي الشوكي
+</h3>
+
+<p>
+
+The ventricles contain cerebrospinal fluid, which circulates
+through the ventricular system and subarachnoid space.
+
+<br><br>
+
+تحتوي البطينات على السائل الدماغي الشوكي الذي يدور
+عبر الجهاز البطيني والحيز تحت العنكبوتية.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+Interventricular Foramen · الثقبة بين البطينين
+</h3>
+
+<p>
+
+The interventricular foramina connect each lateral ventricle
+to the third ventricle.
+
+<br><br>
+
+تربط الثقبتان بين البطينين كل بطين جانبي بالبطين الثالث.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+Ventricular Flow · مسار السائل
+</h3>
+
+<p>
+
+CSF flows from the lateral ventricles through the
+interventricular foramina toward the third ventricle.
+
+<br><br>
+
+ينتقل السائل الدماغي الشوكي من البطينات الجانبية عبر
+الثقبات بين البطينين باتجاه البطين الثالث.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ==================================================
+     LOCATION
+================================================== -->
+
+<section
+id="location"
+class="location"
+>
+
+<h2>
+📍 Where are the Lateral Ventricles?
+· أين تقع البطينات الجانبية؟
+</h2>
+
+
+<p class="location-intro">
+
+The lateral ventricles are located deep within the right
+and left cerebral hemispheres. They lie beneath the
+corpus callosum and curve through the frontal, parietal,
+occipital, and temporal regions.
+
+<br><br>
+
+تقع البطينات الجانبية في عمق نصفي الكرة المخية الأيمن
+والأيسر. وتوجد أسفل الجسم الثفني وتمتد بشكل مقوس عبر
+المناطق الجبهية والجدارية والقذالية والصدغية.
+
+</p>
+
+
+<div class="location-diagram">
+
+<svg
+class="brain-svg"
+viewBox="0 0 900 600"
+xmlns="http://www.w3.org/2000/svg"
+aria-label="Simplified location diagram of the lateral ventricles"
+>
+
+
+<!-- ==================================================
+     CEREBRAL HEMISPHERE
+================================================== -->
+
+<path
+class="svg-cerebrum"
+d="
+M110 250
+C100 145 185 75 300 52
+C430 25 565 60 655 145
+C720 205 730 290 690 350
+C645 415 555 435 450 425
+C330 415 220 390 155 330
+C125 300 110 275 110 250Z"
+/>
+
+
+<!-- ==================================================
+     BRAINSTEM
+================================================== -->
+
+<path
+class="svg-brainstem"
+d="
+M405 340
+C415 380 420 425 410 490
+L452 490
+C458 425 452 380 438 340Z"
+/>
+
+
+<!-- ==================================================
+     LEFT LATERAL VENTRICLE
+================================================== -->
+
+<path
+class="svg-ventricle"
+d="
+M310 155
+
+C285 175
+280 205
+292 225
+
+C304 245
+315 275
+304 300
+
+C292 328
+270 350
+275 368
+
+C282 380
+300 377
+315 360
+
+C330 342
+342 320
+342 298
+
+C342 275
+330 248
+328 225
+
+C326 200
+335 178
+326 160
+
+C323 154
+316 151
+310 155Z
+"
+/>
+
+
+<!-- ==================================================
+     RIGHT LATERAL VENTRICLE
+================================================== -->
+
+<path
+class="svg-ventricle"
+d="
+M590 155
+
+C615 175
+620 205
+608 225
+
+C596 245
+585 275
+596 300
+
+C608 328
+630 350
+625 368
+
+C618 380
+600 377
+585 360
+
+C570 342
+558 320
+558 298
+
+C558 275
+570 248
+572 225
+
+C574 200
+565 178
+574 160
+
+C577 154
+584 151
+590 155Z
+"
+/>
+
+
+<!-- ==================================================
+     VENTRICLE LABEL
+================================================== -->
+
+<line
+class="svg-line"
+x1="590"
+y1="220"
+x2="705"
+y2="155"
+/>
+
+
+<text
+class="svg-label"
+x="715"
+y="150"
+>
+LATERAL VENTRICLE
+</text>
+
+
+<text
+class="svg-label"
+x="715"
+y="177"
+>
+البطين الجانبي
+</text>
+
+
+<!-- ==================================================
+     CORPUS CALLOSUM
+================================================== -->
+
+<path
+fill="#344d66"
+stroke="#71869e"
+stroke-width="3"
+d="
+M285 118
+C350 80
+540 80
+615 118
+C590 133
+565 136
+540 135
+C465 120
+365 120
+285 135Z
+"
+/>
+
+
+<line
+class="svg-line"
+x1="450"
+y1="115"
+x2="720"
+y2="270"
+/>
+
+
+<text
+class="svg-label"
+x="730"
+y="275"
+>
+CORPUS CALLOSUM
+</text>
+
+
+<!-- ==================================================
+     BRAINSTEM LABEL
+================================================== -->
+
+<line
+class="svg-line"
+x1="430"
+y1="450"
+x2="700"
+y2="485"
+/>
+
+
+<text
+class="svg-label"
+x="710"
+y="490"
+>
+BRAINSTEM
+</text>
+
+
+</svg>
+
+
+<p class="location-caption">
+
+⚪ The white C-shaped structures represent the lateral ventricles.
+
+<br>
+
+التركيبات البيضاء المقوسة تمثل البطينات الجانبية.
+
+</p>
+
+</div>
+
+</section>
+
+
+<!-- ==================================================
+     CLINICAL
+================================================== -->
+
+<div class="clinical-section">
+
+<div class="section-label">
+Clinical Importance · الأهمية السريرية
+</div>
+
+
+<h2>
+Why the Lateral Ventricles Matter
+</h2>
+
+
+<div class="clinical-box">
+
+<p>
+
+Because the lateral ventricles are major components of the
+cerebrospinal fluid circulation system, obstruction of
+ventricular pathways can interfere with normal CSF movement
+and may contribute to enlargement of the ventricular system.
+
+</p>
+
+
+<p dir="rtl">
+
+لأن البطينات الجانبية تُعد جزءًا رئيسيًا من نظام دوران
+السائل الدماغي الشوكي، فإن انسداد مسارات البطينات قد
+يؤثر على حركة السائل الطبيعية وقد يؤدي إلى توسع الجهاز
+البطيني.
+
+</p>
+
+</div>
+
+</div>
+
+
+<!-- ==================================================
+     INSIGHT
+================================================== -->
+
+<div class="insight">
+
+<strong>
+NeuroAtlas Insight
+</strong>
+
+<br><br>
+
+The lateral ventricles are not solid brain structures.
+They are internal cavities filled with cerebrospinal fluid
+and form the largest components of the brain's ventricular
+system.
+
+<br><br>
+
+البطينات الجانبية ليست تراكيب صلبة من نسيج الدماغ؛
+بل هي تجاويف داخلية تحتوي على السائل الدماغي الشوكي
+وتُعد أكبر مكونات الجهاز البطيني للدماغ.
+
+</div>
+
+
+<!-- ==================================================
+     QUICK FACTS
+================================================== -->
+
+<div class="section">
+
+<div class="section-label">
+Quick Facts · معلومات سريعة
+</div>
+
+
+<h2>
+Lateral Ventricles at a Glance
+</h2>
+
+
+<div class="facts-grid">
+
+
+<div class="fact">
+
+<span>
+01
+</span>
+
+<strong>
+Number · العدد
+</strong>
+
+<p>
+Two: one in each cerebral hemisphere
+</p>
+
+</div>
+
+
+<div class="fact">
+
+<span>
+02
+</span>
+
+<strong>
+Main Content · المحتوى الأساسي
+</strong>
+
+<p>
+Cerebrospinal fluid · السائل الدماغي الشوكي
+</p>
+
+</div>
+
+
+<div class="fact">
+
+<span>
+03
+</span>
+
+<strong>
+Shape · الشكل
+</strong>
+
+<p>
+C-shaped ventricular cavities
+</p>
+
+</div>
+
+
+<div class="fact">
+
+<span>
+04
+</span>
+
+<strong>
+Connection · الاتصال
+</strong>
+
+<p>
+Each connects to the third ventricle
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ==================================================
+     QUIZ
+================================================== -->
+
+<div
+id="quiz"
+class="quiz"
+>
+
+<h2>
+🧠 Mini Test · اختبار قصير
+</h2>
+
+
+<!-- QUESTION 1 -->
+
+<div
+class="question-block"
+data-answer="B"
+>
+
+<div class="question-number">
+Question 01 · السؤال الأول
+</div>
+
+
+<div class="question-en">
+What do the lateral ventricles primarily contain?
+</div>
+
+
+<div
+class="question-ar"
+dir="rtl"
+>
+ماذا تحتوي البطينات الجانبية بشكل أساسي؟
+</div>
+
+
+<button
+class="option"
+data-option="A"
+>
+A. Blood
+</button>
+
+
+<button
+class="option"
+data-option="B"
+>
+B. Cerebrospinal fluid
+</button>
+
+
+<button
+class="option"
+data-option="C"
+>
+C. Bone marrow
+</button>
+
+
+<button
+class="option"
+data-option="D"
+>
+D. Muscle tissue
+</button>
+
+
+<div class="question-feedback"></div>
+
+</div>
+
+
+<!-- QUESTION 2 -->
+
+<div
+class="question-block"
+data-answer="C"
+>
+
+<div class="question-number">
+Question 02 · السؤال الثاني
+</div>
+
+
+<div class="question-en">
+Which structure connects each lateral ventricle with the third ventricle?
+</div>
+
+
+<div
+class="question-ar"
+dir="rtl"
+>
+أي تركيب يربط كل بطين جانبي بالبطين الثالث؟
+</div>
+
+
+<button
+class="option"
+data-option="A"
+>
+A. Cerebral aqueduct
+</button>
+
+
+<button
+class="option"
+data-option="B"
+>
+B. Median aperture
+</button>
+
+
+<button
+class="option"
+data-option="C"
+>
+C. Interventricular foramen
+</button>
+
+
+<button
+class="option"
+data-option="D"
+>
+D. Central canal
+</button>
+
+
+<div class="question-feedback"></div>
+
+</div>
+
+
+<!-- QUESTION 3 -->
+
+<div
+class="question-block"
+data-answer="A"
+>
+
+<div class="question-number">
+Question 03 · السؤال الثالث
+</div>
+
+
+<div class="question-en">
+Which lobe contains the inferior horn of the lateral ventricle?
+</div>
+
+
+<div
+class="question-ar"
+dir="rtl"
+>
+في أي فص يوجد القرن السفلي للبطين الجانبي؟
+</div>
+
+
+<button
+class="option"
+data-option="A"
+>
+A. Temporal lobe
+</button>
+
+
+<button
+class="option"
+data-option="B"
+>
+B. Frontal lobe
+</button>
+
+
+<button
+class="option"
+data-option="C"
+>
+C. Occipital lobe
+</button>
+
+
+<button
+class="option"
+data-option="D"
+>
+D. Parietal lobe
+</button>
+
+
+<div class="question-feedback"></div>
+
+</div>
+
+
+<div
+id="quizResult"
+class="quiz-result"
+>
+
+Answer all three questions to see your final score.
+<br>
+
+أجب عن الأسئلة الثلاثة لرؤية نتيجتك النهائية.
+
+</div>
+
+</div>
+
+
+<a
+class="back"
+href="explore.html"
+>
+← Back to Explore Anatomy
+</a>
+
+
+</main>
+
+
+<!-- ==================================================
+     THREE.JS IMPORT MAP
+================================================== -->
+
+<script type="importmap">
+
+{
+    "imports": {
+
+        "three":
+        "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+
+        "three/addons/":
+        "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+
+    }
+}
+
+</script>
+
+
+<!-- ==================================================
+     THREE.JS
+================================================== -->
+
+<script type="module">
+
+import * as THREE from "three";
+
+import {
+    OrbitControls
+} from "three/addons/controls/OrbitControls.js";
+
+import {
+    GLTFLoader
+} from "three/addons/loaders/GLTFLoader.js";
+
+import {
+    DRACOLoader
+} from "three/addons/loaders/DRACOLoader.js";
+
+
+/* ==================================================
+   ELEMENTS
+================================================== */
+
+const canvas =
+document.getElementById("brainCanvas");
+
+const loading =
+document.getElementById("loading");
+
+const loadText =
+document.getElementById("loadText");
+
+const loadBar =
+document.getElementById("loadBar");
+
+const ventricleLabel =
+document.getElementById("ventricleLabel");
+
+
+/* ==================================================
+   SCENE
+================================================== */
+
+const scene =
+new THREE.Scene();
+
+
+/* ==================================================
+   CAMERA
+================================================== */
+
+const camera =
+new THREE.PerspectiveCamera(
+    30,
+    1,
+    0.01,
+    100
+);
+
+camera.position.set(
+    0,
+    0.15,
+    8.5
+);
+
+
+/* ==================================================
+   RENDERER
+================================================== */
+
+const renderer =
+new THREE.WebGLRenderer({
+
+    canvas:canvas,
+
+    antialias:true,
+
+    alpha:true
+
+});
+
+renderer.setPixelRatio(
+    Math.min(
+        window.devicePixelRatio || 1,
+        2
+    )
+);
+
+renderer.setSize(
+    canvas.clientWidth,
+    canvas.clientHeight,
+    false
+);
+
+renderer.toneMapping =
+THREE.ACESFilmicToneMapping;
+
+renderer.toneMappingExposure =
+0.8;
+
+
+/* ==================================================
+   CONTROLS
+================================================== */
+
+const controls =
+new OrbitControls(
+    camera,
+    canvas
+);
+
+controls.enableDamping = true;
+
+controls.dampingFactor = .05;
+
+controls.enablePan = false;
+
+controls.enableZoom = true;
+
+controls.autoRotate = true;
+
+controls.autoRotateSpeed = .18;
+
+controls.minDistance = 3.5;
+
+controls.maxDistance = 16;
+
+controls.target.set(
+    0,
+    -0.25,
+    0
+);
+
+
+/* ==================================================
+   LIGHTS
+================================================== */
+
+scene.add(
+    new THREE.AmbientLight(
+        0xffffff,
+        .65
+    )
+);
+
+
+scene.add(
+    new THREE.HemisphereLight(
+        0xffffff,
+        0x081018,
+        .75
+    )
+);
+
+
+const keyLight =
+new THREE.DirectionalLight(
+    0xffffff,
+    1.5
+);
+
+keyLight.position.set(
+    6,
+    10,
+    8
+);
+
+scene.add(keyLight);
+
+
+const fillLight =
+new THREE.DirectionalLight(
+    0x8ca9bd,
+    .45
+);
+
+fillLight.position.set(
+    -7,
+    2,
+    6
+);
+
+scene.add(fillLight);
+
+
+/* ==================================================
+   BRAIN ROOT
+================================================== */
+
+const brainRoot =
+new THREE.Group();
+
+scene.add(brainRoot);
+
+
+let brainModel = null;
+
+let ventricleGroup = null;
+
+let ventricleMeshes = [];
+
+let highlighted = true;
+
+
+/* ==================================================
+   BRAIN MATERIAL
+================================================== */
+
+const brainMaterial =
+new THREE.MeshPhysicalMaterial({
+
+    color:0xe8bfc9,
+
+    roughness:.65,
+
+    metalness:0,
+
+    clearcoat:.1,
+
+    transparent:true,
+
+    opacity:.48,
+
+    depthWrite:false,
+
+    side:THREE.DoubleSide
+
+});
+
+
+/* ==================================================
+   VENTRICLE MATERIAL
+================================================== */
+
+const ventricleMaterial =
+new THREE.MeshPhysicalMaterial({
+
+    color:0xffffff,
+
+    emissive:0xffffff,
+
+    emissiveIntensity:1.4,
+
+    roughness:.25,
+
+    metalness:0,
+
+    transparent:false,
+
+    depthTest:false,
+
+    depthWrite:false,
+
+    side:THREE.DoubleSide
+
+});
+
+
+/* ==================================================
+   CREATE ONE VENTRICLE
+================================================== */
+
+function makeVentricle(
+    name,
+    position,
+    scale,
+    rotationZ
+){
+
+    const geometry =
+    new THREE.CapsuleGeometry(
+        1,
+        2.5,
+        12,
+        24
+    );
+
+    const mesh =
+    new THREE.Mesh(
+        geometry,
+        ventricleMaterial.clone()
+    );
+
+    mesh.name =
+    name;
+
+    mesh.position.copy(
+        position
+    );
+
+    mesh.scale.copy(
+        scale
+    );
+
+    mesh.rotation.z =
+    rotationZ;
+
+    mesh.renderOrder = 20;
+
+    ventricleGroup.add(
+        mesh
+    );
+
+    ventricleMeshes.push(
+        mesh
+    );
+
+    return mesh;
+}
+
+
+/* ==================================================
+   CREATE LATERAL VENTRICLES
+================================================== */
+
+function createLateralVentricles(){
+
+    ventricleGroup =
+    new THREE.Group();
+
+    /*
+       Same principle as the working
+       Deep Cerebellar Nuclei version:
+
+       the highlighted structure is a
+       child of brainRoot, so it moves
+       with the brain.
+    */
+
+    brainRoot.add(
+        ventricleGroup
+    );
+
+
+    /*
+       The lateral ventricles are
+       represented as two small,
+       elongated internal cavities
+       inside the cerebral hemispheres.
+
+       They are intentionally subtle
+       rather than giant floating objects.
+    */
+
+
+    /* LEFT LATERAL VENTRICLE */
+
+    makeVentricle(
+
+        "Left Lateral Ventricle",
+
+        new THREE.Vector3(
+            -0.52,
+             0.35,
+             0.00
+        ),
+
+        new THREE.Vector3(
+            .18,
+            .42,
+            .12
+        ),
+
+        -0.22
+
+    );
+
+
+    /* RIGHT LATERAL VENTRICLE */
+
+    makeVentricle(
+
+        "Right Lateral Ventricle",
+
+        new THREE.Vector3(
+             0.52,
+             0.35,
+             0.00
+        ),
+
+        new THREE.Vector3(
+            .18,
+            .42,
+            .12
+        ),
+
+        0.22
+
+    );
+
+}
+
+
+/* ==================================================
+   LOAD BRAIN
+================================================== */
+
+function loadBrain(){
+
+    const loader =
+    new GLTFLoader();
+
+
+    const draco =
+    new DRACOLoader();
+
+
+    draco.setDecoderPath(
+        "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/"
+    );
+
+
+    loader.setDRACOLoader(
+        draco
+    );
+
+
+    /*
+       Same real brain model used
+       throughout the NeuroAtlas pages.
+    */
+
+    const url =
+    "https://cdn.jsdelivr.net/gh/itayinbarr/brainproject@main/brain-atlas/models/brain.glb";
+
+
+    loader.load(
+
+        url,
+
+        function(gltf){
+
+            brainModel =
+            gltf.scene;
+
+
+            /* ==================================
+               FIND ORIGINAL BOUNDS
+            ================================== */
+
+            const box =
+            new THREE.Box3()
+            .setFromObject(
+                brainModel
+            );
+
+
+            const center =
+            box.getCenter(
+                new THREE.Vector3()
+            );
+
+
+            const size =
+            box.getSize(
+                new THREE.Vector3()
+            );
+
+
+            const maxDim =
+            Math.max(
+                size.x,
+                size.y,
+                size.z
+            );
+
+
+            /* ==================================
+               NORMALIZE MODEL
+            ================================== */
+
+            const scale =
+            4.5 / maxDim;
+
+
+            brainModel.scale.setScalar(
+                scale
+            );
+
+
+            brainModel.position.set(
+                0,
+                0,
+                0
+            );
+
+
+            brainModel.position.sub(
+                center.multiplyScalar(
+                    scale
+                )
+            );
+
+
+            brainModel.position.y -= .60;
+
+
+            /* ==================================
+               BRAIN MATERIAL
+            ================================== */
+
+            brainModel.traverse(
+            function(child){
+
+                if(
+                    !child.isMesh
+                )
+                    return;
+
+
+                child.castShadow = true;
+
+                child.receiveShadow = true;
+
+
+                child.material =
+                brainMaterial.clone();
+
+            });
+
+
+            brainRoot.add(
+                brainModel
+            );
+
+
+            /*
+               Create highlighted ventricles
+               AFTER the brain is normalized.
+            */
+
+            createLateralVentricles();
+
+
+            loadBar.style.width =
+            "100%";
+
+
+            loadText.textContent =
+            "Lateral ventricles loaded";
+
+
+            setTimeout(
+            function(){
+
+                loading.classList.add(
+                    "hide"
+                );
+
+
+                ventricleLabel.classList.add(
+                    "show"
+                );
+
+            },600);
+
+        },
+
+
+        function(progress){
+
+            if(
+                progress.total > 0
+            ){
+
+                const percent =
+                Math.min(
+                    95,
+                    progress.loaded /
+                    progress.total *
+                    95
+                );
+
+
+                loadBar.style.width =
+                percent + "%";
+
+            }
+
+        },
+
+
+        function(error){
+
+            console.error(
+                "Could not load brain:",
+                error
+            );
+
+
+            loadText.textContent =
+            "Could not load brain model.";
+
+        }
+
+    );
+
+}
+
+
+/* ==================================================
+   LABEL POSITION
+================================================== */
+
+function updateLabel(){
+
+    if(
+        !ventricleGroup ||
+        ventricleMeshes.length === 0
+    )
+        return;
+
+
+    const center =
+    new THREE.Vector3();
+
+
+    ventricleMeshes.forEach(
+    function(mesh){
+
+        const p =
+        new THREE.Vector3();
+
+
+        mesh.getWorldPosition(
+            p
+        );
+
+
+        center.add(
+            p
+        );
+
+    });
+
+
+    center.divideScalar(
+        ventricleMeshes.length
+    );
+
+
+    center.project(
+        camera
+    );
+
+
+    const x =
+    (center.x + 1) /
+    2 *
+    canvas.clientWidth;
+
+
+    const y =
+    (-center.y + 1) /
+    2 *
+    canvas.clientHeight;
+
+
+    ventricleLabel.style.left =
+    x + "px";
+
+
+    ventricleLabel.style.top =
+    (y - 60) + "px";
+
+}
+
+
+/* ==================================================
+   RESIZE
+================================================== */
+
+function resize(){
+
+    const width =
+    canvas.clientWidth;
+
+
+    const height =
+    canvas.clientHeight;
+
+
+    if(
+        width <= 0 ||
+        height <= 0
+    )
+        return;
+
+
+    camera.aspect =
+    width / height;
+
+
+    camera.updateProjectionMatrix();
+
+
+    renderer.setSize(
+        width,
+        height,
+        false
+    );
+
+}
+
+
+window.addEventListener(
+    "resize",
+    resize
+);
+
+
+/* ==================================================
+   HIGHLIGHT BUTTON
+================================================== */
+
+document
+.getElementById("highlight")
+.addEventListener(
+"click",
+function(){
+
+    highlighted =
+    !highlighted;
+
+
+    if(
+        ventricleGroup
+    ){
+
+        ventricleGroup.visible =
+        highlighted;
+
+    }
+
+
+    ventricleLabel.classList.toggle(
+        "show",
+        highlighted
+    );
+
+
+    this.classList.toggle(
+        "active",
+        highlighted
+    );
+
+
+    this.textContent =
+
+    highlighted
+
+    ? "⚪ Highlight Lateral Ventricles"
+
+    : "⚫ Show Lateral Ventricles";
+
+});
+
+
+/* ==================================================
+   ROTATE BUTTON
+================================================== */
+
+document
+.getElementById("rotate")
+.addEventListener(
+"click",
+function(){
+
+    controls.autoRotate =
+    !controls.autoRotate;
+
+
+    this.classList.toggle(
+        "active",
+        controls.autoRotate
+    );
+
+
+    this.textContent =
+
+    controls.autoRotate
+
+    ? "⟳ Auto Rotate"
+
+    : "▶ Auto Rotate";
+
+});
+
+
+/* ==================================================
+   RESET
+================================================== */
+
+document
+.getElementById("reset")
+.addEventListener(
+"click",
+function(){
+
+    camera.position.set(
+        0,
+        .15,
+        8.5
+    );
+
+
+    controls.target.set(
+        0,
+        -.25,
+        0
+    );
+
+
+    controls.update();
+
+});
+
+
+/* ==================================================
+   ANIMATION
+================================================== */
+
+function animate(){
+
+    requestAnimationFrame(
+        animate
+    );
+
+
+    controls.update();
+
+
+    updateLabel();
+
+
+    renderer.render(
+        scene,
+        camera
+    );
+
+}
+
+
+/* ==================================================
+   START
+================================================== */
+
+resize();
+
+animate();
+
+loadBrain();
+
+
+/* ==================================================
+   QUIZ
+================================================== */
+
+let score = 0;
+
+let answered = 0;
+
+
+const questions =
+document.querySelectorAll(
+    ".question-block"
+);
+
+
+questions.forEach(
+function(question){
+
+    const correct =
+    question.dataset.answer;
+
+
+    const options =
+    question.querySelectorAll(
+        ".option"
+    );
+
+
+    const feedback =
+    question.querySelector(
+        ".question-feedback"
+    );
+
+
+    let done = false;
+
+
+    options.forEach(
+    function(option){
+
+        option.addEventListener(
+        "click",
+        function(){
+
+            if(
+                done
+            )
+                return;
+
+
+            done = true;
+
+
+            const selected =
+            option.dataset.option;
+
+
+            options.forEach(
+            function(btn){
+
+                btn.disabled =
+                true;
+
+            });
+
+
+            if(
+                selected === correct
+            ){
+
+                score++;
+
+
+                option.classList.add(
+                    "correct"
+                );
+
+
+                feedback.textContent =
+                "✓ Correct! · إجابة صحيحة";
+
+
+                feedback.style.color =
+                "#78e0a0";
+
+            }
+
+            else{
+
+                option.classList.add(
+                    "wrong"
+                );
+
+
+                options.forEach(
+                function(btn){
+
+                    if(
+                        btn.dataset.option ===
+                        correct
+                    ){
+
+                        btn.classList.add(
+                            "correct"
+                        );
+
+                    }
+
+                });
+
+
+                feedback.textContent =
+                "✗ Incorrect · إجابة غير صحيحة";
+
+
+                feedback.style.color =
+                "#ff8792";
+
+            }
+
+
+            answered++;
+
+
+            if(
+                answered ===
+                questions.length
+            ){
+
+                showScore();
+
+            }
+
+        });
+
+    });
+
+});
+
+
+/* ==================================================
+   SCORE
+================================================== */
+
+function showScore(){
+
+    const result =
+    document.getElementById(
+        "quizResult"
+    );
+
+
+    let message;
+
+
+    if(
+        score === 3
+    ){
+
+        message =
+        "🔥 Perfect! Excellent work!";
+
+    }
+
+    else if(
+        score === 2
+    ){
+
+        message =
+        "👏 Great job!";
+
+    }
+
+    else if(
+        score === 1
+    ){
+
+        message =
+        "💡 Good start! Review the lateral ventricles.";
+
+    }
+
+    else{
+
+        message =
+        "🧠 Review the lateral ventricles and try again.";
+
+    }
+
+
+    result.innerHTML =
+
+    "<strong>" +
+    message +
+    "</strong>" +
+
+    "<br><br>" +
+
+    "Final Score · النتيجة النهائية: " +
+
+    score +
+
+    " / 3";
+
+}
+
+</script>
+
+
+</body>
+
+</html>
+```
