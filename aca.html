@@ -4,7 +4,6 @@
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>NeuroAtlas | ACA</title>
@@ -76,21 +75,21 @@ nav a:hover{
 }
 
 h1{
-    font-size:clamp(55px,8vw,90px);
+    font-size:clamp(60px,8vw,90px);
     line-height:.95;
     letter-spacing:-4px;
     margin-bottom:10px;
 }
 
 .arabic-title{
-    color:#ffb6c9;
+    color:#ffffff;
     font-size:24px;
     margin-bottom:25px;
 }
 
 .hero p{
     color:#a6b6c7;
-    max-width:850px;
+    max-width:800px;
     font-size:18px;
     line-height:1.8;
 }
@@ -222,7 +221,7 @@ h1{
     width:0%;
     height:100%;
 
-    background:#61b5ff;
+    background:#ffffff;
 
     transition:width .3s;
 }
@@ -257,9 +256,9 @@ h1{
 
     background:rgba(5,10,17,.96);
 
-    border:1.5px solid #ffb6c9;
+    border:1.5px solid #ffffff;
 
-    color:#ffd5df;
+    color:#ffffff;
 
     font-size:12px;
 
@@ -270,8 +269,8 @@ h1{
     white-space:nowrap;
 
     box-shadow:
-        0 0 12px rgba(255,182,201,.18),
-        0 0 25px rgba(255,182,201,.08);
+        0 0 12px rgba(255,255,255,.25),
+        0 0 28px rgba(255,255,255,.10);
 }
 
 .label-box::after{
@@ -285,7 +284,7 @@ h1{
     width:1.5px;
     height:15px;
 
-    background:#ffb6c9;
+    background:#ffffff;
 
     transform:translateX(-50%);
 }
@@ -327,11 +326,11 @@ h1{
 }
 
 .controls button.active{
-    background:#241c20;
+    background:#1b1f23;
 
-    border-color:#ffb6c9;
+    border-color:#ffffff;
 
-    color:#ffd5df;
+    color:#ffffff;
 }
 
 
@@ -411,36 +410,41 @@ h1{
 
 
 /* =========================
-   SIMPLE BRAIN DIAGRAM
+   SIMPLE LOCATION DIAGRAM
 ========================= */
 
-.brain-outline{
+.location-brain{
     fill:#263d55;
     stroke:#71869e;
     stroke-width:3;
 }
 
-.cerebellum{
+.location-cerebellum{
     fill:#344d66;
     stroke:#71869e;
     stroke-width:3;
 }
 
-.artery{
+.location-brainstem{
+    fill:#29465b;
+    stroke:#71869e;
+    stroke-width:3;
+}
+
+.location-artery{
     fill:none;
-    stroke:#ffb6c9;
-    stroke-width:9;
+    stroke:#ffffff;
+    stroke-width:8;
     stroke-linecap:round;
     stroke-linejoin:round;
 }
 
-.artery-glow{
+.location-artery-glow{
     fill:none;
-    stroke:#ffb6c9;
+    stroke:#ffffff;
     stroke-width:18;
-    opacity:.25;
+    opacity:.18;
     filter:blur(7px);
-    stroke-linecap:round;
 }
 
 .location-line{
@@ -448,8 +452,8 @@ h1{
     stroke-width:2;
 }
 
-.aca-line{
-    stroke:#ffb6c9;
+.location-aca-line{
+    stroke:#ffffff;
     stroke-width:3;
 }
 
@@ -459,14 +463,14 @@ h1{
     font-weight:bold;
 }
 
-.aca-svg-label{
-    fill:#ffb6c9;
+.location-aca-label{
+    fill:#ffffff;
     font-size:21px;
     font-weight:bold;
 }
 
 .location-arabic-label{
-    fill:#ffdce5;
+    fill:#ffffff;
     font-size:16px;
     font-weight:bold;
 }
@@ -484,10 +488,7 @@ h1{
 
 .cards{
     display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
+    grid-template-columns:repeat(3,1fr);
     gap:20px;
 }
 
@@ -507,25 +508,19 @@ h1{
 
 .card:hover{
     transform:translateY(-3px);
-
     border-color:#2b506c;
 }
 
 .card h3{
     font-size:18px;
-
     margin-bottom:13px;
-
     color:#eef4fa;
-
     line-height:1.45;
 }
 
 .card p{
     color:#91a5b8;
-
     font-size:14px;
-
     line-height:1.8;
 }
 
@@ -545,7 +540,7 @@ h1{
 
     border:1px solid #172b3e;
 
-    border-left:3px solid #ffb6c9;
+    border-left:3px solid #ffffff;
 
     border-radius:18px;
 }
@@ -571,10 +566,7 @@ h1{
 
 .facts-grid{
     display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
+    grid-template-columns:repeat(4,1fr);
     gap:15px;
 }
 
@@ -591,7 +583,7 @@ h1{
 .fact span{
     display:block;
 
-    color:#ffb6c9;
+    color:#ffffff;
 
     font-size:11px;
 
@@ -639,13 +631,11 @@ h1{
 
 .quiz h2{
     font-size:28px;
-
     margin-bottom:10px;
 }
 
 .quiz-intro{
     color:#91a5b8;
-
     margin-bottom:25px;
 }
 
@@ -694,24 +684,19 @@ h1{
 }
 
 .option:hover{
-    border-color:#ffb6c9;
-
+    border-color:#ffffff;
     background:#111e2c;
 }
 
 .option.correct{
     border-color:#8fd3a8;
-
     background:#14291e;
-
     color:#b9f0c9;
 }
 
 .option.wrong{
     border-color:#d88b9b;
-
     background:#2a171d;
-
     color:#ffc2cc;
 }
 
@@ -739,13 +724,11 @@ h1{
 @media(max-width:900px){
 
     .cards{
-        grid-template-columns:
-            repeat(2,1fr);
+        grid-template-columns:repeat(2,1fr);
     }
 
     .facts-grid{
-        grid-template-columns:
-            repeat(2,1fr);
+        grid-template-columns:repeat(2,1fr);
     }
 
 }
@@ -827,9 +810,16 @@ ACA
 <p>
 
 The anterior cerebral artery (ACA) is one of the major arteries
-supplying the cerebral hemispheres. It arises from the internal
-carotid artery and primarily supplies the medial surfaces of the
-frontal and parietal lobes.
+supplying the cerebral hemispheres. It primarily supplies medial
+and superior regions of the frontal and parietal lobes and is an
+important component of the cerebral arterial circulation.
+
+<br><br>
+
+الشريان الدماغي الأمامي هو أحد الشرايين الرئيسية التي تغذي
+نصفي الكرة المخية. يغذي بشكل أساسي المناطق الإنسية والعلوية
+من الفصين الجبهي والجداري، ويُعد جزءًا مهمًا من الدورة الدموية
+الدماغية.
 
 </p>
 
@@ -875,7 +865,7 @@ href="#quiz"
 <div class="viewer-header">
 
 <div class="viewer-title">
-Human Brain · Cerebral Vasculature
+Human Brain · Interactive 3D
 </div>
 
 <div class="viewer-status">
@@ -891,7 +881,7 @@ DRAG TO ROTATE · SCROLL TO ZOOM
 <div id="loading" class="loading">
 
 <span id="loadText">
-Loading brain model...
+Loading real brain model...
 </span>
 
 <div class="loading-bar">
@@ -914,7 +904,7 @@ id="acaLabel"
 class="aca-label">
 
 <div class="label-box">
-ANTERIOR CEREBRAL ARTERY
+ANTERIOR CEREBRAL ARTERY · ACA
 </div>
 
 </div>
@@ -928,29 +918,20 @@ ANTERIOR CEREBRAL ARTERY
 <button
 id="highlight"
 class="active">
-
-🩸 Highlight ACA
-
+⚪ Highlight ACA
 </button>
-
 
 <button
 id="rotate"
 class="active">
-
 ⟳ Auto Rotate
-
 </button>
 
-
 <button id="reset">
-
 ↻ Reset View
-
 </button>
 
 </div>
-
 
 </div>
 
@@ -964,171 +945,144 @@ id="location"
 class="location"
 >
 
-
 <div class="section-label">
 Location · الموقع
 </div>
-
 
 <h2>
 📍 Where is the ACA?
 </h2>
 
-
 <p class="location-intro">
 
-The anterior cerebral artery is a branch of the internal carotid
-artery. It travels forward and medially near the longitudinal
-fissure between the cerebral hemispheres and supplies much of
-the medial surface of the frontal and parietal lobes.
+The anterior cerebral artery arises from the internal carotid
+artery and travels forward and medially toward the longitudinal
+fissure between the cerebral hemispheres. It then courses around
+the medial surface of the cerebral hemisphere.
 
 <br><br>
 
-الشريان الدماغي الأمامي هو أحد فروع الشريان السباتي الداخلي.
-يتجه إلى الأمام وإلى الداخل بالقرب من الشق الطولي بين نصفي
-الكرة المخية، ويغذي جزءًا كبيرًا من السطح الإنسي للفصين الجبهي
-والجداري.
+ينشأ الشريان الدماغي الأمامي من الشريان السباتي الداخلي،
+ويتجه إلى الأمام وإلى الداخل نحو الشق الطولي بين نصفي الكرة
+المخية، ثم يمتد على السطح الإنسي لنصف الكرة المخية.
 
 </p>
 
 
 <div class="brain-visual">
 
-
 <svg
 class="location-svg"
 viewBox="0 0 900 600"
 xmlns="http://www.w3.org/2000/svg"
-aria-label="Simplified diagram showing the location of the anterior cerebral artery"
+aria-label="Simplified diagram showing the anterior cerebral artery"
 >
 
 
-<!-- =========================
-     BRAIN
-========================= -->
+<!-- CEREBRUM -->
 
 <path
-class="brain-outline"
-d="M180 110
-C245 55 340 45 430 65
-C530 85 620 130 670 210
-C710 275 690 350 630 390
-C580 425 515 420 460 405
-C410 390 370 405 315 425
-C250 448 180 420 145 365
-C105 300 120 165 180 110Z"
+class="location-brain"
+d="
+M165 115
+C220 55 315 45 410 65
+C500 40 620 65 690 135
+C755 200 760 295 700 350
+C650 395 575 385 520 350
+C470 318 430 300 370 310
+C300 322 235 355 175 315
+C115 275 105 185 165 115Z"
 />
 
 
-<!-- =========================
-     CEREBELLUM
-========================= -->
+<!-- CEREBELLUM -->
 
 <path
-class="cerebellum"
-d="M610 350
-C680 330 745 360 760 420
-C775 475 735 520 670 520
-C610 520 575 475 580 425
-C582 390 595 365 610 350Z"
+class="location-cerebellum"
+d="
+M615 350
+C685 330 755 365 770 420
+C785 480 740 530 675 530
+C610 530 570 485 575 430
+C578 395 590 365 615 350Z"
 />
 
 
-<!-- =========================
-     INTERNAL CAROTID
-========================= -->
+<!-- BRAINSTEM -->
 
 <path
-class="artery"
-d="M420 500
-C425 460 430 425 430 390
-C430 350 425 320 410 290"
+class="location-brainstem"
+d="
+M450 300
+C470 320 478 350 470 385
+L455 475
+L420 475
+L405 385
+C398 350 405 320 425 300Z"
 />
 
 
-<!-- =========================
-     ACA GLOW
-========================= -->
+<!-- ACA GLOW -->
 
 <path
-class="artery-glow"
-d="M410 290
-C380 260 350 225 325 190
-C300 155 280 130 250 115"
+class="location-artery-glow"
+d="
+M447 115
+C440 150 430 185 425 225
+C420 255 420 285 425 315
+"
 />
 
 
-<!-- =========================
-     ACA
-========================= -->
+<!-- ACA -->
 
 <path
-class="artery"
-d="M410 290
-C380 260 350 225 325 190
-C300 155 280 130 250 115"
+class="location-artery"
+d="
+M447 115
+C440 150 430 185 425 225
+C420 255 420 285 425 315
+"
 />
 
 
-<!-- =========================
-     ACA BRANCH
-========================= -->
+<!-- ACA BRANCH -->
 
 <path
-class="artery"
-d="M325 190
-C345 165 360 140 370 110"
+class="location-artery"
+d="
+M425 220
+C395 205 365 190 335 175
+"
 />
 
 
-<!-- =========================
-     SECOND BRANCH
-========================= -->
+<!-- ACA BRANCH -->
 
 <path
-class="artery"
-d="M300 155
-C270 145 240 135 210 125"
+class="location-artery"
+d="
+M425 250
+C455 235 485 220 515 205
+"
 />
 
 
-<!-- =========================
-     BRAIN LABEL
-========================= -->
+<!-- LABEL LINE -->
 
 <line
-class="location-line"
-x1="580"
-y1="210"
-x2="745"
-y2="175"
+class="location-aca-line"
+x1="450"
+y1="180"
+x2="650"
+y2="170"
 />
 
-<text
-class="location-svg-label"
-x="760"
-y="181"
->
-CEREBRUM
-</text>
-
-
-<!-- =========================
-     ACA LABEL
-========================= -->
-
-<line
-class="aca-line"
-x1="325"
-y1="190"
-x2="570"
-y2="120"
-/>
 
 <text
-class="aca-svg-label"
-x="590"
-y="126"
+class="location-aca-label"
+x="665"
+y="176"
 >
 ACA
 </text>
@@ -1136,10 +1090,29 @@ ACA
 
 <text
 class="location-arabic-label"
-x="590"
-y="153"
+x="665"
+y="203"
 >
 الشريان الدماغي الأمامي
+</text>
+
+
+<!-- OTHER LABEL -->
+
+<line
+class="location-line"
+x1="575"
+y1="340"
+x2="710"
+y2="300"
+/>
+
+<text
+class="location-svg-label"
+x="725"
+y="305"
+>
+CEREBRUM
 </text>
 
 
@@ -1148,11 +1121,10 @@ y="153"
 
 <p class="location-caption">
 
-🌸 The highlighted pathway represents the approximate course
-of the anterior cerebral artery.
+⚪ The white vessel represents the approximate course of the
+anterior cerebral artery.
 
 </p>
-
 
 </div>
 
@@ -1168,31 +1140,27 @@ id="information"
 class="section"
 >
 
-
 <div class="section-label">
 ACA Anatomy · تشريح الشريان الدماغي الأمامي
 </div>
 
-
 <h2>
-Anterior Cerebral Artery · ACA
+Anterior Cerebral Artery · الشريان الدماغي الأمامي
 </h2>
-
 
 <p class="section-intro">
 
-The anterior cerebral artery is a major branch of the internal
-carotid artery and an important component of the cerebral arterial
-circulation. It primarily supplies the medial portions of the
-frontal and parietal lobes and contributes to blood supply of
-several deep structures.
+The ACA is one of the principal arteries of the anterior
+circulation of the brain. It contributes to blood supply of
+medial frontal and parietal cortical regions and participates
+in the arterial network connecting the two cerebral hemispheres.
 
 <br><br>
 
-الشريان الدماغي الأمامي هو فرع رئيسي من الشريان السباتي الداخلي
-وعنصر مهم في الدورة الدموية الدماغية. يغذي بشكل أساسي الأجزاء
-الإنسية من الفصين الجبهي والجداري، ويساهم أيضًا في تغذية بعض
-التراكيب العميقة.
+يُعد الشريان الدماغي الأمامي أحد الشرايين الرئيسية للدورة
+الدموية الأمامية للدماغ. يساهم في إمداد المناطق الإنسية من
+القشرة الجبهية والجدارية بالدم، كما يشارك في الشبكة الشريانية
+التي تربط بين نصفي الكرة المخية.
 
 </p>
 
@@ -1210,13 +1178,13 @@ Origin · المنشأ
 
 <p>
 
-The ACA arises from the internal carotid artery near the base
-of the brain.
+The ACA arises from the internal carotid artery near the point
+where the internal carotid divides into major cerebral branches.
 
 <br><br>
 
 ينشأ الشريان الدماغي الأمامي من الشريان السباتي الداخلي
-بالقرب من قاعدة الدماغ.
+بالقرب من موضع انقسامه إلى الفروع الدماغية الرئيسية.
 
 </p>
 
@@ -1228,18 +1196,18 @@ of the brain.
 <div class="card">
 
 <h3>
-Medial Frontal Lobe · الفص الجبهي الإنسي
+Course · المسار
 </h3>
 
 <p>
 
-The ACA supplies important regions of the medial frontal lobe,
-including areas involved in motor and behavioral functions.
+The artery travels anteriorly and medially toward the
+longitudinal fissure between the cerebral hemispheres.
 
 <br><br>
 
-يغذي الشريان الدماغي الأمامي مناطق مهمة من السطح الإنسي
-للفص الجبهي، والتي تشارك في وظائف حركية وسلوكية.
+يتجه الشريان إلى الأمام وإلى الداخل نحو الشق الطولي
+الفاصل بين نصفي الكرة المخية.
 
 </p>
 
@@ -1251,18 +1219,18 @@ including areas involved in motor and behavioral functions.
 <div class="card">
 
 <h3>
-Medial Parietal Lobe · الفص الجداري الإنسي
+Medial Cortex · القشرة الإنسية
 </h3>
 
 <p>
 
-Branches of the ACA supply portions of the medial parietal
-cortex.
+The ACA supplies important medial portions of the frontal
+and parietal lobes.
 
 <br><br>
 
-تغذي فروع الشريان الدماغي الأمامي أجزاء من القشرة الجدارية
-الإنسية.
+يغذي الشريان مناطق مهمة من السطح الإنسي للفصين الجبهي
+والجداري.
 
 </p>
 
@@ -1274,18 +1242,20 @@ cortex.
 <div class="card">
 
 <h3>
-Lower Limb Motor Area · المنطقة الحركية للطرف السفلي
+Motor Areas · المناطق الحركية
 </h3>
 
 <p>
 
-The ACA supplies much of the medial primary motor cortex,
-which contains representations associated with the lower limb.
+The ACA contributes to the blood supply of medial portions
+of the frontal motor regions, including areas involved in
+lower-limb motor control.
 
 <br><br>
 
-يغذي الشريان الدماغي الأمامي جزءًا كبيرًا من القشرة الحركية
-الأولية الإنسية، والتي تحتوي على تمثيل حركي مهم للطرف السفلي.
+يساهم الشريان في تغذية أجزاء إنسية من المناطق الحركية
+بالقشرة الجبهية، ومنها مناطق مرتبطة بالتحكم الحركي للطرف
+السفلي.
 
 </p>
 
@@ -1297,18 +1267,18 @@ which contains representations associated with the lower limb.
 <div class="card">
 
 <h3>
-Anterior Communicating Artery · الشريان الموصل الأمامي
+Sensory Areas · المناطق الحسية
 </h3>
 
 <p>
 
-The right and left ACAs are connected near their proximal
-segments by the anterior communicating artery.
+The ACA also contributes to blood supply of medial
+somatosensory cortical regions.
 
 <br><br>
 
-يرتبط الشريانان الدماغيان الأماميان الأيمن والأيسر بالقرب
-من أجزائهما القريبة بواسطة الشريان الموصل الأمامي.
+يساهم الشريان أيضًا في تغذية المناطق الإنسية من القشرة
+الحسية الجسدية.
 
 </p>
 
@@ -1320,18 +1290,19 @@ segments by the anterior communicating artery.
 <div class="card">
 
 <h3>
-Pericallosal Artery · الشريان حول الثفني
+Corpus Callosum · الجسم الثفني
 </h3>
 
 <p>
 
-The pericallosal artery is a major distal continuation of the
-ACA that courses along the corpus callosum.
+Branches of the ACA contribute to the arterial supply of
+structures associated with the medial cerebral surface,
+including regions around the corpus callosum.
 
 <br><br>
 
-يُعد الشريان حول الثفني امتدادًا بعيدًا مهمًا للشريان الدماغي
-الأمامي ويسير بمحاذاة الجسم الثفني.
+تساهم فروع الشريان الدماغي الأمامي في تغذية تراكيب مرتبطة
+بالسطح الإنسي للمخ، بما في ذلك مناطق حول الجسم الثفني.
 
 </p>
 
@@ -1343,18 +1314,18 @@ ACA that courses along the corpus callosum.
 <div class="card">
 
 <h3>
-Callosomarginal Artery · الشريان الهامشي الثفني
+Anterior Communicating Artery · الشريان الموصل الأمامي
 </h3>
 
 <p>
 
-The callosomarginal artery is an important ACA branch that
-supplies parts of the medial frontal region.
+The right and left anterior cerebral arteries are connected
+through the anterior communicating artery.
 
 <br><br>
 
-الشريان الهامشي الثفني هو أحد الفروع المهمة للشريان الدماغي
-الأمامي ويغذي أجزاء من المنطقة الجبهية الإنسية.
+يرتبط الشريانان الدماغيان الأماميان الأيمن والأيسر
+عن طريق الشريان الموصل الأمامي.
 
 </p>
 
@@ -1366,17 +1337,19 @@ supplies parts of the medial frontal region.
 <div class="card">
 
 <h3>
-Corpus Callosum · الجسم الثفني
+Anterior Circulation · الدورة الأمامية
 </h3>
 
 <p>
 
-Branches of the ACA contribute to the blood supply of portions
-of the corpus callosum.
+The ACA belongs to the anterior cerebral circulation,
+together with other major vessels such as the middle
+cerebral artery.
 
 <br><br>
 
-تساهم فروع الشريان الدماغي الأمامي في تغذية أجزاء من الجسم الثفني.
+ينتمي الشريان الدماغي الأمامي إلى الدورة الدموية الأمامية
+للدماغ، إلى جانب شرايين رئيسية أخرى مثل الشريان الدماغي الأوسط.
 
 </p>
 
@@ -1388,93 +1361,18 @@ of the corpus callosum.
 <div class="card">
 
 <h3>
-Deep Structures · التراكيب العميقة
+Cortical Supply · الإمداد القشري
 </h3>
 
 <p>
 
-Small branches of the ACA contribute to blood supply of
-structures near the anterior and medial portions of the brain.
+The ACA supplies portions of the cerebral cortex located
+along the medial surface of the hemisphere.
 
 <br><br>
 
-تساهم فروع صغيرة من الشريان الدماغي الأمامي في تغذية تراكيب
-بالقرب من المناطق الأمامية والإنسية للدماغ.
-
-</p>
-
-</div>
-
-
-<!-- CARD 10 -->
-
-<div class="card">
-
-<h3>
-Anterior Circulation · الدورة الأمامية
-</h3>
-
-<p>
-
-The ACA is part of the anterior cerebral circulation and works
-with the MCA and communicating arteries within the arterial
-network of the brain.
-
-<br><br>
-
-ينتمي الشريان الدماغي الأمامي إلى الدورة الدموية الدماغية
-الأمامية ويعمل مع الشريان الدماغي الأوسط والشرايين الموصلة
-ضمن شبكة شرايين الدماغ.
-
-</p>
-
-</div>
-
-
-<!-- CARD 11 -->
-
-<div class="card">
-
-<h3>
-Motor Function · الوظيفة الحركية
-</h3>
-
-<p>
-
-Because the ACA supplies medial motor regions, disruption of
-its blood flow can particularly affect movement of the
-contralateral lower limb.
-
-<br><br>
-
-لأن الشريان الدماغي الأمامي يغذي مناطق حركية إنسية، فإن
-اضطراب تدفق الدم فيه قد يؤثر بشكل خاص على حركة الطرف السفلي
-في الجانب المقابل.
-
-</p>
-
-</div>
-
-
-<!-- CARD 12 -->
-
-<div class="card">
-
-<h3>
-
-Frontal Lobe Functions · وظائف الفص الجبهي
-
-</h3>
-
-<p>
-
-ACA territory includes medial frontal regions involved in
-aspects of behavior, motivation, attention, and motor control.
-
-<br><br>
-
-تشمل منطقة تغذية الشريان الدماغي الأمامي مناطق جبهية إنسية
-تشارك في بعض جوانب السلوك والدافعية والانتباه والتحكم الحركي.
+يغذي الشريان أجزاء من القشرة المخية الموجودة على السطح
+الإنسي لنصف الكرة المخية.
 
 </p>
 
@@ -1490,41 +1388,35 @@ aspects of behavior, motivation, attention, and motor control.
 
 <div class="clinical-section">
 
-
 <div class="section-label">
 Clinical Importance · الأهمية السريرية
 </div>
-
 
 <h2>
 Why the ACA Matters
 </h2>
 
-
 <div class="clinical-box">
-
 
 <p>
 
-An ACA stroke can affect the medial frontal and parietal regions.
-Because these areas include important motor and behavioral networks,
-patients may develop weakness that is often more pronounced in
-the opposite lower limb, along with possible behavioral or
-executive changes.
+Because the ACA supplies medial frontal and parietal regions,
+vascular problems involving this artery can affect neurological
+functions associated with these cortical areas. ACA territory
+stroke can particularly produce weakness or sensory changes
+that are more prominent in the lower limb than in the upper limb.
 
 </p>
-
 
 <p dir="rtl">
 
-يمكن أن تؤثر السكتة الدماغية في منطقة الشريان الدماغي الأمامي
-على المناطق الإنسية من الفصين الجبهي والجداري. وبما أن هذه
-المناطق تحتوي على شبكات حركية وسلوكية مهمة، فقد يظهر ضعف
-يكون أكثر وضوحًا غالبًا في الطرف السفلي المقابل، بالإضافة
-إلى احتمالية حدوث تغيرات سلوكية أو تنفيذية.
+نظرًا لأن الشريان الدماغي الأمامي يغذي مناطق إنسية من الفصين
+الجبهي والجداري، فإن المشكلات الوعائية التي تصيبه قد تؤثر
+على الوظائف العصبية المرتبطة بهذه المناطق. وقد تؤدي السكتة
+الدماغية في منطقة تغذيها ACA إلى ضعف أو تغيرات حسية تكون
+أكثر وضوحًا في الطرف السفلي مقارنة بالطرف العلوي.
 
 </p>
-
 
 </div>
 
@@ -1537,16 +1429,13 @@ executive changes.
 
 <div class="section">
 
-
 <div class="section-label">
 Quick Facts · معلومات سريعة
 </div>
 
-
 <h2>
 ACA at a Glance
 </h2>
-
 
 <div class="facts-grid">
 
@@ -1558,14 +1447,12 @@ ACA at a Glance
 </span>
 
 <strong>
-Full Name · الاسم الكامل
+Full Name · الاسم
 </strong>
 
 <p>
-
 Anterior Cerebral Artery ·
 الشريان الدماغي الأمامي
-
 </p>
 
 </div>
@@ -1582,10 +1469,8 @@ Origin · المنشأ
 </strong>
 
 <p>
-
 Internal carotid artery ·
 الشريان السباتي الداخلي
-
 </p>
 
 </div>
@@ -1598,14 +1483,12 @@ Internal carotid artery ·
 </span>
 
 <strong>
-Main Territory · منطقة التغذية
+Main Territory · المنطقة
 </strong>
 
 <p>
-
-Medial frontal and parietal surfaces ·
-الأسطح الإنسية للفصين الجبهي والجداري
-
+Medial frontal and parietal cortex ·
+القشرة الجبهية والجدارية الإنسية
 </p>
 
 </div>
@@ -1618,18 +1501,15 @@ Medial frontal and parietal surfaces ·
 </span>
 
 <strong>
-Major Connection · الاتصال الرئيسي
+Connection · الاتصال
 </strong>
 
 <p>
-
 Anterior communicating artery ·
 الشريان الموصل الأمامي
-
 </p>
 
 </div>
-
 
 </div>
 
@@ -1645,16 +1525,13 @@ id="quiz"
 class="quiz"
 >
 
-
 <div class="section-label">
 Mini Test
 </div>
 
-
 <h2>
 🧠 Test Yourself
 </h2>
-
 
 <p class="quiz-intro">
 
@@ -1668,39 +1545,35 @@ Choose the best answer for each question.
 <div class="question">
 
 <p>
-1. The ACA primarily supplies which surface of the cerebral hemispheres?
+1. What does ACA stand for?
 </p>
-
 
 <button
 class="option"
 onclick="checkAnswer(this,true)"
 >
-A. Medial surface
+A. Anterior Cerebral Artery
 </button>
-
 
 <button
 class="option"
 onclick="checkAnswer(this,false)"
 >
-B. Lateral surface only
+B. Anterior Cardiac Artery
 </button>
-
 
 <button
 class="option"
 onclick="checkAnswer(this,false)"
 >
-C. Inferior cerebellar surface
+C. Ascending Cerebellar Artery
 </button>
-
 
 <button
 class="option"
 onclick="checkAnswer(this,false)"
 >
-D. Brainstem only
+D. Arcuate Cerebral Artery
 </button>
 
 </div>
@@ -1711,39 +1584,35 @@ D. Brainstem only
 <div class="question">
 
 <p>
-2. The ACA arises primarily from which artery?
+2. Which region is strongly supplied by the ACA?
 </p>
-
 
 <button
 class="option"
 onclick="checkAnswer(this,false)"
 >
-A. Basilar artery
+A. Lateral temporal cortex
 </button>
-
 
 <button
 class="option"
 onclick="checkAnswer(this,true)"
 >
-B. Internal carotid artery
+B. Medial frontal and parietal cortex
 </button>
-
 
 <button
 class="option"
 onclick="checkAnswer(this,false)"
 >
-C. Vertebral artery
+C. Occipital pole only
 </button>
-
 
 <button
 class="option"
 onclick="checkAnswer(this,false)"
 >
-D. External carotid artery
+D. Cerebellar cortex
 </button>
 
 </div>
@@ -1754,39 +1623,35 @@ D. External carotid artery
 <div class="question">
 
 <p>
-3. An ACA stroke commonly affects which motor region?
+3. Which artery connects the right and left anterior cerebral arteries?
 </p>
-
 
 <button
 class="option"
 onclick="checkAnswer(this,false)"
 >
-A. Face only
+A. Basilar artery
 </button>
 
+<button
+class="option"
+onclick="checkAnswer(this,false)"
+>
+B. Middle cerebral artery
+</button>
 
 <button
 class="option"
 onclick="checkAnswer(this,true)"
 >
-B. Lower limb region
+C. Anterior communicating artery
 </button>
-
 
 <button
 class="option"
 onclick="checkAnswer(this,false)"
 >
-C. Eye muscles only
-</button>
-
-
-<button
-class="option"
-onclick="checkAnswer(this,false)"
->
-D. Tongue only
+D. Posterior cerebral artery
 </button>
 
 </div>
@@ -1798,7 +1663,6 @@ class="quiz-result"
 >
 </div>
 
-
 </div>
 
 
@@ -1809,7 +1673,7 @@ class="quiz-result"
 
 
 <!-- ==================================================
-     THREE.JS IMPORT MAP
+     THREE.JS
 ================================================== -->
 
 <script type="importmap">
@@ -1851,29 +1715,19 @@ import {
 ========================================= */
 
 const canvas =
-document.getElementById(
-    "brainCanvas"
-);
+document.getElementById("brainCanvas");
 
 const loading =
-document.getElementById(
-    "loading"
-);
+document.getElementById("loading");
 
 const loadText =
-document.getElementById(
-    "loadText"
-);
+document.getElementById("loadText");
 
 const loadBar =
-document.getElementById(
-    "loadBar"
-);
+document.getElementById("loadBar");
 
 const acaLabel =
-document.getElementById(
-    "acaLabel"
-);
+document.getElementById("acaLabel");
 
 
 /* =========================================
@@ -1943,21 +1797,17 @@ new OrbitControls(
 );
 
 controls.enableRotate = true;
-
 controls.rotateSpeed = 0.6;
 
 controls.enableDamping = true;
-
 controls.dampingFactor = 0.05;
 
 controls.enableZoom = true;
-
 controls.zoomSpeed = 0.6;
 
 controls.enablePan = false;
 
 controls.autoRotate = true;
-
 controls.autoRotateSpeed = 0.2;
 
 controls.target.set(
@@ -1967,7 +1817,6 @@ controls.target.set(
 );
 
 controls.minDistance = 3.5;
-
 controls.maxDistance = 16;
 
 
@@ -1975,26 +1824,24 @@ controls.maxDistance = 16;
    LIGHTING
 ========================================= */
 
-const ambient =
-new THREE.AmbientLight(
-    0xffffff,
-    0.55
+scene.add(
+    new THREE.AmbientLight(
+        0xffffff,
+        0.55
+    )
 );
 
-scene.add(ambient);
-
-const hemi =
-new THREE.HemisphereLight(
-    0xffdce6,
-    0x081018,
-    0.75
+scene.add(
+    new THREE.HemisphereLight(
+        0xffffff,
+        0x081018,
+        0.75
+    )
 );
-
-scene.add(hemi);
 
 const keyLight =
 new THREE.DirectionalLight(
-    0xfff5f0,
+    0xffffff,
     1.4
 );
 
@@ -2030,20 +1877,12 @@ new THREE.Group();
 
 scene.add(brainGroup);
 
-let acaMesh = null;
-
-let acaHighlightMesh = null;
-
-let acaOutline = null;
-
-let highlighted = true;
-
 
 /* =========================================
-   BRAIN MATERIAL
+   MATERIALS
 ========================================= */
 
-const brainPinkMaterial =
+const brainMaterial =
 new THREE.MeshPhysicalMaterial({
 
     color:0xf1c5d0,
@@ -2061,40 +1900,36 @@ new THREE.MeshPhysicalMaterial({
 });
 
 
-/* =========================================
-   ACA MATERIAL
-========================================= */
-
 const acaMaterial =
 new THREE.MeshPhysicalMaterial({
 
-    color:0x15151a,
+    color:0xffffff,
 
-    roughness:0.38,
+    roughness:0.28,
 
-    metalness:0.02,
+    metalness:0,
 
-    clearcoat:0.25,
+    clearcoat:0.4,
 
-    clearcoatRoughness:0.35,
+    clearcoatRoughness:0.2,
+
+    emissive:0xffffff,
+
+    emissiveIntensity:0.08,
 
     side:THREE.DoubleSide
 
 });
 
 
-/* =========================================
-   OUTLINE
-========================================= */
-
-const outlineMaterial =
+const acaOutlineMaterial =
 new THREE.MeshBasicMaterial({
 
-    color:0xffb6c9,
+    color:0xffffff,
 
     transparent:true,
 
-    opacity:0.95,
+    opacity:0.9,
 
     side:THREE.BackSide
 
@@ -2102,89 +1937,225 @@ new THREE.MeshBasicMaterial({
 
 
 /* =========================================
-   FALLBACK ACA
+   VARIABLES
 ========================================= */
 
-function createACAMarker(){
+let acaMesh = null;
 
-    const arteryMaterial =
-    new THREE.MeshBasicMaterial({
+let acaHighlightMesh = null;
 
-        color:0xffb6c9
+let acaOutline = null;
+
+let acaOverlay = null;
+
+let highlighted = true;
+
+let isRealACA = false;
+
+
+/* =========================================
+   CREATE ACA OVERLAY
+   Used only if GLB doesn't contain
+   an identifiable ACA mesh.
+========================================= */
+
+function createACAOverlay(){
+
+    const group =
+    new THREE.Group();
+
+    group.name =
+    "ACA_White_Overlay";
+
+    /*
+       The overlay represents the
+       approximate anterior cerebral
+       artery course around the medial
+       cerebral surface.
+    */
+
+    const points = [
+
+        new THREE.Vector3(
+            -0.05,
+            1.55,
+            0.10
+        ),
+
+        new THREE.Vector3(
+            -0.12,
+            1.25,
+            0.18
+        ),
+
+        new THREE.Vector3(
+            -0.18,
+            0.95,
+            0.22
+        ),
+
+        new THREE.Vector3(
+            -0.18,
+            0.62,
+            0.25
+        ),
+
+        new THREE.Vector3(
+            -0.10,
+            0.32,
+            0.28
+        )
+
+    ];
+
+
+    const curve =
+    new THREE.CatmullRomCurve3(
+        points
+    );
+
+
+    const geometry =
+    new THREE.TubeGeometry(
+        curve,
+        48,
+        0.035,
+        10,
+        false
+    );
+
+
+    acaOverlay =
+    new THREE.Mesh(
+        geometry,
+        acaMaterial
+    );
+
+
+    group.add(
+        acaOverlay
+    );
+
+
+    /*
+       Small branches
+    */
+
+    const branchCurves = [
+
+        [
+            new THREE.Vector3(
+                -0.13,
+                1.10,
+                0.21
+            ),
+
+            new THREE.Vector3(
+                -0.42,
+                1.00,
+                0.28
+            ),
+
+            new THREE.Vector3(
+                -0.65,
+                0.88,
+                0.30
+            )
+        ],
+
+        [
+            new THREE.Vector3(
+                -0.16,
+                0.78,
+                0.24
+            ),
+
+            new THREE.Vector3(
+                0.18,
+                0.68,
+                0.29
+            ),
+
+            new THREE.Vector3(
+                0.42,
+                0.56,
+                0.30
+            )
+        ]
+
+    ];
+
+
+    branchCurves.forEach(
+    function(branch){
+
+        const branchCurve =
+        new THREE.CatmullRomCurve3(
+            branch
+        );
+
+        const branchGeometry =
+        new THREE.TubeGeometry(
+            branchCurve,
+            24,
+            0.022,
+            8,
+            false
+        );
+
+        const branchMesh =
+        new THREE.Mesh(
+            branchGeometry,
+            acaMaterial
+        );
+
+        group.add(
+            branchMesh
+        );
 
     });
 
 
-    const arteryGroup =
-    new THREE.Group();
+    brainGroup.add(group);
+
+    acaOverlay.visible =
+    highlighted;
+
+}
 
 
-    const mainGeometry =
-    new THREE.TubeGeometry(
+/* =========================================
+   FIND ACA MESH
+========================================= */
 
-        new THREE.CatmullRomCurve3([
+function isACAName(name){
 
-            new THREE.Vector3(
-                0,
-                -0.35,
-                0
-            ),
+    const n =
+    name
+    .toLowerCase()
+    .replace(/[_\-]/g," ");
 
-            new THREE.Vector3(
-                -0.12,
-                0.05,
-                0.04
-            ),
+    return (
 
-            new THREE.Vector3(
-                -0.35,
-                0.45,
-                0.06
-            ),
+        n.includes("anterior cerebral") ||
 
-            new THREE.Vector3(
-                -0.75,
-                0.82,
-                0.05
-            ),
+        n.includes("anterior cerebral artery") ||
 
-            new THREE.Vector3(
-                -1.15,
-                1.10,
-                0.04
-            )
+        n === "aca" ||
 
-        ]),
+        n.includes(" aca ") ||
 
-        10,
-        0.075,
-        12,
-        false
+        n.includes("cerebral artery anterior") ||
 
-    );
+        n.includes("aca artery")
 
-
-    acaHighlightMesh =
-    new THREE.Mesh(
-        mainGeometry,
-        arteryMaterial
-    );
-
-
-    arteryGroup.add(
-        acaHighlightMesh
-    );
-
-
-    brainGroup.add(
-        arteryGroup
     );
 
 }
 
 
 /* =========================================
-   LOAD REAL BRAIN MODEL
+   LOAD REAL BRAIN
 ========================================= */
 
 function loadRealBrain(){
@@ -2224,7 +2195,10 @@ function loadRealBrain(){
             urlIndex >= urls.length
         ){
 
-            createACAMarker();
+            loadText.textContent =
+            "Using anatomical ACA overlay...";
+
+            createACAOverlay();
 
             onReady();
 
@@ -2237,14 +2211,9 @@ function loadRealBrain(){
         urls[urlIndex++];
 
 
-        loadText.textContent =
-        "Loading real brain model...";
-
-
         loader.load(
 
             url,
-
 
             function(gltf){
 
@@ -2252,11 +2221,13 @@ function loadRealBrain(){
                 gltf.scene;
 
 
+                /* =========================
+                   CENTER + SCALE
+                ========================= */
+
                 const box =
                 new THREE.Box3()
-                .setFromObject(
-                    model
-                );
+                .setFromObject(model);
 
 
                 const center =
@@ -2298,6 +2269,10 @@ function loadRealBrain(){
                 model.position.y -= 0.60;
 
 
+                /* =========================
+                   PROCESS MODEL
+                ========================= */
+
                 model.traverse(
                 function(child){
 
@@ -2307,40 +2282,107 @@ function loadRealBrain(){
                         return;
 
 
-                    child.castShadow =
-                    true;
+                    const name =
+                    child.name || "";
 
 
-                    child.receiveShadow =
-                    true;
-
+                    /*
+                       IMPORTANT:
+                       Only highlight a mesh if its
+                       actual name indicates ACA.
+                    */
 
                     if(
-                        child.material
+                        isACAName(name)
                     ){
 
-                        child.material =
-                        brainPinkMaterial.clone();
+                        isRealACA = true;
+
+                        acaMesh =
+                        child;
+
+
+                        acaHighlightMesh =
+                        child.clone();
+
+
+                        acaHighlightMesh.material =
+                        acaMaterial.clone();
+
+
+                        acaHighlightMesh.scale
+                        .multiplyScalar(1.015);
+
+
+                        child.parent.add(
+                            acaHighlightMesh
+                        );
+
+
+                        acaOutline =
+                        child.clone();
+
+
+                        acaOutline.material =
+                        acaOutlineMaterial.clone();
+
+
+                        acaOutline.scale
+                        .multiplyScalar(1.06);
+
+
+                        child.parent.add(
+                            acaOutline
+                        );
+
+
+                        acaHighlightMesh.visible =
+                        highlighted;
+
+
+                        acaOutline.visible =
+                        highlighted;
+
+                    }
+
+                    else{
+
+                        /*
+                           Everything else remains
+                           soft baby pink.
+                        */
+
+                        if(
+                            child.material
+                        ){
+
+                            child.material =
+                            brainMaterial.clone();
+
+                        }
 
                     }
 
                 });
 
 
-                brainGroup.add(
-                    model
-                );
+                brainGroup.add(model);
 
 
                 /*
-                 * The vascular structure is represented
-                 * by an interactive ACA overlay so the
-                 * artery remains visible even if the
-                 * imported brain model does not contain
-                 * named arterial meshes.
-                 */
+                   If this particular brain model
+                   does NOT contain an ACA mesh,
+                   create the white overlay instead
+                   of highlighting a random brain part.
+                */
 
-                createACAMarker();
+                if(
+                    !isRealACA
+                ){
+
+                    createACAOverlay();
+
+                }
 
 
                 loadBar.style.width =
@@ -2366,7 +2408,6 @@ function loadRealBrain(){
                         90
                     );
 
-
                     loadBar.style.width =
                     pct + "%";
 
@@ -2381,7 +2422,6 @@ function loadRealBrain(){
                     "Model failed:",
                     error
                 );
-
 
                 tryLoad();
 
@@ -2410,16 +2450,9 @@ function onReady(){
             "hide"
         );
 
-
-        if(
-            highlighted
-        ){
-
-            acaLabel.classList.add(
-                "show"
-            );
-
-        }
+        acaLabel.classList.add(
+            "show"
+        );
 
     },500);
 
@@ -2432,9 +2465,31 @@ function onReady(){
 
 function updateLabel(){
 
+    let target = null;
+
+
     if(
-        !acaHighlightMesh
-    )
+        acaHighlightMesh &&
+        acaHighlightMesh.visible
+    ){
+
+        target =
+        acaHighlightMesh;
+
+    }
+
+    else if(
+        acaOverlay &&
+        acaOverlay.visible
+    ){
+
+        target =
+        acaOverlay;
+
+    }
+
+
+    if(!target)
         return;
 
 
@@ -2442,8 +2497,7 @@ function updateLabel(){
     new THREE.Vector3();
 
 
-    acaHighlightMesh
-    .getWorldPosition(
+    target.getWorldPosition(
         position
     );
 
@@ -2470,7 +2524,7 @@ function updateLabel(){
 
 
     acaLabel.style.top =
-    (y - 45) + "px";
+    (y - 35) + "px";
 
 }
 
@@ -2519,7 +2573,7 @@ window.addEventListener(
 
 
 /* =========================================
-   HIGHLIGHT BUTTON
+   HIGHLIGHT
 ========================================= */
 
 const highlightBtn =
@@ -2556,6 +2610,16 @@ function(){
     }
 
 
+    if(
+        acaOverlay
+    ){
+
+        acaOverlay.visible =
+        highlighted;
+
+    }
+
+
     acaLabel.classList.toggle(
         "show",
         highlighted
@@ -2572,9 +2636,9 @@ function(){
 
     highlighted
 
-    ? "🩸 Highlight ACA"
+    ? "⚪ Highlight ACA"
 
-    : "⚪ Show ACA";
+    : "⚫ Show ACA";
 
 });
 
@@ -2656,9 +2720,7 @@ function animate(){
 
     controls.update();
 
-
     updateLabel();
-
 
     renderer.render(
         scene,
@@ -2682,7 +2744,7 @@ loadRealBrain();
 
 
 <!-- ==================================================
-     MINI TEST JAVASCRIPT
+     QUIZ JAVASCRIPT
 ================================================== -->
 
 <script>
@@ -2692,14 +2754,14 @@ function checkAnswer(button,correct){
     const parent =
     button.parentElement;
 
-
     const options =
     parent.querySelectorAll(
         ".option"
     );
 
 
-    options.forEach(function(option){
+    options.forEach(
+    function(option){
 
         option.classList.remove(
             "correct",
@@ -2755,7 +2817,8 @@ function updateQuizScore(){
     );
 
 
-    questions.forEach(function(question){
+    questions.forEach(
+    function(question){
 
         const selected =
         question.querySelector(
@@ -2804,4 +2867,4 @@ function updateQuizScore(){
 
 </body>
 
-  </html>
+</html>
