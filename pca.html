@@ -4,131 +4,736 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NeuroAtlas | PCA</title>
+
 <style>
-*{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
-body{background:#050b13;color:#eef4fa;font-family:Arial,Helvetica,sans-serif;line-height:1.7;}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:#050b13;
+  color:#eef4fa;
+  font-family:Arial,Helvetica,sans-serif;
+  line-height:1.7;
+}
 
 /* NAVIGATION */
-nav{height:70px;padding:0 7%;display:flex;align-items:center;border-bottom:1px solid rgba(255,255,255,.08);}
-nav a{color:#9db0c3;text-decoration:none;font-size:14px;}
-nav a:hover{color:white;}
+nav{
+  height:70px;
+  padding:0 7%;
+  display:flex;
+  align-items:center;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+nav a{
+  color:#9db0c3;
+  text-decoration:none;
+  font-size:14px;
+}
+
+nav a:hover{
+  color:white;
+}
 
 /* CONTAINER */
-.container{max-width:1200px;margin:auto;padding:60px 7% 100px;}
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:60px 7% 100px;
+}
 
 /* HERO */
-.eyebrow{color:#61b5ff;letter-spacing:3px;font-size:12px;text-transform:uppercase;margin-bottom:15px;}
-h1{font-size:clamp(60px,8vw,90px);line-height:.95;letter-spacing:-4px;margin-bottom:10px;}
-.arabic-title{color:#ff8f9b;font-size:24px;margin-bottom:25px;}
-.hero p{color:#a6b6c7;max-width:780px;font-size:18px;line-height:1.8;}
+.eyebrow{
+  color:#61b5ff;
+  letter-spacing:3px;
+  font-size:12px;
+  text-transform:uppercase;
+  margin-bottom:15px;
+}
+
+h1{
+  font-size:clamp(60px,8vw,90px);
+  line-height:.95;
+  letter-spacing:-4px;
+  margin-bottom:10px;
+}
+
+.arabic-title{
+  color:#ff8f9b;
+  font-size:24px;
+  margin-bottom:25px;
+}
+
+.hero p{
+  color:#a6b6c7;
+  max-width:780px;
+  font-size:18px;
+  line-height:1.8;
+}
 
 /* ACTION BUTTONS */
-.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px;}
-.action-button{padding:11px 17px;border-radius:9px;background:#0b1928;border:1px solid #31516d;color:#bdd0e0;text-decoration:none;cursor:pointer;transition:.2s;}
-.action-button:hover{background:#14304a;color:white;border-color:#61b5ff;}
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:30px;
+}
+
+.action-button{
+  padding:11px 17px;
+  border-radius:9px;
+  background:#0b1928;
+  border:1px solid #31516d;
+  color:#bdd0e0;
+  text-decoration:none;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.action-button:hover{
+  background:#14304a;
+  color:white;
+  border-color:#61b5ff;
+}
 
 /* 3D VIEWER */
-.viewer{margin-top:60px;border:1px solid rgba(255,255,255,.10);border-radius:24px;overflow:hidden;background:#02060b;box-shadow:0 25px 80px rgba(0,0,0,.45);}
-.viewer-header{min-height:65px;padding:0 22px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.08);}
-.viewer-title{font-size:14px;color:#d2dce6;}
-.viewer-status{color:#708499;font-size:11px;letter-spacing:1px;}
-.scene{position:relative;width:100%;height:700px;background:radial-gradient(circle at 50% 45%,#203b51 0%,#0d1c2e 42%,#02060b 100%);}
-#brainCanvas{width:100%;height:100%;display:block;}
+.viewer{
+  margin-top:60px;
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:24px;
+  overflow:hidden;
+  background:#02060b;
+  box-shadow:0 25px 80px rgba(0,0,0,.45);
+}
+
+.viewer-header{
+  min-height:65px;
+  padding:0 22px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.viewer-title{
+  font-size:14px;
+  color:#d2dce6;
+}
+
+.viewer-status{
+  color:#708499;
+  font-size:11px;
+  letter-spacing:1px;
+}
+
+.scene{
+  position:relative;
+  width:100%;
+  height:700px;
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      #203b51 0%,
+      #0d1c2e 42%,
+      #02060b 100%
+    );
+}
+
+#brainCanvas{
+  width:100%;
+  height:100%;
+  display:block;
+}
 
 /* LOADING */
-.loading{position:absolute;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;background:#02060b;color:#9db0c3;font-size:14px;transition:opacity .8s;}
-.loading.hide{opacity:0;pointer-events:none;}
-.loading-bar{width:180px;height:2px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden;}
-.loading-bar-inner{width:0%;height:100%;background:#61b5ff;transition:width .3s;}
+.loading{
+  position:absolute;
+  inset:0;
+  z-index:20;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:16px;
+  background:#02060b;
+  color:#9db0c3;
+  font-size:14px;
+  transition:opacity .8s;
+}
+
+.loading.hide{
+  opacity:0;
+  pointer-events:none;
+}
+
+.loading-bar{
+  width:180px;
+  height:2px;
+  background:rgba(255,255,255,.08);
+  border-radius:2px;
+  overflow:hidden;
+}
+
+.loading-bar-inner{
+  width:0%;
+  height:100%;
+  background:#61b5ff;
+  transition:width .3s;
+}
 
 /* PCA LABEL */
-.pca-label{position:absolute;z-index:30;pointer-events:none;transform:translate(-50%,-100%);display:none;}
-.pca-label.show{display:block;}
-.label-box{position:relative;padding:9px 15px;border-radius:10px;background:rgba(5,10,17,.96);border:1.5px solid #ff4d5e;color:#ffd0d5;font-size:12px;font-weight:bold;letter-spacing:1px;white-space:nowrap;box-shadow:0 0 12px rgba(255,77,94,.25),0 0 25px rgba(255,77,94,.12);}
-.label-box::after{content:"";position:absolute;left:50%;bottom:-15px;width:1.5px;height:15px;background:#ff4d5e;transform:translateX(-50%);}
+.pca-label{
+  position:absolute;
+  z-index:30;
+  pointer-events:none;
+  transform:translate(-50%,-100%);
+  display:none;
+}
+
+.pca-label.show{
+  display:block;
+}
+
+.label-box{
+  position:relative;
+  padding:9px 15px;
+  border-radius:10px;
+  background:rgba(5,10,17,.96);
+  border:1.5px solid #ffffff;
+  color:#ffffff;
+  font-size:12px;
+  font-weight:bold;
+  letter-spacing:1px;
+  white-space:nowrap;
+  box-shadow:
+    0 0 12px rgba(255,255,255,.25),
+    0 0 25px rgba(255,255,255,.12);
+}
+
+.label-box::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:-15px;
+  width:1.5px;
+  height:15px;
+  background:#ffffff;
+  transform:translateX(-50%);
+}
 
 /* CONTROLS */
-.controls{display:flex;gap:10px;flex-wrap:wrap;padding:15px;border-top:1px solid rgba(255,255,255,.08);}
-.controls button{padding:11px 17px;border-radius:9px;background:#0b1928;border:1px solid #31516d;color:#bdd0e0;cursor:pointer;transition:.2s;}
-.controls button:hover{background:#14304a;color:white;}
-.controls button.active{background:#241417;border-color:#ff4d5e;color:#ffd0d5;}
+.controls{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  padding:15px;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+
+.controls button{
+  padding:11px 17px;
+  border-radius:9px;
+  background:#0b1928;
+  border:1px solid #31516d;
+  color:#bdd0e0;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.controls button:hover{
+  background:#14304a;
+  color:white;
+}
+
+.controls button.active{
+  background:#17202a;
+  border-color:#ffffff;
+  color:#ffffff;
+}
 
 /* INFORMATION */
-.section{margin-top:70px;}
-.section-label{color:#61b5ff;letter-spacing:2px;font-size:11px;text-transform:uppercase;margin-bottom:8px;}
-.section h2{font-size:32px;margin-bottom:25px;}
-.section-intro{color:#91a5b8;max-width:900px;font-size:15px;line-height:1.9;margin-bottom:30px;}
+.section{
+  margin-top:70px;
+}
+
+.section-label{
+  color:#61b5ff;
+  letter-spacing:2px;
+  font-size:11px;
+  text-transform:uppercase;
+  margin-bottom:8px;
+}
+
+.section h2{
+  font-size:32px;
+  margin-bottom:25px;
+}
+
+.section-intro{
+  color:#91a5b8;
+  max-width:900px;
+  font-size:15px;
+  line-height:1.9;
+  margin-bottom:30px;
+}
 
 /* LOCATION */
-.location{margin-top:70px;padding:35px;background:#091522;border:1px solid #172b3e;border-radius:18px;}
-.location h2{font-size:32px;margin-bottom:12px;}
-.location-intro{color:#91a5b8;max-width:900px;line-height:1.9;margin-bottom:30px;}
-.brain-visual{width:100%;overflow:hidden;}
+.location{
+  margin-top:70px;
+  padding:35px;
+  background:#091522;
+  border:1px solid #172b3e;
+  border-radius:18px;
+}
 
-.location-svg{display:block;width:100%;max-width:800px;height:auto;margin:auto;}
-.location-brain{fill:#263d55;stroke:#71869e;stroke-width:3;}
-.location-ica{fill:none;stroke:#c98a6b;stroke-width:3;stroke-dasharray:2 6;stroke-linecap:round;}
-.location-pca-glow{fill:none;stroke:#ff4d5e;stroke-width:14;opacity:.35;filter:blur(7px);}
-.location-pca-trunk{fill:none;stroke:#ff4d5e;stroke-width:7;stroke-linecap:round;}
-.location-pca{fill:none;stroke:#ff4d5e;stroke-width:4.5;stroke-linecap:round;}
-.location-line{stroke:#8fc7ff;stroke-width:2;}
-.location-pca-line{stroke:#ff4d5e;stroke-width:3;}
-.location-svg-label{fill:white;font-size:18px;font-weight:bold;}
-.location-pca-label{fill:#ff4d5e;font-size:21px;font-weight:bold;}
-.location-arabic-label{fill:#ffd6da;font-size:16px;font-weight:bold;}
-.location-caption{text-align:center;color:#9fb0c3;margin-top:15px;}
+.location h2{
+  font-size:32px;
+  margin-bottom:12px;
+}
+
+.location-intro{
+  color:#91a5b8;
+  max-width:900px;
+  line-height:1.9;
+  margin-bottom:30px;
+}
+
+/* LOCATION PHOTO */
+.location-photo{
+  margin:30px auto 40px;
+  max-width:900px;
+  background:#050b13;
+  border:1px solid #172b3e;
+  border-radius:18px;
+  overflow:hidden;
+}
+
+.location-photo-header{
+  min-height:55px;
+  padding:0 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  border-bottom:1px solid #172b3e;
+  color:#dce7f0;
+  font-size:14px;
+}
+
+.location-photo-header span:last-child{
+  color:#71869e;
+  font-size:11px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+
+.location-image-wrap{
+  position:relative;
+  width:100%;
+  min-height:360px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:25px;
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(36,70,94,.45),
+      rgba(2,6,11,1) 75%
+    );
+}
+
+.location-image-wrap img{
+  display:block;
+  width:100%;
+  max-width:760px;
+  height:auto;
+  max-height:520px;
+  object-fit:contain;
+  border-radius:12px;
+  opacity:.94;
+  filter:
+    brightness(.82)
+    contrast(1.08)
+    saturate(.8);
+}
+
+/* LOCATION PHOTO MARKERS */
+.location-marker{
+  position:absolute;
+  display:flex;
+  align-items:center;
+  gap:7px;
+  padding:7px 10px;
+  border-radius:8px;
+  background:rgba(5,10,17,.94);
+  border:1px solid #ffffff;
+  color:#ffffff;
+  font-size:11px;
+  font-weight:bold;
+  letter-spacing:.5px;
+  box-shadow:0 0 15px rgba(255,255,255,.22);
+}
+
+.location-marker span{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#ffffff;
+  box-shadow:0 0 10px #ffffff;
+}
+
+.marker-pca{
+  right:18%;
+  top:35%;
+}
+
+.marker-basilar{
+  left:18%;
+  bottom:22%;
+  border-color:#8fc7ff;
+  color:#d7ebff;
+}
+
+.marker-basilar span{
+  background:#8fc7ff;
+  box-shadow:0 0 10px #8fc7ff;
+}
+
+.location-photo .location-caption{
+  padding:0 20px 20px;
+}
+
+/* SVG LOCATION DIAGRAM */
+.brain-visual{
+  width:100%;
+  overflow:hidden;
+}
+
+.location-svg{
+  display:block;
+  width:100%;
+  max-width:800px;
+  height:auto;
+  margin:auto;
+}
+
+.location-brain{
+  fill:#263d55;
+  stroke:#71869e;
+  stroke-width:3;
+}
+
+.location-ica{
+  fill:none;
+  stroke:#c98a6b;
+  stroke-width:3;
+  stroke-dasharray:2 6;
+  stroke-linecap:round;
+}
+
+.location-pca-glow{
+  fill:none;
+  stroke:#ffffff;
+  stroke-width:14;
+  opacity:.35;
+  filter:blur(7px);
+}
+
+.location-pca-trunk{
+  fill:none;
+  stroke:#ffffff;
+  stroke-width:7;
+  stroke-linecap:round;
+}
+
+.location-pca{
+  fill:none;
+  stroke:#ffffff;
+  stroke-width:4.5;
+  stroke-linecap:round;
+}
+
+.location-line{
+  stroke:#8fc7ff;
+  stroke-width:2;
+}
+
+.location-pca-line{
+  stroke:#ffffff;
+  stroke-width:3;
+}
+
+.location-svg-label{
+  fill:white;
+  font-size:18px;
+  font-weight:bold;
+}
+
+.location-pca-label{
+  fill:#ffffff;
+  font-size:21px;
+  font-weight:bold;
+}
+
+.location-arabic-label{
+  fill:#ffffff;
+  font-size:16px;
+  font-weight:bold;
+}
+
+.location-caption{
+  text-align:center;
+  color:#9fb0c3;
+  margin-top:15px;
+}
 
 /* CARDS */
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-.card{padding:27px;background:#091522;border:1px solid #172b3e;border-radius:18px;transition:transform .2s,border-color .2s;}
-.card:hover{transform:translateY(-3px);border-color:#4a2a30;}
-.card h3{font-size:18px;margin-bottom:13px;color:#eef4fa;line-height:1.45;}
-.card p{color:#91a5b8;font-size:14px;line-height:1.8;}
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.card{
+  padding:27px;
+  background:#091522;
+  border:1px solid #172b3e;
+  border-radius:18px;
+  transition:
+    transform .2s,
+    border-color .2s;
+}
+
+.card:hover{
+  transform:translateY(-3px);
+  border-color:#4a2a30;
+}
+
+.card h3{
+  font-size:18px;
+  margin-bottom:13px;
+  color:#eef4fa;
+  line-height:1.45;
+}
+
+.card p{
+  color:#91a5b8;
+  font-size:14px;
+  line-height:1.8;
+}
 
 /* CLINICAL */
-.clinical-section{margin-top:65px;}
-.clinical-box{padding:30px;background:#091522;border:1px solid #172b3e;border-left:3px solid #ff4d5e;border-radius:18px;}
-.clinical-box p{color:#a7b7c6;font-size:15px;line-height:1.9;margin-bottom:18px;}
-.clinical-box p:last-child{margin-bottom:0;}
+.clinical-section{
+  margin-top:65px;
+}
+
+.clinical-box{
+  padding:30px;
+  background:#091522;
+  border:1px solid #172b3e;
+  border-left:3px solid #ffffff;
+  border-radius:18px;
+}
+
+.clinical-box p{
+  color:#a7b7c6;
+  font-size:15px;
+  line-height:1.9;
+  margin-bottom:18px;
+}
+
+.clinical-box p:last-child{
+  margin-bottom:0;
+}
 
 /* QUICK FACTS */
-.facts-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;}
-.fact{padding:22px;background:#091522;border:1px solid #172b3e;border-radius:16px;}
-.fact span{display:block;color:#ff4d5e;font-size:11px;letter-spacing:2px;margin-bottom:12px;}
-.fact strong{display:block;color:#eef4fa;font-size:14px;margin-bottom:8px;line-height:1.5;}
-.fact p{color:#8195a8;font-size:13px;line-height:1.7;}
+.facts-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+}
+
+.fact{
+  padding:22px;
+  background:#091522;
+  border:1px solid #172b3e;
+  border-radius:16px;
+}
+
+.fact span{
+  display:block;
+  color:#ffffff;
+  font-size:11px;
+  letter-spacing:2px;
+  margin-bottom:12px;
+}
+
+.fact strong{
+  display:block;
+  color:#eef4fa;
+  font-size:14px;
+  margin-bottom:8px;
+  line-height:1.5;
+}
+
+.fact p{
+  color:#8195a8;
+  font-size:13px;
+  line-height:1.7;
+}
 
 /* MINI TEST */
-.quiz{margin-top:65px;padding:30px;background:#091522;border:1px solid #172b3e;border-radius:18px;}
-.quiz h2{font-size:28px;margin-bottom:10px;}
-.quiz-intro{color:#91a5b8;margin-bottom:25px;}
-.question{margin-bottom:30px;}
-.question:last-child{margin-bottom:0;}
-.question p{color:#eef4fa;font-size:16px;margin-bottom:12px;font-weight:bold;}
-.option{display:block;width:100%;padding:12px 15px;margin-top:9px;background:#0b1928;color:#c7d5e2;border:1px solid #263951;border-radius:9px;text-align:left;cursor:pointer;font-size:14px;transition:.2s;}
-.option:hover{border-color:#ff4d5e;background:#111e2c;}
-.option.correct{border-color:#8fd3a8;background:#14291e;color:#b9f0c9;}
-.option.wrong{border-color:#d88b9b;background:#2a171d;color:#ffc2cc;}
-.quiz-result{margin-top:25px;padding:15px;border-radius:10px;background:#0b1928;border:1px solid #263951;color:#aebdce;display:none;}
+.quiz{
+  margin-top:65px;
+  padding:30px;
+  background:#091522;
+  border:1px solid #172b3e;
+  border-radius:18px;
+}
+
+.quiz h2{
+  font-size:28px;
+  margin-bottom:10px;
+}
+
+.quiz-intro{
+  color:#91a5b8;
+  margin-bottom:25px;
+}
+
+.question{
+  margin-bottom:30px;
+}
+
+.question:last-child{
+  margin-bottom:0;
+}
+
+.question p{
+  color:#eef4fa;
+  font-size:16px;
+  margin-bottom:12px;
+  font-weight:bold;
+}
+
+.option{
+  display:block;
+  width:100%;
+  padding:12px 15px;
+  margin-top:9px;
+  background:#0b1928;
+  color:#c7d5e2;
+  border:1px solid #263951;
+  border-radius:9px;
+  text-align:left;
+  cursor:pointer;
+  font-size:14px;
+  transition:.2s;
+}
+
+.option:hover{
+  border-color:#ffffff;
+  background:#111e2c;
+}
+
+.option.correct{
+  border-color:#8fd3a8;
+  background:#14291e;
+  color:#b9f0c9;
+}
+
+.option.wrong{
+  border-color:#d88b9b;
+  background:#2a171d;
+  color:#ffc2cc;
+}
+
+.quiz-result{
+  margin-top:25px;
+  padding:15px;
+  border-radius:10px;
+  background:#0b1928;
+  border:1px solid #263951;
+  color:#aebdce;
+  display:none;
+}
 
 /* MOBILE */
 @media(max-width:900px){
-  .cards{grid-template-columns:repeat(2,1fr);}
-  .facts-grid{grid-template-columns:repeat(2,1fr);}
+
+  .cards{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .facts-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
 }
+
 @media(max-width:800px){
-  .scene{height:450px;}
-  .viewer-status{display:none;}
+
+  .scene{
+    height:450px;
+  }
+
+  .viewer-status{
+    display:none;
+  }
 }
+
 @media(max-width:600px){
-  .cards{grid-template-columns:1fr;}
-  .facts-grid{grid-template-columns:1fr;}
-  h1{letter-spacing:-2px;}
-  .location{padding:20px;}
+
+  .cards{
+    grid-template-columns:1fr;
+  }
+
+  .facts-grid{
+    grid-template-columns:1fr;
+  }
+
+  h1{
+    letter-spacing:-2px;
+  }
+
+  .location{
+    padding:20px;
+  }
+
+  .location-image-wrap{
+    min-height:260px;
+    padding:15px;
+  }
+
+  .location-marker{
+    font-size:9px;
+    padding:5px 7px;
+  }
+
+  .marker-pca{
+    right:7%;
+    top:30%;
+  }
+
+  .marker-basilar{
+    left:7%;
+    bottom:15%;
+  }
+
+  .location-photo-header{
+    font-size:12px;
+  }
 }
 </style>
 </head>
+
 <body>
 
 <nav>
@@ -139,8 +744,13 @@ h1{font-size:clamp(60px,8vw,90px);line-height:.95;letter-spacing:-4px;margin-bot
 
 <!-- HERO -->
 <div class="eyebrow">Cerebral Vasculature · NeuroAtlas</div>
+
 <h1>PCA</h1>
-<div class="arabic-title">الشريان الدماغي الخلفي</div>
+
+<div class="arabic-title">
+الشريان الدماغي الخلفي
+</div>
+
 <div class="hero">
 <p>
 The posterior cerebral artery (PCA) is the terminal branch of the
@@ -153,38 +763,74 @@ and deep brainstem structures.
 
 <!-- ACTION BUTTONS -->
 <div class="actions">
-<a class="action-button" href="#location">📍 Show Location</a>
-<a class="action-button" href="#information">🧠 Learn About the PCA</a>
-<a class="action-button" href="#quiz">📝 Test Yourself</a>
+
+<a class="action-button" href="#location">
+📍 Show Location
+</a>
+
+<a class="action-button" href="#information">
+🧠 Learn About the PCA
+</a>
+
+<a class="action-button" href="#quiz">
+📝 Test Yourself
+</a>
+
 </div>
 
 <!-- 3D VIEWER -->
 <div class="viewer">
 
 <div class="viewer-header">
-<div class="viewer-title">Human Brain · Interactive 3D</div>
-<div class="viewer-status">DRAG TO ROTATE · SCROLL TO ZOOM</div>
+
+<div class="viewer-title">
+Human Brain · Interactive 3D
+</div>
+
+<div class="viewer-status">
+DRAG TO ROTATE · SCROLL TO ZOOM
+</div>
+
 </div>
 
 <div class="scene">
 
 <div id="loading" class="loading">
-<span id="loadText">Loading real brain model...</span>
-<div class="loading-bar"><div id="loadBar" class="loading-bar-inner"></div></div>
+
+<span id="loadText">
+Loading real brain model...
+</span>
+
+<div class="loading-bar">
+<div id="loadBar" class="loading-bar-inner"></div>
+</div>
+
 </div>
 
 <canvas id="brainCanvas"></canvas>
 
 <div id="pcaLabel" class="pca-label">
-<div class="label-box">POSTERIOR CEREBRAL ARTERY</div>
+<div class="label-box">
+POSTERIOR CEREBRAL ARTERY
+</div>
 </div>
 
 </div>
 
 <div class="controls">
-<button id="highlight" class="active">⚪ Highlight PCA</button>
-<button id="rotate" class="active">⟳ Auto Rotate</button>
-<button id="reset">↻ Reset View</button>
+
+<button id="highlight" class="active">
+⚪ Highlight PCA
+</button>
+
+<button id="rotate" class="active">
+⟳ Auto Rotate
+</button>
+
+<button id="reset">
+↻ Reset View
+</button>
+
 </div>
 
 </div>
@@ -192,78 +838,211 @@ and deep brainstem structures.
 <!-- LOCATION -->
 <section id="location" class="location">
 
-<div class="section-label">Location · الموقع</div>
-<h2>📍 Where is the PCA?</h2>
+<div class="section-label">
+Location · الموقع
+</div>
+
+<h2>
+📍 Where is the PCA?
+</h2>
 
 <p class="location-intro">
-The PCA arises from the tip of the <strong>basilar artery</strong> deep at
-the base of the brain, then curves posteriorly around the midbrain
-through the <strong>ambient cistern</strong> before fanning out over the
+The PCA arises from the tip of the <strong>basilar artery</strong>
+deep at the base of the brain, then curves posteriorly around the
+<strong>midbrain</strong> before reaching the
 <strong>occipital lobe</strong> and the underside of the temporal lobe.
+
 <br><br>
-ينشأ الشريان الدماغي الخلفي من نهاية <strong>الشريان القاعدي</strong>
-في عمق قاعدة الدماغ، ثم ينحني إلى الخلف حول الدماغ المتوسط عبر
-<strong>الصهريج المحيط</strong> قبل أن ينتشر فوق <strong>الفص القذالي</strong>
+
+ينشأ الشريان الدماغي الخلفي من نهاية
+<strong>الشريان القاعدي</strong>
+في عمق قاعدة الدماغ، ثم ينحني إلى الخلف حول
+<strong>الدماغ المتوسط</strong>
+قبل أن يصل إلى <strong>الفص القذالي</strong>
 والسطح السفلي للفص الصدغي.
 </p>
 
+<!-- LOCATION PHOTO -->
+<div class="location-photo">
+
+<div class="location-photo-header">
+
+<span>
+📍 PCA Location
+</span>
+
+<span>
+Posterior View
+</span>
+
+</div>
+
+<div class="location-image-wrap">
+
+<img
+src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Circle_of_Willis_en.svg/1280px-Circle_of_Willis_en.svg.png"
+alt="Diagram showing cerebral arterial circulation and PCA location"
+loading="lazy"
+>
+
+<div class="location-marker marker-pca">
+<span></span>
+<strong>PCA</strong>
+</div>
+
+<div class="location-marker marker-basilar">
+<span></span>
+<strong>Basilar Artery</strong>
+</div>
+
+</div>
+
+<p class="location-caption">
+The PCA is located posteriorly at the base of the brain,
+arising near the termination of the basilar artery.
+</p>
+
+</div>
+
+<!-- LOCATION SVG -->
 <div class="brain-visual">
-<svg class="location-svg" viewBox="0 0 800 560" xmlns="http://www.w3.org/2000/svg" aria-label="Simplified diagram highlighting the posterior cerebral artery">
+
+<svg
+class="location-svg"
+viewBox="0 0 800 560"
+xmlns="http://www.w3.org/2000/svg"
+aria-label="Simplified posterior cerebral artery location diagram"
+>
 
 <!-- CEREBRUM -->
-<path class="location-brain" d="M150 100 C200 45 300 30 400 50 C510 70 575 150 570 235 C568 300 525 330 470 330 C410 330 375 285 315 275 C255 265 190 300 150 255 C115 215 115 145 150 100Z"/>
+<path
+class="location-brain"
+d="M150 100
+C200 45 300 30 400 50
+C510 70 575 150 570 235
+C568 300 525 330 470 330
+C410 330 375 285 315 275
+C255 265 190 300 150 255
+C115 215 115 145 150 100Z"
+/>
 
-<!-- BASILAR ARTERY (context) -->
-<path class="location-ica" d="M430 400 C428 370 430 340 438 312"/>
+<!-- BASILAR ARTERY - DIAGRAM CONTEXT ONLY -->
+<path
+class="location-ica"
+d="M430 400
+C428 370 430 340 438 312"
+/>
 
 <!-- PCA GLOW -->
-<path class="location-pca-glow" d="M438 312 C458 288 485 265 505 240 C518 224 528 208 534 192"/>
-<path class="location-pca-glow" d="M534 192 C524 168 516 148 512 130"/>
-<path class="location-pca-glow" d="M534 192 C538 165 540 142 540 120"/>
-<path class="location-pca-glow" d="M534 192 C548 172 558 155 562 138"/>
-<path class="location-pca-glow" d="M534 192 C550 212 561 228 566 246"/>
-<path class="location-pca-glow" d="M534 192 C540 218 540 244 534 268"/>
+<path
+class="location-pca-glow"
+d="M438 312
+C458 288 485 265 505 240
+C518 224 528 208 534 192"
+/>
 
-<!-- PCA P1-P2 TRUNK -->
-<path class="location-pca-trunk" d="M438 312 C458 288 485 265 505 240 C518 224 528 208 534 192"/>
+<!-- PCA TRUNK -->
+<path
+class="location-pca-trunk"
+d="M438 312
+C458 288 485 265 505 240
+C518 224 528 208 534 192"
+/>
 
-<!-- PCA P3-P4 CORTICAL BRANCHES -->
-<path class="location-pca" d="M534 192 C524 168 516 148 512 130"/>
-<path class="location-pca" d="M534 192 C538 165 540 142 540 120"/>
-<path class="location-pca" d="M534 192 C548 172 558 155 562 138"/>
-<path class="location-pca" d="M534 192 C550 212 561 228 566 246"/>
-<path class="location-pca" d="M534 192 C540 218 540 244 534 268"/>
+<!-- PCA BRANCHES -->
+<path
+class="location-pca"
+d="M534 192
+C524 168 516 148 512 130"
+/>
+
+<path
+class="location-pca"
+d="M534 192
+C538 165 540 142 540 120"
+/>
+
+<path
+class="location-pca"
+d="M534 192
+C548 172 558 155 562 138"
+/>
+
+<path
+class="location-pca"
+d="M534 192
+C550 212 561 228 566 246"
+/>
+
+<path
+class="location-pca"
+d="M534 192
+C540 218 540 244 534 268"
+/>
 
 <!-- BASILAR LABEL -->
-<line class="location-line" x1="430" y1="400" x2="330" y2="460"/>
-<text class="location-svg-label" x="220" y="466">BASILAR ARTERY</text>
+<line
+class="location-line"
+x1="430"
+y1="400"
+x2="330"
+y2="460"
+/>
 
-<!-- P1-P2 SEGMENT LABEL -->
-<line class="location-line" x1="480" y1="270" x2="300" y2="330"/>
-<text class="location-svg-label" x="120" y="336">P1–P2 SEGMENT</text>
+<text
+class="location-svg-label"
+x="220"
+y="466"
+>
+BASILAR ARTERY
+</text>
 
 <!-- PCA LABEL -->
-<line class="location-pca-line" x1="534" y1="192" x2="640" y2="185"/>
-<text class="location-pca-label" x="650" y="191">PCA</text>
-<text class="location-arabic-label" x="650" y="218">الشريان الدماغي الخلفي</text>
+<line
+class="location-pca-line"
+x1="534"
+y1="192"
+x2="640"
+y2="185"
+/>
 
-<!-- CORTICAL BRANCHES LABEL -->
-<line class="location-pca-line" x1="550" y1="130" x2="640" y2="95"/>
-<text class="location-svg-label" x="650" y="101">P3–P4 · OCCIPITAL</text>
-<text class="location-arabic-label" x="650" y="123">الفروع القذالية</text>
+<text
+class="location-pca-label"
+x="650"
+y="191"
+>
+PCA
+</text>
+
+<text
+class="location-arabic-label"
+x="650"
+y="218"
+>
+الشريان الدماغي الخلفي
+</text>
 
 </svg>
 
-<p class="location-caption">🔴 The red pathway represents the approximate course of the PCA, from its origin at the basilar artery, around the midbrain, to its cortical branches over the occipital lobe.</p>
+<p class="location-caption">
+⚪ The white pathway represents the approximate course of the PCA
+from the basilar artery around the midbrain toward the occipital lobe.
+</p>
 
 </div>
+
 </section>
 
-<!-- DETAILED INFORMATION -->
+<!-- INFORMATION -->
 <section id="information" class="section">
 
-<div class="section-label">PCA Anatomy · تشريح الشريان الدماغي الخلفي</div>
-<h2>Posterior Cerebral Artery · الشريان الدماغي الخلفي</h2>
+<div class="section-label">
+PCA Anatomy · تشريح الشريان الدماغي الخلفي
+</div>
+
+<h2>
+Posterior Cerebral Artery · الشريان الدماغي الخلفي
+</h2>
 
 <p class="section-intro">
 The PCA is the terminal branch of the basilar artery and the smallest
@@ -271,30 +1050,36 @@ of the three major cerebral arteries. It is functionally divided into
 four segments (P1–P4) and supplies the occipital lobe, the inferior
 temporal lobe, the thalamus, and parts of the midbrain — making it
 central to vision and to several deep, non-cortical structures.
+
 <br><br>
+
 الشريان الدماغي الخلفي هو الفرع النهائي للشريان القاعدي، وأصغر
 الشرايين المخية الرئيسية الثلاثة. يُقسَّم وظيفياً إلى أربع قطع
 (P1–P4)، ويغذي الفص القذالي والسطح السفلي للفص الصدغي والمهاد
-وأجزاءً من الدماغ المتوسط، مما يجعله محورياً في الرؤية وفي عدة بنى
-عميقة غير قشرية.
+وأجزاءً من الدماغ المتوسط، مما يجعله محورياً في الرؤية وفي عدة
+بنى عميقة غير قشرية.
 </p>
 
 <div class="cards">
 
 <div class="card">
-<h3>Origin · المنشأ</h3>
+<h3>
+Origin · المنشأ
+</h3>
 <p>
 The PCA arises as the terminal bifurcation of the basilar artery at
 the top of the brainstem, forming the posterior part of the Circle
 of Willis.
 <br><br>
-ينشأ الشريان الدماغي الخلفي كتفرع نهائي للشريان القاعدي عند قمة جذع
-الدماغ، مُشكِّلاً الجزء الخلفي من دائرة ويليس.
+ينشأ الشريان الدماغي الخلفي كتفرع نهائي للشريان القاعدي عند قمة
+جذع الدماغ، مُشكِّلاً الجزء الخلفي من دائرة ويليس.
 </p>
 </div>
 
 <div class="card">
-<h3>P1 Segment · القطعة P1</h3>
+<h3>
+P1 Segment · القطعة P1
+</h3>
 <p>
 The precommunical segment, running from the basilar tip to the
 posterior communicating artery. It gives off small but critical
@@ -307,7 +1092,9 @@ thalamoperforating branches to the thalamus and midbrain.
 </div>
 
 <div class="card">
-<h3>P2 Segment · القطعة P2</h3>
+<h3>
+P2 Segment · القطعة P2
+</h3>
 <p>
 The ambient segment, curving around the midbrain through the ambient
 cistern. It gives rise to the posterior choroidal and thalamogeniculate
@@ -319,7 +1106,9 @@ branches.
 </div>
 
 <div class="card">
-<h3>P3 Segment · القطعة P3</h3>
+<h3>
+P3 Segment · القطعة P3
+</h3>
 <p>
 The quadrigeminal segment, passing near the quadrigeminal plate
 before dividing into the terminal cortical branches.
@@ -330,7 +1119,9 @@ before dividing into the terminal cortical branches.
 </div>
 
 <div class="card">
-<h3>P4 Segment · القطعة P4</h3>
+<h3>
+P4 Segment · القطعة P4
+</h3>
 <p>
 The cortical segment, comprising the calcarine and parieto-occipital
 branches that fan out over the occipital lobe.
@@ -341,115 +1132,125 @@ branches that fan out over the occipital lobe.
 </div>
 
 <div class="card">
-<h3>Thalamoperforating Arteries · الشرايين الثاقبة المهادية</h3>
+<h3>
+Thalamoperforating Arteries · الشرايين الثاقبة المهادية
+</h3>
 <p>
 Small perforating branches from P1 that supply the thalamus and
 midbrain. Their occlusion can cause thalamic pain syndrome or
-midbrain (Weber/Claude) syndromes.
+midbrain syndromes.
 <br><br>
-فروع ثاقبة صغيرة من القطعة P1 تغذي المهاد والدماغ المتوسط. يمكن أن
-يسبب انسدادها متلازمة الألم المهادي أو متلازمات الدماغ المتوسط
-(ويبر أو كلود).
+فروع ثاقبة صغيرة من القطعة P1 تغذي المهاد والدماغ المتوسط.
 </p>
 </div>
 
 <div class="card">
-<h3>Cortical Territory · المنطقة القشرية المُغذّاة</h3>
+<h3>
+Cortical Territory · المنطقة القشرية المُغذّاة
+</h3>
 <p>
-The PCA supplies the occipital lobe (primary visual cortex), the
-posterior and inferior temporal lobe, and the splenium of the
-corpus callosum.
+The PCA supplies the occipital lobe, the posterior and inferior
+temporal lobe, and the splenium of the corpus callosum.
 <br><br>
-يغذي الشريان الدماغي الخلفي الفص القذالي (القشرة البصرية الأولية)،
-والجزء الخلفي والسفلي من الفص الصدغي، وطُحال الجسم الثفني.
+يغذي الشريان الدماغي الخلفي الفص القذالي والجزء الخلفي والسفلي
+من الفص الصدغي وطُحال الجسم الثفني.
 </p>
 </div>
 
 <div class="card">
-<h3>Hippocampus & Memory · الحُصين والذاكرة</h3>
+<h3>
+Hippocampus & Memory · الحُصين والذاكرة
+</h3>
 <p>
 Branches to the medial temporal lobe supply the hippocampus, so
 bilateral PCA infarcts can produce significant memory impairment.
 <br><br>
-تغذي فروعه الفص الصدغي الإنسي بما يشمل الحُصين، لذا يمكن أن يسبب
-الاحتشاء الثنائي للشريان الدماغي الخلفي ضعفاً ملحوظاً في الذاكرة.
+تغذي فروعه الفص الصدغي الإنسي بما يشمل الحُصين.
 </p>
 </div>
 
 <div class="card">
-<h3>Fetal Origin Variant · النمط الجنيني</h3>
+<h3>
+Fetal Origin Variant · النمط الجنيني
+</h3>
 <p>
-In up to a quarter of people, the PCA arises mainly from the internal
-carotid artery via a large posterior communicating artery instead of
-the basilar artery — the "fetal PCA" variant.
+In some people, the PCA arises mainly from the internal carotid
+artery through a large posterior communicating artery instead of
+the basilar artery.
 <br><br>
-لدى ما يصل إلى ربع الأشخاص، ينشأ الشريان الدماغي الخلفي أساساً من
-الشريان السباتي الداخلي عبر شريان متصل خلفي كبير بدلاً من الشريان
-القاعدي — وهو ما يُعرف بالنمط الجنيني.
+قد ينشأ الشريان الدماغي الخلفي لدى بعض الأشخاص أساساً من الشريان
+السباتي الداخلي عبر شريان متصل خلفي كبير.
 </p>
 </div>
 
 <div class="card">
-<h3>PCA Stroke Syndrome · متلازمة سكتة الشريان الدماغي الخلفي</h3>
+<h3>
+PCA Stroke Syndrome · متلازمة سكتة الشريان الدماغي الخلفي
+</h3>
 <p>
 Occlusion classically causes contralateral homonymous hemianopia,
-often with macular sparing, and — if the dominant hemisphere is
-involved — alexia without agraphia.
+often with macular sparing, and may produce additional neurological
+findings depending on the branches involved.
 <br><br>
-يسبب الانسداد عادةً عمى نصفياً متماثلاً في الجانب المقابل، غالباً
-مع الإبقاء على الرؤية البقعية، وقد يترافق مع عسر قراءة بدون عسر
-كتابة إذا أُصيب نصف الكرة المسيطر.
+يسبب الانسداد عادةً عمى نصفياً متماثلاً في الجانب المقابل.
 </p>
 </div>
 
 <div class="card">
-<h3>Macular Sparing · الإبقاء على الرؤية البقعية</h3>
+<h3>
+Macular Sparing · الإبقاء على الرؤية البقعية
+</h3>
 <p>
-The occipital pole often has dual blood supply from both the PCA and
-the middle cerebral artery, which can preserve central (macular)
-vision even after a PCA infarct.
+The occipital pole can receive blood from both the PCA and the
+middle cerebral artery, which may preserve central vision.
 <br><br>
-غالباً ما يحصل قطب الفص القذالي على تروية مزدوجة من الشريان الدماغي
-الخلفي والشريان الدماغي الأوسط، مما قد يحافظ على الرؤية المركزية
-(البقعية) حتى بعد احتشاء الشريان الدماغي الخلفي.
+قد يحصل قطب الفص القذالي على تروية من الشريان الدماغي الخلفي
+والشريان الدماغي الأوسط.
 </p>
 </div>
 
 <div class="card">
-<h3>Thalamic Syndrome · متلازمة المهاد</h3>
+<h3>
+Thalamic Syndrome · متلازمة المهاد
+</h3>
 <p>
-Involvement of thalamic branches can cause the Dejerine–Roussy
-syndrome: contralateral sensory loss followed by severe, often
-burning, central pain.
+Involvement of thalamic branches can produce sensory abnormalities
+and other neurological findings.
 <br><br>
-قد يؤدي إصابة الفروع المهادية إلى متلازمة ديجيرين-روسي: فقدان حسي
-في الجانب المقابل يتبعه ألم مركزي شديد، غالباً بطابع حارق.
+قد تؤدي إصابة الفروع المهادية إلى اضطرابات حسية وأعراض عصبية أخرى.
 </p>
 </div>
 
 </div>
 
-<!-- CLINICAL IMPORTANCE -->
+<!-- CLINICAL -->
 <div class="clinical-section">
 
-<div class="section-label">Clinical Importance · الأهمية السريرية</div>
-<h2>Why the PCA Matters</h2>
+<div class="section-label">
+Clinical Importance · الأهمية السريرية
+</div>
+
+<h2>
+Why the PCA Matters
+</h2>
 
 <div class="clinical-box">
+
 <p>
 Because the PCA supplies primary visual cortex, medial temporal
 memory structures, and deep thalamic and midbrain territory,
-occlusion or hemorrhage in its distribution can produce a distinctive
-mix of visual field loss, memory impairment, and — when perforating
-branches are involved — brainstem or thalamic syndromes.
+occlusion in its distribution can produce a distinctive combination
+of visual field loss, memory impairment, and other neurological
+findings depending on the structures involved.
 </p>
+
 <p dir="rtl">
 نظراً لأن الشريان الدماغي الخلفي يغذي القشرة البصرية الأولية وبنى
 الذاكرة في الفص الصدغي الإنسي والمنطقة المهادية وجذع الدماغ العميقة،
-فإن انسداده أو نزيفه يمكن أن يسبب مزيجاً مميزاً من فقدان المجال
-البصري وضعف الذاكرة، وقد يترافق مع متلازمات جذع الدماغ أو المهاد
-عند إصابة الفروع الثاقبة.
+فإن انسداده يمكن أن يسبب فقدان المجال البصري وضعف الذاكرة وأعراضاً
+عصبية أخرى حسب البنى المصابة.
 </p>
+
 </div>
 
 </div>
@@ -457,67 +1258,149 @@ branches are involved — brainstem or thalamic syndromes.
 <!-- QUICK FACTS -->
 <div class="section">
 
-<div class="section-label">Quick Facts · معلومات سريعة</div>
-<h2>PCA at a Glance</h2>
+<div class="section-label">
+Quick Facts · معلومات سريعة
+</div>
+
+<h2>
+PCA at a Glance
+</h2>
 
 <div class="facts-grid">
 
 <div class="fact">
 <span>01</span>
-<strong>Origin · المنشأ</strong>
-<p>Terminal branch of the basilar artery · الفرع النهائي للشريان القاعدي</p>
+<strong>
+Origin · المنشأ
+</strong>
+<p>
+Terminal branch of the basilar artery ·
+الفرع النهائي للشريان القاعدي
+</p>
 </div>
 
 <div class="fact">
 <span>02</span>
-<strong>Course · المسار</strong>
-<p>Around the midbrain via the ambient cistern · حول الدماغ المتوسط عبر الصهريج المحيط</p>
+<strong>
+Course · المسار
+</strong>
+<p>
+Around the midbrain via the ambient cistern ·
+حول الدماغ المتوسط عبر الصهريج المحيط
+</p>
 </div>
 
 <div class="fact">
 <span>03</span>
-<strong>Territory · المنطقة المُغذّاة</strong>
-<p>Occipital lobe, inferior temporal lobe, thalamus · الفص القذالي والسطح السفلي للفص الصدغي والمهاد</p>
+<strong>
+Territory · المنطقة المُغذّاة
+</strong>
+<p>
+Occipital lobe, inferior temporal lobe, thalamus ·
+الفص القذالي والسطح السفلي للفص الصدغي والمهاد
+</p>
 </div>
 
 <div class="fact">
 <span>04</span>
-<strong>Clinical Relevance · الأهمية السريرية</strong>
-<p>Classic cause of homonymous hemianopia · السبب الكلاسيكي للعمى النصفي المتماثل</p>
+<strong>
+Clinical Relevance · الأهمية السريرية
+</strong>
+<p>
+Classic cause of homonymous hemianopia ·
+سبب كلاسيكي للعمى النصفي المتماثل
+</p>
 </div>
 
 </div>
+
 </div>
 
-<!-- MINI TEST -->
+<!-- QUIZ -->
 <div id="quiz" class="quiz">
 
-<div class="section-label">Mini Test</div>
-<h2>🧠 Test Yourself</h2>
-<p class="quiz-intro">Choose the best answer for each question.</p>
+<div class="section-label">
+Mini Test
+</div>
+
+<h2>
+🧠 Test Yourself
+</h2>
+
+<p class="quiz-intro">
+Choose the best answer for each question.
+</p>
 
 <div class="question">
-<p>1. The PCA is the terminal branch of which artery?</p>
-<button class="option" onclick="checkAnswer(this,false)">A. Internal carotid artery</button>
-<button class="option" onclick="checkAnswer(this,true)">B. Basilar artery</button>
-<button class="option" onclick="checkAnswer(this,false)">C. External carotid artery</button>
-<button class="option" onclick="checkAnswer(this,false)">D. Anterior communicating artery</button>
+
+<p>
+1. The PCA is the terminal branch of which artery?
+</p>
+
+<button class="option" onclick="checkAnswer(this,false)">
+A. Internal carotid artery
+</button>
+
+<button class="option" onclick="checkAnswer(this,true)">
+B. Basilar artery
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+C. External carotid artery
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+D. Anterior communicating artery
+</button>
+
 </div>
 
 <div class="question">
-<p>2. A classic PCA stroke most typically produces which deficit?</p>
-<button class="option" onclick="checkAnswer(this,false)">A. Face and arm weakness</button>
-<button class="option" onclick="checkAnswer(this,true)">B. Contralateral homonymous hemianopia</button>
-<button class="option" onclick="checkAnswer(this,false)">C. Isolated leg weakness</button>
-<button class="option" onclick="checkAnswer(this,false)">D. Expressive aphasia</button>
+
+<p>
+2. A classic PCA stroke most typically produces which deficit?
+</p>
+
+<button class="option" onclick="checkAnswer(this,false)">
+A. Face and arm weakness
+</button>
+
+<button class="option" onclick="checkAnswer(this,true)">
+B. Contralateral homonymous hemianopia
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+C. Isolated leg weakness
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+D. Expressive aphasia
+</button>
+
 </div>
 
 <div class="question">
-<p>3. Why is central (macular) vision often spared in a PCA stroke?</p>
-<button class="option" onclick="checkAnswer(this,false)">A. The macula has no cortical representation</button>
-<button class="option" onclick="checkAnswer(this,true)">B. The occipital pole has dual blood supply from the PCA and MCA</button>
-<button class="option" onclick="checkAnswer(this,false)">C. The PCA never reaches the occipital lobe</button>
-<button class="option" onclick="checkAnswer(this,false)">D. The macula is supplied by the anterior cerebral artery</button>
+
+<p>
+3. Why is central vision often spared in a PCA stroke?
+</p>
+
+<button class="option" onclick="checkAnswer(this,false)">
+A. The macula has no cortical representation
+</button>
+
+<button class="option" onclick="checkAnswer(this,true)">
+B. The occipital pole can have dual blood supply
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+C. The PCA never reaches the occipital lobe
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+D. The macula is supplied by the anterior cerebral artery
+</button>
+
 </div>
 
 <div id="quizResult" class="quiz-result"></div>
@@ -535,15 +1418,18 @@ branches are involved — brainstem or thalamic syndromes.
     "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
     "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
   }
+}
 </script>
 
 <script type="module">
+
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
 
 /* ELEMENTS */
+
 const canvas = document.getElementById("brainCanvas");
 const loading = document.getElementById("loading");
 const loadText = document.getElementById("loadText");
@@ -551,20 +1437,42 @@ const loadBar = document.getElementById("loadBar");
 const pcaLabel = document.getElementById("pcaLabel");
 
 /* SCENE */
+
 const scene = new THREE.Scene();
 
 /* CAMERA */
-const camera = new THREE.PerspectiveCamera(30, 1, 0.01, 100);
-camera.position.set(3.2, 0.3, 8.5);
+
+const camera = new THREE.PerspectiveCamera(
+  30,
+  1,
+  0.01,
+  100
+);
+
+camera.position.set(3.2,0.3,8.5);
 
 /* RENDERER */
-const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
-renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+
+const renderer = new THREE.WebGLRenderer({
+  canvas,
+  antialias:true,
+  alpha:true
+});
+
+renderer.setPixelRatio(
+  Math.min(window.devicePixelRatio || 1,2)
+);
+
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 0.75;
 
 /* CONTROLS */
-const controls = new OrbitControls(camera, canvas);
+
+const controls = new OrbitControls(
+  camera,
+  canvas
+);
+
 controls.enableRotate = true;
 controls.rotateSpeed = 0.6;
 controls.enableDamping = true;
@@ -574,125 +1482,309 @@ controls.zoomSpeed = 0.6;
 controls.enablePan = false;
 controls.autoRotate = true;
 controls.autoRotateSpeed = 0.2;
-controls.target.set(0, -0.3, 0);
+
+controls.target.set(
+  0,
+  -0.3,
+  0
+);
+
 controls.minDistance = 3.5;
 controls.maxDistance = 16;
 
 /* LIGHTING */
-scene.add(new THREE.AmbientLight(0xffffff, 0.55));
-const hemi = new THREE.HemisphereLight(0xffdce6, 0x081018, 0.75);
+
+scene.add(
+  new THREE.AmbientLight(
+    0xffffff,
+    0.55
+  )
+);
+
+const hemi = new THREE.HemisphereLight(
+  0xffdce6,
+  0x081018,
+  0.75
+);
+
 scene.add(hemi);
-const keyLight = new THREE.DirectionalLight(0xfff5f0, 1.4);
-keyLight.position.set(6, 10, 8);
+
+const keyLight = new THREE.DirectionalLight(
+  0xfff5f0,
+  1.4
+);
+
+keyLight.position.set(
+  6,
+  10,
+  8
+);
+
 scene.add(keyLight);
-const fillLight = new THREE.DirectionalLight(0x8ca9bd, 0.4);
-fillLight.position.set(-7, 2, 6);
+
+const fillLight = new THREE.DirectionalLight(
+  0x8ca9bd,
+  0.4
+);
+
+fillLight.position.set(
+  -7,
+  2,
+  6
+);
+
 scene.add(fillLight);
 
 /* BRAIN GROUP */
+
 const brainGroup = new THREE.Group();
+
 scene.add(brainGroup);
 
 let pcaMesh = null;
 let pcaHighlightGroup = null;
 let highlighted = true;
+
 const pcaGlowMeshes = [];
 
-/* BABY PINK BRAIN MATERIAL */
+/* BABY PINK BRAIN */
+
 const brainPinkColor = 0xf1c5d0;
-const brainPinkMaterial = new THREE.MeshPhysicalMaterial({
-  color:brainPinkColor, roughness:0.62, metalness:0, clearcoat:0.12, clearcoatRoughness:0.5, side:THREE.DoubleSide
-});
 
-/* PCA MATERIAL — toggles between white (highlighted) and the brain's
-   own pink (blended in) instead of being shown/hidden. Shared by every
-   PCA mesh (real model + fallback candelabra) so one color change
-   updates all of them at once. */
-const pcaWhiteColor = new THREE.Color(0xffffff);
-const pcaBlendColor = new THREE.Color(brainPinkColor);
+const brainPinkMaterial =
+  new THREE.MeshPhysicalMaterial({
+    color:brainPinkColor,
+    roughness:0.62,
+    metalness:0,
+    clearcoat:0.12,
+    clearcoatRoughness:0.5,
+    side:THREE.DoubleSide
+  });
 
-const pcaRedMaterial = new THREE.MeshPhysicalMaterial({
-  color:pcaWhiteColor.clone(), roughness:0.3, metalness:0.05, clearcoat:0.6, clearcoatRoughness:0.2,
-  emissive:0x555555, emissiveIntensity:0.2, side:THREE.DoubleSide
-});
+/* PCA COLORS */
 
-/* GLOW MATERIAL */
-const glowMaterial = new THREE.MeshBasicMaterial({
-  color:0xffffff, transparent:true, opacity:0.18, side:THREE.BackSide
-});
+const pcaWhiteColor =
+  new THREE.Color(0xffffff);
 
-/* BUILD A TUBE MESH ALONG POINTS */
-function buildTube(points, radius){
-  const curve = new THREE.CatmullRomCurve3(points.map(p => new THREE.Vector3(p[0], p[1], p[2])));
-  const geometry = new THREE.TubeGeometry(curve, 40, radius, 10, false);
-  const mesh = new THREE.Mesh(geometry, pcaRedMaterial);
-  const glow = new THREE.Mesh(new THREE.TubeGeometry(curve, 40, radius * 1.9, 10, false), glowMaterial);
+const pcaBlendColor =
+  new THREE.Color(brainPinkColor);
+
+/* PCA MATERIAL */
+
+const pcaRedMaterial =
+  new THREE.MeshPhysicalMaterial({
+
+    color:pcaWhiteColor.clone(),
+
+    roughness:0.3,
+
+    metalness:0.05,
+
+    clearcoat:0.6,
+
+    clearcoatRoughness:0.2,
+
+    emissive:0x555555,
+
+    emissiveIntensity:0.2,
+
+    side:THREE.DoubleSide
+
+  });
+
+/* PCA GLOW */
+
+const glowMaterial =
+  new THREE.MeshBasicMaterial({
+
+    color:0xffffff,
+
+    transparent:true,
+
+    opacity:0.18,
+
+    side:THREE.BackSide
+
+  });
+
+/* BUILD TUBE */
+
+function buildTube(points,radius){
+
+  const curve =
+    new THREE.CatmullRomCurve3(
+      points.map(
+        p =>
+          new THREE.Vector3(
+            p[0],
+            p[1],
+            p[2]
+          )
+      )
+    );
+
+  const geometry =
+    new THREE.TubeGeometry(
+      curve,
+      40,
+      radius,
+      10,
+      false
+    );
+
+  const mesh =
+    new THREE.Mesh(
+      geometry,
+      pcaRedMaterial
+    );
+
+  const glow =
+    new THREE.Mesh(
+      new THREE.TubeGeometry(
+        curve,
+        40,
+        radius * 1.9,
+        10,
+        false
+      ),
+      glowMaterial
+    );
+
   pcaGlowMeshes.push(glow);
-  const group = new THREE.Group();
+
+  const group =
+    new THREE.Group();
+
   group.add(mesh);
   group.add(glow);
+
   return group;
 }
 
-/* FALLBACK PCA — CURVES AROUND THE MIDBRAIN TO THE OCCIPITAL LOBE */
+/* FALLBACK PCA */
+
 function createPCAMarker(){
 
-  pcaHighlightGroup = new THREE.Group();
+  pcaHighlightGroup =
+    new THREE.Group();
 
-  /* P1–P2 trunk: from the basilar tip near the midline base, curving
-     posteriorly around the midbrain through the ambient cistern
-     toward the occipital region. Kept close to the midline and low,
-     unlike the MCA's far-lateral course. */
   const trunk = [
-    [0.10, -0.75,  0.15],
-    [0.30, -0.60, -0.20],
-    [0.45, -0.40, -0.55],
-    [0.55, -0.20, -0.85]
+
+    [0.10,-0.75,0.15],
+
+    [0.30,-0.60,-0.20],
+
+    [0.45,-0.40,-0.55],
+
+    [0.55,-0.20,-0.85]
+
   ];
-  pcaHighlightGroup.add(buildTube(trunk, 0.042));
 
-  const bifurcation = trunk[trunk.length - 1];
+  pcaHighlightGroup.add(
+    buildTube(
+      trunk,
+      0.042
+    )
+  );
 
-  /* P3–P4 cortical branches (calcarine, parieto-occipital, posterior
-     temporal) fanning over the occipital pole. Kept close to the
-     trunk's height so nothing pokes out above the top of the brain. */
+  const bifurcation =
+    trunk[trunk.length - 1];
+
   const branches = [
-    [bifurcation, [0.40,  0.00, -1.05], [0.30, 0.15, -1.15]],
-    [bifurcation, [0.55,  0.05, -1.10], [0.55, 0.20, -1.20]],
-    [bifurcation, [0.72, -0.05, -0.95], [0.82, 0.05, -1.00]],
-    [bifurcation, [0.68, -0.25, -0.65], [0.75, -0.20, -0.45]]
+
+    [
+      bifurcation,
+      [0.40,0.00,-1.05],
+      [0.30,0.15,-1.15]
+    ],
+
+    [
+      bifurcation,
+      [0.55,0.05,-1.10],
+      [0.55,0.20,-1.20]
+    ],
+
+    [
+      bifurcation,
+      [0.72,-0.05,-0.95],
+      [0.82,0.05,-1.00]
+    ],
+
+    [
+      bifurcation,
+      [0.68,-0.25,-0.65],
+      [0.75,-0.20,-0.45]
+    ]
+
   ];
 
-  branches.forEach(pts => {
-    pcaHighlightGroup.add(buildTube(pts, 0.024));
-  });
+  branches.forEach(
+    pts => {
 
-  /* Small thalamoperforating branch near the origin — a short vessel
-     climbing toward the thalamus, kept tight to the base. */
+      pcaHighlightGroup.add(
+        buildTube(
+          pts,
+          0.024
+        )
+      );
+
+    }
+  );
+
   const thalamoperforator = [
-    [0.10, -0.75,  0.15],
-    [0.05, -0.55,  0.05],
-    [0.00, -0.35, -0.05]
+
+    [0.10,-0.75,0.15],
+
+    [0.05,-0.55,0.05],
+
+    [0.00,-0.35,-0.05]
+
   ];
-  pcaHighlightGroup.add(buildTube(thalamoperforator, 0.016));
 
-  pcaHighlightGroup.position.set(0, -0.25, 0.05);
+  pcaHighlightGroup.add(
+    buildTube(
+      thalamoperforator,
+      0.016
+    )
+  );
 
-  brainGroup.add(pcaHighlightGroup);
+  pcaHighlightGroup.position.set(
+    0,
+    -0.25,
+    0.05
+  );
+
+  brainGroup.add(
+    pcaHighlightGroup
+  );
 }
 
 /* LOAD REAL BRAIN MODEL */
+
 function loadRealBrain(){
 
-  const loader = new GLTFLoader();
-  const dracoLoader = new DRACOLoader();
-  dracoLoader.setDecoderPath("https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/");
-  loader.setDRACOLoader(dracoLoader);
+  const loader =
+    new GLTFLoader();
+
+  const dracoLoader =
+    new DRACOLoader();
+
+  dracoLoader.setDecoderPath(
+    "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/"
+  );
+
+  loader.setDRACOLoader(
+    dracoLoader
+  );
 
   const urls = [
+
     "https://cdn.jsdelivr.net/gh/itayinbarr/brainproject@main/brain-atlas/models/brain.glb",
+
     "https://raw.githubusercontent.com/itayinbarr/brainproject/main/brain-atlas/models/brain.glb",
+
     "https://itayinbarr.github.io/brainproject/models/brain.glb"
+
   ];
 
   let urlIndex = 0;
@@ -700,211 +1792,513 @@ function loadRealBrain(){
   function tryLoad(){
 
     if(urlIndex >= urls.length){
+
       createPCAMarker();
+
       onReady();
+
       return;
     }
 
-    const url = urls[urlIndex++];
-    loadText.textContent = "Loading real brain model...";
+    const url =
+      urls[urlIndex++];
+
+    loadText.textContent =
+      "Loading real brain model...";
 
     loader.load(
+
       url,
+
       function(gltf){
 
-        const model = gltf.scene;
+        const model =
+          gltf.scene;
 
-        const box = new THREE.Box3().setFromObject(model);
-        const center = box.getCenter(new THREE.Vector3());
-        const size = box.getSize(new THREE.Vector3());
-        const maxDim = Math.max(size.x, size.y, size.z);
-        const scale = 4.5 / maxDim;
+        const box =
+          new THREE.Box3()
+            .setFromObject(model);
 
-        model.scale.setScalar(scale);
-        model.position.sub(center.multiplyScalar(scale));
+        const center =
+          box.getCenter(
+            new THREE.Vector3()
+          );
+
+        const size =
+          box.getSize(
+            new THREE.Vector3()
+          );
+
+        const maxDim =
+          Math.max(
+            size.x,
+            size.y,
+            size.z
+          );
+
+        const scale =
+          4.5 / maxDim;
+
+        model.scale.setScalar(
+          scale
+        );
+
+        model.position.sub(
+          center.multiplyScalar(scale)
+        );
+
         model.position.y -= 0.60;
 
         const toRemove = [];
 
-        model.traverse(function(child){
+        model.traverse(
+          function(child){
 
-          if(!child.isMesh) return;
-
-          child.castShadow = true;
-          child.receiveShadow = true;
-
-          const name = (child.name || "").toLowerCase();
-
-          const isPCA = name.includes("pca") || name.includes("posterior_cerebral");
-
-          /* Any other vessel/vascular structure that is NOT the PCA
-             (other arteries, veins, the circle of Willis, etc.) is
-             deleted outright — the model should only ever show the
-             brain surface plus the PCA, nothing else "growing" off it. */
-          const otherVesselKeywords = ["artery","arter","vessel","vein","ica","aca","mca",
-            "pcom","acom","carotid","willis","basilar","vertebral","sinus","plexus"];
-          const isOtherVessel = !isPCA && otherVesselKeywords.some(k => name.includes(k));
-
-          if(isPCA){
-
-            pcaMesh = child;
-            child.material = pcaRedMaterial;
-
-            const glow = child.clone();
-            glow.material = glowMaterial;
-            glow.scale.multiplyScalar(1.06);
-            child.parent.add(glow);
-            pcaGlowMeshes.push(glow);
-
-          } else if(isOtherVessel){
-
-            toRemove.push(child);
-
-          } else {
-
-            if(child.material){
-              child.material = brainPinkMaterial.clone();
+            if(!child.isMesh){
+              return;
             }
+
+            child.castShadow = true;
+            child.receiveShadow = true;
+
+            const name =
+              (child.name || "")
+                .toLowerCase();
+
+            const isPCA =
+              name.includes("pca") ||
+              name.includes("posterior_cerebral");
+
+            /*
+             * Only PCA vessel geometry is accepted.
+             * Other vascular objects are removed from the loaded model.
+             */
+
+            const otherVesselKeywords = [
+
+              "artery",
+              "arter",
+              "vessel",
+              "vein",
+              "ica",
+              "aca",
+              "mca",
+              "pcom",
+              "acom",
+              "carotid",
+              "willis",
+              "basilar",
+              "vertebral",
+              "sinus",
+              "plexus"
+
+            ];
+
+            const isOtherVessel =
+              !isPCA &&
+              otherVesselKeywords.some(
+                k => name.includes(k)
+              );
+
+            if(isPCA){
+
+              pcaMesh = child;
+
+              child.material =
+                pcaRedMaterial;
+
+              const glow =
+                child.clone();
+
+              glow.material =
+                glowMaterial;
+
+              glow.scale.multiplyScalar(
+                1.06
+              );
+
+              child.parent.add(
+                glow
+              );
+
+              pcaGlowMeshes.push(
+                glow
+              );
+
+            }
+
+            else if(isOtherVessel){
+
+              toRemove.push(
+                child
+              );
+
+            }
+
+            else{
+
+              if(child.material){
+
+                child.material =
+                  brainPinkMaterial.clone();
+
+              }
+
+            }
+
           }
-        });
+        );
 
-        /* Remove flagged meshes after traversal finishes (mutating the
-           scene graph mid-traverse can skip nodes). */
-        toRemove.forEach(function(child){
-          if(child.geometry) child.geometry.dispose();
-          if(child.parent) child.parent.remove(child);
-        });
+        toRemove.forEach(
+          function(child){
 
-        brainGroup.add(model);
+            if(child.geometry){
+              child.geometry.dispose();
+            }
 
-        /* fallback: real model has no separate PCA mesh (vessels usually
-           aren't included in generic brain models), so build the vessel */
+            if(child.parent){
+              child.parent.remove(child);
+            }
+
+          }
+        );
+
+        brainGroup.add(
+          model
+        );
+
+        /*
+         * If the real brain file does not contain PCA geometry,
+         * use the visual PCA marker.
+         *
+         * This does NOT create a basilar artery object.
+         */
+
         if(!pcaMesh){
+
           createPCAMarker();
+
         }
 
-        loadBar.style.width = "100%";
+        loadBar.style.width =
+          "100%";
+
         onReady();
+
       },
+
       function(progress){
+
         if(progress.total > 0){
-          const pct = Math.min(90, progress.loaded / progress.total * 90);
-          loadBar.style.width = pct + "%";
+
+          const pct =
+            Math.min(
+              90,
+              progress.loaded /
+              progress.total *
+              90
+            );
+
+          loadBar.style.width =
+            pct + "%";
+
         }
+
       },
+
       function(error){
-        console.warn("Model failed:", error);
+
+        console.warn(
+          "Model failed:",
+          error
+        );
+
         tryLoad();
+
       }
+
     );
+
   }
 
   tryLoad();
 }
 
 /* READY */
+
 function onReady(){
-  setTimeout(function(){
-    loading.classList.add("hide");
-    if(highlighted){
-      pcaLabel.classList.add("show");
-    }
-  }, 500);
+
+  setTimeout(
+    function(){
+
+      loading.classList.add(
+        "hide"
+      );
+
+      if(highlighted){
+
+        pcaLabel.classList.add(
+          "show"
+        );
+
+      }
+
+    },
+    500
+  );
+
 }
 
 /* LABEL POSITION */
+
 function updateLabel(){
 
-  const target = pcaHighlightGroup || pcaMesh;
-  if(!target) return;
+  const target =
+    pcaHighlightGroup ||
+    pcaMesh;
 
-  const position = new THREE.Vector3();
-  target.getWorldPosition(position);
-  position.project(camera);
+  if(!target){
+    return;
+  }
 
-  const x = (position.x + 1) / 2 * canvas.clientWidth;
-  const y = (-position.y + 1) / 2 * canvas.clientHeight;
+  const position =
+    new THREE.Vector3();
 
-  pcaLabel.style.left = x + "px";
-  pcaLabel.style.top = (y - 45) + "px";
+  target.getWorldPosition(
+    position
+  );
+
+  position.project(
+    camera
+  );
+
+  const x =
+    (position.x + 1) /
+    2 *
+    canvas.clientWidth;
+
+  const y =
+    (-position.y + 1) /
+    2 *
+    canvas.clientHeight;
+
+  pcaLabel.style.left =
+    x + "px";
+
+  pcaLabel.style.top =
+    (y - 45) + "px";
 }
 
 /* RESIZE */
+
 function resize(){
-  const width = canvas.clientWidth;
-  const height = canvas.clientHeight;
-  if(width <= 0 || height <= 0) return;
-  camera.aspect = width / height;
+
+  const width =
+    canvas.clientWidth;
+
+  const height =
+    canvas.clientHeight;
+
+  if(width <= 0 || height <= 0){
+    return;
+  }
+
+  camera.aspect =
+    width / height;
+
   camera.updateProjectionMatrix();
-  renderer.setSize(width, height, false);
+
+  renderer.setSize(
+    width,
+    height,
+    false
+  );
 }
-window.addEventListener("resize", resize);
 
-/* HIGHLIGHT BUTTON */
-const highlightBtn = document.getElementById("highlight");
-highlightBtn.addEventListener("click", function(){
+window.addEventListener(
+  "resize",
+  resize
+);
 
-  highlighted = !highlighted;
+/* HIGHLIGHT */
 
-  /* Swap the single shared PCA material's color: white while
-     highlighted, the brain's own pink when not — the PCA is never
-     hidden, it just blends into the surrounding brain tissue. */
-  pcaRedMaterial.color.copy(highlighted ? pcaWhiteColor : pcaBlendColor);
-  pcaRedMaterial.emissive.set(highlighted ? 0x555555 : 0x000000);
-  pcaRedMaterial.emissiveIntensity = highlighted ? 0.2 : 0;
+const highlightBtn =
+  document.getElementById(
+    "highlight"
+  );
 
-  pcaGlowMeshes.forEach(function(glow){
-    glow.visible = highlighted;
-  });
+highlightBtn.addEventListener(
+  "click",
+  function(){
 
-  pcaLabel.classList.toggle("show", highlighted);
-  highlightBtn.classList.toggle("active", highlighted);
-  highlightBtn.textContent = highlighted ? "⚪ PCA Highlighted" : "🧠 Highlight PCA";
-});
+    highlighted =
+      !highlighted;
+
+    pcaRedMaterial.color.copy(
+      highlighted
+        ? pcaWhiteColor
+        : pcaBlendColor
+    );
+
+    pcaRedMaterial.emissive.set(
+      highlighted
+        ? 0x555555
+        : 0x000000
+    );
+
+    pcaRedMaterial.emissiveIntensity =
+      highlighted
+        ? 0.2
+        : 0;
+
+    pcaGlowMeshes.forEach(
+      function(glow){
+
+        glow.visible =
+          highlighted;
+
+      }
+    );
+
+    pcaLabel.classList.toggle(
+      "show",
+      highlighted
+    );
+
+    highlightBtn.classList.toggle(
+      "active",
+      highlighted
+    );
+
+    highlightBtn.textContent =
+      highlighted
+        ? "⚪ PCA Highlighted"
+        : "🧠 Highlight PCA";
+
+  }
+);
 
 /* AUTO ROTATE */
-const rotateBtn = document.getElementById("rotate");
-rotateBtn.addEventListener("click", function(){
-  controls.autoRotate = !controls.autoRotate;
-  rotateBtn.classList.toggle("active", controls.autoRotate);
-  rotateBtn.textContent = controls.autoRotate ? "⟳ Auto Rotate" : "▶ Auto Rotate";
-});
+
+const rotateBtn =
+  document.getElementById(
+    "rotate"
+  );
+
+rotateBtn.addEventListener(
+  "click",
+  function(){
+
+    controls.autoRotate =
+      !controls.autoRotate;
+
+    rotateBtn.classList.toggle(
+      "active",
+      controls.autoRotate
+    );
+
+    rotateBtn.textContent =
+      controls.autoRotate
+        ? "⟳ Auto Rotate"
+        : "▶ Auto Rotate";
+
+  }
+);
 
 /* RESET */
-document.getElementById("reset").addEventListener("click", function(){
-  camera.position.set(3.2, 0.3, 8.5);
-  controls.target.set(0, -0.3, 0);
-  controls.update();
-});
+
+document
+  .getElementById("reset")
+  .addEventListener(
+    "click",
+    function(){
+
+      camera.position.set(
+        3.2,
+        0.3,
+        8.5
+      );
+
+      controls.target.set(
+        0,
+        -0.3,
+        0
+      );
+
+      controls.update();
+
+    }
+  );
 
 /* ANIMATION */
+
 function animate(){
-  requestAnimationFrame(animate);
+
+  requestAnimationFrame(
+    animate
+  );
+
   controls.update();
+
   updateLabel();
-  renderer.render(scene, camera);
+
+  renderer.render(
+    scene,
+    camera
+  );
 }
 
 /* START */
+
 resize();
+
 animate();
+
 loadRealBrain();
+
 </script>
 
-<!-- MINI TEST JAVASCRIPT -->
+<!-- QUIZ JAVASCRIPT -->
 <script>
-function checkAnswer(button, correct){
 
-  const parent = button.parentElement;
-  const options = parent.querySelectorAll(".option");
-  options.forEach(function(option){
-    option.classList.remove("correct", "wrong");
-  });
+function checkAnswer(
+  button,
+  correct
+){
+
+  const parent =
+    button.parentElement;
+
+  const options =
+    parent.querySelectorAll(
+      ".option"
+    );
+
+  options.forEach(
+    function(option){
+
+      option.classList.remove(
+        "correct",
+        "wrong"
+      );
+
+    }
+  );
 
   if(correct){
-    button.classList.add("correct");
-  } else {
-    button.classList.add("wrong");
+
+    button.classList.add(
+      "correct"
+    );
+
+  }
+
+  else{
+
+    button.classList.add(
+      "wrong"
+    );
+
   }
 
   updateQuizScore();
@@ -912,25 +2306,57 @@ function checkAnswer(button, correct){
 
 function updateQuizScore(){
 
-  const result = document.getElementById("quizResult");
+  const result =
+    document.getElementById(
+      "quizResult"
+    );
+
   let answered = 0;
   let correctAnswers = 0;
 
-  document.querySelectorAll(".question").forEach(function(question){
-    const selected = question.querySelector(".correct, .wrong");
-    if(selected){
-      answered++;
-      if(selected.classList.contains("correct")){
-        correctAnswers++;
+  document
+    .querySelectorAll(".question")
+    .forEach(
+      function(question){
+
+        const selected =
+          question.querySelector(
+            ".correct, .wrong"
+          );
+
+        if(selected){
+
+          answered++;
+
+          if(
+            selected.classList.contains(
+              "correct"
+            )
+          ){
+
+            correctAnswers++;
+
+          }
+
+        }
+
       }
-    }
-  });
+    );
 
   if(answered > 0){
-    result.style.display = "block";
-    result.textContent = "Score: " + correctAnswers + " / " + answered;
+
+    result.style.display =
+      "block";
+
+    result.textContent =
+      "Score: " +
+      correctAnswers +
+      " / " +
+      answered;
+
   }
 }
+
 </script>
 
 </body>
