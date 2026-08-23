@@ -1,19 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>NeuroAtlas | Basilar Artery</title>
 
 <style>
-
 *{
     box-sizing:border-box;
     margin:0;
@@ -32,7 +25,7 @@ body{
 }
 
 /* =========================
-   NAV
+   NAVIGATION
 ========================= */
 
 nav{
@@ -54,7 +47,7 @@ nav a:hover{
 }
 
 /* =========================
-   CONTAINER
+   MAIN
 ========================= */
 
 .container{
@@ -76,7 +69,7 @@ nav a:hover{
 }
 
 h1{
-    font-size:clamp(60px,8vw,90px);
+    font-size:clamp(55px,8vw,90px);
     line-height:.95;
     letter-spacing:-4px;
     margin-bottom:10px;
@@ -90,13 +83,13 @@ h1{
 
 .hero p{
     color:#a6b6c7;
-    max-width:780px;
+    max-width:820px;
     font-size:18px;
     line-height:1.8;
 }
 
 /* =========================
-   ACTION BUTTONS
+   ACTIONS
 ========================= */
 
 .actions{
@@ -160,11 +153,10 @@ h1{
     position:relative;
     width:100%;
     height:700px;
-
     background:
         radial-gradient(
             circle at 50% 45%,
-            #263c50 0%,
+            #203b51 0%,
             #0d1c2e 42%,
             #02060b 100%
         );
@@ -189,11 +181,9 @@ h1{
     align-items:center;
     justify-content:center;
     flex-direction:column;
-
     gap:16px;
 
     background:#02060b;
-
     color:#9db0c3;
     font-size:14px;
 
@@ -208,9 +198,7 @@ h1{
 .loading-bar{
     width:180px;
     height:2px;
-
     background:rgba(255,255,255,.08);
-
     border-radius:2px;
     overflow:hidden;
 }
@@ -218,25 +206,19 @@ h1{
 .loading-bar-inner{
     width:0%;
     height:100%;
-
     background:#ffffff;
-
     transition:width .3s;
 }
 
 /* =========================
-   BASILAR LABEL
+   ARTERY LABEL
 ========================= */
 
 .basilar-label{
     position:absolute;
-
     z-index:30;
-
     pointer-events:none;
-
     transform:translate(-50%,-100%);
-
     display:none;
 }
 
@@ -246,43 +228,31 @@ h1{
 
 .label-box{
     position:relative;
-
     padding:9px 15px;
-
     border-radius:10px;
 
     background:rgba(5,10,17,.96);
-
     border:1.5px solid #ffffff;
 
     color:#ffffff;
-
     font-size:12px;
-
     font-weight:bold;
-
     letter-spacing:1px;
-
     white-space:nowrap;
 
     box-shadow:
-        0 0 15px rgba(255,255,255,.30),
-        0 0 35px rgba(255,255,255,.12);
+        0 0 12px rgba(255,255,255,.25),
+        0 0 30px rgba(255,255,255,.10);
 }
 
 .label-box::after{
     content:"";
-
     position:absolute;
-
     left:50%;
     bottom:-15px;
-
     width:1.5px;
     height:15px;
-
     background:#ffffff;
-
     transform:translateX(-50%);
 }
 
@@ -294,25 +264,17 @@ h1{
     display:flex;
     gap:10px;
     flex-wrap:wrap;
-
     padding:15px;
-
     border-top:1px solid rgba(255,255,255,.08);
 }
 
 .controls button{
     padding:11px 17px;
-
     border-radius:9px;
-
     background:#0b1928;
-
     border:1px solid #31516d;
-
     color:#bdd0e0;
-
     cursor:pointer;
-
     transition:.2s;
 }
 
@@ -323,17 +285,144 @@ h1{
 
 .controls button.active{
     background:#202020;
-
     border-color:#ffffff;
-
     color:#ffffff;
-
-    box-shadow:
-        0 0 12px rgba(255,255,255,.10);
 }
 
 /* =========================
-   INFORMATION
+   LOCATION
+========================= */
+
+.location{
+    margin-top:70px;
+    padding:35px;
+    background:#091522;
+    border:1px solid #172b3e;
+    border-radius:18px;
+}
+
+.location h2{
+    font-size:32px;
+    margin-bottom:12px;
+}
+
+.location-intro{
+    color:#91a5b8;
+    max-width:900px;
+    line-height:1.9;
+    margin-bottom:30px;
+}
+
+.brain-visual{
+    width:100%;
+    overflow:hidden;
+}
+
+.location-svg{
+    display:block;
+    width:100%;
+    max-width:850px;
+    height:auto;
+    margin:auto;
+}
+
+/* =========================
+   LOCATION DIAGRAM
+========================= */
+
+.location-brain{
+    fill:#263d55;
+    stroke:#71869e;
+    stroke-width:3;
+}
+
+.location-cerebellum{
+    fill:#344d66;
+    stroke:#71869e;
+    stroke-width:3;
+}
+
+.location-brainstem{
+    fill:#29465b;
+    stroke:#71869e;
+    stroke-width:3;
+}
+
+.location-pons{
+    fill:#31526b;
+    stroke:#91abc1;
+    stroke-width:3;
+}
+
+/* Existing anatomical artery representation
+   used ONLY in the location illustration. */
+
+.location-vertebral{
+    fill:none;
+    stroke:#8fc7ff;
+    stroke-width:11;
+    stroke-linecap:round;
+}
+
+.location-basilar-glow{
+    fill:none;
+    stroke:#ffffff;
+    stroke-width:18;
+    stroke-linecap:round;
+    opacity:.25;
+    filter:blur(7px);
+}
+
+.location-basilar{
+    fill:none;
+    stroke:#ffffff;
+    stroke-width:8;
+    stroke-linecap:round;
+}
+
+.location-artery-branch{
+    fill:none;
+    stroke:#ffffff;
+    stroke-width:5;
+    stroke-linecap:round;
+}
+
+.location-line{
+    stroke:#8fc7ff;
+    stroke-width:2;
+}
+
+.location-basilar-line{
+    stroke:#ffffff;
+    stroke-width:3;
+}
+
+.location-svg-label{
+    fill:white;
+    font-size:18px;
+    font-weight:bold;
+}
+
+.location-basilar-label{
+    fill:#ffffff;
+    font-size:21px;
+    font-weight:bold;
+}
+
+.location-arabic-label{
+    fill:#ffffff;
+    font-size:16px;
+    font-weight:bold;
+}
+
+.location-caption{
+    text-align:center;
+    color:#9fb0c3;
+    margin-top:15px;
+}
+
+/* =========================
+   SECTION
 ========================= */
 
 .section{
@@ -362,37 +451,6 @@ h1{
 }
 
 /* =========================
-   LOCATION
-========================= */
-
-.location{
-    margin-top:70px;
-
-    padding:35px;
-
-    background:#091522;
-
-    border:1px solid #172b3e;
-
-    border-radius:18px;
-}
-
-.location h2{
-    font-size:32px;
-    margin-bottom:12px;
-}
-
-.location-intro{
-    color:#91a5b8;
-
-    max-width:900px;
-
-    line-height:1.9;
-
-    margin-bottom:30px;
-}
-
-/* =========================
    CARDS
 ========================= */
 
@@ -404,16 +462,10 @@ h1{
 
 .card{
     padding:27px;
-
     background:#091522;
-
     border:1px solid #172b3e;
-
     border-radius:18px;
-
-    transition:
-        transform .2s,
-        border-color .2s;
+    transition:transform .2s,border-color .2s;
 }
 
 .card:hover{
@@ -444,23 +496,16 @@ h1{
 
 .clinical-box{
     padding:30px;
-
     background:#091522;
-
     border:1px solid #172b3e;
-
     border-left:3px solid #ffffff;
-
     border-radius:18px;
 }
 
 .clinical-box p{
     color:#a7b7c6;
-
     font-size:15px;
-
     line-height:1.9;
-
     margin-bottom:18px;
 }
 
@@ -469,56 +514,41 @@ h1{
 }
 
 /* =========================
-   QUICK FACTS
+   FACTS
 ========================= */
 
 .facts-grid{
     display:grid;
-
     grid-template-columns:repeat(4,1fr);
-
     gap:15px;
 }
 
 .fact{
     padding:22px;
-
     background:#091522;
-
     border:1px solid #172b3e;
-
     border-radius:16px;
 }
 
 .fact span{
     display:block;
-
     color:#ffffff;
-
     font-size:11px;
-
     letter-spacing:2px;
-
     margin-bottom:12px;
 }
 
 .fact strong{
     display:block;
-
     color:#eef4fa;
-
     font-size:14px;
-
     margin-bottom:8px;
-
     line-height:1.5;
 }
 
 .fact p{
     color:#8195a8;
-
     font-size:13px;
-
     line-height:1.7;
 }
 
@@ -528,13 +558,9 @@ h1{
 
 .quiz{
     margin-top:65px;
-
     padding:30px;
-
     background:#091522;
-
     border:1px solid #172b3e;
-
     border-radius:18px;
 }
 
@@ -566,25 +592,15 @@ h1{
 .option{
     display:block;
     width:100%;
-
     padding:12px 15px;
-
     margin-top:9px;
-
     background:#0b1928;
-
     color:#c7d5e2;
-
     border:1px solid #263951;
-
     border-radius:9px;
-
     text-align:left;
-
     cursor:pointer;
-
     font-size:14px;
-
     transition:.2s;
 }
 
@@ -607,17 +623,11 @@ h1{
 
 .quiz-result{
     margin-top:25px;
-
     padding:15px;
-
     border-radius:10px;
-
     background:#0b1928;
-
     border:1px solid #263951;
-
     color:#aebdce;
-
     display:none;
 }
 
@@ -665,81 +675,57 @@ h1{
         padding:20px;
     }
 }
-
 </style>
-
 </head>
-
 
 <body>
 
-
 <nav>
-
-<a href="./explore.html">
-← Back to Explore
-</a>
-
+    <a href="./explore.html">← Back to Explore</a>
 </nav>
-
 
 <main class="container">
 
+<!-- =========================
+     HERO
+========================= -->
 
 <div class="eyebrow">
-Cerebral Circulation · NeuroAtlas
+    Cerebral Circulation · NeuroAtlas
 </div>
-
 
 <h1>
-Basilar Artery
+    Basilar Artery
 </h1>
 
-
 <div class="arabic-title">
-الشريان القاعدي
+    الشريان القاعدي
 </div>
-
 
 <div class="hero">
-
 <p>
-
-The basilar artery is a major artery of the posterior circulation.
-It is formed by the union of the two vertebral arteries and travels
-along the ventral surface of the pons before dividing into the
-posterior cerebral arteries.
-
+    The basilar artery is a major artery of the posterior cerebral
+    circulation. It forms from the union of the two vertebral arteries
+    and travels along the ventral surface of the pons before dividing
+    into the posterior cerebral arteries.
 </p>
-
 </div>
-
 
 <div class="actions">
 
-<a
-class="action-button"
-href="#location"
->
-📍 Show Location
+<a class="action-button" href="#location">
+    📍 Show Location
 </a>
 
-<a
-class="action-button"
-href="#information"
->
-🧠 Learn About the Basilar Artery
+<a class="action-button" href="#information">
+    🧠 Learn About the Basilar Artery
 </a>
 
-<a
-class="action-button"
-href="#quiz"
->
-📝 Test Yourself
+<a class="action-button" href="#quiz">
+    📝 Test Yourself
 </a>
 
 </div>
-
 
 <!-- =========================
      3D VIEWER
@@ -750,598 +736,620 @@ href="#quiz"
 <div class="viewer-header">
 
 <div class="viewer-title">
-Human Brain · Interactive 3D
+    Human Brain · Interactive 3D
 </div>
 
 <div class="viewer-status">
-DRAG TO ROTATE · SCROLL TO ZOOM
+    DRAG TO ROTATE · SCROLL TO ZOOM
 </div>
 
 </div>
-
 
 <div class="scene">
 
 <div id="loading" class="loading">
 
 <span id="loadText">
-Loading brain model...
+    Loading real brain model...
 </span>
 
 <div class="loading-bar">
-
-<div
-id="loadBar"
-class="loading-bar-inner">
+<div id="loadBar" class="loading-bar-inner"></div>
 </div>
 
 </div>
-
-</div>
-
 
 <canvas id="brainCanvas"></canvas>
 
-
-<div
-id="basilarLabel"
-class="basilar-label"
->
-
-<div class="label-box">
-BASILAR ARTERY
+<div id="basilarLabel" class="basilar-label">
+    <div class="label-box">
+        BASILAR ARTERY
+    </div>
 </div>
 
 </div>
-
-</div>
-
 
 <div class="controls">
 
-<button
-id="highlight"
-class="active"
->
-⚪ Show Basilar Artery
+<button id="highlight" class="active">
+    ⚪ Show Basilar Artery
 </button>
 
-
-<button
-id="rotate"
-class="active"
->
-⟳ Auto Rotate
+<button id="rotate" class="active">
+    ⟳ Auto Rotate
 </button>
-
 
 <button id="reset">
-↻ Reset View
+    ↻ Reset View
 </button>
 
 </div>
 
 </div>
-
 
 <!-- =========================
      LOCATION
 ========================= -->
 
-<section
-id="location"
-class="location"
->
+<section id="location" class="location">
 
 <div class="section-label">
-Location · الموقع
+    Location · الموقع
 </div>
 
 <h2>
-📍 Where is the Basilar Artery?
+    📍 Where is the Basilar Artery?
 </h2>
 
 <p class="location-intro">
 
-The basilar artery lies on the anterior surface of the pons.
-It is formed by the union of the right and left vertebral arteries
-and ascends in the midline before terminating by dividing into the
-posterior cerebral arteries.
+The basilar artery is located on the <strong>anterior (ventral)
+surface of the pons</strong>. It is formed when the right and left
+vertebral arteries join near the lower border of the pons and
+travels upward in the basilar groove. Near the upper border of the
+pons, it divides into the posterior cerebral arteries.
 
 <br><br>
 
-يقع الشريان القاعدي على السطح الأمامي للجسر.
-ويتكون من اتحاد الشريانين الفقريين الأيمن والأيسر، ثم يصعد
-في الخط المتوسط قبل أن ينقسم في نهايته إلى الشريانين
-المخيين الخلفيين.
+الشريان القاعدي يقع على <strong>السطح الأمامي للجسر</strong>.
+ويتكوّن من اتحاد الشريانين الفقريين الأيمن والأيسر بالقرب من
+الجزء السفلي للجسر، ثم يصعد على طول الجسر قبل أن ينقسم في
+الأعلى إلى الشريانين المخيين الخلفيين.
 
 </p>
 
-</section>
+<div class="brain-visual">
 
+<svg
+class="location-svg"
+viewBox="0 0 850 610"
+xmlns="http://www.w3.org/2000/svg"
+aria-label="Simplified anatomical diagram showing the basilar artery"
+>
+
+<!-- CEREBRUM -->
+
+<path
+class="location-brain"
+d="
+M145 115
+C205 50 315 35 420 55
+C535 77 610 150 605 235
+C602 298 555 330 495 326
+C430 321 392 287 330 280
+C265 272 203 305 153 263
+C112 229 112 156 145 115Z
+"
+/>
+
+<!-- CEREBELLUM -->
+
+<path
+class="location-cerebellum"
+d="
+M500 320
+C565 288 650 316 680 374
+C708 430 674 490 607 500
+C540 510 490 465 486 410
+C484 370 488 340 500 320Z
+"
+/>
+
+<!-- BRAINSTEM -->
+
+<path
+class="location-brainstem"
+d="
+M382 276
+C362 300 360 332 365 357
+C369 382 363 410 372 449
+L414 449
+C422 410 416 382 420 357
+C425 330 423 300 405 276Z
+"
+/>
+
+<!-- PONS -->
+
+<ellipse
+class="location-pons"
+cx="392"
+cy="356"
+rx="47"
+ry="36"
+/>
+
+<!-- VERTEBRAL ARTERIES -->
+
+<path
+class="location-vertebral"
+d="
+M365 505
+C366 480 373 455 381 430
+C385 416 389 403 392 391
+"
+/>
+
+<path
+class="location-vertebral"
+d="
+M420 505
+C419 480 413 455 405 430
+C401 416 396 403 392 391
+"
+/>
+
+<!-- BASILAR GLOW -->
+
+<path
+class="location-basilar-glow"
+d="
+M392 391
+C391 370 391 348 392 327
+C393 307 393 289 394 269
+"
+/>
+
+<!-- BASILAR ARTERY -->
+
+<path
+class="location-basilar"
+d="
+M392 391
+C391 370 391 348 392 327
+C393 307 393 289 394 269
+"
+/>
+
+<!-- POSTERIOR CEREBRAL ARTERY BRANCHES -->
+
+<path
+class="location-artery-branch"
+d="
+M394 269
+C375 250 353 240 330 235
+M394 269
+C414 249 437 239 461 235
+"
+/>
+
+<!-- PONS LABEL -->
+
+<line
+class="location-line"
+x1="440"
+y1="356"
+x2="600"
+y2="335"
+/>
+
+<text
+class="location-svg-label"
+x="615"
+y="341">
+PONS
+</text>
+
+<!-- CEREBELLUM LABEL -->
+
+<line
+class="location-line"
+x1="610"
+y1="390"
+x2="725"
+y2="365"
+/>
+
+<text
+class="location-svg-label"
+x="735"
+y="371">
+CEREBELLUM
+</text>
+
+<!-- BASILAR LABEL -->
+
+<line
+class="location-basilar-line"
+x1="405"
+y1="330"
+x2="570"
+y2="270"
+/>
+
+<text
+class="location-basilar-label"
+x="585"
+y="276">
+BASILAR ARTERY
+</text>
+
+<text
+class="location-arabic-label"
+x="585"
+y="304">
+الشريان القاعدي
+</text>
+
+<!-- VERTEBRAL LABEL -->
+
+<line
+class="location-line"
+x1="365"
+y1="475"
+x2="205"
+y2="520"
+/>
+
+<text
+class="location-svg-label"
+x="45"
+y="526">
+VERTEBRAL
+</text>
+
+<text
+class="location-svg-label"
+x="45"
+y="550">
+ARTERIES
+</text>
+
+</svg>
+
+<p class="location-caption">
+    ⚪ The white vessel represents the basilar artery. The blue vessels
+    represent the vertebral arteries that join to form it.
+</p>
+
+</div>
+
+</section>
 
 <!-- =========================
      INFORMATION
 ========================= -->
 
-<section
-id="information"
-class="section"
->
+<section id="information" class="section">
 
 <div class="section-label">
-Basilar Artery Anatomy · تشريح الشريان القاعدي
+    Basilar Artery Anatomy · تشريح الشريان القاعدي
 </div>
 
 <h2>
-Basilar Artery · الشريان القاعدي
+    Basilar Artery · الشريان القاعدي
 </h2>
 
 <p class="section-intro">
 
-The basilar artery is one of the principal vessels of the
-vertebrobasilar circulation. It supplies branches to the
-brainstem and cerebellum and contributes to blood supply of
-the posterior parts of the brain.
+The basilar artery is one of the principal arteries supplying the
+posterior part of the brain. It is formed by the union of the
+vertebral arteries and gives rise to several important branches
+before terminating as the posterior cerebral arteries.
 
 <br><br>
 
-يُعد الشريان القاعدي أحد الأوعية الرئيسية في الدورة الدموية
-الفقرية القاعدية. ويعطي فروعًا لجذع الدماغ والمخيخ، ويساهم
-في إمداد الأجزاء الخلفية من الدماغ بالدم.
+الشريان القاعدي هو أحد الشرايين الرئيسية التي تغذي الجزء الخلفي
+من الدماغ. يتكوّن من اتحاد الشريانين الفقريين ويعطي عدة فروع مهمة
+قبل أن ينتهي بانقسامه إلى الشريانين المخيين الخلفيين.
 
 </p>
-
 
 <div class="cards">
 
-
 <div class="card">
-
 <h3>
 Formation · التكوين
 </h3>
-
 <p>
-
-The basilar artery is formed by the union of the right and
-left vertebral arteries near the lower border of the pons.
-
+The basilar artery forms where the right and left vertebral arteries
+join near the lower border of the pons.
 <br><br>
-
-يتكون الشريان القاعدي من اتحاد الشريانين الفقريين الأيمن
-والأيسر بالقرب من الحافة السفلية للجسر.
-
+يتكوّن الشريان القاعدي من اتحاد الشريانين الفقريين بالقرب من
+الحافة السفلية للجسر.
 </p>
-
 </div>
 
-
 <div class="card">
-
 <h3>
 Course · المسار
 </h3>
-
 <p>
-
-It ascends along the ventral surface of the pons in the
-midline of the brainstem.
-
+It ascends along the ventral surface of the pons within the
+basilar groove.
 <br><br>
-
-يصعد الشريان على السطح الأمامي للجسر في الخط المتوسط
-لجذع الدماغ.
-
+يصعد الشريان على السطح الأمامي للجسر داخل الأخدود القاعدي.
 </p>
-
 </div>
 
-
 <div class="card">
-
 <h3>
 Posterior Circulation · الدورة الخلفية
 </h3>
-
 <p>
-
-The basilar artery is a major component of the posterior
-cerebral circulation.
-
+The basilar artery is an important component of the posterior
+circulation of the brain.
 <br><br>
-
-يمثل الشريان القاعدي مكونًا رئيسيًا من مكونات الدورة
-الدموية الدماغية الخلفية.
-
+يمثل الشريان القاعدي جزءًا مهمًا من الدورة الدموية الخلفية للدماغ.
 </p>
-
 </div>
 
-
 <div class="card">
-
 <h3>
 Pontine Branches · الفروع الجسرية
 </h3>
-
 <p>
-
-Small branches from the basilar artery supply structures
-within the pons.
-
+Small branches from the basilar artery supply portions of the pons.
 <br><br>
-
-تقوم فروع صغيرة من الشريان القاعدي بإمداد تراكيب
-موجودة داخل الجسر.
-
+تغذي الفروع الجسرية الصغيرة الخارجة من الشريان القاعدي أجزاءً من الجسر.
 </p>
-
 </div>
 
-
 <div class="card">
-
 <h3>
-Cerebellar Branches · الفروع المخيخية
+Cerebellar Branches · فروع المخيخ
 </h3>
-
 <p>
-
-The basilar artery gives rise to important vessels
-associated with cerebellar blood supply.
-
+The basilar system gives rise to important cerebellar arteries,
+including the anterior inferior cerebellar artery and superior
+cerebellar artery.
 <br><br>
-
-يعطي الشريان القاعدي فروعًا وعائية مهمة مرتبطة بإمداد
-المخيخ بالدم.
-
+يعطي الجهاز القاعدي فروعًا مخيخية مهمة، منها الشريان المخيخي
+الأمامي السفلي والشريان المخيخي العلوي.
 </p>
-
 </div>
 
-
 <div class="card">
-
 <h3>
-Terminal Division · الانقسام النهائي
+Terminal Branches · الفروع النهائية
 </h3>
-
 <p>
-
-Near the upper part of the brainstem, the basilar artery
-terminates by dividing into the posterior cerebral arteries.
-
+Near the upper border of the pons, the basilar artery divides into
+the right and left posterior cerebral arteries.
 <br><br>
-
-ينتهي الشريان القاعدي بالقرب من الجزء العلوي لجذع الدماغ
-بانقسامه إلى الشريانين المخيين الخلفيين.
-
+بالقرب من الحافة العلوية للجسر ينقسم الشريان القاعدي إلى الشريانين
+المخيين الخلفيين الأيمن والأيسر.
 </p>
-
 </div>
 
-
 <div class="card">
-
 <h3>
-Pons Relationship · علاقته بالجسر
+Basilar Groove · الأخدود القاعدي
 </h3>
-
 <p>
-
-The basilar artery runs directly along the anterior surface
-of the pons.
-
+The basilar artery lies within a longitudinal groove on the ventral
+surface of the pons.
 <br><br>
-
-يمر الشريان القاعدي مباشرة على السطح الأمامي للجسر.
-
+يقع الشريان القاعدي داخل أخدود طولي على السطح الأمامي للجسر.
 </p>
-
 </div>
 
-
 <div class="card">
-
 <h3>
-Brainstem Supply · إمداد جذع الدماغ
+Blood Supply · التروية الدموية
 </h3>
-
 <p>
-
-Its branches contribute substantially to the blood supply
-of the brainstem.
-
+Branches of the basilar system contribute to the blood supply of
+the brainstem, cerebellum, and posterior portions of the brain.
 <br><br>
-
-تساهم فروعه بصورة مهمة في إمداد جذع الدماغ بالدم.
-
+تساهم فروع الجهاز القاعدي في تروية جذع الدماغ والمخيخ والأجزاء
+الخلفية من الدماغ.
 </p>
-
 </div>
 
-
 <div class="card">
-
 <h3>
 Clinical Importance · الأهمية السريرية
 </h3>
-
 <p>
-
-Because it supplies important posterior-circulation structures,
-changes in basilar artery blood flow can have significant
+Because the basilar artery supplies important structures in the
+posterior circulation, abnormalities affecting it can have serious
 neurological consequences.
-
 <br><br>
-
-نظرًا لأنه يمد تراكيب مهمة في الدورة الدموية الخلفية،
-فإن التغيرات في تدفق الدم عبر الشريان القاعدي قد تكون لها
-تأثيرات عصبية مهمة.
-
+لأن الشريان القاعدي يغذي تراكيب مهمة في الدورة الخلفية، فإن
+الاضطرابات التي تصيبه قد تكون ذات أهمية عصبية كبيرة.
 </p>
+</div>
 
 </div>
 
-
-</div>
-
+<!-- =========================
+     CLINICAL
+========================= -->
 
 <div class="clinical-section">
 
 <div class="section-label">
-Clinical Importance · الأهمية السريرية
+    Clinical Importance · الأهمية السريرية
 </div>
 
 <h2>
-Why the Basilar Artery Matters
+    Why the Basilar Artery Matters
 </h2>
 
 <div class="clinical-box">
 
 <p>
-
-The basilar artery supplies branches to critical structures
-of the posterior circulation, including portions of the
-brainstem and cerebellum. Understanding its position is
-important when studying posterior cerebral circulation.
-
+The basilar artery supplies structures of the brainstem and
+cerebellum through its branches and forms an important connection
+within the posterior cerebral circulation.
 </p>
 
 <p dir="rtl">
-
-يمد الشريان القاعدي فروعًا إلى تراكيب مهمة في الدورة
-الدموية الخلفية، بما في ذلك أجزاء من جذع الدماغ والمخيخ.
-ويُعد فهم موقعه مهمًا عند دراسة الدورة الدموية الدماغية الخلفية.
-
+يغذي الشريان القاعدي تراكيب مهمة في جذع الدماغ والمخيخ من خلال
+فروعه، ويمثل اتصالًا رئيسيًا ضمن الدورة الدموية الخلفية للدماغ.
 </p>
 
 </div>
 
 </div>
 
+<!-- =========================
+     FACTS
+========================= -->
 
 <div class="section">
 
 <div class="section-label">
-Quick Facts · معلومات سريعة
+    Quick Facts · معلومات سريعة
 </div>
 
 <h2>
-Basilar Artery at a Glance
+    Basilar Artery at a Glance
 </h2>
 
 <div class="facts-grid">
 
+<div class="fact">
+<span>01</span>
+<strong>Formed By · يتكوّن من</strong>
+<p>
+Union of the two vertebral arteries ·
+اتحاد الشريانين الفقريين
+</p>
+</div>
 
 <div class="fact">
-
-<span>01</span>
-
-<strong>
-Location · الموقع
-</strong>
-
+<span>02</span>
+<strong>Location · الموقع</strong>
 <p>
-Anterior surface of the pons ·
+Ventral surface of the pons ·
 السطح الأمامي للجسر
 </p>
-
 </div>
 
-
 <div class="fact">
-
-<span>02</span>
-
-<strong>
-Formed By · يتكون من
-</strong>
-
-<p>
-Two vertebral arteries ·
-الشريانان الفقريان
-</p>
-
-</div>
-
-
-<div class="fact">
-
 <span>03</span>
-
-<strong>
-Circulation · الدورة
-</strong>
-
+<strong>Circulation · الدورة</strong>
 <p>
-Posterior circulation ·
-الدورة الدموية الخلفية
+Posterior cerebral circulation ·
+الدورة الدموية الخلفية للدماغ
 </p>
-
 </div>
 
-
 <div class="fact">
-
 <span>04</span>
-
-<strong>
-Terminal Branches · الفروع النهائية
-</strong>
-
+<strong>Ends As · ينتهي بـ</strong>
 <p>
 Posterior cerebral arteries ·
-الشريانان المخيان الخلفيان
+الشريانين المخيين الخلفيين
 </p>
-
-</div>
-
-
 </div>
 
 </div>
-
+</div>
 
 <!-- =========================
      QUIZ
 ========================= -->
 
-<div
-id="quiz"
-class="quiz"
->
+<div id="quiz" class="quiz">
 
 <div class="section-label">
-Mini Test
+    Mini Test
 </div>
 
 <h2>
-🧠 Test Yourself
+    🧠 Test Yourself
 </h2>
 
 <p class="quiz-intro">
 Choose the best answer for each question.
 </p>
 
-
 <div class="question">
 
 <p>
-1. Where does the basilar artery travel?
+1. Which arteries unite to form the basilar artery?
 </p>
 
-<button
-class="option"
-onclick="checkAnswer(this,true)"
->
-A. Along the anterior surface of the pons
-</button>
-
-<button
-class="option"
-onclick="checkAnswer(this,false)"
->
-B. Inside the cerebral cortex
-</button>
-
-<button
-class="option"
-onclick="checkAnswer(this,false)"
->
-C. Inside the hippocampus
-</button>
-
-<button
-class="option"
-onclick="checkAnswer(this,false)"
->
-D. Inside the spinal cord
-</button>
-
-</div>
-
-
-<div class="question">
-
-<p>
-2. What forms the basilar artery?
-</p>
-
-<button
-class="option"
-onclick="checkAnswer(this,true)"
->
-A. The union of the two vertebral arteries
-</button>
-
-<button
-class="option"
-onclick="checkAnswer(this,false)"
->
-B. The two internal carotid arteries
-</button>
-
-<button
-class="option"
-onclick="checkAnswer(this,false)"
->
-C. The anterior cerebral arteries
-</button>
-
-<button
-class="option"
-onclick="checkAnswer(this,false)"
->
-D. The middle cerebral arteries
-</button>
-
-</div>
-
-
-<div class="question">
-
-<p>
-3. Which arteries are the terminal branches of the basilar artery?
-</p>
-
-<button
-class="option"
-onclick="checkAnswer(this,false)"
->
+<button class="option" onclick="checkAnswer(this,true)">
 A. Vertebral arteries
 </button>
 
-<button
-class="option"
-onclick="checkAnswer(this,true)"
->
-B. Posterior cerebral arteries
+<button class="option" onclick="checkAnswer(this,false)">
+B. Middle cerebral arteries
 </button>
 
-<button
-class="option"
-onclick="checkAnswer(this,false)"
->
-C. Middle cerebral arteries
+<button class="option" onclick="checkAnswer(this,false)">
+C. Internal carotid arteries
 </button>
 
-<button
-class="option"
-onclick="checkAnswer(this,false)"
->
+<button class="option" onclick="checkAnswer(this,false)">
 D. Anterior cerebral arteries
 </button>
 
 </div>
 
+<div class="question">
 
-<div
-id="quizResult"
-class="quiz-result"
->
+<p>
+2. Where does the basilar artery primarily travel?
+</p>
+
+<button class="option" onclick="checkAnswer(this,false)">
+A. Through the frontal lobe
+</button>
+
+<button class="option" onclick="checkAnswer(this,true)">
+B. Along the ventral surface of the pons
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+C. Through the lateral ventricle
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+D. Along the spinal cord
+</button>
+
 </div>
+
+<div class="question">
+
+<p>
+3. What are the terminal branches of the basilar artery?
+</p>
+
+<button class="option" onclick="checkAnswer(this,false)">
+A. Middle cerebral arteries
+</button>
+
+<button class="option" onclick="checkAnswer(this,true)">
+B. Posterior cerebral arteries
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+C. Anterior cerebral arteries
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+D. Vertebral arteries
+</button>
+
+</div>
+
+<div id="quizResult" class="quiz-result"></div>
 
 </div>
 
@@ -1349,27 +1357,18 @@ class="quiz-result"
 
 </main>
 
-
 <!-- =========================
      THREE.JS
 ========================= -->
 
 <script type="importmap">
-
 {
-    "imports": {
-
-        "three":
-        "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
-
-        "three/addons/":
-        "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
-
+    "imports":{
+        "three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
     }
 }
-
 </script>
-
 
 <script type="module">
 
@@ -1377,23 +1376,19 @@ import * as THREE from "three";
 
 import {
     OrbitControls
-}
-from "three/addons/controls/OrbitControls.js";
+} from "three/addons/controls/OrbitControls.js";
 
 import {
     GLTFLoader
-}
-from "three/addons/loaders/GLTFLoader.js";
+} from "three/addons/loaders/GLTFLoader.js";
 
 import {
     DRACOLoader
-}
-from "three/addons/loaders/DRACOLoader.js";
+} from "three/addons/loaders/DRACOLoader.js";
 
-
-/* =========================================
+/* =========================
    ELEMENTS
-========================================= */
+========================= */
 
 const canvas =
 document.getElementById("brainCanvas");
@@ -1410,18 +1405,19 @@ document.getElementById("loadBar");
 const basilarLabel =
 document.getElementById("basilarLabel");
 
+const highlightBtn =
+document.getElementById("highlight");
 
-/* =========================================
-   THREE SCENE
-========================================= */
+/* =========================
+   SCENE
+========================= */
 
 const scene =
 new THREE.Scene();
 
-
-/* =========================================
+/* =========================
    CAMERA
-========================================= */
+========================= */
 
 const camera =
 new THREE.PerspectiveCamera(
@@ -1437,20 +1433,15 @@ camera.position.set(
     8.5
 );
 
-
-/* =========================================
+/* =========================
    RENDERER
-========================================= */
+========================= */
 
 const renderer =
 new THREE.WebGLRenderer({
-
-    canvas:canvas,
-
+    canvas,
     antialias:true,
-
     alpha:true
-
 });
 
 renderer.setPixelRatio(
@@ -1464,12 +1455,11 @@ renderer.toneMapping =
 THREE.ACESFilmicToneMapping;
 
 renderer.toneMappingExposure =
-0.85;
+0.9;
 
-
-/* =========================================
+/* =========================
    CONTROLS
-========================================= */
+========================= */
 
 const controls =
 new OrbitControls(
@@ -1478,21 +1468,17 @@ new OrbitControls(
 );
 
 controls.enableRotate = true;
-
 controls.rotateSpeed = 0.6;
 
 controls.enableDamping = true;
-
 controls.dampingFactor = 0.05;
 
 controls.enableZoom = true;
-
 controls.zoomSpeed = 0.6;
 
 controls.enablePan = false;
 
 controls.autoRotate = true;
-
 controls.autoRotateSpeed = 0.2;
 
 controls.target.set(
@@ -1502,13 +1488,11 @@ controls.target.set(
 );
 
 controls.minDistance = 3.5;
-
 controls.maxDistance = 16;
 
-
-/* =========================================
+/* =========================
    LIGHTING
-========================================= */
+========================= */
 
 const ambient =
 new THREE.AmbientLight(
@@ -1518,21 +1502,19 @@ new THREE.AmbientLight(
 
 scene.add(ambient);
 
-
 const hemi =
 new THREE.HemisphereLight(
-    0xffe5ec,
+    0xffdce6,
     0x081018,
-    0.85
+    0.9
 );
 
 scene.add(hemi);
 
-
 const keyLight =
 new THREE.DirectionalLight(
     0xffffff,
-    1.7
+    1.5
 );
 
 keyLight.position.set(
@@ -1543,11 +1525,10 @@ keyLight.position.set(
 
 scene.add(keyLight);
 
-
 const fillLight =
 new THREE.DirectionalLight(
-    0xb9d9ff,
-    0.5
+    0x9fc9ff,
+    0.45
 );
 
 fillLight.position.set(
@@ -1558,34 +1539,38 @@ fillLight.position.set(
 
 scene.add(fillLight);
 
-
-/* =========================================
-   BRAIN GROUP
-========================================= */
+/* =========================
+   GROUP
+========================= */
 
 const brainGroup =
 new THREE.Group();
 
 scene.add(brainGroup);
 
-
-/* =========================================
+/* =========================
    STATE
-========================================= */
+========================= */
 
 let basilarMeshes = [];
 
-let basilarVisible = true;
+let basilarOutlineMeshes = [];
 
+let basilarCenter =
+new THREE.Vector3();
 
-/* =========================================
-   BABY PINK BRAIN MATERIAL
-========================================= */
+let highlighted = true;
+
+let isRealModel = false;
+
+/* =========================
+   BABY PINK BRAIN
+========================= */
 
 const brainPinkMaterial =
 new THREE.MeshPhysicalMaterial({
 
-    color:0xf3c6d1,
+    color:0xf4c7d2,
 
     roughness:0.58,
 
@@ -1593,20 +1578,14 @@ new THREE.MeshPhysicalMaterial({
 
     clearcoat:0.18,
 
-    clearcoatRoughness:0.45,
-
-    sheen:0.15,
-
-    sheenColor:0xffdce5,
+    clearcoatRoughness:0.4,
 
     side:THREE.DoubleSide
-
 });
 
-
-/* =========================================
-   BASILAR WHITE MATERIAL
-========================================= */
+/* =========================
+   WHITE BASILAR ARTERY
+========================= */
 
 const basilarWhiteMaterial =
 new THREE.MeshPhysicalMaterial({
@@ -1615,176 +1594,212 @@ new THREE.MeshPhysicalMaterial({
 
     emissive:0xffffff,
 
-    emissiveIntensity:0.12,
+    emissiveIntensity:0.18,
 
-    roughness:0.22,
+    roughness:0.25,
 
-    metalness:0.02,
+    metalness:0,
 
-    clearcoat:0.55,
+    clearcoat:0.5,
 
-    clearcoatRoughness:0.18,
+    clearcoatRoughness:0.2,
 
     side:THREE.DoubleSide
-
 });
 
+/* =========================
+   WHITE OUTLINE
+========================= */
 
-/* =========================================
-   BASILAR SEARCH TERMS
-========================================= */
+const basilarOutlineMaterial =
+new THREE.MeshBasicMaterial({
 
-const basilarTerms = [
+    color:0xffffff,
 
-    "basilar",
+    transparent:true,
 
-    "basilarartery",
+    opacity:0.72,
 
-    "basilar_artery",
+    side:THREE.BackSide
+});
 
-    "basilar-artery",
+/* =========================
+   NAME MATCHING
+========================= */
 
-    "basilar artery",
+function isBasilarName(name){
 
-    "arterybasilar",
+    const n =
+    String(name || "")
+    .toLowerCase()
+    .replace(/[_\-]/g," ");
 
-    "arteria basilaris",
+    return (
 
-    "a.basilaris"
+        n.includes("basilar") ||
 
-];
+        n.includes("basilar artery") ||
 
+        n.includes("basilarartery")
 
-/* =========================================
-   CHECK BASILAR NAME
-========================================= */
-
-function isBasilarMesh(mesh){
-
-    const name = (
-
-        mesh.name ||
-
-        ""
-
-    ).toLowerCase().replace(
-        /[\s_\-]/g,
-        ""
     );
-
-    return basilarTerms.some(
-        term => {
-
-            const normalized =
-            term.toLowerCase().replace(
-                /[\s_\-]/g,
-                ""
-            );
-
-            return name.includes(
-                normalized
-            );
-
-        }
-    );
-
 }
 
+/* =========================
+   ARTERY NAME HEURISTICS
+========================= */
 
-/* =========================================
-   SAVE ORIGINAL MATERIAL
-========================================= */
+function scoreArteryMesh(mesh){
 
-function prepareBrainMesh(mesh){
+    const name =
+    String(mesh.name || "")
+    .toLowerCase();
 
-    if(!mesh.material)
-        return;
+    let score = 0;
+
+    if(name.includes("basilar"))
+        score += 100;
+
+    if(name.includes("artery"))
+        score += 25;
+
+    if(name.includes("vessel"))
+        score += 10;
+
+    if(name.includes("blood"))
+        score += 5;
+
+    return score;
+}
+
+/* =========================
+   FIND BASILAR MESHES
+========================= */
+
+function findBasilarMeshes(root){
+
+    const candidates = [];
+
+    root.traverse(function(child){
+
+        if(!child.isMesh)
+            return;
+
+        const score =
+        scoreArteryMesh(child);
+
+        if(score > 0){
+
+            candidates.push({
+                mesh:child,
+                score
+            });
+
+        }
+
+    });
+
+    candidates.sort(
+        (a,b) =>
+        b.score - a.score
+    );
 
     /*
        IMPORTANT:
+       We do NOT create a basilar artery.
 
-       We do NOT create a new artery.
-
-       We simply recolor the actual
-       mesh already contained inside
-       the GLB model.
+       We only use geometry already
+       contained in the loaded model.
     */
 
-    mesh.userData.originalMaterial =
-        mesh.material;
+    const direct =
+    candidates.filter(
+        item =>
+        isBasilarName(item.mesh.name)
+    );
 
-}
+    if(direct.length){
 
-
-/* =========================================
-   APPLY BRAIN COLOR
-========================================= */
-
-function applyBrainAppearance(mesh){
-
-    if(!mesh.material)
-        return;
-
-    /*
-       Actual basilar artery:
-       keep it separate.
-    */
-
-    if(isBasilarMesh(mesh)){
-
-        basilarMeshes.push(mesh);
-
-        mesh.userData.originalMaterial =
-        mesh.material;
-
-        mesh.material =
-        basilarWhiteMaterial.clone();
-
-        mesh.visible =
-        basilarVisible;
-
-        return;
+        return direct.map(
+            item => item.mesh
+        );
 
     }
 
-
-    /*
-       Every other brain mesh becomes
-       beautiful baby pink.
-    */
-
-    mesh.userData.originalMaterial =
-    mesh.material;
-
-    mesh.material =
-    brainPinkMaterial.clone();
-
+    return [];
 }
 
+/* =========================
+   HIGHLIGHT EXISTING MESH
+========================= */
 
-/* =========================================
-   LOAD REAL BRAIN
-========================================= */
+function highlightExistingBasilar(mesh){
+
+    if(!mesh)
+        return;
+
+    if(mesh.userData.originalMaterial === undefined){
+
+        mesh.userData.originalMaterial =
+        mesh.material;
+    }
+
+    mesh.material =
+    basilarWhiteMaterial.clone();
+
+    mesh.userData.basilarHighlighted =
+    true;
+
+    basilarMeshes.push(mesh);
+
+    /*
+       Outline is made from the SAME
+       existing geometry, not a new
+       anatomical artery.
+    */
+
+    const outline =
+    mesh.clone(false);
+
+    outline.material =
+    basilarOutlineMaterial.clone();
+
+    outline.scale.multiplyScalar(
+        1.035
+    );
+
+    if(mesh.parent){
+
+        mesh.parent.add(
+            outline
+        );
+
+        basilarOutlineMeshes.push(
+            outline
+        );
+
+    }
+}
+
+/* =========================
+   LOAD MODEL
+========================= */
 
 function loadRealBrain(){
 
     const loader =
     new GLTFLoader();
 
-
     const dracoLoader =
     new DRACOLoader();
-
 
     dracoLoader.setDecoderPath(
         "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/"
     );
 
-
     loader.setDRACOLoader(
         dracoLoader
     );
-
 
     const urls = [
 
@@ -1796,31 +1811,31 @@ function loadRealBrain(){
 
     ];
 
-
     let urlIndex = 0;
-
 
     function tryLoad(){
 
-        if(
-            urlIndex >= urls.length
-        ){
+        if(urlIndex >= urls.length){
 
             loadText.textContent =
-            "Unable to load brain model.";
+            "Could not load the brain model.";
+
+            loadBar.style.width =
+            "100%";
+
+            setTimeout(
+                () => loading.classList.add("hide"),
+                800
+            );
 
             return;
-
         }
-
 
         const url =
         urls[urlIndex++];
 
-
         loadText.textContent =
         "Loading real brain model...";
-
 
         loader.load(
 
@@ -1828,32 +1843,28 @@ function loadRealBrain(){
 
             function(gltf){
 
+                isRealModel = true;
+
                 const model =
                 gltf.scene;
 
-
-                /*
-                   Calculate model bounds.
-                */
+                /* =====================
+                   CENTER + SCALE
+                ===================== */
 
                 const box =
                 new THREE.Box3()
-                .setFromObject(
-                    model
-                );
-
+                .setFromObject(model);
 
                 const center =
                 box.getCenter(
                     new THREE.Vector3()
                 );
 
-
                 const size =
                 box.getSize(
                     new THREE.Vector3()
                 );
-
 
                 const maxDim =
                 Math.max(
@@ -1862,15 +1873,12 @@ function loadRealBrain(){
                     size.z
                 );
 
-
                 const scale =
                 4.5 / maxDim;
-
 
                 model.scale.setScalar(
                     scale
                 );
-
 
                 model.position.sub(
                     center.multiplyScalar(
@@ -1878,15 +1886,12 @@ function loadRealBrain(){
                     )
                 );
 
+                model.position.y -= 0.60;
 
-                model.position.y -=
-                0.60;
-
-
-                /*
-                   Search EVERY mesh in the
-                   actual model.
-                */
+                /* =====================
+                   FIRST PASS:
+                   BRAIN PINK
+                ===================== */
 
                 model.traverse(
                 function(child){
@@ -1894,98 +1899,78 @@ function loadRealBrain(){
                     if(!child.isMesh)
                         return;
 
+                    child.castShadow = true;
+                    child.receiveShadow = true;
 
-                    child.castShadow =
-                    true;
+                    child.userData.originalMaterial =
+                    child.material;
 
-                    child.receiveShadow =
-                    true;
-
-
-                    applyBrainAppearance(
-                        child
-                    );
+                    child.material =
+                    brainPinkMaterial.clone();
 
                 });
 
+                /* =====================
+                   FIND EXISTING BASILAR
+                ===================== */
 
-                brainGroup.add(
-                    model
+                const found =
+                findBasilarMeshes(model);
+
+                found.forEach(
+                    mesh =>
+                    highlightExistingBasilar(mesh)
                 );
 
+                /* =====================
+                   ADD MODEL
+                ===================== */
+
+                brainGroup.add(model);
 
                 /*
-                   Diagnostic information.
+                   Calculate the center of the
+                   EXISTING basilar geometry.
                 */
 
-                console.log(
-                    "Basilar artery meshes found:",
-                    basilarMeshes.length
-                );
+                if(basilarMeshes.length){
 
+                    const basilarBox =
+                    new THREE.Box3();
 
-                basilarMeshes.forEach(
-                    mesh => {
+                    basilarMeshes.forEach(
+                        mesh =>
+                        basilarBox.expandByObject(mesh)
+                    );
 
-                        console.log(
-                            "Basilar mesh:",
-                            mesh.name
-                        );
-
-                    }
-                );
-
-
-                /*
-                   If the actual model has
-                   a basilar artery mesh,
-                   show it.
-                */
-
-                if(
-                    basilarMeshes.length > 0
-                ){
-
-                    basilarVisible =
-                    true;
-
-                    basilarLabel.classList.add(
-                        "show"
+                    basilarBox.getCenter(
+                        basilarCenter
                     );
 
                 }
-                else{
-
-                    console.warn(
-                        "No separately named basilar artery mesh was found in this GLB model."
-                    );
-
-                    loadText.textContent =
-                    "Brain loaded · Basilar mesh not found";
-
-                }
-
 
                 loadBar.style.width =
                 "100%";
 
+                if(basilarMeshes.length){
 
-                setTimeout(
-                function(){
+                    loadText.textContent =
+                    "Basilar artery identified.";
 
-                    loading.classList.add(
-                        "hide"
-                    );
+                }else{
 
-                },600);
+                    loadText.textContent =
+                    "Brain model loaded.";
+
+                }
+
+                onReady();
 
             },
 
             function(progress){
 
-                if(
-                    progress.total > 0
-                ){
+                if(progress.total > 0){
 
                     const pct =
                     Math.min(
@@ -1997,7 +1982,6 @@ function loadRealBrain(){
 
                     loadBar.style.width =
                     pct + "%";
-
                 }
 
             },
@@ -2012,99 +1996,186 @@ function loadRealBrain(){
                 tryLoad();
 
             }
-
         );
-
     }
-
 
     tryLoad();
-
 }
 
+/* =========================
+   READY
+========================= */
 
-/* =========================================
-   BASILAR TOGGLE
-========================================= */
+function onReady(){
 
-const highlightBtn =
-document.getElementById(
-    "highlight"
-);
+    setTimeout(
+    function(){
 
-
-highlightBtn.addEventListener(
-"click",
-function(){
-
-    if(
-        basilarMeshes.length === 0
-    ){
-
-        alert(
-            "The loaded 3D model does not contain a separately selectable basilar artery mesh."
+        loading.classList.add(
+            "hide"
         );
 
-        return;
+        updateHighlightState();
 
-    }
+    },700);
+}
 
+/* =========================
+   HIGHLIGHT STATE
+========================= */
 
-    basilarVisible =
-    !basilarVisible;
-
-
-    /*
-       THIS IS THE IMPORTANT PART.
-
-       We are changing visibility of the
-       ORIGINAL basilar artery mesh.
-
-       No artificial artery is created.
-    */
+function updateHighlightState(){
 
     basilarMeshes.forEach(
         mesh => {
 
             mesh.visible =
-            basilarVisible;
+            highlighted;
+
+            if(
+                highlighted
+            ){
+
+                mesh.material =
+                basilarWhiteMaterial.clone();
+
+            }else{
+
+                mesh.material =
+                mesh.userData.originalMaterial;
+            }
 
         }
     );
 
+    basilarOutlineMeshes.forEach(
+        outline => {
+
+            outline.visible =
+            highlighted;
+
+        }
+    );
 
     basilarLabel.classList.toggle(
         "show",
-        basilarVisible
+        highlighted &&
+        basilarMeshes.length > 0
     );
-
 
     highlightBtn.classList.toggle(
         "active",
-        basilarVisible
+        highlighted
     );
 
-
     highlightBtn.textContent =
-
-    basilarVisible
-
+    highlighted
     ? "⚪ Hide Basilar Artery"
-
     : "⚪ Show Basilar Artery";
+}
+
+/* =========================
+   LABEL POSITION
+========================= */
+
+function updateLabel(){
+
+    if(
+        !basilarMeshes.length
+    ){
+
+        basilarLabel.classList.remove(
+            "show"
+        );
+
+        return;
+    }
+
+    if(!highlighted)
+        return;
+
+    const position =
+    basilarCenter.clone();
+
+    position.project(
+        camera
+    );
+
+    const x =
+    (position.x + 1) /
+    2 *
+    canvas.clientWidth;
+
+    const y =
+    (-position.y + 1) /
+    2 *
+    canvas.clientHeight;
+
+    basilarLabel.style.left =
+    x + "px";
+
+    basilarLabel.style.top =
+    (y - 45) + "px";
+}
+
+/* =========================
+   RESIZE
+========================= */
+
+function resize(){
+
+    const width =
+    canvas.clientWidth;
+
+    const height =
+    canvas.clientHeight;
+
+    if(
+        width <= 0 ||
+        height <= 0
+    )
+        return;
+
+    camera.aspect =
+    width / height;
+
+    camera.updateProjectionMatrix();
+
+    renderer.setSize(
+        width,
+        height,
+        false
+    );
+}
+
+window.addEventListener(
+    "resize",
+    resize
+);
+
+/* =========================
+   HIGHLIGHT BUTTON
+========================= */
+
+highlightBtn.addEventListener(
+"click",
+function(){
+
+    highlighted =
+    !highlighted;
+
+    updateHighlightState();
 
 });
 
-
-/* =========================================
+/* =========================
    AUTO ROTATE
-========================================= */
+========================= */
 
 const rotateBtn =
 document.getElementById(
     "rotate"
 );
-
 
 rotateBtn.addEventListener(
 "click",
@@ -2113,27 +2184,21 @@ function(){
     controls.autoRotate =
     !controls.autoRotate;
 
-
     rotateBtn.classList.toggle(
         "active",
         controls.autoRotate
     );
 
-
     rotateBtn.textContent =
-
     controls.autoRotate
-
     ? "⟳ Auto Rotate"
-
     : "▶ Auto Rotate";
 
 });
 
-
-/* =========================================
+/* =========================
    RESET
-========================================= */
+========================= */
 
 document.getElementById(
     "reset"
@@ -2147,141 +2212,19 @@ function(){
         8.5
     );
 
-
     controls.target.set(
         0,
         -0.3,
         0
     );
 
-
     controls.update();
 
 });
 
-
-/* =========================================
-   LABEL POSITION
-========================================= */
-
-function updateLabel(){
-
-    if(
-        basilarMeshes.length === 0 ||
-        !basilarVisible
-    )
-        return;
-
-
-    /*
-       Use the actual basilar artery
-       mesh position.
-
-       No fake marker is used.
-    */
-
-    const box =
-    new THREE.Box3();
-
-
-    basilarMeshes.forEach(
-        mesh => {
-
-            if(mesh.visible){
-
-                box.expandByObject(
-                    mesh
-                );
-
-            }
-
-        }
-    );
-
-
-    if(box.isEmpty())
-        return;
-
-
-    const position =
-    box.getCenter(
-        new THREE.Vector3()
-    );
-
-
-    position.project(
-        camera
-    );
-
-
-    const x =
-    (position.x + 1) /
-    2 *
-    canvas.clientWidth;
-
-
-    const y =
-    (-position.y + 1) /
-    2 *
-    canvas.clientHeight;
-
-
-    basilarLabel.style.left =
-    x + "px";
-
-
-    basilarLabel.style.top =
-    (y - 40) + "px";
-
-}
-
-
-/* =========================================
-   RESIZE
-========================================= */
-
-function resize(){
-
-    const width =
-    canvas.clientWidth;
-
-
-    const height =
-    canvas.clientHeight;
-
-
-    if(
-        width <= 0 ||
-        height <= 0
-    )
-        return;
-
-
-    camera.aspect =
-    width / height;
-
-
-    camera.updateProjectionMatrix();
-
-
-    renderer.setSize(
-        width,
-        height,
-        false
-    );
-
-}
-
-
-window.addEventListener(
-    "resize",
-    resize
-);
-
-
-/* =========================================
+/* =========================
    ANIMATION
-========================================= */
+========================= */
 
 function animate(){
 
@@ -2289,24 +2232,19 @@ function animate(){
         animate
     );
 
-
     controls.update();
 
-
     updateLabel();
-
 
     renderer.render(
         scene,
         camera
     );
-
 }
 
-
-/* =========================================
+/* =========================
    START
-========================================= */
+========================= */
 
 resize();
 
@@ -2316,7 +2254,6 @@ loadRealBrain();
 
 </script>
 
-
 <!-- =========================
      QUIZ JAVASCRIPT
 ========================= -->
@@ -2324,35 +2261,28 @@ loadRealBrain();
 <script>
 
 let answered = 0;
-
 let correctAnswers = 0;
 
-
-function checkAnswer(
-    button,
-    correct
-){
+function checkAnswer(button,correct){
 
     const parent =
     button.parentElement;
-
 
     const options =
     parent.querySelectorAll(
         ".option"
     );
 
-
     options.forEach(
-    function(option){
+        function(option){
 
-        option.classList.remove(
-            "correct",
-            "wrong"
-        );
+            option.classList.remove(
+                "correct",
+                "wrong"
+            );
 
-    });
-
+        }
+    );
 
     if(correct){
 
@@ -2360,8 +2290,7 @@ function checkAnswer(
             "correct"
         );
 
-    }
-    else{
+    }else{
 
         button.classList.add(
             "wrong"
@@ -2369,11 +2298,8 @@ function checkAnswer(
 
     }
 
-
     updateQuizScore();
-
 }
-
 
 function updateQuizScore(){
 
@@ -2382,66 +2308,53 @@ function updateQuizScore(){
         "quizResult"
     );
 
-
     answered = 0;
-
     correctAnswers = 0;
-
 
     const questions =
     document.querySelectorAll(
         ".question"
     );
 
-
     questions.forEach(
-    function(question){
+        function(question){
 
-        const selected =
-        question.querySelector(
-            ".correct, .wrong"
-        );
+            const selected =
+            question.querySelector(
+                ".correct, .wrong"
+            );
 
+            if(selected){
 
-        if(selected){
+                answered++;
 
-            answered++;
+                if(
+                    selected.classList.contains(
+                        "correct"
+                    )
+                ){
 
+                    correctAnswers++;
 
-            if(
-                selected.classList.contains(
-                    "correct"
-                )
-            ){
-
-                correctAnswers++;
-
+                }
             }
-
         }
-
-    });
-
+    );
 
     if(answered > 0){
 
         result.style.display =
         "block";
 
-
         result.textContent =
         "Score: " +
         correctAnswers +
         " / " +
         answered;
-
     }
-
 }
 
 </script>
 
-
 </body>
-
 </html>
