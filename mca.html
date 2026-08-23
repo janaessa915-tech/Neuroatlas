@@ -1722,17 +1722,22 @@ scene.add(
 
 
 /* ==================================================
-   COLORS
+   ONLY COLOR CHANGE
 ================================================== */
 
-/* ONLY COLOR CHANGE:
-   Brain = baby pink
-   MCA = white
+/*
+   Brain:
+   BABY PINK
+
+   MCA:
+   WHITE
+
+   Nothing is created here.
 */
 
 const brainPink =
     new THREE.Color(
-        0xf8c8d8
+        0xffc1cc
     );
 
 const arteryWhite =
@@ -1742,7 +1747,7 @@ const arteryWhite =
 
 
 /* ==================================================
-   ORIGINAL MATERIAL STORAGE
+   MATERIAL STORAGE
 ================================================== */
 
 const brainMaterials =
@@ -1753,7 +1758,7 @@ const mcaMaterials =
 
 
 /* ==================================================
-   NAME DETECTION
+   MCA NAME DETECTION
 ================================================== */
 
 const mcaWords = [
@@ -1779,29 +1784,6 @@ const mcaWords = [
 ];
 
 
-const vesselWords = [
-
-    "artery",
-
-    "arteries",
-
-    "vessel",
-
-    "vasculature",
-
-    "vascular",
-
-    "mca",
-
-    "cerebral"
-
-];
-
-
-/* ==================================================
-   CHECK MCA NAME
-================================================== */
-
 function isMCAName(name){
 
     if(!name)
@@ -1824,32 +1806,7 @@ function isMCAName(name){
 
 
 /* ==================================================
-   CHECK VESSEL NAME
-================================================== */
-
-function isVesselName(name){
-
-    if(!name)
-        return false;
-
-
-    const clean =
-        name
-        .toLowerCase()
-        .replace(/\s+/g," ")
-        .trim();
-
-
-    return vesselWords.some(
-        word =>
-        clean.includes(word)
-    );
-
-}
-
-
-/* ==================================================
-   MAKE BRAIN PINK
+   MAKE BRAIN BABY PINK
 ================================================== */
 
 function makeBrainPink(mesh){
@@ -1864,45 +1821,45 @@ function makeBrainPink(mesh){
         : [mesh.material];
 
 
-    materials.forEach(
-        function(oldMaterial){
+    const newMaterials =
+        materials.map(
+            function(oldMaterial){
 
-            const mat =
-                oldMaterial.clone();
+                const mat =
+                    oldMaterial.clone();
+
+                mat.color =
+                    brainPink;
+
+                mat.roughness =
+                    0.62;
+
+                mat.metalness =
+                    0;
+
+                mat.side =
+                    THREE.DoubleSide;
+
+                brainMaterials.push(
+                    mat
+                );
+
+                return mat;
+
+            }
+        );
 
 
-            mat.color =
-                brainPink;
-
-
-            mat.roughness =
-                0.62;
-
-
-            mat.metalness =
-                0;
-
-
-            mat.side =
-                THREE.DoubleSide;
-
-
-            mesh.material =
-                mat;
-
-
-            brainMaterials.push(
-                mat
-            );
-
-        }
-    );
+    mesh.material =
+        Array.isArray(mesh.material)
+        ? newMaterials
+        : newMaterials[0];
 
 }
 
 
 /* ==================================================
-   MAKE MCA WHITE
+   MAKE EXISTING MCA WHITE
 ================================================== */
 
 function makeMCAWhite(mesh){
@@ -1917,44 +1874,39 @@ function makeMCAWhite(mesh){
         : [mesh.material];
 
 
-    materials.forEach(
-        function(oldMaterial){
+    const newMaterials =
+        materials.map(
+            function(oldMaterial){
 
-            const mat =
-                oldMaterial.clone();
+                const mat =
+                    oldMaterial.clone();
 
+                mat.color =
+                    arteryWhite;
 
-            /*
-               ONLY THE EXISTING
-               MCA MESH GETS WHITE.
-            */
+                mat.roughness =
+                    0.38;
 
-            mat.color =
-                arteryWhite;
+                mat.metalness =
+                    0.05;
 
+                mat.side =
+                    THREE.DoubleSide;
 
-            mat.roughness =
-                0.38;
+                mcaMaterials.push(
+                    mat
+                );
 
+                return mat;
 
-            mat.metalness =
-                0.05;
-
-
-            mat.side =
-                THREE.DoubleSide;
-
-
-            mesh.material =
-                mat;
+            }
+        );
 
 
-            mcaMaterials.push(
-                mat
-            );
-
-        }
-    );
+    mesh.material =
+        Array.isArray(mesh.material)
+        ? newMaterials
+        : newMaterials[0];
 
 
     mesh.userData.isMCA =
@@ -1968,7 +1920,7 @@ function makeMCAWhite(mesh){
 
 
 /* ==================================================
-   PREPARE MODEL
+   PREPARE EXISTING MODEL
 ================================================== */
 
 function prepareModel(model){
@@ -1997,10 +1949,8 @@ function prepareModel(model){
 
 
             /*
-               FIRST:
-
-               Check whether this is already
-               an MCA object in the GLB.
+               If this existing mesh
+               is the MCA → WHITE.
             */
 
             if(
@@ -2019,21 +1969,24 @@ function prepareModel(model){
                     name
                 );
 
-                return;
-
             }
 
-
             /*
-               If it is not MCA,
-               make the brain baby pink.
+               Every other existing mesh
+               → BABY PINK.
 
-               We NEVER create an artery.
+               No new geometry.
+               No new artery.
+               No region replacement.
             */
 
-            makeBrainPink(
-                child
-            );
+            else{
+
+                makeBrainPink(
+                    child
+                );
+
+            }
 
         }
     );
@@ -2108,10 +2061,6 @@ function loadRealBrain(){
                     gltf.scene;
 
 
-                /*
-                   Normalize model size.
-                */
-
                 const box =
                     new THREE.Box3()
                         .setFromObject(
@@ -2160,7 +2109,8 @@ function loadRealBrain(){
 
 
                 /*
-                   Prepare existing geometry.
+                   ONLY recolor
+                   existing meshes.
                 */
 
                 const foundMCA =
@@ -2189,9 +2139,6 @@ function loadRealBrain(){
 
                     /*
                        No fake artery.
-
-                       If the GLB has no MCA mesh,
-                       we tell the user instead.
                     */
 
                     loadText.textContent =
@@ -2329,11 +2276,15 @@ highlightBtn.addEventListener(
         mcaMaterials.forEach(
             function(material){
 
+                /*
+                   MCA remains WHITE
+                   when highlighted.
+                */
+
                 material.color =
                     newState
                     ? arteryWhite
                     : brainPink;
-
 
                 material.userData.highlighted =
                     newState;
