@@ -3,212 +3,589 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hippocampus | NeuroAtlas</title>
+<title>NeuroAtlas | Hippocampus</title>
 
 <style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+*{box-sizing:border-box;margin:0;padding:0;}
+
+html{
+  scroll-behavior:smooth;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  background: #07111f;
-  color: #f4f7fb;
-  line-height: 1.7;
+body{
+  background:#050b13;
+  color:#eef4fa;
+  font-family:Arial,Helvetica,sans-serif;
+  line-height:1.7;
 }
 
-nav {
-  padding: 22px 7%;
-  border-bottom: 1px solid rgba(255,255,255,.08);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+/* NAVIGATION */
+nav{
+  height:70px;
+  padding:0 7%;
+  display:flex;
+  align-items:center;
+  border-bottom:1px solid rgba(255,255,255,.08);
 }
 
-.logo {
-  color: white;
-  text-decoration: none;
-  font-size: 22px;
-  font-weight: bold;
+nav a{
+  color:#9db0c3;
+  text-decoration:none;
+  font-size:14px;
 }
 
-.logo span {
-  color: #4da6ff;
+nav a:hover{
+  color:white;
 }
 
-.nav-links {
-  display: flex;
-  gap: 25px;
+/* CONTAINER */
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:60px 7% 100px;
 }
 
-.nav-links a {
-  color: #aebdce;
-  text-decoration: none;
-  font-size: 14px;
+/* HERO */
+.eyebrow{
+  color:#61b5ff;
+  letter-spacing:3px;
+  font-size:12px;
+  text-transform:uppercase;
+  margin-bottom:15px;
 }
 
-.nav-links a:hover {
-  color: white;
+h1{
+  font-size:clamp(55px,8vw,90px);
+  line-height:.95;
+  letter-spacing:-4px;
+  margin-bottom:10px;
 }
 
-.container {
-  max-width: 1050px;
-  margin: auto;
-  padding: 70px 7%;
+.arabic-title{
+  color:#ff8f9b;
+  font-size:24px;
+  margin-bottom:25px;
 }
 
-.label {
-  color: #4da6ff;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-size: 13px;
-  margin-bottom: 12px;
+.hero p{
+  color:#a6b6c7;
+  max-width:800px;
+  font-size:18px;
+  line-height:1.8;
 }
 
-h1 {
-  font-size: clamp(45px, 7vw, 76px);
-  line-height: 1.05;
-  margin-bottom: 8px;
+/* ACTION BUTTONS */
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:30px;
 }
 
-.arabic {
-  color: #7ebcff;
-  font-size: 25px;
-  margin-bottom: 28px;
+.action-button{
+  padding:11px 17px;
+  border-radius:9px;
+  background:#0b1928;
+  border:1px solid #31516d;
+  color:#bdd0e0;
+  text-decoration:none;
+  cursor:pointer;
+  transition:.2s;
 }
 
-.intro {
-  color: #aebdce;
-  font-size: 18px;
-  max-width: 780px;
-  margin-bottom: 45px;
+.action-button:hover{
+  background:#14304a;
+  color:white;
+  border-color:#61b5ff;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+/* 3D VIEWER */
+.viewer{
+  margin-top:60px;
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:24px;
+  overflow:hidden;
+  background:#02060b;
+  box-shadow:0 25px 80px rgba(0,0,0,.45);
 }
 
-.card {
-  padding: 28px;
-  background: rgba(255,255,255,.035);
-  border: 1px solid rgba(255,255,255,.08);
-  border-radius: 16px;
-  transition: .25s;
+.viewer-header{
+  min-height:65px;
+  padding:0 22px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid rgba(255,255,255,.08);
 }
 
-.card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(77,166,255,.45);
+.viewer-title{
+  font-size:14px;
+  color:#d2dce6;
 }
 
-.card h2 {
-  font-size: 20px;
-  margin-bottom: 12px;
+.viewer-status{
+  color:#708499;
+  font-size:11px;
+  letter-spacing:1px;
 }
 
-.card p {
-  color: #aebdce;
+.scene{
+  position:relative;
+  width:100%;
+  height:700px;
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      #203b51 0%,
+      #0d1c2e 42%,
+      #02060b 100%
+    );
 }
 
-.insight {
-  margin-top: 30px;
-  padding: 30px;
-  border-left: 3px solid #4da6ff;
-  background: #0a1728;
-  border-radius: 10px;
+#brainCanvas{
+  width:100%;
+  height:100%;
+  display:block;
 }
 
-.insight strong {
-  color: #7ebcff;
+/* LOADING */
+.loading{
+  position:absolute;
+  inset:0;
+  z-index:20;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:16px;
+  background:#02060b;
+  color:#9db0c3;
+  font-size:14px;
+  transition:opacity .8s;
 }
 
-.quiz {
-  margin-top: 55px;
-  padding: 35px;
-  background: #0a1728;
-  border: 1px solid rgba(77,166,255,.2);
-  border-radius: 18px;
+.loading.hide{
+  opacity:0;
+  pointer-events:none;
 }
 
-.quiz .label {
-  margin-bottom: 8px;
+.loading-bar{
+  width:180px;
+  height:2px;
+  background:rgba(255,255,255,.08);
+  border-radius:2px;
+  overflow:hidden;
 }
 
-.quiz h2 {
-  margin-bottom: 20px;
+.loading-bar-inner{
+  width:0%;
+  height:100%;
+  background:#61b5ff;
+  transition:width .3s;
 }
 
-.option {
-  display: block;
-  width: 100%;
-  text-align: left;
-  padding: 14px 16px;
-  margin-top: 10px;
-  border-radius: 10px;
-  border: 1px solid #263951;
-  background: #0d2035;
-  color: white;
-  cursor: pointer;
-  font-size: 15px;
+/* HIPPOCAMPUS LABEL */
+.hippocampus-label{
+  position:absolute;
+  z-index:30;
+  pointer-events:none;
+  transform:translate(-50%,-100%);
+  display:none;
 }
 
-.option:hover {
-  border-color: #4da6ff;
+.hippocampus-label.show{
+  display:block;
 }
 
-#feedback {
-  margin-top: 20px;
-  color: #7ebcff;
-  font-weight: bold;
+.label-box{
+  position:relative;
+  padding:9px 15px;
+  border-radius:10px;
+  background:rgba(5,10,17,.96);
+  border:1.5px solid #ff4d5e;
+  color:#ffd0d5;
+  font-size:12px;
+  font-weight:bold;
+  letter-spacing:1px;
+  white-space:nowrap;
+  box-shadow:
+    0 0 12px rgba(255,77,94,.25),
+    0 0 25px rgba(255,77,94,.12);
 }
 
-.bottom-nav {
-  display: flex;
-  justify-content: space-between;
-  gap: 15px;
-  margin-top: 60px;
+.label-box::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:-15px;
+  width:1.5px;
+  height:15px;
+  background:#ff4d5e;
+  transform:translateX(-50%);
 }
 
-.bottom-nav a {
-  padding: 13px 18px;
-  border-radius: 10px;
-  text-decoration: none;
-  border: 1px solid #263951;
-  color: #d7e2ee;
+/* CONTROLS */
+.controls{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  padding:15px;
+  border-top:1px solid rgba(255,255,255,.08);
 }
 
-.bottom-nav a:hover {
-  border-color: #4da6ff;
+.controls button{
+  padding:11px 17px;
+  border-radius:9px;
+  background:#0b1928;
+  border:1px solid #31516d;
+  color:#bdd0e0;
+  cursor:pointer;
+  transition:.2s;
 }
 
-footer {
-  text-align: center;
-  padding: 35px 7%;
-  border-top: 1px solid rgba(255,255,255,.08);
-  color: #718197;
-  font-size: 14px;
+.controls button:hover{
+  background:#14304a;
+  color:white;
 }
 
-@media(max-width:700px) {
-  .grid {
-    grid-template-columns: 1fr;
+.controls button.active{
+  background:#241417;
+  border-color:#ff4d5e;
+  color:#ffd0d5;
+}
+
+/* INFORMATION */
+.section{
+  margin-top:70px;
+}
+
+.section-label{
+  color:#61b5ff;
+  letter-spacing:2px;
+  font-size:11px;
+  text-transform:uppercase;
+  margin-bottom:8px;
+}
+
+.section h2{
+  font-size:32px;
+  margin-bottom:25px;
+}
+
+.section-intro{
+  color:#91a5b8;
+  max-width:900px;
+  font-size:15px;
+  line-height:1.9;
+  margin-bottom:30px;
+}
+
+/* LOCATION */
+.location{
+  margin-top:70px;
+  padding:35px;
+  background:#091522;
+  border:1px solid #172b3e;
+  border-radius:18px;
+}
+
+.location h2{
+  font-size:32px;
+  margin-bottom:12px;
+}
+
+.location-intro{
+  color:#91a5b8;
+  max-width:900px;
+  line-height:1.9;
+  margin-bottom:30px;
+}
+
+.brain-visual{
+  width:100%;
+  overflow:hidden;
+}
+
+.location-svg{
+  display:block;
+  width:100%;
+  max-width:800px;
+  height:auto;
+  margin:auto;
+}
+
+.location-brain{
+  fill:#f1c5d0;
+  stroke:#71869e;
+  stroke-width:3;
+}
+
+.location-hippocampus-glow{
+  fill:none;
+  stroke:#ff4d5e;
+  stroke-width:18;
+  opacity:.35;
+  filter:blur(7px);
+}
+
+.location-hippocampus{
+  fill:none;
+  stroke:#ff4d5e;
+  stroke-width:8;
+  stroke-linecap:round;
+}
+
+.location-hippocampus-inner{
+  fill:none;
+  stroke:#ffffff;
+  stroke-width:3;
+  stroke-linecap:round;
+}
+
+.location-line{
+  stroke:#8fc7ff;
+  stroke-width:2;
+}
+
+.location-hippocampus-line{
+  stroke:#ff4d5e;
+  stroke-width:3;
+}
+
+.location-svg-label{
+  fill:white;
+  font-size:18px;
+  font-weight:bold;
+}
+
+.location-hippocampus-label{
+  fill:#ff4d5e;
+  font-size:21px;
+  font-weight:bold;
+}
+
+.location-arabic-label{
+  fill:#ffd6da;
+  font-size:16px;
+  font-weight:bold;
+}
+
+.location-caption{
+  text-align:center;
+  color:#9fb0c3;
+  margin-top:15px;
+}
+
+/* CARDS */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.card{
+  padding:27px;
+  background:#091522;
+  border:1px solid #172b3e;
+  border-radius:18px;
+  transition:
+    transform .2s,
+    border-color .2s;
+}
+
+.card:hover{
+  transform:translateY(-3px);
+  border-color:#4a2a30;
+}
+
+.card h3{
+  font-size:18px;
+  margin-bottom:13px;
+  color:#eef4fa;
+  line-height:1.45;
+}
+
+.card p{
+  color:#91a5b8;
+  font-size:14px;
+  line-height:1.8;
+}
+
+/* CLINICAL */
+.clinical-section{
+  margin-top:65px;
+}
+
+.clinical-box{
+  padding:30px;
+  background:#091522;
+  border:1px solid #172b3e;
+  border-left:3px solid #ff4d5e;
+  border-radius:18px;
+}
+
+.clinical-box p{
+  color:#a7b7c6;
+  font-size:15px;
+  line-height:1.9;
+  margin-bottom:18px;
+}
+
+.clinical-box p:last-child{
+  margin-bottom:0;
+}
+
+/* QUICK FACTS */
+.facts-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+}
+
+.fact{
+  padding:22px;
+  background:#091522;
+  border:1px solid #172b3e;
+  border-radius:16px;
+}
+
+.fact span{
+  display:block;
+  color:#ff4d5e;
+  font-size:11px;
+  letter-spacing:2px;
+  margin-bottom:12px;
+}
+
+.fact strong{
+  display:block;
+  color:#eef4fa;
+  font-size:14px;
+  margin-bottom:8px;
+  line-height:1.5;
+}
+
+.fact p{
+  color:#8195a8;
+  font-size:13px;
+  line-height:1.7;
+}
+
+/* QUIZ */
+.quiz{
+  margin-top:65px;
+  padding:30px;
+  background:#091522;
+  border:1px solid #172b3e;
+  border-radius:18px;
+}
+
+.quiz h2{
+  font-size:28px;
+  margin-bottom:10px;
+}
+
+.quiz-intro{
+  color:#91a5b8;
+  margin-bottom:25px;
+}
+
+.question{
+  margin-bottom:30px;
+}
+
+.question:last-child{
+  margin-bottom:0;
+}
+
+.question p{
+  color:#eef4fa;
+  font-size:16px;
+  margin-bottom:12px;
+  font-weight:bold;
+}
+
+.option{
+  display:block;
+  width:100%;
+  padding:12px 15px;
+  margin-top:9px;
+  background:#0b1928;
+  color:#c7d5e2;
+  border:1px solid #263951;
+  border-radius:9px;
+  text-align:left;
+  cursor:pointer;
+  font-size:14px;
+  transition:.2s;
+}
+
+.option:hover{
+  border-color:#ff4d5e;
+  background:#111e2c;
+}
+
+.option.correct{
+  border-color:#8fd3a8;
+  background:#14291e;
+  color:#b9f0c9;
+}
+
+.option.wrong{
+  border-color:#d88b9b;
+  background:#2a171d;
+  color:#ffc2cc;
+}
+
+.quiz-result{
+  margin-top:25px;
+  padding:15px;
+  border-radius:10px;
+  background:#0b1928;
+  border:1px solid #263951;
+  color:#aebdce;
+  display:none;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+
+  .cards{
+    grid-template-columns:repeat(2,1fr);
   }
 
-  nav {
-    flex-direction: column;
-    gap: 15px;
+  .facts-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:800px){
+
+  .scene{
+    height:450px;
   }
 
-  .nav-links {
-    gap: 15px;
+  .viewer-status{
+    display:none;
+  }
+}
+
+@media(max-width:600px){
+
+  .cards{
+    grid-template-columns:1fr;
   }
 
-  .bottom-nav {
-    flex-direction: column;
+  .facts-grid{
+    grid-template-columns:1fr;
+  }
+
+  h1{
+    letter-spacing:-2px;
+  }
+
+  .location{
+    padding:20px;
   }
 }
 </style>
@@ -217,186 +594,2029 @@ footer {
 <body>
 
 <nav>
-
-  <a class="logo" href="index.html">
-    Neuro<span>Atlas</span>
-  </a>
-
-  <div class="nav-links">
-    <a href="index.html">Home</a>
-
-    <a href="explore.html">
-      Explore Anatomy
-    </a>
-  </div>
-
+<a href="./explore.html">← Back to Explore</a>
 </nav>
 
 <main class="container">
 
-  <div class="label">Brain Structure</div>
+<!-- HERO -->
+<div class="eyebrow">Limbic System · NeuroAtlas</div>
 
-  <h1>Hippocampus</h1>
+<h1>Hippocampus</h1>
 
-  <div class="arabic">
-    الحُصين
-  </div>
+<div class="arabic-title">
+الحُصين
+</div>
 
-  <p class="intro">
-    A curved structure within the medial temporal lobe that plays
-    an important role in memory formation, spatial learning,
-    and memory-related networks.
-  </p>
+<div class="hero">
+<p>
+The hippocampus is a curved structure deep within the medial temporal
+lobe and is a major component of the limbic system. It plays a central
+role in forming and organizing new memories, spatial navigation,
+learning, and aspects of emotional processing.
+</p>
+</div>
 
-  <div class="grid">
+<!-- ACTION BUTTONS -->
+<div class="actions">
 
-    <div class="card">
-      <h2>📍 Location</h2>
+<a class="action-button" href="#location">
+📍 Show Location
+</a>
 
-      <p>
-        The hippocampus is located in the medial temporal lobe
-        and forms part of the hippocampal formation.
-      </p>
-    </div>
+<a class="action-button" href="#information">
+🧠 Learn About the Hippocampus
+</a>
 
+<a class="action-button" href="#quiz">
+📝 Test Yourself
+</a>
 
-    <div class="card">
-      <h2>⚙️ Main Functions</h2>
+</div>
 
-      <p>
-        It contributes to the formation and organization of new
-        memories, spatial learning, and contextual aspects of memory.
-      </p>
-    </div>
+<!-- 3D VIEWER -->
+<div class="viewer">
 
+<div class="viewer-header">
 
-    <div class="card">
-      <h2>🔗 Important Connections</h2>
+<div class="viewer-title">
+Human Brain · Interactive 3D
+</div>
 
-      <p>
-        The hippocampal formation communicates with structures
-        including the entorhinal cortex, fornix, mammillary bodies,
-        and anterior thalamic nuclei.
-      </p>
-    </div>
+<div class="viewer-status">
+DRAG TO ROTATE · SCROLL TO ZOOM
+</div>
 
+</div>
 
-    <div class="card">
-      <h2>🛣️ Related Pathways</h2>
+<div class="scene">
 
-      <p>
-        Hippocampal information travels through interconnected
-        memory circuits, including pathways involving the fornix
-        and Papez circuit.
-      </p>
-    </div>
+<div id="loading" class="loading">
 
+<span id="loadText">
+Loading real brain model...
+</span>
 
-    <div class="card">
-      <h2>🩺 Clinical Relevance</h2>
+<div class="loading-bar">
+<div id="loadBar" class="loading-bar-inner"></div>
+</div>
 
-      <p>
-        Hippocampal dysfunction can affect memory formation
-        and spatial learning and is studied in disorders involving
-        memory impairment and temporal-lobe dysfunction.
-      </p>
-    </div>
+</div>
 
+<canvas id="brainCanvas"></canvas>
 
-    <div class="card">
-      <h2>🧠 Neurosurgical Context</h2>
+<div id="hippocampusLabel" class="hippocampus-label">
 
-      <p>
-        The hippocampus is anatomically important in temporal-lobe
-        surgery because of its proximity to structures involved
-        in memory and other important neural networks.
-      </p>
-    </div>
+<div class="label-box">
+HIPPOCAMPUS
+</div>
 
-  </div>
+</div>
 
+</div>
 
-  <div class="insight">
+<div class="controls">
 
-    <strong>NeuroAtlas Insight</strong>
+<button id="highlight" class="active">
+🔴 Highlight Hippocampus
+</button>
 
-    <br><br>
+<button id="rotate" class="active">
+⟳ Auto Rotate
+</button>
 
-    Don't memorize the hippocampus as simply
-    "the memory structure." Think of it as part of a
-    larger network connecting cortical and subcortical
-    regions involved in learning and memory.
+<button id="reset">
+↻ Reset View
+</button>
 
-  </div>
+</div>
 
+</div>
 
-  <section class="quiz">
+<!-- LOCATION -->
+<section id="location" class="location">
 
-    <div class="label">
-      Knowledge Check
-    </div>
+<div class="section-label">
+Location · الموقع
+</div>
 
-    <h2>
-      Which function is most strongly associated with the hippocampus?
-    </h2>
+<h2>
+📍 Where is the Hippocampus?
+</h2>
 
-    <button class="option" onclick="checkAnswer(false)">
-      A. Primary visual processing
-    </button>
+<p class="location-intro">
 
-    <button class="option" onclick="checkAnswer(true)">
-      B. Formation of new memories
-    </button>
+The hippocampus lies deep within the
+<strong>medial temporal lobe</strong> on each side of the brain.
+It has a curved, elongated shape and lies near the
+<strong>parahippocampal gyrus</strong>, beneath the temporal lobe.
 
-    <button class="option" onclick="checkAnswer(false)">
-      C. Initiation of skeletal muscle contraction
-    </button>
+<br><br>
 
-    <button class="option" onclick="checkAnswer(false)">
-      D. Regulation of breathing rhythm
-    </button>
+يقع الحُصين في عمق
+<strong>الفص الصدغي الإنسي</strong>
+على جانبي الدماغ. وله شكل منحني وممتد، ويقع بالقرب من
+<strong>التلفيف المجاور للحُصين</strong>
+تحت الفص الصدغي.
 
-    <div id="feedback"></div>
+</p>
 
-  </section>
+<div class="brain-visual">
 
+<svg
+  class="location-svg"
+  viewBox="0 0 800 560"
+  xmlns="http://www.w3.org/2000/svg"
+  aria-label="Simplified brain diagram showing the hippocampus"
+>
 
-  <div class="bottom-nav">
+<!-- BRAIN -->
+<path
+  class="location-brain"
+  d="
+  M145 145
+  C170 80 250 48 335 65
+  C405 35 500 60 555 120
+  C610 180 612 260 565 315
+  C520 365 445 380 380 355
+  C320 335 270 360 215 335
+  C155 308 120 240 130 190
+  C133 172 138 156 145 145Z
+  "
+/>
 
-    <a href="explore.html">
-      ← Back to Explore Anatomy
-    </a>
+<!-- MIDLINE -->
+<path
+  d="M380 75 C382 145 382 220 380 350"
+  fill="none"
+  stroke="#8a9caf"
+  stroke-width="2"
+  stroke-dasharray="5 8"
+/>
 
-    <a href="index.html">
-      NeuroAtlas Home →
-    </a>
+<!-- LEFT HIPPOCAMPUS GLOW -->
+<path
+  class="location-hippocampus-glow"
+  d="
+  M300 270
+  C270 255 250 265 235 285
+  C225 300 235 315 255 318
+  C278 321 302 310 320 295
+  C330 286 320 276 300 270
+  "
+/>
 
-  </div>
+<!-- LEFT HIPPOCAMPUS -->
+<path
+  class="location-hippocampus"
+  d="
+  M300 270
+  C270 255 250 265 235 285
+  C225 300 235 315 255 318
+  C278 321 302 310 320 295
+  C330 286 320 276 300 270
+  "
+/>
+
+<path
+  class="location-hippocampus-inner"
+  d="
+  M292 276
+  C270 269 252 276 244 289
+  C240 299 250 306 263 307
+  C282 307 299 300 311 290
+  "
+/>
+
+<!-- RIGHT HIPPOCAMPUS GLOW -->
+<path
+  class="location-hippocampus-glow"
+  d="
+  M460 270
+  C490 255 510 265 525 285
+  C535 300 525 315 505 318
+  C482 321 458 310 440 295
+  C430 286 440 276 460 270
+  "
+/>
+
+<!-- RIGHT HIPPOCAMPUS -->
+<path
+  class="location-hippocampus"
+  d="
+  M460 270
+  C490 255 510 265 525 285
+  C535 300 525 315 505 318
+  C482 321 458 310 440 295
+  C430 286 440 276 460 270
+  "
+/>
+
+<path
+  class="location-hippocampus-inner"
+  d="
+  M468 276
+  C490 269 508 276 516 289
+  C520 299 510 306 497 307
+  C478 307 461 300 449 290
+  "
+/>
+
+<!-- LABEL LEFT -->
+<line
+  class="location-hippocampus-line"
+  x1="250"
+  y1="290"
+  x2="115"
+  y2="350"
+/>
+
+<text
+  class="location-hippocampus-label"
+  x="45"
+  y="356"
+>
+HIPPOCAMPUS
+</text>
+
+<text
+  class="location-arabic-label"
+  x="45"
+  y="382"
+>
+الحُصين
+</text>
+
+<!-- LABEL RIGHT -->
+<line
+  class="location-line"
+  x1="525"
+  y1="290"
+  x2="650"
+  y2="350"
+/>
+
+<text
+  class="location-svg-label"
+  x="655"
+  y="356"
+>
+MEDIAL TEMPORAL LOBE
+</text>
+
+<text
+  class="location-arabic-label"
+  x="655"
+  y="382"
+>
+الفص الصدغي الإنسي
+</text>
+
+<!-- BRAIN LABEL -->
+<line
+  class="location-line"
+  x1="380"
+  y1="100"
+  x2="650"
+  y2="130"
+/>
+
+<text
+  class="location-svg-label"
+  x="655"
+  y="136"
+>
+CEREBRUM
+</text>
+
+</svg>
+
+<p class="location-caption">
+
+🔴 The red structures represent the approximate bilateral location
+of the hippocampi deep within the medial temporal lobes.
+
+</p>
+
+</div>
+
+</section>
+
+<!-- INFORMATION -->
+<section id="information" class="section">
+
+<div class="section-label">
+Hippocampal Anatomy · تشريح الحُصين
+</div>
+
+<h2>
+Hippocampus · الحُصين
+</h2>
+
+<p class="section-intro">
+
+The hippocampus is a paired structure located in the medial temporal
+lobe. It belongs to the limbic system and is especially important
+for memory formation, spatial learning, and navigation.
+
+<br><br>
+
+الحُصين بنية مزدوجة تقع في الفص الصدغي الإنسي. وينتمي إلى الجهاز
+الحوفي، وله أهمية خاصة في تكوين الذاكرة والتعلم المكاني والملاحة.
+
+</p>
+
+<div class="cards">
+
+<!-- CARD 1 -->
+<div class="card">
+
+<h3>
+Location · الموقع
+</h3>
+
+<p>
+
+The hippocampus lies deep within the medial temporal lobe,
+forming part of the floor of the inferior horn of the lateral
+ventricle.
+
+<br><br>
+
+يقع الحُصين في عمق الفص الصدغي الإنسي، ويشكّل جزءاً من أرضية
+القرن السفلي للبطين الجانبي.
+
+</p>
+
+</div>
+
+<!-- CARD 2 -->
+<div class="card">
+
+<h3>
+Memory Formation · تكوين الذاكرة
+</h3>
+
+<p>
+
+The hippocampus is particularly important for forming new
+declarative memories and helping organize information for
+long-term storage.
+
+<br><br>
+
+يُعد الحُصين مهماً بشكل خاص في تكوين الذكريات التصريحية الجديدة
+والمساعدة على تنظيم المعلومات للتخزين طويل الأمد.
+
+</p>
+
+</div>
+
+<!-- CARD 3 -->
+<div class="card">
+
+<h3>
+Spatial Navigation · الملاحة المكانية
+</h3>
+
+<p>
+
+Hippocampal networks help the brain build internal representations
+of places and environments, supporting spatial navigation.
+
+<br><br>
+
+تساعد شبكات الحُصين الدماغ على بناء تمثيلات داخلية للأماكن
+والبيئات، مما يدعم الملاحة المكانية.
+
+</p>
+
+</div>
+
+<!-- CARD 4 -->
+<div class="card">
+
+<h3>
+Dentate Gyrus · التلفيف المسنن
+</h3>
+
+<p>
+
+The dentate gyrus is a hippocampal formation structure involved
+in memory processing and the separation of similar experiences
+into distinct representations.
+
+<br><br>
+
+التلفيف المسنن جزء من تكوين الحُصين، ويشارك في معالجة الذاكرة
+والتمييز بين التجارب المتشابهة.
+
+</p>
+
+</div>
+
+<!-- CARD 5 -->
+<div class="card">
+
+<h3>
+CA Fields · مناطق CA
+</h3>
+
+<p>
+
+The hippocampus contains specialized fields including CA1,
+CA2, CA3, and CA4. These regions form interconnected circuits
+important for information processing.
+
+<br><br>
+
+يحتوي الحُصين على مناطق متخصصة تشمل CA1 وCA2 وCA3 وCA4،
+وتشكّل هذه المناطق دوائر مترابطة مهمة لمعالجة المعلومات.
+
+</p>
+
+</div>
+
+<!-- CARD 6 -->
+<div class="card">
+
+<h3>
+Subiculum · المنطقة تحت الحُصين
+</h3>
+
+<p>
+
+The subiculum is an important output region of the hippocampal
+formation and connects hippocampal activity with wider cortical
+and limbic networks.
+
+<br><br>
+
+تُعد المنطقة تحت الحُصين منطقة إخراج مهمة من تكوين الحُصين،
+وتربط نشاط الحُصين بالشبكات القشرية والحوفية الأوسع.
+
+</p>
+
+</div>
+
+<!-- CARD 7 -->
+<div class="card">
+
+<h3>
+Fornix · القبو
+</h3>
+
+<p>
+
+The fornix is a major white-matter pathway carrying hippocampal
+signals toward structures including the mammillary bodies and
+septal regions.
+
+<br><br>
+
+القبو مسار رئيسي من المادة البيضاء ينقل إشارات الحُصين نحو
+بنى تشمل الأجسام الحلمية والمناطق الحاجزية.
+
+</p>
+
+</div>
+
+<!-- CARD 8 -->
+<div class="card">
+
+<h3>
+Limbic System · الجهاز الحوفي
+</h3>
+
+<p>
+
+The hippocampus works as part of a broader limbic network that
+includes structures involved in memory, emotion, motivation,
+and learning.
+
+<br><br>
+
+يعمل الحُصين كجزء من شبكة حوفية أوسع تضم بنى تشارك في الذاكرة
+والعاطفة والدافعية والتعلم.
+
+</p>
+
+</div>
+
+<!-- CARD 9 -->
+<div class="card">
+
+<h3>
+Neuroplasticity · المرونة العصبية
+</h3>
+
+<p>
+
+The hippocampal formation is highly plastic and can change its
+connections in response to learning and experience.
+
+<br><br>
+
+يتميز تكوين الحُصين بمرونة عصبية عالية، ويمكن أن تتغير
+اتصالاته استجابةً للتعلم والخبرة.
+
+</p>
+
+</div>
+
+<!-- CARD 10 -->
+<div class="card">
+
+<h3>
+Bilateral Structure · بنية مزدوجة
+</h3>
+
+<p>
+
+There is a hippocampus in each cerebral hemisphere. The two
+structures communicate with broader memory and limbic networks.
+
+<br><br>
+
+يوجد حُصين في كل نصف كرة مخية، وتتصل البنيتان بشبكات الذاكرة
+والجهاز الحوفي الأوسع.
+
+</p>
+
+</div>
+
+<!-- CARD 11 -->
+<div class="card">
+
+<h3>
+Memory Consolidation · تثبيت الذاكرة
+</h3>
+
+<p>
+
+The hippocampus contributes to the consolidation of newly
+acquired information, particularly during interactions between
+memory networks and the cerebral cortex.
+
+<br><br>
+
+يساهم الحُصين في تثبيت المعلومات المكتسبة حديثاً، خاصةً من خلال
+التفاعل بين شبكات الذاكرة والقشرة المخية.
+
+</p>
+
+</div>
+
+<!-- CARD 12 -->
+<div class="card">
+
+<h3>
+Medial Temporal Lobe · الفص الصدغي الإنسي
+</h3>
+
+<p>
+
+The hippocampus is part of the medial temporal lobe memory
+system, alongside neighboring structures such as the
+parahippocampal region.
+
+<br><br>
+
+يُعد الحُصين جزءاً من نظام الذاكرة في الفص الصدغي الإنسي،
+إلى جانب البنى المجاورة مثل المنطقة المجاورة للحُصين.
+
+</p>
+
+</div>
+
+</div>
+
+<!-- CLINICAL -->
+<div class="clinical-section">
+
+<div class="section-label">
+Clinical Importance · الأهمية السريرية
+</div>
+
+<h2>
+Why the Hippocampus Matters
+</h2>
+
+<div class="clinical-box">
+
+<p>
+
+Because the hippocampus is essential for aspects of memory
+formation and spatial learning, disruption of hippocampal
+function can produce significant difficulties with acquiring
+and organizing new memories.
+
+</p>
+
+<p>
+
+The hippocampus is also vulnerable to several neurological
+processes, including conditions that affect medial temporal
+lobe structures. Studying its anatomy helps explain why
+memory disturbances can accompany damage to this region.
+
+</p>
+
+<p dir="rtl">
+
+نظراً لأن الحُصين ضروري لبعض جوانب تكوين الذاكرة والتعلم المكاني،
+فإن اضطراب وظيفته يمكن أن يؤدي إلى صعوبات ملحوظة في اكتساب
+الذكريات الجديدة وتنظيمها.
+
+</p>
+
+<p dir="rtl">
+
+كما أن الحُصين قد يتأثر بعدة عمليات عصبية تصيب بنى الفص الصدغي
+الإنسي. وتساعد دراسة تشريحه على فهم سبب ارتباط اضطرابات الذاكرة
+بتضرر هذه المنطقة.
+
+</p>
+
+</div>
+
+</div>
+
+<!-- QUICK FACTS -->
+<div class="section">
+
+<div class="section-label">
+Quick Facts · معلومات سريعة
+</div>
+
+<h2>
+Hippocampus at a Glance
+</h2>
+
+<div class="facts-grid">
+
+<div class="fact">
+
+<span>01</span>
+
+<strong>
+Location · الموقع
+</strong>
+
+<p>
+Medial temporal lobe · الفص الصدغي الإنسي
+</p>
+
+</div>
+
+<div class="fact">
+
+<span>02</span>
+
+<strong>
+System · النظام
+</strong>
+
+<p>
+Limbic system · الجهاز الحوفي
+</p>
+
+</div>
+
+<div class="fact">
+
+<span>03</span>
+
+<strong>
+Major Role · الوظيفة الرئيسية
+</strong>
+
+<p>
+Memory formation and spatial learning · تكوين الذاكرة والتعلم المكاني
+</p>
+
+</div>
+
+<div class="fact">
+
+<span>04</span>
+
+<strong>
+Structure · البنية
+</strong>
+
+<p>
+Paired bilateral structure · بنية مزدوجة على جانبي الدماغ
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- QUIZ -->
+<div id="quiz" class="quiz">
+
+<div class="section-label">
+Mini Test
+</div>
+
+<h2>
+🧠 Test Yourself
+</h2>
+
+<p class="quiz-intro">
+Choose the best answer for each question.
+</p>
+
+<!-- QUESTION 1 -->
+<div class="question">
+
+<p>
+1. Where is the hippocampus primarily located?
+</p>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)"
+>
+A. Frontal pole
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,true)"
+>
+B. Medial temporal lobe
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)"
+>
+C. Occipital pole
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)"
+>
+D. Cerebellum
+</button>
+
+</div>
+
+<!-- QUESTION 2 -->
+<div class="question">
+
+<p>
+2. Which function is strongly associated with the hippocampus?
+</p>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)"
+>
+A. Primary motor control
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,true)"
+>
+B. Formation of new memories
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)"
+>
+C. Regulation of heart rate
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)"
+>
+D. Primary auditory processing
+</button>
+
+</div>
+
+<!-- QUESTION 3 -->
+<div class="question">
+
+<p>
+3. The hippocampus is part of which major functional system?
+</p>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,true)"
+>
+A. Limbic system
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)"
+>
+B. Basal ganglia only
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)"
+>
+C. Peripheral nervous system
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)"
+>
+D. Spinal cord
+</button>
+
+</div>
+
+<div
+  id="quizResult"
+  class="quiz-result"
+></div>
+
+</div>
+
+</section>
 
 </main>
 
+<!-- THREE.JS -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
 
-<footer>
-  NeuroAtlas · Free bilingual neuroanatomy education
-</footer>
+<script type="module">
 
+import * as THREE from "three";
+
+import {
+  OrbitControls
+} from "three/addons/controls/OrbitControls.js";
+
+import {
+  GLTFLoader
+} from "three/addons/loaders/GLTFLoader.js";
+
+import {
+  DRACOLoader
+} from "three/addons/loaders/DRACOLoader.js";
+
+
+/* ELEMENTS */
+
+const canvas =
+  document.getElementById("brainCanvas");
+
+const loading =
+  document.getElementById("loading");
+
+const loadText =
+  document.getElementById("loadText");
+
+const loadBar =
+  document.getElementById("loadBar");
+
+const hippocampusLabel =
+  document.getElementById("hippocampusLabel");
+
+
+/* SCENE */
+
+const scene = new THREE.Scene();
+
+
+/* CAMERA */
+
+const camera =
+  new THREE.PerspectiveCamera(
+    30,
+    1,
+    0.01,
+    100
+  );
+
+camera.position.set(
+  3.2,
+  0.3,
+  8.5
+);
+
+
+/* RENDERER */
+
+const renderer =
+  new THREE.WebGLRenderer({
+    canvas:canvas,
+    antialias:true,
+    alpha:true
+  });
+
+renderer.setPixelRatio(
+  Math.min(
+    window.devicePixelRatio || 1,
+    2
+  )
+);
+
+renderer.toneMapping =
+  THREE.ACESFilmicToneMapping;
+
+renderer.toneMappingExposure =
+  0.75;
+
+
+/* CONTROLS */
+
+const controls =
+  new OrbitControls(
+    camera,
+    canvas
+  );
+
+controls.enableRotate = true;
+controls.rotateSpeed = 0.6;
+
+controls.enableDamping = true;
+controls.dampingFactor = 0.05;
+
+controls.enableZoom = true;
+controls.zoomSpeed = 0.6;
+
+controls.enablePan = false;
+
+controls.autoRotate = true;
+controls.autoRotateSpeed = 0.2;
+
+controls.target.set(
+  0,
+  -0.3,
+  0
+);
+
+controls.minDistance = 3.5;
+controls.maxDistance = 16;
+
+
+/* LIGHTING */
+
+scene.add(
+  new THREE.AmbientLight(
+    0xffffff,
+    0.55
+  )
+);
+
+const hemi =
+  new THREE.HemisphereLight(
+    0xffdce6,
+    0x081018,
+    0.75
+  );
+
+scene.add(hemi);
+
+const keyLight =
+  new THREE.DirectionalLight(
+    0xfff5f0,
+    1.4
+  );
+
+keyLight.position.set(
+  6,
+  10,
+  8
+);
+
+scene.add(keyLight);
+
+const fillLight =
+  new THREE.DirectionalLight(
+    0x8ca9bd,
+    0.4
+  );
+
+fillLight.position.set(
+  -7,
+  2,
+  6
+);
+
+scene.add(fillLight);
+
+
+/* BRAIN GROUP */
+
+const brainGroup =
+  new THREE.Group();
+
+scene.add(brainGroup);
+
+
+/* HIPPOCAMPUS STATE */
+
+let hippocampusMesh = null;
+let hippocampusHighlightGroup = null;
+
+let highlighted = true;
+
+const hippocampusGlowMeshes = [];
+
+
+/* BABY PINK BRAIN */
+
+const brainPinkColor =
+  0xf1c5d0;
+
+const brainPinkMaterial =
+  new THREE.MeshPhysicalMaterial({
+
+    color:brainPinkColor,
+
+    roughness:0.62,
+
+    metalness:0,
+
+    clearcoat:0.12,
+
+    clearcoatRoughness:0.5,
+
+    side:THREE.DoubleSide
+
+  });
+
+
+/* HIPPOCAMPUS COLORS */
+
+const hippocampusHighlightColor =
+  new THREE.Color(0xffffff);
+
+const hippocampusBlendColor =
+  new THREE.Color(
+    brainPinkColor
+  );
+
+
+/*
+  The highlighted hippocampus uses
+  white, while its non-highlighted
+  state blends into the same pink
+  as the brain.
+*/
+
+const hippocampusMaterial =
+  new THREE.MeshPhysicalMaterial({
+
+    color:
+      hippocampusHighlightColor.clone(),
+
+    roughness:0.3,
+
+    metalness:0.05,
+
+    clearcoat:0.6,
+
+    clearcoatRoughness:0.2,
+
+    emissive:0x555555,
+
+    emissiveIntensity:0.2,
+
+    side:THREE.DoubleSide
+
+  });
+
+
+/* GLOW */
+
+const glowMaterial =
+  new THREE.MeshBasicMaterial({
+
+    color:0xffffff,
+
+    transparent:true,
+
+    opacity:0.18,
+
+    side:THREE.BackSide
+
+  });
+
+
+/* TUBE CREATION */
+
+function buildTube(points,radius){
+
+  const curve =
+    new THREE.CatmullRomCurve3(
+      points.map(
+        p =>
+          new THREE.Vector3(
+            p[0],
+            p[1],
+            p[2]
+          )
+      )
+    );
+
+  const geometry =
+    new THREE.TubeGeometry(
+      curve,
+      40,
+      radius,
+      10,
+      false
+    );
+
+  const mesh =
+    new THREE.Mesh(
+      geometry,
+      hippocampusMaterial
+    );
+
+  const glowGeometry =
+    new THREE.TubeGeometry(
+      curve,
+      40,
+      radius * 1.9,
+      10,
+      false
+    );
+
+  const glow =
+    new THREE.Mesh(
+      glowGeometry,
+      glowMaterial
+    );
+
+  hippocampusGlowMeshes.push(
+    glow
+  );
+
+  const group =
+    new THREE.Group();
+
+  group.add(mesh);
+  group.add(glow);
+
+  return group;
+}
+
+
+/*
+  FALLBACK HIPPOCAMPUS MARKER
+
+  This is only a visual highlight placed
+  over the anatomical location of the
+  hippocampus on the brain model.
+*/
+
+function createHippocampusMarker(){
+
+  hippocampusHighlightGroup =
+    new THREE.Group();
+
+
+  /*
+    LEFT HIPPOCAMPUS
+  */
+
+  const leftHippo = [
+
+    [-0.30,-0.55,-0.55],
+
+    [-0.48,-0.50,-0.62],
+
+    [-0.62,-0.42,-0.66],
+
+    [-0.72,-0.32,-0.62],
+
+    [-0.78,-0.22,-0.52]
+
+  ];
+
+  hippocampusHighlightGroup.add(
+    buildTube(
+      leftHippo,
+      0.055
+    )
+  );
+
+
+  /*
+    RIGHT HIPPOCAMPUS
+  */
+
+  const rightHippo = [
+
+    [0.30,-0.55,-0.55],
+
+    [0.48,-0.50,-0.62],
+
+    [0.62,-0.42,-0.66],
+
+    [0.72,-0.32,-0.62],
+
+    [0.78,-0.22,-0.52]
+
+  ];
+
+  hippocampusHighlightGroup.add(
+    buildTube(
+      rightHippo,
+      0.055
+    )
+  );
+
+
+  /*
+    Small curved continuation to
+    represent the hippocampal formation.
+  */
+
+  const leftTail = [
+
+    [-0.78,-0.22,-0.52],
+
+    [-0.72,-0.12,-0.42],
+
+    [-0.65,-0.05,-0.34]
+
+  ];
+
+  hippocampusHighlightGroup.add(
+    buildTube(
+      leftTail,
+      0.035
+    )
+  );
+
+
+  const rightTail = [
+
+    [0.78,-0.22,-0.52],
+
+    [0.72,-0.12,-0.42],
+
+    [0.65,-0.05,-0.34]
+
+  ];
+
+  hippocampusHighlightGroup.add(
+    buildTube(
+      rightTail,
+      0.035
+    )
+  );
+
+
+  hippocampusHighlightGroup.position.set(
+    0,
+    -0.25,
+    0.05
+  );
+
+
+  brainGroup.add(
+    hippocampusHighlightGroup
+  );
+}
+
+
+/* LOAD REAL BRAIN MODEL */
+
+function loadRealBrain(){
+
+  const loader =
+    new GLTFLoader();
+
+  const dracoLoader =
+    new DRACOLoader();
+
+  dracoLoader.setDecoderPath(
+    "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/"
+  );
+
+  loader.setDRACOLoader(
+    dracoLoader
+  );
+
+
+  const urls = [
+
+    "https://cdn.jsdelivr.net/gh/itayinbarr/brainproject@main/brain-atlas/models/brain.glb",
+
+    "https://raw.githubusercontent.com/itayinbarr/brainproject/main/brain-atlas/models/brain.glb",
+
+    "https://itayinbarr.github.io/brainproject/models/brain.glb"
+
+  ];
+
+
+  let urlIndex = 0;
+
+
+  function tryLoad(){
+
+    if(urlIndex >= urls.length){
+
+      createHippocampusMarker();
+
+      onReady();
+
+      return;
+    }
+
+
+    const url =
+      urls[urlIndex++];
+
+
+    loadText.textContent =
+      "Loading real brain model...";
+
+
+    loader.load(
+
+      url,
+
+      function(gltf){
+
+        const model =
+          gltf.scene;
+
+
+        /*
+          FIT MODEL
+        */
+
+        const box =
+          new THREE.Box3()
+            .setFromObject(model);
+
+        const center =
+          box.getCenter(
+            new THREE.Vector3()
+          );
+
+        const size =
+          box.getSize(
+            new THREE.Vector3()
+          );
+
+        const maxDim =
+          Math.max(
+            size.x,
+            size.y,
+            size.z
+          );
+
+        const scale =
+          4.5 / maxDim;
+
+
+        model.scale.setScalar(
+          scale
+        );
+
+        model.position.sub(
+          center.multiplyScalar(
+            scale
+          )
+        );
+
+        model.position.y -= 0.60;
+
+
+        const toRemove = [];
+
+
+        /*
+          PROCESS MODEL
+        */
+
+        model.traverse(
+          function(child){
+
+            if(!child.isMesh){
+              return;
+            }
+
+
+            child.castShadow = true;
+            child.receiveShadow = true;
+
+
+            const name =
+              (
+                child.name || ""
+              ).toLowerCase();
+
+
+            /*
+              Look for a hippocampus
+              mesh if the supplied model
+              contains one.
+            */
+
+            const isHippocampus =
+              name.includes("hippocampus") ||
+              name.includes("hippocampal") ||
+              name.includes("hippocamp");
+
+
+            /*
+              Remove unrelated vessel
+              objects from an atlas model.
+            */
+
+            const vesselKeywords = [
+
+              "artery",
+              "arter",
+              "vessel",
+              "vein",
+              "ica",
+              "aca",
+              "mca",
+              "pca",
+              "pcom",
+              "acom",
+              "carotid",
+              "willis",
+              "basilar",
+              "vertebral",
+              "sinus",
+              "plexus"
+
+            ];
+
+
+            const isVessel =
+              !isHippocampus &&
+              vesselKeywords.some(
+                keyword =>
+                  name.includes(keyword)
+              );
+
+
+            /*
+              REAL HIPPOCAMPUS
+            */
+
+            if(isHippocampus){
+
+              hippocampusMesh =
+                child;
+
+              child.material =
+                hippocampusMaterial;
+
+              const glow =
+                child.clone();
+
+              glow.material =
+                glowMaterial;
+
+              glow.scale.multiplyScalar(
+                1.06
+              );
+
+              child.parent.add(
+                glow
+              );
+
+              hippocampusGlowMeshes.push(
+                glow
+              );
+
+            }
+
+
+            /*
+              REMOVE VESSELS
+            */
+
+            else if(isVessel){
+
+              toRemove.push(
+                child
+              );
+
+            }
+
+
+            /*
+              BRAIN SURFACE
+            */
+
+            else{
+
+              if(child.material){
+
+                child.material =
+                  brainPinkMaterial.clone();
+
+              }
+
+            }
+
+          }
+        );
+
+
+        /*
+          Remove unwanted meshes
+          after traversal.
+        */
+
+        toRemove.forEach(
+          function(child){
+
+            if(child.geometry){
+
+              child.geometry.dispose();
+
+            }
+
+            if(child.parent){
+
+              child.parent.remove(
+                child
+              );
+
+            }
+
+          }
+        );
+
+
+        brainGroup.add(
+          model
+        );
+
+
+        /*
+          If the model does not contain
+          a named hippocampus, use the
+          anatomical highlight marker.
+        */
+
+        if(!hippocampusMesh){
+
+          createHippocampusMarker();
+
+        }
+
+
+        loadBar.style.width =
+          "100%";
+
+
+        onReady();
+
+      },
+
+
+      function(progress){
+
+        if(progress.total > 0){
+
+          const pct =
+            Math.min(
+              90,
+              progress.loaded /
+              progress.total *
+              90
+            );
+
+          loadBar.style.width =
+            pct + "%";
+
+        }
+
+      },
+
+
+      function(error){
+
+        console.warn(
+          "Model failed:",
+          error
+        );
+
+        tryLoad();
+
+      }
+
+    );
+
+  }
+
+
+  tryLoad();
+
+}
+
+
+/* READY */
+
+function onReady(){
+
+  setTimeout(
+    function(){
+
+      loading.classList.add(
+        "hide"
+      );
+
+      if(highlighted){
+
+        hippocampusLabel.classList.add(
+          "show"
+        );
+
+      }
+
+    },
+    500
+  );
+
+}
+
+
+/* LABEL */
+
+function updateLabel(){
+
+  const target =
+    hippocampusHighlightGroup ||
+    hippocampusMesh;
+
+
+  if(!target){
+    return;
+  }
+
+
+  const position =
+    new THREE.Vector3();
+
+
+  target.getWorldPosition(
+    position
+  );
+
+
+  position.project(
+    camera
+  );
+
+
+  const x =
+    (position.x + 1) /
+    2 *
+    canvas.clientWidth;
+
+
+  const y =
+    (-position.y + 1) /
+    2 *
+    canvas.clientHeight;
+
+
+  hippocampusLabel.style.left =
+    x + "px";
+
+
+  hippocampusLabel.style.top =
+    (y - 45) + "px";
+
+}
+
+
+/* RESIZE */
+
+function resize(){
+
+  const width =
+    canvas.clientWidth;
+
+  const height =
+    canvas.clientHeight;
+
+
+  if(
+    width <= 0 ||
+    height <= 0
+  ){
+
+    return;
+
+  }
+
+
+  camera.aspect =
+    width / height;
+
+  camera.updateProjectionMatrix();
+
+
+  renderer.setSize(
+    width,
+    height,
+    false
+  );
+
+}
+
+window.addEventListener(
+  "resize",
+  resize
+);
+
+
+/* HIGHLIGHT */
+
+const highlightBtn =
+  document.getElementById(
+    "highlight"
+  );
+
+
+highlightBtn.addEventListener(
+  "click",
+  function(){
+
+    highlighted =
+      !highlighted;
+
+
+    hippocampusMaterial.color.copy(
+
+      highlighted
+        ? hippocampusHighlightColor
+        : hippocampusBlendColor
+
+    );
+
+
+    hippocampusMaterial.emissive.set(
+
+      highlighted
+        ? 0x555555
+        : 0x000000
+
+    );
+
+
+    hippocampusMaterial.emissiveIntensity =
+      highlighted
+        ? 0.2
+        : 0;
+
+
+    hippocampusGlowMeshes.forEach(
+      function(glow){
+
+        glow.visible =
+          highlighted;
+
+      }
+    );
+
+
+    hippocampusLabel.classList.toggle(
+      "show",
+      highlighted
+    );
+
+
+    highlightBtn.classList.toggle(
+      "active",
+      highlighted
+    );
+
+
+    highlightBtn.textContent =
+      highlighted
+        ? "🔴 Hippocampus Highlighted"
+        : "🧠 Highlight Hippocampus";
+
+  }
+);
+
+
+/* AUTO ROTATE */
+
+const rotateBtn =
+  document.getElementById(
+    "rotate"
+  );
+
+
+rotateBtn.addEventListener(
+  "click",
+  function(){
+
+    controls.autoRotate =
+      !controls.autoRotate;
+
+
+    rotateBtn.classList.toggle(
+      "active",
+      controls.autoRotate
+    );
+
+
+    rotateBtn.textContent =
+      controls.autoRotate
+        ? "⟳ Auto Rotate"
+        : "▶ Auto Rotate";
+
+  }
+);
+
+
+/* RESET */
+
+document
+  .getElementById("reset")
+  .addEventListener(
+    "click",
+    function(){
+
+      camera.position.set(
+        3.2,
+        0.3,
+        8.5
+      );
+
+      controls.target.set(
+        0,
+        -0.3,
+        0
+      );
+
+      controls.update();
+
+    }
+  );
+
+
+/* ANIMATION */
+
+function animate(){
+
+  requestAnimationFrame(
+    animate
+  );
+
+  controls.update();
+
+  updateLabel();
+
+  renderer.render(
+    scene,
+    camera
+  );
+
+}
+
+
+/* START */
+
+resize();
+
+animate();
+
+loadRealBrain();
+
+</script>
+
+
+<!-- QUIZ JAVASCRIPT -->
 
 <script>
 
-function checkAnswer(correct) {
+function checkAnswer(
+  button,
+  correct
+){
 
-  const feedback =
-    document.getElementById("feedback");
+  const parent =
+    button.parentElement;
 
-  if (correct) {
+  const options =
+    parent.querySelectorAll(
+      ".option"
+    );
 
-    feedback.textContent =
-      "✓ Correct — the hippocampus is strongly involved in forming and organizing new memories.";
 
-  } else {
+  options.forEach(
+    function(option){
 
-    feedback.textContent =
-      "Not quite. Think about the hippocampus's role in memory and spatial learning.";
+      option.classList.remove(
+        "correct",
+        "wrong"
+      );
+
+    }
+  );
+
+
+  if(correct){
+
+    button.classList.add(
+      "correct"
+    );
+
+  }else{
+
+    button.classList.add(
+      "wrong"
+    );
+
+  }
+
+
+  updateQuizScore();
+
+}
+
+
+function updateQuizScore(){
+
+  const result =
+    document.getElementById(
+      "quizResult"
+    );
+
+
+  let answered = 0;
+
+  let correctAnswers = 0;
+
+
+  document
+    .querySelectorAll(".question")
+    .forEach(
+      function(question){
+
+        const selected =
+          question.querySelector(
+            ".correct, .wrong"
+          );
+
+
+        if(selected){
+
+          answered++;
+
+
+          if(
+            selected.classList.contains(
+              "correct"
+            )
+          ){
+
+            correctAnswers++;
+
+          }
+
+        }
+
+      }
+    );
+
+
+  if(answered > 0){
+
+    result.style.display =
+      "block";
+
+
+    result.textContent =
+      "Score: " +
+      correctAnswers +
+      " / " +
+      answered;
 
   }
 
