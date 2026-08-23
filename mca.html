@@ -4,7 +4,9 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
 <title>NeuroAtlas | Middle Cerebral Artery</title>
 
@@ -125,7 +127,7 @@ h1{
 
 
 /* ==================================================
-   3D VIEWER
+   VIEWER
 ================================================== */
 
 .viewer{
@@ -224,7 +226,7 @@ h1{
 
 
 /* ==================================================
-   MCA LABEL
+   LABEL
 ================================================== */
 
 .mca-label{
@@ -764,7 +766,7 @@ DRAG TO ROTATE · SCROLL TO ZOOM
 <div id="loading" class="loading">
 
 <span id="loadText">
-Loading real brain model...
+Loading brain model...
 </span>
 
 <div class="loading-bar">
@@ -785,7 +787,7 @@ class="loading-bar-inner">
 <div id="mcaLabel" class="mca-label">
 
 <div class="label-box">
-MCA TERRITORY · منطقة الـMCA
+MCA · MIDDLE CEREBRAL ARTERY
 </div>
 
 </div>
@@ -936,7 +938,7 @@ Middle Cerebral Artery
 
 <p class="location-caption">
 
-⚪ White indicates the approximate MCA territory and course.
+⚪ White indicates the MCA.
 
 </p>
 
@@ -1317,8 +1319,6 @@ Choose the best answer for each question.
 </p>
 
 
-<!-- QUESTION 1 -->
-
 <div class="question">
 
 <p>
@@ -1372,8 +1372,6 @@ D. Anterior cerebral artery · الشريان الدماغي الأمامي
 </div>
 
 
-<!-- QUESTION 2 -->
-
 <div class="question">
 
 <p>
@@ -1426,8 +1424,6 @@ D. Cerebellum · المخيخ
 
 </div>
 
-
-<!-- QUESTION 3 -->
 
 <div class="question">
 
@@ -1498,7 +1494,7 @@ class="quiz-result">
 
 
 <!-- ==================================================
-     THREE.JS IMPORT MAP
+     THREE.JS
 ================================================== -->
 
 <script type="importmap">
@@ -1524,18 +1520,15 @@ import * as THREE from "three";
 
 import {
     OrbitControls
-}
-from "three/addons/controls/OrbitControls.js";
+} from "three/addons/controls/OrbitControls.js";
 
 import {
     GLTFLoader
-}
-from "three/addons/loaders/GLTFLoader.js";
+} from "three/addons/loaders/GLTFLoader.js";
 
 import {
     DRACOLoader
-}
-from "three/addons/loaders/DRACOLoader.js";
+} from "three/addons/loaders/DRACOLoader.js";
 
 
 /* ==================================================
@@ -1543,40 +1536,37 @@ from "three/addons/loaders/DRACOLoader.js";
 ================================================== */
 
 const canvas =
-document.getElementById("brainCanvas");
+    document.getElementById("brainCanvas");
 
 const loading =
-document.getElementById("loading");
+    document.getElementById("loading");
 
 const loadText =
-document.getElementById("loadText");
+    document.getElementById("loadText");
 
 const loadBar =
-document.getElementById("loadBar");
+    document.getElementById("loadBar");
 
 const mcaLabel =
-document.getElementById("mcaLabel");
+    document.getElementById("mcaLabel");
 
 
 /* ==================================================
-   SCENE
+   THREE SCENE
 ================================================== */
 
 const scene =
-new THREE.Scene();
+    new THREE.Scene();
 
-
-/* ==================================================
-   CAMERA
-================================================== */
 
 const camera =
-new THREE.PerspectiveCamera(
-    30,
-    1,
-    0.01,
-    100
-);
+    new THREE.PerspectiveCamera(
+        30,
+        1,
+        0.01,
+        100
+    );
+
 
 camera.position.set(
     3.4,
@@ -1585,20 +1575,17 @@ camera.position.set(
 );
 
 
-/* ==================================================
-   RENDERER
-================================================== */
-
 const renderer =
-new THREE.WebGLRenderer({
+    new THREE.WebGLRenderer({
 
-    canvas:canvas,
+        canvas:canvas,
 
-    antialias:true,
+        antialias:true,
 
-    alpha:true
+        alpha:true
 
-});
+    });
+
 
 renderer.setPixelRatio(
     Math.min(
@@ -1607,40 +1594,49 @@ renderer.setPixelRatio(
     )
 );
 
+
 renderer.toneMapping =
-THREE.ACESFilmicToneMapping;
+    THREE.ACESFilmicToneMapping;
+
 
 renderer.toneMappingExposure =
-0.9;
+    0.9;
 
 
 /* ==================================================
-   CONTROLS
+   ORBIT
 ================================================== */
 
 const controls =
-new OrbitControls(
-    camera,
-    canvas
-);
+    new OrbitControls(
+        camera,
+        canvas
+    );
 
-controls.enableRotate = true;
 
-controls.rotateSpeed = 0.6;
+controls.enableDamping =
+    true;
 
-controls.enableDamping = true;
+controls.dampingFactor =
+    0.05;
 
-controls.dampingFactor = 0.05;
+controls.enablePan =
+    false;
 
-controls.enableZoom = true;
+controls.enableZoom =
+    true;
 
-controls.zoomSpeed = 0.6;
+controls.zoomSpeed =
+    0.6;
 
-controls.enablePan = false;
+controls.rotateSpeed =
+    0.6;
 
-controls.autoRotate = true;
+controls.autoRotate =
+    true;
 
-controls.autoRotateSpeed = 0.18;
+controls.autoRotateSpeed =
+    0.18;
 
 controls.target.set(
     0,
@@ -1648,36 +1644,42 @@ controls.target.set(
     0
 );
 
-controls.minDistance = 3.5;
+controls.minDistance =
+    3.5;
 
-controls.maxDistance = 16;
+controls.maxDistance =
+    16;
 
 
 /* ==================================================
-   LIGHTING
+   LIGHT
 ================================================== */
 
 scene.add(
     new THREE.AmbientLight(
         0xffffff,
-        0.65
+        0.7
     )
 );
 
+
 const hemi =
-new THREE.HemisphereLight(
-    0xffdce6,
-    0x081018,
-    0.85
-);
+    new THREE.HemisphereLight(
+        0xffdce6,
+        0x081018,
+        0.9
+    );
+
 
 scene.add(hemi);
 
+
 const key =
-new THREE.DirectionalLight(
-    0xffffff,
-    1.5
-);
+    new THREE.DirectionalLight(
+        0xffffff,
+        1.6
+    );
+
 
 key.position.set(
     6,
@@ -1685,13 +1687,16 @@ key.position.set(
     8
 );
 
+
 scene.add(key);
 
+
 const fill =
-new THREE.DirectionalLight(
-    0x9bb9d2,
-    0.45
-);
+    new THREE.DirectionalLight(
+        0x9bb9d2,
+        0.45
+    );
+
 
 fill.position.set(
     -7,
@@ -1699,265 +1704,363 @@ fill.position.set(
     6
 );
 
+
 scene.add(fill);
 
 
 /* ==================================================
-   BRAIN GROUP
+   BRAIN
 ================================================== */
 
 const brainGroup =
-new THREE.Group();
-
-scene.add(brainGroup);
-
-
-/* ==================================================
-   PINK BRAIN MATERIAL
-================================================== */
-
-const brainPinkMaterial =
-new THREE.MeshPhysicalMaterial({
-
-    color:0xf1c5d0,
-
-    roughness:0.62,
-
-    metalness:0,
-
-    clearcoat:0.15,
-
-    clearcoatRoughness:0.5,
-
-    side:THREE.DoubleSide
-
-});
-
-
-/* ==================================================
-   MCA WHITE MATERIAL
-================================================== */
-
-const mcaMaterial =
-new THREE.MeshBasicMaterial({
-
-    color:0xffffff,
-
-    transparent:true,
-
-    opacity:0.92,
-
-    depthTest:false,
-
-    depthWrite:false,
-
-    side:THREE.DoubleSide
-
-});
-
-
-let highlighted = true;
-
-let mcaGroup = null;
-
-
-/* ==================================================
-   MCA INTERNAL HIGHLIGHT
-
-   IMPORTANT:
-
-   There is NO white tube outside the brain.
-
-   The highlight is a flattened white region
-   embedded into the lateral cerebral hemisphere.
-================================================== */
-
-function createMCAOverlay(){
-
-    mcaGroup =
     new THREE.Group();
 
 
-    /*
-       Main MCA territory.
+scene.add(
+    brainGroup
+);
 
-       It is intentionally a flat,
-       rounded cortical patch instead
-       of a floating vessel.
-    */
 
-    const geometry =
-    new THREE.SphereGeometry(
-        1,
-        64,
-        32
+/* ==================================================
+   COLORS
+================================================== */
+
+const brainPink =
+    new THREE.Color(
+        0xf1c5d0
+    );
+
+const arteryWhite =
+    new THREE.Color(
+        0xffffff
     );
 
 
-    const material =
-    mcaMaterial.clone();
+/* ==================================================
+   ORIGINAL MATERIAL STORAGE
+================================================== */
+
+const brainMaterials =
+    [];
+
+const mcaMaterials =
+    [];
 
 
-    const territory =
-    new THREE.Mesh(
-        geometry,
-        material
-    );
+/* ==================================================
+   NAME DETECTION
+================================================== */
+
+/*
+    We DO NOT create an artery.
+
+    We only search the meshes that already
+    exist inside the GLB.
+
+    Names commonly used for MCA/vessels:
+*/
+
+const mcaWords = [
+
+    "mca",
+
+    "middlecerebral",
+
+    "middle_cerebral",
+
+    "middle-cerebral",
+
+    "middle cerebral",
+
+    "cerebralartery",
+
+    "cerebral_artery",
+
+    "cerebral-artery",
+
+    "cerebral artery"
+
+];
 
 
-    /*
-       Make it wide and thin.
+const vesselWords = [
 
-       This creates a cortical highlight
-       rather than a separate object.
-    */
+    "artery",
 
-    territory.scale.set(
-        1.18,
-        0.68,
-        0.055
-    );
+    "arteries",
 
+    "vessel",
 
-    /*
-       LATERAL SURFACE
+    "vasculature",
 
-       This is intentionally kept within
-       the brain silhouette.
-    */
+    "vascular",
 
-    territory.position.set(
-        0.82,
-        0.02,
-        0.02
-    );
+    "mca",
+
+    "cerebral"
+
+];
 
 
-    mcaGroup.add(
-        territory
-    );
+/* ==================================================
+   CHECK MCA NAME
+================================================== */
+
+function isMCAName(name){
+
+    if(!name)
+        return false;
 
 
-    /*
-       Smaller superior extension.
-    */
-
-    const superiorGeometry =
-    new THREE.SphereGeometry(
-        0.65,
-        48,
-        24
-    );
+    const clean =
+        name
+        .toLowerCase()
+        .replace(/\s+/g," ")
+        .trim();
 
 
-    const superior =
-    new THREE.Mesh(
-        superiorGeometry,
-        material.clone()
-    );
-
-
-    superior.scale.set(
-        0.72,
-        0.38,
-        0.045
-    );
-
-
-    superior.position.set(
-        0.78,
-        0.43,
-        0.02
-    );
-
-
-    mcaGroup.add(
-        superior
-    );
-
-
-    /*
-       Smaller inferior extension.
-    */
-
-    const inferior =
-    new THREE.Mesh(
-        new THREE.SphereGeometry(
-            0.65,
-            48,
-            24
-        ),
-        material.clone()
-    );
-
-
-    inferior.scale.set(
-        0.78,
-        0.36,
-        0.045
-    );
-
-
-    inferior.position.set(
-        0.78,
-        -0.38,
-        0.02
-    );
-
-
-    mcaGroup.add(
-        inferior
-    );
-
-
-    /*
-       Keep the whole highlight embedded
-       in the brain.
-    */
-
-    mcaGroup.position.set(
-        -0.40,
-        -0.48,
-        0.02
-    );
-
-
-    mcaGroup.scale.set(
-        0.72,
-        0.72,
-        0.72
-    );
-
-
-    /*
-       VERY IMPORTANT:
-
-       Render the brain first and the highlight
-       only slightly above its surface.
-    */
-
-    mcaGroup.renderOrder = 10;
-
-
-    brainGroup.add(
-        mcaGroup
+    return mcaWords.some(
+        word =>
+        clean.includes(word)
     );
 
 }
 
 
 /* ==================================================
-   LOAD REAL BRAIN
+   CHECK VESSEL NAME
+================================================== */
+
+function isVesselName(name){
+
+    if(!name)
+        return false;
+
+
+    const clean =
+        name
+        .toLowerCase()
+        .replace(/\s+/g," ")
+        .trim();
+
+
+    return vesselWords.some(
+        word =>
+        clean.includes(word)
+    );
+
+}
+
+
+/* ==================================================
+   MAKE BRAIN PINK
+================================================== */
+
+function makeBrainPink(mesh){
+
+    if(!mesh.material)
+        return;
+
+
+    const materials =
+        Array.isArray(mesh.material)
+        ? mesh.material
+        : [mesh.material];
+
+
+    materials.forEach(
+        function(oldMaterial){
+
+            const mat =
+                oldMaterial.clone();
+
+
+            mat.color =
+                brainPink;
+
+
+            mat.roughness =
+                0.62;
+
+
+            mat.metalness =
+                0;
+
+
+            mat.side =
+                THREE.DoubleSide;
+
+
+            mesh.material =
+                mat;
+
+
+            brainMaterials.push(
+                mat
+            );
+
+        }
+    );
+
+}
+
+
+/* ==================================================
+   MAKE MCA WHITE
+================================================== */
+
+function makeMCAWhite(mesh){
+
+    if(!mesh.material)
+        return;
+
+
+    const materials =
+        Array.isArray(mesh.material)
+        ? mesh.material
+        : [mesh.material];
+
+
+    materials.forEach(
+        function(oldMaterial){
+
+            const mat =
+                oldMaterial.clone();
+
+
+            /*
+               ONLY THE EXISTING
+               MCA MESH GETS THIS COLOR.
+            */
+
+            mat.color =
+                arteryWhite;
+
+
+            mat.roughness =
+                0.38;
+
+
+            mat.metalness =
+                0.05;
+
+
+            mat.side =
+                THREE.DoubleSide;
+
+
+            mesh.material =
+                mat;
+
+
+            mcaMaterials.push(
+                mat
+            );
+
+        }
+    );
+
+
+    mesh.userData.isMCA =
+        true;
+
+
+    mesh.renderOrder =
+        5;
+
+}
+
+
+/* ==================================================
+   PREPARE MODEL
+================================================== */
+
+function prepareModel(model){
+
+    let foundMCA =
+        false;
+
+
+    model.traverse(
+        function(child){
+
+            if(!child.isMesh)
+                return;
+
+
+            child.castShadow =
+                true;
+
+
+            child.receiveShadow =
+                true;
+
+
+            const name =
+                child.name || "";
+
+
+            /*
+               FIRST:
+
+               Check whether this is already
+               an MCA object in the GLB.
+            */
+
+            if(
+                isMCAName(name)
+            ){
+
+                makeMCAWhite(
+                    child
+                );
+
+                foundMCA =
+                    true;
+
+                console.log(
+                    "MCA FOUND:",
+                    name
+                );
+
+                return;
+
+            }
+
+
+            /*
+               If it is not MCA,
+               make the brain pink.
+
+               We NEVER turn a random brain
+               region into an artery.
+            */
+
+            makeBrainPink(
+                child
+            );
+
+        }
+    );
+
+
+    return foundMCA;
+
+}
+
+
+/* ==================================================
+   LOAD MODEL
 ================================================== */
 
 function loadRealBrain(){
 
     const loader =
-    new GLTFLoader();
+        new GLTFLoader();
 
 
     const draco =
-    new DRACOLoader();
+        new DRACOLoader();
 
 
     draco.setDecoderPath(
@@ -1971,7 +2074,7 @@ function loadRealBrain(){
 
 
     /*
-       Keep your real model URL here.
+       Existing brain model.
     */
 
     const urls = [
@@ -1986,11 +2089,14 @@ function loadRealBrain(){
     let index = 0;
 
 
-    function tryLoad(){
+    function tryNext(){
 
-        if(index >= urls.length){
+        if(
+            index >= urls.length
+        ){
 
-            createFallbackBrain();
+            loadText.textContent =
+                "Brain model could not be loaded.";
 
             return;
 
@@ -1998,11 +2104,7 @@ function loadRealBrain(){
 
 
         const url =
-        urls[index++];
-
-
-        loadText.textContent =
-        "Loading real brain model...";
+            urls[index++];
 
 
         loader.load(
@@ -2012,45 +2114,43 @@ function loadRealBrain(){
             function(gltf){
 
                 const model =
-                gltf.scene;
+                    gltf.scene;
 
 
                 /*
-                   Calculate dimensions.
+                   Normalize model size.
                 */
 
                 const box =
-                new THREE.Box3()
-                .setFromObject(model);
+                    new THREE.Box3()
+                        .setFromObject(
+                            model
+                        );
 
 
                 const center =
-                box.getCenter(
-                    new THREE.Vector3()
-                );
+                    box.getCenter(
+                        new THREE.Vector3()
+                    );
 
 
                 const size =
-                box.getSize(
-                    new THREE.Vector3()
-                );
+                    box.getSize(
+                        new THREE.Vector3()
+                    );
 
 
                 const maxDim =
-                Math.max(
-                    size.x,
-                    size.y,
-                    size.z
-                );
+                    Math.max(
+                        size.x,
+                        size.y,
+                        size.z
+                    );
 
 
                 const scale =
-                4.5 / maxDim;
+                    4.5 / maxDim;
 
-
-                /*
-                   Normalize model.
-                */
 
                 model.scale.setScalar(
                     scale
@@ -2064,31 +2164,18 @@ function loadRealBrain(){
                 );
 
 
-                model.position.y -= 0.55;
+                model.position.y -=
+                    0.55;
 
 
                 /*
-                   Make REAL brain pink.
+                   Prepare existing geometry.
                 */
 
-                model.traverse(
-                function(child){
-
-                    if(!child.isMesh)
-                        return;
-
-
-                    child.castShadow =
-                    true;
-
-                    child.receiveShadow =
-                    true;
-
-
-                    child.material =
-                    brainPinkMaterial.clone();
-
-                });
+                const foundMCA =
+                    prepareModel(
+                        model
+                    );
 
 
                 brainGroup.add(
@@ -2096,35 +2183,68 @@ function loadRealBrain(){
                 );
 
 
-                /*
-                   Create internal MCA highlight.
-                */
+                if(foundMCA){
 
-                createMCAOverlay();
+                    loadText.textContent =
+                        "MCA highlighted.";
+
+                    mcaLabel.classList.add(
+                        "show"
+                    );
+
+                }
+
+                else{
+
+                    /*
+                       IMPORTANT:
+
+                       No fake artery.
+
+                       If the GLB has no MCA mesh,
+                       we tell the user instead of
+                       creating one.
+                    */
+
+                    loadText.textContent =
+                        "Brain loaded · MCA vessel not found in model.";
+
+                }
 
 
                 loadBar.style.width =
-                "100%";
+                    "100%";
 
 
-                onReady();
+                setTimeout(
+                    function(){
+
+                        loading.classList.add(
+                            "hide"
+                        );
+
+                    },
+                    700
+                );
 
             },
 
             function(progress){
 
-                if(progress.total > 0){
+                if(progress.total){
 
-                    const pct =
-                    Math.min(
-                        90,
-                        progress.loaded /
-                        progress.total *
-                        90
-                    );
+                    const percent =
+                        Math.min(
+                            95,
+                            (
+                                progress.loaded /
+                                progress.total
+                            ) * 100
+                        );
+
 
                     loadBar.style.width =
-                    pct + "%";
+                        percent + "%";
 
                 }
 
@@ -2133,12 +2253,12 @@ function loadRealBrain(){
             function(error){
 
                 console.warn(
-                    "Brain model failed:",
+                    "Model failed:",
                     error
                 );
 
 
-                tryLoad();
+                tryNext();
 
             }
 
@@ -2147,137 +2267,7 @@ function loadRealBrain(){
     }
 
 
-    tryLoad();
-
-}
-
-
-/* ==================================================
-   FALLBACK BRAIN
-================================================== */
-
-function createFallbackBrain(){
-
-    loadText.textContent =
-    "Creating anatomy view...";
-
-
-    const geometry =
-    new THREE.SphereGeometry(
-        2.05,
-        64,
-        48
-    );
-
-
-    const brain =
-    new THREE.Mesh(
-        geometry,
-        brainPinkMaterial
-    );
-
-
-    brain.scale.set(
-        1.15,
-        0.92,
-        0.82
-    );
-
-
-    brain.position.y =
-    -0.45;
-
-
-    brainGroup.add(
-        brain
-    );
-
-
-    createMCAOverlay();
-
-
-    loadBar.style.width =
-    "100%";
-
-
-    onReady();
-
-}
-
-
-/* ==================================================
-   READY
-================================================== */
-
-function onReady(){
-
-    setTimeout(
-    function(){
-
-        loading.classList.add(
-            "hide"
-        );
-
-        mcaLabel.classList.add(
-            "show"
-        );
-
-    },
-    500
-    );
-
-}
-
-
-/* ==================================================
-   LABEL POSITION
-
-   Kept very close to the highlighted
-   region rather than floating outside.
-================================================== */
-
-function updateLabel(){
-
-    if(!mcaGroup)
-        return;
-
-
-    const position =
-    new THREE.Vector3(
-        0.80,
-        0.10,
-        0.08
-    );
-
-
-    mcaGroup.localToWorld(
-        position
-    );
-
-
-    position.project(
-        camera
-    );
-
-
-    const x =
-    (position.x + 1) /
-    2 *
-    canvas.clientWidth;
-
-
-    const y =
-    (-position.y + 1) /
-    2 *
-    canvas.clientHeight;
-
-
-    mcaLabel.style.left =
-    x + "px";
-
-
-    mcaLabel.style.top =
-    y + "px";
+    tryNext();
 
 }
 
@@ -2289,18 +2279,21 @@ function updateLabel(){
 function resize(){
 
     const width =
-    canvas.clientWidth;
+        canvas.clientWidth;
 
     const height =
-    canvas.clientHeight;
+        canvas.clientHeight;
 
 
-    if(width <= 0 || height <= 0)
+    if(
+        width <= 0 ||
+        height <= 0
+    )
         return;
 
 
     camera.aspect =
-    width / height;
+        width / height;
 
 
     camera.updateProjectionMatrix();
@@ -2322,87 +2315,96 @@ window.addEventListener(
 
 
 /* ==================================================
-   HIGHLIGHT BUTTON
+   HIGHLIGHT
 ================================================== */
 
 const highlightBtn =
-document.getElementById(
-    "highlight"
-);
+    document.getElementById(
+        "highlight"
+    );
 
 
 highlightBtn.addEventListener(
-"click",
-function(){
+    "click",
+    function(){
 
-    highlighted =
-    !highlighted;
+        const visible =
+            mcaMaterials.length > 0
+            ? mcaMaterials[0].userData.highlighted !== false
+            : true;
 
 
-    if(mcaGroup){
+        const newState =
+            !visible;
 
-        mcaGroup.visible =
-        highlighted;
+
+        mcaMaterials.forEach(
+            function(material){
+
+                material.color =
+                    newState
+                    ? arteryWhite
+                    : brainPink;
+
+                material.userData.highlighted =
+                    newState;
+
+            }
+        );
+
+
+        mcaLabel.classList.toggle(
+            "show",
+            newState
+        );
+
+
+        highlightBtn.classList.toggle(
+            "active",
+            newState
+        );
+
+
+        highlightBtn.textContent =
+            newState
+            ? "⚪ Highlight MCA"
+            : "⚫ Show MCA";
 
     }
-
-
-    mcaLabel.classList.toggle(
-        "show",
-        highlighted
-    );
-
-
-    highlightBtn.classList.toggle(
-        "active",
-        highlighted
-    );
-
-
-    highlightBtn.textContent =
-
-    highlighted
-
-    ? "⚪ Highlight MCA"
-
-    : "⚫ Show MCA";
-
-});
-
-
-/* ==================================================
-   ROTATION BUTTON
-================================================== */
-
-const rotateBtn =
-document.getElementById(
-    "rotate"
 );
 
 
-rotateBtn.addEventListener(
-"click",
-function(){
+/* ==================================================
+   ROTATION
+================================================== */
 
-    controls.autoRotate =
-    !controls.autoRotate;
-
-
-    rotateBtn.classList.toggle(
-        "active",
-        controls.autoRotate
+const rotateBtn =
+    document.getElementById(
+        "rotate"
     );
 
 
-    rotateBtn.textContent =
+rotateBtn.addEventListener(
+    "click",
+    function(){
 
-    controls.autoRotate
+        controls.autoRotate =
+            !controls.autoRotate;
 
-    ? "⟳ Auto Rotate"
 
-    : "▶ Auto Rotate";
+        rotateBtn.classList.toggle(
+            "active",
+            controls.autoRotate
+        );
 
-});
+
+        rotateBtn.textContent =
+            controls.autoRotate
+            ? "⟳ Auto Rotate"
+            : "▶ Auto Rotate";
+
+    }
+);
 
 
 /* ==================================================
@@ -2412,26 +2414,27 @@ function(){
 document.getElementById(
     "reset"
 ).addEventListener(
-"click",
-function(){
+    "click",
+    function(){
 
-    camera.position.set(
-        3.4,
-        0.35,
-        8.2
-    );
-
-
-    controls.target.set(
-        0,
-        -0.25,
-        0
-    );
+        camera.position.set(
+            3.4,
+            0.35,
+            8.2
+        );
 
 
-    controls.update();
+        controls.target.set(
+            0,
+            -0.25,
+            0
+        );
 
-});
+
+        controls.update();
+
+    }
+);
 
 
 /* ==================================================
@@ -2446,9 +2449,6 @@ function animate(){
 
 
     controls.update();
-
-
-    updateLabel();
 
 
     renderer.render(
@@ -2486,24 +2486,20 @@ let correctAnswers = 0;
 function checkAnswer(button, correct){
 
     const question =
-    button.closest(
-        ".question"
-    );
+        button.closest(
+            ".question"
+        );
 
 
     const options =
-    question.querySelectorAll(
-        ".option"
-    );
+        question.querySelectorAll(
+            ".option"
+        );
 
-
-    /*
-       Prevent answering the same question
-       multiple times.
-    */
 
     if(
-        question.dataset.answered === "true"
+        question.dataset.answered ===
+        "true"
     ){
 
         return;
@@ -2512,16 +2508,17 @@ function checkAnswer(button, correct){
 
 
     question.dataset.answered =
-    "true";
+        "true";
 
 
     options.forEach(
-    function(option){
+        function(option){
 
-        option.disabled =
-        true;
+            option.disabled =
+                true;
 
-    });
+        }
+    );
 
 
     if(correct){
@@ -2542,22 +2539,23 @@ function checkAnswer(button, correct){
 
 
         options.forEach(
-        function(option){
+            function(option){
 
-            if(
-                option.getAttribute(
-                    "onclick"
-                ) ===
-                "checkAnswer(this,true)"
-            ){
+                if(
+                    option.getAttribute(
+                        "onclick"
+                    ) ===
+                    "checkAnswer(this,true)"
+                ){
 
-                option.classList.add(
-                    "correct"
-                );
+                    option.classList.add(
+                        "correct"
+                    );
+
+                }
 
             }
-
-        });
+        );
 
     }
 
@@ -2566,26 +2564,26 @@ function checkAnswer(button, correct){
 
 
     const result =
-    document.getElementById(
-        "quizResult"
-    );
+        document.getElementById(
+            "quizResult"
+        );
 
 
     result.style.display =
-    "block";
+        "block";
 
 
     result.textContent =
-    "Score · النتيجة: " +
-    correctAnswers +
-    " / " +
-    answered;
+        "Score · النتيجة: " +
+        correctAnswers +
+        " / " +
+        answered;
 
 
     if(answered === 3){
 
         result.textContent +=
-        "  ·  Quiz Complete! 🎉";
+            " · Quiz Complete! 🎉";
 
     }
 
