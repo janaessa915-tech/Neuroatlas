@@ -1,764 +1,282 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>NeuroAtlas | MCA</title>
-
 <style>
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    background:#050b13;
-    color:#eef4fa;
-    font-family:Arial,Helvetica,sans-serif;
-    line-height:1.6;
-}
-
-nav{
-    height:70px;
-    padding:0 7%;
-    display:flex;
-    align-items:center;
-    border-bottom:1px solid rgba(255,255,255,.08);
-}
-
-nav a{
-    color:#9db0c3;
-    text-decoration:none;
-    font-size:14px;
-}
-
-nav a:hover{
-    color:white;
-}
-
-.container{
-    max-width:1200px;
-    margin:auto;
-    padding:60px 7% 100px;
-}
-
-.eyebrow{
-    color:#61b5ff;
-    letter-spacing:3px;
-    font-size:12px;
-    text-transform:uppercase;
-    margin-bottom:15px;
-}
-
-h1{
-    font-size:clamp(60px,8vw,90px);
-    line-height:.95;
-    letter-spacing:-4px;
-    margin-bottom:12px;
-}
-
-.arabic-title{
-    color:#ffb6c9;
-    font-size:25px;
-    margin-bottom:25px;
-}
-
-.hero p{
-    color:#a6b6c7;
-    max-width:850px;
-    font-size:18px;
-    line-height:1.8;
-}
-
-.actions{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    margin-top:28px;
-}
-
-.action-button{
-    padding:11px 17px;
-    border-radius:9px;
-    background:#0b1928;
-    border:1px solid #31516d;
-    color:#bdd0e0;
-    cursor:pointer;
-    text-decoration:none;
-    font-size:14px;
-    transition:.2s;
-}
-
-.action-button:hover{
-    background:#14304a;
-    color:white;
-    border-color:#ffffff;
-}
-
-.viewer{
-    margin-top:60px;
-    border:1px solid rgba(255,255,255,.10);
-    border-radius:24px;
-    overflow:hidden;
-    background:#02060b;
-    box-shadow:0 25px 80px rgba(0,0,0,.45);
-}
-
-.viewer-header{
-    min-height:65px;
-    padding:0 22px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    border-bottom:1px solid rgba(255,255,255,.08);
-}
-
-.viewer-title{
-    font-size:14px;
-    color:#d2dce6;
-}
-
-.viewer-status{
-    color:#708499;
-    font-size:11px;
-    letter-spacing:1px;
-}
-
-.scene{
-    position:relative;
-    width:100%;
-    height:700px;
-    background:
-    radial-gradient(
-        circle at 50% 45%,
-        #203b51 0%,
-        #0d1c2e 42%,
-        #02060b 100%
-    );
-}
-
-#brainCanvas{
-    width:100%;
-    height:100%;
-    display:block;
-}
-
-.loading{
-    position:absolute;
-    inset:0;
-    z-index:20;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-direction:column;
-    gap:16px;
-    background:#02060b;
-    color:#9db0c3;
-    font-size:14px;
-    transition:opacity .8s;
-}
-
-.loading.hide{
-    opacity:0;
-    pointer-events:none;
-}
-
-.loading-bar{
-    width:180px;
-    height:2px;
-    background:rgba(255,255,255,.08);
-    border-radius:2px;
-    overflow:hidden;
-}
-
-.loading-bar-inner{
-    width:0%;
-    height:100%;
-    background:#ffffff;
-    transition:width .3s;
-}
-
-.mca-label{
-    position:absolute;
-    z-index:30;
-    pointer-events:none;
-    transform:translate(-50%,-100%);
-    display:none;
-}
-
-.mca-label.show{
-    display:block;
-}
-
-.label-box{
-    position:relative;
-    padding:9px 15px;
-    border-radius:10px;
-    background:rgba(5,10,17,.96);
-    border:1.5px solid #ffffff;
-    color:#ffffff;
-    font-size:12px;
-    font-weight:bold;
-    letter-spacing:1px;
-    white-space:nowrap;
-    box-shadow:
-        0 0 12px rgba(255,255,255,.18),
-        0 0 25px rgba(255,255,255,.08);
-}
-
-.label-box::after{
-    content:"";
-    position:absolute;
-    left:50%;
-    bottom:-15px;
-    width:1.5px;
-    height:15px;
-    background:#ffffff;
-    transform:translateX(-50%);
-}
-
-.controls{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-    padding:15px;
-    border-top:1px solid rgba(255,255,255,.08);
-}
-
-.controls button{
-    padding:11px 17px;
-    border-radius:9px;
-    background:#0b1928;
-    border:1px solid #31516d;
-    color:#bdd0e0;
-    cursor:pointer;
-    transition:.2s;
-}
-
-.controls button:hover{
-    background:#14304a;
-    color:white;
-}
-
-.controls button.active{
-    background:#15181c;
-    border-color:#ffffff;
-    color:#ffffff;
-}
-
-.section{
-    margin-top:70px;
-}
-
-.section-label{
-    color:#61b5ff;
-    letter-spacing:2px;
-    font-size:11px;
-    text-transform:uppercase;
-    margin-bottom:8px;
-}
-
-.section h2{
-    font-size:32px;
-    margin-bottom:25px;
-}
-
-.section-intro{
-    color:#91a5b8;
-    max-width:900px;
-    font-size:15px;
-    line-height:1.9;
-    margin-bottom:30px;
-}
-
-.cards{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:20px;
-}
-
-.card{
-    padding:27px;
-    background:#091522;
-    border:1px solid #172b3e;
-    border-radius:18px;
-    transition:transform .2s,border-color .2s;
-}
-
-.card:hover{
-    transform:translateY(-3px);
-    border-color:#2b506c;
-}
-
-.card h3{
-    font-size:18px;
-    margin-bottom:13px;
-    color:#eef4fa;
-    line-height:1.45;
-}
-
-.card p{
-    color:#91a5b8;
-    font-size:14px;
-    line-height:1.8;
-}
-
-.location{
-    margin-top:70px;
-    padding:32px;
-    background:#091522;
-    border:1px solid #172b3e;
-    border-radius:18px;
-}
-
-.location h2{
-    font-size:30px;
-    margin-bottom:12px;
-}
-
-.location-intro{
-    color:#91a5b8;
-    max-width:900px;
-    line-height:1.9;
-    margin-bottom:30px;
-}
-
-.brain-location-wrap{
-    width:100%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:25px 10px 10px;
-    background:
-    radial-gradient(
-        ellipse at center,
-        rgba(35,61,82,.45),
-        rgba(4,10,17,.2) 65%,
-        transparent 100%
-    );
-    border-radius:18px;
-}
-
-.brain-location-svg{
-    width:100%;
-    max-width:900px;
-    height:auto;
-    display:block;
-}
-
-.location-brain{
-    fill:#263d55;
-    stroke:#8ca3b8;
-    stroke-width:3;
-}
-
-.hemisphere-line{
-    fill:none;
-    stroke:#8da1b5;
-    stroke-width:2.5;
-    opacity:.7;
-}
-
-.sulcus{
-    fill:none;
-    stroke:#526b82;
-    stroke-width:3;
-    stroke-linecap:round;
-    opacity:.75;
-}
-
-.location-mca{
-    fill:none;
-    stroke:#ffffff;
-    stroke-width:9;
-    stroke-linecap:round;
-    stroke-linejoin:round;
-    filter:
-    drop-shadow(0 0 5px rgba(255,255,255,.8))
-    drop-shadow(0 0 12px rgba(255,255,255,.35));
-}
-
-.location-mca-branch{
-    fill:none;
-    stroke:#ffffff;
-    stroke-width:5.5;
-    stroke-linecap:round;
-    stroke-linejoin:round;
-    filter:
-    drop-shadow(0 0 5px rgba(255,255,255,.6));
-}
-
-.location-line{
-    stroke:#ffffff;
-    stroke-width:2;
-}
-
-.location-label{
-    fill:#ffffff;
-    font-size:20px;
-    font-weight:bold;
-    letter-spacing:1px;
-}
-
-.location-sub{
-    fill:#9fb1c2;
-    font-size:14px;
-}
-
-.location-caption{
-    text-align:center;
-    color:#9fb0c3;
-    margin-top:18px;
-    font-size:14px;
-}
-
-.clinical-section{
-    margin-top:65px;
-}
-
-.clinical-box{
-    padding:30px;
-    background:#091522;
-    border:1px solid #172b3e;
-    border-left:3px solid #ffffff;
-    border-radius:18px;
-}
-
-.clinical-box p{
-    color:#a7b7c6;
-    font-size:15px;
-    line-height:1.9;
-    margin-bottom:18px;
-}
-
-.clinical-box p:last-child{
-    margin-bottom:0;
-}
-
-.insight{
-    margin-top:30px;
-    padding:25px;
-    background:#091522;
-    border-left:3px solid #ffffff;
-    border-radius:10px;
-    color:#aebdce;
-}
-
-.insight strong{
-    color:#ffffff;
-}
-
-.facts-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:15px;
-}
-
-.fact{
-    padding:22px;
-    background:#091522;
-    border:1px solid #172b3e;
-    border-radius:16px;
-}
-
-.fact span{
-    display:block;
-    color:#ffffff;
-    font-size:11px;
-    letter-spacing:2px;
-    margin-bottom:12px;
-}
-
-.fact strong{
-    display:block;
-    color:#eef4fa;
-    font-size:14px;
-    margin-bottom:8px;
-    line-height:1.5;
-}
-
-.fact p{
-    color:#8195a8;
-    font-size:13px;
-    line-height:1.7;
-}
-
-.quiz{
-    margin-top:65px;
-    padding:30px;
-    background:#091522;
-    border:1px solid #172b3e;
-    border-radius:18px;
-}
-
-.quiz h2{
-    font-size:27px;
-    margin-bottom:25px;
-}
-
-.question{
-    margin-bottom:35px;
-    padding-bottom:25px;
-    border-bottom:1px solid #172b3e;
-}
-
-.question:last-of-type{
-    border-bottom:none;
-    margin-bottom:0;
-}
-
-.question-text{
-    color:#eef4fa;
-    font-size:16px;
-    line-height:1.8;
-    margin-bottom:15px;
-}
-
-.option{
-    display:block;
-    width:100%;
-    padding:13px;
-    margin-top:10px;
-    background:#10233a;
-    color:white;
-    border:1px solid #263951;
-    border-radius:8px;
-    text-align:left;
-    cursor:pointer;
-    font-size:15px;
-    transition:.2s;
-}
-
-.option:hover{
-    border-color:#ffffff;
-}
-
-.option.correct{
-    border-color:#ffffff;
-    background:#182027;
-}
-
-.option.wrong{
-    border-color:#687583;
-    background:#10161c;
-}
-
-.feedback{
-    margin-top:12px;
-    color:#ffffff;
-    font-size:14px;
-    min-height:22px;
-}
-
-.back{
-    display:inline-block;
-    margin-top:40px;
-    padding:12px 18px;
-    border:1px solid #263951;
-    border-radius:9px;
-    color:white;
-    text-decoration:none;
-}
-
-.back:hover{
-    border-color:#ffffff;
-}
-
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:#050b13;color:#eef4fa;font-family:Arial,Helvetica,sans-serif;line-height:1.7;}
+
+/* NAVIGATION */
+nav{height:70px;padding:0 7%;display:flex;align-items:center;border-bottom:1px solid rgba(255,255,255,.08);}
+nav a{color:#9db0c3;text-decoration:none;font-size:14px;}
+nav a:hover{color:white;}
+
+/* CONTAINER */
+.container{max-width:1200px;margin:auto;padding:60px 7% 100px;}
+
+/* HERO */
+.eyebrow{color:#61b5ff;letter-spacing:3px;font-size:12px;text-transform:uppercase;margin-bottom:15px;}
+h1{font-size:clamp(60px,8vw,90px);line-height:.95;letter-spacing:-4px;margin-bottom:10px;}
+.arabic-title{color:#ff8f9b;font-size:24px;margin-bottom:25px;}
+.hero p{color:#a6b6c7;max-width:780px;font-size:18px;line-height:1.8;}
+
+/* ACTION BUTTONS */
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px;}
+.action-button{padding:11px 17px;border-radius:9px;background:#0b1928;border:1px solid #31516d;color:#bdd0e0;text-decoration:none;cursor:pointer;transition:.2s;}
+.action-button:hover{background:#14304a;color:white;border-color:#61b5ff;}
+
+/* 3D VIEWER */
+.viewer{margin-top:60px;border:1px solid rgba(255,255,255,.10);border-radius:24px;overflow:hidden;background:#02060b;box-shadow:0 25px 80px rgba(0,0,0,.45);}
+.viewer-header{min-height:65px;padding:0 22px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.08);}
+.viewer-title{font-size:14px;color:#d2dce6;}
+.viewer-status{color:#708499;font-size:11px;letter-spacing:1px;}
+.scene{position:relative;width:100%;height:700px;background:radial-gradient(circle at 50% 45%,#203b51 0%,#0d1c2e 42%,#02060b 100%);}
+#brainCanvas{width:100%;height:100%;display:block;}
+
+/* LOADING */
+.loading{position:absolute;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;background:#02060b;color:#9db0c3;font-size:14px;transition:opacity .8s;}
+.loading.hide{opacity:0;pointer-events:none;}
+.loading-bar{width:180px;height:2px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden;}
+.loading-bar-inner{width:0%;height:100%;background:#61b5ff;transition:width .3s;}
+
+/* MCA LABEL */
+.mca-label{position:absolute;z-index:30;pointer-events:none;transform:translate(-50%,-100%);display:none;}
+.mca-label.show{display:block;}
+.label-box{position:relative;padding:9px 15px;border-radius:10px;background:rgba(5,10,17,.96);border:1.5px solid #ff4d5e;color:#ffd0d5;font-size:12px;font-weight:bold;letter-spacing:1px;white-space:nowrap;box-shadow:0 0 12px rgba(255,77,94,.25),0 0 25px rgba(255,77,94,.12);}
+.label-box::after{content:"";position:absolute;left:50%;bottom:-15px;width:1.5px;height:15px;background:#ff4d5e;transform:translateX(-50%);}
+
+/* CONTROLS */
+.controls{display:flex;gap:10px;flex-wrap:wrap;padding:15px;border-top:1px solid rgba(255,255,255,.08);}
+.controls button{padding:11px 17px;border-radius:9px;background:#0b1928;border:1px solid #31516d;color:#bdd0e0;cursor:pointer;transition:.2s;}
+.controls button:hover{background:#14304a;color:white;}
+.controls button.active{background:#241417;border-color:#ff4d5e;color:#ffd0d5;}
+
+/* INFORMATION */
+.section{margin-top:70px;}
+.section-label{color:#61b5ff;letter-spacing:2px;font-size:11px;text-transform:uppercase;margin-bottom:8px;}
+.section h2{font-size:32px;margin-bottom:25px;}
+.section-intro{color:#91a5b8;max-width:900px;font-size:15px;line-height:1.9;margin-bottom:30px;}
+
+/* LOCATION */
+.location{margin-top:70px;padding:35px;background:#091522;border:1px solid #172b3e;border-radius:18px;}
+.location h2{font-size:32px;margin-bottom:12px;}
+.location-intro{color:#91a5b8;max-width:900px;line-height:1.9;margin-bottom:30px;}
+.brain-visual{width:100%;overflow:hidden;}
+
+.location-svg{display:block;width:100%;max-width:800px;height:auto;margin:auto;}
+.location-brain{fill:#263d55;stroke:#71869e;stroke-width:3;}
+.location-ica{fill:none;stroke:#c98a6b;stroke-width:3;stroke-dasharray:2 6;stroke-linecap:round;}
+.location-mca-glow{fill:none;stroke:#ff4d5e;stroke-width:14;opacity:.35;filter:blur(7px);}
+.location-mca-trunk{fill:none;stroke:#ff4d5e;stroke-width:7;stroke-linecap:round;}
+.location-mca{fill:none;stroke:#ff4d5e;stroke-width:4.5;stroke-linecap:round;}
+.location-line{stroke:#8fc7ff;stroke-width:2;}
+.location-mca-line{stroke:#ff4d5e;stroke-width:3;}
+.location-svg-label{fill:white;font-size:18px;font-weight:bold;}
+.location-mca-label{fill:#ff4d5e;font-size:21px;font-weight:bold;}
+.location-arabic-label{fill:#ffd6da;font-size:16px;font-weight:bold;}
+.location-caption{text-align:center;color:#9fb0c3;margin-top:15px;}
+
+/* CARDS */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.card{padding:27px;background:#091522;border:1px solid #172b3e;border-radius:18px;transition:transform .2s,border-color .2s;}
+.card:hover{transform:translateY(-3px);border-color:#4a2a30;}
+.card h3{font-size:18px;margin-bottom:13px;color:#eef4fa;line-height:1.45;}
+.card p{color:#91a5b8;font-size:14px;line-height:1.8;}
+
+/* CLINICAL */
+.clinical-section{margin-top:65px;}
+.clinical-box{padding:30px;background:#091522;border:1px solid #172b3e;border-left:3px solid #ff4d5e;border-radius:18px;}
+.clinical-box p{color:#a7b7c6;font-size:15px;line-height:1.9;margin-bottom:18px;}
+.clinical-box p:last-child{margin-bottom:0;}
+
+/* QUICK FACTS */
+.facts-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;}
+.fact{padding:22px;background:#091522;border:1px solid #172b3e;border-radius:16px;}
+.fact span{display:block;color:#ff4d5e;font-size:11px;letter-spacing:2px;margin-bottom:12px;}
+.fact strong{display:block;color:#eef4fa;font-size:14px;margin-bottom:8px;line-height:1.5;}
+.fact p{color:#8195a8;font-size:13px;line-height:1.7;}
+
+/* MINI TEST */
+.quiz{margin-top:65px;padding:30px;background:#091522;border:1px solid #172b3e;border-radius:18px;}
+.quiz h2{font-size:28px;margin-bottom:10px;}
+.quiz-intro{color:#91a5b8;margin-bottom:25px;}
+.question{margin-bottom:30px;}
+.question:last-child{margin-bottom:0;}
+.question p{color:#eef4fa;font-size:16px;margin-bottom:12px;font-weight:bold;}
+.option{display:block;width:100%;padding:12px 15px;margin-top:9px;background:#0b1928;color:#c7d5e2;border:1px solid #263951;border-radius:9px;text-align:left;cursor:pointer;font-size:14px;transition:.2s;}
+.option:hover{border-color:#ff4d5e;background:#111e2c;}
+.option.correct{border-color:#8fd3a8;background:#14291e;color:#b9f0c9;}
+.option.wrong{border-color:#d88b9b;background:#2a171d;color:#ffc2cc;}
+.quiz-result{margin-top:25px;padding:15px;border-radius:10px;background:#0b1928;border:1px solid #263951;color:#aebdce;display:none;}
+
+/* MOBILE */
 @media(max-width:900px){
-
-    .cards{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .facts-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
+  .cards{grid-template-columns:repeat(2,1fr);}
+  .facts-grid{grid-template-columns:repeat(2,1fr);}
 }
-
 @media(max-width:800px){
-
-    .scene{
-        height:450px;
-    }
-
-    .viewer-status{
-        display:none;
-    }
-
+  .scene{height:450px;}
+  .viewer-status{display:none;}
 }
-
 @media(max-width:600px){
-
-    .cards{
-        grid-template-columns:1fr;
-    }
-
-    .facts-grid{
-        grid-template-columns:1fr;
-    }
-
-    h1{
-        letter-spacing:-2px;
-    }
-
-    .location{
-        padding:20px;
-    }
-
+  .cards{grid-template-columns:1fr;}
+  .facts-grid{grid-template-columns:1fr;}
+  h1{letter-spacing:-2px;}
+  .location{padding:20px;}
 }
-
 </style>
-
 </head>
-
 <body>
 
 <nav>
-<a href="./explore.html">← Back to Explore Anatomy</a>
+<a href="./explore.html">← Back to Explore</a>
 </nav>
 
 <main class="container">
 
-<div class="eyebrow">
-Cerebral Vasculature · NeuroAtlas
-</div>
-
+<!-- HERO -->
+<div class="eyebrow">Cerebral Vasculature · NeuroAtlas</div>
 <h1>MCA</h1>
-
-<div class="arabic-title">
-الشريان الدماغي الأوسط
-</div>
-
+<div class="arabic-title">الشريان الدماغي الأوسط</div>
 <div class="hero">
-
 <p>
-
-The Middle Cerebral Artery (MCA) is one of the major arteries
-supplying the brain. It is a major branch of the internal carotid
-artery and supplies large portions of the lateral cerebral
-hemispheres, including important motor, sensory, and language-related
-regions.
-
-<br><br>
-
-الشريان الدماغي الأوسط هو أحد الشرايين الرئيسية التي تغذي الدماغ.
-وهو فرع رئيسي من الشريان السباتي الداخلي، ويغذي أجزاء كبيرة من
-السطح الجانبي لنصفي الكرة المخية، بما في ذلك مناطق مهمة للحركة
-والإحساس واللغة.
-
+The middle cerebral artery (MCA) is the largest terminal branch of the
+internal carotid artery. It courses through the lateral (Sylvian) fissure
+and supplies most of the lateral surface of the cerebral hemisphere,
+including key motor, sensory, and language regions.
 </p>
-
 </div>
 
+<!-- ACTION BUTTONS -->
 <div class="actions">
-
-<a class="action-button" href="#location">
-📍 Show Location
-</a>
-
-<a class="action-button" href="#anatomy">
-🧠 MCA Anatomy
-</a>
-
-<a class="action-button" href="#quiz">
-🧪 Test Yourself
-</a>
-
+<a class="action-button" href="#location">📍 Show Location</a>
+<a class="action-button" href="#information">🧠 Learn About the MCA</a>
+<a class="action-button" href="#quiz">📝 Test Yourself</a>
 </div>
 
+<!-- 3D VIEWER -->
 <div class="viewer">
 
 <div class="viewer-header">
-
-<div class="viewer-title">
-Human Brain · MCA Interactive 3D
-</div>
-
-<div class="viewer-status">
-DRAG TO ROTATE · SCROLL TO ZOOM
-</div>
-
+<div class="viewer-title">Human Brain · Interactive 3D</div>
+<div class="viewer-status">DRAG TO ROTATE · SCROLL TO ZOOM</div>
 </div>
 
 <div class="scene">
 
 <div id="loading" class="loading">
-
-<span id="loadText">
-Loading real brain model...
-</span>
-
-<div class="loading-bar">
-
-<div id="loadBar" class="loading-bar-inner"></div>
-
-</div>
-
+<span id="loadText">Loading real brain model...</span>
+<div class="loading-bar"><div id="loadBar" class="loading-bar-inner"></div></div>
 </div>
 
 <canvas id="brainCanvas"></canvas>
 
 <div id="mcaLabel" class="mca-label">
-
-<div class="label-box">
-MCA · الشريان الدماغي الأوسط
-</div>
-
+<div class="label-box">MIDDLE CEREBRAL ARTERY</div>
 </div>
 
 </div>
 
 <div class="controls">
-
-<button id="highlight" class="active">
-⚪ Highlight MCA
-</button>
-
-<button id="rotate" class="active">
-⟳ Auto Rotate
-</button>
-
-<button id="reset">
-↻ Reset View
-</button>
-
+<button id="highlight" class="active">⚪ Highlight MCA</button>
+<button id="rotate" class="active">⟳ Auto Rotate</button>
+<button id="reset">↻ Reset View</button>
 </div>
 
 </div>
 
-<section id="anatomy" class="section">
+<!-- LOCATION -->
+<section id="location" class="location">
 
-<div class="section-label">
-MCA Anatomy · تشريح الشريان الدماغي الأوسط
+<div class="section-label">Location · الموقع</div>
+<h2>📍 Where is the MCA?</h2>
+
+<p class="location-intro">
+The MCA arises from the <strong>internal carotid artery (ICA)</strong> at
+the base of the brain, then runs laterally into the
+<strong>Sylvian fissure</strong>, where it typically bifurcates and fans
+out over the lateral cortical surface in a pattern often called the
+<strong>"candelabra."</strong>
+<br><br>
+ينشأ الشريان الدماغي الأوسط من <strong>الشريان السباتي الداخلي</strong>
+عند قاعدة الدماغ، ثم يسير جانبياً داخل <strong>الشق الجانبي (السيلفياني)</strong>،
+حيث يتفرع عادةً وينتشر فوق السطح الجانبي للقشرة المخية بنمط يُعرف
+غالباً باسم <strong>"الشمعدان."</strong>
+</p>
+
+<div class="brain-visual">
+<svg class="location-svg" viewBox="0 0 800 560" xmlns="http://www.w3.org/2000/svg" aria-label="Simplified diagram highlighting the middle cerebral artery">
+
+<!-- CEREBRUM -->
+<path class="location-brain" d="M150 100 C200 45 300 30 400 50 C510 70 575 150 570 235 C568 300 525 330 470 330 C410 330 375 285 315 275 C255 265 190 300 150 255 C115 215 115 145 150 100Z"/>
+
+<!-- ICA (context) -->
+<path class="location-ica" d="M330 400 C330 360 330 330 330 300"/>
+
+<!-- MCA GLOW -->
+<path class="location-mca-glow" d="M330 300 C360 270 390 250 420 230 C440 218 452 205 460 190"/>
+<path class="location-mca-glow" d="M460 190 C445 150 430 115 420 90"/>
+<path class="location-mca-glow" d="M460 190 C470 145 478 110 480 80"/>
+<path class="location-mca-glow" d="M460 190 C495 155 512 130 520 108"/>
+<path class="location-mca-glow" d="M460 190 C515 175 535 165 545 158"/>
+<path class="location-mca-glow" d="M460 190 C510 195 522 208 530 220"/>
+<path class="location-mca-glow" d="M460 190 C485 215 478 240 480 258"/>
+
+<!-- MCA M1 TRUNK -->
+<path class="location-mca-trunk" d="M330 300 C360 270 390 250 420 230 C440 218 452 205 460 190"/>
+
+<!-- MCA M2 CANDELABRA BRANCHES -->
+<path class="location-mca" d="M460 190 C445 150 430 115 420 90"/>
+<path class="location-mca" d="M460 190 C470 145 478 110 480 80"/>
+<path class="location-mca" d="M460 190 C495 155 512 130 520 108"/>
+<path class="location-mca" d="M460 190 C515 175 535 165 545 158"/>
+<path class="location-mca" d="M460 190 C510 195 522 208 530 220"/>
+<path class="location-mca" d="M460 190 C485 215 478 240 480 258"/>
+
+<!-- ICA LABEL -->
+<line class="location-line" x1="330" y1="400" x2="480" y2="470"/>
+<text class="location-svg-label" x="495" y="476">ICA</text>
+
+<!-- M1 SEGMENT LABEL -->
+<line class="location-line" x1="395" y1="260" x2="590" y2="300"/>
+<text class="location-svg-label" x="605" y="306">M1 SEGMENT</text>
+
+<!-- MCA LABEL -->
+<line class="location-mca-line" x1="460" y1="190" x2="605" y2="150"/>
+<text class="location-mca-label" x="615" y="156">MCA</text>
+<text class="location-arabic-label" x="615" y="183">الشريان الدماغي الأوسط</text>
+
+<!-- CANDELABRA LABEL -->
+<line class="location-mca-line" x1="510" y1="115" x2="605" y2="70"/>
+<text class="location-svg-label" x="615" y="76">M2 · CANDELABRA</text>
+<text class="location-arabic-label" x="615" y="98">الفروع القشرية</text>
+
+</svg>
+
+<p class="location-caption">🔴 The red pathway represents the approximate course of the MCA, from its origin at the ICA through the Sylvian fissure and its cortical branches.</p>
+
 </div>
+</section>
 
-<h2>
-Middle Cerebral Artery · MCA
-</h2>
+<!-- DETAILED INFORMATION -->
+<section id="information" class="section">
+
+<div class="section-label">MCA Anatomy · تشريح الشريان الدماغي الأوسط</div>
+<h2>Middle Cerebral Artery · الشريان الدماغي الأوسط</h2>
 
 <p class="section-intro">
-
-The middle cerebral artery is a major cerebral artery that
-originates from the internal carotid artery. It travels laterally
-and supplies much of the lateral surface of the cerebral
-hemisphere.
-
+The MCA is the largest and most clinically significant branch of the
+internal carotid artery. It is functionally divided into four segments
+(M1–M4) and supplies the majority of the lateral cerebral hemisphere,
+including cortex responsible for movement, sensation, and language.
 <br><br>
-
-الشريان الدماغي الأوسط هو أحد الشرايين الدماغية الرئيسية،
-وينشأ من الشريان السباتي الداخلي. يمتد في اتجاه جانبي ويغذي
-جزءًا كبيرًا من السطح الجانبي لنصف الكرة المخية.
-
+الشريان الدماغي الأوسط هو أكبر فروع الشريان السباتي الداخلي وأكثرها
+أهمية سريرياً. يُقسَّم وظيفياً إلى أربع قطع (M1–M4)، ويغذي الجزء
+الأكبر من السطح الجانبي لنصف الكرة المخية، بما يشمل مناطق الحركة
+والحس واللغة.
 </p>
 
 <div class="cards">
@@ -766,704 +284,280 @@ hemisphere.
 <div class="card">
 <h3>Origin · المنشأ</h3>
 <p>
-The MCA is a major terminal branch of the internal carotid artery.
+The MCA is the larger of the two terminal branches of the internal
+carotid artery, arising near the anterior perforated substance.
 <br><br>
-ينشأ الشريان الدماغي الأوسط كأحد الفروع النهائية الرئيسية
-للشريان السباتي الداخلي.
+يُعد الشريان الدماغي الأوسط الأكبر بين الفرعين النهائيين للشريان
+السباتي الداخلي، وينشأ بالقرب من المادة المثقّبة الأمامية.
 </p>
 </div>
 
 <div class="card">
-<h3>Lateral Cerebral Surface · السطح الجانبي للدماغ</h3>
+<h3>M1 Segment · القطعة M1</h3>
 <p>
-The MCA supplies a large portion of the lateral surface
-of the cerebral hemisphere.
+Also called the sphenoidal or horizontal segment, it runs laterally
+toward the Sylvian fissure and gives off small but critical
+perforating branches.
 <br><br>
-يغذي الشريان الدماغي الأوسط جزءًا كبيرًا من السطح الجانبي
-لنصف الكرة المخية.
+تُعرف أيضاً بالقطعة الوتدية أو الأفقية، وتسير جانبياً نحو الشق
+السيلفياني، وتُصدر فروعاً ثاقبة صغيرة لكنها بالغة الأهمية.
 </p>
 </div>
 
 <div class="card">
-<h3>Motor Function · الوظيفة الحركية</h3>
+<h3>M2 Segment · القطعة M2</h3>
 <p>
-MCA branches supply important regions of the frontal and
-parietal lobes involved in voluntary movement.
+The insular segment, where the artery divides into superior and
+inferior trunks that arch over the insula.
 <br><br>
-تغذي فروعه مناطق مهمة من الفصين الجبهي والجداري المرتبطة
-بالحركة الإرادية.
+هي القطعة الجزيرية، حيث ينقسم الشريان إلى جذعين علوي وسفلي
+يقوسان فوق الجزيرة (الإنسولا).
 </p>
 </div>
 
 <div class="card">
-<h3>Sensory Function · الإحساس</h3>
+<h3>M3 Segment · القطعة M3</h3>
 <p>
-The MCA supplies cortical areas involved in processing
-sensory information from the body.
+The opercular segment, in which branches emerge from the Sylvian
+fissure and course over the frontal, parietal, and temporal opercula.
 <br><br>
-تغذي فروعه مناطق قشرية تشارك في معالجة المعلومات الحسية
-القادمة من الجسم.
+هي القطعة الغطائية، حيث تخرج الفروع من الشق السيلفياني وتسير فوق
+الأغطية الجبهية والجدارية والصدغية.
 </p>
 </div>
 
 <div class="card">
-<h3>Language · اللغة</h3>
+<h3>M4 Segment · القطعة M4</h3>
 <p>
-In the dominant hemisphere, MCA branches supply important
-cortical regions associated with language processing.
+The cortical segment, comprising the terminal branches that spread
+over the lateral cortical surface — the "candelabra."
 <br><br>
-في النصف المسيطر من الدماغ، تغذي فروع الشريان مناطق قشرية
-مهمة مرتبطة بمعالجة اللغة.
+هي القطعة القشرية، وتضم الفروع النهائية المنتشرة فوق السطح القشري
+الجانبي، والمعروفة بنمط "الشمعدان."
 </p>
 </div>
 
 <div class="card">
-<h3>Major Branches · الفروع الرئيسية</h3>
+<h3>Lenticulostriate Arteries · الشرايين العدسية المخططة</h3>
 <p>
-The MCA divides into major cortical branches that distribute
-blood across different regions of the cerebral hemisphere.
+Small perforating branches from M1 that supply deep structures such
+as the basal ganglia and internal capsule. They are prone to
+hypertensive small-vessel disease.
 <br><br>
-ينقسم الشريان الدماغي الأوسط إلى فروع قشرية رئيسية توزع الدم
-على مناطق مختلفة من نصف الكرة المخية.
+فروع ثاقبة صغيرة من القطعة M1 تغذي بنى عميقة مثل العقد القاعدية
+والمحفظة الداخلية، وهي عرضة لأمراض الأوعية الصغيرة المرتبطة بارتفاع
+ضغط الدم.
 </p>
 </div>
 
 <div class="card">
-<h3>Deep Branches · الفروع العميقة</h3>
+<h3>Cortical Territory · المنطقة القشرية المُغذّاة</h3>
 <p>
-Small perforating branches, including the lenticulostriate
-arteries, supply deep structures such as the basal ganglia
-and internal capsule.
-<br><br>
-تغذي الفروع المثقبة الصغيرة، ومنها الشرايين العدسية المخططة،
-بنى عميقة مثل العقد القاعدية والمحفظة الداخلية.
-</p>
-</div>
-
-<div class="card">
-<h3>Cortical Territories · المناطق القشرية</h3>
-<p>
-MCA cortical branches supply extensive regions of the frontal,
+The MCA supplies most of the lateral surface of the frontal,
 parietal, and temporal lobes.
 <br><br>
-تغذي الفروع القشرية للشريان مناطق واسعة من الفصوص الجبهي
-والجداري والصدغي.
+يغذي الشريان الدماغي الأوسط الجزء الأكبر من السطح الجانبي للفصوص
+الجبهية والجدارية والصدغية.
 </p>
 </div>
 
 <div class="card">
-<h3>Visual Processing · المعالجة البصرية</h3>
+<h3>Language Areas · مناطق اللغة</h3>
 <p>
-Some MCA branches contribute to the blood supply of cortical
-regions involved in aspects of visual processing.
+In the dominant hemisphere, MCA branches supply Broca's and
+Wernicke's areas, which are essential for language production and
+comprehension.
 <br><br>
-تساهم بعض فروع الشريان في تغذية مناطق قشرية تشارك في بعض
-جوانب معالجة المعلومات البصرية.
+في نصف الكرة المخية المسيطر، تغذي فروع الشريان الدماغي الأوسط
+منطقتي بروكا وفيرنيكه، وهما أساسيتان لإنتاج اللغة وفهمها.
 </p>
 </div>
 
 <div class="card">
-<h3>Collateral Circulation · الدورة الجانبية</h3>
+<h3>Motor & Sensory Strip · الشريط الحركي والحسي</h3>
 <p>
-The MCA participates in a larger cerebral arterial network
-that provides potential alternative routes of blood flow.
+MCA branches supply the lateral portions of the precentral and
+postcentral gyri, corresponding mainly to the face and arm, with
+the leg region typically supplied by the anterior cerebral artery.
 <br><br>
-يشارك الشريان الدماغي الأوسط ضمن شبكة شريانية دماغية أكبر
-يمكن أن توفر مسارات بديلة محتملة لتدفق الدم.
+تغذي فروع الشريان الدماغي الأوسط الأجزاء الجانبية من التلفيفين
+أمام وخلف المركزي، والمتعلقة أساساً بالوجه والذراع، بينما تُغذى
+منطقة الساق عادةً من الشريان الدماغي الأمامي.
 </p>
 </div>
 
 <div class="card">
-<h3>Blood Supply · إمداد الدم</h3>
+<h3>MCA Stroke Syndrome · متلازمة سكتة الشريان الدماغي الأوسط</h3>
 <p>
-The MCA delivers oxygenated blood to a large and functionally
-important territory of the cerebral hemisphere.
+Occlusion classically causes contralateral face and arm weakness
+greater than leg weakness, sensory loss, and — depending on the
+hemisphere affected — aphasia or hemineglect.
 <br><br>
-ينقل الشريان الدم المؤكسج إلى منطقة واسعة ومهمة وظيفيًا
-من نصف الكرة المخية.
+يسبب الانسداد عادةً ضعفاً في الوجه والذراع في الجانب المقابل يفوق
+ضعف الساق، وفقداناً حسياً، وقد يترافق مع حبسة كلامية أو إهمال نصفي
+حسب نصف الكرة المصاب.
 </p>
 </div>
 
 <div class="card">
-<h3>Clinical Importance · الأهمية السريرية</h3>
+<h3>Homonymous Hemianopia · العمى النصفي المتماثل</h3>
 <p>
-Because the MCA supplies extensive functional areas, disruption
-of its blood flow can produce significant neurological deficits.
+Involvement of optic radiation fibers coursing through the temporal
+and parietal lobes can produce a visual field deficit affecting the
+same side of both eyes.
 <br><br>
-لأن الشريان يغذي مناطق وظيفية واسعة، فإن اضطراب تدفق الدم
-من خلاله قد يؤدي إلى أعراض عصبية مهمة.
+قد يؤدي إصابة ألياف الإشعاع البصري المارة عبر الفصين الصدغي
+والجداري إلى عجز في المجال البصري يصيب الجانب نفسه في كلتا العينين.
 </p>
 </div>
 
-</div>
-
-</section>
-
-<section id="location" class="location">
-
-<h2>
-📍 Where is the MCA? · أين يقع الشريان الدماغي الأوسط؟
-</h2>
-
-<p class="location-intro">
-
-The MCA originates from the internal carotid artery and travels
-laterally into the lateral sulcus before giving rise to branches
-that spread across the lateral surface of the cerebral hemisphere.
-
+<div class="card">
+<h3>Most Common Stroke Territory · المنطقة الأكثر إصابة بالسكتات</h3>
+<p>
+The MCA territory is the most frequently affected site in ischemic
+stroke, making it a central focus of acute stroke evaluation.
 <br><br>
-
-ينشأ الشريان الدماغي الأوسط من الشريان السباتي الداخلي،
-ويمتد جانبيًا داخل الشق الجانبي، ثم يتفرع إلى فروع تنتشر
-على السطح الجانبي لنصف الكرة المخية.
-
+تُعد منطقة الشريان الدماغي الأوسط الموقع الأكثر تأثراً بالسكتة
+الدماغية الإقفارية، مما يجعلها محوراً رئيسياً في تقييم السكتة الحادة.
 </p>
-
-<div class="brain-location-wrap">
-
-<svg
-class="brain-location-svg"
-viewBox="0 0 1000 620"
-xmlns="http://www.w3.org/2000/svg"
-aria-label="Anatomical MCA location diagram"
->
-
-<path
-class="location-brain"
-d="
-M170 350
-C115 325 95 270 120 220
-C140 180 175 160 215 155
-C225 110 270 75 325 82
-C365 38 430 48 460 85
-C505 58 570 70 595 112
-C650 90 710 120 720 168
-C770 170 810 210 800 255
-C850 290 835 350 795 372
-C775 425 720 455 670 445
-C630 490 560 505 510 480
-C465 520 395 520 355 480
-C305 505 245 480 235 435
-C190 430 155 395 170 350Z"
-/>
-
-<path
-class="hemisphere-line"
-d="
-M490 105
-C475 155 482 210 490 265
-C498 325 492 390 500 465
-"
-/>
-
-<path
-class="sulcus"
-d="
-M185 235
-C235 205 280 215 315 250
-C345 280 350 320 335 355
-"/>
-
-<path
-class="sulcus"
-d="
-M175 300
-C230 270 280 285 315 315
-C340 338 365 350 405 340
-"/>
-
-<path
-class="sulcus"
-d="
-M230 175
-C270 145 315 150 350 175
-C375 195 390 220 395 250
-"/>
-
-<path
-class="sulcus"
-d="
-M535 165
-C575 135 630 140 665 170
-C690 190 705 220 700 250
-"/>
-
-<path
-class="sulcus"
-d="
-M525 225
-C570 200 620 215 650 245
-C680 275 700 295 735 292
-"/>
-
-<path
-class="sulcus"
-d="
-M540 330
-C590 305 635 320 670 350
-C700 375 720 390 750 385
-"/>
-
-<path
-class="sulcus"
-d="
-M260 390
-C305 365 345 375 380 405
-C405 425 430 435 460 425
-"/>
-
-<path
-d="
-M470 450
-C455 475 458 500 470 525
-C480 545 505 548 520 528
-C530 505 528 480 515 455Z
-"
-fill="#263d55"
-stroke="#8ca3b8"
-stroke-width="3"
-/>
-
-<path
-class="location-mca"
-style="stroke-width:7"
-d="
-M455 515
-C450 485 445 450 425 425
-C405 400 395 370 405 340
-C415 310 435 295 460 285
-"/>
-
-<path
-class="location-mca"
-d="
-M460 285
-C500 275 535 270 565 250
-C595 230 620 205 645 175
-"/>
-
-<path
-class="location-mca-branch"
-d="
-M550 260
-C585 250 615 235 640 210
-C665 185 685 155 700 125
-"/>
-
-<path
-class="location-mca-branch"
-d="
-M560 260
-C600 270 635 280 665 270
-C700 260 725 240 750 210
-"/>
-
-<path
-class="location-mca-branch"
-d="
-M625 225
-C650 215 675 205 700 185
-C720 170 740 150 755 125
-"/>
-
-<path
-class="location-mca-branch"
-d="
-M645 175
-C675 165 700 145 720 120
-"/>
-
-<line
-class="location-line"
-x1="650"
-y1="175"
-x2="820"
-y2="115"
-/>
-
-<text
-class="location-label"
-x="835"
-y="110"
->
-MCA
-</text>
-
-<text
-class="location-sub"
-x="835"
-y="135"
->
-Middle Cerebral Artery
-</text>
-
-<text
-class="location-sub"
-x="835"
-y="157"
->
-الشريان الدماغي الأوسط
-</text>
-
-<line
-class="location-line"
-x1="715"
-y1="300"
-x2="835"
-y2="320"
-/>
-
-<text
-class="location-sub"
-x="845"
-y="325"
->
-Lateral cerebral surface
-</text>
-
-<text
-class="location-sub"
-x="845"
-y="347"
->
-السطح الجانبي للدماغ
-</text>
-
-</svg>
+</div>
 
 </div>
 
-<p class="location-caption">
-
-⚪ White vessels show the approximate course and branching pattern
-of the Middle Cerebral Artery.
-
-<br>
-
-⚪ تمثل الأوعية البيضاء المسار والتفرعات التقريبية للشريان الدماغي الأوسط.
-
-</p>
-
-</section>
-
+<!-- CLINICAL IMPORTANCE -->
 <div class="clinical-section">
 
-<div class="section-label">
-Clinical Importance · الأهمية السريرية
-</div>
-
-<h2>
-Why the MCA Matters
-</h2>
+<div class="section-label">Clinical Importance · الأهمية السريرية</div>
+<h2>Why the MCA Matters</h2>
 
 <div class="clinical-box">
-
 <p>
-The MCA supplies a large and highly functional region of the
-cerebral hemisphere. Because of this extensive territory,
-changes in MCA blood flow can affect movement, sensation,
-language, vision, and other neurological functions.
+Because the MCA supplies such a large and functionally critical
+territory, occlusion or hemorrhage in its distribution is a leading
+cause of stroke-related disability, commonly affecting movement,
+sensation, language, and visual fields.
 </p>
-
 <p dir="rtl">
-يغذي الشريان الدماغي الأوسط منطقة واسعة وغنية بالمناطق
-الوظيفية في نصف الكرة المخية. ولذلك فإن اضطراب تدفق الدم
-في الشريان قد يؤثر على الحركة والإحساس واللغة والرؤية
-وغيرها من الوظائف العصبية.
+نظراً لأن الشريان الدماغي الأوسط يغذي منطقة واسعة وحيوية وظيفياً،
+فإن انسداده أو نزيفه يُعد سبباً رئيسياً للإعاقة الناتجة عن السكتة
+الدماغية، إذ يؤثر غالباً على الحركة والحس واللغة والمجال البصري.
 </p>
-
 </div>
 
 </div>
 
-<div class="insight">
-
-<strong>
-NeuroAtlas Insight
-</strong>
-
-<br><br>
-
-Think of the MCA as one of the brain's major arterial highways.
-It carries blood from the internal carotid circulation toward
-a large portion of the lateral cerebral hemisphere.
-
-<br><br>
-
-فكر في الشريان الدماغي الأوسط باعتباره أحد الطرق الشريانية
-الرئيسية في الدماغ؛ فهو ينقل الدم من الدورة السباتية الداخلية
-إلى جزء كبير من السطح الجانبي لنصف الكرة المخية.
-
-</div>
-
+<!-- QUICK FACTS -->
 <div class="section">
 
-<div class="section-label">
-Quick Facts · معلومات سريعة
-</div>
-
-<h2>
-MCA at a Glance
-</h2>
+<div class="section-label">Quick Facts · معلومات سريعة</div>
+<h2>MCA at a Glance</h2>
 
 <div class="facts-grid">
 
 <div class="fact">
 <span>01</span>
-<strong>Full Name · الاسم الكامل</strong>
-<p>
-Middle Cerebral Artery ·
-الشريان الدماغي الأوسط
-</p>
+<strong>Origin · المنشأ</strong>
+<p>Larger terminal branch of the ICA · أكبر فرع نهائي للشريان السباتي الداخلي</p>
 </div>
 
 <div class="fact">
 <span>02</span>
-<strong>Origin · المنشأ</strong>
-<p>
-Internal Carotid Artery ·
-الشريان السباتي الداخلي
-</p>
+<strong>Course · المسار</strong>
+<p>Through the Sylvian fissure · عبر الشق السيلفياني</p>
 </div>
 
 <div class="fact">
 <span>03</span>
-<strong>Main Territory · المنطقة الرئيسية</strong>
-<p>
-Lateral cerebral hemisphere ·
-السطح الجانبي لنصف الكرة المخية
-</p>
+<strong>Territory · المنطقة المُغذّاة</strong>
+<p>Lateral frontal, parietal, temporal cortex · القشرة الجانبية الجبهية والجدارية والصدغية</p>
 </div>
 
 <div class="fact">
 <span>04</span>
-<strong>Major Role · الدور الأساسي</strong>
-<p>
-Cerebral blood supply ·
-إمداد الدم للدماغ
-</p>
+<strong>Clinical Relevance · الأهمية السريرية</strong>
+<p>Most common ischemic stroke territory · المنطقة الأكثر شيوعاً في السكتة الإقفارية</p>
 </div>
 
 </div>
-
 </div>
 
+<!-- MINI TEST -->
 <div id="quiz" class="quiz">
 
-<h2>
-🧠 Mini Test · اختبار سريع
-</h2>
+<div class="section-label">Mini Test</div>
+<h2>🧠 Test Yourself</h2>
+<p class="quiz-intro">Choose the best answer for each question.</p>
 
 <div class="question">
-
-<p class="question-text">
-
-<strong>Question 1:</strong>
-Where does the MCA originate?
-
-<br>
-
-<strong>السؤال الأول:</strong>
-من أين ينشأ الشريان الدماغي الأوسط؟
-
-</p>
-
-<button
-class="option"
-onclick="checkAnswer(this,true,'feedback1')"
->
-A. Internal Carotid Artery · الشريان السباتي الداخلي
-</button>
-
-<button
-class="option"
-onclick="checkAnswer(this,false,'feedback1')"
->
-B. Basilar Artery · الشريان القاعدي
-</button>
-
-<button
-class="option"
-onclick="checkAnswer(this,false,'feedback1')"
->
-C. Vertebral Artery · الشريان الفقري
-</button>
-
-<div id="feedback1" class="feedback"></div>
-
+<p>1. The MCA is the largest terminal branch of which artery?</p>
+<button class="option" onclick="checkAnswer(this,true)">A. Internal carotid artery</button>
+<button class="option" onclick="checkAnswer(this,false)">B. Basilar artery</button>
+<button class="option" onclick="checkAnswer(this,false)">C. Vertebral artery</button>
+<button class="option" onclick="checkAnswer(this,false)">D. External carotid artery</button>
 </div>
 
 <div class="question">
-
-<p class="question-text">
-
-<strong>Question 2:</strong>
-Which cerebral surface is largely supplied by the MCA?
-
-<br>
-
-<strong>السؤال الثاني:</strong>
-أي سطح من المخ يغذيه الشريان الدماغي الأوسط بدرجة كبيرة؟
-
-</p>
-
-<button
-class="option"
-onclick="checkAnswer(this,true,'feedback2')"
->
-A. Lateral cerebral surface · السطح الجانبي لنصف الكرة المخية
-</button>
-
-<button
-class="option"
-onclick="checkAnswer(this,false,'feedback2')"
->
-B. Inferior spinal surface · السطح السفلي للحبل الشوكي
-</button>
-
-<button
-class="option"
-onclick="checkAnswer(this,false,'feedback2')"
->
-C. Cerebellar surface only · سطح المخيخ فقط
-</button>
-
-<div id="feedback2" class="feedback"></div>
-
+<p>2. In a classic MCA stroke, weakness typically affects which body regions most?</p>
+<button class="option" onclick="checkAnswer(this,false)">A. Leg only</button>
+<button class="option" onclick="checkAnswer(this,true)">B. Face and arm, with relative leg sparing</button>
+<button class="option" onclick="checkAnswer(this,false)">C. Trunk only</button>
+<button class="option" onclick="checkAnswer(this,false)">D. Eye movements only</button>
 </div>
 
 <div class="question">
+<p>3. What is the fan-like spreading pattern of the MCA's cortical (M2–M4) branches commonly called?</p>
+<button class="option" onclick="checkAnswer(this,false)">A. The pyramidal decussation</button>
+<button class="option" onclick="checkAnswer(this,true)">B. The candelabra</button>
+<button class="option" onclick="checkAnswer(this,false)">C. The circle of Willis</button>
+<button class="option" onclick="checkAnswer(this,false)">D. The corona radiata</button>
+</div>
 
-<p class="question-text">
-
-<strong>Question 3:</strong>
-Which artery is the MCA?
-
-<br>
-
-<strong>السؤال الثالث:</strong>
-أي مما يلي هو الشريان الدماغي الأوسط؟
-
-</p>
-
-<button
-class="option"
-onclick="checkAnswer(this,false,'feedback3')"
->
-A. Posterior Cerebral Artery · الشريان الدماغي الخلفي
-</button>
-
-<button
-class="option"
-onclick="checkAnswer(this,true,'feedback3')"
->
-B. Middle Cerebral Artery · الشريان الدماغي الأوسط
-</button>
-
-<button
-class="option"
-onclick="checkAnswer(this,false,'feedback3')"
->
-C. Anterior Cerebral Artery · الشريان الدماغي الأمامي
-</button>
-
-<div id="feedback3" class="feedback"></div>
+<div id="quizResult" class="quiz-result"></div>
 
 </div>
 
-</div>
-
-<a class="back" href="explore.html">
-← Back to Explore Anatomy
-</a>
+</section>
 
 </main>
 
+<!-- THREE.JS IMPORT MAP -->
 <script type="importmap">
 {
-    "imports": {
-        "three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
-        "three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
-    }
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
 }
 </script>
 
 <script type="module">
-
 import * as THREE from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
 
-import {
-    OrbitControls
-} from "three/addons/controls/OrbitControls.js";
+/* ELEMENTS */
+const canvas = document.getElementById("brainCanvas");
+const loading = document.getElementById("loading");
+const loadText = document.getElementById("loadText");
+const loadBar = document.getElementById("loadBar");
+const mcaLabel = document.getElementById("mcaLabel");
 
-import {
-    GLTFLoader
-} from "three/addons/loaders/GLTFLoader.js";
+/* SCENE */
+const scene = new THREE.Scene();
 
-import {
-    DRACOLoader
-} from "three/addons/loaders/DRACOLoader.js";
+/* CAMERA */
+const camera = new THREE.PerspectiveCamera(30, 1, 0.01, 100);
+camera.position.set(3.2, 0.3, 8.5);
 
+/* RENDERER */
+const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 0.75;
 
-const canvas =
-document.getElementById("brainCanvas");
-
-const loading =
-document.getElementById("loading");
-
-const loadBar =
-document.getElementById("loadBar");
-
-const mcaLabel =
-document.getElementById("mcaLabel");
-
-
-const scene =
-new THREE.Scene();
-
-
-const camera =
-new THREE.PerspectiveCamera(
-    30,
-    1,
-    0.01,
-    100
-);
-
-camera.position.set(
-    3.2,
-    0.15,
-    8.5
-);
-
-
-const renderer =
-new THREE.WebGLRenderer({
-    canvas:canvas,
-    antialias:true,
-    alpha:true
-});
-
-renderer.setPixelRatio(
-    Math.min(
-        window.devicePixelRatio || 1,
-        2
-    )
-);
-
-renderer.toneMapping =
-THREE.ACESFilmicToneMapping;
-
-renderer.toneMappingExposure =
-0.85;
-
-
-const controls =
-new OrbitControls(
-    camera,
-    canvas
-);
-
+/* CONTROLS */
+const controls = new OrbitControls(camera, canvas);
 controls.enableRotate = true;
 controls.rotateSpeed = 0.6;
 controls.enableDamping = true;
@@ -1473,958 +567,356 @@ controls.zoomSpeed = 0.6;
 controls.enablePan = false;
 controls.autoRotate = true;
 controls.autoRotateSpeed = 0.2;
-
-controls.target.set(
-    0,
-    -0.35,
-    0
-);
-
+controls.target.set(0, -0.3, 0);
 controls.minDistance = 3.5;
 controls.maxDistance = 16;
 
-
-scene.add(
-    new THREE.AmbientLight(
-        0xffffff,
-        0.6
-    )
-);
-
-scene.add(
-    new THREE.HemisphereLight(
-        0xffdce6,
-        0x081018,
-        0.8
-    )
-);
-
-const keyLight =
-new THREE.DirectionalLight(
-    0xfff5f0,
-    1.5
-);
-
-keyLight.position.set(
-    6,
-    10,
-    8
-);
-
+/* LIGHTING */
+scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+const hemi = new THREE.HemisphereLight(0xffdce6, 0x081018, 0.75);
+scene.add(hemi);
+const keyLight = new THREE.DirectionalLight(0xfff5f0, 1.4);
+keyLight.position.set(6, 10, 8);
 scene.add(keyLight);
-
-
-const fillLight =
-new THREE.DirectionalLight(
-    0x8ca9bd,
-    0.45
-);
-
-fillLight.position.set(
-    -7,
-    2,
-    6
-);
-
+const fillLight = new THREE.DirectionalLight(0x8ca9bd, 0.4);
+fillLight.position.set(-7, 2, 6);
 scene.add(fillLight);
 
-
-const brainGroup =
-new THREE.Group();
-
+/* BRAIN GROUP */
+const brainGroup = new THREE.Group();
 scene.add(brainGroup);
 
-
 let mcaMesh = null;
-let mcaHighlightMesh = null;
-let mcaOutline = null;
+let mcaHighlightGroup = null;
 let highlighted = true;
+const mcaGlowMeshes = [];
 
-
-const brainPinkMaterial =
-new THREE.MeshPhysicalMaterial({
-    color:0xf1c5d0,
-    roughness:0.62,
-    metalness:0,
-    clearcoat:0.12,
-    clearcoatRoughness:0.5,
-    side:THREE.DoubleSide
+/* BABY PINK BRAIN MATERIAL */
+const brainPinkColor = 0xf1c5d0;
+const brainPinkMaterial = new THREE.MeshPhysicalMaterial({
+  color:brainPinkColor, roughness:0.62, metalness:0, clearcoat:0.12, clearcoatRoughness:0.5, side:THREE.DoubleSide
 });
 
+/* MCA MATERIAL — toggles between white (highlighted) and the brain's
+   own pink (blended in) instead of being shown/hidden. Shared by every
+   MCA mesh (real model + fallback candelabra) so one color change
+   updates all of them at once. */
+const mcaWhiteColor = new THREE.Color(0xffffff);
+const mcaBlendColor = new THREE.Color(brainPinkColor);
 
-const mcaWhiteMaterial =
-new THREE.MeshPhysicalMaterial({
-    color:0xffffff,
-    emissive:0xffffff,
-    emissiveIntensity:0.18,
-    roughness:0.22,
-    metalness:0.02,
-    clearcoat:0.45,
-    clearcoatRoughness:0.2,
-    side:THREE.DoubleSide
+const mcaRedMaterial = new THREE.MeshPhysicalMaterial({
+  color:mcaWhiteColor.clone(), roughness:0.3, metalness:0.05, clearcoat:0.6, clearcoatRoughness:0.2,
+  emissive:0x555555, emissiveIntensity:0.2, side:THREE.DoubleSide
 });
 
-
-const outlineMaterial =
-new THREE.MeshBasicMaterial({
-    color:0xffffff,
-    transparent:true,
-    opacity:0.9,
-    side:THREE.BackSide
+/* GLOW MATERIAL */
+const glowMaterial = new THREE.MeshBasicMaterial({
+  color:0xffffff, transparent:true, opacity:0.18, side:THREE.BackSide
 });
 
-
-function createMCAFallback(){
-
-    const vascularGroup =
-    new THREE.Group();
-
-    vascularGroup.name =
-    "MCA_Fallback_Vascular_Model";
-
-
-    const mainCurve =
-    new THREE.CatmullRomCurve3([
-
-        new THREE.Vector3(
-            0.05,
-            -0.30,
-            0.95
-        ),
-
-        new THREE.Vector3(
-            0.40,
-            -0.27,
-            1.02
-        ),
-
-        new THREE.Vector3(
-            0.78,
-            -0.15,
-            1.00
-        ),
-
-        new THREE.Vector3(
-            1.10,
-            0.05,
-            0.92
-        ),
-
-        new THREE.Vector3(
-            1.38,
-            0.27,
-            0.75
-        )
-
-    ]);
-
-
-    vascularGroup.add(
-        new THREE.Mesh(
-            new THREE.TubeGeometry(
-                mainCurve,
-                48,
-                0.068,
-                14,
-                false
-            ),
-            mcaWhiteMaterial
-        )
-    );
-
-
-    const superiorCurve =
-    new THREE.CatmullRomCurve3([
-
-        new THREE.Vector3(
-            0.70,
-            -0.15,
-            1.00
-        ),
-
-        new THREE.Vector3(
-            0.95,
-            0.10,
-            0.98
-        ),
-
-        new THREE.Vector3(
-            1.15,
-            0.40,
-            0.85
-        ),
-
-        new THREE.Vector3(
-            1.30,
-            0.70,
-            0.65
-        ),
-
-        new THREE.Vector3(
-            1.45,
-            0.95,
-            0.45
-        )
-
-    ]);
-
-
-    vascularGroup.add(
-        new THREE.Mesh(
-            new THREE.TubeGeometry(
-                superiorCurve,
-                35,
-                0.040,
-                12,
-                false
-            ),
-            mcaWhiteMaterial
-        )
-    );
-
-
-    const inferiorCurve =
-    new THREE.CatmullRomCurve3([
-
-        new THREE.Vector3(
-            0.78,
-            -0.17,
-            1.00
-        ),
-
-        new THREE.Vector3(
-            1.05,
-            -0.27,
-            0.98
-        ),
-
-        new THREE.Vector3(
-            1.32,
-            -0.37,
-            0.85
-        ),
-
-        new THREE.Vector3(
-            1.58,
-            -0.45,
-            0.65
-        ),
-
-        new THREE.Vector3(
-            1.80,
-            -0.50,
-            0.48
-        )
-
-    ]);
-
-
-    vascularGroup.add(
-        new THREE.Mesh(
-            new THREE.TubeGeometry(
-                inferiorCurve,
-                35,
-                0.040,
-                12,
-                false
-            ),
-            mcaWhiteMaterial
-        )
-    );
-
-
-    const distalCurve =
-    new THREE.CatmullRomCurve3([
-
-        new THREE.Vector3(
-            1.10,
-            0.05,
-            0.92
-        ),
-
-        new THREE.Vector3(
-            1.35,
-            0.17,
-            0.80
-        ),
-
-        new THREE.Vector3(
-            1.60,
-            0.25,
-            0.66
-        ),
-
-        new THREE.Vector3(
-            1.85,
-            0.33,
-            0.53
-        ),
-
-        new THREE.Vector3(
-            2.05,
-            0.37,
-            0.40
-        )
-
-    ]);
-
-
-    vascularGroup.add(
-        new THREE.Mesh(
-            new THREE.TubeGeometry(
-                distalCurve,
-                30,
-                0.030,
-                10,
-                false
-            ),
-            mcaWhiteMaterial
-        )
-    );
-
-
-    const corticalCurve =
-    new THREE.CatmullRomCurve3([
-
-        new THREE.Vector3(
-            1.38,
-            0.27,
-            0.75
-        ),
-
-        new THREE.Vector3(
-            1.58,
-            0.47,
-            0.68
-        ),
-
-        new THREE.Vector3(
-            1.75,
-            0.65,
-            0.55
-        ),
-
-        new THREE.Vector3(
-            1.90,
-            0.80,
-            0.40
-        )
-
-    ]);
-
-
-    vascularGroup.add(
-        new THREE.Mesh(
-            new THREE.TubeGeometry(
-                corticalCurve,
-                28,
-                0.025,
-                9,
-                false
-            ),
-            mcaWhiteMaterial
-        )
-    );
-
-
-    brainGroup.add(
-        vascularGroup
-    );
-
-    mcaHighlightMesh =
-    vascularGroup;
-
-    return vascularGroup;
+/* BUILD A TUBE MESH ALONG POINTS */
+function buildTube(points, radius){
+  const curve = new THREE.CatmullRomCurve3(points.map(p => new THREE.Vector3(p[0], p[1], p[2])));
+  const geometry = new THREE.TubeGeometry(curve, 40, radius, 10, false);
+  const mesh = new THREE.Mesh(geometry, mcaRedMaterial);
+  const glow = new THREE.Mesh(new THREE.TubeGeometry(curve, 40, radius * 1.9, 10, false), glowMaterial);
+  mcaGlowMeshes.push(glow);
+  const group = new THREE.Group();
+  group.add(mesh);
+  group.add(glow);
+  return group;
 }
 
+/* FALLBACK MCA — CANDELABRA SHAPE */
+function createMCAMarker(){
 
+  mcaHighlightGroup = new THREE.Group();
+
+  /* M1 trunk: from ICA origin toward the Sylvian bifurcation.
+     Kept close to the base of the brain, running laterally rather
+     than climbing upward. */
+  const trunk = [
+    [0.35, -0.55, -0.15],
+    [0.65, -0.45, -0.42],
+    [0.95, -0.35, -0.55],
+    [1.15, -0.30, -0.58]
+  ];
+  mcaHighlightGroup.add(buildTube(trunk, 0.045));
+
+  const bifurcation = trunk[trunk.length - 1];
+
+  /* M2–M4 candelabra branches fanning laterally over the Sylvian
+     surface. Kept close to the trunk's height (small y range) so
+     nothing pokes out above the top of the brain. */
+  const branches = [
+    [bifurcation, [1.35, -0.05, -0.85], [1.30, 0.15, -1.05]],
+    [bifurcation, [1.55, -0.05, -0.65], [1.55, 0.20, -0.70]],
+    [bifurcation, [1.65,  0.05, -0.25], [1.70, 0.30, -0.15]],
+    [bifurcation, [1.60, -0.05,  0.20], [1.50, 0.20,  0.45]],
+    [bifurcation, [1.40, -0.20,  0.45], [1.20, -0.10,  0.70]],
+    [bifurcation, [1.25, -0.45,  0.20], [1.05, -0.55,  0.50]]
+  ];
+
+  branches.forEach(pts => {
+    mcaHighlightGroup.add(buildTube(pts, 0.026));
+  });
+
+  mcaHighlightGroup.position.set(0, -0.25, 0.05);
+
+  brainGroup.add(mcaHighlightGroup);
+}
+
+/* LOAD REAL BRAIN MODEL */
 function loadRealBrain(){
 
-    const loader =
-    new GLTFLoader();
-
-    const dracoLoader =
-    new DRACOLoader();
-
-    dracoLoader.setDecoderPath(
-        "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/"
-    );
-
-    loader.setDRACOLoader(
-        dracoLoader
-    );
-
-
-    const urls = [
-
-        "https://cdn.jsdelivr.net/gh/itayinbarr/brainproject@main/brain-atlas/models/brain.glb",
-
-        "https://raw.githubusercontent.com/itayinbarr/brainproject/main/brain-atlas/models/brain.glb",
-
-        "https://itayinbarr.github.io/brainproject/models/brain.glb"
-
-    ];
-
-
-    let urlIndex = 0;
-
-
-    function tryLoad(){
-
-        if(
-            urlIndex >= urls.length
-        ){
-
-            createMCAFallback();
-
-            onReady();
-
-            return;
-        }
-
-
-        const url =
-        urls[urlIndex++];
-
-
-        loader.load(
-
-            url,
-
-            function(gltf){
-
-                const model =
-                gltf.scene;
-
-
-                const box =
-                new THREE.Box3()
-                .setFromObject(model);
-
-
-                const center =
-                box.getCenter(
-                    new THREE.Vector3()
-                );
-
-
-                const size =
-                box.getSize(
-                    new THREE.Vector3()
-                );
-
-
-                const maxDim =
-                Math.max(
-                    size.x,
-                    size.y,
-                    size.z
-                );
-
-
-                const scale =
-                4.5 / maxDim;
-
-
-                model.scale.setScalar(
-                    scale
-                );
-
-
-                model.position.sub(
-                    center.multiplyScalar(
-                        scale
-                    )
-                );
-
-
-                model.position.y -= 0.60;
-
-
-                model.traverse(
-                function(child){
-
-                    if(
-                        !child.isMesh
-                    )
-                        return;
-
-
-                    child.castShadow = true;
-                    child.receiveShadow = true;
-
-
-                    const name =
-                    (
-                        child.name || ""
-                    ).toLowerCase();
-
-
-                    const isMCA =
-
-                        name.includes("mca") ||
-
-                        name.includes(
-                            "middle cerebral"
-                        ) ||
-
-                        name.includes(
-                            "middlecerebral"
-                        ) ||
-
-                        name.includes(
-                            "middle_cerebral"
-                        );
-
-
-                    if(isMCA){
-
-                        mcaMesh =
-                        child;
-
-
-                        child.visible =
-                        false;
-
-
-                        mcaHighlightMesh =
-                        child.clone(true);
-
-
-                        mcaHighlightMesh.material =
-                        mcaWhiteMaterial.clone();
-
-
-                        /* ONLY CHANGE:
-                           MCA MADE A LITTLE SMALLER */
-
-                        mcaHighlightMesh.scale.multiplyScalar(
-                            1.015
-                        );
-
-
-                        mcaHighlightMesh.visible =
-                        true;
-
-
-                        child.parent.add(
-                            mcaHighlightMesh
-                        );
-
-
-                        mcaOutline =
-                        child.clone(true);
-
-
-                        mcaOutline.material =
-                        outlineMaterial.clone();
-
-
-                        mcaOutline.scale.multiplyScalar(
-                            1.035
-                        );
-
-
-                        mcaOutline.visible =
-                        true;
-
-
-                        child.parent.add(
-                            mcaOutline
-                        );
-
-                    }
-
-                    else{
-
-                        if(
-                            child.material
-                        ){
-
-                            child.material =
-                            brainPinkMaterial.clone();
-
-                        }
-
-                    }
-
-                });
-
-
-                brainGroup.add(
-                    model
-                );
-
-
-                if(
-                    !mcaMesh
-                ){
-
-                    createMCAFallback();
-
-                }
-
-
-                loadBar.style.width =
-                "100%";
-
-
-                onReady();
-
-            },
-
-
-            function(progress){
-
-                if(
-                    progress.total > 0
-                ){
-
-                    const pct =
-                    Math.min(
-                        90,
-                        progress.loaded /
-                        progress.total *
-                        90
-                    );
-
-                    loadBar.style.width =
-                    pct + "%";
-
-                }
-
-            },
-
-
-            function(error){
-
-                console.warn(
-                    "Model failed:",
-                    error
-                );
-
-                tryLoad();
-
-            }
-
-        );
-
+  const loader = new GLTFLoader();
+  const dracoLoader = new DRACOLoader();
+  dracoLoader.setDecoderPath("https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/");
+  loader.setDRACOLoader(dracoLoader);
+
+  const urls = [
+    "https://cdn.jsdelivr.net/gh/itayinbarr/brainproject@main/brain-atlas/models/brain.glb",
+    "https://raw.githubusercontent.com/itayinbarr/brainproject/main/brain-atlas/models/brain.glb",
+    "https://itayinbarr.github.io/brainproject/models/brain.glb"
+  ];
+
+  let urlIndex = 0;
+
+  function tryLoad(){
+
+    if(urlIndex >= urls.length){
+      createMCAMarker();
+      onReady();
+      return;
     }
 
+    const url = urls[urlIndex++];
+    loadText.textContent = "Loading real brain model...";
 
-    tryLoad();
+    loader.load(
+      url,
+      function(gltf){
 
-}
+        const model = gltf.scene;
 
+        const box = new THREE.Box3().setFromObject(model);
+        const center = box.getCenter(new THREE.Vector3());
+        const size = box.getSize(new THREE.Vector3());
+        const maxDim = Math.max(size.x, size.y, size.z);
+        const scale = 4.5 / maxDim;
 
-function onReady(){
+        model.scale.setScalar(scale);
+        model.position.sub(center.multiplyScalar(scale));
+        model.position.y -= 0.60;
 
-    setTimeout(
-    function(){
+        const toRemove = [];
 
-        loading.classList.add(
-            "hide"
-        );
+        model.traverse(function(child){
 
+          if(!child.isMesh) return;
 
-        if(
-            highlighted &&
-            mcaHighlightMesh
-        ){
+          child.castShadow = true;
+          child.receiveShadow = true;
 
-            mcaLabel.classList.add(
-                "show"
-            );
+          const name = (child.name || "").toLowerCase();
 
+          const isMCA = name.includes("mca") || name.includes("middle_cerebral");
+
+          /* Any other vessel/vascular structure that is NOT the MCA
+             (other arteries, veins, the circle of Willis, etc.) is
+             deleted outright — the model should only ever show the
+             brain surface plus the MCA, nothing else "growing" off it. */
+          const otherVesselKeywords = ["artery","arter","vessel","vein","ica","aca","pca",
+            "pcom","acom","carotid","willis","basilar","vertebral","sinus","plexus"];
+          const isOtherVessel = !isMCA && otherVesselKeywords.some(k => name.includes(k));
+
+          if(isMCA){
+
+            mcaMesh = child;
+            child.material = mcaRedMaterial;
+
+            const glow = child.clone();
+            glow.material = glowMaterial;
+            glow.scale.multiplyScalar(1.06);
+            child.parent.add(glow);
+            mcaGlowMeshes.push(glow);
+
+          } else if(isOtherVessel){
+
+            toRemove.push(child);
+
+          } else {
+
+            if(child.material){
+              child.material = brainPinkMaterial.clone();
+            }
+          }
+        });
+
+        /* Remove flagged meshes after traversal finishes (mutating the
+           scene graph mid-traverse can skip nodes). */
+        toRemove.forEach(function(child){
+          if(child.geometry) child.geometry.dispose();
+          if(child.parent) child.parent.remove(child);
+        });
+
+        brainGroup.add(model);
+
+        /* fallback: real model has no separate MCA mesh (vessels usually
+           aren't included in generic brain models), so build the vessel */
+        if(!mcaMesh){
+          createMCAMarker();
         }
 
-    },500);
+        loadBar.style.width = "100%";
+        onReady();
+      },
+      function(progress){
+        if(progress.total > 0){
+          const pct = Math.min(90, progress.loaded / progress.total * 90);
+          loadBar.style.width = pct + "%";
+        }
+      },
+      function(error){
+        console.warn("Model failed:", error);
+        tryLoad();
+      }
+    );
+  }
 
+  tryLoad();
 }
 
+/* READY */
+function onReady(){
+  setTimeout(function(){
+    loading.classList.add("hide");
+    if(highlighted){
+      mcaLabel.classList.add("show");
+    }
+  }, 500);
+}
 
+/* LABEL POSITION */
 function updateLabel(){
 
-    if(
-        !mcaHighlightMesh
-    )
-        return;
+  const target = mcaHighlightGroup || mcaMesh;
+  if(!target) return;
 
+  const position = new THREE.Vector3();
+  target.getWorldPosition(position);
+  position.project(camera);
 
-    const position =
-    new THREE.Vector3();
+  const x = (position.x + 1) / 2 * canvas.clientWidth;
+  const y = (-position.y + 1) / 2 * canvas.clientHeight;
 
-
-    mcaHighlightMesh
-    .getWorldPosition(
-        position
-    );
-
-
-    position.project(
-        camera
-    );
-
-
-    const x =
-    (position.x + 1) /
-    2 *
-    canvas.clientWidth;
-
-
-    const y =
-    (-position.y + 1) /
-    2 *
-    canvas.clientHeight;
-
-
-    mcaLabel.style.left =
-    x + "px";
-
-
-    mcaLabel.style.top =
-    (y - 45) + "px";
-
+  mcaLabel.style.left = x + "px";
+  mcaLabel.style.top = (y - 45) + "px";
 }
 
-
+/* RESIZE */
 function resize(){
-
-    const width =
-    canvas.clientWidth;
-
-
-    const height =
-    canvas.clientHeight;
-
-
-    if(
-        width <= 0 ||
-        height <= 0
-    )
-        return;
-
-
-    camera.aspect =
-    width / height;
-
-
-    camera.updateProjectionMatrix();
-
-
-    renderer.setSize(
-        width,
-        height,
-        false
-    );
-
+  const width = canvas.clientWidth;
+  const height = canvas.clientHeight;
+  if(width <= 0 || height <= 0) return;
+  camera.aspect = width / height;
+  camera.updateProjectionMatrix();
+  renderer.setSize(width, height, false);
 }
+window.addEventListener("resize", resize);
 
+/* HIGHLIGHT BUTTON */
+const highlightBtn = document.getElementById("highlight");
+highlightBtn.addEventListener("click", function(){
 
-window.addEventListener(
-    "resize",
-    resize
-);
+  highlighted = !highlighted;
 
+  /* Swap the single shared MCA material's color: white while
+     highlighted, the brain's own pink when not — the MCA is never
+     hidden, it just blends into the surrounding brain tissue. */
+  mcaRedMaterial.color.copy(highlighted ? mcaWhiteColor : mcaBlendColor);
+  mcaRedMaterial.emissive.set(highlighted ? 0x555555 : 0x000000);
+  mcaRedMaterial.emissiveIntensity = highlighted ? 0.2 : 0;
 
-const highlightBtn =
-document.getElementById(
-    "highlight"
-);
+  mcaGlowMeshes.forEach(function(glow){
+    glow.visible = highlighted;
+  });
 
-
-highlightBtn.addEventListener(
-"click",
-function(){
-
-    highlighted =
-    !highlighted;
-
-
-    if(
-        mcaHighlightMesh
-    ){
-
-        mcaHighlightMesh.visible =
-        highlighted;
-
-    }
-
-
-    if(
-        mcaOutline
-    ){
-
-        mcaOutline.visible =
-        highlighted;
-
-    }
-
-
-    mcaLabel.classList.toggle(
-        "show",
-        highlighted
-    );
-
-
-    highlightBtn.classList.toggle(
-        "active",
-        highlighted
-    );
-
-
-    highlightBtn.textContent =
-
-    highlighted
-
-    ? "⚪ Highlight MCA"
-
-    : "⚫ Show MCA";
-
+  mcaLabel.classList.toggle("show", highlighted);
+  highlightBtn.classList.toggle("active", highlighted);
+  highlightBtn.textContent = highlighted ? "⚪ MCA Highlighted" : "🧠 Highlight MCA";
 });
 
-
-const rotateBtn =
-document.getElementById(
-    "rotate"
-);
-
-
-rotateBtn.addEventListener(
-"click",
-function(){
-
-    controls.autoRotate =
-    !controls.autoRotate;
-
-
-    rotateBtn.classList.toggle(
-        "active",
-        controls.autoRotate
-    );
-
-
-    rotateBtn.textContent =
-
-    controls.autoRotate
-
-    ? "⟳ Auto Rotate"
-
-    : "▶ Auto Rotate";
-
+/* AUTO ROTATE */
+const rotateBtn = document.getElementById("rotate");
+rotateBtn.addEventListener("click", function(){
+  controls.autoRotate = !controls.autoRotate;
+  rotateBtn.classList.toggle("active", controls.autoRotate);
+  rotateBtn.textContent = controls.autoRotate ? "⟳ Auto Rotate" : "▶ Auto Rotate";
 });
 
-
-document.getElementById(
-    "reset"
-).addEventListener(
-"click",
-function(){
-
-    camera.position.set(
-        3.2,
-        0.15,
-        8.5
-    );
-
-
-    controls.target.set(
-        0,
-        -0.35,
-        0
-    );
-
-
-    controls.update();
-
+/* RESET */
+document.getElementById("reset").addEventListener("click", function(){
+  camera.position.set(3.2, 0.3, 8.5);
+  controls.target.set(0, -0.3, 0);
+  controls.update();
 });
 
-
+/* ANIMATION */
 function animate(){
-
-    requestAnimationFrame(
-        animate
-    );
-
-
-    controls.update();
-
-    updateLabel();
-
-
-    renderer.render(
-        scene,
-        camera
-    );
-
+  requestAnimationFrame(animate);
+  controls.update();
+  updateLabel();
+  renderer.render(scene, camera);
 }
 
-
+/* START */
 resize();
-
 animate();
-
 loadRealBrain();
+</script>
 
+<!-- MINI TEST JAVASCRIPT -->
+<script>
+function checkAnswer(button, correct){
 
-window.checkAnswer =
-function(
-    button,
-    correct,
-    feedbackId
-){
+  const parent = button.parentElement;
+  const options = parent.querySelectorAll(".option");
+  options.forEach(function(option){
+    option.classList.remove("correct", "wrong");
+  });
 
-    const feedback =
-    document.getElementById(
-        feedbackId
-    );
+  if(correct){
+    button.classList.add("correct");
+  } else {
+    button.classList.add("wrong");
+  }
 
+  updateQuizScore();
+}
 
-    const parent =
-    button.parentElement;
+function updateQuizScore(){
 
+  const result = document.getElementById("quizResult");
+  let answered = 0;
+  let correctAnswers = 0;
 
-    const options =
-    parent.querySelectorAll(
-        ".option"
-    );
-
-
-    options.forEach(
-    function(option){
-
-        option.disabled =
-        true;
-
-    });
-
-
-    if(correct){
-
-        button.classList.add(
-            "correct"
-        );
-
-        feedback.textContent =
-        "✓ Correct! · إجابة صحيحة!";
-
+  document.querySelectorAll(".question").forEach(function(question){
+    const selected = question.querySelector(".correct, .wrong");
+    if(selected){
+      answered++;
+      if(selected.classList.contains("correct")){
+        correctAnswers++;
+      }
     }
+  });
 
-    else{
-
-        button.classList.add(
-            "wrong"
-        );
-
-        feedback.textContent =
-        "✗ Not quite. Try again next time. · إجابة غير صحيحة، حاولي مرة أخرى.";
-
-    }
-
-};
-
+  if(answered > 0){
+    result.style.display = "block";
+    result.textContent = "Score: " + correctAnswers + " / " + answered;
+  }
+}
 </script>
 
 </body>
-
 </html>
