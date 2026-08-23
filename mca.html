@@ -231,9 +231,13 @@ h1{
 
 .mca-label{
     position:absolute;
+
     z-index:30;
+
     pointer-events:none;
+
     transform:translate(-50%,-100%);
+
     display:none;
 }
 
@@ -243,14 +247,23 @@ h1{
 
 .label-box{
     position:relative;
+
     padding:9px 15px;
+
     border-radius:10px;
+
     background:rgba(5,10,17,.96);
+
     border:1.5px solid #fff;
+
     color:#fff;
+
     font-size:12px;
+
     font-weight:bold;
+
     letter-spacing:1px;
+
     white-space:nowrap;
 
     box-shadow:
@@ -260,12 +273,17 @@ h1{
 
 .label-box::after{
     content:"";
+
     position:absolute;
+
     left:50%;
     bottom:-14px;
+
     width:1.5px;
     height:14px;
+
     background:#fff;
+
     transform:translateX(-50%);
 }
 
@@ -278,17 +296,25 @@ h1{
     display:flex;
     gap:10px;
     flex-wrap:wrap;
+
     padding:15px;
+
     border-top:1px solid rgba(255,255,255,.08);
 }
 
 .controls button{
     padding:11px 17px;
+
     border-radius:9px;
+
     background:#0b1928;
+
     border:1px solid #31516d;
+
     color:#bdd0e0;
+
     cursor:pointer;
+
     transition:.2s;
 }
 
@@ -1696,24 +1722,18 @@ scene.add(
 
 
 /* ==================================================
-   COLORS — ONLY CHANGE NEEDED
+   COLORS
 ================================================== */
 
-/*
-    BRAIN:
-    Soft anatomical pink
+/* ONLY COLOR CHANGE:
+   Brain = baby pink
+   MCA = white
 */
 
 const brainPink =
     new THREE.Color(
-        0xf1b6c6
+        0xf8c8d8
     );
-
-
-/*
-    MCA:
-    Pure white
-*/
 
 const arteryWhite =
     new THREE.Color(
@@ -1851,10 +1871,6 @@ function makeBrainPink(mesh){
                 oldMaterial.clone();
 
 
-            /*
-               BRAIN = PINK
-            */
-
             mat.color =
                 brainPink;
 
@@ -1909,7 +1925,8 @@ function makeMCAWhite(mesh){
 
 
             /*
-               MCA = WHITE
+               ONLY THE EXISTING
+               MCA MESH GETS WHITE.
             */
 
             mat.color =
@@ -1980,8 +1997,10 @@ function prepareModel(model){
 
 
             /*
-               ONLY existing MCA geometry
-               is made white.
+               FIRST:
+
+               Check whether this is already
+               an MCA object in the GLB.
             */
 
             if(
@@ -2006,10 +2025,10 @@ function prepareModel(model){
 
 
             /*
-               Every other existing brain mesh
-               becomes pink.
+               If it is not MCA,
+               make the brain baby pink.
 
-               NO NEW GEOMETRY IS CREATED.
+               We NEVER create an artery.
             */
 
             makeBrainPink(
@@ -2089,6 +2108,10 @@ function loadRealBrain(){
                     gltf.scene;
 
 
+                /*
+                   Normalize model size.
+                */
+
                 const box =
                     new THREE.Box3()
                         .setFromObject(
@@ -2136,6 +2159,10 @@ function loadRealBrain(){
                     0.55;
 
 
+                /*
+                   Prepare existing geometry.
+                */
+
                 const foundMCA =
                     prepareModel(
                         model
@@ -2159,6 +2186,13 @@ function loadRealBrain(){
                 }
 
                 else{
+
+                    /*
+                       No fake artery.
+
+                       If the GLB has no MCA mesh,
+                       we tell the user instead.
+                    */
 
                     loadText.textContent =
                         "Brain loaded · MCA vessel not found in model.";
