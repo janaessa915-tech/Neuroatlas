@@ -1,504 +1,2388 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Thalamus | NeuroAtlas</title>
+<title>NeuroAtlas | Thalamus</title>
 
 <style>
-
-*{
-box-sizing:border-box;
-margin:0;
-padding:0;
-}
-
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
 body{
-font-family:Arial,sans-serif;
-background:#07111f;
-color:#f4f7fb;
-line-height:1.7;
+  background:#050b13;
+  color:#eef4fa;
+  font-family:Arial,Helvetica,sans-serif;
+  line-height:1.7;
 }
 
+/* NAVIGATION */
 nav{
-padding:22px 7%;
-border-bottom:1px solid rgba(255,255,255,.08);
-display:flex;
-justify-content:space-between;
-align-items:center;
+  height:70px;
+  padding:0 7%;
+  display:flex;
+  align-items:center;
+  border-bottom:1px solid rgba(255,255,255,.08);
 }
-
-.logo{
-font-size:22px;
-font-weight:bold;
-color:white;
-text-decoration:none;
+nav a{
+  color:#9db0c3;
+  text-decoration:none;
+  font-size:14px;
 }
+nav a:hover{color:white;}
 
-.logo span{
-color:#4da6ff;
-}
-
-.nav-links{
-display:flex;
-gap:25px;
-}
-
-.nav-links a{
-color:#aebdce;
-text-decoration:none;
-font-size:14px;
-}
-
-.nav-links a:hover{
-color:white;
-}
-
+/* CONTAINER */
 .container{
-max-width:1050px;
-margin:auto;
-padding:70px 7%;
+  max-width:1200px;
+  margin:auto;
+  padding:60px 7% 100px;
 }
 
-.label{
-color:#4da6ff;
-text-transform:uppercase;
-letter-spacing:2px;
-font-size:13px;
-margin-bottom:12px;
+/* HERO */
+.eyebrow{
+  color:#61b5ff;
+  letter-spacing:3px;
+  font-size:12px;
+  text-transform:uppercase;
+  margin-bottom:15px;
 }
-
 h1{
-font-size:clamp(45px,7vw,76px);
-line-height:1.05;
-margin-bottom:8px;
+  font-size:clamp(60px,8vw,90px);
+  line-height:.95;
+  letter-spacing:-4px;
+  margin-bottom:10px;
+}
+.arabic-title{
+  color:#ff8f9b;
+  font-size:24px;
+  margin-bottom:25px;
+}
+.hero p{
+  color:#a6b6c7;
+  max-width:780px;
+  font-size:18px;
+  line-height:1.8;
 }
 
-.arabic{
-color:#7ebcff;
-font-size:25px;
-margin-bottom:28px;
+/* ACTION BUTTONS */
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:30px;
+}
+.action-button{
+  padding:11px 17px;
+  border-radius:9px;
+  background:#0b1928;
+  border:1px solid #31516d;
+  color:#bdd0e0;
+  text-decoration:none;
+  cursor:pointer;
+  transition:.2s;
+}
+.action-button:hover{
+  background:#14304a;
+  color:white;
+  border-color:#61b5ff;
 }
 
-.intro{
-color:#aebdce;
-font-size:18px;
-max-width:780px;
-margin-bottom:45px;
+/* 3D VIEWER */
+.viewer{
+  margin-top:60px;
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:24px;
+  overflow:hidden;
+  background:#02060b;
+  box-shadow:0 25px 80px rgba(0,0,0,.45);
+}
+.viewer-header{
+  min-height:65px;
+  padding:0 22px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.viewer-title{
+  font-size:14px;
+  color:#d2dce6;
+}
+.viewer-status{
+  color:#708499;
+  font-size:11px;
+  letter-spacing:1px;
+}
+.scene{
+  position:relative;
+  width:100%;
+  height:700px;
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      #203b51 0%,
+      #0d1c2e 42%,
+      #02060b 100%
+    );
+}
+#brainCanvas{
+  width:100%;
+  height:100%;
+  display:block;
 }
 
-.grid{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:20px;
+/* LOADING */
+.loading{
+  position:absolute;
+  inset:0;
+  z-index:20;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:16px;
+  background:#02060b;
+  color:#9db0c3;
+  font-size:14px;
+  transition:opacity .8s;
+}
+.loading.hide{
+  opacity:0;
+  pointer-events:none;
+}
+.loading-bar{
+  width:180px;
+  height:2px;
+  background:rgba(255,255,255,.08);
+  border-radius:2px;
+  overflow:hidden;
+}
+.loading-bar-inner{
+  width:0%;
+  height:100%;
+  background:#61b5ff;
+  transition:width .3s;
 }
 
+/* THALAMUS LABEL */
+.thalamus-label{
+  position:absolute;
+  z-index:30;
+  pointer-events:none;
+  transform:translate(-50%,-100%);
+  display:none;
+}
+.thalamus-label.show{
+  display:block;
+}
+.label-box{
+  position:relative;
+  padding:9px 15px;
+  border-radius:10px;
+  background:rgba(5,10,17,.96);
+  border:1.5px solid #ff4d5e;
+  color:#ffd0d5;
+  font-size:12px;
+  font-weight:bold;
+  letter-spacing:1px;
+  white-space:nowrap;
+  box-shadow:
+    0 0 12px rgba(255,77,94,.25),
+    0 0 25px rgba(255,77,94,.12);
+}
+.label-box::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:-15px;
+  width:1.5px;
+  height:15px;
+  background:#ff4d5e;
+  transform:translateX(-50%);
+}
+
+/* CONTROLS */
+.controls{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  padding:15px;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+.controls button{
+  padding:11px 17px;
+  border-radius:9px;
+  background:#0b1928;
+  border:1px solid #31516d;
+  color:#bdd0e0;
+  cursor:pointer;
+  transition:.2s;
+}
+.controls button:hover{
+  background:#14304a;
+  color:white;
+}
+.controls button.active{
+  background:#241417;
+  border-color:#ff4d5e;
+  color:#ffd0d5;
+}
+
+/* INFORMATION */
+.section{
+  margin-top:70px;
+}
+.section-label{
+  color:#61b5ff;
+  letter-spacing:2px;
+  font-size:11px;
+  text-transform:uppercase;
+  margin-bottom:8px;
+}
+.section h2{
+  font-size:32px;
+  margin-bottom:25px;
+}
+.section-intro{
+  color:#91a5b8;
+  max-width:900px;
+  font-size:15px;
+  line-height:1.9;
+  margin-bottom:30px;
+}
+
+/* LOCATION */
+.location{
+  margin-top:70px;
+  padding:35px;
+  background:#091522;
+  border:1px solid #172b3e;
+  border-radius:18px;
+}
+.location h2{
+  font-size:32px;
+  margin-bottom:12px;
+}
+.location-intro{
+  color:#91a5b8;
+  max-width:900px;
+  line-height:1.9;
+  margin-bottom:30px;
+}
+.brain-visual{
+  width:100%;
+  overflow:hidden;
+}
+
+.location-svg{
+  display:block;
+  width:100%;
+  max-width:800px;
+  height:auto;
+  margin:auto;
+}
+
+.location-brain{
+  fill:#263d55;
+  stroke:#71869e;
+  stroke-width:3;
+}
+
+/* THALAMUS DIAGRAM COLORS */
+.location-brainstem{
+  fill:#344b61;
+  stroke:#71869e;
+  stroke-width:3;
+}
+
+.location-thalamus-glow{
+  fill:#ff4d5e;
+  opacity:.30;
+  filter:blur(7px);
+}
+
+.location-thalamus{
+  fill:#ff4d5e;
+  stroke:#ffd0d5;
+  stroke-width:2;
+}
+
+.location-line{
+  stroke:#8fc7ff;
+  stroke-width:2;
+}
+
+.location-thalamus-line{
+  stroke:#ff4d5e;
+  stroke-width:3;
+}
+
+.location-svg-label{
+  fill:white;
+  font-size:18px;
+  font-weight:bold;
+}
+
+.location-thalamus-label{
+  fill:#ff4d5e;
+  font-size:21px;
+  font-weight:bold;
+}
+
+.location-arabic-label{
+  fill:#ffd6da;
+  font-size:16px;
+  font-weight:bold;
+}
+
+.location-caption{
+  text-align:center;
+  color:#9fb0c3;
+  margin-top:15px;
+}
+
+/* CARDS */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
 .card{
-padding:28px;
-background:rgba(255,255,255,.035);
-border:1px solid rgba(255,255,255,.08);
-border-radius:16px;
-transition:.25s;
+  padding:27px;
+  background:#091522;
+  border:1px solid #172b3e;
+  border-radius:18px;
+  transition:
+    transform .2s,
+    border-color .2s;
 }
-
 .card:hover{
-transform:translateY(-4px);
-border-color:rgba(77,166,255,.45);
+  transform:translateY(-3px);
+  border-color:#4a2a30;
 }
-
-.card h2{
-font-size:20px;
-margin-bottom:12px;
+.card h3{
+  font-size:18px;
+  margin-bottom:13px;
+  color:#eef4fa;
+  line-height:1.45;
 }
-
 .card p{
-color:#aebdce;
+  color:#91a5b8;
+  font-size:14px;
+  line-height:1.8;
 }
 
-.insight{
-margin-top:30px;
-padding:30px;
-border-left:3px solid #4da6ff;
-background:#0a1728;
-border-radius:10px;
+/* CLINICAL */
+.clinical-section{
+  margin-top:65px;
+}
+.clinical-box{
+  padding:30px;
+  background:#091522;
+  border:1px solid #172b3e;
+  border-left:3px solid #ff4d5e;
+  border-radius:18px;
+}
+.clinical-box p{
+  color:#a7b7c6;
+  font-size:15px;
+  line-height:1.9;
+  margin-bottom:18px;
+}
+.clinical-box p:last-child{
+  margin-bottom:0;
 }
 
-.insight strong{
-color:#7ebcff;
+/* QUICK FACTS */
+.facts-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+}
+.fact{
+  padding:22px;
+  background:#091522;
+  border:1px solid #172b3e;
+  border-radius:16px;
+}
+.fact span{
+  display:block;
+  color:#ff4d5e;
+  font-size:11px;
+  letter-spacing:2px;
+  margin-bottom:12px;
+}
+.fact strong{
+  display:block;
+  color:#eef4fa;
+  font-size:14px;
+  margin-bottom:8px;
+  line-height:1.5;
+}
+.fact p{
+  color:#8195a8;
+  font-size:13px;
+  line-height:1.7;
 }
 
+/* MINI TEST */
 .quiz{
-margin-top:55px;
-padding:35px;
-background:#0a1728;
-border:1px solid rgba(77,166,255,.2);
-border-radius:18px;
+  margin-top:65px;
+  padding:30px;
+  background:#091522;
+  border:1px solid #172b3e;
+  border-radius:18px;
 }
-
 .quiz h2{
-margin-bottom:20px;
+  font-size:28px;
+  margin-bottom:10px;
 }
-
+.quiz-intro{
+  color:#91a5b8;
+  margin-bottom:25px;
+}
+.question{
+  margin-bottom:30px;
+}
+.question:last-child{
+  margin-bottom:0;
+}
+.question p{
+  color:#eef4fa;
+  font-size:16px;
+  margin-bottom:12px;
+  font-weight:bold;
+}
 .option{
-display:block;
-width:100%;
-text-align:left;
-padding:14px 16px;
-margin-top:10px;
-border-radius:10px;
-border:1px solid #263951;
-background:#0d2035;
-color:white;
-cursor:pointer;
-font-size:15px;
+  display:block;
+  width:100%;
+  padding:12px 15px;
+  margin-top:9px;
+  background:#0b1928;
+  color:#c7d5e2;
+  border:1px solid #263951;
+  border-radius:9px;
+  text-align:left;
+  cursor:pointer;
+  font-size:14px;
+  transition:.2s;
 }
-
 .option:hover{
-border-color:#4da6ff;
+  border-color:#ff4d5e;
+  background:#111e2c;
+}
+.option.correct{
+  border-color:#8fd3a8;
+  background:#14291e;
+  color:#b9f0c9;
+}
+.option.wrong{
+  border-color:#d88b9b;
+  background:#2a171d;
+  color:#ffc2cc;
+}
+.quiz-result{
+  margin-top:25px;
+  padding:15px;
+  border-radius:10px;
+  background:#0b1928;
+  border:1px solid #263951;
+  color:#aebdce;
+  display:none;
 }
 
-#feedback{
-margin-top:20px;
-color:#7ebcff;
-font-weight:bold;
+/* MOBILE */
+@media(max-width:900px){
+  .cards{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .facts-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
 }
 
-.bottom-nav{
-display:flex;
-justify-content:space-between;
-gap:15px;
-margin-top:60px;
+@media(max-width:800px){
+  .scene{
+    height:450px;
+  }
+
+  .viewer-status{
+    display:none;
+  }
 }
 
-.bottom-nav a{
-padding:13px 18px;
-border-radius:10px;
-text-decoration:none;
-border:1px solid #263951;
-color:#d7e2ee;
+@media(max-width:600px){
+  .cards{
+    grid-template-columns:1fr;
+  }
+
+  .facts-grid{
+    grid-template-columns:1fr;
+  }
+
+  h1{
+    letter-spacing:-2px;
+  }
+
+  .location{
+    padding:20px;
+  }
 }
-
-.bottom-nav a:hover{
-border-color:#4da6ff;
-}
-
-footer{
-text-align:center;
-padding:35px 7%;
-border-top:1px solid rgba(255,255,255,.08);
-color:#718197;
-font-size:14px;
-}
-
-@media(max-width:700px){
-
-.grid{
-grid-template-columns:1fr;
-}
-
-nav{
-flex-direction:column;
-gap:15px;
-}
-
-.bottom-nav{
-flex-direction:column;
-}
-
-}
-
 </style>
-
 </head>
-
 
 <body>
 
-
 <nav>
-
-<a class="logo"
-href="https://janaessa915-tech.github.io/Neuroatlas/">
-
-Neuro<span>Atlas</span>
-
-</a>
-
-
-<div class="nav-links">
-
-<a href="https://janaessa915-tech.github.io/Neuroatlas/">
-Home
-</a>
-
-<a href="https://janaessa915-tech.github.io/Neuroatlas/explore.html">
-Explore Anatomy
-</a>
-
-</div>
-
+<a href="./explore.html">← Back to Explore</a>
 </nav>
-
 
 <main class="container">
 
+<!-- HERO -->
+<div class="eyebrow">Deep Brain Anatomy · NeuroAtlas</div>
 
-<div class="label">
-Brain Structure
-</div>
+<h1>THALAMUS</h1>
 
-
-<h1>
-Thalamus
-</h1>
-
-
-<div class="arabic">
+<div class="arabic-title">
 المهاد
 </div>
 
-
-<p class="intro">
-
-The thalamus is a major paired structure of the diencephalon
-that acts as an important relay and integration center for
-many types of information traveling to the cerebral cortex.
-
-</p>
-
-
-<div class="grid">
-
-
-<div class="card">
-
-<h2>📍 Location</h2>
-
+<div class="hero">
 <p>
-
-The thalamus lies deep within the brain, on either side of
-the third ventricle, and forms a major component of the
-diencephalon.
-
+The thalamus is a paired deep-gray-matter structure located near the
+center of the brain. It acts as a major relay and integration center,
+routing sensory information toward the cerebral cortex and helping
+regulate attention, consciousness, movement, memory, and emotion.
 </p>
+</div>
+
+<!-- ACTION BUTTONS -->
+<div class="actions">
+
+<a class="action-button" href="#location">
+📍 Show Location
+</a>
+
+<a class="action-button" href="#information">
+🧠 Learn About the Thalamus
+</a>
+
+<a class="action-button" href="#quiz">
+📝 Test Yourself
+</a>
 
 </div>
 
+<!-- 3D VIEWER -->
+<div class="viewer">
 
-<div class="card">
+<div class="viewer-header">
 
-<h2>⚙️ Main Functions</h2>
+<div class="viewer-title">
+Human Brain · Interactive 3D
+</div>
 
-<p>
-
-The thalamus participates in relaying sensory information
-to the cerebral cortex and contributes to motor control,
-attention, arousal, and aspects of cognition.
-
-</p>
+<div class="viewer-status">
+DRAG TO ROTATE · SCROLL TO ZOOM
+</div>
 
 </div>
 
+<div class="scene">
 
-<div class="card">
+<div id="loading" class="loading">
 
-<h2>🔗 Important Connections</h2>
+<span id="loadText">
+Loading real brain model...
+</span>
 
-<p>
-
-Different thalamic nuclei connect with specific cortical
-regions and with structures involved in motor, sensory,
-limbic, and cognitive networks.
-
-</p>
+<div class="loading-bar">
+<div id="loadBar" class="loading-bar-inner"></div>
+</div>
 
 </div>
 
+<canvas id="brainCanvas"></canvas>
 
-<div class="card">
+<div id="thalamusLabel" class="thalamus-label">
 
-<h2>🛣️ Neural Pathways</h2>
-
-<p>
-
-Major ascending sensory pathways commonly relay through
-thalamic nuclei before reaching appropriate regions of
-the cerebral cortex, with important exceptions such as
-olfaction.
-
-</p>
+<div class="label-box">
+THALAMUS
+</div>
 
 </div>
 
+</div>
 
-<div class="card">
+<div class="controls">
 
-<h2>🩺 Clinical Relevance</h2>
+<button id="highlight" class="active">
+🔴 Highlight Thalamus
+</button>
 
-<p>
+<button id="rotate" class="active">
+⟳ Auto Rotate
+</button>
 
-Damage to particular thalamic regions can produce sensory,
-motor, cognitive, or consciousness-related disturbances,
-depending on the nuclei and pathways involved.
-
-</p>
+<button id="reset">
+↻ Reset View
+</button>
 
 </div>
 
-
-<div class="card">
-
-<h2>🧠 Neurosurgical Context</h2>
-
-<p>
-
-The thalamus is surrounded by important neural pathways
-and deep brain structures, making its anatomy particularly
-important when studying stereotactic and deep-brain procedures.
-
-</p>
-
 </div>
 
+<!-- LOCATION -->
+<section id="location" class="location">
 
+<div class="section-label">
+Location · الموقع
 </div>
 
+<h2>
+📍 Where is the Thalamus?
+</h2>
 
-<div class="insight">
+<p class="location-intro">
 
-<strong>NeuroAtlas Insight</strong>
+The thalamus is located deep within the brain, on either side of the
+third ventricle. It lies superior to the midbrain and forms an important
+part of the diencephalon. The two thalami are connected in many people
+by a small bridge of tissue called the interthalamic adhesion.
 
 <br><br>
 
-The thalamus isn't simply a "sensory relay."
-Different thalamic nuclei connect with different
-cortical and subcortical networks, giving the structure
-a much broader role in brain function.
+يقع المهاد في عمق الدماغ على جانبي البطين الثالث. يوجد فوق الدماغ
+المتوسط ويشكّل جزءاً مهماً من الدماغ البيني. ويرتبط المهادان لدى كثير
+من الأشخاص بواسطة جسر صغير من النسيج يُسمى الالتصاق بين المهادين.
+
+</p>
+
+<div class="brain-visual">
+
+<svg
+  class="location-svg"
+  viewBox="0 0 800 560"
+  xmlns="http://www.w3.org/2000/svg"
+  aria-label="Simplified diagram showing the location of the thalamus"
+>
+
+<!-- CEREBRUM -->
+<path
+  class="location-brain"
+  d="
+  M145 95
+  C195 45 285 30 365 45
+  C450 25 535 65 590 125
+  C635 175 635 250 605 300
+  C580 342 535 360 485 350
+  C445 342 410 315 380 300
+  C340 280 300 295 260 310
+  C215 327 165 310 135 275
+  C105 240 105 175 120 135
+  C126 118 134 105 145 95Z"
+/>
+
+<!-- CENTRAL INTERNAL SPACE -->
+<ellipse
+  cx="390"
+  cy="235"
+  rx="115"
+  ry="85"
+  fill="#101f2e"
+  stroke="#536c83"
+  stroke-width="2"
+/>
+
+<!-- THIRD VENTRICLE -->
+<path
+  d="
+  M390 155
+  C375 175 374 205 380 235
+  C384 265 378 290 390 310
+  C402 290 396 265 400 235
+  C406 205 405 175 390 155Z"
+  fill="#07111c"
+  stroke="#6f8499"
+  stroke-width="2"
+/>
+
+<!-- LEFT THALAMUS GLOW -->
+<ellipse
+  class="location-thalamus-glow"
+  cx="340"
+  cy="235"
+  rx="42"
+  ry="58"
+/>
+
+<!-- RIGHT THALAMUS GLOW -->
+<ellipse
+  class="location-thalamus-glow"
+  cx="440"
+  cy="235"
+  rx="42"
+  ry="58"
+/>
+
+<!-- LEFT THALAMUS -->
+<ellipse
+  class="location-thalamus"
+  cx="340"
+  cy="235"
+  rx="34"
+  ry="48"
+/>
+
+<!-- RIGHT THALAMUS -->
+<ellipse
+  class="location-thalamus"
+  cx="440"
+  cy="235"
+  rx="34"
+  ry="48"
+/>
+
+<!-- INTERTHALAMIC ADHESION -->
+<line
+  x1="374"
+  y1="235"
+  x2="406"
+  y2="235"
+  stroke="#ffd0d5"
+  stroke-width="4"
+  stroke-linecap="round"
+/>
+
+<!-- MIDBRAIN -->
+<path
+  class="location-brainstem"
+  d="
+  M355 315
+  C360 335 362 365 355 400
+  C350 425 365 448 390 452
+  C415 448 430 425 425 400
+  C418 365 420 335 425 315Z"
+/>
+
+<!-- SPINAL / BRAINSTEM CONTEXT -->
+<path
+  class="location-brainstem"
+  d="
+  M365 440
+  C370 465 372 495 370 520
+  L410 520
+  C408 495 410 465 415 440Z"
+/>
+
+<!-- THALAMUS LABEL -->
+<line
+  class="location-thalamus-line"
+  x1="440"
+  y1="235"
+  x2="570"
+  y2="175"
+/>
+
+<text
+  class="location-thalamus-label"
+  x="585"
+  y="180"
+>
+THALAMUS
+</text>
+
+<text
+  class="location-arabic-label"
+  x="585"
+  y="207"
+>
+المهاد
+</text>
+
+<!-- THIRD VENTRICLE LABEL -->
+<line
+  class="location-line"
+  x1="390"
+  y1="185"
+  x2="570"
+  y2="285"
+/>
+
+<text
+  class="location-svg-label"
+  x="580"
+  y="290"
+>
+3rd VENTRICLE
+</text>
+
+<!-- MIDBRAIN LABEL -->
+<line
+  class="location-line"
+  x1="390"
+  y1="360"
+  x2="230"
+  y2="405"
+/>
+
+<text
+  class="location-svg-label"
+  x="100"
+  y="410"
+>
+MIDBRAIN
+</text>
+
+<text
+  class="location-arabic-label"
+  x="100"
+  y="435"
+>
+الدماغ المتوسط
+</text>
+
+<!-- CEREBRUM LABEL -->
+<line
+  class="location-line"
+  x1="250"
+  y1="115"
+  x2="100"
+  y2="80"
+/>
+
+<text
+  class="location-svg-label"
+  x="35"
+  y="82"
+>
+CEREBRUM
+</text>
+
+</svg>
+
+<p class="location-caption">
+
+🔴 The red structures represent the paired thalami, located deep within
+the brain on either side of the third ventricle.
+
+</p>
 
 </div>
-
-
-<section class="quiz">
-
-
-<div class="label">
-Knowledge Check
-</div>
-
-
-<h2>
-
-Which statement best describes a major role of the thalamus?
-
-</h2>
-
-
-<button
-class="option"
-onclick="checkAnswer(true)"
->
-
-A. Relaying and integrating information for communication
-with the cerebral cortex
-
-</button>
-
-
-<button
-class="option"
-onclick="checkAnswer(false)"
->
-
-B. Producing cerebrospinal fluid
-
-</button>
-
-
-<button
-class="option"
-onclick="checkAnswer(false)"
->
-
-C. Controlling skeletal muscle directly
-
-</button>
-
-
-<button
-class="option"
-onclick="checkAnswer(false)"
->
-
-D. Serving as the primary visual receptor
-
-</button>
-
-
-<div id="feedback"></div>
-
 
 </section>
 
+<!-- INFORMATION -->
+<section id="information" class="section">
 
-<div class="bottom-nav">
+<div class="section-label">
+Thalamus Anatomy · تشريح المهاد
+</div>
 
+<h2>
+Thalamus · المهاد
+</h2>
 
-<a href="https://janaessa915-tech.github.io/Neuroatlas/explore.html">
+<p class="section-intro">
 
-← Back to Explore Anatomy
+The thalamus is one of the major structures of the diencephalon.
+It contains multiple specialized nuclei that communicate extensively
+with the cerebral cortex, brainstem, basal ganglia, and limbic system.
+Although it is often described as a sensory relay, its functions are
+much broader and include motor control, attention, arousal, cognition,
+and emotional processing.
 
-</a>
+<br><br>
 
+المهاد هو أحد أهم تراكيب الدماغ البيني. يحتوي على عدة نوى متخصصة
+تتواصل بشكل واسع مع القشرة المخية وجذع الدماغ والعقد القاعدية والجهاز
+الحوفي. وعلى الرغم من وصفه غالباً بأنه محطة لترحيل المعلومات الحسية،
+فإن وظائفه أوسع بكثير وتشمل التحكم الحركي والانتباه واليقظة والإدراك
+والمعالجة العاطفية.
 
-<a href="https://janaessa915-tech.github.io/Neuroatlas/">
+</p>
 
-NeuroAtlas Home →
+<div class="cards">
 
-</a>
+<div class="card">
 
+<h3>
+Location · الموقع
+</h3>
+
+<p>
+The thalamus lies deep within the cerebral hemispheres and forms much
+of the lateral wall of the third ventricle.
+
+<br><br>
+
+يقع المهاد في عمق نصفي الكرة المخية ويشكّل جزءاً كبيراً من الجدار
+الجانبي للبطين الثالث.
+</p>
 
 </div>
 
+<div class="card">
+
+<h3>
+Sensory Relay · الترحيل الحسي
+</h3>
+
+<p>
+Most major sensory pathways reaching the cerebral cortex relay through
+the thalamus, with the notable exception of olfactory information.
+
+<br><br>
+
+تمر معظم المسارات الحسية الرئيسية المتجهة إلى القشرة المخية عبر
+المهاد، مع وجود استثناء مهم وهو المعلومات الشمية.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Motor Function · الوظيفة الحركية
+</h3>
+
+<p>
+Several thalamic nuclei communicate with the basal ganglia and
+cerebellum and help relay information involved in movement planning
+and coordination.
+
+<br><br>
+
+تتواصل عدة نوى مهادية مع العقد القاعدية والمخيخ وتساعد على نقل
+المعلومات المرتبطة بتخطيط الحركة وتنسيقها.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Anterior Nucleus · النواة الأمامية
+</h3>
+
+<p>
+The anterior nucleus is closely associated with the limbic system and
+is involved in memory and emotional processing.
+
+<br><br>
+
+ترتبط النواة الأمامية ارتباطاً وثيقاً بالجهاز الحوفي وتشارك في
+الذاكرة والمعالجة العاطفية.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Medial Geniculate Body · الجسم الركبي الإنسي
+</h3>
+
+<p>
+The medial geniculate body is an important auditory relay nucleus,
+passing auditory information toward the auditory cortex.
+
+<br><br>
+
+يُعد الجسم الركبي الإنسي نواة مهمة لترحيل المعلومات السمعية نحو
+القشرة السمعية.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Lateral Geniculate Body · الجسم الركبي الوحشي
+</h3>
+
+<p>
+The lateral geniculate body is a major visual relay nucleus carrying
+information from the visual pathway toward the primary visual cortex.
+
+<br><br>
+
+يُعد الجسم الركبي الوحشي محطة رئيسية للمعلومات البصرية وينقلها من
+المسار البصري نحو القشرة البصرية الأولية.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Ventral Posterior Nucleus · النواة البطنية الخلفية
+</h3>
+
+<p>
+The ventral posterior nuclei relay somatosensory information,
+including touch, pain, temperature, and proprioception.
+
+<br><br>
+
+تنقل النوى البطنية الخلفية المعلومات الحسية الجسدية مثل اللمس
+والألم والحرارة والإحساس بوضعية الجسم.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Pulvinar · الوسادة
+</h3>
+
+<p>
+The pulvinar is the large posterior portion of the thalamus and has
+important connections with association areas of the cerebral cortex.
+
+<br><br>
+
+الوسادة هي الجزء الخلفي الكبير من المهاد وترتبط بشكل مهم بمناطق
+الارتباط في القشرة المخية.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Intralaminar Nuclei · النوى داخل الصفيحة
+</h3>
+
+<p>
+These nuclei participate in arousal, attention, and interactions
+between the thalamus and widespread cortical networks.
+
+<br><br>
+
+تشارك هذه النوى في اليقظة والانتباه والتفاعلات بين المهاد والشبكات
+القشرية واسعة الانتشار.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Thalamocortical Connections · الاتصالات المهادية القشرية
+</h3>
+
+<p>
+Thalamic nuclei maintain extensive reciprocal connections with the
+cerebral cortex, allowing information to travel in both directions.
+
+<br><br>
+
+تحافظ النوى المهادية على اتصالات متبادلة واسعة مع القشرة المخية،
+مما يسمح بانتقال المعلومات في الاتجاهين.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Consciousness · الوعي
+</h3>
+
+<p>
+Thalamic networks interact with the brainstem and cerebral cortex and
+contribute to arousal and conscious awareness.
+
+<br><br>
+
+تتفاعل الشبكات المهادية مع جذع الدماغ والقشرة المخية وتساهم في
+اليقظة والوعي.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Pain Processing · معالجة الألم
+</h3>
+
+<p>
+The thalamus receives and distributes nociceptive information and
+participates in the perception and modulation of pain.
+
+<br><br>
+
+يستقبل المهاد المعلومات المتعلقة بالألم ويوزعها ويشارك في إدراك
+الألم وتنظيمه.
+</p>
+
+</div>
+
+</div>
+
+<!-- CLINICAL IMPORTANCE -->
+<div class="clinical-section">
+
+<div class="section-label">
+Clinical Importance · الأهمية السريرية
+</div>
+
+<h2>
+Why the Thalamus Matters
+</h2>
+
+<div class="clinical-box">
+
+<p>
+Because the thalamus contains multiple nuclei with different
+connections, a lesion can produce very different neurological
+findings depending on its location. Possible effects include sensory
+disturbance, altered attention or consciousness, memory problems,
+movement abnormalities, or visual pathway deficits.
+</p>
+
+<p dir="rtl">
+نظراً لأن المهاد يحتوي على عدة نوى ذات اتصالات مختلفة، فإن إصابته
+يمكن أن تسبب علامات عصبية متنوعة جداً حسب موقع الإصابة. وقد تشمل
+التأثيرات اضطرابات حسية أو تغيراً في الانتباه أو الوعي أو مشكلات في
+الذاكرة أو اضطرابات حركية أو اضطرابات في المسارات البصرية.
+</p>
+
+</div>
+
+</div>
+
+<!-- QUICK FACTS -->
+<div class="section">
+
+<div class="section-label">
+Quick Facts · معلومات سريعة
+</div>
+
+<h2>
+Thalamus at a Glance
+</h2>
+
+<div class="facts-grid">
+
+<div class="fact">
+
+<span>01</span>
+
+<strong>
+Location · الموقع
+</strong>
+
+<p>
+Deep within the brain around the third ventricle · في عمق الدماغ حول البطين الثالث
+</p>
+
+</div>
+
+<div class="fact">
+
+<span>02</span>
+
+<strong>
+System · الجهاز
+</strong>
+
+<p>
+Part of the diencephalon · جزء من الدماغ البيني
+</p>
+
+</div>
+
+<div class="fact">
+
+<span>03</span>
+
+<strong>
+Main Role · الدور الرئيسي
+</strong>
+
+<p>
+Relay and integration of information · ترحيل ودمج المعلومات
+</p>
+
+</div>
+
+<div class="fact">
+
+<span>04</span>
+
+<strong>
+Connections · الاتصالات
+</strong>
+
+<p>
+Extensive connections with the cerebral cortex · اتصالات واسعة مع القشرة المخية
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- QUIZ -->
+<div id="quiz" class="quiz">
+
+<div class="section-label">
+Mini Test
+</div>
+
+<h2>
+🧠 Test Yourself
+</h2>
+
+<p class="quiz-intro">
+Choose the best answer for each question.
+</p>
+
+<div class="question">
+
+<p>
+1. Where is the thalamus primarily located?
+</p>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)"
+>
+A. Inside the cerebellar cortex
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,true)"
+>
+B. Deep within the diencephalon near the third ventricle
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)"
+>
+C. Inside the spinal cord
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)"
+>
+D. Within the frontal sinus
+</button>
+
+</div>
+
+<div class="question">
+
+<p>
+2. What is one of the major functions of the thalamus?
+</p>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,true)"
+>
+A. Relaying and integrating information to the cerebral cortex
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)"
+>
+B. Producing cerebrospinal fluid exclusively
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)"
+>
+C. Controlling the muscles of the heart directly
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)"
+>
+D. Producing red blood cells
+</button>
+
+</div>
+
+<div class="question">
+
+<p>
+3. Which thalamic structure is strongly associated with visual relay?
+</p>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)"
+>
+A. Medial geniculate body
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,true)"
+>
+B. Lateral geniculate body
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)"
+>
+C. Hippocampus
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)"
+>
+D. Caudate nucleus
+</button>
+
+</div>
+
+<div id="quizResult" class="quiz-result"></div>
+
+</div>
+
+</section>
 
 </main>
 
+<!-- THREE.JS IMPORT MAP -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
 
-<footer>
+<script type="module">
 
-NeuroAtlas · Free bilingual neuroanatomy education
+import * as THREE from "three";
 
-</footer>
+import {
+  OrbitControls
+} from "three/addons/controls/OrbitControls.js";
 
+import {
+  GLTFLoader
+} from "three/addons/loaders/GLTFLoader.js";
+
+import {
+  DRACOLoader
+} from "three/addons/loaders/DRACOLoader.js";
+
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const canvas =
+  document.getElementById("brainCanvas");
+
+const loading =
+  document.getElementById("loading");
+
+const loadText =
+  document.getElementById("loadText");
+
+const loadBar =
+  document.getElementById("loadBar");
+
+const thalamusLabel =
+  document.getElementById("thalamusLabel");
+
+
+/* =========================================================
+   SCENE
+========================================================= */
+
+const scene = new THREE.Scene();
+
+
+/* =========================================================
+   CAMERA
+========================================================= */
+
+const camera =
+  new THREE.PerspectiveCamera(
+    30,
+    1,
+    0.01,
+    100
+  );
+
+camera.position.set(
+  3.2,
+  0.3,
+  8.5
+);
+
+
+/* =========================================================
+   RENDERER
+========================================================= */
+
+const renderer =
+  new THREE.WebGLRenderer({
+    canvas,
+    antialias:true,
+    alpha:true
+  });
+
+renderer.setPixelRatio(
+  Math.min(
+    window.devicePixelRatio || 1,
+    2
+  )
+);
+
+renderer.toneMapping =
+  THREE.ACESFilmicToneMapping;
+
+renderer.toneMappingExposure = 0.75;
+
+
+/* =========================================================
+   ORBIT CONTROLS
+========================================================= */
+
+const controls =
+  new OrbitControls(
+    camera,
+    canvas
+  );
+
+controls.enableRotate = true;
+controls.rotateSpeed = 0.6;
+
+controls.enableDamping = true;
+controls.dampingFactor = 0.05;
+
+controls.enableZoom = true;
+controls.zoomSpeed = 0.6;
+
+controls.enablePan = false;
+
+controls.autoRotate = true;
+controls.autoRotateSpeed = 0.2;
+
+controls.target.set(
+  0,
+  -0.3,
+  0
+);
+
+controls.minDistance = 3.5;
+controls.maxDistance = 16;
+
+
+/* =========================================================
+   LIGHTING
+========================================================= */
+
+scene.add(
+  new THREE.AmbientLight(
+    0xffffff,
+    0.55
+  )
+);
+
+const hemi =
+  new THREE.HemisphereLight(
+    0xffdce6,
+    0x081018,
+    0.75
+  );
+
+scene.add(hemi);
+
+
+const keyLight =
+  new THREE.DirectionalLight(
+    0xfff5f0,
+    1.4
+  );
+
+keyLight.position.set(
+  6,
+  10,
+  8
+);
+
+scene.add(keyLight);
+
+
+const fillLight =
+  new THREE.DirectionalLight(
+    0x8ca9bd,
+    0.4
+  );
+
+fillLight.position.set(
+  -7,
+  2,
+  6
+);
+
+scene.add(fillLight);
+
+
+/* =========================================================
+   BRAIN GROUP
+========================================================= */
+
+const brainGroup =
+  new THREE.Group();
+
+scene.add(brainGroup);
+
+
+/* =========================================================
+   THALAMUS STATE
+========================================================= */
+
+let thalamusMeshes = [];
+
+let highlighted = true;
+
+
+/* =========================================================
+   BRAIN COLOR
+========================================================= */
+
+const brainPinkColor =
+  new THREE.Color(
+    0xf1c5d0
+  );
+
+const brainPinkMaterial =
+  new THREE.MeshPhysicalMaterial({
+    color:brainPinkColor,
+    roughness:0.62,
+    metalness:0,
+    clearcoat:0.12,
+    clearcoatRoughness:0.5,
+    side:THREE.DoubleSide
+  });
+
+
+/* =========================================================
+   THALAMUS MATERIAL
+========================================================= */
+
+const thalamusHighlightColor =
+  new THREE.Color(
+    0xff4d5e
+  );
+
+const thalamusBlendColor =
+  new THREE.Color(
+    0xf1c5d0
+  );
+
+const thalamusMaterial =
+  new THREE.MeshPhysicalMaterial({
+
+    color:
+      thalamusHighlightColor.clone(),
+
+    roughness:0.35,
+
+    metalness:0.05,
+
+    clearcoat:0.6,
+
+    clearcoatRoughness:0.2,
+
+    emissive:
+      new THREE.Color(0x55151d),
+
+    emissiveIntensity:0.22,
+
+    side:THREE.DoubleSide
+  });
+
+
+/* =========================================================
+   GLOW MATERIAL
+========================================================= */
+
+const glowMaterial =
+  new THREE.MeshBasicMaterial({
+    color:0xff4d5e,
+    transparent:true,
+    opacity:0.18,
+    side:THREE.BackSide
+  });
+
+
+const glowMeshes = [];
+
+
+/* =========================================================
+   NAME DETECTION
+========================================================= */
+
+function isThalamusName(name){
+
+  const normalized =
+    name
+      .toLowerCase()
+      .replace(/[\s_-]+/g,"");
+
+  return (
+    normalized.includes("thalamus") ||
+    normalized.includes("thalamic")
+  );
+}
+
+
+/* =========================================================
+   CREATE THALAMUS HIGHLIGHT FROM REAL MODEL
+========================================================= */
+
+function registerThalamusMesh(mesh){
+
+  thalamusMeshes.push(mesh);
+
+  mesh.material =
+    thalamusMaterial;
+
+  const glow =
+    mesh.clone();
+
+  glow.material =
+    glowMaterial;
+
+  glow.scale.multiplyScalar(1.045);
+
+  mesh.parent.add(glow);
+
+  glowMeshes.push(glow);
+}
+
+
+/* =========================================================
+   LOAD REAL BRAIN MODEL
+========================================================= */
+
+function loadRealBrain(){
+
+  const loader =
+    new GLTFLoader();
+
+  const dracoLoader =
+    new DRACOLoader();
+
+  dracoLoader.setDecoderPath(
+    "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/"
+  );
+
+  loader.setDRACOLoader(
+    dracoLoader
+  );
+
+
+  const urls = [
+
+    "https://cdn.jsdelivr.net/gh/itayinbarr/brainproject@main/brain-atlas/models/brain.glb",
+
+    "https://raw.githubusercontent.com/itayinbarr/brainproject/main/brain-atlas/models/brain.glb",
+
+    "https://itayinbarr.github.io/brainproject/models/brain.glb"
+
+  ];
+
+
+  let urlIndex = 0;
+
+
+  function tryLoad(){
+
+    if(
+      urlIndex >= urls.length
+    ){
+
+      loadText.textContent =
+        "Brain model could not be loaded.";
+
+      loadBar.style.width =
+        "100%";
+
+      setTimeout(
+        () => loading.classList.add("hide"),
+        800
+      );
+
+      return;
+    }
+
+
+    const url =
+      urls[urlIndex++];
+
+
+    loadText.textContent =
+      "Loading real brain model...";
+
+
+    loader.load(
+
+      url,
+
+      function(gltf){
+
+        const model =
+          gltf.scene;
+
+
+        /* -----------------------------------------
+           NORMALIZE MODEL
+        ----------------------------------------- */
+
+        const box =
+          new THREE.Box3()
+            .setFromObject(model);
+
+        const center =
+          box.getCenter(
+            new THREE.Vector3()
+          );
+
+        const size =
+          box.getSize(
+            new THREE.Vector3()
+          );
+
+        const maxDim =
+          Math.max(
+            size.x,
+            size.y,
+            size.z
+          );
+
+        const scale =
+          4.5 / maxDim;
+
+
+        model.scale.setScalar(
+          scale
+        );
+
+
+        model.position.sub(
+          center.multiplyScalar(
+            scale
+          )
+        );
+
+
+        model.position.y -= 0.60;
+
+
+        /* -----------------------------------------
+           PROCESS MODEL
+        ----------------------------------------- */
+
+        model.traverse(
+          function(child){
+
+            if(!child.isMesh)
+              return;
+
+
+            child.castShadow = true;
+            child.receiveShadow = true;
+
+
+            const name =
+              child.name || "";
+
+
+            /*
+              IMPORTANT:
+
+              We do NOT create a separate fake
+              thalamus object.
+
+              If the supplied brain model actually
+              contains a mesh named thalamus, that
+              EXISTING mesh is highlighted.
+
+              Everything else remains part of the
+              original brain model.
+            */
+
+            if(
+              isThalamusName(name)
+            ){
+
+              registerThalamusMesh(
+                child
+              );
+
+            }else{
+
+              child.material =
+                brainPinkMaterial.clone();
+
+            }
+
+          }
+        );
+
+
+        brainGroup.add(
+          model
+        );
+
+
+        loadBar.style.width =
+          "100%";
+
+
+        if(
+          thalamusMeshes.length === 0
+        ){
+
+          /*
+            The model does not expose a separate
+            thalamus mesh.
+
+            We deliberately do NOT create a new
+            thalamus object because the request is
+            to highlight the structure in the model.
+          */
+
+          loadText.textContent =
+            "Brain model loaded · Thalamus mesh unavailable";
+
+        }else{
+
+          loadText.textContent =
+            "Brain model loaded · Thalamus highlighted";
+
+        }
+
+
+        onReady();
+
+      },
+
+      function(progress){
+
+        if(
+          progress.total > 0
+        ){
+
+          const pct =
+            Math.min(
+              90,
+              progress.loaded /
+              progress.total *
+              90
+            );
+
+          loadBar.style.width =
+            pct + "%";
+        }
+
+      },
+
+      function(error){
+
+        console.warn(
+          "Model failed:",
+          error
+        );
+
+        tryLoad();
+
+      }
+
+    );
+
+  }
+
+
+  tryLoad();
+
+}
+
+
+/* =========================================================
+   READY
+========================================================= */
+
+function onReady(){
+
+  setTimeout(
+    function(){
+
+      loading.classList.add(
+        "hide"
+      );
+
+      if(
+        highlighted &&
+        thalamusMeshes.length > 0
+      ){
+
+        thalamusLabel.classList.add(
+          "show"
+        );
+
+      }
+
+    },
+    500
+  );
+
+}
+
+
+/* =========================================================
+   FIND THALAMUS CENTER
+========================================================= */
+
+function getThalamusCenter(){
+
+  if(
+    thalamusMeshes.length === 0
+  ){
+
+    return null;
+
+  }
+
+
+  const box =
+    new THREE.Box3();
+
+
+  thalamusMeshes.forEach(
+    function(mesh){
+
+      box.expandByObject(
+        mesh
+      );
+
+    }
+  );
+
+
+  return box.getCenter(
+    new THREE.Vector3()
+  );
+
+}
+
+
+/* =========================================================
+   LABEL POSITION
+========================================================= */
+
+function updateLabel(){
+
+  if(
+    thalamusMeshes.length === 0
+  ){
+
+    thalamusLabel.classList.remove(
+      "show"
+    );
+
+    return;
+
+  }
+
+
+  const position =
+    getThalamusCenter();
+
+
+  if(!position)
+    return;
+
+
+  position.project(
+    camera
+  );
+
+
+  const x =
+    (position.x + 1) /
+    2 *
+    canvas.clientWidth;
+
+
+  const y =
+    (-position.y + 1) /
+    2 *
+    canvas.clientHeight;
+
+
+  thalamusLabel.style.left =
+    x + "px";
+
+
+  thalamusLabel.style.top =
+    (y - 45) + "px";
+
+}
+
+
+/* =========================================================
+   RESIZE
+========================================================= */
+
+function resize(){
+
+  const width =
+    canvas.clientWidth;
+
+  const height =
+    canvas.clientHeight;
+
+
+  if(
+    width <= 0 ||
+    height <= 0
+  )
+    return;
+
+
+  camera.aspect =
+    width / height;
+
+  camera.updateProjectionMatrix();
+
+
+  renderer.setSize(
+    width,
+    height,
+    false
+  );
+
+}
+
+
+window.addEventListener(
+  "resize",
+  resize
+);
+
+
+/* =========================================================
+   HIGHLIGHT BUTTON
+========================================================= */
+
+const highlightBtn =
+  document.getElementById(
+    "highlight"
+  );
+
+
+highlightBtn.addEventListener(
+  "click",
+  function(){
+
+    highlighted =
+      !highlighted;
+
+
+    /*
+      We only change the material of the
+      EXISTING thalamus mesh.
+
+      Nothing new is created.
+    */
+
+    thalamusMaterial.color.copy(
+
+      highlighted
+        ? thalamusHighlightColor
+        : thalamusBlendColor
+
+    );
+
+
+    thalamusMaterial.emissive.set(
+
+      highlighted
+        ? 0x55151d
+        : 0x000000
+
+    );
+
+
+    thalamusMaterial.emissiveIntensity =
+      highlighted
+        ? 0.22
+        : 0;
+
+
+    glowMeshes.forEach(
+      function(glow){
+
+        glow.visible =
+          highlighted;
+
+      }
+    );
+
+
+    thalamusLabel.classList.toggle(
+      "show",
+      highlighted &&
+      thalamusMeshes.length > 0
+    );
+
+
+    highlightBtn.classList.toggle(
+      "active",
+      highlighted
+    );
+
+
+    highlightBtn.textContent =
+      highlighted
+        ? "🔴 Thalamus Highlighted"
+        : "🧠 Highlight Thalamus";
+
+  }
+);
+
+
+/* =========================================================
+   AUTO ROTATE
+========================================================= */
+
+const rotateBtn =
+  document.getElementById(
+    "rotate"
+  );
+
+
+rotateBtn.addEventListener(
+  "click",
+  function(){
+
+    controls.autoRotate =
+      !controls.autoRotate;
+
+
+    rotateBtn.classList.toggle(
+      "active",
+      controls.autoRotate
+    );
+
+
+    rotateBtn.textContent =
+      controls.autoRotate
+        ? "⟳ Auto Rotate"
+        : "▶ Auto Rotate";
+
+  }
+);
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+document
+  .getElementById("reset")
+  .addEventListener(
+    "click",
+    function(){
+
+      camera.position.set(
+        3.2,
+        0.3,
+        8.5
+      );
+
+
+      controls.target.set(
+        0,
+        -0.3,
+        0
+      );
+
+
+      controls.update();
+
+    }
+  );
+
+
+/* =========================================================
+   ANIMATION
+========================================================= */
+
+function animate(){
+
+  requestAnimationFrame(
+    animate
+  );
+
+
+  controls.update();
+
+  updateLabel();
+
+  renderer.render(
+    scene,
+    camera
+  );
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+resize();
+
+animate();
+
+loadRealBrain();
+
+</script>
+
+
+<!-- =========================================================
+     QUIZ JAVASCRIPT
+========================================================= -->
 
 <script>
 
-function checkAnswer(correct){
+function checkAnswer(
+  button,
+  correct
+){
 
-const feedback =
-document.getElementById("feedback");
+  const parent =
+    button.parentElement;
 
-if(correct){
 
-feedback.textContent =
-"✓ Correct — the thalamus contains multiple nuclei that relay and integrate information for communication with the cortex.";
+  const options =
+    parent.querySelectorAll(
+      ".option"
+    );
+
+
+  options.forEach(
+    function(option){
+
+      option.classList.remove(
+        "correct",
+        "wrong"
+      );
+
+    }
+  );
+
+
+  if(correct){
+
+    button.classList.add(
+      "correct"
+    );
+
+  }else{
+
+    button.classList.add(
+      "wrong"
+    );
+
+  }
+
+
+  updateQuizScore();
 
 }
 
-else{
 
-feedback.textContent =
-"Not quite. Think about the thalamus as a collection of specialized nuclei connecting different neural networks.";
+function updateQuizScore(){
 
-}
+  const result =
+    document.getElementById(
+      "quizResult"
+    );
+
+
+  let answered = 0;
+
+  let correctAnswers = 0;
+
+
+  document
+    .querySelectorAll(".question")
+    .forEach(
+      function(question){
+
+        const selected =
+          question.querySelector(
+            ".correct, .wrong"
+          );
+
+
+        if(selected){
+
+          answered++;
+
+
+          if(
+            selected.classList.contains(
+              "correct"
+            )
+          ){
+
+            correctAnswers++;
+
+          }
+
+        }
+
+      }
+    );
+
+
+  if(answered > 0){
+
+    result.style.display =
+      "block";
+
+
+    result.textContent =
+      "Score: " +
+      correctAnswers +
+      " / " +
+      answered;
+
+  }
 
 }
 
 </script>
 
-
 </body>
-
-</html>
+  </html>
