@@ -1,507 +1,2341 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Hypothalamus | NeuroAtlas</title>
+<title>NeuroAtlas | Hypothalamus</title>
 
 <style>
-
 *{
-box-sizing:border-box;
-margin:0;
-padding:0;
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
 }
 
 body{
-font-family:Arial,sans-serif;
-background:#07111f;
-color:#f4f7fb;
-line-height:1.7;
+  background:#050b13;
+  color:#eef4fa;
+  font-family:Arial,Helvetica,sans-serif;
+  line-height:1.7;
 }
 
+/* NAVIGATION */
 nav{
-padding:22px 7%;
-border-bottom:1px solid rgba(255,255,255,.08);
-display:flex;
-justify-content:space-between;
-align-items:center;
+  height:70px;
+  padding:0 7%;
+  display:flex;
+  align-items:center;
+  border-bottom:1px solid rgba(255,255,255,.08);
 }
 
-.logo{
-font-size:22px;
-font-weight:bold;
-color:white;
-text-decoration:none;
+nav a{
+  color:#9db0c3;
+  text-decoration:none;
+  font-size:14px;
 }
 
-.logo span{
-color:#4da6ff;
+nav a:hover{
+  color:white;
 }
 
-.nav-links{
-display:flex;
-gap:25px;
-}
-
-.nav-links a{
-color:#aebdce;
-text-decoration:none;
-font-size:14px;
-}
-
-.nav-links a:hover{
-color:white;
-}
-
+/* CONTAINER */
 .container{
-max-width:1050px;
-margin:auto;
-padding:70px 7%;
+  max-width:1200px;
+  margin:auto;
+  padding:60px 7% 100px;
 }
 
-.label{
-color:#4da6ff;
-text-transform:uppercase;
-letter-spacing:2px;
-font-size:13px;
-margin-bottom:12px;
+/* HERO */
+.eyebrow{
+  color:#61b5ff;
+  letter-spacing:3px;
+  font-size:12px;
+  text-transform:uppercase;
+  margin-bottom:15px;
 }
 
 h1{
-font-size:clamp(45px,7vw,76px);
-line-height:1.05;
-margin-bottom:8px;
+  font-size:clamp(55px,8vw,90px);
+  line-height:.95;
+  letter-spacing:-4px;
+  margin-bottom:10px;
 }
 
-.arabic{
-color:#7ebcff;
-font-size:25px;
-margin-bottom:28px;
+.arabic-title{
+  color:#ff8f9b;
+  font-size:24px;
+  margin-bottom:25px;
 }
 
-.intro{
-color:#aebdce;
-font-size:18px;
-max-width:780px;
-margin-bottom:45px;
+.hero p{
+  color:#a6b6c7;
+  max-width:780px;
+  font-size:18px;
+  line-height:1.8;
 }
 
-.grid{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:20px;
+/* ACTION BUTTONS */
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:30px;
+}
+
+.action-button{
+  padding:11px 17px;
+  border-radius:9px;
+  background:#0b1928;
+  border:1px solid #31516d;
+  color:#bdd0e0;
+  text-decoration:none;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.action-button:hover{
+  background:#14304a;
+  color:white;
+  border-color:#61b5ff;
+}
+
+/* 3D VIEWER */
+.viewer{
+  margin-top:60px;
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:24px;
+  overflow:hidden;
+  background:#02060b;
+  box-shadow:0 25px 80px rgba(0,0,0,.45);
+}
+
+.viewer-header{
+  min-height:65px;
+  padding:0 22px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.viewer-title{
+  font-size:14px;
+  color:#d2dce6;
+}
+
+.viewer-status{
+  color:#708499;
+  font-size:11px;
+  letter-spacing:1px;
+}
+
+.scene{
+  position:relative;
+  width:100%;
+  height:700px;
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      #203b51 0%,
+      #0d1c2e 42%,
+      #02060b 100%
+    );
+}
+
+#brainCanvas{
+  width:100%;
+  height:100%;
+  display:block;
+}
+
+/* LOADING */
+.loading{
+  position:absolute;
+  inset:0;
+  z-index:20;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:16px;
+  background:#02060b;
+  color:#9db0c3;
+  font-size:14px;
+  transition:opacity .8s;
+}
+
+.loading.hide{
+  opacity:0;
+  pointer-events:none;
+}
+
+.loading-bar{
+  width:180px;
+  height:2px;
+  background:rgba(255,255,255,.08);
+  border-radius:2px;
+  overflow:hidden;
+}
+
+.loading-bar-inner{
+  width:0%;
+  height:100%;
+  background:#61b5ff;
+  transition:width .3s;
+}
+
+/* HYPOTHALAMUS LABEL */
+.anatomy-label{
+  position:absolute;
+  z-index:30;
+  pointer-events:none;
+  transform:translate(-50%,-100%);
+  display:none;
+}
+
+.anatomy-label.show{
+  display:block;
+}
+
+.label-box{
+  position:relative;
+  padding:9px 15px;
+  border-radius:10px;
+  background:rgba(5,10,17,.96);
+  border:1.5px solid #ff4d5e;
+  color:#ffd0d5;
+  font-size:12px;
+  font-weight:bold;
+  letter-spacing:1px;
+  white-space:nowrap;
+  box-shadow:
+    0 0 12px rgba(255,77,94,.25),
+    0 0 25px rgba(255,77,94,.12);
+}
+
+.label-box::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:-15px;
+  width:1.5px;
+  height:15px;
+  background:#ff4d5e;
+  transform:translateX(-50%);
+}
+
+/* CONTROLS */
+.controls{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  padding:15px;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+
+.controls button{
+  padding:11px 17px;
+  border-radius:9px;
+  background:#0b1928;
+  border:1px solid #31516d;
+  color:#bdd0e0;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.controls button:hover{
+  background:#14304a;
+  color:white;
+}
+
+.controls button.active{
+  background:#241417;
+  border-color:#ff4d5e;
+  color:#ffd0d5;
+}
+
+/* INFORMATION */
+.section{
+  margin-top:70px;
+}
+
+.section-label{
+  color:#61b5ff;
+  letter-spacing:2px;
+  font-size:11px;
+  text-transform:uppercase;
+  margin-bottom:8px;
+}
+
+.section h2{
+  font-size:32px;
+  margin-bottom:25px;
+}
+
+.section-intro{
+  color:#91a5b8;
+  max-width:900px;
+  font-size:15px;
+  line-height:1.9;
+  margin-bottom:30px;
+}
+
+/* LOCATION */
+.location{
+  margin-top:70px;
+  padding:35px;
+  background:#091522;
+  border:1px solid #172b3e;
+  border-radius:18px;
+}
+
+.location h2{
+  font-size:32px;
+  margin-bottom:12px;
+}
+
+.location-intro{
+  color:#91a5b8;
+  max-width:900px;
+  line-height:1.9;
+  margin-bottom:30px;
+}
+
+.location-svg{
+  display:block;
+  width:100%;
+  max-width:800px;
+  height:auto;
+  margin:auto;
+}
+
+.location-brain{
+  fill:#f1c5d0;
+  stroke:#71869e;
+  stroke-width:3;
+}
+
+.location-thalamus{
+  fill:#dba7b5;
+  stroke:#ff8f9b;
+  stroke-width:3;
+}
+
+.location-hypothalamus-glow{
+  fill:#ff4d5e;
+  opacity:.25;
+  filter:blur(6px);
+}
+
+.location-hypothalamus{
+  fill:#ffffff;
+  stroke:#ff4d5e;
+  stroke-width:4;
+}
+
+.location-line{
+  stroke:#8fc7ff;
+  stroke-width:2;
+}
+
+.location-hypothalamus-line{
+  stroke:#ff4d5e;
+  stroke-width:3;
+}
+
+.location-svg-label{
+  fill:white;
+  font-size:18px;
+  font-weight:bold;
+}
+
+.location-hypothalamus-label{
+  fill:#ff4d5e;
+  font-size:21px;
+  font-weight:bold;
+}
+
+.location-arabic-label{
+  fill:#ffd6da;
+  font-size:16px;
+  font-weight:bold;
+}
+
+.location-caption{
+  text-align:center;
+  color:#9fb0c3;
+  margin-top:15px;
+}
+
+/* CARDS */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
 }
 
 .card{
-padding:28px;
-background:rgba(255,255,255,.035);
-border:1px solid rgba(255,255,255,.08);
-border-radius:16px;
-transition:.25s;
+  padding:27px;
+  background:#091522;
+  border:1px solid #172b3e;
+  border-radius:18px;
+  transition:transform .2s,border-color .2s;
 }
 
 .card:hover{
-transform:translateY(-4px);
-border-color:rgba(77,166,255,.45);
+  transform:translateY(-3px);
+  border-color:#4a2a30;
 }
 
-.card h2{
-font-size:20px;
-margin-bottom:12px;
+.card h3{
+  font-size:18px;
+  margin-bottom:13px;
+  color:#eef4fa;
+  line-height:1.45;
 }
 
 .card p{
-color:#aebdce;
+  color:#91a5b8;
+  font-size:14px;
+  line-height:1.8;
 }
 
-.insight{
-margin-top:30px;
-padding:30px;
-border-left:3px solid #4da6ff;
-background:#0a1728;
-border-radius:10px;
+/* CLINICAL */
+.clinical-section{
+  margin-top:65px;
 }
 
-.insight strong{
-color:#7ebcff;
+.clinical-box{
+  padding:30px;
+  background:#091522;
+  border:1px solid #172b3e;
+  border-left:3px solid #ff4d5e;
+  border-radius:18px;
 }
 
+.clinical-box p{
+  color:#a7b7c6;
+  font-size:15px;
+  line-height:1.9;
+  margin-bottom:18px;
+}
+
+.clinical-box p:last-child{
+  margin-bottom:0;
+}
+
+/* QUICK FACTS */
+.facts-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+}
+
+.fact{
+  padding:22px;
+  background:#091522;
+  border:1px solid #172b3e;
+  border-radius:16px;
+}
+
+.fact span{
+  display:block;
+  color:#ff4d5e;
+  font-size:11px;
+  letter-spacing:2px;
+  margin-bottom:12px;
+}
+
+.fact strong{
+  display:block;
+  color:#eef4fa;
+  font-size:14px;
+  margin-bottom:8px;
+  line-height:1.5;
+}
+
+.fact p{
+  color:#8195a8;
+  font-size:13px;
+  line-height:1.7;
+}
+
+/* QUIZ */
 .quiz{
-margin-top:55px;
-padding:35px;
-background:#0a1728;
-border:1px solid rgba(77,166,255,.2);
-border-radius:18px;
+  margin-top:65px;
+  padding:30px;
+  background:#091522;
+  border:1px solid #172b3e;
+  border-radius:18px;
 }
 
 .quiz h2{
-margin-bottom:20px;
+  font-size:28px;
+  margin-bottom:10px;
+}
+
+.quiz-intro{
+  color:#91a5b8;
+  margin-bottom:25px;
+}
+
+.question{
+  margin-bottom:30px;
+}
+
+.question:last-child{
+  margin-bottom:0;
+}
+
+.question p{
+  color:#eef4fa;
+  font-size:16px;
+  margin-bottom:12px;
+  font-weight:bold;
 }
 
 .option{
-display:block;
-width:100%;
-text-align:left;
-padding:14px 16px;
-margin-top:10px;
-border-radius:10px;
-border:1px solid #263951;
-background:#0d2035;
-color:white;
-cursor:pointer;
-font-size:15px;
+  display:block;
+  width:100%;
+  padding:12px 15px;
+  margin-top:9px;
+  background:#0b1928;
+  color:#c7d5e2;
+  border:1px solid #263951;
+  border-radius:9px;
+  text-align:left;
+  cursor:pointer;
+  font-size:14px;
+  transition:.2s;
 }
 
 .option:hover{
-border-color:#4da6ff;
+  border-color:#ff4d5e;
+  background:#111e2c;
 }
 
-#feedback{
-margin-top:20px;
-color:#7ebcff;
-font-weight:bold;
+.option.correct{
+  border-color:#8fd3a8;
+  background:#14291e;
+  color:#b9f0c9;
 }
 
-.bottom-nav{
-display:flex;
-justify-content:space-between;
-gap:15px;
-margin-top:60px;
+.option.wrong{
+  border-color:#d88b9b;
+  background:#2a171d;
+  color:#ffc2cc;
 }
 
-.bottom-nav a{
-padding:13px 18px;
-border-radius:10px;
-text-decoration:none;
-border:1px solid #263951;
-color:#d7e2ee;
+.quiz-result{
+  margin-top:25px;
+  padding:15px;
+  border-radius:10px;
+  background:#0b1928;
+  border:1px solid #263951;
+  color:#aebdce;
+  display:none;
 }
 
-.bottom-nav a:hover{
-border-color:#4da6ff;
+/* MOBILE */
+@media(max-width:900px){
+
+  .cards{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .facts-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
 }
 
-footer{
-text-align:center;
-padding:35px 7%;
-border-top:1px solid rgba(255,255,255,.08);
-color:#718197;
-font-size:14px;
+@media(max-width:800px){
+
+  .scene{
+    height:450px;
+  }
+
+  .viewer-status{
+    display:none;
+  }
 }
 
-@media(max-width:700px){
+@media(max-width:600px){
 
-.grid{
-grid-template-columns:1fr;
+  .cards{
+    grid-template-columns:1fr;
+  }
+
+  .facts-grid{
+    grid-template-columns:1fr;
+  }
+
+  h1{
+    letter-spacing:-2px;
+  }
+
+  .location{
+    padding:20px;
+  }
 }
-
-nav{
-flex-direction:column;
-gap:15px;
-}
-
-.bottom-nav{
-flex-direction:column;
-}
-
-}
-
 </style>
-
 </head>
-
 
 <body>
 
-
 <nav>
-
-<a
-class="logo"
-href="https://janaessa915-tech.github.io/Neuroatlas/"
->
-Neuro<span>Atlas</span>
-</a>
-
-<div class="nav-links">
-
-<a
-href="https://janaessa915-tech.github.io/Neuroatlas/"
->
-Home
-</a>
-
-<a
-href="https://janaessa915-tech.github.io/Neuroatlas/explore.html"
->
-Explore Anatomy
-</a>
-
-</div>
-
+<a href="./explore.html">← Back to Explore</a>
 </nav>
-
 
 <main class="container">
 
+<!-- HERO -->
+<div class="eyebrow">Deep Brain Structures · NeuroAtlas</div>
 
-<div class="label">
-Brain Structure
-</div>
+<h1>Hypothalamus</h1>
 
+<div class="arabic-title">الوطاء · تحت المهاد</div>
 
-<h1>
-Hypothalamus
-</h1>
-
-
-<div class="arabic">
-تحت المهاد
-</div>
-
-
-<p class="intro">
-
-The hypothalamus is a small but highly important region of the
-diencephalon that helps regulate the body's internal environment
-and coordinates nervous and endocrine functions.
-
-</p>
-
-
-<div class="grid">
-
-
-<div class="card">
-
-<h2>📍 Location</h2>
-
+<div class="hero">
 <p>
-
-The hypothalamus lies below the thalamus and forms part of the
-floor and lower walls of the third ventricle.
-
+The hypothalamus is a small but critically important region located
+deep within the brain, beneath the thalamus and around the third
+ventricle. It helps regulate homeostasis, body temperature, hunger,
+thirst, sleep, endocrine function, and many autonomic processes.
 </p>
+</div>
+
+<!-- ACTION BUTTONS -->
+<div class="actions">
+
+<a class="action-button" href="#location">
+📍 Show Location
+</a>
+
+<a class="action-button" href="#information">
+🧠 Learn About the Hypothalamus
+</a>
+
+<a class="action-button" href="#quiz">
+📝 Test Yourself
+</a>
 
 </div>
 
+<!-- 3D VIEWER -->
+<div class="viewer">
 
-<div class="card">
+<div class="viewer-header">
 
-<h2>⚙️ Main Functions</h2>
+<div class="viewer-title">
+Human Brain · Interactive 3D
+</div>
 
-<p>
-
-It contributes to regulation of body temperature, hunger,
-thirst, sleep-wake cycles, autonomic activity, and endocrine
-function.
-
-</p>
+<div class="viewer-status">
+DRAG TO ROTATE · SCROLL TO ZOOM
+</div>
 
 </div>
 
+<div class="scene">
 
-<div class="card">
+<div id="loading" class="loading">
 
-<h2>🔗 Important Connections</h2>
+<span id="loadText">
+Loading real brain model...
+</span>
 
-<p>
-
-The hypothalamus communicates with the pituitary gland,
-limbic structures, brainstem regions, and autonomic pathways.
-
-</p>
+<div class="loading-bar">
+<div id="loadBar" class="loading-bar-inner"></div>
+</div>
 
 </div>
 
+<canvas id="brainCanvas"></canvas>
 
-<div class="card">
+<div id="anatomyLabel" class="anatomy-label">
 
-<h2>🧪 Endocrine Control</h2>
-
-<p>
-
-Hypothalamic neurons regulate pituitary activity through
-releasing and inhibiting hormones and through specialized
-neural connections with the posterior pituitary.
-
-</p>
+<div class="label-box">
+HYPOTHALAMUS
+</div>
 
 </div>
 
+</div>
 
-<div class="card">
+<div class="controls">
 
-<h2>🩺 Clinical Relevance</h2>
+<button id="highlight" class="active">
+⚪ Highlight Hypothalamus
+</button>
 
-<p>
+<button id="rotate" class="active">
+⟳ Auto Rotate
+</button>
 
-Disruption of hypothalamic function can affect temperature
-regulation, appetite, sleep, hormone balance, fluid regulation,
-and autonomic functions.
-
-</p>
+<button id="reset">
+↻ Reset View
+</button>
 
 </div>
 
-
-<div class="card">
-
-<h2>🧠 Neuroscience Context</h2>
-
-<p>
-
-The hypothalamus demonstrates how the nervous and endocrine
-systems interact to maintain homeostasis and coordinate
-complex physiological responses.
-
-</p>
-
 </div>
 
+<!-- LOCATION -->
+<section id="location" class="location">
 
+<div class="section-label">
+Location · الموقع
 </div>
 
+<h2>
+📍 Where is the Hypothalamus?
+</h2>
 
-<div class="insight">
+<p class="location-intro">
 
-<strong>NeuroAtlas Insight</strong>
+The hypothalamus is located deep in the center of the brain,
+immediately <strong>below the thalamus</strong> and forming part of the
+floor and lower walls of the <strong>third ventricle</strong>. It lies
+above the pituitary gland and is connected to it through the
+infundibulum.
 
 <br><br>
 
-The hypothalamus is tiny compared with many other brain regions,
-but its connections allow it to influence systems throughout
-the body. Think of it as an important coordinator of
-homeostasis rather than a single-function structure.
+يقع الوطاء في عمق مركز الدماغ، مباشرةً
+<strong>أسفل المهاد</strong>، ويشكّل جزءاً من أرضية وجدران
+<strong>البطين الثالث</strong>. يقع فوق الغدة النخامية ويرتبط بها
+من خلال السويقة النخامية.
+
+</p>
+
+<div class="brain-visual">
+
+<svg
+class="location-svg"
+viewBox="0 0 800 560"
+xmlns="http://www.w3.org/2000/svg"
+aria-label="Simplified diagram showing the location of the hypothalamus"
+>
+
+<!-- BRAIN -->
+<path
+class="location-brain"
+d="
+M150 100
+C200 45 300 30 400 50
+C510 70 575 150 570 235
+C568 300 525 330 470 330
+C410 330 375 285 315 275
+C255 265 190 300 150 255
+C115 215 115 145 150 100Z"
+/>
+
+<!-- THALAMUS -->
+<ellipse
+class="location-thalamus"
+cx="400"
+cy="220"
+rx="74"
+ry="52"
+/>
+
+<!-- HYPOTHALAMUS GLOW -->
+<ellipse
+class="location-hypothalamus-glow"
+cx="400"
+cy="287"
+rx="47"
+ry="31"
+/>
+
+<!-- HYPOTHALAMUS -->
+<ellipse
+class="location-hypothalamus"
+cx="400"
+cy="287"
+rx="38"
+ry="24"
+/>
+
+<!-- THIRD VENTRICLE -->
+<path
+d="M390 150
+C382 190 382 225 390 270
+C395 288 405 288 410 270
+C418 225 418 190 410 150"
+fill="none"
+stroke="#8fc7ff"
+stroke-width="4"
+opacity=".8"
+/>
+
+<!-- PITUITARY STALK -->
+<path
+d="M400 311
+C400 330 400 348 400 366"
+fill="none"
+stroke="#ff8f9b"
+stroke-width="7"
+stroke-linecap="round"
+/>
+
+<!-- PITUITARY -->
+<ellipse
+cx="400"
+cy="380"
+rx="30"
+ry="18"
+fill="#dba7b5"
+stroke="#ff8f9b"
+stroke-width="3"
+/>
+
+<!-- THALAMUS LABEL -->
+<line
+class="location-line"
+x1="460"
+y1="220"
+x2="600"
+y2="180"
+/>
+
+<text
+class="location-svg-label"
+x="610"
+y="186"
+>
+THALAMUS
+</text>
+
+<text
+class="location-arabic-label"
+x="610"
+y="210"
+>
+المهاد
+</text>
+
+<!-- HYPOTHALAMUS LABEL -->
+<line
+class="location-hypothalamus-line"
+x1="438"
+y1="287"
+x2="590"
+y2="290"
+/>
+
+<text
+class="location-hypothalamus-label"
+x="600"
+y="296"
+>
+HYPOTHALAMUS
+</text>
+
+<text
+class="location-arabic-label"
+x="600"
+y="320"
+>
+الوطاء · تحت المهاد
+</text>
+
+<!-- THIRD VENTRICLE LABEL -->
+<line
+class="location-line"
+x1="390"
+y1="230"
+x2="205"
+y2="180"
+/>
+
+<text
+class="location-svg-label"
+x="70"
+y="176"
+>
+3RD VENTRICLE
+</text>
+
+<text
+class="location-arabic-label"
+x="70"
+y="200"
+>
+البطين الثالث
+</text>
+
+<!-- PITUITARY LABEL -->
+<line
+class="location-line"
+x1="400"
+y1="380"
+x2="205"
+y2="405"
+/>
+
+<text
+class="location-svg-label"
+x="75"
+y="410"
+>
+PITUITARY GLAND
+</text>
+
+<text
+class="location-arabic-label"
+x="75"
+y="434"
+>
+الغدة النخامية
+</text>
+
+</svg>
+
+<p class="location-caption">
+
+🔴 The highlighted region represents the approximate anatomical
+location of the hypothalamus beneath the thalamus and above the
+pituitary gland.
+
+</p>
 
 </div>
-
-
-<section class="quiz">
-
-
-<div class="label">
-Knowledge Check
-</div>
-
-
-<h2>
-
-Which function is strongly associated with the hypothalamus?
-
-</h2>
-
-
-<button
-class="option"
-onclick="checkAnswer(true)"
->
-
-A. Regulation of homeostasis and endocrine functions
-
-</button>
-
-
-<button
-class="option"
-onclick="checkAnswer(false)"
->
-
-B. Primary processing of visual information
-
-</button>
-
-
-<button
-class="option"
-onclick="checkAnswer(false)"
->
-
-C. Coordinating fine motor movements
-
-</button>
-
-
-<button
-class="option"
-onclick="checkAnswer(false)"
->
-
-D. Producing conscious visual perception
-
-</button>
-
-
-<div id="feedback"></div>
-
 
 </section>
 
+<!-- INFORMATION -->
+<section id="information" class="section">
 
-<div class="bottom-nav">
+<div class="section-label">
+Hypothalamus Anatomy · تشريح الوطاء
+</div>
 
+<h2>
+Hypothalamus · الوطاء
+</h2>
 
-<a
-href="https://janaessa915-tech.github.io/Neuroatlas/explore.html"
->
+<p class="section-intro">
 
-← Back to Explore Anatomy
+The hypothalamus is a small region of the diencephalon that acts as
+one of the brain's major regulatory centers. Although it is relatively
+small, it influences endocrine, autonomic, behavioral, and homeostatic
+functions throughout the body.
 
-</a>
+<br><br>
 
+الوطاء هو منطقة صغيرة من الدماغ البيني تعمل كواحدة من أهم مراكز
+التنظيم في الدماغ. وعلى الرغم من صغر حجمه، فإنه يؤثر في الوظائف
+الهرمونية واللاإرادية والسلوكية ووظائف الاتزان الداخلي في الجسم.
 
-<a
-href="https://janaessa915-tech.github.io/Neuroatlas/"
->
+</p>
 
-NeuroAtlas Home →
+<div class="cards">
 
-</a>
+<div class="card">
 
+<h3>
+Location · الموقع
+</h3>
+
+<p>
+The hypothalamus lies below the thalamus and forms part of the floor
+of the third ventricle.
+
+<br><br>
+
+يقع الوطاء أسفل المهاد ويشكّل جزءاً من أرضية البطين الثالث.
+</p>
 
 </div>
 
+<div class="card">
+
+<h3>
+Homeostasis · الاتزان الداخلي
+</h3>
+
+<p>
+It continuously monitors internal conditions and coordinates responses
+that keep the body's environment stable.
+
+<br><br>
+
+يراقب الظروف الداخلية للجسم باستمرار وينسق الاستجابات التي تحافظ
+على استقرار البيئة الداخلية.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Temperature · تنظيم الحرارة
+</h3>
+
+<p>
+The hypothalamus plays a central role in detecting and responding to
+changes in body temperature.
+
+<br><br>
+
+يلعب الوطاء دوراً أساسياً في اكتشاف التغيرات في درجة حرارة الجسم
+والاستجابة لها.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Hunger · الجوع
+</h3>
+
+<p>
+Hypothalamic networks participate in regulating hunger, satiety,
+energy balance, and feeding behavior.
+
+<br><br>
+
+تشارك شبكات الوطاء في تنظيم الجوع والشبع وتوازن الطاقة وسلوك
+تناول الطعام.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Thirst · العطش
+</h3>
+
+<p>
+The hypothalamus helps detect changes in body fluid concentration
+and contributes to thirst and water-balance responses.
+
+<br><br>
+
+يساعد الوطاء على اكتشاف تغيرات تركيز سوائل الجسم ويساهم في تنظيم
+العطش وتوازن الماء.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Sleep & Circadian Rhythms · النوم والإيقاع اليومي
+</h3>
+
+<p>
+The suprachiasmatic nucleus acts as an important circadian timing
+center and helps coordinate daily biological rhythms.
+
+<br><br>
+
+تعمل النواة فوق التصالبية كمركز مهم لتنظيم الإيقاع اليومي وتساعد
+على تنسيق الإيقاعات البيولوجية اليومية.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Pituitary Connection · الاتصال بالغدة النخامية
+</h3>
+
+<p>
+The hypothalamus controls major aspects of pituitary function through
+releasing hormones and neural connections.
+
+<br><br>
+
+يسيطر الوطاء على جوانب رئيسية من وظيفة الغدة النخامية من خلال
+الهرمونات المطلقة والاتصالات العصبية.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Autonomic Control · التحكم اللاإرادي
+</h3>
+
+<p>
+Hypothalamic circuits influence sympathetic and parasympathetic
+activity and help coordinate visceral responses.
+
+<br><br>
+
+تؤثر دوائر الوطاء في النشاط الودي ونظير الودي وتساعد على تنسيق
+الاستجابات الحشوية.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Emotion & Behavior · العاطفة والسلوك
+</h3>
+
+<p>
+The hypothalamus interacts with limbic and brainstem systems involved
+in emotional responses, motivation, and reproductive behaviors.
+
+<br><br>
+
+يتفاعل الوطاء مع الجهاز الحوفي وجذع الدماغ في الاستجابات العاطفية
+والدافع وبعض السلوكيات التناسلية.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Supraoptic Nucleus · النواة فوق البصرية
+</h3>
+
+<p>
+Neurons in this region contribute to the production of vasopressin
+and other hypothalamic neuroendocrine signals.
+
+<br><br>
+
+تساهم الخلايا العصبية في هذه المنطقة في إنتاج الفازوبريسين
+وإشارات عصبية هرمونية أخرى.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Paraventricular Nucleus · النواة المجاورة للبطين
+</h3>
+
+<p>
+The paraventricular nucleus contains neurons involved in endocrine
+and autonomic regulation.
+
+<br><br>
+
+تحتوي النواة المجاورة للبطين على خلايا عصبية تشارك في التنظيم
+الهرموني واللاإرادي.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Mammillary Bodies · الأجسام الحلمية
+</h3>
+
+<p>
+The mammillary bodies are hypothalamic structures associated with
+limbic circuits and memory processing.
+
+<br><br>
+
+الأجسام الحلمية هي بنى تابعة للوطاء وترتبط بالدوائر الحوفية
+وبمعالجة الذاكرة.
+</p>
+
+</div>
+
+</div>
+
+<!-- CLINICAL -->
+<div class="clinical-section">
+
+<div class="section-label">
+Clinical Importance · الأهمية السريرية
+</div>
+
+<h2>
+Why the Hypothalamus Matters
+</h2>
+
+<div class="clinical-box">
+
+<p>
+Because the hypothalamus coordinates many homeostatic and endocrine
+functions, disruption of its circuits can affect temperature
+regulation, fluid balance, sleep, appetite, hormone regulation,
+autonomic function, and other physiological processes.
+</p>
+
+<p dir="rtl">
+لأن الوطاء ينسق العديد من وظائف الاتزان الداخلي والوظائف الهرمونية،
+فإن اضطراب دوائره يمكن أن يؤثر في تنظيم الحرارة وتوازن السوائل
+والنوم والشهية وتنظيم الهرمونات والوظائف اللاإرادية وغيرها من
+العمليات الفسيولوجية.
+</p>
+
+</div>
+
+</div>
+
+<!-- QUICK FACTS -->
+<div class="section">
+
+<div class="section-label">
+Quick Facts · معلومات سريعة
+</div>
+
+<h2>
+Hypothalamus at a Glance
+</h2>
+
+<div class="facts-grid">
+
+<div class="fact">
+
+<span>01</span>
+
+<strong>
+Location · الموقع
+</strong>
+
+<p>
+Below the thalamus and around the third ventricle · أسفل المهاد وحول البطين الثالث
+</p>
+
+</div>
+
+<div class="fact">
+
+<span>02</span>
+
+<strong>
+Major Role · الدور الرئيسي
+</strong>
+
+<p>
+Homeostasis and endocrine regulation · الاتزان الداخلي والتنظيم الهرموني
+</p>
+
+</div>
+
+<div class="fact">
+
+<span>03</span>
+
+<strong>
+Pituitary · النخامية
+</strong>
+
+<p>
+Major regulator of pituitary function · منظم رئيسي لوظيفة الغدة النخامية
+</p>
+
+</div>
+
+<div class="fact">
+
+<span>04</span>
+
+<strong>
+Circadian Rhythm · الإيقاع اليومي
+</strong>
+
+<p>
+The suprachiasmatic nucleus helps coordinate biological timing · النواة فوق التصالبية تنظم التوقيت البيولوجي
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- QUIZ -->
+<div id="quiz" class="quiz">
+
+<div class="section-label">
+Mini Test
+</div>
+
+<h2>
+🧠 Test Yourself
+</h2>
+
+<p class="quiz-intro">
+Choose the best answer for each question.
+</p>
+
+<div class="question">
+
+<p>
+1. Where is the hypothalamus located?
+</p>
+
+<button class="option" onclick="checkAnswer(this,false)">
+A. Above the cerebral cortex
+</button>
+
+<button class="option" onclick="checkAnswer(this,true)">
+B. Below the thalamus
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+C. Inside the cerebellum
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+D. Inside the spinal cord
+</button>
+
+</div>
+
+<div class="question">
+
+<p>
+2. Which function is strongly associated with the hypothalamus?
+</p>
+
+<button class="option" onclick="checkAnswer(this,false)">
+A. Fine motor coordination
+</button>
+
+<button class="option" onclick="checkAnswer(this,true)">
+B. Homeostasis
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+C. Primary hearing
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+D. Voluntary skeletal muscle contraction
+</button>
+
+</div>
+
+<div class="question">
+
+<p>
+3. Which structure is closely regulated by the hypothalamus?
+</p>
+
+<button class="option" onclick="checkAnswer(this,true)">
+A. Pituitary gland
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+B. Cerebellar cortex
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+C. Spinal cord
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+D. Occipital pole
+</button>
+
+</div>
+
+<div id="quizResult" class="quiz-result"></div>
+
+</div>
+
+</section>
 
 </main>
 
+<!-- THREE.JS -->
+<script type="importmap">
+{
+  "imports": {
+    "three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
 
-<footer>
+<script type="module">
 
-NeuroAtlas · Free bilingual neuroanatomy education
+import * as THREE from "three";
 
-</footer>
+import {
+  OrbitControls
+} from "three/addons/controls/OrbitControls.js";
 
+import {
+  GLTFLoader
+} from "three/addons/loaders/GLTFLoader.js";
+
+import {
+  DRACOLoader
+} from "three/addons/loaders/DRACOLoader.js";
+
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const canvas =
+  document.getElementById("brainCanvas");
+
+const loading =
+  document.getElementById("loading");
+
+const loadText =
+  document.getElementById("loadText");
+
+const loadBar =
+  document.getElementById("loadBar");
+
+const anatomyLabel =
+  document.getElementById("anatomyLabel");
+
+
+/* =========================================================
+   SCENE
+========================================================= */
+
+const scene = new THREE.Scene();
+
+
+/* =========================================================
+   CAMERA
+========================================================= */
+
+const camera =
+  new THREE.PerspectiveCamera(
+    30,
+    1,
+    0.01,
+    100
+  );
+
+camera.position.set(
+  3.2,
+  0.3,
+  8.5
+);
+
+
+/* =========================================================
+   RENDERER
+========================================================= */
+
+const renderer =
+  new THREE.WebGLRenderer({
+    canvas:canvas,
+    antialias:true,
+    alpha:true
+  });
+
+renderer.setPixelRatio(
+  Math.min(
+    window.devicePixelRatio || 1,
+    2
+  )
+);
+
+renderer.toneMapping =
+  THREE.ACESFilmicToneMapping;
+
+renderer.toneMappingExposure = 0.75;
+
+
+/* =========================================================
+   ORBIT CONTROLS
+========================================================= */
+
+const controls =
+  new OrbitControls(
+    camera,
+    canvas
+  );
+
+controls.enableRotate = true;
+controls.rotateSpeed = 0.6;
+
+controls.enableDamping = true;
+controls.dampingFactor = 0.05;
+
+controls.enableZoom = true;
+controls.zoomSpeed = 0.6;
+
+controls.enablePan = false;
+
+controls.autoRotate = true;
+controls.autoRotateSpeed = 0.2;
+
+controls.target.set(
+  0,
+  -0.3,
+  0
+);
+
+controls.minDistance = 3.5;
+controls.maxDistance = 16;
+
+
+/* =========================================================
+   LIGHTING
+========================================================= */
+
+scene.add(
+  new THREE.AmbientLight(
+    0xffffff,
+    0.55
+  )
+);
+
+const hemisphere =
+  new THREE.HemisphereLight(
+    0xffdce6,
+    0x081018,
+    0.75
+  );
+
+scene.add(hemisphere);
+
+const keyLight =
+  new THREE.DirectionalLight(
+    0xfff5f0,
+    1.4
+  );
+
+keyLight.position.set(
+  6,
+  10,
+  8
+);
+
+scene.add(keyLight);
+
+const fillLight =
+  new THREE.DirectionalLight(
+    0x8ca9bd,
+    0.4
+  );
+
+fillLight.position.set(
+  -7,
+  2,
+  6
+);
+
+scene.add(fillLight);
+
+
+/* =========================================================
+   BRAIN GROUP
+========================================================= */
+
+const brainGroup =
+  new THREE.Group();
+
+scene.add(brainGroup);
+
+
+/* =========================================================
+   HYPOTHALAMUS STATE
+========================================================= */
+
+let hypothalamusMeshes = [];
+
+let hypothalamusTarget = null;
+
+let highlighted = true;
+
+
+/* =========================================================
+   BRAIN MATERIAL
+========================================================= */
+
+const brainPinkColor =
+  0xf1c5d0;
+
+const brainPinkMaterial =
+  new THREE.MeshPhysicalMaterial({
+
+    color:brainPinkColor,
+
+    roughness:0.62,
+
+    metalness:0,
+
+    clearcoat:0.12,
+
+    clearcoatRoughness:0.5,
+
+    side:THREE.DoubleSide
+  });
+
+
+/* =========================================================
+   HYPOTHALAMUS HIGHLIGHT MATERIAL
+========================================================= */
+
+const hypothalamusWhite =
+  new THREE.Color(
+    0xffffff
+  );
+
+const hypothalamusNormal =
+  new THREE.Color(
+    brainPinkColor
+  );
+
+const hypothalamusMaterial =
+  new THREE.MeshPhysicalMaterial({
+
+    color:hypothalamusWhite.clone(),
+
+    roughness:0.3,
+
+    metalness:0.05,
+
+    clearcoat:0.6,
+
+    clearcoatRoughness:0.2,
+
+    emissive:0x555555,
+
+    emissiveIntensity:0.2,
+
+    side:THREE.DoubleSide
+  });
+
+
+/* =========================================================
+   HIGHLIGHT GLOW
+========================================================= */
+
+const highlightGlowMaterial =
+  new THREE.MeshBasicMaterial({
+
+    color:0xffffff,
+
+    transparent:true,
+
+    opacity:0.18,
+
+    side:THREE.BackSide
+  });
+
+
+/* =========================================================
+   ANATOMICAL NAME DETECTION
+========================================================= */
+
+function isHypothalamusName(name){
+
+  const normalized =
+    name
+      .toLowerCase()
+      .replace(/[\s_-]+/g,"");
+
+  const names = [
+
+    "hypothalamus",
+
+    "hypothalamic",
+
+    "hypothalamusregion",
+
+    "hypothalamicregion",
+
+    "hypothalamusleft",
+
+    "hypothalamusright",
+
+    "hypothalamusl",
+
+    "hypothalamusr"
+
+  ];
+
+  return names.some(
+    value =>
+      normalized.includes(value)
+  );
+}
+
+
+/* =========================================================
+   LOAD REAL BRAIN
+========================================================= */
+
+function loadRealBrain(){
+
+  const loader =
+    new GLTFLoader();
+
+  const dracoLoader =
+    new DRACOLoader();
+
+  dracoLoader.setDecoderPath(
+    "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/"
+  );
+
+  loader.setDRACOLoader(
+    dracoLoader
+  );
+
+
+  const urls = [
+
+    "https://cdn.jsdelivr.net/gh/itayinbarr/brainproject@main/brain-atlas/models/brain.glb",
+
+    "https://raw.githubusercontent.com/itayinbarr/brainproject/main/brain-atlas/models/brain.glb",
+
+    "https://itayinbarr.github.io/brainproject/models/brain.glb"
+
+  ];
+
+
+  let urlIndex = 0;
+
+
+  function tryLoad(){
+
+    if(urlIndex >= urls.length){
+
+      loadText.textContent =
+        "Brain model could not be loaded.";
+
+      loadBar.style.width = "100%";
+
+      setTimeout(() => {
+        loading.classList.add("hide");
+      },500);
+
+      return;
+    }
+
+
+    const url =
+      urls[urlIndex++];
+
+    loadText.textContent =
+      "Loading real brain model...";
+
+
+    loader.load(
+
+      url,
+
+      function(gltf){
+
+        const model =
+          gltf.scene;
+
+
+        /* ---------------------------------------------
+           NORMALIZE MODEL
+        --------------------------------------------- */
+
+        const box =
+          new THREE.Box3()
+            .setFromObject(model);
+
+        const center =
+          box.getCenter(
+            new THREE.Vector3()
+          );
+
+        const size =
+          box.getSize(
+            new THREE.Vector3()
+          );
+
+        const maxDim =
+          Math.max(
+            size.x,
+            size.y,
+            size.z
+          );
+
+        const scale =
+          4.5 / maxDim;
+
+
+        model.scale.setScalar(
+          scale
+        );
+
+        model.position.sub(
+          center.multiplyScalar(
+            scale
+          )
+        );
+
+        model.position.y -= 0.60;
+
+
+        /* ---------------------------------------------
+           PROCESS MODEL
+        --------------------------------------------- */
+
+        model.traverse(
+          function(child){
+
+            if(!child.isMesh){
+              return;
+            }
+
+
+            child.castShadow = true;
+            child.receiveShadow = true;
+
+
+            const name =
+              child.name || "";
+
+
+            const isHypothalamus =
+              isHypothalamusName(
+                name
+              );
+
+
+            if(isHypothalamus){
+
+              /*
+               IMPORTANT:
+
+               We do NOT create a new anatomical
+               hypothalamus object.
+
+               We use the actual hypothalamus mesh
+               already present in the model.
+              */
+
+              hypothalamusMeshes.push(
+                child
+              );
+
+              child.material =
+                hypothalamusMaterial;
+
+              if(!hypothalamusTarget){
+
+                hypothalamusTarget =
+                  child;
+
+              }
+
+            }else{
+
+              /*
+               Everything else remains part
+               of the original brain model.
+              */
+
+              child.material =
+                brainPinkMaterial.clone();
+
+            }
+
+          }
+        );
+
+
+        brainGroup.add(
+          model
+        );
+
+
+        /*
+         If the model has a segmented
+         hypothalamus, use its real mesh.
+
+         No artificial hypothalamus is generated.
+        */
+
+        if(hypothalamusMeshes.length){
+
+          loadText.textContent =
+            "Hypothalamus identified in brain model.";
+
+        }else{
+
+          /*
+           The model is still displayed normally.
+           We don't invent a fake hypothalamus object
+           when the anatomical mesh isn't present.
+          */
+
+          loadText.textContent =
+            "Brain model loaded.";
+
+        }
+
+
+        loadBar.style.width =
+          "100%";
+
+
+        onReady();
+
+      },
+
+
+      function(progress){
+
+        if(progress.total > 0){
+
+          const percentage =
+            Math.min(
+              90,
+              progress.loaded /
+              progress.total *
+              90
+            );
+
+          loadBar.style.width =
+            percentage + "%";
+
+        }
+
+      },
+
+
+      function(error){
+
+        console.warn(
+          "Brain model failed:",
+          error
+        );
+
+        tryLoad();
+
+      }
+
+    );
+
+  }
+
+
+  tryLoad();
+
+}
+
+
+/* =========================================================
+   READY
+========================================================= */
+
+function onReady(){
+
+  setTimeout(
+    function(){
+
+      loading.classList.add(
+        "hide"
+      );
+
+      if(
+        highlighted &&
+        hypothalamusMeshes.length
+      ){
+
+        anatomyLabel.classList.add(
+          "show"
+        );
+
+      }
+
+    },
+    500
+  );
+
+}
+
+
+/* =========================================================
+   LABEL POSITION
+========================================================= */
+
+function updateLabel(){
+
+  if(!hypothalamusTarget){
+    return;
+  }
+
+
+  const position =
+    new THREE.Vector3();
+
+
+  hypothalamusTarget
+    .getWorldPosition(
+      position
+    );
+
+
+  position.project(
+    camera
+  );
+
+
+  const x =
+    (position.x + 1) /
+    2 *
+    canvas.clientWidth;
+
+
+  const y =
+    (-position.y + 1) /
+    2 *
+    canvas.clientHeight;
+
+
+  anatomyLabel.style.left =
+    x + "px";
+
+
+  anatomyLabel.style.top =
+    (y - 45) + "px";
+
+}
+
+
+/* =========================================================
+   RESIZE
+========================================================= */
+
+function resize(){
+
+  const width =
+    canvas.clientWidth;
+
+  const height =
+    canvas.clientHeight;
+
+
+  if(
+    width <= 0 ||
+    height <= 0
+  ){
+
+    return;
+
+  }
+
+
+  camera.aspect =
+    width / height;
+
+  camera.updateProjectionMatrix();
+
+
+  renderer.setSize(
+    width,
+    height,
+    false
+  );
+
+}
+
+
+window.addEventListener(
+  "resize",
+  resize
+);
+
+
+/* =========================================================
+   HIGHLIGHT BUTTON
+========================================================= */
+
+const highlightButton =
+  document.getElementById(
+    "highlight"
+  );
+
+
+highlightButton.addEventListener(
+  "click",
+  function(){
+
+    highlighted =
+      !highlighted;
+
+
+    /*
+     The real hypothalamus mesh
+     changes material appearance.
+
+     It is never replaced by
+     a fake object.
+    */
+
+    hypothalamusMaterial.color.copy(
+      highlighted
+        ? hypothalamusWhite
+        : hypothalamusNormal
+    );
+
+
+    hypothalamusMaterial.emissive.set(
+      highlighted
+        ? 0x555555
+        : 0x000000
+    );
+
+
+    hypothalamusMaterial.emissiveIntensity =
+      highlighted
+        ? 0.2
+        : 0;
+
+
+    anatomyLabel.classList.toggle(
+      "show",
+      highlighted &&
+      hypothalamusMeshes.length > 0
+    );
+
+
+    highlightButton.classList.toggle(
+      "active",
+      highlighted
+    );
+
+
+    highlightButton.textContent =
+      highlighted
+        ? "⚪ Hypothalamus Highlighted"
+        : "🧠 Highlight Hypothalamus";
+
+  }
+);
+
+
+/* =========================================================
+   AUTO ROTATE
+========================================================= */
+
+const rotateButton =
+  document.getElementById(
+    "rotate"
+  );
+
+
+rotateButton.addEventListener(
+  "click",
+  function(){
+
+    controls.autoRotate =
+      !controls.autoRotate;
+
+
+    rotateButton.classList.toggle(
+      "active",
+      controls.autoRotate
+    );
+
+
+    rotateButton.textContent =
+      controls.autoRotate
+        ? "⟳ Auto Rotate"
+        : "▶ Auto Rotate";
+
+  }
+);
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+document
+  .getElementById("reset")
+  .addEventListener(
+    "click",
+    function(){
+
+      camera.position.set(
+        3.2,
+        0.3,
+        8.5
+      );
+
+
+      controls.target.set(
+        0,
+        -0.3,
+        0
+      );
+
+
+      controls.update();
+
+    }
+  );
+
+
+/* =========================================================
+   ANIMATION
+========================================================= */
+
+function animate(){
+
+  requestAnimationFrame(
+    animate
+  );
+
+
+  controls.update();
+
+
+  updateLabel();
+
+
+  renderer.render(
+    scene,
+    camera
+  );
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+resize();
+
+animate();
+
+loadRealBrain();
+
+</script>
+
+
+<!-- =========================================================
+     QUIZ JAVASCRIPT
+========================================================= -->
 
 <script>
 
-function checkAnswer(correct){
+function checkAnswer(
+  button,
+  correct
+){
 
-const feedback =
-document.getElementById("feedback");
+  const parent =
+    button.parentElement;
 
-if(correct){
 
-feedback.textContent =
-"✓ Correct — the hypothalamus is a major regulator of homeostasis and endocrine function.";
+  const options =
+    parent.querySelectorAll(
+      ".option"
+    );
+
+
+  options.forEach(
+    function(option){
+
+      option.classList.remove(
+        "correct",
+        "wrong"
+      );
+
+    }
+  );
+
+
+  if(correct){
+
+    button.classList.add(
+      "correct"
+    );
+
+  }else{
+
+    button.classList.add(
+      "wrong"
+    );
+
+  }
+
+
+  updateQuizScore();
 
 }
 
-else{
 
-feedback.textContent =
-"Not quite. Think about the hypothalamus as a key coordinator of homeostasis.";
+function updateQuizScore(){
 
-}
+  const result =
+    document.getElementById(
+      "quizResult"
+    );
+
+
+  let answered = 0;
+
+  let correctAnswers = 0;
+
+
+  document
+    .querySelectorAll(
+      ".question"
+    )
+    .forEach(
+      function(question){
+
+        const selected =
+          question.querySelector(
+            ".correct, .wrong"
+          );
+
+
+        if(selected){
+
+          answered++;
+
+
+          if(
+            selected.classList.contains(
+              "correct"
+            )
+          ){
+
+            correctAnswers++;
+
+          }
+
+        }
+
+      }
+    );
+
+
+  if(answered > 0){
+
+    result.style.display =
+      "block";
+
+
+    result.textContent =
+      "Score: " +
+      correctAnswers +
+      " / " +
+      answered;
+
+  }
 
 }
 
 </script>
 
-
 </body>
-
 </html>
