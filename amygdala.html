@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>NeuroAtlas | Amygdala</title>
 
 <style>
@@ -18,16 +17,13 @@ html{
 }
 
 body{
-  background:#050a12;
+  background:#050b13;
   color:#eef4fa;
   font-family:Arial,Helvetica,sans-serif;
   line-height:1.7;
 }
 
-/* =========================
-   NAVIGATION
-========================= */
-
+/* NAVIGATION */
 nav{
   height:70px;
   padding:0 7%;
@@ -40,29 +36,22 @@ nav a{
   color:#9db0c3;
   text-decoration:none;
   font-size:14px;
-  transition:.2s;
 }
 
 nav a:hover{
   color:white;
 }
 
-/* =========================
-   CONTAINER
-========================= */
-
+/* CONTAINER */
 .container{
   max-width:1200px;
   margin:auto;
   padding:60px 7% 100px;
 }
 
-/* =========================
-   HERO
-========================= */
-
+/* HERO */
 .eyebrow{
-  color:#b58cff;
+  color:#61b5ff;
   letter-spacing:3px;
   font-size:12px;
   text-transform:uppercase;
@@ -70,29 +59,26 @@ nav a:hover{
 }
 
 h1{
-  font-size:clamp(60px,8vw,90px);
+  font-size:clamp(55px,8vw,90px);
   line-height:.95;
   letter-spacing:-4px;
   margin-bottom:10px;
 }
 
 .arabic-title{
-  color:#d7a5ff;
+  color:#ff8f9b;
   font-size:24px;
   margin-bottom:25px;
 }
 
 .hero p{
   color:#a6b6c7;
-  max-width:820px;
+  max-width:800px;
   font-size:18px;
   line-height:1.8;
 }
 
-/* =========================
-   ACTION BUTTONS
-========================= */
-
+/* ACTION BUTTONS */
 .actions{
   display:flex;
   flex-wrap:wrap;
@@ -103,33 +89,28 @@ h1{
 .action-button{
   padding:11px 17px;
   border-radius:9px;
-  background:#0b1727;
-  border:1px solid #394a67;
-  color:#c9d5e2;
+  background:#0b1928;
+  border:1px solid #31516d;
+  color:#bdd0e0;
   text-decoration:none;
   cursor:pointer;
-  transition:.25s;
+  transition:.2s;
 }
 
 .action-button:hover{
-  background:#17233a;
+  background:#14304a;
   color:white;
-  border-color:#b58cff;
+  border-color:#61b5ff;
 }
 
-/* =========================
-   3D VIEWER
-========================= */
-
+/* 3D VIEWER */
 .viewer{
   margin-top:60px;
   border:1px solid rgba(255,255,255,.10);
   border-radius:24px;
   overflow:hidden;
-  background:#02050a;
-  box-shadow:
-    0 25px 80px rgba(0,0,0,.5),
-    0 0 80px rgba(125,77,190,.06);
+  background:#02060b;
+  box-shadow:0 25px 80px rgba(0,0,0,.45);
 }
 
 .viewer-header{
@@ -143,7 +124,7 @@ h1{
 
 .viewer-title{
   font-size:14px;
-  color:#d7deea;
+  color:#d2dce6;
 }
 
 .viewer-status{
@@ -158,11 +139,10 @@ h1{
   height:700px;
   background:
     radial-gradient(
-      circle at 50% 48%,
-      #29334c 0%,
-      #111c30 38%,
-      #050b14 72%,
-      #02050a 100%
+      circle at 50% 45%,
+      #203b51 0%,
+      #0d1c2e 42%,
+      #02060b 100%
     );
 }
 
@@ -172,25 +152,19 @@ h1{
   display:block;
 }
 
-/* =========================
-   LOADING
-========================= */
-
+/* LOADING */
 .loading{
   position:absolute;
   inset:0;
   z-index:20;
-
   display:flex;
   align-items:center;
   justify-content:center;
   flex-direction:column;
   gap:16px;
-
-  background:#02050a;
-  color:#aab8c8;
+  background:#02060b;
+  color:#9db0c3;
   font-size:14px;
-
   transition:opacity .8s;
 }
 
@@ -200,41 +174,27 @@ h1{
 }
 
 .loading-bar{
-  width:220px;
-  height:3px;
+  width:180px;
+  height:2px;
   background:rgba(255,255,255,.08);
-  border-radius:10px;
+  border-radius:2px;
   overflow:hidden;
 }
 
 .loading-bar-inner{
   width:0%;
   height:100%;
-  background:
-    linear-gradient(
-      90deg,
-      #8d5cff,
-      #d68cff,
-      #ffb4dc
-    );
+  background:#61b5ff;
   transition:width .3s;
 }
 
-/* =========================
-   AMYGDALA LABEL
-========================= */
-
+/* AMYGDALA LABEL */
 .amygdala-label{
   position:absolute;
   z-index:30;
-
   pointer-events:none;
-
   transform:translate(-50%,-100%);
-
   display:none;
-
-  transition:left .1s,top .1s;
 }
 
 .amygdala-label.show{
@@ -243,97 +203,68 @@ h1{
 
 .label-box{
   position:relative;
-
   padding:9px 15px;
-
   border-radius:10px;
-
-  background:rgba(5,8,16,.96);
-
-  border:1.5px solid #d783ff;
-
-  color:#f0cfff;
-
+  background:rgba(5,10,17,.96);
+  border:1.5px solid #ff4d5e;
+  color:#ffd0d5;
   font-size:12px;
   font-weight:bold;
-
   letter-spacing:1px;
-
   white-space:nowrap;
-
   box-shadow:
-    0 0 12px rgba(214,131,255,.35),
-    0 0 35px rgba(155,74,255,.18);
+    0 0 12px rgba(255,77,94,.25),
+    0 0 25px rgba(255,77,94,.12);
 }
 
 .label-box::after{
   content:"";
-
   position:absolute;
-
   left:50%;
   bottom:-15px;
-
   width:1.5px;
   height:15px;
-
-  background:#d783ff;
-
+  background:#ff4d5e;
   transform:translateX(-50%);
 }
 
-/* =========================
-   CONTROLS
-========================= */
-
+/* CONTROLS */
 .controls{
   display:flex;
   gap:10px;
   flex-wrap:wrap;
-
   padding:15px;
-
   border-top:1px solid rgba(255,255,255,.08);
 }
 
 .controls button{
   padding:11px 17px;
-
   border-radius:9px;
-
-  background:#0b1727;
-
-  border:1px solid #394a67;
-
-  color:#c5d3e2;
-
+  background:#0b1928;
+  border:1px solid #31516d;
+  color:#bdd0e0;
   cursor:pointer;
-
-  transition:.25s;
+  transition:.2s;
 }
 
 .controls button:hover{
-  background:#17233a;
+  background:#14304a;
   color:white;
-  border-color:#a875ff;
 }
 
 .controls button.active{
-  background:#241638;
-  border-color:#d783ff;
-  color:#f0cfff;
+  background:#241417;
+  border-color:#ff4d5e;
+  color:#ffd0d5;
 }
 
-/* =========================
-   INFORMATION
-========================= */
-
+/* INFORMATION */
 .section{
   margin-top:70px;
 }
 
 .section-label{
-  color:#b58cff;
+  color:#61b5ff;
   letter-spacing:2px;
   font-size:11px;
   text-transform:uppercase;
@@ -353,22 +284,13 @@ h1{
   margin-bottom:30px;
 }
 
-/* =========================
-   LOCATION
-========================= */
-
+/* LOCATION */
 .location{
   margin-top:70px;
   padding:35px;
-
-  background:#091321;
-
-  border:1px solid #1b2a40;
-
+  background:#091522;
+  border:1px solid #172b3e;
   border-radius:18px;
-
-  box-shadow:
-    inset 0 0 50px rgba(130,70,190,.025);
 }
 
 .location h2{
@@ -391,48 +313,38 @@ h1{
 .location-svg{
   display:block;
   width:100%;
-  max-width:850px;
+  max-width:800px;
   height:auto;
   margin:auto;
 }
 
 .location-brain{
-  fill:#26384f;
+  fill:#f1c5d0;
   stroke:#71869e;
   stroke-width:3;
 }
 
 .location-brain-inner{
-  fill:#18283a;
-  stroke:#50657c;
-  stroke-width:2;
-  opacity:.75;
+  fill:#dcaebc;
+  opacity:.65;
 }
 
-/* AMYGDALA LOCATION */
+.location-midbrain{
+  fill:#d69eae;
+  stroke:#71869e;
+  stroke-width:2;
+}
 
 .location-amygdala-glow{
-  fill:#c85dff;
-  opacity:.32;
-
-  filter:
-    blur(8px);
+  fill:#ff4d5e;
+  opacity:.30;
+  filter:blur(8px);
 }
 
 .location-amygdala{
-  fill:
-    url(#amygdalaGradient);
-
-  stroke:#e8a7ff;
-  stroke-width:2.5;
-
-  filter:
-    drop-shadow(0 0 8px rgba(211,112,255,.85));
-}
-
-.location-amygdala-core{
-  fill:#f2a5ff;
-  opacity:.8;
+  fill:#ff4d5e;
+  stroke:#ffd6da;
+  stroke-width:2;
 }
 
 .location-line{
@@ -441,8 +353,8 @@ h1{
 }
 
 .location-amygdala-line{
-  stroke:#e59bff;
-  stroke-width:2.5;
+  stroke:#ff4d5e;
+  stroke-width:3;
 }
 
 .location-svg-label{
@@ -452,13 +364,13 @@ h1{
 }
 
 .location-amygdala-label{
-  fill:#e9aaff;
+  fill:#ff4d5e;
   font-size:21px;
   font-weight:bold;
 }
 
 .location-arabic-label{
-  fill:#f2ccff;
+  fill:#ffd6da;
   font-size:16px;
   font-weight:bold;
 }
@@ -469,10 +381,7 @@ h1{
   margin-top:15px;
 }
 
-/* =========================
-   CARDS
-========================= */
-
+/* CARDS */
 .cards{
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -481,26 +390,17 @@ h1{
 
 .card{
   padding:27px;
-
   background:#091522;
-
   border:1px solid #172b3e;
-
   border-radius:18px;
-
   transition:
     transform .2s,
-    border-color .2s,
-    box-shadow .2s;
+    border-color .2s;
 }
 
 .card:hover{
   transform:translateY(-3px);
-
-  border-color:#593a70;
-
-  box-shadow:
-    0 15px 35px rgba(0,0,0,.15);
+  border-color:#4a2a30;
 }
 
 .card h3{
@@ -516,23 +416,16 @@ h1{
   line-height:1.8;
 }
 
-/* =========================
-   CLINICAL
-========================= */
-
+/* CLINICAL */
 .clinical-section{
   margin-top:65px;
 }
 
 .clinical-box{
   padding:30px;
-
   background:#091522;
-
   border:1px solid #172b3e;
-
-  border-left:3px solid #c978ff;
-
+  border-left:3px solid #ff4d5e;
   border-radius:18px;
 }
 
@@ -547,10 +440,7 @@ h1{
   margin-bottom:0;
 }
 
-/* =========================
-   QUICK FACTS
-========================= */
-
+/* QUICK FACTS */
 .facts-grid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
@@ -559,17 +449,14 @@ h1{
 
 .fact{
   padding:22px;
-
   background:#091522;
-
   border:1px solid #172b3e;
-
   border-radius:16px;
 }
 
 .fact span{
   display:block;
-  color:#d080ff;
+  color:#ff4d5e;
   font-size:11px;
   letter-spacing:2px;
   margin-bottom:12px;
@@ -589,18 +476,12 @@ h1{
   line-height:1.7;
 }
 
-/* =========================
-   QUIZ
-========================= */
-
+/* QUIZ */
 .quiz{
   margin-top:65px;
   padding:30px;
-
   background:#091522;
-
   border:1px solid #172b3e;
-
   border-radius:18px;
 }
 
@@ -631,33 +512,22 @@ h1{
 
 .option{
   display:block;
-
   width:100%;
-
   padding:12px 15px;
-
   margin-top:9px;
-
   background:#0b1928;
-
   color:#c7d5e2;
-
   border:1px solid #263951;
-
   border-radius:9px;
-
   text-align:left;
-
   cursor:pointer;
-
   font-size:14px;
-
   transition:.2s;
 }
 
 .option:hover{
-  border-color:#c978ff;
-  background:#171b2c;
+  border-color:#ff4d5e;
+  background:#111e2c;
 }
 
 .option.correct{
@@ -674,24 +544,15 @@ h1{
 
 .quiz-result{
   margin-top:25px;
-
   padding:15px;
-
   border-radius:10px;
-
   background:#0b1928;
-
   border:1px solid #263951;
-
   color:#aebdce;
-
   display:none;
 }
 
-/* =========================
-   MOBILE
-========================= */
-
+/* MOBILE */
 @media(max-width:900px){
 
   .cards{
@@ -701,19 +562,17 @@ h1{
   .facts-grid{
     grid-template-columns:repeat(2,1fr);
   }
-
 }
 
 @media(max-width:800px){
 
   .scene{
-    height:500px;
+    height:450px;
   }
 
   .viewer-status{
     display:none;
   }
-
 }
 
 @media(max-width:600px){
@@ -733,15 +592,6 @@ h1{
   .location{
     padding:20px;
   }
-
-  .scene{
-    height:420px;
-  }
-
-  .label-box{
-    font-size:10px;
-  }
-
 }
 </style>
 </head>
@@ -749,529 +599,278 @@ h1{
 <body>
 
 <nav>
-  <a href="./explore.html">← Back to Explore</a>
+<a href="./explore.html">← Back to Explore</a>
 </nav>
 
 <main class="container">
 
-<!-- =========================
-     HERO
-========================= -->
+<!-- HERO -->
+<div class="eyebrow">Limbic System · NeuroAtlas</div>
 
-<div class="eyebrow">
-  Limbic System · NeuroAtlas
-</div>
-
-<h1>AMYGDALA</h1>
+<h1>Amygdala</h1>
 
 <div class="arabic-title">
-  اللوزة الدماغية
+اللوزة الدماغية
 </div>
 
 <div class="hero">
 
 <p>
-The amygdala is a small, almond-shaped group of nuclei located deep
+The amygdala is a small almond-shaped group of nuclei located deep
 within the medial temporal lobe. It plays an important role in
-emotional processing, threat detection, learning, memory, and the
-formation of emotionally significant experiences.
+emotional processing, fear learning, memory, threat detection, and
+the coordination of emotional responses.
 </p>
 
 </div>
 
+<!-- ACTION BUTTONS -->
 <div class="actions">
 
 <a class="action-button" href="#location">
-  📍 Show Location
+📍 Show Location
 </a>
 
 <a class="action-button" href="#information">
-  🧠 Learn About the Amygdala
+🧠 Learn About the Amygdala
 </a>
 
 <a class="action-button" href="#quiz">
-  📝 Test Yourself
+📝 Test Yourself
 </a>
 
 </div>
 
-
-<!-- =========================
-     3D VIEWER
-========================= -->
-
+<!-- 3D VIEWER -->
 <div class="viewer">
 
 <div class="viewer-header">
 
 <div class="viewer-title">
-  Human Brain · Interactive 3D
+Human Brain · Interactive 3D
 </div>
 
 <div class="viewer-status">
-  DRAG TO ROTATE · SCROLL TO ZOOM
+DRAG TO ROTATE · SCROLL TO ZOOM
 </div>
 
 </div>
-
 
 <div class="scene">
 
 <div id="loading" class="loading">
 
 <span id="loadText">
-  Preparing 3D brain...
+Loading real brain model...
 </span>
 
 <div class="loading-bar">
-  <div
-    id="loadBar"
-    class="loading-bar-inner">
-  </div>
+
+<div
+id="loadBar"
+class="loading-bar-inner">
 </div>
 
 </div>
 
+</div>
 
 <canvas id="brainCanvas"></canvas>
 
-
-<div id="amygdalaLabel" class="amygdala-label">
+<div
+id="amygdalaLabel"
+class="amygdala-label">
 
 <div class="label-box">
-  AMYGDALA · LIPID TEMPORAL LOBE
+AMYGDALA
 </div>
 
 </div>
 
 </div>
-
 
 <div class="controls">
 
-<button id="highlight" class="active">
-  🟣 Show Amygdala
+<button
+id="highlight"
+class="active">
+🔴 Highlight Amygdala
 </button>
 
-<button id="rotate" class="active">
-  ⟳ Auto Rotate
+<button
+id="rotate"
+class="active">
+⟳ Auto Rotate
 </button>
 
-<button id="reset">
-  ↻ Reset View
+<button
+id="reset">
+↻ Reset View
 </button>
 
 </div>
 
 </div>
 
-
-<!-- =========================
-     LOCATION
-========================= -->
-
-<section id="location" class="location">
+<!-- LOCATION -->
+<section
+id="location"
+class="location">
 
 <div class="section-label">
-  Location · الموقع
+Location · الموقع
 </div>
 
 <h2>
-  📍 Where is the Amygdala?
+📍 Where is the Amygdala?
 </h2>
 
 <p class="location-intro">
 
-The amygdala is located deep inside the
+The amygdala is located deep within the
 <strong>medial temporal lobe</strong>, anterior to the hippocampus and
-close to the tip of the temporal horn of the lateral ventricle.
-
-It is not a surface structure — it lies deep within the brain.
+near the anterior end of the temporal horn of the lateral ventricle.
+There is an amygdala in each cerebral hemisphere.
 
 <br><br>
 
-تقع اللوزة الدماغية في عمق
-<strong>الفص الصدغي الإنسي</strong>، أمام الحُصين وقريبة من الجزء
-الأمامي للقرن الصدغي للبطين الجانبي.
-
-وهي ليست بنية سطحية، بل تقع في عمق الدماغ.
+تقع <strong>اللوزة الدماغية</strong> في عمق
+<strong>الفص الصدغي الإنسي</strong>، أمام الحُصين وبالقرب من الجزء
+الأمامي للقرن الصدغي للبطين الجانبي. توجد لوزة دماغية في كل نصف من
+نصفي الكرة المخية.
 
 </p>
-
 
 <div class="brain-visual">
 
 <svg
-  class="location-svg"
-  viewBox="0 0 900 620"
-  xmlns="http://www.w3.org/2000/svg"
-  aria-label="Simplified brain diagram showing the bilateral amygdalae inside the medial temporal lobes"
->
+class="location-svg"
+viewBox="0 0 800 560"
+xmlns="http://www.w3.org/2000/svg"
+aria-label="Simplified diagram showing the location of the amygdala">
 
-<defs>
-
-<!-- Amygdala gradient -->
-
-<radialGradient
-  id="amygdalaGradient"
-  cx="40%"
-  cy="35%"
-  r="70%"
->
-
-<stop
-  offset="0%"
-  stop-color="#ffd5ff"
-/>
-
-<stop
-  offset="35%"
-  stop-color="#df80ff"
-/>
-
-<stop
-  offset="70%"
-  stop-color="#a846e8"
-/>
-
-<stop
-  offset="100%"
-  stop-color="#6526a8"
-/>
-
-</radialGradient>
-
-
-<!-- Brain gradient -->
-
-<linearGradient
-  id="brainGradient"
-  x1="0"
-  y1="0"
-  x2="1"
-  y2="1"
->
-
-<stop
-  offset="0%"
-  stop-color="#344c66"
-/>
-
-<stop
-  offset="100%"
-  stop-color="#1d3045"
-/>
-
-</linearGradient>
-
-</defs>
-
-
-<!-- =========================
-     MAIN BRAIN SHAPE
-========================= -->
-
+<!-- BRAIN -->
 <path
-  class="location-brain"
-  fill="url(#brainGradient)"
-  d="
-  M145 210
+class="location-brain"
+d="
+M145 155
+C155 80 250 42 350 55
+C455 67 545 110 595 190
+C625 240 610 310 570 350
+C530 390 465 405 395 395
+C330 386 275 410 220 380
+C165 350 125 300 125 235
+C125 205 132 180 145 155Z"/>
 
-  C115 175 125 125 170 95
-  C215 55 275 48 330 60
-
-  C385 35 450 38 500 60
-
-  C560 45 625 65 675 105
-
-  C735 150 760 210 748 275
-
-  C775 325 755 385 715 420
-
-  C680 455 630 470 575 462
-
-  C525 500 465 512 415 492
-
-  C360 515 300 505 255 478
-
-  C200 470 150 438 130 390
-
-  C105 350 115 305 137 275
-
-  C118 250 125 225 145 210
-
-  Z
-  "
-/>
-
-
-<!-- Inner brain depth -->
-
+<!-- INNER TEMPORAL REGION -->
 <path
-  class="location-brain-inner"
-  d="
-  M195 220
-  C180 170 230 115 295 105
+class="location-brain-inner"
+d="
+M215 275
+C250 245 300 240 350 255
+C395 270 430 300 455 330
+C420 360 370 365 320 350
+C275 338 235 315 215 275Z"/>
 
-  C355 92 405 112 450 130
-
-  C500 100 565 110 615 145
-
-  C665 180 690 230 675 280
-
-  C695 325 665 375 620 400
-
-  C570 430 510 425 465 410
-
-  C410 450 345 445 300 415
-
-  C250 410 215 375 205 335
-
-  C180 300 178 255 195 220
-
-  Z
-"
-/>
-
-
-<!-- =========================
-     TEMPORAL LOBE REGIONS
-========================= -->
-
+<!-- HIPPOCAMPUS -->
 <path
-  d="
-  M180 330
-  C215 300 255 300 295 325
-  C320 342 330 380 305 405
-  C275 430 220 420 190 390
-  C170 370 165 345 180 330
-  Z
-  "
-  fill="#1c2f43"
-  opacity=".8"
-/>
+class="location-midbrain"
+d="
+M330 305
+C355 282 392 285 410 305
+C425 322 414 342 390 350
+C365 357 335 347 325 330
+C320 320 322 312 330 305Z"/>
 
-
-<path
-  d="
-  M720 330
-  C685 300 645 300 605 325
-  C580 342 570 380 595 405
-  C625 430 680 420 710 390
-  C730 370 735 345 720 330
-  Z
-  "
-  fill="#1c2f43"
-  opacity=".8"
-/>
-
-
-<!-- =========================
-     AMYGDALA GLOW
-     LEFT
-========================= -->
-
+<!-- AMYGDALA GLOW -->
 <ellipse
-  class="location-amygdala-glow"
-  cx="280"
-  cy="350"
-  rx="37"
-  ry="29"
-/>
+class="location-amygdala-glow"
+cx="300"
+cy="285"
+rx="42"
+ry="30"/>
 
-
-<!-- RIGHT -->
-
+<!-- AMYGDALA -->
 <ellipse
-  class="location-amygdala-glow"
-  cx="620"
-  cy="350"
-  rx="37"
-  ry="29"
-/>
+class="location-amygdala"
+cx="300"
+cy="285"
+rx="25"
+ry="18"/>
 
-
-<!-- =========================
-     AMYGDALA
-     LEFT
-========================= -->
-
-<ellipse
-  class="location-amygdala"
-  cx="280"
-  cy="350"
-  rx="27"
-  ry="20"
-/>
-
-
-<!-- RIGHT -->
-
-<ellipse
-  class="location-amygdala"
-  cx="620"
-  cy="350"
-  rx="27"
-  ry="20"
-/>
-
-
-<!-- =========================
-     AMYGDALA CORE
-========================= -->
-
-<ellipse
-  class="location-amygdala-core"
-  cx="273"
-  cy="344"
-  rx="8"
-  ry="6"
-/>
-
-<ellipse
-  class="location-amygdala-core"
-  cx="613"
-  cy="344"
-  rx="8"
-  ry="6"
-/>
-
-
-<!-- =========================
-     LABELS
-========================= -->
-
+<!-- TEMPORAL LOBE LABEL -->
 <line
-  class="location-amygdala-line"
-  x1="280"
-  y1="350"
-  x2="130"
-  y2="300"
-/>
+class="location-line"
+x1="390"
+y1="345"
+x2="565"
+y2="435"/>
 
 <text
-  class="location-amygdala-label"
-  x="55"
-  y="292"
->
-  AMYGDALA
+class="location-svg-label"
+x="570"
+y="438">
+MEDIAL TEMPORAL LOBE
 </text>
 
 <text
-  class="location-arabic-label"
-  x="55"
-  y="318"
->
-  اللوزة الدماغية
+class="location-arabic-label"
+x="570"
+y="464">
+الفص الصدغي الإنسي
 </text>
 
-
+<!-- HIPPOCAMPUS LABEL -->
 <line
-  class="location-amygdala-line"
-  x1="620"
-  y1="350"
-  x2="770"
-  y2="300"
-/>
+class="location-line"
+x1="370"
+y1="318"
+x2="565"
+y2="285"/>
 
 <text
-  class="location-amygdala-label"
-  x="690"
-  y="292"
->
-  AMYGDALA
+class="location-svg-label"
+x="575"
+y="288">
+HIPPOCAMPUS
 </text>
 
 <text
-  class="location-arabic-label"
-  x="690"
-  y="318"
->
-  اللوزة الدماغية
+class="location-arabic-label"
+x="575"
+y="314">
+الحُصين
 </text>
 
-
-<!-- MEDIAL TEMPORAL LOBE -->
-
+<!-- AMYGDALA LABEL -->
 <line
-  class="location-line"
-  x1="280"
-  y1="380"
-  x2="125"
-  y2="450"
-/>
+class="location-amygdala-line"
+x1="300"
+y1="285"
+x2="135"
+y2="205"/>
 
 <text
-  class="location-svg-label"
-  x="55"
-  y="470"
->
-  MEDIAL TEMPORAL LOBE
+class="location-amygdala-label"
+x="35"
+y="195">
+AMYGDALA
 </text>
 
-
-<line
-  class="location-line"
-  x1="620"
-  y1="380"
-  x2="775"
-  y2="450"
-/>
-
 <text
-  class="location-svg-label"
-  x="665"
-  y="470"
->
-  MEDIAL TEMPORAL LOBE
-</text>
-
-
-<!-- HIPPOCAMPUS CONTEXT -->
-
-<path
-  d="
-  M250 390
-  C270 380 300 382 320 395
-  "
-  fill="none"
-  stroke="#7f9bb5"
-  stroke-width="5"
-  stroke-linecap="round"
-  opacity=".6"
-/>
-
-<path
-  d="
-  M650 390
-  C630 380 600 382 580 395
-  "
-  fill="none"
-  stroke="#7f9bb5"
-  stroke-width="5"
-  stroke-linecap="round"
-  opacity=".6"
-/>
-
-
-<text
-  x="390"
-  y="550"
-  fill="#9fb0c3"
-  font-size="17"
-  text-anchor="middle"
->
-  Bilateral amygdalae lie deep within the medial temporal lobes
+class="location-arabic-label"
+x="35"
+y="222">
+اللوزة الدماغية
 </text>
 
 </svg>
 
-
 <p class="location-caption">
 
-🟣 The purple structures represent the approximate position of the
-right and left amygdalae. They are shown **inside the temporal lobes**,
-not on the external surface of the brain.
+🔴 The red region represents the approximate location of the
+amygdala deep within the medial temporal lobe, anterior to the
+hippocampus.
 
 </p>
 
@@ -1279,39 +878,34 @@ not on the external surface of the brain.
 
 </section>
 
-
-<!-- =========================
-     INFORMATION
-========================= -->
-
-<section id="information" class="section">
+<!-- INFORMATION -->
+<section
+id="information"
+class="section">
 
 <div class="section-label">
-  Amygdala Anatomy · تشريح اللوزة الدماغية
+Amygdala Anatomy · تشريح اللوزة الدماغية
 </div>
 
 <h2>
-  Amygdala · اللوزة الدماغية
+Amygdala · اللوزة الدماغية
 </h2>
 
 <p class="section-intro">
 
-The amygdala is a paired collection of nuclei located deep in the
-medial temporal lobes. It is strongly involved in emotional learning,
-fear and threat processing, memory modulation, and assigning
-emotional significance to sensory information.
+The amygdala is a collection of interconnected nuclei within the
+medial temporal lobe. It is part of the limbic system and integrates
+sensory information with emotional and behavioral responses.
 
 <br><br>
 
-اللوزة الدماغية هي مجموعة مزدوجة من النوى تقع عميقاً في الفصين
-الصدغيين الإنسيين. وتشارك بشكل كبير في التعلم العاطفي ومعالجة
-الخوف والتهديد وتعديل الذاكرة وإعطاء المعلومات الحسية أهمية عاطفية.
+اللوزة الدماغية هي مجموعة من النوى المترابطة الموجودة داخل الفص
+الصدغي الإنسي. وهي جزء من الجهاز الحوفي وتعمل على دمج المعلومات
+الحسية مع الاستجابات العاطفية والسلوكية.
 
 </p>
 
-
 <div class="cards">
-
 
 <div class="card">
 
@@ -1321,61 +915,77 @@ Location · الموقع
 
 <p>
 
-The amygdala lies deep in the anterior medial temporal lobe,
-anterior to the hippocampus and close to the temporal horn of the
-lateral ventricle.
+The amygdala lies in the anterior medial temporal lobe, close to the
+hippocampus and temporal horn of the lateral ventricle.
 
 <br><br>
 
-تقع اللوزة الدماغية عميقاً في الجزء الأمامي من الفص الصدغي الإنسي،
-أمام الحُصين وقريبة من القرن الصدغي للبطين الجانبي.
+تقع اللوزة الدماغية في الجزء الأمامي من الفص الصدغي الإنسي، بالقرب
+من الحُصين والقرن الصدغي للبطين الجانبي.
 
 </p>
 
 </div>
-
 
 <div class="card">
 
 <h3>
-Shape · الشكل
+Limbic System · الجهاز الحوفي
 </h3>
 
 <p>
 
-The name amygdala comes from the Greek word for almond because the
-structure has an approximately almond-shaped appearance.
+The amygdala is a major component of the limbic system, which is
+involved in emotion, motivation, learning, and memory.
 
 <br><br>
 
-اشتُق اسم اللوزة الدماغية من الكلمة اليونانية التي تعني اللوزة،
-وذلك بسبب شكلها الذي يشبه حبة اللوز تقريباً.
+تُعد اللوزة الدماغية مكوّناً رئيسياً من الجهاز الحوفي، الذي يشارك
+في العاطفة والدافعية والتعلم والذاكرة.
 
 </p>
 
 </div>
-
 
 <div class="card">
 
 <h3>
-Basolateral Complex · المجموعة القاعدية الوحشية
+Fear Processing · معالجة الخوف
 </h3>
 
 <p>
 
-The basolateral complex receives substantial sensory information and
-helps associate sensory experiences with emotional significance.
+The amygdala helps detect emotionally significant or threatening
+stimuli and contributes to learned fear responses.
 
 <br><br>
 
-تستقبل المجموعة القاعدية الوحشية معلومات حسية مهمة وتساعد على ربط
-التجارب الحسية بالأهمية العاطفية.
+تساعد اللوزة الدماغية على اكتشاف المنبهات المهمة عاطفياً أو
+التهديدية وتشارك في الاستجابات المكتسبة للخوف.
 
 </p>
 
 </div>
 
+<div class="card">
+
+<h3>
+Basolateral Complex · المركب القاعدي الوحشي
+</h3>
+
+<p>
+
+The basolateral amygdala receives substantial sensory information
+and helps associate environmental cues with emotional significance.
+
+<br><br>
+
+يستقبل المركب القاعدي الوحشي في اللوزة الدماغية كمية كبيرة من
+المعلومات الحسية ويساعد على ربط الإشارات البيئية بالأهمية العاطفية.
+
+</p>
+
+</div>
 
 <div class="card">
 
@@ -1385,61 +995,19 @@ Central Nucleus · النواة المركزية
 
 <p>
 
-The central nucleus is an important output region of the amygdala and
-participates in coordinating autonomic and behavioral responses.
+The central nucleus is an important output region of the amygdala
+and communicates with brainstem and hypothalamic systems involved in
+autonomic and behavioral responses.
 
 <br><br>
 
-تُعد النواة المركزية منطقة إخراج مهمة في اللوزة الدماغية وتشارك في
-تنسيق الاستجابات اللاإرادية والسلوكية.
+تُعد النواة المركزية منطقة إخراج مهمة في اللوزة الدماغية وتتواصل
+مع أنظمة جذع الدماغ وتحت المهاد المشاركة في الاستجابات اللاإرادية
+والسلوكية.
 
 </p>
 
 </div>
-
-
-<div class="card">
-
-<h3>
-Emotion · العاطفة
-</h3>
-
-<p>
-
-The amygdala contributes to the processing of emotionally important
-stimuli, including signals associated with threat and safety.
-
-<br><br>
-
-تساهم اللوزة الدماغية في معالجة المنبهات ذات الأهمية العاطفية،
-بما في ذلك الإشارات المرتبطة بالتهديد والأمان.
-
-</p>
-
-</div>
-
-
-<div class="card">
-
-<h3>
-Fear Learning · تعلم الخوف
-</h3>
-
-<p>
-
-The amygdala is an important component of fear-conditioning circuits,
-helping organisms learn that particular cues predict significant
-events.
-
-<br><br>
-
-تُعد اللوزة الدماغية جزءاً مهماً من دوائر تعلم الخوف، حيث تساعد على
-تعلم أن بعض الإشارات قد تتنبأ بأحداث مهمة.
-
-</p>
-
-</div>
-
 
 <div class="card">
 
@@ -1449,39 +1017,58 @@ Memory · الذاكرة
 
 <p>
 
-The amygdala interacts with hippocampal and cortical systems to
-influence how emotionally significant experiences are remembered.
+The amygdala influences how emotionally significant experiences are
+encoded and remembered, interacting closely with the hippocampus.
 
 <br><br>
 
-تتفاعل اللوزة الدماغية مع الحُصين والقشرة الدماغية للتأثير في كيفية
-تذكر التجارب ذات الأهمية العاطفية.
+تؤثر اللوزة الدماغية في كيفية ترميز الخبرات ذات الأهمية العاطفية
+وتذكرها، وتتفاعل بشكل وثيق مع الحُصين.
 
 </p>
 
 </div>
-
 
 <div class="card">
 
 <h3>
-Hippocampal Connection · الاتصال بالحُصين
+Amygdala & Hippocampus · اللوزة والحُصين
 </h3>
 
 <p>
 
-The amygdala and hippocampus are anatomically and functionally
-connected, allowing emotional significance to influence memory.
+The amygdala and hippocampus work together during emotional memory,
+allowing experiences to acquire both contextual and emotional
+significance.
 
 <br><br>
 
-ترتبط اللوزة الدماغية والحُصين تشريحياً ووظيفياً، مما يسمح للأهمية
-العاطفية بالتأثير في الذاكرة.
+تعمل اللوزة الدماغية والحُصين معاً أثناء الذاكرة العاطفية، مما
+يسمح للخبرات باكتساب أهمية سياقية وعاطفية.
 
 </p>
 
 </div>
 
+<div class="card">
+
+<h3>
+Hypothalamic Connections · الاتصالات مع تحت المهاد
+</h3>
+
+<p>
+
+Amygdala pathways communicate with the hypothalamus and contribute
+to autonomic and endocrine components of emotional responses.
+
+<br><br>
+
+تتواصل مسارات اللوزة الدماغية مع تحت المهاد وتساهم في المكونات
+اللاإرادية والغدية للاستجابات العاطفية.
+
+</p>
+
+</div>
 
 <div class="card">
 
@@ -1492,60 +1079,57 @@ Prefrontal Connections · الاتصالات الجبهية
 <p>
 
 Connections with prefrontal regions help regulate and interpret
-emotional responses rather than simply generating them.
+emotional responses, contributing to flexible behavioral control.
 
 <br><br>
 
-تساعد الاتصالات مع مناطق الفص الجبهي على تنظيم الاستجابات العاطفية
-وتفسيرها، وليس فقط توليدها.
+تساعد الاتصالات مع المناطق الجبهية على تنظيم وتفسير الاستجابات
+العاطفية والمساهمة في التحكم السلوكي المرن.
 
 </p>
 
 </div>
-
 
 <div class="card">
 
 <h3>
-Bilateral Structure · بنية مزدوجة
+Temporal Lobe · الفص الصدغي
 </h3>
 
 <p>
 
-There is an amygdala in each cerebral hemisphere. The two structures
-are positioned in corresponding regions of the medial temporal lobes.
+Because the amygdala lies within the medial temporal lobe, its
+activity is closely integrated with systems responsible for memory
+and perception.
 
 <br><br>
 
-توجد لوزة دماغية في كل نصف من نصفي الكرة المخية، وتقع البنيتان في
-مناطق متناظرة من الفصين الصدغيين الإنسيين.
+نظراً لوجود اللوزة الدماغية داخل الفص الصدغي الإنسي، فإن نشاطها
+مرتبط بشكل وثيق بالأنظمة المسؤولة عن الذاكرة والإدراك.
 
 </p>
 
 </div>
-
 
 <div class="card">
 
 <h3>
-Amygdala & Stress · اللوزة والتوتر
+Emotion · العاطفة
 </h3>
 
 <p>
 
-Amygdala activity can influence autonomic and hormonal stress
-responses through connections with hypothalamic and brainstem
-systems.
+The amygdala participates in processing emotional relevance rather
+than simply generating one single emotion.
 
 <br><br>
 
-يمكن لنشاط اللوزة الدماغية أن يؤثر في الاستجابات اللاإرادية
-والهرمونية للتوتر من خلال اتصالاتها مع الوطاء وجذع الدماغ.
+تشارك اللوزة الدماغية في معالجة الأهمية العاطفية للمعلومات، وليس
+في توليد عاطفة واحدة فقط.
 
 </p>
 
 </div>
-
 
 <div class="card">
 
@@ -1555,52 +1139,47 @@ Clinical Relevance · الأهمية السريرية
 
 <p>
 
-Amygdala circuitry is studied in conditions involving emotion,
-anxiety, trauma, memory, and social processing.
+Changes affecting the amygdala can be associated with alterations in
+emotional processing, learning, memory, and responses to stress.
 
 <br><br>
 
-تُدرس دوائر اللوزة الدماغية في الحالات التي تتضمن العاطفة والقلق
-والصدمة والذاكرة والمعالجة الاجتماعية.
+يمكن أن ترتبط التغيرات التي تؤثر في اللوزة الدماغية باضطرابات في
+المعالجة العاطفية والتعلم والذاكرة والاستجابة للضغط النفسي.
 
 </p>
 
 </div>
 
-
 </div>
 
-
-<!-- =========================
-     CLINICAL IMPORTANCE
-========================= -->
-
+<!-- CLINICAL -->
 <div class="clinical-section">
 
 <div class="section-label">
-  Clinical Importance · الأهمية السريرية
+Clinical Importance · الأهمية السريرية
 </div>
 
 <h2>
-  Why the Amygdala Matters
+Why the Amygdala Matters
 </h2>
 
 <div class="clinical-box">
 
 <p>
 
-The amygdala is not simply a "fear center." It is part of a broader
-network that evaluates the emotional significance of information and
-interacts with memory, attention, autonomic regulation, and decision
-making.
+The amygdala is important because it helps the brain determine the
+emotional significance of information. It interacts with memory,
+attention, hypothalamic systems, brainstem pathways, and cortical
+regions to coordinate appropriate responses.
 
 </p>
 
 <p dir="rtl">
 
-اللوزة الدماغية ليست مجرد "مركز للخوف"، بل هي جزء من شبكة أوسع تقوم
-بتقييم الأهمية العاطفية للمعلومات وتتفاعل مع الذاكرة والانتباه
-والتنظيم اللاإرادي واتخاذ القرار.
+تكتسب اللوزة الدماغية أهميتها من دورها في تحديد الأهمية العاطفية
+للمعلومات. فهي تتفاعل مع الذاكرة والانتباه وأنظمة تحت المهاد
+ومسارات جذع الدماغ والمناطق القشرية لتنسيق الاستجابات المناسبة.
 
 </p>
 
@@ -1608,23 +1187,18 @@ making.
 
 </div>
 
-
-<!-- =========================
-     QUICK FACTS
-========================= -->
-
+<!-- QUICK FACTS -->
 <div class="section">
 
 <div class="section-label">
-  Quick Facts · معلومات سريعة
+Quick Facts · معلومات سريعة
 </div>
 
 <h2>
-  Amygdala at a Glance
+Amygdala at a Glance
 </h2>
 
 <div class="facts-grid">
-
 
 <div class="fact">
 
@@ -1635,52 +1209,49 @@ Location · الموقع
 </strong>
 
 <p>
-Deep in the medial temporal lobe · عميقاً في الفص الصدغي الإنسي
+Medial temporal lobe · الفص الصدغي الإنسي
 </p>
 
 </div>
-
 
 <div class="fact">
 
 <span>02</span>
 
 <strong>
-Shape · الشكل
+System · الجهاز
 </strong>
 
 <p>
-Approximately almond-shaped · تشبه حبة اللوز تقريباً
+Limbic system · الجهاز الحوفي
 </p>
 
 </div>
-
 
 <div class="fact">
 
 <span>03</span>
 
 <strong>
-Structure · البنية
+Major Role · الدور الرئيسي
 </strong>
 
 <p>
-Paired structure · بنية مزدوجة في نصفي الدماغ
+Emotional processing and learning · معالجة العاطفة والتعلم
 </p>
 
 </div>
-
 
 <div class="fact">
 
 <span>04</span>
 
 <strong>
-Function · الوظيفة
+Key Partner · الشريك الرئيسي
 </strong>
 
 <p>
-Emotion, learning and memory · العاطفة والتعلم والذاكرة
+Hippocampus · الحُصين
 </p>
 
 </div>
@@ -1689,25 +1260,22 @@ Emotion, learning and memory · العاطفة والتعلم والذاكرة
 
 </div>
 
-
-<!-- =========================
-     QUIZ
-========================= -->
-
-<div id="quiz" class="quiz">
+<!-- QUIZ -->
+<div
+id="quiz"
+class="quiz">
 
 <div class="section-label">
-  Mini Test
+Mini Test
 </div>
 
 <h2>
-  🧠 Test Yourself
+🧠 Test Yourself
 </h2>
 
 <p class="quiz-intro">
-  Choose the best answer for each question.
+Choose the best answer for each question.
 </p>
-
 
 <div class="question">
 
@@ -1716,111 +1284,99 @@ Emotion, learning and memory · العاطفة والتعلم والذاكرة
 </p>
 
 <button
-  class="option"
-  onclick="checkAnswer(this,false)"
->
-  A. On the surface of the frontal lobe
+class="option"
+onclick="checkAnswer(this,true)">
+A. Medial temporal lobe
 </button>
 
 <button
-  class="option"
-  onclick="checkAnswer(this,true)"
->
-  B. Deep within the medial temporal lobe
+class="option"
+onclick="checkAnswer(this,false)">
+B. Primary motor cortex
 </button>
 
 <button
-  class="option"
-  onclick="checkAnswer(this,false)"
->
-  C. Inside the cerebellum
+class="option"
+onclick="checkAnswer(this,false)">
+C. Occipital pole
 </button>
 
 <button
-  class="option"
-  onclick="checkAnswer(this,false)"
->
-  D. In the spinal cord
+class="option"
+onclick="checkAnswer(this,false)">
+D. Cerebellar hemisphere
 </button>
 
 </div>
-
 
 <div class="question">
 
 <p>
-2. The amygdala is particularly associated with which function?
+2. The amygdala is strongly associated with which system?
 </p>
 
 <button
-  class="option"
-  onclick="checkAnswer(this,false)"
->
-  A. Primary motor control
+class="option"
+onclick="checkAnswer(this,false)">
+A. Vestibular system
 </button>
 
 <button
-  class="option"
-  onclick="checkAnswer(this,true)"
->
-  B. Emotional processing and learning
+class="option"
+onclick="checkAnswer(this,true)">
+B. Limbic system
 </button>
 
 <button
-  class="option"
-  onclick="checkAnswer(this,false)"
->
-  C. Hearing only
+class="option"
+onclick="checkAnswer(this,false)">
+C. Somatic motor system
 </button>
 
 <button
-  class="option"
-  onclick="checkAnswer(this,false)"
->
-  D. Spinal reflexes
+class="option"
+onclick="checkAnswer(this,false)">
+D. Visual system only
 </button>
 
 </div>
-
 
 <div class="question">
 
 <p>
-3. Why is the amygdala difficult to see from the outside of the brain?
+3. Which structure works closely with the amygdala during emotional memory?
 </p>
 
 <button
-  class="option"
-  onclick="checkAnswer(this,false)"
->
-  A. It is located above the skull
+class="option"
+onclick="checkAnswer(this,true)">
+A. Hippocampus
 </button>
 
 <button
-  class="option"
-  onclick="checkAnswer(this,true)"
->
-  B. It lies deep inside the medial temporal lobe
+class="option"
+onclick="checkAnswer(this,false)">
+B. Medulla
 </button>
 
 <button
-  class="option"
-  onclick="checkAnswer(this,false)"
->
-  C. It is part of the spinal cord
+class="option"
+onclick="checkAnswer(this,false)">
+C. Primary visual cortex
 </button>
 
 <button
-  class="option"
-  onclick="checkAnswer(this,false)"
->
-  D. It only exists during childhood
+class="option"
+onclick="checkAnswer(this,false)">
+D. Cerebellum
 </button>
 
 </div>
 
-
-<div id="quizResult" class="quiz-result"></div>
+<div
+id="quizResult"
+class="quiz-result">
+</div>
 
 </div>
 
@@ -1828,11 +1384,7 @@ Emotion, learning and memory · العاطفة والتعلم والذاكرة
 
 </main>
 
-
-<!-- =========================
-     THREE.JS IMPORT MAP
-========================= -->
-
+<!-- THREE.JS -->
 <script type="importmap">
 {
   "imports": {
@@ -1841,7 +1393,6 @@ Emotion, learning and memory · العاطفة والتعلم والذاكرة
   }
 }
 </script>
-
 
 <script type="module">
 
@@ -1860,9 +1411,7 @@ import {
 } from "three/addons/loaders/DRACOLoader.js";
 
 
-/* =========================================================
-   ELEMENTS
-========================================================= */
+/* ELEMENTS */
 
 const canvas =
   document.getElementById("brainCanvas");
@@ -1880,36 +1429,30 @@ const amygdalaLabel =
   document.getElementById("amygdalaLabel");
 
 
-/* =========================================================
-   SCENE
-========================================================= */
+/* SCENE */
 
 const scene =
   new THREE.Scene();
 
 
-/* =========================================================
-   CAMERA
-========================================================= */
+/* CAMERA */
 
 const camera =
   new THREE.PerspectiveCamera(
-    32,
+    30,
     1,
     0.01,
     100
   );
 
 camera.position.set(
-  4.8,
-  0.45,
-  8.8
+  3.2,
+  0.3,
+  8.5
 );
 
 
-/* =========================================================
-   RENDERER
-========================================================= */
+/* RENDERER */
 
 const renderer =
   new THREE.WebGLRenderer({
@@ -1929,12 +1472,10 @@ renderer.toneMapping =
   THREE.ACESFilmicToneMapping;
 
 renderer.toneMappingExposure =
-  0.9;
+  0.75;
 
 
-/* =========================================================
-   CONTROLS
-========================================================= */
+/* CONTROLS */
 
 const controls =
   new OrbitControls(
@@ -1943,104 +1484,76 @@ const controls =
   );
 
 controls.enableRotate = true;
-
-controls.rotateSpeed = 0.55;
-
+controls.rotateSpeed = 0.6;
 controls.enableDamping = true;
-
-controls.dampingFactor = 0.055;
+controls.dampingFactor = 0.05;
 
 controls.enableZoom = true;
-
-controls.zoomSpeed = 0.65;
+controls.zoomSpeed = 0.6;
 
 controls.enablePan = false;
 
 controls.autoRotate = true;
-
-controls.autoRotateSpeed = 0.22;
+controls.autoRotateSpeed = 0.2;
 
 controls.target.set(
   0,
-  -0.2,
+  -0.3,
   0
 );
 
 controls.minDistance = 3.5;
+controls.maxDistance = 16;
 
-controls.maxDistance = 15;
 
-
-/* =========================================================
-   LIGHTING
-========================================================= */
+/* LIGHTING */
 
 scene.add(
   new THREE.AmbientLight(
     0xffffff,
-    0.65
+    0.55
   )
 );
 
-
 const hemi =
   new THREE.HemisphereLight(
-    0xffe4ee,
-    0x07101b,
-    1.0
+    0xffdce6,
+    0x081018,
+    0.75
   );
 
 scene.add(hemi);
 
-
 const keyLight =
   new THREE.DirectionalLight(
-    0xfff3f5,
-    1.7
+    0xfff5f0,
+    1.4
   );
 
 keyLight.position.set(
   6,
-  9,
+  10,
   8
 );
 
 scene.add(keyLight);
 
-
 const fillLight =
   new THREE.DirectionalLight(
-    0x9ebcff,
-    0.55
+    0x8ca9bd,
+    0.4
   );
 
 fillLight.position.set(
   -7,
-  3,
+  2,
   6
 );
 
 scene.add(fillLight);
 
 
-const rimLight =
-  new THREE.DirectionalLight(
-    0xd28cff,
-    0.65
-  );
-
-rimLight.position.set(
-  0,
-  -2,
-  -8
-);
-
-scene.add(rimLight);
-
-
-/* =========================================================
-   BRAIN GROUP
-========================================================= */
+/* BRAIN GROUP */
 
 const brainGroup =
   new THREE.Group();
@@ -2048,613 +1561,191 @@ const brainGroup =
 scene.add(brainGroup);
 
 
-/* =========================================================
-   AMYGDALA GROUP
-========================================================= */
+/*
+  IMPORTANT:
 
-const amygdalaGroup =
-  new THREE.Group();
+  No artificial amygdala object is created.
 
-brainGroup.add(
-  amygdalaGroup
-);
+  The code searches the ACTUAL loaded brain model for an existing
+  mesh whose name indicates that it is the amygdala.
 
+  If such a mesh exists, that real mesh is highlighted.
 
-/* =========================================================
-   COLORS
-========================================================= */
+  If the model does not contain an amygdala mesh, nothing artificial
+  is added to the brain.
+*/
 
-const brainColor =
-  new THREE.Color(
-    0xf0c5d1
-  );
+let amygdalaMeshes = [];
 
-const amygdalaVisibleColor =
-  new THREE.Color(
-    0xe879ff
-  );
-
-const amygdalaBlendColor =
-  new THREE.Color(
-    0xe5bdca
-  );
+let highlighted = true;
 
 
-/* =========================================================
-   BRAIN MATERIAL
-========================================================= */
+/* BABY PINK BRAIN */
 
-const brainMaterial =
+const brainPinkColor =
+  0xf1c5d0;
+
+const brainPinkMaterial =
   new THREE.MeshPhysicalMaterial({
-
-    color:brainColor,
-
-    roughness:0.64,
-
-    metalness:0.0,
-
-    clearcoat:0.15,
-
-    clearcoatRoughness:0.45,
-
+    color:brainPinkColor,
+    roughness:0.62,
+    metalness:0,
+    clearcoat:0.12,
+    clearcoatRoughness:0.5,
     side:THREE.DoubleSide
-
   });
 
 
-/* =========================================================
-   AMYGDALA MATERIAL
-========================================================= */
+/* AMYGDALA HIGHLIGHT */
+
+const amygdalaHighlightColor =
+  new THREE.Color(0xff4d5e);
+
+const amygdalaNormalColor =
+  new THREE.Color(brainPinkColor);
 
 const amygdalaMaterial =
   new THREE.MeshPhysicalMaterial({
 
     color:
-      amygdalaVisibleColor.clone(),
+      amygdalaHighlightColor.clone(),
 
-    roughness:0.28,
+    roughness:0.3,
 
-    metalness:0.02,
+    metalness:0.05,
 
-    clearcoat:0.8,
+    clearcoat:0.6,
 
-    clearcoatRoughness:0.15,
+    clearcoatRoughness:0.2,
 
-    emissive:
-      new THREE.Color(
-        0x7c2bb0
-      ),
+    emissive:0x55151d,
 
-    emissiveIntensity:0.75,
+    emissiveIntensity:0.35,
 
     side:THREE.DoubleSide
-
   });
 
 
-/* =========================================================
-   AMYGDALA GLOW
-========================================================= */
+/*
+  We keep references to the original materials so that the
+  existing model mesh can return to its original appearance.
+*/
 
-const amygdalaGlowMaterial =
-  new THREE.MeshBasicMaterial({
-
-    color:0xd46cff,
-
-    transparent:true,
-
-    opacity:0.22,
-
-    blending:
-      THREE.AdditiveBlending,
-
-    depthWrite:false,
-
-    side:THREE.DoubleSide
-
-  });
+const originalMaterials =
+  new Map();
 
 
-/* =========================================================
-   STATE
-========================================================= */
+/* FIND AMYGDALA MESH */
 
-let amygdalaVisible =
-  true;
+function isAmygdalaName(name){
 
-let leftAmygdala =
-  null;
+  const value =
+    String(name || "")
+      .toLowerCase()
+      .replace(/[-_]/g," ");
 
-let rightAmygdala =
-  null;
+  const keywords = [
 
-let leftGlow =
-  null;
+    "amygdala",
 
-let rightGlow =
-  null;
+    "amygdaloid",
 
-let modelLoaded =
-  false;
+    "amygdaloid body",
 
+    "amygdala left",
 
-/* =========================================================
-   CREATE ONE AMYGDALA
-========================================================= */
+    "amygdala right",
 
-function createAmygdala(
-  side
-){
+    "left amygdala",
 
-  /*
-    Important:
+    "right amygdala",
 
-    These coordinates are deliberately SMALL and placed
-    inside the brain volume.
+    "amygdal"
 
-    They are not attached to the outside surface.
+  ];
 
-    Left and right are mirrored around the midline.
-  */
-
-  const x =
-    side === "left"
-      ? -0.72
-      : 0.72;
-
-  const y =
-    -0.35;
-
-  const z =
-    -0.48;
-
-
-  /*
-    Main almond-shaped body.
-  */
-
-  const geometry =
-    new THREE.SphereGeometry(
-      1,
-      40,
-      24
-    );
-
-
-  const mesh =
-    new THREE.Mesh(
-      geometry,
-      amygdalaMaterial
-    );
-
-
-  /*
-    Flatten the sphere into an
-    almond-like medial-temporal shape.
-  */
-
-  mesh.scale.set(
-    0.34,
-    0.25,
-    0.46
+  return keywords.some(
+    keyword =>
+      value.includes(keyword)
   );
-
-
-  /*
-    Slight rotation gives it a
-    more organic anatomical appearance.
-  */
-
-  mesh.rotation.z =
-    side === "left"
-      ? -0.18
-      : 0.18;
-
-
-  mesh.position.set(
-    x,
-    y,
-    z
-  );
-
-
-  /*
-    Subtle secondary lobe creates
-    a more organic amygdala silhouette.
-  */
-
-  const secondaryGeometry =
-    new THREE.SphereGeometry(
-      1,
-      32,
-      20
-    );
-
-
-  const secondary =
-    new THREE.Mesh(
-      secondaryGeometry,
-      amygdalaMaterial
-    );
-
-
-  secondary.scale.set(
-    0.24,
-    0.19,
-    0.30
-  );
-
-
-  secondary.position.set(
-    side === "left"
-      ? x - 0.18
-      : x + 0.18,
-
-    y + 0.015,
-
-    z + 0.08
-  );
-
-
-  secondary.rotation.z =
-    side === "left"
-      ? -0.25
-      : 0.25;
-
-
-  /*
-    Glow shell.
-  */
-
-  const glow =
-    new THREE.Mesh(
-      new THREE.SphereGeometry(
-        1.05,
-        32,
-        20
-      ),
-      amygdalaGlowMaterial
-    );
-
-
-  glow.scale.set(
-    0.40,
-    0.30,
-    0.53
-  );
-
-
-  glow.position.set(
-    x,
-    y,
-    z
-  );
-
-
-  glow.visible =
-    amygdalaVisible;
-
-
-  mesh.visible = true;
-
-  secondary.visible = true;
-
-
-  const group =
-    new THREE.Group();
-
-  group.add(mesh);
-
-  group.add(secondary);
-
-  group.add(glow);
-
-  amygdalaGroup.add(group);
-
-
-  return {
-    group,
-    mesh,
-    secondary,
-    glow
-  };
 }
 
 
-/* =========================================================
-   CREATE AMYGDALAE
-========================================================= */
+/* APPLY BRAIN MATERIAL */
 
-function createAmygdalae(){
+function applyBrainMaterial(mesh){
 
-  /*
-    Clear previous structures if a
-    fallback is recreated.
-  */
+  if(!mesh.material){
+    return;
+  }
 
-  while(
-    amygdalaGroup.children.length
-  ){
+  if(!originalMaterials.has(mesh)){
+    originalMaterials.set(
+      mesh,
+      mesh.material
+    );
+  }
 
-    const child =
-      amygdalaGroup.children.pop();
+  mesh.material =
+    brainPinkMaterial.clone();
+}
 
-    child.traverse(
-      object => {
 
-        if(
-          object.geometry
-        ){
-          object.geometry.dispose();
+/* HIGHLIGHT EXISTING AMYGDALA */
+
+function applyAmygdalaHighlight(){
+
+  amygdalaMeshes.forEach(
+    mesh => {
+
+      if(highlighted){
+
+        mesh.material =
+          amygdalaMaterial;
+
+      }else{
+
+        const original =
+          originalMaterials.get(mesh);
+
+        if(original){
+
+          mesh.material =
+            original;
+
+        }else{
+
+          mesh.material =
+            brainPinkMaterial.clone();
+
         }
 
       }
-    );
 
-  }
-
-
-  const left =
-    createAmygdala("left");
-
-  const right =
-    createAmygdala("right");
-
-
-  leftAmygdala =
-    left;
-
-  rightAmygdala =
-    right;
-
-
-  /*
-    Keep the amygdalae inside the brain.
-  */
-
-  amygdalaGroup.position.set(
-    0,
-    0,
-    0
+    }
   );
 
+  amygdalaLabel.classList.toggle(
+    "show",
+    highlighted &&
+    amygdalaMeshes.length > 0
+  );
 }
 
 
-/* =========================================================
-   FALLBACK BRAIN
-========================================================= */
-
-function createFallbackBrain(){
-
-  /*
-    This fallback is deliberately brain-like
-    and encloses the amygdala.
-
-    The amygdala is positioned within
-    this volume rather than outside it.
-  */
-
-  const brain =
-    new THREE.Group();
-
-
-  /*
-    Main cerebrum.
-  */
-
-  const cerebrumGeometry =
-    new THREE.SphereGeometry(
-      2.15,
-      64,
-      48
-    );
-
-
-  const cerebrum =
-    new THREE.Mesh(
-      cerebrumGeometry,
-      brainMaterial
-    );
-
-
-  cerebrum.scale.set(
-    1.30,
-    0.92,
-    1.02
-  );
-
-
-  cerebrum.position.y =
-    0.05;
-
-
-  brain.add(cerebrum);
-
-
-  /*
-    Left temporal lobe.
-  */
-
-  const temporalGeometry =
-    new THREE.SphereGeometry(
-      1,
-      48,
-      32
-    );
-
-
-  const leftTemporal =
-    new THREE.Mesh(
-      temporalGeometry,
-      brainMaterial
-    );
-
-
-  leftTemporal.scale.set(
-    0.95,
-    0.55,
-    1.20
-  );
-
-
-  leftTemporal.position.set(
-    -1.45,
-    -0.65,
-    -0.05
-  );
-
-
-  brain.add(leftTemporal);
-
-
-  /*
-    Right temporal lobe.
-  */
-
-  const rightTemporal =
-    new THREE.Mesh(
-      temporalGeometry.clone(),
-      brainMaterial
-    );
-
-
-  rightTemporal.scale.set(
-    0.95,
-    0.55,
-    1.20
-  );
-
-
-  rightTemporal.position.set(
-    1.45,
-    -0.65,
-    -0.05
-  );
-
-
-  brain.add(rightTemporal);
-
-
-  /*
-    Cerebellum.
-  */
-
-  const cerebellum =
-    new THREE.Mesh(
-      new THREE.SphereGeometry(
-        1,
-        48,
-        32
-      ),
-      brainMaterial
-    );
-
-
-  cerebellum.scale.set(
-    0.95,
-    0.55,
-    0.65
-  );
-
-
-  cerebellum.position.set(
-    0,
-    -1.35,
-    -0.65
-  );
-
-
-  brain.add(cerebellum);
-
-
-  /*
-    Brainstem.
-  */
-
-  const brainstem =
-    new THREE.Mesh(
-      new THREE.CapsuleGeometry(
-        0.28,
-        1.15,
-        16,
-        24
-      ),
-      brainMaterial
-    );
-
-
-  brainstem.position.set(
-    0,
-    -1.15,
-    -0.35
-  );
-
-
-  brainstem.rotation.x =
-    Math.PI / 2;
-
-
-  brain.add(brainstem);
-
-
-  /*
-    Central longitudinal groove.
-  */
-
-  const grooveMaterial =
-    new THREE.MeshBasicMaterial({
-      color:0x9b6d7b,
-      transparent:true,
-      opacity:.16
-    });
-
-
-  const groove =
-    new THREE.Mesh(
-      new THREE.BoxGeometry(
-        0.045,
-        2.5,
-        1.5
-      ),
-      grooveMaterial
-    );
-
-
-  groove.position.y =
-    0.1;
-
-
-  brain.add(groove);
-
-
-  brainGroup.add(brain);
-
-
-  modelLoaded =
-    true;
-
-}
-
-
-/* =========================================================
-   LOAD REAL BRAIN
-========================================================= */
+/* LOAD REAL BRAIN */
 
 function loadRealBrain(){
 
   const loader =
     new GLTFLoader();
 
-
   const dracoLoader =
     new DRACOLoader();
-
 
   dracoLoader.setDecoderPath(
     "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/"
   );
-
 
   loader.setDRACOLoader(
     dracoLoader
@@ -2662,7 +1753,7 @@ function loadRealBrain(){
 
 
   /*
-    Several fallback URLs.
+    Same brain model sources as the original version.
   */
 
   const urls = [
@@ -2676,108 +1767,94 @@ function loadRealBrain(){
   ];
 
 
-  let index = 0;
+  let urlIndex = 0;
 
 
-  function tryNext(){
+  function tryLoad(){
 
-    if(index >= urls.length){
-
-      /*
-        If the external model cannot load,
-        use the built-in brain.
-
-        This guarantees the 3D component
-        remains functional.
-      */
+    if(urlIndex >= urls.length){
 
       loadText.textContent =
-        "Building interactive brain...";
-
-      createFallbackBrain();
+        "Brain model could not be loaded.";
 
       loadBar.style.width =
         "100%";
 
-      finishLoading();
+      setTimeout(
+        () => loading.classList.add("hide"),
+        700
+      );
 
       return;
     }
 
 
     const url =
-      urls[index++];
-
+      urls[urlIndex++];
 
     loadText.textContent =
-      "Loading 3D brain...";
+      "Loading real brain model...";
 
 
     loader.load(
 
       url,
 
-      gltf => {
+      function(gltf){
 
         const model =
           gltf.scene;
 
 
         /*
-          Measure model.
+          Normalize model size.
         */
 
         const box =
           new THREE.Box3()
             .setFromObject(model);
 
-
         const center =
           box.getCenter(
             new THREE.Vector3()
           );
-
 
         const size =
           box.getSize(
             new THREE.Vector3()
           );
 
-
-        const maxDimension =
+        const maxDim =
           Math.max(
             size.x,
             size.y,
             size.z
           );
 
-
         const scale =
-          4.2 / maxDimension;
+          4.5 / maxDim;
 
 
         model.scale.setScalar(
           scale
         );
 
-
         model.position.sub(
-          center.multiplyScalar(
-            scale
-          )
+          center.multiplyScalar(scale)
         );
 
-
         model.position.y -=
-          0.35;
+          0.60;
 
 
         /*
-          Recolor the actual brain.
+          Inspect every existing mesh.
+
+          Nothing is generated here.
         */
 
         model.traverse(
-          child => {
+          function(child){
 
             if(!child.isMesh){
               return;
@@ -2791,64 +1868,127 @@ function loadRealBrain(){
               true;
 
 
+            const name =
+              child.name || "";
+
+
             /*
-              Replace materials with
-              the beautiful pink brain material.
+              If this is an existing amygdala mesh,
+              preserve it and highlight it.
             */
 
-            child.material =
-              brainMaterial.clone();
+            if(
+              isAmygdalaName(name)
+            ){
+
+              amygdalaMeshes.push(
+                child
+              );
+
+              if(!originalMaterials.has(child)){
+
+                originalMaterials.set(
+                  child,
+                  child.material
+                );
+
+              }
+
+              child.material =
+                amygdalaMaterial;
+
+              return;
+            }
+
+
+            /*
+              Everything else remains the brain.
+
+              No vessels are deleted.
+              No additional anatomy is generated.
+            */
+
+            applyBrainMaterial(
+              child
+            );
 
           }
         );
 
+
+        /*
+          Add ONLY the downloaded model.
+          No fallback amygdala sphere,
+          tube,
+          mesh,
+          or marker is created.
+        */
 
         brainGroup.add(
           model
         );
 
 
-        modelLoaded =
-          true;
-
-
         loadBar.style.width =
           "100%";
 
 
-        finishLoading();
+        if(
+          amygdalaMeshes.length > 0
+        ){
+
+          loadText.textContent =
+            "Amygdala identified in brain model.";
+
+        }else{
+
+          loadText.textContent =
+            "Brain model loaded.";
+
+        }
+
+
+        setTimeout(
+          function(){
+
+            loading.classList.add(
+              "hide"
+            );
+
+            applyAmygdalaHighlight();
+
+          },
+          500
+        );
 
       },
 
-      progress => {
+      function(progress){
 
         if(progress.total > 0){
 
-          const percentage =
+          const pct =
             Math.min(
               90,
-              (
-                progress.loaded /
-                progress.total
-              ) * 90
+              progress.loaded /
+              progress.total *
+              90
             );
 
-
           loadBar.style.width =
-            percentage + "%";
-
+            pct + "%";
         }
 
       },
 
-      error => {
+      function(error){
 
         console.warn(
           "Brain model failed:",
           error
         );
 
-        tryNext();
+        tryLoad();
 
       }
 
@@ -2857,157 +1997,37 @@ function loadRealBrain(){
   }
 
 
-  tryNext();
+  tryLoad();
 
 }
 
 
-/* =========================================================
-   FINISH LOADING
-========================================================= */
-
-function finishLoading(){
-
-  setTimeout(
-    () => {
-
-      loading.classList.add(
-        "hide"
-      );
-
-
-      if(amygdalaVisible){
-
-        amygdalaLabel.classList.add(
-          "show"
-        );
-
-      }
-
-    },
-    450
-  );
-
-}
-
-
-/* =========================================================
-   AMYGDALA VISUAL STATE
-========================================================= */
-
-function updateAmygdalaAppearance(){
-
-  if(!leftAmygdala ||
-     !rightAmygdala){
-
-    return;
-  }
-
-
-  const visible =
-    amygdalaVisible;
-
-
-  /*
-    Bright purple/pink when ON.
-  */
-
-  amygdalaMaterial.color.copy(
-    visible
-      ? amygdalaVisibleColor
-      : amygdalaBlendColor
-  );
-
-
-  amygdalaMaterial.emissive.set(
-    visible
-      ? 0x7c2bb0
-      : 0x000000
-  );
-
-
-  amygdalaMaterial.emissiveIntensity =
-    visible
-      ? 0.75
-      : 0;
-
-
-  /*
-    Glow is only visible when
-    highlighting is enabled.
-  */
-
-  leftAmygdala.glow.visible =
-    visible;
-
-  rightAmygdala.glow.visible =
-    visible;
-
-
-  /*
-    Keep the actual structures present.
-
-    When disabled they blend with
-    the brain instead of jumping outside
-    or disappearing from the model.
-  */
-
-  leftAmygdala.mesh.visible =
-    true;
-
-  rightAmygdala.mesh.visible =
-    true;
-
-  leftAmygdala.secondary.visible =
-    true;
-
-  rightAmygdala.secondary.visible =
-    true;
-
-
-  amygdalaLabel.classList.toggle(
-    "show",
-    visible
-  );
-
-}
-
-
-/* =========================================================
-   LABEL POSITION
-========================================================= */
+/* LABEL POSITION */
 
 function updateLabel(){
 
   if(
-    !amygdalaVisible ||
-    !leftAmygdala
+    amygdalaMeshes.length === 0 ||
+    !highlighted
   ){
 
     return;
   }
 
 
-  /*
-    Put the label approximately above
-    the left amygdala in 3D space.
-  */
+  const target =
+    amygdalaMeshes[0];
+
+
+  const box =
+    new THREE.Box3()
+      .setFromObject(target);
+
 
   const position =
-    new THREE.Vector3();
-
-
-  leftAmygdala.group.getWorldPosition(
-    position
-  );
-
-
-  /*
-    Move label slightly upward.
-  */
-
-  position.y +=
-    0.42;
+    box.getCenter(
+      new THREE.Vector3()
+    );
 
 
   position.project(
@@ -3016,32 +2036,27 @@ function updateLabel(){
 
 
   const x =
-    (
-      position.x + 1
-    ) / 2 *
+    (position.x + 1) /
+    2 *
     canvas.clientWidth;
 
 
   const y =
-    (
-      -position.y + 1
-    ) / 2 *
+    (-position.y + 1) /
+    2 *
     canvas.clientHeight;
 
 
   amygdalaLabel.style.left =
     x + "px";
 
-
   amygdalaLabel.style.top =
-    y + "px";
+    (y - 45) + "px";
 
 }
 
 
-/* =========================================================
-   RESIZE
-========================================================= */
+/* RESIZE */
 
 function resize(){
 
@@ -3065,7 +2080,6 @@ function resize(){
   camera.aspect =
     width / height;
 
-
   camera.updateProjectionMatrix();
 
 
@@ -3084,9 +2098,7 @@ window.addEventListener(
 );
 
 
-/* =========================================================
-   HIGHLIGHT BUTTON
-========================================================= */
+/* HIGHLIGHT BUTTON */
 
 const highlightBtn =
   document.getElementById(
@@ -3096,33 +2108,31 @@ const highlightBtn =
 
 highlightBtn.addEventListener(
   "click",
-  () => {
+  function(){
 
-    amygdalaVisible =
-      !amygdalaVisible;
+    highlighted =
+      !highlighted;
 
 
-    updateAmygdalaAppearance();
+    applyAmygdalaHighlight();
 
 
     highlightBtn.classList.toggle(
       "active",
-      amygdalaVisible
+      highlighted
     );
 
 
     highlightBtn.textContent =
-      amygdalaVisible
-        ? "🟣 Amygdala Highlighted"
-        : "🧠 Show Amygdala";
+      highlighted
+        ? "🔴 Amygdala Highlighted"
+        : "🧠 Highlight Amygdala";
 
   }
 );
 
 
-/* =========================================================
-   AUTO ROTATE
-========================================================= */
+/* AUTO ROTATE */
 
 const rotateBtn =
   document.getElementById(
@@ -3132,7 +2142,7 @@ const rotateBtn =
 
 rotateBtn.addEventListener(
   "click",
-  () => {
+  function(){
 
     controls.autoRotate =
       !controls.autoRotate;
@@ -3153,29 +2163,25 @@ rotateBtn.addEventListener(
 );
 
 
-/* =========================================================
-   RESET
-========================================================= */
+/* RESET */
 
 document
   .getElementById("reset")
   .addEventListener(
     "click",
-    () => {
+    function(){
 
       camera.position.set(
-        4.8,
-        0.45,
-        8.8
+        3.2,
+        0.3,
+        8.5
       );
-
 
       controls.target.set(
         0,
-        -0.2,
+        -0.3,
         0
       );
-
 
       controls.update();
 
@@ -3183,9 +2189,7 @@ document
   );
 
 
-/* =========================================================
-   ANIMATION
-========================================================= */
+/* ANIMATION */
 
 function animate(){
 
@@ -3193,12 +2197,9 @@ function animate(){
     animate
   );
 
-
   controls.update();
 
-
   updateLabel();
-
 
   renderer.render(
     scene,
@@ -3208,15 +2209,9 @@ function animate(){
 }
 
 
-/* =========================================================
-   START
-========================================================= */
+/* START */
 
 resize();
-
-createAmygdalae();
-
-updateAmygdalaAppearance();
 
 animate();
 
@@ -3225,9 +2220,7 @@ loadRealBrain();
 </script>
 
 
-<!-- =========================
-     QUIZ JAVASCRIPT
-========================= -->
+<!-- QUIZ JAVASCRIPT -->
 
 <script>
 
@@ -3239,7 +2232,6 @@ function checkAnswer(
   const parent =
     button.parentElement;
 
-
   const options =
     parent.querySelectorAll(
       ".option"
@@ -3247,7 +2239,7 @@ function checkAnswer(
 
 
   options.forEach(
-    option => {
+    function(option){
 
       option.classList.remove(
         "correct",
@@ -3292,11 +2284,9 @@ function updateQuizScore(){
 
 
   document
-    .querySelectorAll(
-      ".question"
-    )
+    .querySelectorAll(".question")
     .forEach(
-      question => {
+      function(question){
 
         const selected =
           question.querySelector(
