@@ -1,756 +1,649 @@
+<!-- /cerebellar-cortex.html -->
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>NeuroAtlas | Cerebellar Cortex</title>
 
 <style>
+*{box-sizing:border-box;margin:0;padding:0}
 
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-html{
-    scroll-behavior:smooth;
-}
+html{scroll-behavior:smooth}
 
 body{
-    background:#050b13;
-    color:#eef4fa;
-    font-family:Arial,Helvetica,sans-serif;
-    line-height:1.6;
+  background:#050b13;
+  color:#eef4fa;
+  font-family:Arial,Helvetica,sans-serif;
+  line-height:1.7
 }
 
-/* ================= NAV ================= */
-
 nav{
-    height:70px;
-    padding:0 7%;
-    display:flex;
-    align-items:center;
-    border-bottom:1px solid rgba(255,255,255,.08);
+  height:70px;
+  padding:0 7%;
+  display:flex;
+  align-items:center;
+  border-bottom:1px solid rgba(255,255,255,.08)
 }
 
 nav a{
-    color:#9db0c3;
-    text-decoration:none;
-    font-size:14px;
+  color:#9db0c3;
+  text-decoration:none;
+  font-size:14px
 }
 
-nav a:hover{
-    color:white;
-}
-
-/* ================= MAIN ================= */
+nav a:hover{color:#fff}
 
 .container{
-    max-width:1200px;
-    margin:auto;
-    padding:60px 7% 100px;
+  max-width:1200px;
+  margin:auto;
+  padding:60px 7% 100px
 }
 
-/* ================= HERO ================= */
-
 .eyebrow{
-    color:#61b5ff;
-    letter-spacing:3px;
-    font-size:12px;
-    text-transform:uppercase;
-    margin-bottom:15px;
+  color:#61b5ff;
+  letter-spacing:3px;
+  font-size:12px;
+  text-transform:uppercase;
+  margin-bottom:15px
 }
 
 h1{
-    font-size:clamp(55px,8vw,90px);
-    line-height:.95;
-    letter-spacing:-4px;
-    margin-bottom:12px;
+  font-size:clamp(60px,8vw,90px);
+  line-height:.95;
+  letter-spacing:-4px;
+  margin-bottom:10px
 }
 
 .arabic-title{
-    color:#fff;
-    font-size:25px;
-    margin-bottom:25px;
+  color:#ff4055;
+  font-size:24px;
+  margin-bottom:25px
 }
 
 .hero p{
-    color:#a6b6c7;
-    max-width:900px;
-    font-size:18px;
-    line-height:1.8;
+  color:#a6b6c7;
+  max-width:780px;
+  font-size:18px;
+  line-height:1.8
 }
 
-/* ================= ACTIONS ================= */
-
 .actions{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    margin-top:28px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:30px
 }
 
 .action-button{
-    padding:11px 17px;
-    border-radius:9px;
-    background:#0b1928;
-    border:1px solid #31516d;
-    color:#bdd0e0;
-    cursor:pointer;
-    text-decoration:none;
-    font-size:14px;
-    transition:.2s;
+  padding:11px 17px;
+  border-radius:9px;
+  background:#0b1928;
+  border:1px solid #31516d;
+  color:#bdd0e0;
+  text-decoration:none;
+  cursor:pointer;
+  transition:.2s
 }
 
 .action-button:hover{
-    background:#14304a;
-    color:white;
-    border-color:white;
+  background:#14304a;
+  color:#fff;
+  border-color:#61b5ff
 }
 
-/* ================= VIEWER ================= */
-
 .viewer{
-    margin-top:60px;
-    border:1px solid rgba(255,255,255,.10);
-    border-radius:24px;
-    overflow:hidden;
-    background:#02060b;
-    box-shadow:0 25px 80px rgba(0,0,0,.45);
+  margin-top:60px;
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:24px;
+  overflow:hidden;
+  background:#02060b;
+  box-shadow:0 25px 80px rgba(0,0,0,.45)
 }
 
 .viewer-header{
-    min-height:65px;
-    padding:0 22px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    border-bottom:1px solid rgba(255,255,255,.08);
+  min-height:65px;
+  padding:0 22px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid rgba(255,255,255,.08)
 }
 
 .viewer-title{
-    font-size:14px;
-    color:#d2dce6;
+  font-size:14px;
+  color:#d2dce6
 }
 
 .viewer-status{
-    color:#708499;
-    font-size:11px;
-    letter-spacing:1px;
+  color:#708499;
+  font-size:11px;
+  letter-spacing:1px
 }
 
 .scene{
-    position:relative;
-    width:100%;
-    height:700px;
-
-    background:
+  position:relative;
+  width:100%;
+  height:700px;
+  background:
     radial-gradient(
-        circle at 50% 45%,
-        #203b51 0%,
-        #0d1c2e 42%,
-        #02060b 100%
-    );
+      circle at 50% 45%,
+      #203b51 0%,
+      #0d1c2e 42%,
+      #02060b 100%
+    )
 }
 
 #brainCanvas{
-    width:100%;
-    height:100%;
-    display:block;
+  width:100%;
+  height:100%;
+  display:block
 }
 
-/* ================= LOADING ================= */
-
 .loading{
-    position:absolute;
-    inset:0;
-    z-index:20;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-direction:column;
-    gap:16px;
-
-    background:#02060b;
-    color:#9db0c3;
-    font-size:14px;
-
-    transition:opacity .8s;
+  position:absolute;
+  inset:0;
+  z-index:20;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:16px;
+  background:#02060b;
+  color:#9db0c3;
+  font-size:14px;
+  transition:opacity .8s
 }
 
 .loading.hide{
-    opacity:0;
-    pointer-events:none;
+  opacity:0;
+  pointer-events:none
 }
 
 .loading-bar{
-    width:180px;
-    height:2px;
-    background:rgba(255,255,255,.08);
-    border-radius:2px;
-    overflow:hidden;
+  width:180px;
+  height:2px;
+  background:rgba(255,255,255,.08);
+  border-radius:2px;
+  overflow:hidden
 }
 
 .loading-bar-inner{
-    width:0%;
-    height:100%;
-    background:#fff;
-    transition:width .3s;
+  width:0%;
+  height:100%;
+  background:#ff4055;
+  transition:width .3s
 }
 
-/* ================= CEREBELLAR LABEL ================= */
-
-.cerebellar-label{
-    position:absolute;
-    z-index:30;
-    pointer-events:none;
-
-    transform:translate(-50%,-100%);
-
-    display:none;
+.location-label{
+  position:absolute;
+  z-index:30;
+  pointer-events:none;
+  transform:translate(-50%,-100%);
+  display:none
 }
 
-.cerebellar-label.show{
-    display:block;
-}
+.location-label.show{display:block}
 
 .label-box{
-    position:relative;
-
-    padding:9px 15px;
-
-    border-radius:10px;
-
-    background:rgba(5,10,17,.96);
-
-    border:1.5px solid #ffffff;
-
-    color:#ffffff;
-
-    font-size:12px;
-
-    font-weight:bold;
-
-    letter-spacing:1px;
-
-    white-space:nowrap;
-
-    box-shadow:
-        0 0 12px rgba(255,255,255,.25),
-        0 0 30px rgba(255,255,255,.10);
+  position:relative;
+  padding:9px 15px;
+  border-radius:10px;
+  background:rgba(5,10,17,.96);
+  border:1.5px solid #ff4055;
+  color:#ffd9de;
+  font-size:12px;
+  font-weight:bold;
+  letter-spacing:1px;
+  white-space:nowrap;
+  box-shadow:
+    0 0 12px rgba(255,64,85,.35),
+    0 0 30px rgba(255,64,85,.2)
 }
 
 .label-box::after{
-    content:"";
-
-    position:absolute;
-
-    left:50%;
-    bottom:-15px;
-
-    width:1.5px;
-    height:15px;
-
-    background:#ffffff;
-
-    transform:translateX(-50%);
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:-15px;
+  width:1.5px;
+  height:15px;
+  background:#ff4055;
+  transform:translateX(-50%)
 }
 
-/* ================= CONTROLS ================= */
-
 .controls{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-
-    padding:15px;
-
-    border-top:1px solid rgba(255,255,255,.08);
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  padding:15px;
+  border-top:1px solid rgba(255,255,255,.08)
 }
 
 .controls button{
-    padding:11px 17px;
-
-    border-radius:9px;
-
-    background:#0b1928;
-
-    border:1px solid #31516d;
-
-    color:#bdd0e0;
-
-    cursor:pointer;
-
-    transition:.2s;
+  padding:11px 17px;
+  border-radius:9px;
+  background:#0b1928;
+  border:1px solid #31516d;
+  color:#bdd0e0;
+  cursor:pointer;
+  transition:.2s
 }
 
 .controls button:hover{
-    background:#14304a;
-    color:white;
+  background:#14304a;
+  color:#fff
 }
 
 .controls button.active{
-    background:#17191c;
-    border-color:#fff;
-    color:white;
+  background:#321218;
+  border-color:#ff4055;
+  color:#ffd9de
 }
 
-/* ================= SECTIONS ================= */
-
 .section{
-    margin-top:70px;
+  margin-top:70px
 }
 
 .section-label{
-    color:#61b5ff;
-    letter-spacing:2px;
-    font-size:11px;
-    text-transform:uppercase;
-    margin-bottom:8px;
+  color:#61b5ff;
+  letter-spacing:2px;
+  font-size:11px;
+  text-transform:uppercase;
+  margin-bottom:8px
 }
 
 .section h2{
-    font-size:32px;
-    margin-bottom:25px;
+  font-size:32px;
+  margin-bottom:25px
 }
 
 .section-intro{
-    color:#91a5b8;
-    max-width:900px;
-    font-size:15px;
-    line-height:1.9;
-    margin-bottom:30px;
+  color:#91a5b8;
+  max-width:900px;
+  font-size:15px;
+  line-height:1.9;
+  margin-bottom:30px
 }
 
-/* ================= CARDS ================= */
-
-.cards{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:20px;
-}
-
-.card{
-    padding:27px;
-
-    background:#091522;
-
-    border:1px solid #172b3e;
-
-    border-radius:18px;
-
-    transition:
-    transform .2s,
-    border-color .2s;
-}
-
-.card:hover{
-    transform:translateY(-3px);
-    border-color:#2b506c;
-}
-
-.card h3{
-    font-size:18px;
-    margin-bottom:13px;
-    color:#eef4fa;
-    line-height:1.45;
-}
-
-.card p{
-    color:#91a5b8;
-    font-size:14px;
-    line-height:1.8;
-}
-
-/* ================= LOCATION ================= */
+/* ANATOMICAL LOCATION */
 
 .location{
-    margin-top:70px;
-
-    padding:32px;
-
-    background:#091522;
-
-    border:1px solid #172b3e;
-
-    border-radius:18px;
+  margin-top:70px;
+  padding:35px;
+  background:#091522;
+  border:1px solid #172b3e;
+  border-radius:18px
 }
 
 .location h2{
-    font-size:30px;
-    margin-bottom:12px;
+  font-size:32px;
+  margin-bottom:12px
 }
 
 .location-intro{
-    color:#91a5b8;
-    max-width:900px;
-    line-height:1.9;
-    margin-bottom:25px;
+  color:#91a5b8;
+  max-width:900px;
+  line-height:1.9;
+  margin-bottom:30px
 }
 
-.location-visual{
-    display:none;
-
-    margin-top:25px;
-
-    padding:20px;
-
-    background:#050b13;
-
-    border:1px solid #20364b;
-
-    border-radius:16px;
-
-    animation:fadeIn .45s ease;
+.anatomy-viewer{
+  position:relative;
+  width:100%;
+  max-width:900px;
+  height:510px;
+  margin:auto;
+  border:1px solid #243b50;
+  border-radius:16px;
+  overflow:hidden;
+  background:
+    radial-gradient(
+      ellipse at center,
+      #162b3d 0%,
+      #091522 65%,
+      #02060b 100%
+    )
 }
 
-.location-visual.show{
-    display:block;
-}
+/*
+  Anatomical-style lateral brain illustration.
+  The red regions represent both sides of the cerebellar cortex.
+*/
 
-@keyframes fadeIn{
-
-    from{
-        opacity:0;
-        transform:translateY(8px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-
+.brain-drawing{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center
 }
 
 .brain-svg{
-    display:block;
-    width:100%;
-    max-width:850px;
-    height:auto;
-    margin:auto;
+  width:92%;
+  height:92%;
+  overflow:visible
 }
 
-.svg-brain{
-    fill:#263d55;
-    stroke:#71869e;
-    stroke-width:3;
+.brain-outline{
+  fill:#d9c1c6;
+  stroke:#f1e5e8;
+  stroke-width:4
 }
 
-.svg-cerebellum{
-    fill:#ffffff;
-    stroke:#ffffff;
-    stroke-width:4;
+.brain-shadow{
+  fill:#ad969d;
+  opacity:.55
 }
 
-.svg-brainstem{
-    fill:#29465b;
-    stroke:#71869e;
-    stroke-width:3;
+.brain-groove{
+  fill:none;
+  stroke:#826f77;
+  stroke-width:3;
+  stroke-linecap:round;
+  opacity:.7
 }
 
-.svg-line{
-    stroke:#ffffff;
-    stroke-width:2;
+.cerebellum-base{
+  fill:#bca6ad;
+  stroke:#eee1e5;
+  stroke-width:3
 }
 
-.svg-label{
-    fill:white;
-    font-size:18px;
-    font-weight:bold;
+.cerebellar-highlight{
+  fill:#ff203d;
+  stroke:#fff;
+  stroke-width:3;
+  filter:url(#redGlow)
+}
+
+.cerebellar-fold{
+  fill:none;
+  stroke:#ff9aa6;
+  stroke-width:2.5;
+  stroke-linecap:round;
+  opacity:.95
+}
+
+.cerebellar-label{
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:17px;
+  font-weight:bold;
+  letter-spacing:1px;
+  fill:#fff
+}
+
+.cerebellar-label-small{
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:12px;
+  fill:#ffb4bd
+}
+
+.label-line{
+  fill:none;
+  stroke:#ff4055;
+  stroke-width:2.5
+}
+
+.cerebellum-pulse{
+  animation:cerebellumPulse 1.6s infinite
+}
+
+@keyframes cerebellumPulse{
+  0%,100%{
+    opacity:1
+  }
+
+  50%{
+    opacity:.72
+  }
 }
 
 .location-caption{
-    text-align:center;
-    color:#9fb0c3;
-    margin-top:15px;
+  text-align:center;
+  color:#9fb0c3;
+  margin-top:15px;
+  line-height:1.8
 }
 
-/* ================= CLINICAL ================= */
+.source-note{
+  max-width:900px;
+  margin:15px auto 0;
+  color:#617487;
+  font-size:11px;
+  text-align:center
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px
+}
+
+.card{
+  padding:27px;
+  background:#091522;
+  border:1px solid #172b3e;
+  border-radius:18px;
+  transition:transform .2s,border-color .2s
+}
+
+.card:hover{
+  transform:translateY(-3px);
+  border-color:#4a2027
+}
+
+.card h3{
+  font-size:18px;
+  margin-bottom:13px;
+  color:#eef4fa;
+  line-height:1.45
+}
+
+.card p{
+  color:#91a5b8;
+  font-size:14px;
+  line-height:1.8
+}
 
 .clinical-section{
-    margin-top:65px;
+  margin-top:65px
 }
 
 .clinical-box{
-    padding:30px;
-
-    background:#091522;
-
-    border:1px solid #172b3e;
-
-    border-left:3px solid #ffffff;
-
-    border-radius:18px;
+  padding:30px;
+  background:#091522;
+  border:1px solid #172b3e;
+  border-left:3px solid #ff4055;
+  border-radius:18px
 }
 
 .clinical-box p{
-    color:#a7b7c6;
-    font-size:15px;
-    line-height:1.9;
-    margin-bottom:18px;
+  color:#a7b7c6;
+  font-size:15px;
+  line-height:1.9;
+  margin-bottom:18px
 }
 
 .clinical-box p:last-child{
-    margin-bottom:0;
+  margin-bottom:0
 }
-
-/* ================= INSIGHT ================= */
-
-.insight{
-    margin-top:30px;
-
-    padding:25px;
-
-    background:#091522;
-
-    border-left:3px solid #ffffff;
-
-    border-radius:10px;
-
-    color:#aebdce;
-}
-
-.insight strong{
-    color:#ffffff;
-}
-
-/* ================= FACTS ================= */
 
 .facts-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:15px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px
 }
 
 .fact{
-    padding:22px;
-
-    background:#091522;
-
-    border:1px solid #172b3e;
-
-    border-radius:16px;
+  padding:22px;
+  background:#091522;
+  border:1px solid #172b3e;
+  border-radius:16px
 }
 
 .fact span{
-    display:block;
-    color:#ffffff;
-    font-size:11px;
-    letter-spacing:2px;
-    margin-bottom:12px;
+  display:block;
+  color:#ff4055;
+  font-size:11px;
+  letter-spacing:2px;
+  margin-bottom:12px
 }
 
 .fact strong{
-    display:block;
-    color:#eef4fa;
-    font-size:14px;
-    margin-bottom:8px;
-    line-height:1.5;
+  display:block;
+  color:#eef4fa;
+  font-size:14px;
+  margin-bottom:8px;
+  line-height:1.5
 }
 
 .fact p{
-    color:#8195a8;
-    font-size:13px;
-    line-height:1.7;
+  color:#8195a8;
+  font-size:13px;
+  line-height:1.7
 }
 
-/* ================= QUIZ ================= */
-
 .quiz{
-    margin-top:65px;
-
-    padding:30px;
-
-    background:#091522;
-
-    border:1px solid #172b3e;
-
-    border-radius:18px;
+  margin-top:65px;
+  padding:30px;
+  background:#091522;
+  border:1px solid #172b3e;
+  border-radius:18px
 }
 
 .quiz h2{
-    font-size:27px;
-    margin-bottom:25px;
+  font-size:28px;
+  margin-bottom:10px
 }
 
-.question-block{
-    padding:22px;
-
-    margin-bottom:18px;
-
-    background:#07111d;
-
-    border:1px solid #172b3e;
-
-    border-radius:14px;
+.quiz-intro{
+  color:#91a5b8;
+  margin-bottom:25px
 }
 
-.question-number{
-    color:#61b5ff;
-    font-size:12px;
-    letter-spacing:2px;
-    text-transform:uppercase;
-    margin-bottom:8px;
+.question{
+  margin-bottom:30px
 }
 
-.question-en{
-    color:#eef4fa;
-    font-size:16px;
-    margin-bottom:5px;
-}
+.question:last-child{margin-bottom:0}
 
-.question-ar{
-    color:#91a5b8;
-    font-size:15px;
-    margin-bottom:15px;
+.question p{
+  color:#eef4fa;
+  font-size:16px;
+  margin-bottom:12px;
+  font-weight:bold
 }
 
 .option{
-    display:block;
-    width:100%;
-
-    padding:13px;
-    margin-top:10px;
-
-    background:#10233a;
-    color:white;
-
-    border:1px solid #263951;
-
-    border-radius:8px;
-
-    text-align:left;
-
-    cursor:pointer;
-    font-size:14px;
-
-    transition:.2s;
+  display:block;
+  width:100%;
+  padding:12px 15px;
+  margin-top:9px;
+  background:#0b1928;
+  color:#c7d5e2;
+  border:1px solid #263951;
+  border-radius:9px;
+  text-align:left;
+  cursor:pointer;
+  font-size:14px;
+  transition:.2s
 }
 
 .option:hover{
-    border-color:#fff;
+  border-color:#ff4055;
+  background:#111e2c
 }
 
 .option.correct{
-    background:#17251f;
-    border-color:#78e0a0;
+  border-color:#8fd3a8;
+  background:#14291e;
+  color:#b9f0c9
 }
 
 .option.wrong{
-    background:#291a1d;
-    border-color:#ff8792;
-}
-
-.question-feedback{
-    margin-top:12px;
-    font-size:14px;
-    min-height:22px;
+  border-color:#d88b9b;
+  background:#2a171d;
+  color:#ffc2cc
 }
 
 .quiz-result{
-    margin-top:25px;
-
-    padding:20px;
-
-    border-radius:12px;
-
-    background:#07111d;
-
-    border:1px solid #263951;
-
-    text-align:center;
-
-    font-size:17px;
-
-    color:#fff;
+  margin-top:25px;
+  padding:15px;
+  border-radius:10px;
+  background:#0b1928;
+  border:1px solid #263951;
+  color:#aebdce;
+  display:none
 }
-
-/* ================= BACK ================= */
-
-.back{
-    display:inline-block;
-
-    margin-top:40px;
-
-    padding:12px 18px;
-
-    border:1px solid #263951;
-
-    border-radius:9px;
-
-    color:white;
-
-    text-decoration:none;
-}
-
-.back:hover{
-    border-color:white;
-}
-
-/* ================= MOBILE ================= */
 
 @media(max-width:900px){
+  .cards{
+    grid-template-columns:repeat(2,1fr)
+  }
 
-    .cards{
-        grid-template-columns:repeat(2,1fr);
-    }
+  .facts-grid{
+    grid-template-columns:repeat(2,1fr)
+  }
 
-    .facts-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
+  .anatomy-viewer{
+    height:450px
+  }
 }
 
 @media(max-width:800px){
+  .scene{
+    height:450px
+  }
 
-    .scene{
-        height:450px;
-    }
+  .viewer-status{
+    display:none
+  }
 
-    .viewer-status{
-        display:none;
-    }
-
+  .location{
+    padding:25px
+  }
 }
 
 @media(max-width:600px){
+  .cards{
+    grid-template-columns:1fr
+  }
 
-    .cards{
-        grid-template-columns:1fr;
-    }
+  .facts-grid{
+    grid-template-columns:1fr
+  }
 
-    .facts-grid{
-        grid-template-columns:1fr;
-    }
+  h1{
+    letter-spacing:-2px
+  }
 
-    h1{
-        letter-spacing:-2px;
-    }
+  .location{
+    padding:20px
+  }
 
-    .location{
-        padding:20px;
-    }
+  .anatomy-viewer{
+    height:330px
+  }
 
+  .cerebellar-label{
+    font-size:12px
+  }
+
+  .cerebellar-label-small{
+    font-size:8px
+  }
 }
-
 </style>
 </head>
 
 <body>
 
 <nav>
-<a href="./explore.html">
-← Back to Explore Anatomy
-</a>
+<a href="./explore.html">← Back to Explore</a>
 </nav>
 
 <main class="container">
-
-<!-- ================= HERO ================= -->
 
 <div class="eyebrow">
 Cerebellum · NeuroAtlas
@@ -761,56 +654,34 @@ Cerebellar Cortex
 </h1>
 
 <div class="arabic-title">
-القشرة المخيخية
+قشرة المخيخ
 </div>
 
 <div class="hero">
 
 <p>
-
 The cerebellar cortex is the highly folded outer layer of the
-cerebellum. It plays a major role in coordinating movement,
+cerebellum. It plays an important role in coordinating movement,
 maintaining balance and posture, and supporting motor learning.
-
-<br><br>
-
-القشرة المخيخية هي الطبقة الخارجية كثيرة الطيات من المخيخ،
-وتلعب دورًا أساسيًا في تنسيق الحركة والحفاظ على التوازن
-ووضعية الجسم والتعلم الحركي.
-
 </p>
 
 </div>
 
-<!-- ================= ACTIONS ================= -->
-
 <div class="actions">
 
-<a
-class="action-button"
-href="#location"
-id="locationButton"
->
-📍 View Location
+<a class="action-button" href="#location">
+📍 Show Location
 </a>
 
-<a
-class="action-button"
-href="#anatomy"
->
-🧠 Cerebellar Anatomy
+<a class="action-button" href="#information">
+🧠 Learn About the Cerebellar Cortex
 </a>
 
-<a
-class="action-button"
-href="#quiz"
->
-🧪 Test Yourself
+<a class="action-button" href="#quiz">
+📝 Test Yourself
 </a>
 
 </div>
-
-<!-- ================= 3D VIEWER ================= -->
 
 <div class="viewer">
 
@@ -842,13 +713,10 @@ Loading real brain model...
 
 <canvas id="brainCanvas"></canvas>
 
-<div
-id="cerebellarLabel"
-class="cerebellar-label"
->
+<div id="locationLabel" class="location-label">
 
 <div class="label-box">
-CEREBELLAR CORTEX · القشرة المخيخية
+CEREBELLAR CORTEX · قشرة المخيخ
 </div>
 
 </div>
@@ -857,8 +725,12 @@ CEREBELLAR CORTEX · القشرة المخيخية
 
 <div class="controls">
 
+<button id="showLocation">
+📍 Show Cerebellar Cortex
+</button>
+
 <button id="highlight" class="active">
-⚪ Highlight Cerebellar Cortex
+🔴 Highlight Cerebellar Cortex
 </button>
 
 <button id="rotate" class="active">
@@ -873,32 +745,258 @@ CEREBELLAR CORTEX · القشرة المخيخية
 
 </div>
 
-<!-- ================= ANATOMY ================= -->
-
-<section id="anatomy" class="section">
+<section id="location" class="location">
 
 <div class="section-label">
-Cerebellar Cortex · القشرة المخيخية
+Location · الموقع
 </div>
 
 <h2>
-Cerebellar Cortex Anatomy · تشريح القشرة المخيخية
+📍 Where is the Cerebellar Cortex?
+</h2>
+
+<p class="location-intro">
+
+The cerebellar cortex forms the outer layer of the cerebellum,
+which is located in the posterior cranial fossa beneath the
+occipital lobes and behind the brainstem.
+
+<br><br>
+
+تقع قشرة المخيخ على السطح الخارجي للمخيخ، الموجود في الحفرة
+القحفية الخلفية أسفل الفصوص القذالية وخلف جذع الدماغ.
+
+</p>
+
+<div class="anatomy-viewer">
+
+<div class="brain-drawing">
+
+<svg
+class="brain-svg"
+viewBox="0 0 900 500"
+xmlns="http://www.w3.org/2000/svg"
+aria-label="Anatomical-style brain illustration highlighting both sides of the cerebellar cortex"
+role="img"
+>
+
+<defs>
+
+<filter id="redGlow" x="-100%" y="-100%" width="300%" height="300%">
+<feGaussianBlur stdDeviation="5" result="blur"/>
+<feMerge>
+<feMergeNode in="blur"/>
+<feMergeNode in="SourceGraphic"/>
+</feMerge>
+</filter>
+
+</defs>
+
+<!-- Main brain silhouette -->
+
+<path
+class="brain-outline"
+d="
+M155 280
+C110 250 105 190 140 145
+C175 100 225 80 275 88
+C320 35 400 30 450 65
+C500 30 580 35 625 88
+C675 80 725 100 760 145
+C795 190 790 250 745 280
+C730 305 710 330 690 350
+C640 390 570 400 500 390
+L400 390
+C330 400 260 390 210 350
+C190 330 170 305 155 280Z
+"
+/>
+
+<!-- Brain shadow -->
+
+<path
+class="brain-shadow"
+d="
+M155 280
+C180 305 205 320 235 330
+C300 355 350 350 400 350
+L500 350
+C550 350 600 355 665 330
+C695 320 720 305 745 280
+C735 335 685 380 620 395
+C570 405 520 395 500 390
+L400 390
+C380 395 330 405 280 395
+C215 380 165 335 155 280Z
+"
+/>
+
+<!-- Brain folds -->
+
+<path
+class="brain-groove"
+d="M190 190 C240 150 270 175 300 130
+M175 225 C230 190 270 215 315 175
+M205 260 C260 235 300 255 340 215
+M280 105 C300 145 340 145 360 100
+M350 75 C370 115 405 120 425 80
+M475 80 C495 120 530 115 550 75
+M540 100 C560 145 600 145 620 105
+M585 130 C630 175 660 150 710 190
+M585 175 C630 215 670 190 725 225
+M560 215 C600 255 640 235 695 260
+"
+/>
+
+<!-- Brainstem -->
+
+<path
+class="cerebellum-base"
+d="
+M400 315
+C410 285 420 260 450 250
+C480 260 490 285 500 315
+L500 405
+C475 430 425 430 400 405Z
+"
+/>
+
+<!-- Left cerebellar hemisphere -->
+
+<g class="cerebellum-pulse">
+
+<path
+class="cerebellar-highlight"
+d="
+M175 300
+C185 260 220 235 265 235
+C310 235 350 255 375 290
+C390 315 380 350 350 370
+C315 392 260 390 220 370
+C190 355 170 330 175 300Z
+"
+/>
+
+<path
+class="cerebellar-fold"
+d="
+M195 285 C235 265 275 275 315 295
+M185 305 C230 290 275 300 345 320
+M195 330 C245 315 290 330 350 345
+M220 350 C260 340 300 350 330 360
+"
+/>
+
+<!-- Right cerebellar hemisphere -->
+
+<path
+class="cerebellar-highlight"
+d="
+M725 300
+C715 260 680 235 635 235
+C590 235 550 255 525 290
+C510 315 520 350 550 370
+C585 392 640 390 680 370
+C710 355 730 330 725 300Z
+"/>
+
+<path
+class="cerebellar-fold"
+d="
+M705 285 C665 265 625 275 585 295
+M715 305 C670 290 625 300 555 320
+M705 330 C655 315 610 330 550 345
+M680 350 C640 340 600 350 570 360
+"/>
+
+</g>
+
+<!-- Labels -->
+
+<path
+class="label-line"
+d="M270 245 L170 170 L80 170"
+/>
+
+<text
+class="cerebellar-label"
+x="25"
+y="155"
+>
+CEREBELLAR CORTEX
+</text>
+
+<text
+class="cerebellar-label-small"
+x="25"
+y="178"
+>
+قشرة المخيخ · LEFT
+</text>
+
+<path
+class="label-line"
+d="M630 245 L730 170 L820 170"
+/>
+
+<text
+class="cerebellar-label"
+x="610"
+y="155"
+>
+CEREBELLAR CORTEX
+</text>
+
+<text
+class="cerebellar-label-small"
+x="650"
+y="178"
+>
+قشرة المخيخ · RIGHT
+</text>
+
+</svg>
+
+</div>
+
+</div>
+
+<p class="location-caption">
+
+🔴 Both cerebellar hemispheres are highlighted.
+The red areas represent the cerebellar cortex.
+
+</p>
+
+<p class="source-note">
+Simplified anatomical illustration for educational visualization.
+</p>
+
+</section>
+
+<section id="information" class="section">
+
+<div class="section-label">
+Cerebellar Anatomy · تشريح المخيخ
+</div>
+
+<h2>
+Cerebellar Cortex · قشرة المخيخ
 </h2>
 
 <p class="section-intro">
 
-The cerebellar cortex forms the outer layer of the cerebellum
-and is organized into three main cellular layers. Its extensive
-folding increases surface area while allowing the cerebellum
-to process large amounts of information involved in movement
+The cerebellar cortex is a thin, highly folded layer covering the
+cerebellum. Its extensive folds increase the available cortical
+surface area. The cortex contains three major layers and interacts
+with deeper cerebellar nuclei to help regulate coordinated movement
 and motor learning.
 
 <br><br>
 
-تُكوّن القشرة المخيخية الطبقة الخارجية للمخيخ، وتنظم في ثلاث
-طبقات خلوية رئيسية. وتزيد طياتها الكثيرة من مساحة السطح، مما
-يسمح للمخيخ بمعالجة كمية كبيرة من المعلومات المتعلقة بالحركة
-والتعلم الحركي.
+قشرة المخيخ طبقة رقيقة كثيرة الطيات تغطي المخيخ. تزيد هذه الطيات
+من مساحة سطح القشرة، وتتكون القشرة من ثلاث طبقات رئيسية وتتفاعل
+مع النوى المخيخية العميقة للمساعدة في تنسيق الحركة والتعلم الحركي.
 
 </p>
 
@@ -911,16 +1009,11 @@ Molecular Layer · الطبقة الجزيئية
 </h3>
 
 <p>
-
-The outermost cortical layer contains Purkinje cell
-dendrites and numerous interneurons involved in processing
-signals within the cerebellar cortex.
-
+The molecular layer is the outermost layer of the cerebellar cortex
+and contains extensive connections between cerebellar neurons.
 <br><br>
-
-الطبقة الخارجية وتحتوي على تغصنات خلايا بركنجي وعدد كبير
-من الخلايا العصبية البينية التي تشارك في معالجة الإشارات.
-
+الطبقة الجزيئية هي الطبقة الخارجية لقشرة المخيخ وتحتوي على
+اتصالات واسعة بين الخلايا العصبية المخيخية.
 </p>
 
 </div>
@@ -928,20 +1021,15 @@ signals within the cerebellar cortex.
 <div class="card">
 
 <h3>
-Purkinje Cell Layer · طبقة خلايا بركنجي
+Purkinje Layer · طبقة خلايا بوركنجي
 </h3>
 
 <p>
-
-Purkinje cells form a distinctive layer and provide the
-major output from the cerebellar cortex to deeper
-cerebellar nuclei.
-
+Purkinje cells form a distinctive layer and provide the major
+output from the cerebellar cortex to the deep cerebellar nuclei.
 <br><br>
-
-تكوّن خلايا بركنجي طبقة مميزة وتوفر المخرج الرئيسي
-من القشرة المخيخية إلى النوى المخيخية العميقة.
-
+تشكل خلايا بوركنجي طبقة مميزة وتوفر المخرج الرئيسي لقشرة المخيخ
+نحو النوى المخيخية العميقة.
 </p>
 
 </div>
@@ -953,119 +1041,11 @@ Granular Layer · الطبقة الحبيبية
 </h3>
 
 <p>
-
-The granular layer contains granule cells and receives
-important incoming information that is distributed
-through the cerebellar cortical circuitry.
-
+The granular layer contains large numbers of small granule cells
+and receives important inputs into cerebellar circuits.
 <br><br>
-
-تحتوي الطبقة الحبيبية على الخلايا الحبيبية وتستقبل
-معلومات واردة مهمة يتم توزيعها داخل دوائر القشرة المخيخية.
-
-</p>
-
-</div>
-
-<div class="card">
-
-<h3>
-Cerebellar Folia · الطيات المخيخية
-</h3>
-
-<p>
-
-The cortex is arranged into many narrow folds called
-folia. These folds greatly increase the available
-cortical surface area.
-
-<br><br>
-
-تنظم القشرة في عدد كبير من الطيات الضيقة التي تُسمى
-الطيات المخيخية، مما يزيد مساحة سطح القشرة.
-
-</p>
-
-</div>
-
-<div class="card">
-
-<h3>
-Purkinje Cells · خلايا بركنجي
-</h3>
-
-<p>
-
-Purkinje neurons are large inhibitory neurons that integrate
-information arriving from different cerebellar circuits.
-
-<br><br>
-
-خلايا بركنجي هي خلايا عصبية كبيرة مثبطة تدمج المعلومات
-القادمة من دوائر مخيخية مختلفة.
-
-</p>
-
-</div>
-
-<div class="card">
-
-<h3>
-Granule Cells · الخلايا الحبيبية
-</h3>
-
-<p>
-
-Granule cells are among the most numerous neurons in the
-brain and participate extensively in cerebellar information
-processing.
-
-<br><br>
-
-الخلايا الحبيبية من أكثر الخلايا العصبية عددًا في الدماغ
-وتشارك بشكل واسع في معالجة المعلومات داخل المخيخ.
-
-</p>
-
-</div>
-
-<div class="card">
-
-<h3>
-Climbing Fibers · الألياف المتسلقة
-</h3>
-
-<p>
-
-Climbing fibers originate primarily from the inferior
-olivary nucleus and form powerful connections with
-Purkinje cells.
-
-<br><br>
-
-تنشأ الألياف المتسلقة بشكل أساسي من النواة الزيتونية
-السفلية وتكوّن اتصالات قوية مع خلايا بركنجي.
-
-</p>
-
-</div>
-
-<div class="card">
-
-<h3>
-Mossy Fibers · الألياف الطحلبية
-</h3>
-
-<p>
-
-Mossy fibers provide major excitatory input to the
-cerebellar cortex and influence granule cells.
-
-<br><br>
-
-توفر الألياف الطحلبية جزءًا رئيسيًا من المدخلات
-الاستثارية للقشرة المخيخية وتؤثر على الخلايا الحبيبية.
-
+تحتوي الطبقة الحبيبية على أعداد كبيرة من الخلايا الحبيبية
+وتستقبل مدخلات مهمة إلى دوائر المخيخ.
 </p>
 
 </div>
@@ -1077,15 +1057,10 @@ Motor Coordination · تنسيق الحركة
 </h3>
 
 <p>
-
-The cerebellar cortex helps refine the timing, accuracy,
-and coordination of movements.
-
+Cerebellar circuits contribute to the timing, precision and
+coordination of voluntary movements.
 <br><br>
-
-تساعد القشرة المخيخية على تحسين توقيت الحركات ودقتها
-وتنسيقها.
-
+تساهم دوائر المخيخ في توقيت ودقة وتنسيق الحركات الإرادية.
 </p>
 
 </div>
@@ -1093,19 +1068,14 @@ and coordination of movements.
 <div class="card">
 
 <h3>
-Balance & Posture · التوازن والوضعية
+Balance · التوازن
 </h3>
 
 <p>
-
-Cerebellar circuits contribute to maintaining balance,
-posture, and stable body position during movement.
-
+The cerebellum contributes to maintaining balance and coordinating
+movements that stabilize the body.
 <br><br>
-
-تساهم دوائر المخيخ في الحفاظ على التوازن والوضعية
-وثبات الجسم أثناء الحركة.
-
+يساهم المخيخ في الحفاظ على التوازن وتنسيق الحركات التي تثبت الجسم.
 </p>
 
 </div>
@@ -1117,15 +1087,10 @@ Motor Learning · التعلم الحركي
 </h3>
 
 <p>
-
-The cerebellum contributes to learning and refining
-repeated motor skills.
-
+The cerebellum participates in adapting movements through practice
+and experience.
 <br><br>
-
-يساهم المخيخ في تعلم المهارات الحركية المتكررة
-وتحسينها مع الممارسة.
-
+يشارك المخيخ في تعديل الحركات وتطويرها من خلال التدريب والخبرة.
 </p>
 
 </div>
@@ -1133,134 +1098,97 @@ repeated motor skills.
 <div class="card">
 
 <h3>
-Cortical Output · مخرجات القشرة
+Highly Folded · كثيرة الطيات
 </h3>
 
 <p>
-
-Purkinje cells transmit processed information from the
-cortex toward the deep cerebellar nuclei.
-
+The cerebellar cortex contains many narrow folds called folia that
+increase its surface area.
 <br><br>
-
-تنقل خلايا بركنجي المعلومات المعالجة من القشرة
-نحو النوى المخيخية العميقة.
-
+تحتوي قشرة المخيخ على طيات عديدة وضيقة تسمى الأوراق المخيخية،
+وتزيد هذه الطيات من مساحة سطحها.
 </p>
 
 </div>
 
-</div>
+<div class="card">
 
-</section>
+<h3>
+Two Hemispheres · نصفا الكرة
+</h3>
 
-<!-- ================= LOCATION ================= -->
-
-<section id="location" class="location">
-
-<h2>
-📍 Where is the Cerebellar Cortex? · أين تقع القشرة المخيخية؟
-</h2>
-
-<p class="location-intro">
-
-The cerebellar cortex forms the outer surface of the cerebellum,
-which is located in the posterior cranial fossa beneath the
-occipital lobes and behind the brainstem.
-
+<p>
+The cerebellum has right and left hemispheres connected by a central
+region called the vermis.
 <br><br>
-
-تكوّن القشرة المخيخية السطح الخارجي للمخيخ، الذي يقع في الجزء
-الخلفي من الجمجمة أسفل الفصين القذاليين وخلف جذع الدماغ.
-
-</p>
-
-<div id="locationVisual" class="location-visual">
-
-<svg
-class="brain-svg"
-viewBox="0 0 900 600"
-xmlns="http://www.w3.org/2000/svg"
->
-
-<!-- CEREBRUM -->
-
-<path
-class="svg-brain"
-d="
-M120 280
-C100 190 155 100 260 65
-C380 25 535 55 625 125
-C700 185 720 275 680 350
-C650 405 590 435 510 440
-C405 448 280 430 205 385
-C155 355 130 320 120 280Z"
-/>
-
-<!-- CEREBELLUM -->
-
-<path
-class="svg-cerebellum"
-d="
-M425 365
-C475 330 555 335 600 375
-C645 415 650 475 605 510
-C560 545 485 535 445 495
-C415 465 405 405 425 365Z"
-/>
-
-<!-- BRAINSTEM -->
-
-<path
-class="svg-brainstem"
-d="
-M400 345
-C410 390 415 435 405 480
-L445 480
-C450 435 445 390 435 345Z"
-/>
-
-<!-- LABEL -->
-
-<line
-class="svg-line"
-x1="560"
-y1="430"
-x2="690"
-y2="350"
-/>
-
-<text
-class="svg-label"
-x="700"
-y="345"
->
-CEREBELLAR CORTEX
-</text>
-
-<text
-class="svg-label"
-x="700"
-y="372"
->
-القشرة المخيخية
-</text>
-
-</svg>
-
-<p class="location-caption">
-
-⚪ The white region represents the cerebellar cortex.
-<br>
-المنطقة البيضاء تمثل القشرة المخيخية.
-
+يتكون المخيخ من نصف كرة أيمن ونصف كرة أيسر يتصلان بمنطقة مركزية
+تسمى الدودة المخيخية.
 </p>
 
 </div>
 
-</section>
+<div class="card">
 
-<!-- ================= CLINICAL ================= -->
+<h3>
+Deep Nuclei · النوى العميقة
+</h3>
+
+<p>
+Cerebellar cortical output is transmitted primarily through the
+deep cerebellar nuclei.
+<br><br>
+تنتقل مخرجات قشرة المخيخ بشكل أساسي عبر النوى المخيخية العميقة.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Brainstem Connections · اتصالات جذع الدماغ
+</h3>
+
+<p>
+The cerebellum communicates extensively with the brainstem through
+major fiber pathways.
+<br><br>
+يتواصل المخيخ بشكل واسع مع جذع الدماغ من خلال مسارات عصبية رئيسية.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Posture · وضعية الجسم
+</h3>
+
+<p>
+Cerebellar systems contribute to the control and adjustment of
+posture during movement.
+<br><br>
+تساهم أنظمة المخيخ في التحكم في وضعية الجسم وتعديلها أثناء الحركة.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Sensory Integration · التكامل الحسي
+</h3>
+
+<p>
+The cerebellum integrates sensory information with motor signals
+to help produce accurate coordinated movements.
+<br><br>
+يدمج المخيخ المعلومات الحسية مع الإشارات الحركية للمساعدة في
+إنتاج حركات دقيقة ومنسقة.
+</p>
+
+</div>
+
+</div>
 
 <div class="clinical-section">
 
@@ -1275,50 +1203,20 @@ Why the Cerebellar Cortex Matters
 <div class="clinical-box">
 
 <p>
-
-Because the cerebellar cortex is involved in coordinating
-movement and maintaining balance, dysfunction of cerebellar
-circuits can lead to problems with coordination, gait,
-balance, and the accuracy of voluntary movement.
-
+Disruption of cerebellar circuits can affect coordination, balance,
+timing and motor learning. Cerebellar function is therefore important
+for producing smooth and accurately controlled movement.
 </p>
 
 <p dir="rtl">
-
-نظرًا لدور القشرة المخيخية في تنسيق الحركة والحفاظ على
-التوازن، فإن اضطراب دوائر المخيخ قد يؤدي إلى مشكلات في
-التنسيق والمشي والتوازن ودقة الحركات الإرادية.
-
+يمكن أن يؤثر اضطراب دوائر المخيخ في التنسيق والتوازن والتوقيت
+والتعلم الحركي. لذلك تعد وظيفة المخيخ مهمة لإنتاج حركات سلسة
+ودقيقة ومنضبطة.
 </p>
 
 </div>
 
 </div>
-
-<!-- ================= INSIGHT ================= -->
-
-<div class="insight">
-
-<strong>
-NeuroAtlas Insight
-</strong>
-
-<br><br>
-
-The cerebellum does not simply make muscles move.
-It continuously compares incoming information with
-intended movement and helps refine the timing and accuracy
-of motor actions.
-
-<br><br>
-
-المخيخ لا يجعل العضلات تتحرك فقط؛ بل يدمج المعلومات
-الواردة مع الحركة المقصودة ويساعد على تحسين توقيت
-الحركات ودقتها.
-
-</div>
-
-<!-- ================= FACTS ================= -->
 
 <div class="section">
 
@@ -1341,8 +1239,7 @@ Location · الموقع
 </strong>
 
 <p>
-Outer surface of the cerebellum ·
-السطح الخارجي للمخيخ
+Outer layer of the cerebellum · الطبقة الخارجية للمخيخ
 </p>
 
 </div>
@@ -1352,11 +1249,11 @@ Outer surface of the cerebellum ·
 <span>02</span>
 
 <strong>
-Main Role · الوظيفة الأساسية
+Structure · التركيب
 </strong>
 
 <p>
-Movement coordination and motor learning
+Three major cortical layers · ثلاث طبقات قشرية رئيسية
 </p>
 
 </div>
@@ -1366,11 +1263,11 @@ Movement coordination and motor learning
 <span>03</span>
 
 <strong>
-Major Cells · الخلايا الرئيسية
+Function · الوظيفة
 </strong>
 
 <p>
-Purkinje cells and granule cells
+Movement coordination and motor learning · تنسيق الحركة والتعلم الحركي
 </p>
 
 </div>
@@ -1384,7 +1281,7 @@ Organization · التنظيم
 </strong>
 
 <p>
-Molecular, Purkinje, and granular layers
+Right and left hemispheres with vermis · نصفان أيمن وأيسر مع الدودة المخيخية
 </p>
 
 </div>
@@ -1393,1105 +1290,874 @@ Molecular, Purkinje, and granular layers
 
 </div>
 
-<!-- ================= QUIZ ================= -->
-
 <div id="quiz" class="quiz">
 
+<div class="section-label">
+Mini Test
+</div>
+
 <h2>
-🧠 Mini Test · اختبار قصير
+🧠 Test Yourself
 </h2>
 
-<!-- Q1 -->
+<p class="quiz-intro">
+Choose the best answer for each question.
+</p>
 
-<div class="question-block" data-answer="B">
+<div class="question">
 
-<div class="question-number">
-Question 01 · السؤال الأول
-</div>
+<p>
+1. Where is the cerebellar cortex located?
+</p>
 
-<div class="question-en">
-Which structure contains the cerebellar cortex?
-</div>
-
-<div class="question-ar" dir="rtl">
-أي تركيب يحتوي على القشرة المخيخية؟
-</div>
-
-<button class="option" data-option="A">
-A. Cerebral cortex · القشرة المخية
+<button class="option" onclick="checkAnswer(this,false)">
+A. Inside the spinal cord
 </button>
 
-<button class="option" data-option="B">
-B. Cerebellum · المخيخ
+<button class="option" onclick="checkAnswer(this,true)">
+B. On the outer layer of the cerebellum
 </button>
 
-<button class="option" data-option="C">
-C. Thalamus · المهاد
+<button class="option" onclick="checkAnswer(this,false)">
+C. On the surface of the frontal lobe
 </button>
 
-<button class="option" data-option="D">
-D. Medulla · النخاع المستطيل
+<button class="option" onclick="checkAnswer(this,false)">
+D. Inside the medulla
 </button>
-
-<div class="question-feedback"></div>
 
 </div>
 
-<!-- Q2 -->
+<div class="question">
 
-<div class="question-block" data-answer="C">
+<p>
+2. Which cells form a distinctive layer of the cerebellar cortex?
+</p>
 
-<div class="question-number">
-Question 02 · السؤال الثاني
-</div>
-
-<div class="question-en">
-Which cells form the distinctive Purkinje cell layer?
-</div>
-
-<div class="question-ar" dir="rtl">
-أي خلايا تكوّن طبقة خلايا بركنجي؟
-</div>
-
-<button class="option" data-option="A">
-A. Granule cells · الخلايا الحبيبية
+<button class="option" onclick="checkAnswer(this,false)">
+A. Pyramidal cells
 </button>
 
-<button class="option" data-option="B">
-B. Astrocytes · الخلايا النجمية
+<button class="option" onclick="checkAnswer(this,true)">
+B. Purkinje cells
 </button>
 
-<button class="option" data-option="C">
-C. Purkinje cells · خلايا بركنجي
+<button class="option" onclick="checkAnswer(this,false)">
+C. Motor neurons
 </button>
 
-<button class="option" data-option="D">
-D. Motor neurons · الخلايا الحركية
+<button class="option" onclick="checkAnswer(this,false)">
+D. Photoreceptors
 </button>
-
-<div class="question-feedback"></div>
 
 </div>
 
-<!-- Q3 -->
+<div class="question">
 
-<div class="question-block" data-answer="A">
+<p>
+3. What is the cerebellum strongly involved in?
+</p>
 
-<div class="question-number">
-Question 03 · السؤال الثالث
-</div>
-
-<div class="question-en">
-Which function is strongly associated with the cerebellar cortex?
-</div>
-
-<div class="question-ar" dir="rtl">
-أي وظيفة ترتبط بشكل أساسي بالقشرة المخيخية؟
-</div>
-
-<button class="option" data-option="A">
-A. Motor coordination · تنسيق الحركة
+<button class="option" onclick="checkAnswer(this,false)">
+A. Producing vision
 </button>
 
-<button class="option" data-option="B">
-B. Language production · إنتاج اللغة
+<button class="option" onclick="checkAnswer(this,true)">
+B. Coordinating movement and motor learning
 </button>
 
-<button class="option" data-option="C">
-C. Smell detection · اكتشاف الروائح
+<button class="option" onclick="checkAnswer(this,false)">
+C. Producing hormones only
 </button>
 
-<button class="option" data-option="D">
-D. Hormone secretion · إفراز الهرمونات
+<button class="option" onclick="checkAnswer(this,false)">
+D. Hearing only
 </button>
-
-<div class="question-feedback"></div>
 
 </div>
 
-<div id="quizResult" class="quiz-result">
-
-Answer all three questions to see your final score.
-<br>
-أجب عن الأسئلة الثلاثة لرؤية نتيجتك النهائية.
+<div id="quizResult" class="quiz-result"></div>
 
 </div>
 
-</div>
-
-<a class="back" href="explore.html">
-← Back to Explore Anatomy
-</a>
+</section>
 
 </main>
 
-<!-- ================= IMPORT MAP ================= -->
-
 <script type="importmap">
 {
-    "imports": {
-        "three":
-        "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
-
-        "three/addons/":
-        "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
-    }
+  "imports":{
+    "three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
 }
 </script>
 
 <script type="module">
 
 import * as THREE from "three";
+import {OrbitControls} from "three/addons/controls/OrbitControls.js";
+import {GLTFLoader} from "three/addons/loaders/GLTFLoader.js";
+import {DRACOLoader} from "three/addons/loaders/DRACOLoader.js";
 
-import {
-    OrbitControls
-} from "three/addons/controls/OrbitControls.js";
+const canvas=document.getElementById("brainCanvas");
+const loading=document.getElementById("loading");
+const loadText=document.getElementById("loadText");
+const loadBar=document.getElementById("loadBar");
+const locationLabel=document.getElementById("locationLabel");
 
-import {
-    GLTFLoader
-} from "three/addons/loaders/GLTFLoader.js";
+const scene=new THREE.Scene();
 
-import {
-    DRACOLoader
-} from "three/addons/loaders/DRACOLoader.js";
-
-/* ================= ELEMENTS ================= */
-
-const canvas =
-document.getElementById("brainCanvas");
-
-const loading =
-document.getElementById("loading");
-
-const loadText =
-document.getElementById("loadText");
-
-const loadBar =
-document.getElementById("loadBar");
-
-const cerebellarLabel =
-document.getElementById("cerebellarLabel");
-
-/* ================= SCENE ================= */
-
-const scene =
-new THREE.Scene();
-
-/* ================= CAMERA ================= */
-
-const camera =
-new THREE.PerspectiveCamera(
-    30,
-    1,
-    0.01,
-    100
+const camera=new THREE.PerspectiveCamera(
+  30,
+  1,
+  .01,
+  100
 );
 
 camera.position.set(
-    3.2,
-    0.3,
-    8.5
+  3.2,
+  .3,
+  8.5
 );
 
-/* ================= RENDERER ================= */
-
-const renderer =
-new THREE.WebGLRenderer({
-
-    canvas:canvas,
-
-    antialias:true,
-
-    alpha:true
-
+const renderer=new THREE.WebGLRenderer({
+  canvas,
+  antialias:true,
+  alpha:true
 });
 
 renderer.setPixelRatio(
-    Math.min(
-        window.devicePixelRatio || 1,
-        2
-    )
+  Math.min(window.devicePixelRatio||1,2)
 );
 
-renderer.toneMapping =
-THREE.ACESFilmicToneMapping;
+renderer.toneMapping=THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure=.75;
 
-renderer.toneMappingExposure =
-0.75;
-
-/* ================= CONTROLS ================= */
-
-const controls =
-new OrbitControls(
-    camera,
-    canvas
+const controls=new OrbitControls(
+  camera,
+  canvas
 );
 
-controls.enableRotate = true;
-controls.rotateSpeed = 0.6;
-
-controls.enableDamping = true;
-controls.dampingFactor = 0.05;
-
-controls.enableZoom = true;
-controls.zoomSpeed = 0.6;
-
-controls.enablePan = false;
-
-controls.autoRotate = true;
-controls.autoRotateSpeed = 0.2;
+controls.enableRotate=true;
+controls.rotateSpeed=.6;
+controls.enableDamping=true;
+controls.dampingFactor=.05;
+controls.enableZoom=true;
+controls.zoomSpeed=.6;
+controls.enablePan=false;
+controls.autoRotate=true;
+controls.autoRotateSpeed=.2;
 
 controls.target.set(
-    0,
-    -0.3,
-    0
+  0,
+  -.3,
+  0
 );
 
-controls.minDistance = 3.5;
-controls.maxDistance = 16;
-
-/* ================= LIGHTING ================= */
+controls.minDistance=3.5;
+controls.maxDistance=16;
 
 scene.add(
-    new THREE.AmbientLight(
-        0xffffff,
-        0.55
-    )
+  new THREE.AmbientLight(
+    0xffffff,
+    .55
+  )
 );
 
-const hemi =
-new THREE.HemisphereLight(
-    0xffffff,
+scene.add(
+  new THREE.HemisphereLight(
+    0xffdce6,
     0x081018,
-    0.75
+    .75
+  )
 );
 
-scene.add(hemi);
-
-const keyLight =
-new THREE.DirectionalLight(
-    0xffffff,
-    1.4
+const keyLight=new THREE.DirectionalLight(
+  0xfff5f0,
+  1.4
 );
 
 keyLight.position.set(
-    6,
-    10,
-    8
+  6,
+  10,
+  8
 );
 
 scene.add(keyLight);
 
-const fillLight =
-new THREE.DirectionalLight(
-    0x8ca9bd,
-    0.4
+const fillLight=new THREE.DirectionalLight(
+  0x8ca9bd,
+  .4
 );
 
 fillLight.position.set(
-    -7,
-    2,
-    6
+  -7,
+  2,
+  6
 );
 
 scene.add(fillLight);
 
-/* ================= BRAIN ================= */
-
-const brainGroup =
-new THREE.Group();
+const brainGroup=new THREE.Group();
 
 scene.add(brainGroup);
 
-let cerebellarHighlightMesh = null;
-let cerebellarOutline = null;
-let highlighted = true;
+let cerebellarMeshes=[];
+let brainMeshes=[];
 
-/* ================= MATERIALS ================= */
+let locationShown=false;
+let highlighted=true;
 
-const brainMaterial =
-new THREE.MeshPhysicalMaterial({
-
+const brainOpaqueMaterial=
+  new THREE.MeshPhysicalMaterial({
     color:0xf1c5d0,
-
-    roughness:0.62,
-
+    roughness:.62,
     metalness:0,
+    clearcoat:.12,
+    clearcoatRoughness:.5,
+    side:THREE.DoubleSide,
+    transparent:false,
+    opacity:1
+  });
 
-    clearcoat:0.12,
-
-    clearcoatRoughness:0.5,
-
-    side:THREE.DoubleSide
-
-});
-
-const highlightMaterial =
-new THREE.MeshPhysicalMaterial({
-
-    color:0xffffff,
-
-    roughness:0.25,
-
-    metalness:0.02,
-
-    clearcoat:0.45,
-
-    clearcoatRoughness:0.18,
-
-    side:THREE.DoubleSide
-
-});
-
-const outlineMaterial =
-new THREE.MeshBasicMaterial({
-
-    color:0xffffff,
-
+const brainTransparentMaterial=
+  new THREE.MeshPhysicalMaterial({
+    color:0xf1c5d0,
+    roughness:.55,
+    metalness:0,
+    clearcoat:.1,
+    clearcoatRoughness:.5,
+    side:THREE.DoubleSide,
     transparent:true,
+    opacity:.18,
+    depthWrite:false
+  });
 
-    opacity:0.9,
+const cerebellarMaterial=
+  new THREE.MeshPhysicalMaterial({
+    color:0xff203d,
+    roughness:.3,
+    metalness:0,
+    clearcoat:.5,
+    clearcoatRoughness:.15,
+    emissive:0x4a0710,
+    emissiveIntensity:.8,
+    side:THREE.DoubleSide,
+    transparent:false,
+    opacity:1
+  });
 
-    side:THREE.BackSide
+const cerebellarNormalMaterial=
+  new THREE.MeshPhysicalMaterial({
+    color:0xf1c5d0,
+    roughness:.62,
+    metalness:0,
+    clearcoat:.12,
+    clearcoatRoughness:.5,
+    side:THREE.DoubleSide
+  });
 
-});
+function normalizeName(name){
 
-/* ==================================================
-   CEREBELLUM FALLBACK
-================================================== */
-
-function createCerebellarMarker(){
-
-    const geometry =
-    new THREE.SphereGeometry(
-        0.92,
-        64,
-        40
-    );
-
-    cerebellarHighlightMesh =
-    new THREE.Mesh(
-        geometry,
-        highlightMaterial
-    );
-
-    /*
-       Positioned behind the brainstem,
-       matching the normal anatomical
-       location of the cerebellum.
-    */
-
-    cerebellarHighlightMesh.scale.set(
-        1.25,
-        0.70,
-        0.95
-    );
-
-    cerebellarHighlightMesh.position.set(
-        0,
-        -1.15,
-        -0.45
-    );
-
-    brainGroup.add(
-        cerebellarHighlightMesh
-    );
-
-    cerebellarOutline =
-    new THREE.Mesh(
-        geometry.clone(),
-        outlineMaterial
-    );
-
-    cerebellarOutline.scale.set(
-        1.31,
-        0.76,
-        1.01
-    );
-
-    cerebellarHighlightMesh.add(
-        cerebellarOutline
-    );
+  return String(name||"")
+    .toLowerCase()
+    .replace(/[\s_\-]+/g,"");
 }
 
-/* ==================================================
-   CREATE HIGHLIGHT FROM ACTUAL MESH
-================================================== */
+function isCerebellarName(name){
 
-function createHighlightFromMesh(mesh){
+  const n=normalizeName(name);
 
-    if(cerebellarHighlightMesh)
-        return;
+  const names=[
+    "cerebellum",
+    "cerebellarcortex",
+    "cerebellarcortex",
+    "cerebellar",
+    "cerebellarhemisphere",
+    "leftcerebellum",
+    "rightcerebellum",
+    "leftcerebellar",
+    "rightcerebellar",
+    "vermis"
+  ];
 
-    cerebellarHighlightMesh =
-    mesh.clone();
-
-    cerebellarHighlightMesh.material =
-    highlightMaterial.clone();
-
-    cerebellarHighlightMesh.scale.multiplyScalar(
-        1.012
-    );
-
-    mesh.parent.add(
-        cerebellarHighlightMesh
-    );
-
-    cerebellarOutline =
-    mesh.clone();
-
-    cerebellarOutline.material =
-    outlineMaterial.clone();
-
-    cerebellarOutline.scale.multiplyScalar(
-        1.045
-    );
-
-    mesh.parent.add(
-        cerebellarOutline
-    );
+  return names.some(
+    item=>n.includes(item)
+  );
 }
-
-/* ==================================================
-   LOAD BRAIN
-================================================== */
 
 function loadRealBrain(){
 
-    const loader =
-    new GLTFLoader();
+  const loader=new GLTFLoader();
 
-    const dracoLoader =
-    new DRACOLoader();
+  const dracoLoader=new DRACOLoader();
 
-    dracoLoader.setDecoderPath(
-        "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/"
-    );
+  dracoLoader.setDecoderPath(
+    "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/"
+  );
 
-    loader.setDRACOLoader(
-        dracoLoader
-    );
+  loader.setDRACOLoader(dracoLoader);
 
-    const urls = [
+  const urls=[
+    "https://cdn.jsdelivr.net/gh/itayinbarr/brainproject@main/brain-atlas/models/brain.glb",
+    "https://raw.githubusercontent.com/itayinbarr/brainproject/main/brain-atlas/models/brain.glb",
+    "https://itayinbarr.github.io/brainproject/models/brain.glb"
+  ];
 
-        "https://cdn.jsdelivr.net/gh/itayinbarr/brainproject@main/brain-atlas/models/brain.glb",
+  let index=0;
 
-        "https://raw.githubusercontent.com/itayinbarr/brainproject/main/brain-atlas/models/brain.glb",
+  function tryLoad(){
 
-        "https://itayinbarr.github.io/brainproject/models/brain.glb"
+    if(index>=urls.length){
 
-    ];
+      loadText.textContent=
+        "Brain model could not be loaded.";
 
-    let urlIndex = 0;
+      loadBar.style.width="100%";
 
-    function tryLoad(){
+      setTimeout(
+        ()=>{
+          loading.classList.add("hide");
+        },
+        500
+      );
 
-        if(
-            urlIndex >= urls.length
-        ){
-
-            createCerebellarMarker();
-
-            onReady();
-
-            return;
-        }
-
-        const url =
-        urls[urlIndex++];
-
-        loadText.textContent =
-        "Loading real brain model...";
-
-        loader.load(
-
-            url,
-
-            function(gltf){
-
-                const model =
-                gltf.scene;
-
-                const box =
-                new THREE.Box3()
-                .setFromObject(model);
-
-                const center =
-                box.getCenter(
-                    new THREE.Vector3()
-                );
-
-                const size =
-                box.getSize(
-                    new THREE.Vector3()
-                );
-
-                const maxDim =
-                Math.max(
-                    size.x,
-                    size.y,
-                    size.z
-                );
-
-                const scale =
-                4.5 / maxDim;
-
-                model.scale.setScalar(
-                    scale
-                );
-
-                model.position.sub(
-                    center.multiplyScalar(scale)
-                );
-
-                model.position.y -= 0.60;
-
-                let detected =
-                false;
-
-                model.traverse(
-                function(child){
-
-                    if(!child.isMesh)
-                        return;
-
-                    child.castShadow = true;
-                    child.receiveShadow = true;
-
-                    const name =
-                    (
-                        child.name || ""
-                    ).toLowerCase();
-
-                    /*
-                       Detect cerebellum /
-                       cerebellar cortex meshes.
-                    */
-
-                    const isCerebellum =
-
-                        name.includes("cerebell") ||
-
-                        name.includes("cerebellum") ||
-
-                        name.includes("cerebellar") ||
-
-                        name.includes("vermis");
-
-                    if(
-                        isCerebellum &&
-                        !detected
-                    ){
-
-                        detected = true;
-
-                        createHighlightFromMesh(
-                            child
-                        );
-
-                    }
-
-                    /*
-                       Everything else gets
-                       normal brain material.
-                    */
-
-                    if(
-                        !isCerebellum
-                    ){
-
-                        if(child.material){
-
-                            child.material =
-                            brainMaterial.clone();
-
-                        }
-
-                    }
-
-                });
-
-                brainGroup.add(
-                    model
-                );
-
-                /*
-                   If model does not contain
-                   a named cerebellum mesh,
-                   use the anatomical fallback.
-                */
-
-                if(
-                    !cerebellarHighlightMesh
-                ){
-
-                    createCerebellarMarker();
-
-                }
-
-                loadBar.style.width =
-                "100%";
-
-                onReady();
-
-            },
-
-            function(progress){
-
-                if(
-                    progress.total > 0
-                ){
-
-                    const pct =
-                    Math.min(
-                        90,
-                        progress.loaded /
-                        progress.total *
-                        90
-                    );
-
-                    loadBar.style.width =
-                    pct + "%";
-
-                }
-
-            },
-
-            function(error){
-
-                console.warn(
-                    "Model failed:",
-                    error
-                );
-
-                tryLoad();
-
-            }
-
-        );
-
+      return;
     }
 
-    tryLoad();
-}
+    const url=urls[index++];
 
-/* ================= READY ================= */
+    loader.load(
 
-function onReady(){
+      url,
 
-    setTimeout(
-    function(){
+      gltf=>{
 
-        loading.classList.add(
-            "hide"
+        const model=gltf.scene;
+
+        const box=
+          new THREE.Box3()
+            .setFromObject(model);
+
+        const center=
+          box.getCenter(
+            new THREE.Vector3()
+          );
+
+        const size=
+          box.getSize(
+            new THREE.Vector3()
+          );
+
+        const maxDim=
+          Math.max(
+            size.x,
+            size.y,
+            size.z
+          );
+
+        const scale=4.5/maxDim;
+
+        model.scale.setScalar(scale);
+
+        model.position.sub(
+          center.multiplyScalar(scale)
         );
 
-        if(highlighted){
+        model.position.y-=.6;
 
-            cerebellarLabel.classList.add(
-                "show"
-            );
+        model.traverse(
+          child=>{
 
+            if(!child.isMesh){
+              return;
+            }
+
+            child.castShadow=true;
+            child.receiveShadow=true;
+
+            const name=
+              `${child.name} ${
+                child.userData &&
+                child.userData.name
+                  ? child.userData.name
+                  : ""
+              }`;
+
+            if(isCerebellarName(name)){
+
+              cerebellarMeshes.push(child);
+
+              child.material=
+                cerebellarMaterial.clone();
+
+              return;
+            }
+
+            child.material=
+              brainOpaqueMaterial.clone();
+
+            brainMeshes.push(child);
+          }
+        );
+
+        brainGroup.add(model);
+
+        if(cerebellarMeshes.length===0){
+
+          loadText.textContent=
+            "Brain loaded · cerebellar mesh unavailable";
+
+        }else{
+
+          loadText.textContent=
+            "Cerebellar cortex located";
+
+          locationLabel.classList.add(
+            "show"
+          );
         }
 
-    },500);
+        loadBar.style.width="100%";
 
+        setTimeout(
+          ()=>{
+            loading.classList.add("hide");
+          },
+          500
+        );
+      },
+
+      progress=>{
+
+        if(progress.total>0){
+
+          const pct=
+            Math.min(
+              95,
+              progress.loaded/
+              progress.total*95
+            );
+
+          loadBar.style.width=
+            pct+"%";
+        }
+      },
+
+      error=>{
+
+        console.warn(
+          "Brain model loading failed:",
+          error
+        );
+
+        tryLoad();
+      }
+    );
+  }
+
+  tryLoad();
 }
 
-/* ================= LABEL ================= */
+function setBrainTransparency(enabled){
+
+  brainMeshes.forEach(
+    mesh=>{
+
+      if(!mesh.material){
+        return;
+      }
+
+      mesh.material=
+        enabled
+          ? brainTransparentMaterial.clone()
+          : brainOpaqueMaterial.clone();
+    }
+  );
+}
+
+function setCerebellarHighlight(enabled){
+
+  cerebellarMeshes.forEach(
+    mesh=>{
+
+      mesh.material=
+        enabled
+          ? cerebellarMaterial.clone()
+          : cerebellarNormalMaterial.clone();
+    }
+  );
+}
+
+const showLocationBtn=
+  document.getElementById(
+    "showLocation"
+  );
+
+function showAnatomyHighlight(enabled){
+
+  document.querySelector(
+    ".anatomy-viewer"
+  ).classList.toggle(
+    "highlighted",
+    enabled
+  );
+}
+
+showLocationBtn.addEventListener(
+  "click",
+  ()=>{
+
+    locationShown=
+      !locationShown;
+
+    if(locationShown){
+
+      setBrainTransparency(true);
+      setCerebellarHighlight(true);
+
+      highlighted=true;
+
+      locationLabel.classList.add(
+        "show"
+      );
+
+      showLocationBtn.classList.add(
+        "active"
+      );
+
+      showLocationBtn.textContent=
+        "📍 Hide Cerebellar Cortex";
+
+      controls.autoRotate=false;
+
+      rotateBtn.classList.remove(
+        "active"
+      );
+
+      rotateBtn.textContent=
+        "▶ Auto Rotate";
+
+    }else{
+
+      setBrainTransparency(false);
+
+      setCerebellarHighlight(
+        highlighted
+      );
+
+      locationLabel.classList.remove(
+        "show"
+      );
+
+      showLocationBtn.classList.remove(
+        "active"
+      );
+
+      showLocationBtn.textContent=
+        "📍 Show Cerebellar Cortex";
+    }
+  }
+);
+
+const highlightBtn=
+  document.getElementById(
+    "highlight"
+  );
+
+highlightBtn.addEventListener(
+  "click",
+  ()=>{
+
+    highlighted=
+      !highlighted;
+
+    setCerebellarHighlight(
+      highlighted
+    );
+
+    if(highlighted){
+
+      highlightBtn.classList.add(
+        "active"
+      );
+
+      highlightBtn.textContent=
+        "🔴 Highlight Cerebellar Cortex";
+
+    }else{
+
+      highlightBtn.classList.remove(
+        "active"
+      );
+
+      highlightBtn.textContent=
+        "🧠 Highlight Cerebellar Cortex";
+    }
+
+    if(locationShown){
+      setBrainTransparency(true);
+    }
+  }
+);
+
+const rotateBtn=
+  document.getElementById(
+    "rotate"
+  );
+
+rotateBtn.addEventListener(
+  "click",
+  ()=>{
+
+    controls.autoRotate=
+      !controls.autoRotate;
+
+    rotateBtn.classList.toggle(
+      "active",
+      controls.autoRotate
+    );
+
+    rotateBtn.textContent=
+      controls.autoRotate
+        ? "⟳ Auto Rotate"
+        : "▶ Auto Rotate";
+  }
+);
+
+document
+  .getElementById("reset")
+  .addEventListener(
+    "click",
+    ()=>{
+
+      camera.position.set(
+        3.2,
+        .3,
+        8.5
+      );
+
+      controls.target.set(
+        0,
+        -.3,
+        0
+      );
+
+      controls.update();
+
+      locationShown=false;
+
+      setBrainTransparency(false);
+      setCerebellarHighlight(true);
+
+      locationLabel.classList.remove(
+        "show"
+      );
+
+      showLocationBtn.classList.remove(
+        "active"
+      );
+
+      showLocationBtn.textContent=
+        "📍 Show Cerebellar Cortex";
+
+      highlighted=true;
+
+      highlightBtn.classList.add(
+        "active"
+      );
+
+      highlightBtn.textContent=
+        "🔴 Highlight Cerebellar Cortex";
+    }
+  );
 
 function updateLabel(){
 
-    if(!cerebellarHighlightMesh)
-        return;
+  if(!locationShown){
+    return;
+  }
 
-    const position =
-    new THREE.Vector3();
+  if(cerebellarMeshes.length===0){
+    return;
+  }
 
-    cerebellarHighlightMesh
-    .getWorldPosition(
-        position
+  const box=
+    new THREE.Box3();
+
+  cerebellarMeshes.forEach(
+    mesh=>{
+      box.expandByObject(mesh);
+    }
+  );
+
+  if(box.isEmpty()){
+    return;
+  }
+
+  const position=
+    box.getCenter(
+      new THREE.Vector3()
     );
 
-    position.project(
-        camera
-    );
+  position.project(camera);
 
-    const x =
-    (position.x + 1) /
-    2 *
+  const x=
+    (position.x+1)/2*
     canvas.clientWidth;
 
-    const y =
-    (-position.y + 1) /
-    2 *
+  const y=
+    (-position.y+1)/2*
     canvas.clientHeight;
 
-    cerebellarLabel.style.left =
-    x + "px";
+  locationLabel.style.left=
+    x+"px";
 
-    cerebellarLabel.style.top =
-    (y - 70) + "px";
+  locationLabel.style.top=
+    (y-35)+"px";
 }
-
-/* ================= RESIZE ================= */
 
 function resize(){
 
-    const width =
+  const width=
     canvas.clientWidth;
 
-    const height =
+  const height=
     canvas.clientHeight;
 
-    if(
-        width <= 0 ||
-        height <= 0
-    )
-        return;
+  if(width<=0||height<=0){
+    return;
+  }
 
-    camera.aspect =
-    width / height;
+  camera.aspect=
+    width/height;
 
-    camera.updateProjectionMatrix();
+  camera.updateProjectionMatrix();
 
-    renderer.setSize(
-        width,
-        height,
-        false
-    );
+  renderer.setSize(
+    width,
+    height,
+    false
+  );
 }
 
 window.addEventListener(
-    "resize",
-    resize
+  "resize",
+  resize
 );
-
-/* ================= HIGHLIGHT ================= */
-
-const highlightBtn =
-document.getElementById(
-    "highlight"
-);
-
-highlightBtn.addEventListener(
-"click",
-function(){
-
-    highlighted =
-    !highlighted;
-
-    if(cerebellarHighlightMesh){
-
-        cerebellarHighlightMesh.visible =
-        highlighted;
-
-    }
-
-    if(cerebellarOutline){
-
-        cerebellarOutline.visible =
-        highlighted;
-
-    }
-
-    cerebellarLabel.classList.toggle(
-        "show",
-        highlighted
-    );
-
-    highlightBtn.classList.toggle(
-        "active",
-        highlighted
-    );
-
-    highlightBtn.textContent =
-
-    highlighted
-
-    ? "⚪ Highlight Cerebellar Cortex"
-
-    : "⚫ Show Cerebellar Cortex";
-
-});
-
-/* ================= ROTATE ================= */
-
-const rotateBtn =
-document.getElementById(
-    "rotate"
-);
-
-rotateBtn.addEventListener(
-"click",
-function(){
-
-    controls.autoRotate =
-    !controls.autoRotate;
-
-    rotateBtn.classList.toggle(
-        "active",
-        controls.autoRotate
-    );
-
-    rotateBtn.textContent =
-
-    controls.autoRotate
-
-    ? "⟳ Auto Rotate"
-
-    : "▶ Auto Rotate";
-
-});
-
-/* ================= RESET ================= */
-
-document.getElementById(
-    "reset"
-).addEventListener(
-"click",
-function(){
-
-    camera.position.set(
-        3.2,
-        0.3,
-        8.5
-    );
-
-    controls.target.set(
-        0,
-        -0.3,
-        0
-    );
-
-    controls.update();
-
-});
-
-/* ================= ANIMATION ================= */
 
 function animate(){
 
-    requestAnimationFrame(
-        animate
-    );
+  requestAnimationFrame(
+    animate
+  );
 
-    controls.update();
+  controls.update();
 
-    updateLabel();
+  updateLabel();
 
-    renderer.render(
-        scene,
-        camera
-    );
+  renderer.render(
+    scene,
+    camera
+  );
 }
 
-/* ================= START ================= */
-
 resize();
-
 animate();
-
 loadRealBrain();
 
-/* ================= LOCATION ================= */
+</script>
 
-const locationButton =
-document.getElementById(
-    "locationButton"
-);
+<script>
 
-const locationVisual =
-document.getElementById(
-    "locationVisual"
-);
+function checkAnswer(
+  button,
+  correct
+){
 
-locationButton.addEventListener(
-"click",
-function(){
+  const parent=
+    button.parentElement;
 
-    setTimeout(
-    function(){
-
-        locationVisual.classList.add(
-            "show"
-        );
-
-    },50);
-
-});
-
-/* ================= QUIZ ================= */
-
-let score = 0;
-let answered = 0;
-
-const questionBlocks =
-document.querySelectorAll(
-    ".question-block"
-);
-
-questionBlocks.forEach(
-function(question){
-
-    const correctAnswer =
-    question.dataset.answer;
-
-    const options =
-    question.querySelectorAll(
-        ".option"
+  const options=
+    parent.querySelectorAll(
+      ".option"
     );
 
-    const feedback =
-    question.querySelector(
-        ".question-feedback"
+  options.forEach(
+    option=>{
+      option.classList.remove(
+        "correct",
+        "wrong"
+      );
+    }
+  );
+
+  if(correct){
+
+    button.classList.add(
+      "correct"
     );
 
-    let alreadyAnswered =
-    false;
+  }else{
 
-    options.forEach(
-    function(option){
+    button.classList.add(
+      "wrong"
+    );
+  }
 
-        option.addEventListener(
-        "click",
-        function(){
+  updateQuizScore();
+}
 
-            if(alreadyAnswered)
-                return;
+function updateQuizScore(){
 
-            alreadyAnswered = true;
-
-            const selected =
-            option.dataset.option;
-
-            options.forEach(
-            function(btn){
-
-                btn.disabled = true;
-
-            });
-
-            if(
-                selected === correctAnswer
-            ){
-
-                score++;
-
-                option.classList.add(
-                    "correct"
-                );
-
-                feedback.textContent =
-                "✓ Correct! · إجابة صحيحة";
-
-                feedback.style.color =
-                "#78e0a0";
-
-            }
-
-            else{
-
-                option.classList.add(
-                    "wrong"
-                );
-
-                options.forEach(
-                function(btn){
-
-                    if(
-                        btn.dataset.option ===
-                        correctAnswer
-                    ){
-
-                        btn.classList.add(
-                            "correct"
-                        );
-
-                    }
-
-                });
-
-                feedback.textContent =
-                "✗ Incorrect. The correct answer is highlighted. · إجابة غير صحيحة، الإجابة الصحيحة موضحة.";
-
-                feedback.style.color =
-                "#ff8792";
-
-            }
-
-            answered++;
-
-            if(
-                answered ===
-                questionBlocks.length
-            ){
-
-                showFinalScore();
-
-            }
-
-        });
-
-    });
-
-});
-
-/* ================= FINAL SCORE ================= */
-
-function showFinalScore(){
-
-    const result =
+  const result=
     document.getElementById(
-        "quizResult"
+      "quizResult"
     );
 
-    let message = "";
+  let answered=0;
+  let correctAnswers=0;
 
-    if(score === 3){
+  document
+    .querySelectorAll(".question")
+    .forEach(
+      question=>{
 
-        message =
-        "🔥 Perfect! Excellent work! · ممتاز! إجاباتك كلها صحيحة!";
+        const selected=
+          question.querySelector(
+            ".correct,.wrong"
+          );
 
-    }
+        if(selected){
 
-    else if(score === 2){
+          answered++;
 
-        message =
-        "👏 Great job! Just one more to master it. · شغل ممتاز! باقي إجابة واحدة فقط.";
+          if(
+            selected.classList.contains(
+              "correct"
+            )
+          ){
 
-    }
+            correctAnswers++;
+          }
+        }
+      }
+    );
 
-    else if(score === 1){
+  if(answered>0){
 
-        message =
-        "💡 Good start! Review the anatomy and try again. · بداية جيدة! راجعي التشريح وجربي مرة أخرى.";
+    result.style.display="block";
 
-    }
-
-    else{
-
-        message =
-        "🧠 Keep learning! Review the cerebellar cortex and try again. · كملي تعلم! راجعي القشرة المخيخية وجربي مرة أخرى.";
-
-    }
-
-    result.innerHTML =
-
-    "<strong>" +
-    message +
-    "</strong>" +
-
-    "<br><br>" +
-
-    "Final Score · النتيجة النهائية: " +
-
-    score +
-
-    " / 3";
+    result.textContent=
+      "Score: "+
+      correctAnswers+
+      " / "+
+      answered;
+  }
 }
 
 </script>
 
 </body>
-  </html>
+</html>
