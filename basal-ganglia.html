@@ -3,19 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>NeuroAtlas | Basal Ganglia</title>
 
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
-html{
-  scroll-behavior:smooth;
-}
+html{scroll-behavior:smooth}
 
 body{
   background:#050b13;
@@ -23,10 +16,6 @@ body{
   font-family:Arial,Helvetica,sans-serif;
   line-height:1.7;
 }
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
 
 nav{
   height:70px;
@@ -42,23 +31,13 @@ nav a{
   font-size:14px;
 }
 
-nav a:hover{
-  color:white;
-}
-
-/* =========================================================
-   CONTAINER
-========================================================= */
+nav a:hover{color:white}
 
 .container{
   max-width:1200px;
   margin:auto;
   padding:60px 7% 100px;
 }
-
-/* =========================================================
-   HERO
-========================================================= */
 
 .eyebrow{
   color:#61b5ff;
@@ -83,14 +62,10 @@ h1{
 
 .hero p{
   color:#a6b6c7;
-  max-width:820px;
+  max-width:800px;
   font-size:18px;
   line-height:1.8;
 }
-
-/* =========================================================
-   ACTION BUTTONS
-========================================================= */
 
 .actions{
   display:flex;
@@ -107,8 +82,7 @@ h1{
   color:#bdd0e0;
   text-decoration:none;
   cursor:pointer;
-  transition:.25s;
-  font-size:14px;
+  transition:.2s;
 }
 
 .action-button:hover{
@@ -117,15 +91,11 @@ h1{
   border-color:#61b5ff;
 }
 
-.action-button.active-location{
-  background:#14291e;
-  border-color:#8fd3a8;
-  color:#c8f5d5;
+.action-button.location-active{
+  background:#241417;
+  border-color:#ff4d5e;
+  color:#ffd0d5;
 }
-
-/* =========================================================
-   3D VIEWER
-========================================================= */
 
 .viewer{
   margin-top:60px;
@@ -173,37 +143,97 @@ h1{
   width:100%;
   height:100%;
   display:block;
-
-  /*
-   * Only the existing brain canvas changes opacity.
-   * No new 3D object is created.
-   */
-  transition:opacity .4s ease;
 }
 
-#brainCanvas.location-mode{
-  opacity:.58;
+/* LOCATION OVERLAY */
+.location-overlay{
+  position:absolute;
+  inset:0;
+  z-index:10;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity:.35s;
 }
 
-/* =========================================================
-   LOADING
-========================================================= */
+.location-overlay.show{
+  opacity:1;
+}
 
+.location-target{
+  position:absolute;
+  left:52%;
+  top:47%;
+  width:145px;
+  height:95px;
+  transform:translate(-50%,-50%);
+  border:3px solid #ff4d5e;
+  border-radius:50%;
+  box-shadow:
+    0 0 15px rgba(255,77,94,.75),
+    0 0 35px rgba(255,77,94,.35);
+  animation:pulseTarget 1.5s infinite;
+}
+
+.location-target::after{
+  content:"";
+  position:absolute;
+  inset:18px 25px;
+  border:2px solid rgba(255,255,255,.8);
+  border-radius:50%;
+}
+
+.location-target-label{
+  position:absolute;
+  left:58%;
+  top:40%;
+  padding:9px 14px;
+  background:rgba(5,10,17,.95);
+  border:1px solid #ff4d5e;
+  border-radius:9px;
+  color:#ffd0d5;
+  font-size:12px;
+  font-weight:bold;
+  letter-spacing:1px;
+  white-space:nowrap;
+}
+
+.location-target-line{
+  position:absolute;
+  left:55%;
+  top:43%;
+  width:80px;
+  height:2px;
+  background:#ff4d5e;
+  transform:rotate(-18deg);
+  transform-origin:left center;
+}
+
+@keyframes pulseTarget{
+  0%,100%{
+    box-shadow:
+      0 0 15px rgba(255,77,94,.75),
+      0 0 35px rgba(255,77,94,.35);
+  }
+  50%{
+    box-shadow:
+      0 0 25px rgba(255,77,94,1),
+      0 0 55px rgba(255,77,94,.55);
+  }
+}
+
+/* LOADING */
 .loading{
   position:absolute;
   inset:0;
   z-index:20;
-
   display:flex;
   align-items:center;
   justify-content:center;
   flex-direction:column;
   gap:16px;
-
   background:#02060b;
   color:#9db0c3;
   font-size:14px;
-
   transition:opacity .8s;
 }
 
@@ -227,66 +257,7 @@ h1{
   transition:width .3s;
 }
 
-/* =========================================================
-   BASAL GANGLIA LABEL
-========================================================= */
-
-.bg-label{
-  position:absolute;
-  z-index:30;
-  pointer-events:none;
-
-  transform:translate(-50%,-100%);
-
-  display:none;
-}
-
-.bg-label.show{
-  display:block;
-}
-
-.label-box{
-  position:relative;
-
-  padding:9px 15px;
-
-  border-radius:10px;
-
-  background:rgba(5,10,17,.96);
-  border:1.5px solid #8fd3a8;
-
-  color:#c8f5d5;
-
-  font-size:12px;
-  font-weight:bold;
-  letter-spacing:1px;
-
-  white-space:nowrap;
-
-  box-shadow:
-    0 0 12px rgba(143,211,168,.25),
-    0 0 25px rgba(143,211,168,.12);
-}
-
-.label-box::after{
-  content:"";
-
-  position:absolute;
-  left:50%;
-  bottom:-15px;
-
-  width:1.5px;
-  height:15px;
-
-  background:#8fd3a8;
-
-  transform:translateX(-50%);
-}
-
-/* =========================================================
-   CONTROLS
-========================================================= */
-
+/* CONTROLS */
 .controls{
   display:flex;
   gap:10px;
@@ -298,12 +269,9 @@ h1{
 .controls button{
   padding:11px 17px;
   border-radius:9px;
-
   background:#0b1928;
   border:1px solid #31516d;
-
   color:#bdd0e0;
-
   cursor:pointer;
   transition:.2s;
 }
@@ -314,17 +282,18 @@ h1{
 }
 
 .controls button.active{
-  background:#14291e;
-  border-color:#8fd3a8;
-  color:#c8f5d5;
+  background:#241417;
+  border-color:#ff4d5e;
+  color:#ffd0d5;
 }
 
-/* =========================================================
-   INFORMATION
-========================================================= */
-
-.section{
+/* LOCATION */
+.location{
   margin-top:70px;
+  padding:35px;
+  background:#091522;
+  border:1px solid #172b3e;
+  border-radius:18px;
 }
 
 .section-label{
@@ -333,6 +302,90 @@ h1{
   font-size:11px;
   text-transform:uppercase;
   margin-bottom:8px;
+}
+
+.location h2{
+  font-size:32px;
+  margin-bottom:12px;
+}
+
+.location-intro{
+  color:#91a5b8;
+  max-width:900px;
+  line-height:1.9;
+  margin-bottom:30px;
+}
+
+/* OLD-STYLE LOCATION DIAGRAM */
+.brain-visual{
+  width:100%;
+  overflow:hidden;
+}
+
+.location-svg{
+  display:block;
+  width:100%;
+  max-width:800px;
+  height:auto;
+  margin:auto;
+}
+
+.location-brain{
+  fill:#263d55;
+  stroke:#71869e;
+  stroke-width:3;
+}
+
+.location-deep{
+  fill:#ff8f9b;
+  stroke:#ffd0d5;
+  stroke-width:2.5;
+  opacity:.95;
+}
+
+.location-deep-glow{
+  fill:#ff4d5e;
+  opacity:.28;
+  filter:blur(8px);
+}
+
+.location-line{
+  stroke:#8fc7ff;
+  stroke-width:2;
+}
+
+.location-ganglia-line{
+  stroke:#ff4d5e;
+  stroke-width:3;
+}
+
+.location-svg-label{
+  fill:white;
+  font-size:18px;
+  font-weight:bold;
+}
+
+.location-ganglia-label{
+  fill:#ff4d5e;
+  font-size:21px;
+  font-weight:bold;
+}
+
+.location-arabic-label{
+  fill:#ffd6da;
+  font-size:16px;
+  font-weight:bold;
+}
+
+.location-caption{
+  text-align:center;
+  color:#9fb0c3;
+  margin-top:15px;
+}
+
+/* INFO */
+.section{
+  margin-top:70px;
 }
 
 .section h2{
@@ -348,144 +401,6 @@ h1{
   margin-bottom:30px;
 }
 
-/* =========================================================
-   LOCATION
-========================================================= */
-
-.location{
-  margin-top:70px;
-
-  padding:35px;
-
-  background:#091522;
-
-  border:1px solid #172b3e;
-
-  border-radius:18px;
-
-  transition:
-    border-color .35s,
-    box-shadow .35s;
-}
-
-.location.location-active{
-  border-color:#8fd3a8;
-
-  box-shadow:
-    0 0 0 1px rgba(143,211,168,.10),
-    0 20px 60px rgba(0,0,0,.25);
-}
-
-.location h2{
-  font-size:32px;
-  margin-bottom:12px;
-}
-
-.location-intro{
-  color:#91a5b8;
-  max-width:900px;
-  line-height:1.9;
-  margin-bottom:30px;
-}
-
-.brain-visual{
-  width:100%;
-  overflow:hidden;
-}
-
-.location-svg{
-  display:block;
-  width:100%;
-  max-width:800px;
-  height:auto;
-  margin:auto;
-}
-
-/* Brain outline */
-
-.location-brain{
-  fill:#f1c5d0;
-  stroke:#71869e;
-  stroke-width:3;
-}
-
-/* Deep structures */
-
-.location-deep{
-  fill:#d998aa;
-  stroke:#8f5667;
-  stroke-width:2.5;
-}
-
-.location-deep-light{
-  fill:#e8adbb;
-  stroke:#9d6070;
-  stroke-width:2.5;
-}
-
-/* Internal connection */
-
-.location-connection{
-  fill:none;
-  stroke:#8f5667;
-  stroke-width:5;
-  stroke-linecap:round;
-}
-
-/* Location highlight */
-
-.location-highlight-glow{
-  fill:#8fd3a8;
-  opacity:.25;
-  filter:blur(7px);
-}
-
-.location-highlight{
-  fill:#8fd3a8;
-  stroke:#d8ffe4;
-  stroke-width:2;
-}
-
-.location-line{
-  stroke:#8fc7ff;
-  stroke-width:2;
-  fill:none;
-}
-
-.location-green-line{
-  stroke:#8fd3a8;
-  stroke-width:3;
-  fill:none;
-}
-
-.location-svg-label{
-  fill:white;
-  font-size:17px;
-  font-weight:bold;
-}
-
-.location-green-label{
-  fill:#8fd3a8;
-  font-size:20px;
-  font-weight:bold;
-}
-
-.location-arabic-label{
-  fill:#c8f5d5;
-  font-size:15px;
-  font-weight:bold;
-}
-
-.location-caption{
-  text-align:center;
-  color:#9fb0c3;
-  margin-top:15px;
-}
-
-/* =========================================================
-   CARDS
-========================================================= */
-
 .cards{
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -494,26 +409,20 @@ h1{
 
 .card{
   padding:27px;
-
   background:#091522;
   border:1px solid #172b3e;
-
   border-radius:18px;
-
-  transition:
-    transform .2s,
-    border-color .2s;
+  transition:transform .2s,border-color .2s;
 }
 
 .card:hover{
   transform:translateY(-3px);
-  border-color:#31516d;
+  border-color:#4a2a30;
 }
 
 .card h3{
   font-size:18px;
   margin-bottom:13px;
-  color:#eef4fa;
   line-height:1.45;
 }
 
@@ -523,21 +432,15 @@ h1{
   line-height:1.8;
 }
 
-/* =========================================================
-   CLINICAL
-========================================================= */
-
 .clinical-section{
   margin-top:65px;
 }
 
 .clinical-box{
   padding:30px;
-
   background:#091522;
   border:1px solid #172b3e;
-  border-left:3px solid #8fd3a8;
-
+  border-left:3px solid #ff4d5e;
   border-radius:18px;
 }
 
@@ -552,10 +455,6 @@ h1{
   margin-bottom:0;
 }
 
-/* =========================================================
-   QUICK FACTS
-========================================================= */
-
 .facts-grid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
@@ -564,34 +463,23 @@ h1{
 
 .fact{
   padding:22px;
-
   background:#091522;
   border:1px solid #172b3e;
-
   border-radius:16px;
 }
 
 .fact span{
   display:block;
-
-  color:#8fd3a8;
-
+  color:#ff4d5e;
   font-size:11px;
   letter-spacing:2px;
-
   margin-bottom:12px;
 }
 
 .fact strong{
   display:block;
-
-  color:#eef4fa;
-
   font-size:14px;
-
   margin-bottom:8px;
-
-  line-height:1.5;
 }
 
 .fact p{
@@ -600,19 +488,11 @@ h1{
   line-height:1.7;
 }
 
-/* =========================================================
-   QUIZ
-========================================================= */
-
 .quiz{
   margin-top:65px;
-
   padding:30px;
-
   background:#091522;
-
   border:1px solid #172b3e;
-
   border-radius:18px;
 }
 
@@ -630,48 +510,28 @@ h1{
   margin-bottom:30px;
 }
 
-.question:last-child{
-  margin-bottom:0;
-}
-
 .question p{
-  color:#eef4fa;
-
   font-size:16px;
-
   margin-bottom:12px;
-
   font-weight:bold;
 }
 
 .option{
   display:block;
-
   width:100%;
-
   padding:12px 15px;
-
   margin-top:9px;
-
   background:#0b1928;
-
   color:#c7d5e2;
-
   border:1px solid #263951;
-
   border-radius:9px;
-
   text-align:left;
-
   cursor:pointer;
-
   font-size:14px;
-
-  transition:.2s;
 }
 
 .option:hover{
-  border-color:#8fd3a8;
+  border-color:#ff4d5e;
   background:#111e2c;
 }
 
@@ -689,26 +549,15 @@ h1{
 
 .quiz-result{
   margin-top:25px;
-
   padding:15px;
-
   border-radius:10px;
-
   background:#0b1928;
-
   border:1px solid #263951;
-
   color:#aebdce;
-
   display:none;
 }
 
-/* =========================================================
-   MOBILE
-========================================================= */
-
 @media(max-width:900px){
-
   .cards{
     grid-template-columns:repeat(2,1fr);
   }
@@ -719,7 +568,6 @@ h1{
 }
 
 @media(max-width:800px){
-
   .scene{
     height:450px;
   }
@@ -730,7 +578,6 @@ h1{
 }
 
 @media(max-width:600px){
-
   .cards{
     grid-template-columns:1fr;
   }
@@ -746,6 +593,19 @@ h1{
   .location{
     padding:20px;
   }
+
+  .location-target{
+    left:48%;
+    top:47%;
+    width:105px;
+    height:70px;
+  }
+
+  .location-target-label{
+    left:52%;
+    top:32%;
+    font-size:10px;
+  }
 }
 </style>
 </head>
@@ -753,84 +613,68 @@ h1{
 <body>
 
 <nav>
-  <a href="./explore.html">← Back to Explore</a>
+<a href="./explore.html">← Back to Explore</a>
 </nav>
 
 <main class="container">
 
-<!-- =======================================================
-     HERO
-======================================================= -->
-
 <div class="eyebrow">
-  Deep Brain Anatomy · NeuroAtlas
+Deep Brain Anatomy · NeuroAtlas
 </div>
 
-<h1>
-  Basal Ganglia
-</h1>
+<h1>Basal Ganglia</h1>
 
 <div class="arabic-title">
-  العقد القاعدية
+العقد القاعدية
 </div>
 
 <div class="hero">
-
 <p>
 The basal ganglia are a group of deep gray-matter nuclei located
 within the cerebral hemispheres. They play an important role in
-movement selection, motor learning, habit formation, and several
-cognitive and emotional functions.
+movement control, motor learning, habit formation, and several
+cognitive functions.
 </p>
-
 </div>
-
-<!-- =======================================================
-     ACTION BUTTONS
-======================================================= -->
 
 <div class="actions">
 
-<button
+<a
   class="action-button"
-  id="showLocationBtn"
-  type="button"
+  id="showLocation"
+  href="#location"
 >
-  📍 Show Location
-</button>
+📍 Show Location
+</a>
 
-<button
+<a
   class="action-button"
-  id="learnBtn"
-  type="button"
+  href="#information"
 >
-  🧠 Learn About the Basal Ganglia
-</button>
+🧠 Learn About the Basal Ganglia
+</a>
 
-<button
+<a
   class="action-button"
-  id="quizBtn"
-  type="button"
+  href="#quiz"
 >
-  📝 Test Yourself
-</button>
+📝 Test Yourself
+</a>
 
 </div>
 
-<!-- =======================================================
-     3D VIEWER
-======================================================= -->
+<!-- 3D VIEWER -->
 
 <div class="viewer">
 
 <div class="viewer-header">
 
 <div class="viewer-title">
-  Human Brain · Interactive 3D
+Human Brain · Interactive 3D
 </div>
 
 <div class="viewer-status">
-  DRAG TO ROTATE · SCROLL TO ZOOM
+DRAG TO ROTATE · SCROLL TO ZOOM
 </div>
 
 </div>
@@ -840,24 +684,32 @@ cognitive and emotional functions.
 <div id="loading" class="loading">
 
 <span id="loadText">
-  Loading real brain model...
+Loading real brain model...
 </span>
 
 <div class="loading-bar">
-  <div
-    id="loadBar"
-    class="loading-bar-inner"
-  ></div>
+<div
+id="loadBar"
+class="loading-bar-inner"
+></div>
 </div>
 
 </div>
 
 <canvas id="brainCanvas"></canvas>
 
-<div id="bgLabel" class="bg-label">
+<!-- LOCATION INDICATOR -->
+<div
+id="locationOverlay"
+class="location-overlay"
+>
 
-<div class="label-box">
-  BASAL GANGLIA
+<div class="location-target"></div>
+
+<div class="location-target-line"></div>
+
+<div class="location-target-label">
+BASAL GANGLIA
 </div>
 
 </div>
@@ -867,757 +719,477 @@ cognitive and emotional functions.
 <div class="controls">
 
 <button
-  id="highlight"
-  class="active"
+id="highlight"
+class="active"
 >
-  🟢 Highlight Location
+🔴 Highlight Location
 </button>
 
 <button
-  id="rotate"
-  class="active"
+id="rotate"
+class="active"
 >
-  ⟳ Auto Rotate
+⟳ Auto Rotate
 </button>
 
 <button
-  id="reset"
+id="reset"
 >
-  ↻ Reset View
+↻ Reset View
 </button>
 
 </div>
 
 </div>
 
-<!-- =======================================================
-     LOCATION
-======================================================= -->
+<!-- LOCATION -->
 
 <section
-  id="location"
-  class="location"
+id="location"
+class="location"
 >
 
 <div class="section-label">
-  Location · الموقع
+Location · الموقع
 </div>
 
 <h2>
-  📍 Where are the Basal Ganglia?
+📍 Where are the Basal Ganglia?
 </h2>
 
 <p class="location-intro">
 
 The basal ganglia are located deep within the cerebral hemispheres,
-rather than on the surface of the brain. They lie near the lateral
-ventricles and thalamus and are closely related to the internal
-capsule.
+beneath the cerebral cortex. They are not a surface structure; they
+form a collection of nuclei surrounding the internal capsule and
+include the caudate nucleus, putamen, and globus pallidus.
 
 <br><br>
 
-The major structures include the caudate nucleus, putamen, globus
-pallidus, and functionally related nuclei such as the subthalamic
-nucleus and substantia nigra.
-
-<br><br>
-
-تقع العقد القاعدية في عمق نصفي الكرة المخية وليست على سطح الدماغ.
-وتوجد بالقرب من البطينات الجانبية والمهاد وترتبط ارتباطاً وثيقاً
-بالكبسولة الداخلية.
+تقع العقد القاعدية في عمق نصفي الكرة المخية أسفل القشرة المخية.
+وهي ليست بنية سطحية، بل مجموعة من النوى العميقة المحيطة بالمحفظة
+الداخلية، وتشمل النواة المذنبة والبوتامن والكرة الشاحبة.
 
 </p>
 
 <div class="brain-visual">
 
 <svg
-  class="location-svg"
-  viewBox="0 0 800 560"
-  xmlns="http://www.w3.org/2000/svg"
-  aria-label="Simplified diagram showing the location of the basal ganglia"
+class="location-svg"
+viewBox="0 0 800 560"
+xmlns="http://www.w3.org/2000/svg"
+aria-label="Simplified basal ganglia location diagram"
 >
 
-<!-- =====================================================
-     CEREBRAL HEMISPHERE
-===================================================== -->
-
+<!-- BRAIN -->
 <path
-  class="location-brain"
-  d="
-    M145 110
-    C195 50 290 32 390 52
-    C505 75 580 145 575 240
-    C571 315 520 360 455 350
-    C390 340 350 295 295 285
-    C240 275 185 305 145 265
-    C108 228 112 153 145 110Z
-  "
+class="location-brain"
+d="
+M150 100
+C200 45 300 30 400 50
+C510 70 575 150 570 235
+C568 300 525 330 470 330
+C410 330 375 285 315 275
+C255 265 190 300 150 255
+C115 215 115 145 150 100Z
+"
 />
 
-<!-- =====================================================
-     INTERNAL DEEP STRUCTURE
-===================================================== -->
-
-<path
-  class="location-deep-light"
-  d="
-    M335 150
-    C365 120 414 122 438 151
-    C455 172 452 207 432 225
-    C407 247 369 242 345 220
-    C325 201 318 169 335 150Z
-  "
-/>
-
-<!-- =====================================================
-     CAUDATE NUCLEUS
-===================================================== -->
-
-<path
-  class="location-highlight-glow"
-  d="
-    M292 135
-    C325 105 375 112 396 137
-    C410 154 405 178 387 188
-    C368 199 340 192 324 177
-    C310 164 300 150 292 135Z
-  "
-/>
-
-<path
-  class="location-highlight"
-  d="
-    M292 135
-    C325 105 375 112 396 137
-    C410 154 405 178 387 188
-    C368 199 340 192 324 177
-    C310 164 300 150 292 135Z
-  "
-/>
-
-<!-- =====================================================
-     PUTAMEN
-===================================================== -->
-
-<path
-  class="location-highlight-glow"
-  d="
-    M400 205
-    C425 187 463 192 480 214
-    C495 234 486 263 461 275
-    C437 287 405 275 393 253
-    C384 235 386 216 400 205Z
-  "
-/>
-
-<path
-  class="location-highlight"
-  d="
-    M400 205
-    C425 187 463 192 480 214
-    C495 234 486 263 461 275
-    C437 287 405 275 393 253
-    C384 235 386 216 400 205Z
-  "
-/>
-
-<!-- =====================================================
-     GLOBUS PALLIDUS
-===================================================== -->
-
+<!-- GLOW BEHIND BASAL GANGLIA -->
 <ellipse
-  class="location-deep-light"
-  cx="420"
-  cy="242"
-  rx="25"
-  ry="34"
+class="location-deep-glow"
+cx="365"
+cy="205"
+rx="100"
+ry="65"
 />
 
-<!-- =====================================================
-     INTERNAL CAPSULE
-===================================================== -->
-
+<!-- CAUDATE -->
 <path
-  class="location-connection"
-  d="
-    M390 190
-    C405 205 405 224 397 245
-    C389 267 391 284 405 301
-  "
+class="location-deep"
+d="
+M305 155
+C325 135 365 132 390 148
+C407 159 409 177 397 190
+C383 204 361 207 345 218
+C330 229 313 225 302 211
+C293 198 295 175 305 155Z
+"
 />
 
-<!-- =====================================================
-     THALAMUS
-===================================================== -->
-
+<!-- PUTAMEN -->
 <ellipse
-  class="location-deep"
-  cx="342"
-  cy="275"
-  rx="46"
-  ry="38"
+class="location-deep"
+cx="405"
+cy="235"
+rx="43"
+ry="30"
 />
 
-<!-- =====================================================
-     LABEL — CAUDATE
-===================================================== -->
+<!-- GLOBUS PALLIDUS -->
+<ellipse
+class="location-deep"
+cx="454"
+cy="235"
+rx="22"
+ry="29"
+/>
 
+<!-- INTERNAL CAPSULE CONTEXT -->
+<path
+d="
+M420 160
+C414 185 414 215 425 260
+"
+fill="none"
+stroke="#8fc7ff"
+stroke-width="7"
+opacity=".7"
+/>
+
+<!-- CAUDATE LABEL -->
 <line
-  class="location-green-line"
-  x1="345"
-  y1="140"
-  x2="180"
-  y2="105"
+class="location-ganglia-line"
+x1="345"
+y1="170"
+x2="185"
+y2="125"
 />
 
 <text
-  class="location-green-label"
-  x="55"
-  y="102"
+class="location-svg-label"
+x="70"
+y="120"
 >
-  CAUDATE
+CAUDATE
 </text>
 
-<text
-  class="location-arabic-label"
-  x="55"
-  y="126"
->
-  النواة المذنبة
-</text>
-
-<!-- =====================================================
-     LABEL — PUTAMEN
-===================================================== -->
-
+<!-- PUTAMEN LABEL -->
 <line
-  class="location-green-line"
-  x1="438"
-  y1="220"
-  x2="600"
-  y2="165"
+class="location-ganglia-line"
+x1="405"
+y1="235"
+x2="590"
+y2="290"
 />
 
 <text
-  class="location-green-label"
-  x="610"
-  y="170"
+class="location-ganglia-label"
+x="600"
+y="295"
 >
-  PUTAMEN
+PUTAMEN
 </text>
 
-<text
-  class="location-arabic-label"
-  x="610"
-  y="194"
->
-  البوتامين
-</text>
-
-<!-- =====================================================
-     LABEL — GLOBUS PALLIDUS
-===================================================== -->
-
+<!-- GLOBUS PALLIDUS LABEL -->
 <line
-  class="location-line"
-  x1="425"
-  y1="245"
-  x2="590"
-  y2="280"
+class="location-ganglia-line"
+x1="454"
+y1="235"
+x2="590"
+y2="210"
 />
 
 <text
-  class="location-svg-label"
-  x="600"
-  y="285"
+class="location-svg-label"
+x="600"
+y="215"
 >
-  GLOBUS PALLIDUS
+GLOBUS PALLIDUS
 </text>
 
-<!-- =====================================================
-     MAIN LABEL
-===================================================== -->
-
+<!-- MAIN LABEL -->
 <line
-  class="location-green-line"
-  x1="390"
-  y1="180"
-  x2="620"
-  y2="365"
+class="location-ganglia-line"
+x1="365"
+y1="205"
+x2="620"
+y2="105"
 />
 
 <text
-  class="location-green-label"
-  x="625"
-  y="370"
+class="location-ganglia-label"
+x="630"
+y="100"
 >
-  BASAL GANGLIA
+BASAL GANGLIA
 </text>
 
 <text
-  class="location-arabic-label"
-  x="625"
-  y="395"
+class="location-arabic-label"
+x="630"
+y="128"
 >
-  العقد القاعدية
-</text>
-
-<!-- =====================================================
-     THALAMUS LABEL
-===================================================== -->
-
-<line
-  class="location-line"
-  x1="340"
-  y1="275"
-  x2="160"
-  y2="390"
-/>
-
-<text
-  class="location-svg-label"
-  x="55"
-  y="395"
->
-  THALAMUS
-</text>
-
-<text
-  class="location-arabic-label"
-  x="55"
-  y="419"
->
-  المهاد
+العقد القاعدية
 </text>
 
 </svg>
 
 <p class="location-caption">
-
-🟢 The highlighted deep structures represent the approximate
-location of the basal ganglia within the cerebral hemisphere.
-
+🔴 The highlighted region represents the approximate deep location
+of the basal ganglia within the cerebral hemisphere.
 </p>
 
 </div>
 
 </section>
 
-<!-- =======================================================
-     INFORMATION
-======================================================= -->
+<!-- INFORMATION -->
 
 <section
-  id="information"
-  class="section"
+id="information"
+class="section"
 >
 
 <div class="section-label">
-  Basal Ganglia Anatomy · تشريح العقد القاعدية
+Basal Ganglia Anatomy · تشريح العقد القاعدية
 </div>
 
 <h2>
-  Basal Ganglia · العقد القاعدية
+Basal Ganglia · العقد القاعدية
 </h2>
 
 <p class="section-intro">
 
-The basal ganglia are interconnected nuclei located deep within the
-brain. Rather than directly producing movement, they help select,
-initiate, regulate, and suppress motor programs.
+The basal ganglia are a collection of interconnected deep nuclei
+that participate in motor control, procedural learning, cognition,
+and behavior. Their major components include the caudate nucleus,
+putamen, and globus pallidus, with important functional connections
+to the substantia nigra and subthalamic nucleus.
 
 <br><br>
 
-العقد القاعدية هي مجموعة من النوى المترابطة الموجودة في عمق الدماغ.
-وهي لا تنتج الحركة مباشرة، لكنها تساعد على اختيار البرامج الحركية
-وبدئها وتنظيمها وتثبيط الحركات غير المرغوبة.
+العقد القاعدية هي مجموعة من النوى العميقة المترابطة التي تشارك في
+التحكم الحركي والتعلم الإجرائي وبعض الوظائف المعرفية والسلوكية.
+وتشمل مكوناتها الرئيسية النواة المذنبة والبوتامن والكرة الشاحبة،
+مع اتصالات وظيفية مهمة مع المادة السوداء والنواة تحت المهاد.
 
 </p>
 
 <div class="cards">
 
 <div class="card">
-
 <h3>
-  Caudate Nucleus · النواة المذنبة
+Caudate Nucleus · النواة المذنبة
 </h3>
 
 <p>
-
-The caudate follows the contour of the lateral ventricle and is
-divided into a head, body, and tail. It participates in motor,
+The caudate nucleus has a curved C-shaped configuration and lies
+adjacent to the lateral ventricle. It contributes to motor,
 cognitive, and associative circuits.
-
 <br><br>
-
-تتبع النواة المذنبة مسار البطين الجانبي وتنقسم إلى الرأس والجسم
-والذيل، وتشارك في الدوائر الحركية والمعرفية والترابطية.
-
+للنواة المذنبة شكل منحني قريب من حرف C وتقع بجوار البطين الجانبي،
+وتشارك في الدوائر الحركية والمعرفية والترابطية.
 </p>
-
 </div>
 
 <div class="card">
-
 <h3>
-  Putamen · البوتامين
+Putamen · البوتامن
 </h3>
 
 <p>
-
-The putamen is a major component of the striatum and is strongly
-involved in motor control and procedural learning.
-
+The putamen is a large lateral component of the basal ganglia.
+Together with the caudate nucleus it forms the striatum.
 <br><br>
-
-يُعد البوتامين مكوناً رئيسياً من الجسم المخطط، وله دور مهم في
-التحكم الحركي والتعلم الإجرائي.
-
+البوتامن مكوّن جانبي كبير من العقد القاعدية، ويكوّن مع النواة
+المذنبة الجسم المخطط.
 </p>
-
 </div>
 
 <div class="card">
-
 <h3>
-  Globus Pallidus · الكرة الشاحبة
+Globus Pallidus · الكرة الشاحبة
 </h3>
 
 <p>
-
-The globus pallidus contains internal and external segments that
-participate in basal ganglia output and regulatory circuits.
-
+The globus pallidus lies medial to the putamen and is divided into
+external and internal segments. It is an important output structure
+of the basal ganglia.
 <br><br>
-
-تحتوي الكرة الشاحبة على جزء داخلي وجزء خارجي يشاركان في دوائر
-الإخراج والتنظيم الخاصة بالعقد القاعدية.
-
+تقع الكرة الشاحبة إنسياً بالنسبة للبوتامن وتنقسم إلى جزء خارجي
+وجزء داخلي، وتُعد من أهم مناطق إخراج العقد القاعدية.
 </p>
-
 </div>
 
 <div class="card">
-
 <h3>
-  Striatum · الجسم المخطط
+Striatum · الجسم المخطط
 </h3>
 
 <p>
-
-The striatum is principally composed of the caudate and putamen.
-It receives major excitatory input from the cerebral cortex.
-
+The striatum consists mainly of the caudate nucleus and putamen.
+It serves as a major input region receiving information from the
+cerebral cortex.
 <br><br>
-
-يتكون الجسم المخطط بشكل أساسي من النواة المذنبة والبوتامين، ويتلقى
-مدخلات استثارية مهمة من القشرة المخية.
-
+يتكون الجسم المخطط أساساً من النواة المذنبة والبوتامن، ويعمل
+كمنطقة استقبال رئيسية للمعلومات القادمة من القشرة المخية.
 </p>
-
 </div>
 
 <div class="card">
-
 <h3>
-  Subthalamic Nucleus · النواة تحت المهادية
+Subthalamic Nucleus · النواة تحت المهاد
 </h3>
 
 <p>
-
-The subthalamic nucleus is functionally linked to the basal ganglia
-and helps regulate movement through excitatory influence on the
-internal globus pallidus.
-
+The subthalamic nucleus is functionally connected with the basal
+ganglia and contributes to regulation of movement through basal
+ganglia circuits.
 <br><br>
-
-ترتبط النواة تحت المهادية وظيفياً بالعقد القاعدية وتساهم في تنظيم
-الحركة من خلال تأثيرها الاستثاري على الكرة الشاحبة الداخلية.
-
+ترتبط النواة تحت المهاد وظيفياً بالعقد القاعدية وتساهم في تنظيم
+الحركة من خلال دوائر العقد القاعدية.
 </p>
-
 </div>
 
 <div class="card">
-
 <h3>
-  Substantia Nigra · المادة السوداء
+Substantia Nigra · المادة السوداء
 </h3>
 
 <p>
-
-The substantia nigra in the midbrain provides important dopaminergic
-input to the striatum.
-
+The substantia nigra is located in the midbrain and has important
+dopaminergic connections with the striatum.
 <br><br>
-
-توفر المادة السوداء الموجودة في الدماغ المتوسط مدخلات دوبامينية
-مهمة إلى الجسم المخطط.
-
+تقع المادة السوداء في الدماغ المتوسط ولها اتصالات دوبامينية مهمة
+مع الجسم المخطط.
 </p>
-
 </div>
 
 <div class="card">
-
 <h3>
-  Direct Pathway · المسار المباشر
+Motor Control · التحكم الحركي
 </h3>
 
 <p>
-
-The direct pathway generally facilitates desired movement by reducing
-inhibitory output from the basal ganglia to the thalamus.
-
+Basal ganglia circuits help select and regulate voluntary movement
+rather than directly generating muscle contraction.
 <br><br>
-
-يساهم المسار المباشر بشكل عام في تسهيل الحركة المرغوبة عن طريق
-تقليل الإخراج المثبط من العقد القاعدية إلى المهاد.
-
+تساعد دوائر العقد القاعدية على اختيار وتنظيم الحركات الإرادية بدلاً
+من توليد انقباض العضلات بشكل مباشر.
 </p>
-
 </div>
 
 <div class="card">
-
 <h3>
-  Indirect Pathway · المسار غير المباشر
+Procedural Learning · التعلم الإجرائي
 </h3>
 
 <p>
-
-The indirect pathway generally increases suppression of competing
-motor programs and helps prevent unwanted movements.
-
+The basal ganglia contribute to learning repeated motor and behavioral
+patterns, such as skills that become more automatic with practice.
 <br><br>
-
-يزيد المسار غير المباشر بشكل عام من تثبيط البرامج الحركية المنافسة
-ويساعد على منع الحركات غير المرغوبة.
-
+تساهم العقد القاعدية في تعلم الأنماط الحركية والسلوكية المتكررة،
+مثل المهارات التي تصبح أكثر تلقائية مع التدريب.
 </p>
-
 </div>
 
 <div class="card">
-
 <h3>
-  Dopamine · الدوبامين
+Clinical Relevance · الأهمية السريرية
 </h3>
 
 <p>
-
-Dopamine from the substantia nigra pars compacta modulates striatal
-circuits and influences the balance between movement facilitation
-and suppression.
-
+Disorders involving basal ganglia circuits can affect movement,
+producing symptoms such as tremor, rigidity, slowed movement,
+or involuntary movements.
 <br><br>
-
-ينظم الدوبامين القادم من المادة السوداء الكثيفة دوائر الجسم المخطط
-ويؤثر في التوازن بين تسهيل الحركة وتثبيطها.
-
+يمكن أن تؤثر اضطرابات دوائر العقد القاعدية في الحركة، مما قد يؤدي
+إلى أعراض مثل الرعشة أو التيبس أو بطء الحركة أو الحركات اللاإرادية.
 </p>
-
-</div>
-
-<div class="card">
-
-<h3>
-  Motor Control · التحكم الحركي
-</h3>
-
-<p>
-
-The basal ganglia help select appropriate movements, regulate their
-amplitude, and suppress competing motor programs.
-
-<br><br>
-
-تساعد العقد القاعدية على اختيار الحركات المناسبة وتنظيم شدتها
-وتثبيط البرامج الحركية المنافسة.
-
-</p>
-
-</div>
-
-<div class="card">
-
-<h3>
-  Habit Learning · تعلم العادات
-</h3>
-
-<p>
-
-Basal ganglia circuits contribute to procedural learning and the
-development of automatic behavioral patterns.
-
-<br><br>
-
-تساهم دوائر العقد القاعدية في التعلم الإجرائي وتكوين الأنماط
-السلوكية التلقائية.
-
-</p>
-
-</div>
-
-<div class="card">
-
-<h3>
-  Cognitive Functions · الوظائف المعرفية
-</h3>
-
-<p>
-
-Beyond movement, basal ganglia circuits participate in cognitive,
-motivational, and reward-related processes.
-
-<br><br>
-
-بالإضافة إلى الحركة، تشارك دوائر العقد القاعدية في العمليات
-المعرفية والتحفيزية والمرتبطة بالمكافأة.
-
-</p>
-
 </div>
 
 </div>
-
-<!-- =======================================================
-     CLINICAL
-======================================================= -->
 
 <div class="clinical-section">
 
 <div class="section-label">
-  Clinical Importance · الأهمية السريرية
+Clinical Importance · الأهمية السريرية
 </div>
 
 <h2>
-  Why the Basal Ganglia Matter
+Why the Basal Ganglia Matter
 </h2>
 
 <div class="clinical-box">
 
 <p>
-
-Disorders affecting basal ganglia circuits can alter the initiation,
-speed, smoothness, or suppression of movement. Different circuit
-disturbances can therefore produce very different movement
-patterns.
-
-</p>
-
-<p>
-
-Parkinson disease is associated with dysfunction of dopaminergic
-signaling involving the substantia nigra and striatum. Huntington
-disease primarily affects striatal neurons and can produce
-involuntary movements and cognitive or behavioral changes.
-
+The basal ganglia form interconnected circuits with the cerebral
+cortex and thalamus. These circuits help regulate movement,
+motor learning, and several cognitive processes.
 </p>
 
 <p dir="rtl">
-
-يمكن أن تؤدي اضطرابات دوائر العقد القاعدية إلى تغيير بدء الحركة
-وسرعتها وسلاستها أو القدرة على تثبيط الحركات غير المرغوبة. ولذلك
-يمكن أن تنتج اضطرابات الدوائر المختلفة أنماطاً حركية مختلفة.
-
+تشكل العقد القاعدية دوائر مترابطة مع القشرة المخية والمهاد. وتساعد
+هذه الدوائر في تنظيم الحركة والتعلم الحركي وعدة عمليات معرفية.
 </p>
 
 </div>
 
 </div>
 
-<!-- =======================================================
-     QUICK FACTS
-======================================================= -->
+<!-- FACTS -->
 
 <div class="section">
 
 <div class="section-label">
-  Quick Facts · معلومات سريعة
+Quick Facts · معلومات سريعة
 </div>
 
 <h2>
-  Basal Ganglia at a Glance
+Basal Ganglia at a Glance
 </h2>
 
 <div class="facts-grid">
 
 <div class="fact">
-
 <span>01</span>
-
-<strong>
-  Location · الموقع
-</strong>
-
+<strong>Location · الموقع</strong>
 <p>
 Deep within the cerebral hemispheres · في عمق نصفي الكرة المخية
 </p>
-
 </div>
 
 <div class="fact">
-
 <span>02</span>
-
-<strong>
-  Major Structures · البنى الرئيسية
-</strong>
-
+<strong>Main Structures · المكونات</strong>
 <p>
-Caudate, putamen, globus pallidus · المذنبة والبوتامين والكرة الشاحبة
+Caudate, putamen, globus pallidus · المذنبة والبوتامن والكرة الشاحبة
 </p>
-
 </div>
 
 <div class="fact">
-
 <span>03</span>
-
-<strong>
-  Main Role · الدور الرئيسي
-</strong>
-
+<strong>Function · الوظيفة</strong>
 <p>
-Movement selection and regulation · اختيار وتنظيم الحركة
+Movement regulation and learning · تنظيم الحركة والتعلم
 </p>
-
 </div>
 
 <div class="fact">
-
 <span>04</span>
-
-<strong>
-  Dopamine · الدوبامين
-</strong>
-
+<strong>Clinical · سريري</strong>
 <p>
-Important modulation from substantia nigra · تنظيم مهم من المادة السوداء
+Important in movement disorders · مهمة في اضطرابات الحركة
 </p>
-
 </div>
 
 </div>
-
 </div>
 
-<!-- =======================================================
-     QUIZ
-======================================================= -->
+<!-- QUIZ -->
 
 <div
-  id="quiz"
-  class="quiz"
+id="quiz"
+class="quiz"
 >
 
 <div class="section-label">
-  Mini Test
+Mini Test
 </div>
 
 <h2>
-  🧠 Test Yourself
+🧠 Test Yourself
 </h2>
 
 <p class="quiz-intro">
@@ -1627,35 +1199,35 @@ Choose the best answer for each question.
 <div class="question">
 
 <p>
-1. Where are the basal ganglia primarily located?
+1. Where are the basal ganglia located?
 </p>
 
 <button
-  class="option"
-  onclick="checkAnswer(this,false)"
+class="option"
+onclick="checkAnswer(this,false)"
 >
-  A. On the surface of the cerebellum
+A. Only on the surface of the cerebral cortex
 </button>
 
 <button
-  class="option"
-  onclick="checkAnswer(this,true)"
+class="option"
+onclick="checkAnswer(this,true)"
 >
-  B. Deep within the cerebral hemispheres
+B. Deep within the cerebral hemispheres
 </button>
 
 <button
-  class="option"
-  onclick="checkAnswer(this,false)"
+class="option"
+onclick="checkAnswer(this,false)"
 >
-  C. Inside the spinal cord
+C. Inside the spinal cord
 </button>
 
 <button
-  class="option"
-  onclick="checkAnswer(this,false)"
+class="option"
+onclick="checkAnswer(this,false)"
 >
-  D. Only within the brainstem
+D. Only inside the cerebellum
 </button>
 
 </div>
@@ -1663,35 +1235,35 @@ Choose the best answer for each question.
 <div class="question">
 
 <p>
-2. Which two structures form the main components of the striatum?
+2. Which structure is part of the striatum?
 </p>
 
 <button
-  class="option"
-  onclick="checkAnswer(this,true)"
+class="option"
+onclick="checkAnswer(this,false)"
 >
-  A. Caudate and putamen
+A. Hippocampus
 </button>
 
 <button
-  class="option"
-  onclick="checkAnswer(this,false)"
+class="option"
+onclick="checkAnswer(this,true)"
 >
-  B. Thalamus and hypothalamus
+B. Putamen
 </button>
 
 <button
-  class="option"
-  onclick="checkAnswer(this,false)"
+class="option"
+onclick="checkAnswer(this,false)"
 >
-  C. Hippocampus and amygdala
+C. Amygdala
 </button>
 
 <button
-  class="option"
-  onclick="checkAnswer(this,false)"
+class="option"
+onclick="checkAnswer(this,false)"
 >
-  D. Pons and medulla
+D. Medulla
 </button>
 
 </div>
@@ -1699,42 +1271,42 @@ Choose the best answer for each question.
 <div class="question">
 
 <p>
-3. Which neurotransmitter is especially important in basal ganglia modulation?
+3. What is an important role of the basal ganglia?
 </p>
 
 <button
-  class="option"
-  onclick="checkAnswer(this,false)"
+class="option"
+onclick="checkAnswer(this,true)"
 >
-  A. Acetylcholine only
+A. Regulation of movement
 </button>
 
 <button
-  class="option"
-  onclick="checkAnswer(this,true)"
+class="option"
+onclick="checkAnswer(this,false)"
 >
-  B. Dopamine
+B. Production of cerebrospinal fluid
 </button>
 
 <button
-  class="option"
-  onclick="checkAnswer(this,false)"
+class="option"
+onclick="checkAnswer(this,false)"
 >
-  C. Melatonin
+C. Hearing only
 </button>
 
 <button
-  class="option"
-  onclick="checkAnswer(this,false)"
+class="option"
+onclick="checkAnswer(this,false)"
 >
-  D. Histamine only
+D. Controlling breathing directly
 </button>
 
 </div>
 
 <div
-  id="quizResult"
-  class="quiz-result"
+id="quizResult"
+class="quiz-result"
 ></div>
 
 </div>
@@ -1742,10 +1314,6 @@ Choose the best answer for each question.
 </section>
 
 </main>
-
-<!-- =======================================================
-     THREE.JS
-======================================================= -->
 
 <script type="importmap">
 {
@@ -1758,64 +1326,24 @@ Choose the best answer for each question.
 
 <script type="module">
 
-import * as THREE from
-"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js";
+import * as THREE from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
 
-import {
-  OrbitControls
-} from
-"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js";
+const canvas=document.getElementById("brainCanvas");
+const loading=document.getElementById("loading");
+const loadText=document.getElementById("loadText");
+const loadBar=document.getElementById("loadBar");
 
-import {
-  GLTFLoader
-} from
-"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/GLTFLoader.js";
+const scene=new THREE.Scene();
 
-import {
-  DRACOLoader
-} from
-"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/DRACOLoader.js";
-
-
-/* =========================================================
-   ELEMENTS
-========================================================= */
-
-const canvas =
-  document.getElementById("brainCanvas");
-
-const loading =
-  document.getElementById("loading");
-
-const loadText =
-  document.getElementById("loadText");
-
-const loadBar =
-  document.getElementById("loadBar");
-
-const bgLabel =
-  document.getElementById("bgLabel");
-
-
-/* =========================================================
-   SCENE
-========================================================= */
-
-const scene =
-  new THREE.Scene();
-
-
-/* =========================================================
-   CAMERA
-========================================================= */
-
-const camera =
-  new THREE.PerspectiveCamera(
-    30,
-    1,
-    0.01,
-    100
-  );
+const camera=new THREE.PerspectiveCamera(
+  30,
+  1,
+  0.01,
+  100
+);
 
 camera.position.set(
   3.2,
@@ -1823,96 +1351,64 @@ camera.position.set(
   8.5
 );
 
-
-/* =========================================================
-   RENDERER
-========================================================= */
-
-const renderer =
-  new THREE.WebGLRenderer({
-    canvas,
-    antialias:true,
-    alpha:true
-  });
+const renderer=new THREE.WebGLRenderer({
+  canvas,
+  antialias:true,
+  alpha:true
+});
 
 renderer.setPixelRatio(
-  Math.min(
-    window.devicePixelRatio || 1,
-    2
-  )
+  Math.min(window.devicePixelRatio || 1,2)
 );
 
-renderer.toneMapping =
-  THREE.ACESFilmicToneMapping;
+renderer.toneMapping=THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure=.75;
 
-renderer.toneMappingExposure =
-  0.75;
+const controls=new OrbitControls(
+  camera,
+  canvas
+);
 
-
-/* =========================================================
-   ORBIT CONTROLS
-========================================================= */
-
-const controls =
-  new OrbitControls(
-    camera,
-    canvas
-  );
-
-controls.enableRotate = true;
-
-controls.rotateSpeed = 0.6;
-
-controls.enableDamping = true;
-
-controls.dampingFactor = 0.05;
-
-controls.enableZoom = true;
-
-controls.zoomSpeed = 0.6;
-
-controls.enablePan = false;
-
-controls.autoRotate = true;
-
-controls.autoRotateSpeed = 0.2;
+controls.enableRotate=true;
+controls.rotateSpeed=.6;
+controls.enableDamping=true;
+controls.dampingFactor=.05;
+controls.enableZoom=true;
+controls.zoomSpeed=.6;
+controls.enablePan=false;
+controls.autoRotate=true;
+controls.autoRotateSpeed=.2;
 
 controls.target.set(
   0,
-  -0.3,
+  -.3,
   0
 );
 
-controls.minDistance = 3.5;
+controls.minDistance=3.5;
+controls.maxDistance=16;
 
-controls.maxDistance = 16;
-
-
-/* =========================================================
-   LIGHTING
-========================================================= */
+/* LIGHTS */
 
 scene.add(
   new THREE.AmbientLight(
     0xffffff,
-    0.55
+    .55
   )
 );
 
-const hemi =
-  new THREE.HemisphereLight(
-    0xffdce6,
-    0x081018,
-    0.75
-  );
+const hemi=new THREE.HemisphereLight(
+  0xffdce6,
+  0x081018,
+  .75
+);
 
 scene.add(hemi);
 
-const keyLight =
-  new THREE.DirectionalLight(
-    0xfff5f0,
-    1.4
-  );
+const keyLight=new THREE.DirectionalLight(
+  0xfff5f0,
+  1.4
+);
 
 keyLight.position.set(
   6,
@@ -1922,11 +1418,10 @@ keyLight.position.set(
 
 scene.add(keyLight);
 
-const fillLight =
-  new THREE.DirectionalLight(
-    0x8ca9bd,
-    0.4
-  );
+const fillLight=new THREE.DirectionalLight(
+  0x8ca9bd,
+  .4
+);
 
 fillLight.position.set(
   -7,
@@ -1936,142 +1431,74 @@ fillLight.position.set(
 
 scene.add(fillLight);
 
+/* BRAIN */
 
-/* =========================================================
-   BRAIN GROUP
-========================================================= */
-
-const brainGroup =
-  new THREE.Group();
+const brainGroup=new THREE.Group();
 
 scene.add(brainGroup);
 
+let brainModel=null;
 
-/* =========================================================
-   MATERIALS
-========================================================= */
-
-const brainPinkMaterial =
-  new THREE.MeshPhysicalMaterial({
-
-    color:0xf1c5d0,
-
-    roughness:0.62,
-
-    metalness:0,
-
-    clearcoat:0.12,
-
-    clearcoatRoughness:0.5,
-
-    side:THREE.DoubleSide
-
-  });
-
+let locationMode=false;
 
 /*
- * This material is ONLY used if the loaded model itself
- * contains a named Basal Ganglia mesh.
- *
- * We do not create a new anatomical object.
- */
+  IMPORTANT:
+  No Basal Ganglia mesh is created here.
 
-const basalHighlightMaterial =
-  new THREE.MeshPhysicalMaterial({
+  The model remains the same brain model.
+  Show Location only changes the opacity of the
+  existing brain and displays the location indicator.
+*/
 
-    color:0x8fd3a8,
+const brainMaterial=new THREE.MeshPhysicalMaterial({
+  color:0xf1c5d0,
+  roughness:.62,
+  metalness:0,
+  clearcoat:.12,
+  clearcoatRoughness:.5,
+  side:THREE.DoubleSide,
+  transparent:true,
+  opacity:1
+});
 
-    roughness:0.32,
-
-    metalness:0.02,
-
-    clearcoat:0.6,
-
-    clearcoatRoughness:0.2,
-
-    emissive:0x274d35,
-
-    emissiveIntensity:0.28,
-
-    side:THREE.DoubleSide
-
-  });
-
-
-/* =========================================================
-   STATE
-========================================================= */
-
-let basalMeshes = [];
-
-let highlighted = true;
-
-let locationMode = false;
-
-
-/* =========================================================
-   LOAD REAL BRAIN MODEL
-========================================================= */
+/* LOAD MODEL */
 
 function loadRealBrain(){
 
-  const loader =
-    new GLTFLoader();
+  const loader=new GLTFLoader();
 
-  const dracoLoader =
-    new DRACOLoader();
+  const dracoLoader=new DRACOLoader();
 
   dracoLoader.setDecoderPath(
     "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/"
   );
 
-  loader.setDRACOLoader(
-    dracoLoader
-  );
+  loader.setDRACOLoader(dracoLoader);
 
-
-  const urls = [
-
+  const urls=[
     "https://cdn.jsdelivr.net/gh/itayinbarr/brainproject@main/brain-atlas/models/brain.glb",
-
     "https://raw.githubusercontent.com/itayinbarr/brainproject/main/brain-atlas/models/brain.glb",
-
     "https://itayinbarr.github.io/brainproject/models/brain.glb"
-
   ];
 
-
-  let urlIndex = 0;
-
+  let urlIndex=0;
 
   function tryLoad(){
 
-    if(
-      urlIndex >= urls.length
-    ){
+    if(urlIndex>=urls.length){
 
-      loadText.textContent =
+      loadText.textContent=
         "Brain model could not be loaded.";
 
-      loadBar.style.width =
-        "100%";
-
-      setTimeout(
-        () => loading.classList.add("hide"),
-        700
-      );
+      loadBar.style.width="0%";
 
       return;
     }
 
+    const url=urls[urlIndex++];
 
-    const url =
-      urls[urlIndex++];
-
-
-    loadText.textContent =
+    loadText.textContent=
       "Loading real brain model...";
-
 
     loader.load(
 
@@ -2079,138 +1506,73 @@ function loadRealBrain(){
 
       function(gltf){
 
-        const model =
-          gltf.scene;
+        brainModel=gltf.scene;
 
+        const box=
+          new THREE.Box3().setFromObject(
+            brainModel
+          );
 
-        /*
-         * Normalize the EXISTING model.
-         */
-
-        const box =
-          new THREE.Box3()
-            .setFromObject(model);
-
-        const center =
+        const center=
           box.getCenter(
             new THREE.Vector3()
           );
 
-        const size =
+        const size=
           box.getSize(
             new THREE.Vector3()
           );
 
-        const maxDim =
+        const maxDim=
           Math.max(
             size.x,
             size.y,
             size.z
           );
 
-        const scale =
-          4.5 / maxDim;
+        const scale=
+          4.5/maxDim;
 
-
-        model.scale.setScalar(
+        brainModel.scale.setScalar(
           scale
         );
 
-
-        model.position.sub(
+        brainModel.position.sub(
           center.multiplyScalar(scale)
         );
 
+        brainModel.position.y-=.60;
 
-        model.position.y -=
-          0.60;
-
-
-        /*
-         * Traverse the existing meshes.
-         *
-         * We do NOT add a Basal Ganglia 3D object.
-         */
-
-        model.traverse(
+        brainModel.traverse(
           function(child){
 
             if(!child.isMesh){
               return;
             }
 
-
-            child.castShadow = true;
-
-            child.receiveShadow = true;
-
-
-            const name =
-              (
-                child.name || ""
-              ).toLowerCase();
-
+            child.castShadow=true;
+            child.receiveShadow=true;
 
             /*
-             * Look for an EXISTING anatomical mesh
-             * if the model happens to contain one.
-             */
+              Keep the model's anatomy intact,
+              but use the baby-pink brain appearance.
+            */
 
-            const isBasalGanglia =
-              name.includes("basal") ||
-              name.includes("ganglia") ||
-              name.includes("caudate") ||
-              name.includes("putamen") ||
-              name.includes("pallid");
-
-
-            if(
-              isBasalGanglia
-            ){
-
-              basalMeshes.push(
-                child
-              );
-
-              child.material =
-                basalHighlightMaterial;
-
-            }else{
-
-              /*
-               * Preserve the actual brain model,
-               * only recolor its existing brain tissue.
-               */
-
-              if(child.material){
-
-                child.material =
-                  brainPinkMaterial.clone();
-
-              }
-
-            }
+            child.material=
+              brainMaterial.clone();
 
           }
         );
 
-
         brainGroup.add(
-          model
+          brainModel
         );
 
-
-        loadBar.style.width =
-          "100%";
-
+        loadBar.style.width="100%";
 
         setTimeout(
           function(){
-
-            loading.classList.add(
-              "hide"
-            );
-
+            loading.classList.add("hide");
           },
           500
         );
@@ -2219,19 +1581,18 @@ function loadRealBrain(){
 
       function(progress){
 
-        if(progress.total > 0){
+        if(progress.total>0){
 
-          const percent =
+          const pct=
             Math.min(
               90,
-              progress.loaded /
-              progress.total *
+              progress.loaded/
+              progress.total*
               90
             );
 
-          loadBar.style.width =
-            percent + "%";
-
+          loadBar.style.width=
+            pct+"%";
         }
 
       },
@@ -2239,7 +1600,7 @@ function loadRealBrain(){
       function(error){
 
         console.warn(
-          "Brain model failed:",
+          "Model failed:",
           error
         );
 
@@ -2251,352 +1612,158 @@ function loadRealBrain(){
 
   }
 
-
   tryLoad();
-
 }
 
+/* LOCATION MODE */
 
-/* =========================================================
-   LOCATION LABEL
-========================================================= */
+function setLocationMode(enabled){
 
-function updateLabel(){
+  locationMode=enabled;
 
-  if(!locationMode){
-    return;
-  }
-
-
-  /*
-   * If the actual model contains a basal ganglia mesh,
-   * use its position.
-   */
-
-  if(
-    basalMeshes.length > 0
-  ){
-
-    const position =
-      new THREE.Vector3();
-
-
-    basalMeshes[0]
-      .getWorldPosition(
-        position
-      );
-
-
-    position.project(
-      camera
+  const overlay=
+    document.getElementById(
+      "locationOverlay"
     );
 
-
-    const x =
-      (position.x + 1) /
-      2 *
-      canvas.clientWidth;
-
-
-    const y =
-      (-position.y + 1) /
-      2 *
-      canvas.clientHeight;
-
-
-    bgLabel.style.left =
-      x + "px";
-
-
-    bgLabel.style.top =
-      (y - 45) + "px";
-
-
-    return;
-
-  }
-
-
-  /*
-   * The generic brain model does not contain
-   * a deep-structure mesh.
-   *
-   * In that case the label points toward the
-   * approximate internal location WITHOUT
-   * creating an anatomical 3D object.
-   */
-
-  const position =
-    new THREE.Vector3(
-      0.05,
-      -0.05,
-      0.65
+  const button=
+    document.getElementById(
+      "showLocation"
     );
 
+  /*
+    THIS IS THE IMPORTANT PART:
 
-  position.project(
-    camera
-  );
+    The existing brain becomes semi-transparent.
+    No new anatomical brain object is created.
+  */
 
+  if(brainModel){
 
-  const x =
-    (position.x + 1) /
-    2 *
-    canvas.clientWidth;
+    brainModel.traverse(
+      function(child){
 
+        if(!child.isMesh){
+          return;
+        }
 
-  const y =
-    (-position.y + 1) /
-    2 *
-    canvas.clientHeight;
+        if(!child.material){
+          return;
+        }
 
+        child.material.transparent=true;
 
-  bgLabel.style.left =
-    x + "px";
+        child.material.opacity=
+          enabled ? .43 : 1;
 
+        child.material.depthWrite=
+          !enabled;
 
-  bgLabel.style.top =
-    (y - 45) + "px";
+      }
+    );
 
-}
-
-
-/* =========================================================
-   RESIZE
-========================================================= */
-
-function resize(){
-
-  const width =
-    canvas.clientWidth;
-
-  const height =
-    canvas.clientHeight;
-
-
-  if(
-    width <= 0 ||
-    height <= 0
-  ){
-    return;
   }
 
-
-  camera.aspect =
-    width / height;
-
-
-  camera.updateProjectionMatrix();
-
-
-  renderer.setSize(
-    width,
-    height,
-    false
+  overlay.classList.toggle(
+    "show",
+    enabled
   );
 
+  button.classList.toggle(
+    "location-active",
+    enabled
+  );
+
+  button.textContent=
+    enabled
+      ? "📍 Hide Location"
+      : "📍 Show Location";
 }
 
+/* SHOW LOCATION BUTTON */
 
-window.addEventListener(
-  "resize",
-  resize
-);
+document
+  .getElementById("showLocation")
+  .addEventListener(
+    "click",
+    function(event){
 
+      event.preventDefault();
 
-/* =========================================================
-   SHOW LOCATION
-========================================================= */
-
-const showLocationBtn =
-  document.getElementById(
-    "showLocationBtn"
-  );
-
-const locationSection =
-  document.getElementById(
-    "location"
-  );
-
-
-showLocationBtn.addEventListener(
-  "click",
-  function(){
-
-    locationMode =
-      !locationMode;
-
-
-    if(locationMode){
-
-      /*
-       * Make the EXISTING brain slightly transparent.
-       *
-       * No new brain.
-       * No new Basal Ganglia object.
-       */
-
-      canvas.classList.add(
-        "location-mode"
+      setLocationMode(
+        !locationMode
       );
 
+      if(locationMode){
 
-      locationSection.classList.add(
-        "location-active"
-      );
-
-
-      bgLabel.classList.add(
-        "show"
-      );
-
-
-      showLocationBtn.classList.add(
-        "active-location"
-      );
-
-
-      showLocationBtn.textContent =
-        "📍 Hide Location";
-
-
-      /*
-       * First show the 3D state,
-       * then scroll to the location diagram.
-       */
-
-      setTimeout(
-        function(){
-
-          locationSection.scrollIntoView({
+        document
+          .getElementById("location")
+          .scrollIntoView({
             behavior:"smooth",
             block:"start"
           });
 
-        },
-        100
-      );
-
-
-    }else{
-
-      canvas.classList.remove(
-        "location-mode"
-      );
-
-
-      locationSection.classList.remove(
-        "location-active"
-      );
-
-
-      bgLabel.classList.remove(
-        "show"
-      );
-
-
-      showLocationBtn.classList.remove(
-        "active-location"
-      );
-
-
-      showLocationBtn.textContent =
-        "📍 Show Location";
+      }
 
     }
+  );
 
-  }
-);
+/* HIGHLIGHT BUTTON */
 
-
-/* =========================================================
-   HIGHLIGHT BUTTON
-========================================================= */
-
-const highlightBtn =
+const highlightBtn=
   document.getElementById(
     "highlight"
   );
-
 
 highlightBtn.addEventListener(
   "click",
   function(){
 
-    highlighted =
-      !highlighted;
-
-
-    basalMeshes.forEach(
-      function(mesh){
-
-        if(highlighted){
-
-          mesh.material =
-            basalHighlightMaterial;
-
-        }else{
-
-          mesh.material =
-            brainPinkMaterial.clone();
-
-        }
-
-      }
+    setLocationMode(
+      !locationMode
     );
-
 
     highlightBtn.classList.toggle(
       "active",
-      highlighted
+      locationMode
     );
 
-
-    highlightBtn.textContent =
-      highlighted
-      ? "🟢 Highlight Location"
-      : "🧠 Highlight Location";
+    highlightBtn.textContent=
+      locationMode
+        ? "🔴 Location Visible"
+        : "🔴 Highlight Location";
 
   }
 );
 
+/* AUTO ROTATE */
 
-/* =========================================================
-   AUTO ROTATE
-========================================================= */
-
-const rotateBtn =
+const rotateBtn=
   document.getElementById(
     "rotate"
   );
-
 
 rotateBtn.addEventListener(
   "click",
   function(){
 
-    controls.autoRotate =
+    controls.autoRotate=
       !controls.autoRotate;
-
 
     rotateBtn.classList.toggle(
       "active",
       controls.autoRotate
     );
 
-
-    rotateBtn.textContent =
+    rotateBtn.textContent=
       controls.autoRotate
-      ? "⟳ Auto Rotate"
-      : "▶ Auto Rotate";
+        ? "⟳ Auto Rotate"
+        : "▶ Auto Rotate";
 
   }
 );
 
-
-/* =========================================================
-   RESET VIEW
-========================================================= */
+/* RESET */
 
 document
   .getElementById("reset")
@@ -2606,69 +1773,65 @@ document
 
       camera.position.set(
         3.2,
-        0.3,
+        .3,
         8.5
       );
 
-
       controls.target.set(
         0,
-        -0.3,
+        -.3,
         0
       );
 
-
       controls.update();
 
-    }
-  );
+      setLocationMode(false);
 
+      highlightBtn.classList.add(
+        "active"
+      );
 
-/* =========================================================
-   LEARN BUTTON
-========================================================= */
-
-document
-  .getElementById("learnBtn")
-  .addEventListener(
-    "click",
-    function(){
-
-      document
-        .getElementById("information")
-        .scrollIntoView({
-          behavior:"smooth",
-          block:"start"
-        });
+      highlightBtn.textContent=
+        "🔴 Highlight Location";
 
     }
   );
 
+/* RESIZE */
 
-/* =========================================================
-   QUIZ BUTTON
-========================================================= */
+function resize(){
 
-document
-  .getElementById("quizBtn")
-  .addEventListener(
-    "click",
-    function(){
+  const width=
+    canvas.clientWidth;
 
-      document
-        .getElementById("quiz")
-        .scrollIntoView({
-          behavior:"smooth",
-          block:"start"
-        });
+  const height=
+    canvas.clientHeight;
 
-    }
+  if(
+    width<=0 ||
+    height<=0
+  ){
+    return;
+  }
+
+  camera.aspect=
+    width/height;
+
+  camera.updateProjectionMatrix();
+
+  renderer.setSize(
+    width,
+    height,
+    false
   );
+}
 
+window.addEventListener(
+  "resize",
+  resize
+);
 
-/* =========================================================
-   ANIMATION
-========================================================= */
+/* ANIMATION */
 
 function animate(){
 
@@ -2676,37 +1839,19 @@ function animate(){
     animate
   );
 
-
   controls.update();
-
-
-  updateLabel();
-
 
   renderer.render(
     scene,
     camera
   );
-
 }
 
-
-/* =========================================================
-   START
-========================================================= */
-
 resize();
-
 animate();
-
 loadRealBrain();
 
 </script>
-
-
-<!-- =======================================================
-     QUIZ JAVASCRIPT
-======================================================= -->
 
 <script>
 
@@ -2715,15 +1860,13 @@ function checkAnswer(
   correct
 ){
 
-  const parent =
+  const parent=
     button.parentElement;
 
-
-  const options =
+  const options=
     parent.querySelectorAll(
       ".option"
     );
-
 
   options.forEach(
     function(option){
@@ -2735,7 +1878,6 @@ function checkAnswer(
 
     }
   );
-
 
   if(correct){
 
@@ -2751,24 +1893,18 @@ function checkAnswer(
 
   }
 
-
   updateQuizScore();
-
 }
-
 
 function updateQuizScore(){
 
-  const result =
+  const result=
     document.getElementById(
       "quizResult"
     );
 
-
-  let answered = 0;
-
-  let correctAnswers = 0;
-
+  let answered=0;
+  let correctAnswers=0;
 
   document
     .querySelectorAll(
@@ -2777,16 +1913,14 @@ function updateQuizScore(){
     .forEach(
       function(question){
 
-        const selected =
+        const selected=
           question.querySelector(
-            ".correct, .wrong"
+            ".correct,.wrong"
           );
-
 
         if(selected){
 
           answered++;
-
 
           if(
             selected.classList.contains(
@@ -2803,17 +1937,15 @@ function updateQuizScore(){
       }
     );
 
+  if(answered>0){
 
-  if(answered > 0){
-
-    result.style.display =
+    result.style.display=
       "block";
 
-
-    result.textContent =
-      "Score: " +
-      correctAnswers +
-      " / " +
+    result.textContent=
+      "Score: "+
+      correctAnswers+
+      " / "+
       answered;
 
   }
