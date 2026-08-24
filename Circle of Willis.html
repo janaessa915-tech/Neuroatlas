@@ -1,0 +1,1559 @@
+<!-- Circle of Willis.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NeuroAtlas | Circle of Willis</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:#050b13;color:#eef4fa;font-family:Arial,Helvetica,sans-serif;line-height:1.7;}
+
+/* NAVIGATION */
+nav{height:70px;padding:0 7%;display:flex;align-items:center;border-bottom:1px solid rgba(255,255,255,.08);}
+nav a{color:#9db0c3;text-decoration:none;font-size:14px;}
+nav a:hover{color:white;}
+
+/* CONTAINER */
+.container{max-width:1200px;margin:auto;padding:60px 7% 100px;}
+
+/* HERO */
+.eyebrow{color:#61b5ff;letter-spacing:3px;font-size:12px;text-transform:uppercase;margin-bottom:15px;}
+h1{font-size:clamp(48px,7vw,82px);line-height:.95;letter-spacing:-4px;margin-bottom:10px;}
+.arabic-title{color:#ff8f9b;font-size:24px;margin-bottom:25px;}
+.hero p{color:#a6b6c7;max-width:780px;font-size:18px;line-height:1.8;}
+
+/* ACTION BUTTONS */
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px;}
+.action-button{padding:11px 17px;border-radius:9px;background:#0b1928;border:1px solid #31516d;color:#bdd0e0;text-decoration:none;cursor:pointer;transition:.2s;}
+.action-button:hover{background:#14304a;color:white;border-color:#61b5ff;}
+
+/* 3D VIEWER */
+.viewer{margin-top:60px;border:1px solid rgba(255,255,255,.10);border-radius:24px;overflow:hidden;background:#02060b;box-shadow:0 25px 80px rgba(0,0,0,.45);}
+.viewer-header{min-height:65px;padding:0 22px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.08);}
+.viewer-title{font-size:14px;color:#d2dce6;}
+.viewer-status{color:#708499;font-size:11px;letter-spacing:1px;}
+.scene{position:relative;width:100%;height:700px;background:radial-gradient(circle at 50% 45%,#203b51 0%,#0d1c2e 42%,#02060b 100%);}
+#brainCanvas{width:100%;height:100%;display:block;}
+
+/* LOADING */
+.loading{position:absolute;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;background:#02060b;color:#9db0c3;font-size:14px;transition:opacity .8s;}
+.loading.hide{opacity:0;pointer-events:none;}
+.loading-bar{width:180px;height:2px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden;}
+.loading-bar-inner{width:0%;height:100%;background:#61b5ff;transition:width .3s;}
+
+/* CIRCLE OF WILLIS LABEL */
+.cow-label{position:absolute;z-index:30;pointer-events:none;transform:translate(-50%,-100%);display:none;}
+.cow-label.show{display:block;}
+.label-box{position:relative;padding:9px 15px;border-radius:10px;background:rgba(5,10,17,.96);border:1.5px solid #ff4d5e;color:#ffd0d5;font-size:12px;font-weight:bold;letter-spacing:1px;white-space:nowrap;box-shadow:0 0 12px rgba(255,77,94,.25),0 0 25px rgba(255,77,94,.12);}
+.label-box::after{content:"";position:absolute;left:50%;bottom:-15px;width:1.5px;height:15px;background:#ff4d5e;transform:translateX(-50%);}
+
+/* CONTROLS */
+.controls{display:flex;gap:10px;flex-wrap:wrap;padding:15px;border-top:1px solid rgba(255,255,255,.08);}
+.controls button{padding:11px 17px;border-radius:9px;background:#0b1928;border:1px solid #31516d;color:#bdd0e0;cursor:pointer;transition:.2s;}
+.controls button:hover{background:#14304a;color:white;}
+.controls button.active{background:#241417;border-color:#ff4d5e;color:#ffd0d5;}
+
+/* INFORMATION */
+.section{margin-top:70px;}
+.section-label{color:#61b5ff;letter-spacing:2px;font-size:11px;text-transform:uppercase;margin-bottom:8px;}
+.section h2{font-size:32px;margin-bottom:25px;}
+.section-intro{color:#91a5b8;max-width:900px;font-size:15px;line-height:1.9;margin-bottom:30px;}
+
+/* LOCATION */
+.location{margin-top:70px;padding:35px;background:#091522;border:1px solid #172b3e;border-radius:18px;}
+.location h2{font-size:32px;margin-bottom:12px;}
+.location-intro{color:#91a5b8;max-width:900px;line-height:1.9;margin-bottom:30px;}
+.brain-visual{width:100%;overflow:hidden;}
+
+.location-svg{display:block;width:100%;max-width:800px;height:auto;margin:auto;}
+.location-brain{fill:#263d55;stroke:#71869e;stroke-width:3;}
+.location-vessel-glow{fill:none;stroke:#ff4d5e;stroke-width:14;opacity:.35;filter:blur(7px);}
+.location-vessel{fill:none;stroke:#ff4d5e;stroke-width:4.5;stroke-linecap:round;stroke-linejoin:round;}
+.location-basilar{fill:none;stroke:#c98a6b;stroke-width:5;stroke-linecap:round;}
+.location-line{stroke:#8fc7ff;stroke-width:2;}
+.location-cow-line{stroke:#ff4d5e;stroke-width:3;}
+.location-svg-label{fill:white;font-size:18px;font-weight:bold;}
+.location-cow-label{fill:#ff4d5e;font-size:21px;font-weight:bold;}
+.location-arabic-label{fill:#ffd6da;font-size:16px;font-weight:bold;}
+.location-caption{text-align:center;color:#9fb0c3;margin-top:15px;}
+
+/* CARDS */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.card{padding:27px;background:#091522;border:1px solid #172b3e;border-radius:18px;transition:transform .2s,border-color .2s;}
+.card:hover{transform:translateY(-3px);border-color:#4a2a30;}
+.card h3{font-size:18px;margin-bottom:13px;color:#eef4fa;line-height:1.45;}
+.card p{color:#91a5b8;font-size:14px;line-height:1.8;}
+
+/* CLINICAL */
+.clinical-section{margin-top:65px;}
+.clinical-box{padding:30px;background:#091522;border:1px solid #172b3e;border-left:3px solid #ff4d5e;border-radius:18px;}
+.clinical-box p{color:#a7b7c6;font-size:15px;line-height:1.9;margin-bottom:18px;}
+.clinical-box p:last-child{margin-bottom:0;}
+
+/* QUICK FACTS */
+.facts-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;}
+.fact{padding:22px;background:#091522;border:1px solid #172b3e;border-radius:16px;}
+.fact span{display:block;color:#ff4d5e;font-size:11px;letter-spacing:2px;margin-bottom:12px;}
+.fact strong{display:block;color:#eef4fa;font-size:14px;margin-bottom:8px;line-height:1.5;}
+.fact p{color:#8195a8;font-size:13px;line-height:1.7;}
+
+/* MINI TEST */
+.quiz{margin-top:65px;padding:30px;background:#091522;border:1px solid #172b3e;border-radius:18px;}
+.quiz h2{font-size:28px;margin-bottom:10px;}
+.quiz-intro{color:#91a5b8;margin-bottom:25px;}
+.question{margin-bottom:30px;}
+.question:last-child{margin-bottom:0;}
+.question p{color:#eef4fa;font-size:16px;margin-bottom:12px;font-weight:bold;}
+.option{display:block;width:100%;padding:12px 15px;margin-top:9px;background:#0b1928;color:#c7d5e2;border:1px solid #263951;border-radius:9px;text-align:left;cursor:pointer;font-size:14px;transition:.2s;}
+.option:hover{border-color:#ff4d5e;background:#111e2c;}
+.option.correct{border-color:#8fd3a8;background:#14291e;color:#b9f0c9;}
+.option.wrong{border-color:#d88b9b;background:#2a171d;color:#ffc2cc;}
+.quiz-result{margin-top:25px;padding:15px;border-radius:10px;background:#0b1928;border:1px solid #263951;color:#aebdce;display:none;}
+
+/* MOBILE */
+@media(max-width:900px){
+  .cards{grid-template-columns:repeat(2,1fr);}
+  .facts-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:800px){
+  .scene{height:450px;}
+  .viewer-status{display:none;}
+}
+@media(max-width:600px){
+  .cards{grid-template-columns:1fr;}
+  .facts-grid{grid-template-columns:1fr;}
+  h1{letter-spacing:-2px;}
+  .location{padding:20px;}
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<a href="./explore.html">← Back to Explore</a>
+</nav>
+
+<main class="container">
+
+<!-- HERO -->
+<div class="eyebrow">Cerebral Vasculature · NeuroAtlas</div>
+
+<h1>Circle of Willis</h1>
+
+<div class="arabic-title">دائرة ويليس</div>
+
+<div class="hero">
+<p>
+The Circle of Willis is an arterial ring located at the base of the
+brain. It connects the anterior and posterior cerebral circulations
+and provides an important potential route for collateral blood flow
+between major cerebral arteries.
+</p>
+</div>
+
+<!-- ACTION BUTTONS -->
+<div class="actions">
+<a class="action-button" href="#location">📍 Show Location</a>
+<a class="action-button" href="#information">🧠 Learn About the Circle</a>
+<a class="action-button" href="#quiz">📝 Test Yourself</a>
+</div>
+
+<!-- 3D VIEWER -->
+<div class="viewer">
+
+<div class="viewer-header">
+<div class="viewer-title">Human Brain · Interactive 3D</div>
+<div class="viewer-status">DRAG TO ROTATE · SCROLL TO ZOOM</div>
+</div>
+
+<div class="scene">
+
+<div id="loading" class="loading">
+<span id="loadText">Loading real brain model...</span>
+<div class="loading-bar">
+<div id="loadBar" class="loading-bar-inner"></div>
+</div>
+</div>
+
+<canvas id="brainCanvas"></canvas>
+
+<div id="cowLabel" class="cow-label">
+<div class="label-box">CIRCLE OF WILLIS</div>
+</div>
+
+</div>
+
+<div class="controls">
+<button id="highlight" class="active">⚪ Highlight Circle of Willis</button>
+<button id="rotate" class="active">⟳ Auto Rotate</button>
+<button id="reset">↻ Reset View</button>
+</div>
+
+</div>
+
+<!-- LOCATION -->
+<section id="location" class="location">
+
+<div class="section-label">Location · الموقع</div>
+
+<h2>📍 Where is the Circle of Willis?</h2>
+
+<p class="location-intro">
+The Circle of Willis is located at the base of the brain around the
+optic chiasm and the hypothalamic region. It forms an arterial
+connection between the anterior circulation, supplied primarily by
+the internal carotid arteries, and the posterior circulation,
+supplied through the basilar artery.
+<br><br>
+تقع دائرة ويليس عند قاعدة الدماغ حول منطقة التصالب البصري ومنطقة
+الوطاء. وتشكّل اتصالاً شريانياً بين الدورة الدموية الأمامية التي
+يغذيها بشكل رئيسي الشريانان السباتيان الداخليان، والدورة الخلفية
+التي تصل إليها التروية عبر الشريان القاعدي.
+</p>
+
+<div class="brain-visual">
+
+<svg
+  class="location-svg"
+  viewBox="0 0 800 560"
+  xmlns="http://www.w3.org/2000/svg"
+  aria-label="Simplified diagram of the Circle of Willis"
+>
+
+<!-- BRAIN BASE -->
+<ellipse
+  class="location-brain"
+  cx="400"
+  cy="270"
+  rx="270"
+  ry="185"
+/>
+
+<!-- BASILAR ARTERY -->
+<path
+  class="location-basilar"
+  d="M400 470 C400 420 400 375 400 330"
+/>
+
+<!-- GLOW -->
+<path
+  class="location-vessel-glow"
+  d="M400 330
+     C350 310 305 300 270 285
+     C245 275 235 250 255 225
+     C280 195 325 190 355 205
+     C375 215 385 220 400 225
+     C415 220 425 215 445 205
+     C475 190 520 195 545 225
+     C565 250 555 275 530 285
+     C495 300 450 310 400 330"
+ />
+
+<path
+  class="location-vessel-glow"
+  d="M355 205 C335 175 320 145 315 115"
+ />
+
+<path
+  class="location-vessel-glow"
+  d="M445 205 C465 175 480 145 485 115"
+ />
+
+<path
+  class="location-vessel-glow"
+  d="M355 205 C375 190 385 175 390 155"
+ />
+
+<path
+  class="location-vessel-glow"
+  d="M445 205 C425 190 415 175 410 155"
+ />
+
+<!-- ICA -->
+<path
+  class="location-vessel"
+  d="M315 115 C320 145 335 175 355 205"
+/>
+
+<path
+  class="location-vessel"
+  d="M485 115 C480 145 465 175 445 205"
+/>
+
+<!-- ACA -->
+<path
+  class="location-vessel"
+  d="M355 205 C375 190 385 175 390 155 C385 135 375 115 365 95"
+/>
+
+<path
+  class="location-vessel"
+  d="M445 205 C425 190 415 175 410 155 C415 135 425 115 435 95"
+/>
+
+<!-- ACOM -->
+<path
+  class="location-vessel"
+  d="M390 155 C397 150 403 150 410 155"
+/>
+
+<!-- PCA -->
+<path
+  class="location-vessel"
+  d="M400 330 C350 310 305 300 270 285"
+/>
+
+<path
+  class="location-vessel"
+  d="M400 330 C450 310 495 300 530 285"
+/>
+
+<!-- POSTERIOR COMMUNICATING ARTERIES -->
+<path
+  class="location-vessel"
+  d="M355 205 C330 225 300 245 270 285"
+/>
+
+<path
+  class="location-vessel"
+  d="M445 205 C470 225 500 245 530 285"
+/>
+
+<!-- BASILAR -->
+<path
+  class="location-vessel"
+  d="M400 330 C400 365 400 405 400 470"
+/>
+
+<!-- ICA LABEL -->
+<line class="location-line" x1="315" y1="115" x2="190" y2="75"/>
+<text class="location-svg-label" x="85" y="70">ICA</text>
+<text class="location-arabic-label" x="85" y="94">السباتي الداخلي</text>
+
+<!-- ACA LABEL -->
+<line class="location-line" x1="365" y1="95" x2="250" y2="45"/>
+<text class="location-svg-label" x="150" y="42">ACA</text>
+<text class="location-arabic-label" x="150" y="65">الشريان الدماغي الأمامي</text>
+
+<!-- ACOM LABEL -->
+<line class="location-cow-line" x1="400" y1="152" x2="545" y2="115"/>
+<text class="location-cow-label" x="560" y="120">ACom</text>
+<text class="location-arabic-label" x="560" y="145">الموصل الأمامي</text>
+
+<!-- CIRCLE LABEL -->
+<line class="location-cow-line" x1="400" y1="225" x2="605" y2="200"/>
+<text class="location-cow-label" x="615" y="205">CIRCLE OF WILLIS</text>
+<text class="location-arabic-label" x="615" y="230">دائرة ويليس</text>
+
+<!-- PCA LABEL -->
+<line class="location-line" x1="530" y1="285" x2="625" y2="325"/>
+<text class="location-svg-label" x="640" y="330">PCA</text>
+<text class="location-arabic-label" x="640" y="355">الشريان الدماغي الخلفي</text>
+
+<!-- BASILAR LABEL -->
+<line class="location-line" x1="400" y1="430" x2="540" y2="470"/>
+<text class="location-svg-label" x="555" y="475">Basilar</text>
+<text class="location-arabic-label" x="555" y="500">الشريان القاعدي</text>
+
+</svg>
+
+<p class="location-caption">
+🔴 The red arterial ring represents the approximate Circle of Willis
+at the base of the brain.
+</p>
+
+</div>
+</section>
+
+<!-- DETAILED INFORMATION -->
+<section id="information" class="section">
+
+<div class="section-label">
+Circle of Willis · تشريح دائرة ويليس
+</div>
+
+<h2>Circle of Willis · دائرة ويليس</h2>
+
+<p class="section-intro">
+The Circle of Willis is a ring-like arterial network at the base of
+the brain. It links the anterior and posterior cerebral circulations
+and can provide collateral pathways when blood flow through one
+major arterial route is reduced.
+<br><br>
+دائرة ويليس هي شبكة شريانية حلقية تقع عند قاعدة الدماغ. تربط بين
+الدورة الدماغية الأمامية والخلفية، ويمكن أن توفر مسارات جانبية
+لجريان الدم عند انخفاض التروية عبر أحد المسارات الشريانية الرئيسية.
+</p>
+
+<div class="cards">
+
+<div class="card">
+<h3>Internal Carotid Arteries · الشرايين السباتية الداخلية</h3>
+<p>
+The internal carotid arteries form the major anterior inflow to the
+cerebral circulation and give rise to important branches including
+the anterior and middle cerebral arteries.
+<br><br>
+تشكل الشرايين السباتية الداخلية المصدر الرئيسي للتروية الأمامية
+للدماغ، وتعطي فروعاً مهمة منها الشريانان الدماغيان الأمامي والأوسط.
+</p>
+</div>
+
+<div class="card">
+<h3>Anterior Cerebral Arteries · الشرايين الدماغية الأمامية</h3>
+<p>
+The paired anterior cerebral arteries course forward and medially
+and are connected by the anterior communicating artery.
+<br><br>
+يسير الشريانان الدماغيان الأماميان إلى الأمام وإلى الناحية
+الإنسية، ويربط بينهما الشريان الموصل الأمامي.
+</p>
+</div>
+
+<div class="card">
+<h3>Anterior Communicating Artery · الشريان الموصل الأمامي</h3>
+<p>
+The anterior communicating artery connects the right and left
+anterior cerebral arteries and forms the anterior part of the
+arterial circle.
+<br><br>
+يربط الشريان الموصل الأمامي بين الشريانين الدماغيين الأماميين
+الأيمن والأيسر ويشكّل الجزء الأمامي من الدائرة الشريانية.
+</p>
+</div>
+
+<div class="card">
+<h3>Posterior Communicating Arteries · الشرايين الموصلة الخلفية</h3>
+<p>
+These paired arteries connect the internal carotid circulation with
+the posterior cerebral arteries, forming the lateral connections of
+the Circle of Willis.
+<br><br>
+تصل هذه الشرايين المزدوجة بين دوران الشريان السباتي الداخلي
+والشرايين الدماغية الخلفية، وتشكّل الوصلات الجانبية للدائرة.
+</p>
+</div>
+
+<div class="card">
+<h3>Posterior Cerebral Arteries · الشرايين الدماغية الخلفية</h3>
+<p>
+The posterior cerebral arteries arise from the terminal basilar
+circulation and supply major portions of the occipital and
+inferomedial temporal regions.
+<br><br>
+تنشأ الشرايين الدماغية الخلفية من نهاية الدورة القاعدية وتغذي
+أجزاء مهمة من الفص القذالي والمناطق الصدغية السفلية والإنسية.
+</p>
+</div>
+
+<div class="card">
+<h3>Basilar Artery · الشريان القاعدي</h3>
+<p>
+The basilar artery is formed by the union of the vertebral arteries
+and provides the main arterial pathway of the posterior circulation.
+<br><br>
+يتكوّن الشريان القاعدي من اتحاد الشريانين الفقريين ويمثل المسار
+الشرياني الرئيسي للدورة الدماغية الخلفية.
+</p>
+</div>
+
+<div class="card">
+<h3>Collateral Circulation · الدوران الجانبي</h3>
+<p>
+The Circle of Willis can provide an alternative route for blood flow
+between anterior and posterior or right and left cerebral
+circulations.
+<br><br>
+يمكن لدائرة ويليس أن توفر مساراً بديلاً لجريان الدم بين الدورة
+الأمامية والخلفية أو بين جانبي الدوران الدماغي.
+</p>
+</div>
+
+<div class="card">
+<h3>Anatomical Variations · الاختلافات التشريحية</h3>
+<p>
+A complete, symmetrical Circle of Willis is not present in every
+person. Differences in vessel size, development, and configuration
+are common.
+<br><br>
+لا تكون دائرة ويليس مكتملة ومتناظرة لدى جميع الأشخاص، وتوجد
+اختلافات شائعة في حجم الأوعية وتطورها وترتيبها.
+</p>
+</div>
+
+<div class="card">
+<h3>Perforating Branches · الفروع الثاقبة</h3>
+<p>
+Small perforating vessels arising around the arterial circle supply
+deep structures of the brain and are clinically important.
+<br><br>
+تنشأ أوعية ثاقبة صغيرة حول الدائرة الشريانية وتغذي البنى العميقة
+في الدماغ، ولها أهمية سريرية.
+</p>
+</div>
+
+<div class="card">
+<h3>Aneurysms · أمهات الدم</h3>
+<p>
+Intracranial aneurysms can occur at arterial branch points around
+the Circle of Willis, particularly at the anterior communicating and
+posterior communicating regions.
+<br><br>
+قد تحدث أمهات الدم داخل القحف عند نقاط تفرع الشرايين حول دائرة
+ويليس، وخاصة في منطقتي الشريان الموصل الأمامي والخلفي.
+</p>
+</div>
+
+<div class="card">
+<h3>Anterior Circulation · الدورة الأمامية</h3>
+<p>
+The anterior circulation is supplied primarily by the internal
+carotid arteries and includes the anterior and middle cerebral
+arteries.
+<br><br>
+تُغذى الدورة الأمامية بشكل رئيسي بواسطة الشرايين السباتية
+الداخلية، وتشمل الشريانين الدماغيين الأمامي والأوسط.
+</p>
+</div>
+
+<div class="card">
+<h3>Posterior Circulation · الدورة الخلفية</h3>
+<p>
+The posterior circulation begins with the vertebral arteries,
+continues through the basilar artery, and gives rise to the
+posterior cerebral arteries.
+<br><br>
+تبدأ الدورة الخلفية بالشريانين الفقريين، وتستمر عبر الشريان
+القاعدي، ثم تعطي الشريانين الدماغيين الخلفيين.
+</p>
+</div>
+
+</div>
+
+<!-- CLINICAL IMPORTANCE -->
+<div class="clinical-section">
+
+<div class="section-label">
+Clinical Importance · الأهمية السريرية
+</div>
+
+<h2>Why the Circle of Willis Matters</h2>
+
+<div class="clinical-box">
+
+<p>
+The Circle of Willis is clinically important because it provides a
+potential connection between major cerebral arterial territories.
+Its anatomy and variations are especially relevant when evaluating
+cerebrovascular disease and intracranial aneurysms.
+</p>
+
+<p dir="rtl">
+تكتسب دائرة ويليس أهمية سريرية لأنها توفر اتصالاً محتملاً بين
+المناطق الرئيسية للتروية الشريانية في الدماغ. كما أن تشريحها
+واختلافاتها مهمان عند تقييم أمراض الأوعية الدماغية وأمهات الدم
+داخل القحف.
+</p>
+
+</div>
+
+</div>
+
+<!-- QUICK FACTS -->
+<div class="section">
+
+<div class="section-label">
+Quick Facts · معلومات سريعة
+</div>
+
+<h2>Circle of Willis at a Glance</h2>
+
+<div class="facts-grid">
+
+<div class="fact">
+<span>01</span>
+<strong>Location · الموقع</strong>
+<p>Base of the brain · قاعدة الدماغ</p>
+</div>
+
+<div class="fact">
+<span>02</span>
+<strong>Function · الوظيفة</strong>
+<p>Potential collateral arterial pathway · مسار شرياني جانبي محتمل</p>
+</div>
+
+<div class="fact">
+<span>03</span>
+<strong>Anterior Connection · الاتصال الأمامي</strong>
+<p>Anterior communicating artery · الشريان الموصل الأمامي</p>
+</div>
+
+<div class="fact">
+<span>04</span>
+<strong>Posterior Connection · الاتصال الخلفي</strong>
+<p>Posterior communicating arteries · الشرايين الموصلة الخلفية</p>
+</div>
+
+</div>
+</div>
+
+<!-- MINI TEST -->
+<div id="quiz" class="quiz">
+
+<div class="section-label">Mini Test</div>
+
+<h2>🧠 Test Yourself</h2>
+
+<p class="quiz-intro">
+Choose the best answer for each question.
+</p>
+
+<div class="question">
+<p>1. Where is the Circle of Willis located?</p>
+
+<button class="option" onclick="checkAnswer(this,true)">
+A. At the base of the brain
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+B. Inside the cerebellar cortex
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+C. Within the spinal cord
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+D. Inside the lateral ventricle
+</button>
+</div>
+
+<div class="question">
+<p>2. Which artery connects the two anterior cerebral arteries?</p>
+
+<button class="option" onclick="checkAnswer(this,true)">
+A. Anterior communicating artery
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+B. Basilar artery
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+C. Middle cerebral artery
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+D. Superior cerebellar artery
+</button>
+</div>
+
+<div class="question">
+<p>3. What is an important potential function of the Circle of Willis?</p>
+
+<button class="option" onclick="checkAnswer(this,false)">
+A. Producing cerebrospinal fluid
+</button>
+
+<button class="option" onclick="checkAnswer(this,true)">
+B. Providing a collateral route for cerebral blood flow
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+C. Controlling eye movements
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+D. Connecting the spinal nerves
+</button>
+</div>
+
+<div id="quizResult" class="quiz-result"></div>
+
+</div>
+
+</section>
+
+</main>
+
+<!-- THREE.JS IMPORT MAP -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+
+import * as THREE from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
+
+/* ELEMENTS */
+
+const canvas = document.getElementById("brainCanvas");
+const loading = document.getElementById("loading");
+const loadText = document.getElementById("loadText");
+const loadBar = document.getElementById("loadBar");
+const cowLabel = document.getElementById("cowLabel");
+
+/* SCENE */
+
+const scene = new THREE.Scene();
+
+/* CAMERA */
+
+const camera = new THREE.PerspectiveCamera(30, 1, 0.01, 100);
+camera.position.set(3.2, 0.3, 8.5);
+
+/* RENDERER */
+
+const renderer = new THREE.WebGLRenderer({
+  canvas,
+  antialias:true,
+  alpha:true
+});
+
+renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 0.75;
+
+/* CONTROLS */
+
+const controls = new OrbitControls(camera, canvas);
+
+controls.enableRotate = true;
+controls.rotateSpeed = 0.6;
+controls.enableDamping = true;
+controls.dampingFactor = 0.05;
+controls.enableZoom = true;
+controls.zoomSpeed = 0.6;
+controls.enablePan = false;
+controls.autoRotate = true;
+controls.autoRotateSpeed = 0.2;
+controls.target.set(0, -0.3, 0);
+controls.minDistance = 3.5;
+controls.maxDistance = 16;
+
+/* LIGHTING */
+
+scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+
+const hemi = new THREE.HemisphereLight(
+  0xffdce6,
+  0x081018,
+  0.75
+);
+
+scene.add(hemi);
+
+const keyLight = new THREE.DirectionalLight(
+  0xfff5f0,
+  1.4
+);
+
+keyLight.position.set(6, 10, 8);
+scene.add(keyLight);
+
+const fillLight = new THREE.DirectionalLight(
+  0x8ca9bd,
+  0.4
+);
+
+fillLight.position.set(-7, 2, 6);
+scene.add(fillLight);
+
+/* BRAIN GROUP */
+
+const brainGroup = new THREE.Group();
+scene.add(brainGroup);
+
+let circleOfWillisGroup = null;
+let highlighted = true;
+
+/*
+ * Stores only the actual brain surface meshes.
+ * This lets the Circle of Willis remain fully visible while the
+ * brain surface becomes partially transparent.
+ */
+const brainMeshes = [];
+
+const cowGlowMeshes = [];
+
+/* BRAIN MATERIAL */
+
+const brainPinkColor = 0xf1c5d0;
+
+const brainPinkMaterial = new THREE.MeshPhysicalMaterial({
+  color:brainPinkColor,
+  roughness:0.62,
+  metalness:0,
+  clearcoat:0.12,
+  clearcoatRoughness:0.5,
+  side:THREE.DoubleSide
+});
+
+/* CIRCLE MATERIAL */
+
+const cowWhiteColor = new THREE.Color(0xffffff);
+const cowBlendColor = new THREE.Color(brainPinkColor);
+
+const cowMaterial = new THREE.MeshPhysicalMaterial({
+  color:cowWhiteColor.clone(),
+  roughness:0.3,
+  metalness:0.05,
+  clearcoat:0.6,
+  clearcoatRoughness:0.2,
+  emissive:0x555555,
+  emissiveIntensity:0.2,
+  side:THREE.DoubleSide
+});
+
+/* GLOW MATERIAL */
+
+const glowMaterial = new THREE.MeshBasicMaterial({
+  color:0xffffff,
+  transparent:true,
+  opacity:0.18,
+  side:THREE.BackSide
+});
+
+/* BRAIN TRANSPARENCY */
+
+function updateBrainTransparency(){
+
+  const opacity =
+    highlighted
+      ? 0.35
+      : 1;
+
+  brainMeshes.forEach(function(mesh){
+
+    if(!mesh.material){
+      return;
+    }
+
+    if(Array.isArray(mesh.material)){
+
+      mesh.material.forEach(function(material){
+
+        material.transparent =
+          highlighted;
+
+        material.opacity =
+          opacity;
+
+        material.depthWrite =
+          !highlighted;
+      });
+
+    }else{
+
+      mesh.material.transparent =
+        highlighted;
+
+      mesh.material.opacity =
+        opacity;
+
+      mesh.material.depthWrite =
+        !highlighted;
+    }
+  });
+}
+
+/* TUBE CREATOR */
+
+function buildTube(points, radius){
+
+  const vectors = points.map(function(point){
+    return new THREE.Vector3(
+      point[0],
+      point[1],
+      point[2]
+    );
+  });
+
+  const curve = new THREE.CatmullRomCurve3(vectors);
+
+  const geometry = new THREE.TubeGeometry(
+    curve,
+    32,
+    radius,
+    10,
+    false
+  );
+
+  const mesh = new THREE.Mesh(
+    geometry,
+    cowMaterial
+  );
+
+  const glowGeometry = new THREE.TubeGeometry(
+    curve,
+    32,
+    radius * 1.9,
+    10,
+    false
+  );
+
+  const glow = new THREE.Mesh(
+    glowGeometry,
+    glowMaterial
+  );
+
+  cowGlowMeshes.push(glow);
+
+  const group = new THREE.Group();
+
+  group.add(mesh);
+  group.add(glow);
+
+  return group;
+}
+
+/* CIRCLE OF WILLIS FALLBACK */
+
+function createCircleOfWillis(){
+
+  circleOfWillisGroup = new THREE.Group();
+
+  const leftICA = [
+    [-0.78,-0.55,0.00],
+    [-0.72,-0.42,0.00],
+    [-0.63,-0.28,0.00]
+  ];
+
+  const rightICA = [
+    [0.78,-0.55,0.00],
+    [0.72,-0.42,0.00],
+    [0.63,-0.28,0.00]
+  ];
+
+  const leftACA = [
+    [-0.63,-0.28,0.00],
+    [-0.48,-0.12,0.00],
+    [-0.25,0.02,0.00],
+    [-0.08,0.12,0.00]
+  ];
+
+  const rightACA = [
+    [0.63,-0.28,0.00],
+    [0.48,-0.12,0.00],
+    [0.25,0.02,0.00],
+    [0.08,0.12,0.00]
+  ];
+
+  const anteriorCommunicating = [
+    [-0.08,0.12,0.00],
+    [0.00,0.14,0.00],
+    [0.08,0.12,0.00]
+  ];
+
+  const leftPCom = [
+    [-0.63,-0.28,0.00],
+    [-0.78,-0.12,0.00],
+    [-0.88,0.03,0.00]
+  ];
+
+  const rightPCom = [
+    [0.63,-0.28,0.00],
+    [0.78,-0.12,0.00],
+    [0.88,0.03,0.00]
+  ];
+
+  const leftPCA = [
+    [-0.88,0.03,0.00],
+    [-0.67,0.13,0.00],
+    [-0.43,0.16,0.00]
+  ];
+
+  const rightPCA = [
+    [0.88,0.03,0.00],
+    [0.67,0.13,0.00],
+    [0.43,0.16,0.00]
+  ];
+
+  const basilar = [
+    [0.00,-1.10,0.00],
+    [0.00,-0.88,0.00],
+    [0.00,-0.60,0.00],
+    [0.00,-0.30,0.00]
+  ];
+
+  const leftPosterior = [
+    [0.00,-0.30,0.00],
+    [-0.22,-0.18,0.00],
+    [-0.43,0.16,0.00]
+  ];
+
+  const rightPosterior = [
+    [0.00,-0.30,0.00],
+    [0.22,-0.18,0.00],
+    [0.43,0.16,0.00]
+  ];
+
+  const vessels = [
+    [leftICA,0.045],
+    [rightICA,0.045],
+    [leftACA,0.04],
+    [rightACA,0.04],
+    [anteriorCommunicating,0.035],
+    [leftPCom,0.035],
+    [rightPCom,0.035],
+    [leftPCA,0.04],
+    [rightPCA,0.04],
+    [basilar,0.05],
+    [leftPosterior,0.04],
+    [rightPosterior,0.04]
+  ];
+
+  vessels.forEach(function(item){
+
+    circleOfWillisGroup.add(
+      buildTube(item[0],item[1])
+    );
+  });
+
+  circleOfWillisGroup.position.set(
+    0,
+    -0.45,
+    0.45
+  );
+
+  circleOfWillisGroup.rotation.x = -0.12;
+
+  brainGroup.add(circleOfWillisGroup);
+}
+
+/* LOAD REAL BRAIN */
+
+function loadRealBrain(){
+
+  const loader = new GLTFLoader();
+
+  const dracoLoader = new DRACOLoader();
+
+  dracoLoader.setDecoderPath(
+    "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/"
+  );
+
+  loader.setDRACOLoader(dracoLoader);
+
+  const urls = [
+    "https://cdn.jsdelivr.net/gh/itayinbarr/brainproject@main/brain-atlas/models/brain.glb",
+    "https://raw.githubusercontent.com/itayinbarr/brainproject/main/brain-atlas/models/brain.glb",
+    "https://itayinbarr.github.io/brainproject/models/brain.glb"
+  ];
+
+  let urlIndex = 0;
+
+  function tryLoad(){
+
+    if(urlIndex >= urls.length){
+
+      createCircleOfWillis();
+      onReady();
+
+      return;
+    }
+
+    const url = urls[urlIndex++];
+
+    loadText.textContent =
+      "Loading real brain model...";
+
+    loader.load(
+      url,
+
+      function(gltf){
+
+        const model = gltf.scene;
+
+        const box = new THREE.Box3().setFromObject(model);
+
+        const center = box.getCenter(
+          new THREE.Vector3()
+        );
+
+        const size = box.getSize(
+          new THREE.Vector3()
+        );
+
+        const maxDim = Math.max(
+          size.x,
+          size.y,
+          size.z
+        );
+
+        const scale = 4.5 / maxDim;
+
+        model.scale.setScalar(scale);
+
+        model.position.sub(
+          center.multiplyScalar(scale)
+        );
+
+        model.position.y -= 0.60;
+
+        const toRemove = [];
+
+        let foundCircleVessel = false;
+
+        model.traverse(function(child){
+
+          if(!child.isMesh){
+            return;
+          }
+
+          child.castShadow = true;
+          child.receiveShadow = true;
+
+          const name =
+            (child.name || "").toLowerCase();
+
+          const isCircleVessel =
+            name.includes("willis") ||
+            name.includes("communicating") ||
+            name.includes("acom") ||
+            name.includes("pcom") ||
+            name.includes("anterior_cerebral") ||
+            name.includes("posterior_cerebral");
+
+          const otherVesselKeywords = [
+            "artery",
+            "arter",
+            "vessel",
+            "vein",
+            "sinus",
+            "plexus",
+            "carotid",
+            "basilar",
+            "vertebral"
+          ];
+
+          const isOtherVessel =
+            !isCircleVessel &&
+            otherVesselKeywords.some(function(keyword){
+              return name.includes(keyword);
+            });
+
+          if(isCircleVessel){
+
+            foundCircleVessel = true;
+
+            child.material = cowMaterial;
+
+            const glow = child.clone();
+
+            glow.material = glowMaterial;
+
+            glow.scale.multiplyScalar(1.06);
+
+            if(child.parent){
+              child.parent.add(glow);
+            }
+
+            cowGlowMeshes.push(glow);
+
+          } else if(isOtherVessel){
+
+            toRemove.push(child);
+
+          } else {
+
+            child.material =
+              brainPinkMaterial.clone();
+
+            brainMeshes.push(child);
+          }
+        });
+
+        toRemove.forEach(function(child){
+
+          if(child.geometry){
+            child.geometry.dispose();
+          }
+
+          if(child.parent){
+            child.parent.remove(child);
+          }
+        });
+
+        brainGroup.add(model);
+
+        /*
+         * Generic brain models often contain only the brain surface.
+         * In that case the procedural Circle of Willis provides the
+         * missing vascular visualization.
+         */
+
+        if(!foundCircleVessel){
+
+          createCircleOfWillis();
+
+        } else {
+
+          circleOfWillisGroup = model;
+        }
+
+        loadBar.style.width = "100%";
+
+        updateBrainTransparency();
+
+        onReady();
+      },
+
+      function(progress){
+
+        if(progress.total > 0){
+
+          const pct = Math.min(
+            90,
+            progress.loaded / progress.total * 90
+          );
+
+          loadBar.style.width =
+            pct + "%";
+        }
+      },
+
+      function(error){
+
+        console.warn(
+          "Brain model failed:",
+          error
+        );
+
+        tryLoad();
+      }
+    );
+  }
+
+  tryLoad();
+}
+
+/* READY */
+
+function onReady(){
+
+  updateBrainTransparency();
+
+  setTimeout(function(){
+
+    loading.classList.add("hide");
+
+    if(highlighted){
+      cowLabel.classList.add("show");
+    }
+
+  },500);
+}
+
+/* LABEL POSITION */
+
+function updateLabel(){
+
+  if(!circleOfWillisGroup){
+    return;
+  }
+
+  const box =
+    new THREE.Box3().setFromObject(
+      circleOfWillisGroup
+    );
+
+  const center =
+    box.getCenter(
+      new THREE.Vector3()
+    );
+
+  center.project(camera);
+
+  const x =
+    (center.x + 1) / 2 *
+    canvas.clientWidth;
+
+  const y =
+    (-center.y + 1) / 2 *
+    canvas.clientHeight;
+
+  cowLabel.style.left =
+    x + "px";
+
+  cowLabel.style.top =
+    (y - 55) + "px";
+}
+
+/* RESIZE */
+
+function resize(){
+
+  const width =
+    canvas.clientWidth;
+
+  const height =
+    canvas.clientHeight;
+
+  if(width <= 0 || height <= 0){
+    return;
+  }
+
+  camera.aspect =
+    width / height;
+
+  camera.updateProjectionMatrix();
+
+  renderer.setSize(
+    width,
+    height,
+    false
+  );
+}
+
+window.addEventListener(
+  "resize",
+  resize
+);
+
+/* HIGHLIGHT */
+
+const highlightBtn =
+  document.getElementById("highlight");
+
+highlightBtn.addEventListener(
+  "click",
+  function(){
+
+    highlighted =
+      !highlighted;
+
+    cowMaterial.color.copy(
+      highlighted
+        ? cowWhiteColor
+        : cowBlendColor
+    );
+
+    cowMaterial.emissive.set(
+      highlighted
+        ? 0x555555
+        : 0x000000
+    );
+
+    cowMaterial.emissiveIntensity =
+      highlighted
+        ? 0.2
+        : 0;
+
+    cowGlowMeshes.forEach(
+      function(glow){
+
+        glow.visible =
+          highlighted;
+      }
+    );
+
+    /*
+     * Only the brain surface becomes transparent.
+     * The Circle of Willis itself is never faded.
+     */
+    updateBrainTransparency();
+
+    cowLabel.classList.toggle(
+      "show",
+      highlighted
+    );
+
+    highlightBtn.classList.toggle(
+      "active",
+      highlighted
+    );
+
+    highlightBtn.textContent =
+      highlighted
+        ? "⚪ Circle of Willis Highlighted"
+        : "🧠 Highlight Circle of Willis";
+  }
+);
+
+/* AUTO ROTATE */
+
+const rotateBtn =
+  document.getElementById("rotate");
+
+rotateBtn.addEventListener(
+  "click",
+  function(){
+
+    controls.autoRotate =
+      !controls.autoRotate;
+
+    rotateBtn.classList.toggle(
+      "active",
+      controls.autoRotate
+    );
+
+    rotateBtn.textContent =
+      controls.autoRotate
+        ? "⟳ Auto Rotate"
+        : "▶ Auto Rotate";
+  }
+);
+
+/* RESET */
+
+document
+  .getElementById("reset")
+  .addEventListener(
+    "click",
+    function(){
+
+      camera.position.set(
+        3.2,
+        0.3,
+        8.5
+      );
+
+      controls.target.set(
+        0,
+        -0.3,
+        0
+      );
+
+      controls.update();
+    }
+  );
+
+/* ANIMATION */
+
+function animate(){
+
+  requestAnimationFrame(
+    animate
+  );
+
+  controls.update();
+
+  updateLabel();
+
+  renderer.render(
+    scene,
+    camera
+  );
+}
+
+/* START */
+
+resize();
+
+animate();
+
+loadRealBrain();
+
+</script>
+
+<!-- MINI TEST JAVASCRIPT -->
+
+<script>
+
+function checkAnswer(
+  button,
+  correct
+){
+
+  const parent =
+    button.parentElement;
+
+  const options =
+    parent.querySelectorAll(
+      ".option"
+    );
+
+  options.forEach(
+    function(option){
+
+      option.classList.remove(
+        "correct",
+        "wrong"
+      );
+    }
+  );
+
+  if(correct){
+
+    button.classList.add(
+      "correct"
+    );
+
+  }else{
+
+    button.classList.add(
+      "wrong"
+    );
+  }
+
+  updateQuizScore();
+}
+
+function updateQuizScore(){
+
+  const result =
+    document.getElementById(
+      "quizResult"
+    );
+
+  let answered = 0;
+  let correctAnswers = 0;
+
+  document
+    .querySelectorAll(
+      ".question"
+    )
+    .forEach(
+      function(question){
+
+        const selected =
+          question.querySelector(
+            ".correct, .wrong"
+          );
+
+        if(selected){
+
+          answered++;
+
+          if(
+            selected.classList.contains(
+              "correct"
+            )
+          ){
+
+            correctAnswers++;
+          }
+        }
+      }
+    );
+
+  if(answered > 0){
+
+    result.style.display =
+      "block";
+
+    result.textContent =
+      "Score: " +
+      correctAnswers +
+      " / " +
+      answered;
+  }
+}
+
+</script>
+
+</body>
+</html>
