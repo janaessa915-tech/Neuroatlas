@@ -59,7 +59,7 @@ nav a:hover{
 }
 
 h1{
-  font-size:clamp(52px,8vw,88px);
+  font-size:clamp(55px,8vw,90px);
   line-height:.95;
   letter-spacing:-4px;
   margin-bottom:10px;
@@ -73,7 +73,7 @@ h1{
 
 .hero p{
   color:#a6b6c7;
-  max-width:820px;
+  max-width:800px;
   font-size:18px;
   line-height:1.8;
 }
@@ -101,6 +101,12 @@ h1{
   background:#14304a;
   color:white;
   border-color:#61b5ff;
+}
+
+.action-button.location-active{
+  background:#241417;
+  border-color:#ff4d5e;
+  color:#ffd0d5;
 }
 
 /* 3D VIEWER */
@@ -188,8 +194,8 @@ h1{
   transition:width .3s;
 }
 
-/* BASAL GANGLIA LABEL */
-.structure-label{
+/* LOCATION LABEL */
+.location-label{
   position:absolute;
   z-index:30;
   pointer-events:none;
@@ -197,34 +203,34 @@ h1{
   display:none;
 }
 
-.structure-label.show{
+.location-label.show{
   display:block;
 }
 
-.label-box{
+.location-label-box{
   position:relative;
   padding:9px 15px;
   border-radius:10px;
   background:rgba(5,10,17,.96);
-  border:1.5px solid #ffffff;
-  color:#ffffff;
+  border:1.5px solid #ff4d5e;
+  color:#ffd0d5;
   font-size:12px;
   font-weight:bold;
   letter-spacing:1px;
   white-space:nowrap;
   box-shadow:
-    0 0 12px rgba(255,255,255,.20),
-    0 0 25px rgba(255,255,255,.08);
+    0 0 12px rgba(255,77,94,.25),
+    0 0 25px rgba(255,77,94,.12);
 }
 
-.label-box::after{
+.location-label-box::after{
   content:"";
   position:absolute;
   left:50%;
-  bottom:-15px;
+  bottom:-18px;
   width:1.5px;
-  height:15px;
-  background:#ffffff;
+  height:18px;
+  background:#ff4d5e;
   transform:translateX(-50%);
 }
 
@@ -253,9 +259,9 @@ h1{
 }
 
 .controls button.active{
-  background:#202428;
-  border-color:#ffffff;
-  color:white;
+  background:#241417;
+  border-color:#ff4d5e;
+  color:#ffd0d5;
 }
 
 /* INFORMATION */
@@ -324,25 +330,19 @@ h1{
   stroke-width:3;
 }
 
-.location-outline{
-  fill:none;
-  stroke:#8ca1b4;
-  stroke-width:2;
-  opacity:.6;
-}
-
 .location-basal{
-  fill:#ffffff;
-  stroke:#ffffff;
-  stroke-width:3;
-  filter:
-    drop-shadow(0 0 5px rgba(255,255,255,.75))
-    drop-shadow(0 0 12px rgba(255,255,255,.35));
+  fill:none;
+  stroke:#ff4d5e;
+  stroke-width:7;
+  stroke-linecap:round;
 }
 
-.location-basal-soft{
-  fill:#ffffff;
-  opacity:.18;
+.location-basal-glow{
+  fill:none;
+  stroke:#ff4d5e;
+  stroke-width:17;
+  opacity:.30;
+  filter:blur(7px);
 }
 
 .location-line{
@@ -351,7 +351,7 @@ h1{
 }
 
 .location-basal-line{
-  stroke:#ffffff;
+  stroke:#ff4d5e;
   stroke-width:3;
 }
 
@@ -362,7 +362,7 @@ h1{
 }
 
 .location-basal-label{
-  fill:#ffffff;
+  fill:#ff4d5e;
   font-size:21px;
   font-weight:bold;
 }
@@ -396,7 +396,7 @@ h1{
 
 .card:hover{
   transform:translateY(-3px);
-  border-color:#4a4a4a;
+  border-color:#4a2a30;
 }
 
 .card h3{
@@ -421,7 +421,7 @@ h1{
   padding:30px;
   background:#091522;
   border:1px solid #172b3e;
-  border-left:3px solid #ffffff;
+  border-left:3px solid #ff4d5e;
   border-radius:18px;
 }
 
@@ -436,7 +436,7 @@ h1{
   margin-bottom:0;
 }
 
-/* QUICK FACTS */
+/* FACTS */
 .facts-grid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
@@ -452,7 +452,7 @@ h1{
 
 .fact span{
   display:block;
-  color:#ffffff;
+  color:#ff4d5e;
   font-size:11px;
   letter-spacing:2px;
   margin-bottom:12px;
@@ -472,7 +472,7 @@ h1{
   line-height:1.7;
 }
 
-/* MINI TEST */
+/* QUIZ */
 .quiz{
   margin-top:65px;
   padding:30px;
@@ -522,7 +522,7 @@ h1{
 }
 
 .option:hover{
-  border-color:#ffffff;
+  border-color:#ff4d5e;
   background:#111e2c;
 }
 
@@ -601,10 +601,7 @@ h1{
 <main class="container">
 
 <!-- HERO -->
-
-<div class="eyebrow">
-Deep Brain Anatomy · NeuroAtlas
-</div>
+<div class="eyebrow">Deep Brain Anatomy · NeuroAtlas</div>
 
 <h1>Basal Ganglia</h1>
 
@@ -613,37 +610,44 @@ Deep Brain Anatomy · NeuroAtlas
 </div>
 
 <div class="hero">
-
 <p>
 The basal ganglia are a group of deep gray-matter nuclei located
-within the cerebral hemispheres. They work with the cerebral cortex,
-thalamus, and brainstem to help regulate movement, motor learning,
-habit formation, and several cognitive and emotional functions.
+beneath the cerebral cortex. They are important for movement
+selection, motor learning, habit formation, and several cognitive
+functions. Because they sit deep inside the brain, making the
+surrounding brain tissue slightly transparent provides a clearer
+view of their anatomical location.
 </p>
-
 </div>
 
 <!-- ACTION BUTTONS -->
-
 <div class="actions">
 
-<a class="action-button" href="#location">
-📍 Show Location
-</a>
+<button
+  id="showLocation"
+  class="action-button"
+  type="button"
+>
+📍 Show Basal Ganglia
+</button>
 
-<a class="action-button" href="#information">
+<a
+  class="action-button"
+  href="#information"
+>
 🧠 Learn About the Basal Ganglia
 </a>
 
-<a class="action-button" href="#quiz">
+<a
+  class="action-button"
+  href="#quiz"
+>
 📝 Test Yourself
 </a>
 
 </div>
 
-
 <!-- 3D VIEWER -->
-
 <div class="viewer">
 
 <div class="viewer-header">
@@ -658,7 +662,6 @@ DRAG TO ROTATE · SCROLL TO ZOOM
 
 </div>
 
-
 <div class="scene">
 
 <div id="loading" class="loading">
@@ -668,44 +671,35 @@ Loading real brain model...
 </span>
 
 <div class="loading-bar">
-
 <div
-id="loadBar"
-class="loading-bar-inner">
+  id="loadBar"
+  class="loading-bar-inner"
+></div>
 </div>
 
 </div>
-
-</div>
-
 
 <canvas id="brainCanvas"></canvas>
 
-
 <div
-id="structureLabel"
-class="structure-label">
+  id="locationLabel"
+  class="location-label"
+>
 
-<div class="label-box">
-BASAL GANGLIA
+<div class="location-label-box">
+BASAL GANGLIA · العقد القاعدية
 </div>
 
 </div>
 
 </div>
-
 
 <div class="controls">
 
 <button
-id="highlight"
-class="active">
-⚪ Highlight Basal Ganglia
-</button>
-
-<button
-id="rotate"
-class="active">
+  id="rotate"
+  class="active"
+>
 ⟳ Auto Rotate
 </button>
 
@@ -717,12 +711,11 @@ class="active">
 
 </div>
 
-
 <!-- LOCATION -->
-
 <section
-id="location"
-class="location">
+  id="location"
+  class="location"
+>
 
 <div class="section-label">
 Location · الموقع
@@ -735,248 +728,198 @@ Location · الموقع
 <p class="location-intro">
 
 The basal ganglia are located deep within the cerebral hemispheres,
-beneath the cerebral cortex. The major components include the
-<strong>caudate nucleus</strong>, <strong>putamen</strong>, and
-<strong>globus pallidus</strong>. Functionally associated structures
-also include the <strong>subthalamic nucleus</strong> and
-<strong>substantia nigra</strong>.
+beneath the cerebral cortex. Major components include the caudate
+nucleus, putamen, globus pallidus, substantia nigra, and subthalamic
+nucleus.
+
+When <strong>Show Basal Ganglia</strong> is activated in the 3D
+viewer, the outer brain becomes slightly transparent so the deep
+location can be appreciated more easily.
 
 <br><br>
 
-تقع العقد القاعدية في عمق نصفي الكرة المخية أسفل القشرة الدماغية.
-وتشمل مكوناتها الرئيسية <strong>النواة المذنبة</strong> و
-<strong>البوتامين</strong> و<strong>الكرة الشاحبة</strong>.
-وترتبط بها وظيفياً أيضاً <strong>النواة تحت المهاد</strong> و
-<strong>المادة السوداء</strong>.
+تقع العقد القاعدية في عمق نصفي الكرة المخية، أسفل القشرة المخية.
+وتشمل مكوناتها الرئيسية النواة المذنبة والبطامة والكرة الشاحبة
+والمادة السوداء والنواة تحت المهاد.
+
+عند تفعيل خيار
+<strong>إظهار العقد القاعدية</strong>
+في النموذج ثلاثي الأبعاد، تصبح أنسجة الدماغ الخارجية شفافة قليلاً
+حتى يصبح موقع هذه البنى العميقة أكثر وضوحاً.
 
 </p>
-
 
 <div class="brain-visual">
 
 <svg
-class="location-svg"
-viewBox="0 0 800 560"
-xmlns="http://www.w3.org/2000/svg"
-aria-label="Simplified diagram showing the deep location of the basal ganglia">
+  class="location-svg"
+  viewBox="0 0 800 560"
+  xmlns="http://www.w3.org/2000/svg"
+  aria-label="Simplified location diagram of the basal ganglia"
+>
 
-
-<!-- CEREBRUM -->
-
+<!-- BRAIN -->
 <path
-class="location-brain"
-d="
-M150 100
-C200 45 300 30 400 50
-C510 70 575 150 570 235
-C568 300 525 330 470 330
-C410 330 375 285 315 275
-C255 265 190 300 150 255
-C115 215 115 145 150 100Z
-"/>
+  class="location-brain"
+  d="
+  M150 100
+  C200 45 300 30 400 50
+  C510 70 575 150 570 235
+  C568 300 525 330 470 330
+  C410 330 375 285 315 275
+  C255 265 190 300 150 255
+  C115 215 115 145 150 100Z"
+/>
 
+<!-- INTERNAL BASAL GANGLIA -->
+<ellipse
+  class="location-basal-glow"
+  cx="370"
+  cy="190"
+  rx="82"
+  ry="55"
+/>
+
+<ellipse
+  class="location-basal"
+  cx="370"
+  cy="190"
+  rx="72"
+  ry="46"
+/>
+
+<ellipse
+  class="location-basal"
+  cx="370"
+  cy="190"
+  rx="45"
+  ry="28"
+/>
 
 <!-- MIDLINE -->
-
 <line
-class="location-outline"
-x1="400"
-y1="65"
-x2="400"
-y2="330"
+  x1="400"
+  y1="70"
+  x2="400"
+  y2="300"
+  stroke="#71869e"
+  stroke-width="2"
+  stroke-dasharray="5 7"
+  opacity=".5"
 />
-
-
-<!-- DEEP BASAL GANGLIA — LEFT -->
-
-<ellipse
-class="location-basal-soft"
-cx="330"
-cy="190"
-rx="82"
-ry="55"
-/>
-
-<ellipse
-class="location-basal"
-cx="330"
-cy="190"
-rx="52"
-ry="31"
-/>
-
-
-<!-- DEEP BASAL GANGLIA — RIGHT -->
-
-<ellipse
-class="location-basal-soft"
-cx="470"
-cy="190"
-rx="82"
-ry="55"
-/>
-
-<ellipse
-class="location-basal"
-cx="470"
-cy="190"
-rx="52"
-ry="31"
-/>
-
-
-<!-- CAUDATE-LIKE CURVE -->
-
-<path
-class="location-basal"
-d="
-M292 138
-C270 150 260 170 266 190
-C270 208 287 220 302 222
-C292 204 289 184 296 165
-C302 151 314 143 328 138
-Z
-"/>
-
-
-<path
-class="location-basal"
-d="
-M508 138
-C530 150 540 170 534 190
-C530 208 513 220 498 222
-C508 204 511 184 504 165
-C498 151 486 143 472 138
-Z
-"/>
-
 
 <!-- LABEL -->
-
 <line
-class="location-basal-line"
-x1="330"
-y1="190"
-x2="155"
-y2="120"
+  class="location-basal-line"
+  x1="440"
+  y1="190"
+  x2="600"
+  y2="150"
 />
 
 <text
-class="location-basal-label"
-x="55"
-y="110">
+  class="location-basal-label"
+  x="610"
+  y="155"
+>
 BASAL GANGLIA
 </text>
 
 <text
-class="location-arabic-label"
-x="55"
-y="137">
+  class="location-arabic-label"
+  x="610"
+  y="182"
+>
 العقد القاعدية
 </text>
 
-
-<!-- DEEP LOCATION LABEL -->
-
+<!-- CORTEX LABEL -->
 <line
-class="location-line"
-x1="470"
-y1="190"
-x2="625"
-y2="270"
+  class="location-line"
+  x1="170"
+  y1="100"
+  x2="75"
+  y2="70"
 />
 
 <text
-class="location-svg-label"
-x="635"
-y="266">
-DEEP WITHIN
+  class="location-svg-label"
+  x="20"
+  y="65"
+>
+CEREBRAL CORTEX
 </text>
 
-<text
-class="location-svg-label"
-x="635"
-y="291">
-CEREBRAL HEMISPHERES
-</text>
-
-
-<!-- CAUDATE -->
-
-<line
-class="location-line"
-x1="300"
-y1="160"
-x2="145"
-y2="330"
-/>
-
-<text
-class="location-svg-label"
-x="55"
-y="345">
-CAUDATE
-</text>
-
-
-<!-- PUTAMEN -->
-
-<line
-class="location-line"
-x1="455"
-y1="205"
-x2="620"
-y2="370"
-/>
-
-<text
-class="location-svg-label"
-x="630"
-y="375">
-PUTAMEN
-</text>
-
-
-<!-- THALAMUS CONTEXT -->
-
+<!-- THALAMUS -->
 <ellipse
-cx="400"
-cy="210"
-rx="35"
-ry="22"
-fill="#172a3c"
-stroke="#71869e"
-stroke-width="2"
+  cx="400"
+  cy="250"
+  rx="28"
+  ry="20"
+  fill="#71869e"
+  opacity=".8"
+/>
+
+<line
+  class="location-line"
+  x1="400"
+  y1="250"
+  x2="280"
+  y2="380"
 />
 
 <text
-class="location-svg-label"
-x="350"
-y="255"
-font-size="15">
+  class="location-svg-label"
+  x="180"
+  y="395"
+>
 THALAMUS
+</text>
+
+<!-- BRAINSTEM -->
+<path
+  d="
+  M380 300
+  C375 350 380 390 400 430
+  C420 390 425 350 420 300
+  Z"
+  fill="#40566d"
+  stroke="#71869e"
+  stroke-width="3"
+/>
+
+<line
+  class="location-line"
+  x1="420"
+  y1="370"
+  x2="540"
+  y2="430"
+/>
+
+<text
+  class="location-svg-label"
+  x="550"
+  y="435"
+>
+BRAINSTEM
 </text>
 
 </svg>
 
-
 <p class="location-caption">
-
-⚪ The highlighted deep structures represent the approximate location
-of the basal ganglia beneath the cerebral cortex.
-
+🔴 The highlighted deep region represents the approximate location of
+the basal ganglia beneath the cerebral cortex.
 </p>
 
 </div>
 
 </section>
 
-
 <!-- INFORMATION -->
-
 <section
-id="information"
-class="section">
+  id="information"
+  class="section"
+>
 
 <div class="section-label">
 Basal Ganglia Anatomy · تشريح العقد القاعدية
@@ -988,22 +931,20 @@ Basal Ganglia · العقد القاعدية
 
 <p class="section-intro">
 
-The basal ganglia form a network of interconnected nuclei involved
-primarily in the selection and regulation of movement. They do not
-simply "start" movement; instead, their circuits help select desired
-motor programs while suppressing competing ones.
+The basal ganglia are interconnected nuclei of gray matter situated
+deep within the cerebral hemispheres and brainstem. Rather than
+acting as a single structure, they operate as a network that helps
+select and regulate motor and cognitive programs.
 
 <br><br>
 
-العقد القاعدية عبارة عن شبكة من النوى المترابطة تشارك بشكل أساسي
-في اختيار وتنظيم الحركة. فهي لا تقوم ببساطة ببدء الحركة، بل تساعد
-دوائرها على اختيار البرامج الحركية المطلوبة وتثبيط البرامج المنافسة.
+العقد القاعدية هي مجموعة مترابطة من نوى المادة الرمادية تقع في عمق
+نصفي الكرة المخية وجذع الدماغ. ولا تعمل كبنية واحدة، بل كشبكة تساعد
+على اختيار وتنظيم البرامج الحركية والمعرفية.
 
 </p>
 
-
 <div class="cards">
-
 
 <div class="card">
 
@@ -1012,42 +953,31 @@ Caudate Nucleus · النواة المذنبة
 </h3>
 
 <p>
-
-The caudate is a C-shaped nucleus that follows the contour of the
-lateral ventricle. It has important connections with the frontal
-cortex and participates in motor, cognitive, and associative circuits.
-
+The caudate nucleus is a curved nucleus that follows the contour of
+the lateral ventricle. It participates in motor control, learning,
+and cognitive processes.
 <br><br>
-
-النواة المذنبة بنية على شكل حرف C تتبع مسار البطين الجانبي، وترتبط
-بالقشرة الجبهية وتشارك في الدوائر الحركية والمعرفية والترابطية.
-
+النواة المذنبة بنية منحنية تتبع مسار البطين الجانبي، وتشارك في
+التحكم الحركي والتعلم والعمليات المعرفية.
 </p>
 
 </div>
-
 
 <div class="card">
 
 <h3>
-Putamen · البوتامين
+Putamen · البطامة
 </h3>
 
 <p>
-
-The putamen is a large lateral nucleus and, together with the globus
-pallidus, forms the anatomical lentiform nucleus. It has a major role
-in motor circuits.
-
+The putamen is a large lateral component of the striatum and plays
+an important role in regulating voluntary movement.
 <br><br>
-
-البوتامين نواة كبيرة تقع جانبياً، وتشكل مع الكرة الشاحبة النواة
-العدسية تشريحياً، ولها دور رئيسي في الدوائر الحركية.
-
+البطامة هي مكوّن جانبي كبير من الجسم المخطط، وتلعب دوراً مهماً في
+تنظيم الحركة الإرادية.
 </p>
 
 </div>
-
 
 <div class="card">
 
@@ -1056,62 +986,15 @@ Globus Pallidus · الكرة الشاحبة
 </h3>
 
 <p>
-
-The globus pallidus is divided into internal and external segments.
-The internal segment is an important output nucleus of the basal
-ganglia and influences thalamocortical activity.
-
+The globus pallidus lies medial to the putamen and is divided into
+external and internal segments. It forms a major output component of
+the basal ganglia circuitry.
 <br><br>
-
-تنقسم الكرة الشاحبة إلى جزء داخلي وجزء خارجي. ويُعد الجزء الداخلي
-من أهم نوى إخراج العقد القاعدية ويؤثر في النشاط المهادي القشري.
-
+تقع الكرة الشاحبة إنسياً بالنسبة للبطامة وتنقسم إلى جزء خارجي
+وجزء داخلي، وتشكل مكوّناً رئيسياً من مخرجات دوائر العقد القاعدية.
 </p>
 
 </div>
-
-
-<div class="card">
-
-<h3>
-Subthalamic Nucleus · النواة تحت المهاد
-</h3>
-
-<p>
-
-The subthalamic nucleus participates in the indirect and
-hyperdirect basal ganglia pathways and helps regulate motor output.
-
-<br><br>
-
-تشارك النواة تحت المهاد في المسارين غير المباشر وفوق المباشر للعقد
-القاعدية وتساعد في تنظيم المخرجات الحركية.
-
-</p>
-
-</div>
-
-
-<div class="card">
-
-<h3>
-Substantia Nigra · المادة السوداء
-</h3>
-
-<p>
-
-The substantia nigra lies in the midbrain. Its pars compacta contains
-dopaminergic neurons that modulate basal ganglia circuits.
-
-<br><br>
-
-تقع المادة السوداء في الدماغ المتوسط. ويحتوي الجزء المكتنز منها على
-خلايا عصبية دوبامينية تعدّل دوائر العقد القاعدية.
-
-</p>
-
-</div>
-
 
 <div class="card">
 
@@ -1120,85 +1003,48 @@ Striatum · الجسم المخطط
 </h3>
 
 <p>
-
-The caudate and putamen together form the striatum. It serves as a
-major input region of the basal ganglia, receiving extensive cortical
-signals.
-
+The striatum consists primarily of the caudate nucleus and putamen.
+It is a major input region of the basal ganglia.
 <br><br>
-
-تشكل النواة المذنبة والبوتامين معاً الجسم المخطط، وهو منطقة إدخال
-رئيسية للعقد القاعدية تستقبل إشارات واسعة من القشرة المخية.
-
+يتكون الجسم المخطط بشكل أساسي من النواة المذنبة والبطامة، وهو
+منطقة الإدخال الرئيسية في دوائر العقد القاعدية.
 </p>
 
 </div>
-
 
 <div class="card">
 
 <h3>
-Direct Pathway · المسار المباشر
+Substantia Nigra · المادة السوداء
 </h3>
 
 <p>
-
-The direct pathway facilitates selected movements by reducing
-inhibitory output from the basal ganglia to the thalamus.
-
+The substantia nigra is located in the midbrain and is closely
+connected with the basal ganglia. Dopaminergic neurons here are
+particularly important for movement regulation.
 <br><br>
-
-يساعد المسار المباشر على تسهيل الحركات المختارة من خلال تقليل
-المخرجات المثبطة من العقد القاعدية إلى المهاد.
-
+تقع المادة السوداء في الدماغ المتوسط وترتبط ارتباطاً وثيقاً
+بالعقد القاعدية، وتؤدي الخلايا العصبية الدوبامينية فيها دوراً
+مهماً في تنظيم الحركة.
 </p>
 
 </div>
-
 
 <div class="card">
 
 <h3>
-Indirect Pathway · المسار غير المباشر
+Subthalamic Nucleus · النواة تحت المهادية
 </h3>
 
 <p>
-
-The indirect pathway contributes to suppression of competing or
-unwanted motor programs and helps refine movement.
-
+The subthalamic nucleus participates in basal ganglia circuits that
+help regulate movement and suppress inappropriate motor activity.
 <br><br>
-
-يساهم المسار غير المباشر في تثبيط البرامج الحركية المنافسة أو غير
-المرغوبة ويساعد على تحسين دقة الحركة.
-
+تشارك النواة تحت المهادية في دوائر العقد القاعدية التي تساعد على
+تنظيم الحركة وكبح النشاط الحركي غير المناسب.
 </p>
 
 </div>
-
-
-<div class="card">
-
-<h3>
-Dopamine · الدوبامين
-</h3>
-
-<p>
-
-Dopamine from the substantia nigra pars compacta modulates striatal
-circuits. It promotes movement through D1-related pathways and
-reduces suppression through D2-related pathways.
-
-<br><br>
-
-يقوم الدوبامين القادم من الجزء المكتنز للمادة السوداء بتعديل دوائر
-الجسم المخطط، فيعزز الحركة عبر مسارات مرتبطة بمستقبلات D1 ويقلل
-التثبيط عبر مسارات مرتبطة بمستقبلات D2.
-
-</p>
-
-</div>
-
 
 <div class="card">
 
@@ -1207,68 +1053,101 @@ Motor Control · التحكم الحركي
 </h3>
 
 <p>
-
-Basal ganglia circuits contribute to movement selection, initiation,
-scaling, automatic movement, and motor learning.
-
+The basal ganglia help select desired movements while suppressing
+competing or unwanted motor programs.
 <br><br>
-
-تشارك دوائر العقد القاعدية في اختيار الحركة وبدئها وضبط شدتها
-والحركات الآلية والتعلم الحركي.
-
+تساعد العقد القاعدية على اختيار الحركات المطلوبة مع تثبيط البرامج
+الحركية المنافسة أو غير المرغوبة.
 </p>
 
 </div>
-
 
 <div class="card">
 
 <h3>
-Cognitive Functions · الوظائف المعرفية
+Learning & Habits · التعلم والعادات
 </h3>
 
 <p>
-
-Basal ganglia loops also connect with frontal cortical regions and
-participate in executive functions, procedural learning, and
-decision-related behavior.
-
+Basal ganglia circuits contribute to reinforcement learning, habit
+formation, and the gradual automation of learned behaviors.
 <br><br>
-
-ترتبط حلقات العقد القاعدية أيضاً بمناطق القشرة الجبهية وتشارك في
-الوظائف التنفيذية والتعلم الإجرائي وبعض السلوكيات المرتبطة باتخاذ
-القرار.
-
+تساهم دوائر العقد القاعدية في التعلم بالتعزيز وتكوين العادات
+والتحول التدريجي للسلوكيات المكتسبة إلى عمليات أكثر تلقائية.
 </p>
 
 </div>
-
 
 <div class="card">
 
 <h3>
-Habit Formation · تكوين العادات
+Cortico-Basal Ganglia Loops · الدوائر القشرية
 </h3>
 
 <p>
-
-Striatal circuits contribute to reinforcement learning and the
-development of repeated behavioral and motor patterns.
-
+The basal ganglia communicate with the cerebral cortex through
+parallel loops involved in motor, cognitive, and emotional functions.
 <br><br>
+تتواصل العقد القاعدية مع القشرة المخية عبر دوائر متوازية تشارك في
+الوظائف الحركية والمعرفية والانفعالية.
+</p>
 
-تساهم دوائر الجسم المخطط في التعلم بالتعزيز وفي تكوين الأنماط
-السلوكية والحركية المتكررة.
+</div>
 
+<div class="card">
+
+<h3>
+Parkinson Disease · مرض باركنسون
+</h3>
+
+<p>
+Changes involving dopaminergic neurons of the substantia nigra can
+disrupt basal ganglia circuitry and contribute to the characteristic
+movement abnormalities of Parkinson disease.
+<br><br>
+يمكن أن تؤدي التغيرات التي تصيب الخلايا العصبية الدوبامينية في
+المادة السوداء إلى اضطراب دوائر العقد القاعدية والمساهمة في
+الاضطرابات الحركية المميزة لمرض باركنسون.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Huntington Disease · مرض هنتنغتون
+</h3>
+
+<p>
+Huntington disease prominently affects striatal circuits and can
+produce progressive movement, cognitive, and behavioral changes.
+<br><br>
+يؤثر مرض هنتنغتون بشكل بارز في دوائر الجسم المخطط ويمكن أن يسبب
+تغيرات تدريجية في الحركة والإدراك والسلوك.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Internal Location · الموقع العميق
+</h3>
+
+<p>
+Unlike the cerebral cortex, the basal ganglia are hidden deep within
+the cerebral hemispheres. This is why transparency mode in the
+interactive model makes their position easier to understand.
+<br><br>
+على عكس القشرة المخية، تقع العقد القاعدية في عمق نصفي الكرة المخية،
+ولهذا يساعد وضع الشفافية في النموذج التفاعلي على فهم موقعها.
 </p>
 
 </div>
 
 </div>
 
-
-<!-- CLINICAL IMPORTANCE -->
-
+<!-- CLINICAL -->
 <div class="clinical-section">
 
 <div class="section-label">
@@ -1282,40 +1161,23 @@ Why the Basal Ganglia Matter
 <div class="clinical-box">
 
 <p>
-
-Disorders affecting the basal ganglia can produce characteristic
-changes in movement. Parkinson disease is associated with loss of
-dopaminergic neurons in the substantia nigra pars compacta, while
-Huntington disease primarily affects striatal neurons and can cause
-involuntary movements.
-
-</p>
-
-<p>
-
-Other basal ganglia disorders can produce dystonia, tremor, rigidity,
-bradykinesia, chorea, or other abnormalities of motor control. The
-specific clinical pattern depends on which nuclei and pathways are
-affected.
-
+Disruption of basal ganglia circuits can affect movement, motor
+learning, cognition, and behavior. Different disorders affect
+different components and pathways, producing different clinical
+patterns.
 </p>
 
 <p dir="rtl">
-
-يمكن أن تؤدي اضطرابات العقد القاعدية إلى تغيرات مميزة في الحركة.
-يرتبط مرض باركنسون بفقدان الخلايا العصبية الدوبامينية في الجزء
-المكتنز من المادة السوداء، بينما يؤثر مرض هنتنغتون بشكل رئيسي في
-الخلايا العصبية في الجسم المخطط وقد يؤدي إلى حركات لا إرادية.
-
+يمكن أن يؤدي اضطراب دوائر العقد القاعدية إلى التأثير في الحركة
+والتعلم الحركي والإدراك والسلوك. وتؤثر الاضطرابات المختلفة في
+مكونات ومسارات مختلفة، مما يؤدي إلى أنماط سريرية متنوعة.
 </p>
 
 </div>
 
 </div>
 
-
 <!-- QUICK FACTS -->
-
 <div class="section">
 
 <div class="section-label">
@@ -1326,9 +1188,7 @@ Quick Facts · معلومات سريعة
 Basal Ganglia at a Glance
 </h2>
 
-
 <div class="facts-grid">
-
 
 <div class="fact">
 
@@ -1344,43 +1204,26 @@ Deep within the cerebral hemispheres · في عمق نصفي الكرة المخ
 
 </div>
 
-
 <div class="fact">
 
 <span>02</span>
 
 <strong>
-Major Nuclei · النوى الرئيسية
+Major Structure · البنية الرئيسية
 </strong>
 
 <p>
-Caudate, putamen, globus pallidus · المذنبة والبوتامين والكرة الشاحبة
+Striatum, globus pallidus, substantia nigra and subthalamic nucleus
 </p>
 
 </div>
-
 
 <div class="fact">
 
 <span>03</span>
 
 <strong>
-Key Modulator · المعدّل الرئيسي
-</strong>
-
-<p>
-Dopamine from substantia nigra · الدوبامين من المادة السوداء
-</p>
-
-</div>
-
-
-<div class="fact">
-
-<span>04</span>
-
-<strong>
-Main Role · الدور الرئيسي
+Main Function · الوظيفة
 </strong>
 
 <p>
@@ -1389,16 +1232,29 @@ Movement selection and regulation · اختيار وتنظيم الحركة
 
 </div>
 
-</div>
+<div class="fact">
+
+<span>04</span>
+
+<strong>
+Clinical Relevance · الأهمية السريرية
+</strong>
+
+<p>
+Important in Parkinson and Huntington disease
+</p>
 
 </div>
 
+</div>
+
+</div>
 
 <!-- QUIZ -->
-
 <div
-id="quiz"
-class="quiz">
+  id="quiz"
+  class="quiz"
+>
 
 <div class="section-label">
 Mini Test
@@ -1412,143 +1268,119 @@ Mini Test
 Choose the best answer for each question.
 </p>
 
-
 <div class="question">
 
 <p>
-1. Which structures are major components of the basal ganglia?
+1. Where are the basal ganglia located?
 </p>
 
 <button
-class="option"
-onclick="checkAnswer(this,true)">
-A. Caudate, putamen, and globus pallidus
+  class="option"
+  onclick="checkAnswer(this,false)"
+>
+A. Only on the surface of the cerebral cortex
 </button>
 
 <button
-class="option"
-onclick="checkAnswer(this,false)">
-B. Hippocampus, amygdala, and fornix
+  class="option"
+  onclick="checkAnswer(this,true)"
+>
+B. Deep within the cerebral hemispheres
 </button>
 
 <button
-class="option"
-onclick="checkAnswer(this,false)">
-C. Medulla, pons, and cerebellum
+  class="option"
+  onclick="checkAnswer(this,false)"
+>
+C. Only inside the cerebellum
 </button>
 
 <button
-class="option"
-onclick="checkAnswer(this,false)">
-D. Corpus callosum, optic chiasm, and pituitary
+  class="option"
+  onclick="checkAnswer(this,false)"
+>
+D. Outside the skull
 </button>
 
 </div>
 
-
 <div class="question">
 
 <p>
-2. Which neurotransmitter is especially important in basal ganglia modulation?
+2. Which structure is part of the striatum?
 </p>
 
 <button
-class="option"
-onclick="checkAnswer(this,false)">
-A. Acetylcholine only
+  class="option"
+  onclick="checkAnswer(this,true)"
+>
+A. Putamen
 </button>
 
 <button
-class="option"
-onclick="checkAnswer(this,true)">
-B. Dopamine
+  class="option"
+  onclick="checkAnswer(this,false)"
+>
+B. Cerebellar cortex
 </button>
 
 <button
-class="option"
-onclick="checkAnswer(this,false)">
-C. Melatonin
+  class="option"
+  onclick="checkAnswer(this,false)"
+>
+C. Medulla
 </button>
 
 <button
-class="option"
-onclick="checkAnswer(this,false)">
-D. Histamine
+  class="option"
+  onclick="checkAnswer(this,false)"
+>
+D. Hippocampal formation
 </button>
 
 </div>
 
-
 <div class="question">
 
 <p>
-3. Which disease is strongly associated with degeneration of dopaminergic neurons in the substantia nigra?
+3. Which neurotransmitter is strongly associated with substantia nigra
+input to the basal ganglia?
 </p>
 
 <button
-class="option"
-onclick="checkAnswer(this,true)">
-A. Parkinson disease
+  class="option"
+  onclick="checkAnswer(this,true)"
+>
+A. Dopamine
 </button>
 
 <button
-class="option"
-onclick="checkAnswer(this,false)">
-B. Multiple sclerosis
+  class="option"
+  onclick="checkAnswer(this,false)"
+>
+B. Hemoglobin
 </button>
 
 <button
-class="option"
-onclick="checkAnswer(this,false)">
-C. Meningitis
+  class="option"
+  onclick="checkAnswer(this,false)"
+>
+C. Collagen
 </button>
 
 <button
-class="option"
-onclick="checkAnswer(this,false)">
-D. Myasthenia gravis
+  class="option"
+  onclick="checkAnswer(this,false)"
+>
+D. Melatonin
 </button>
 
 </div>
-
-
-<div class="question">
-
-<p>
-4. What is one major function of basal ganglia circuits?
-</p>
-
-<button
-class="option"
-onclick="checkAnswer(this,false)">
-A. Producing cerebrospinal fluid
-</button>
-
-<button
-class="option"
-onclick="checkAnswer(this,true)">
-B. Selecting and regulating motor programs
-</button>
-
-<button
-class="option"
-onclick="checkAnswer(this,false)">
-C. Detecting sound vibrations
-</button>
-
-<button
-class="option"
-onclick="checkAnswer(this,false)">
-D. Controlling pupil color
-</button>
-
-</div>
-
 
 <div
-id="quizResult"
-class="quiz-result">
-</div>
+  id="quizResult"
+  class="quiz-result"
+></div>
 
 </div>
 
@@ -1556,18 +1388,15 @@ class="quiz-result">
 
 </main>
 
-
 <!-- THREE.JS -->
-
 <script type="importmap">
 {
-  "imports": {
-    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
-    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  "imports":{
+    "three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
   }
 }
 </script>
-
 
 <script type="module">
 
@@ -1586,7 +1415,9 @@ import {
 } from "three/addons/loaders/DRACOLoader.js";
 
 
-/* ELEMENTS */
+/* =========================================================
+   ELEMENTS
+========================================================= */
 
 const canvas =
   document.getElementById("brainCanvas");
@@ -1600,17 +1431,24 @@ const loadText =
 const loadBar =
   document.getElementById("loadBar");
 
-const structureLabel =
-  document.getElementById("structureLabel");
+const locationLabel =
+  document.getElementById("locationLabel");
+
+const showLocationButton =
+  document.getElementById("showLocation");
 
 
-/* SCENE */
+/* =========================================================
+   SCENE
+========================================================= */
 
 const scene =
   new THREE.Scene();
 
 
-/* CAMERA */
+/* =========================================================
+   CAMERA
+========================================================= */
 
 const camera =
   new THREE.PerspectiveCamera(
@@ -1627,7 +1465,9 @@ camera.position.set(
 );
 
 
-/* RENDERER */
+/* =========================================================
+   RENDERER
+========================================================= */
 
 const renderer =
   new THREE.WebGLRenderer({
@@ -1650,7 +1490,9 @@ renderer.toneMappingExposure =
   0.75;
 
 
-/* CONTROLS */
+/* =========================================================
+   ORBIT CONTROLS
+========================================================= */
 
 const controls =
   new OrbitControls(
@@ -1660,10 +1502,13 @@ const controls =
 
 controls.enableRotate = true;
 controls.rotateSpeed = 0.6;
+
 controls.enableDamping = true;
 controls.dampingFactor = 0.05;
+
 controls.enableZoom = true;
 controls.zoomSpeed = 0.6;
+
 controls.enablePan = false;
 
 controls.autoRotate = true;
@@ -1679,7 +1524,9 @@ controls.minDistance = 3.5;
 controls.maxDistance = 16;
 
 
-/* LIGHTING */
+/* =========================================================
+   LIGHTING
+========================================================= */
 
 scene.add(
   new THREE.AmbientLight(
@@ -1697,7 +1544,6 @@ const hemi =
 
 scene.add(hemi);
 
-
 const keyLight =
   new THREE.DirectionalLight(
     0xfff5f0,
@@ -1711,7 +1557,6 @@ keyLight.position.set(
 );
 
 scene.add(keyLight);
-
 
 const fillLight =
   new THREE.DirectionalLight(
@@ -1728,7 +1573,9 @@ fillLight.position.set(
 scene.add(fillLight);
 
 
-/* BRAIN */
+/* =========================================================
+   BRAIN GROUP
+========================================================= */
 
 const brainGroup =
   new THREE.Group();
@@ -1736,70 +1583,119 @@ const brainGroup =
 scene.add(brainGroup);
 
 
-/*
- IMPORTANT:
-
- No artificial basal-ganglia object is generated here.
-
- The code looks for actual anatomical meshes already present
- inside the loaded model. If the model contains meshes named
- for caudate / putamen / globus pallidus / basal ganglia,
- those existing meshes are highlighted.
-
- The outer brain itself remains the same model.
-*/
+/* =========================================================
+   MATERIALS
+========================================================= */
 
 const brainPinkColor =
-  new THREE.Color(0xf1c5d0);
+  new THREE.Color(
+    0xf1c5d0
+  );
 
-const highlightColor =
-  new THREE.Color(0xffffff);
-
-const normalMaterial =
+const brainMaterial =
   new THREE.MeshPhysicalMaterial({
+
     color:brainPinkColor,
+
     roughness:0.62,
+
     metalness:0,
+
     clearcoat:0.12,
+
     clearcoatRoughness:0.5,
+
+    transparent:false,
+
+    opacity:1,
+
+    depthWrite:true,
+
     side:THREE.DoubleSide
+
   });
 
+
+/*
+  Basal ganglia highlight.
+
+  White/red is intentionally only used as the LOCATION
+  highlight. The brain itself remains the original model.
+*/
 
 const basalHighlightMaterial =
   new THREE.MeshPhysicalMaterial({
-    color:highlightColor,
-    roughness:0.28,
-    metalness:0.02,
-    clearcoat:0.7,
-    clearcoatRoughness:0.18,
-    emissive:0x777777,
-    emissiveIntensity:0.22,
+
+    color:0xff4d5e,
+
+    roughness:0.3,
+
+    metalness:0.05,
+
+    clearcoat:0.6,
+
+    clearcoatRoughness:0.2,
+
+    emissive:0x550914,
+
+    emissiveIntensity:0.75,
+
+    transparent:false,
+
+    opacity:1,
+
     side:THREE.DoubleSide
+
   });
 
 
-const highlightedMeshes = [];
+const basalGlowMaterial =
+  new THREE.MeshBasicMaterial({
 
-let highlighted = true;
+    color:0xff4d5e,
 
-let anatomicalTarget = null;
+    transparent:true,
+
+    opacity:0.22,
+
+    depthWrite:false,
+
+    side:THREE.BackSide
+
+  });
 
 
-/* NAME DETECTION */
+/* =========================================================
+   STATE
+========================================================= */
 
-function isBasalGangliaMesh(name){
+let basalMeshes = [];
 
-  const normalized =
-    name
-      .toLowerCase()
-      .replace(/[-_]/g," ")
-      .replace(/\s+/g," ");
+let brainMeshes = [];
+
+let locationMode = false;
+
+let fallbackLocation = null;
+
+
+/* =========================================================
+   BASAL GANGLIA NAME DETECTION
+========================================================= */
+
+function isBasalGangliaMesh(mesh){
+
+  const name =
+    (
+      mesh.name +
+      " " +
+      (mesh.parent ? mesh.parent.name : "")
+    ).toLowerCase();
 
   const keywords = [
 
     "basal ganglia",
-    "basal ganglion",
+    "basal_ganglia",
+    "basalganglia",
 
     "caudate",
     "caudate nucleus",
@@ -1813,7 +1709,8 @@ function isBasalGangliaMesh(name){
     "lenticular",
 
     "striatum",
-    "striate body",
+
+    "striate",
 
     "subthalamic nucleus",
     "subthalamic",
@@ -1823,56 +1720,250 @@ function isBasalGangliaMesh(name){
   ];
 
   return keywords.some(
-    keyword =>
-      normalized.includes(keyword)
+    keyword => name.includes(keyword)
   );
 }
 
 
-/* SAVE ORIGINAL MATERIAL */
+/* =========================================================
+   BRAIN TRANSPARENCY
+========================================================= */
 
-function cloneOriginalMaterial(material){
+function setBrainTransparency(active){
 
-  if(Array.isArray(material)){
+  brainMeshes.forEach(mesh => {
 
-    return material.map(
-      item => item.clone()
-    );
+    if(!mesh.material){
+      return;
+    }
 
-  }
+    const materials =
+      Array.isArray(mesh.material)
+        ? mesh.material
+        : [mesh.material];
 
-  return material.clone();
+    materials.forEach(material => {
+
+      if(active){
+
+        material.transparent = true;
+
+        material.opacity = 0.28;
+
+        material.depthWrite = false;
+
+        material.color.lerp(
+          new THREE.Color(0xffffff),
+          0.12
+        );
+
+      }else{
+
+        material.transparent = false;
+
+        material.opacity = 1;
+
+        material.depthWrite = true;
+
+        material.color.copy(
+          brainPinkColor
+        );
+
+      }
+
+      material.needsUpdate = true;
+
+    });
+
+  });
+
 }
 
 
-/* HIGHLIGHT EXISTING STRUCTURES */
+/* =========================================================
+   HIGHLIGHT EXISTING BASAL GANGLIA
+========================================================= */
 
-function highlightAnatomicalMesh(mesh){
+function highlightBasalGanglia(){
 
-  if(!mesh.userData.originalMaterial){
+  basalMeshes.forEach(mesh => {
 
     mesh.userData.originalMaterial =
-      cloneOriginalMaterial(
-        mesh.material
-      );
+      mesh.material;
 
-  }
+    mesh.material =
+      basalHighlightMaterial;
 
-  mesh.material =
-    basalHighlightMaterial;
+    mesh.userData.basalHighlight =
+      true;
 
-  highlightedMeshes.push(mesh);
-
-  if(!anatomicalTarget){
-
-    anatomicalTarget = mesh;
-
-  }
+  });
 
 }
 
 
-/* LOAD REAL BRAIN */
+/* =========================================================
+   RESTORE EXISTING BASAL GANGLIA
+========================================================= */
+
+function restoreBasalGanglia(){
+
+  basalMeshes.forEach(mesh => {
+
+    if(
+      mesh.userData.originalMaterial
+    ){
+
+      mesh.material =
+        mesh.userData.originalMaterial;
+
+    }
+
+    mesh.userData.basalHighlight =
+      false;
+
+  });
+
+}
+
+
+/* =========================================================
+   FALLBACK LOCATION GUIDE
+
+   This is NOT a new anatomical brain.
+   It is only a small translucent locator used when the
+   downloaded brain model does not contain separately named
+   basal-ganglia meshes.
+========================================================= */
+
+function createLocationGuide(){
+
+  if(fallbackLocation){
+    return;
+  }
+
+  fallbackLocation =
+    new THREE.Group();
+
+  /*
+    Approximate deep central location.
+    Kept inside the brain volume.
+  */
+
+  const left =
+    new THREE.Mesh(
+      new THREE.SphereGeometry(
+        0.34,
+        32,
+        20
+      ),
+      basalHighlightMaterial
+    );
+
+  const right =
+    new THREE.Mesh(
+      new THREE.SphereGeometry(
+        0.34,
+        32,
+        20
+      ),
+      basalHighlightMaterial
+    );
+
+  left.scale.set(
+    1.35,
+    0.75,
+    0.8
+  );
+
+  right.scale.set(
+    1.35,
+    0.75,
+    0.8
+  );
+
+  left.position.set(
+    -0.42,
+    -0.05,
+    0.05
+  );
+
+  right.position.set(
+    0.42,
+    -0.05,
+    0.05
+  );
+
+  const leftGlow =
+    new THREE.Mesh(
+      new THREE.SphereGeometry(
+        0.42,
+        24,
+        16
+      ),
+      basalGlowMaterial
+    );
+
+  const rightGlow =
+    new THREE.Mesh(
+      new THREE.SphereGeometry(
+        0.42,
+        24,
+        16
+      ),
+      basalGlowMaterial
+    );
+
+  leftGlow.scale.copy(
+    left.scale
+  );
+
+  rightGlow.scale.copy(
+    right.scale
+  );
+
+  leftGlow.position.copy(
+    left.position
+  );
+
+  rightGlow.position.copy(
+    right.position
+  );
+
+  fallbackLocation.add(
+    leftGlow
+  );
+
+  fallbackLocation.add(
+    rightGlow
+  );
+
+  fallbackLocation.add(
+    left
+  );
+
+  fallbackLocation.add(
+    right
+  );
+
+  fallbackLocation.position.set(
+    0,
+    -0.35,
+    0.15
+  );
+
+  fallbackLocation.visible =
+    false;
+
+  brainGroup.add(
+    fallbackLocation
+  );
+}
+
+
+/* =========================================================
+   LOAD REAL BRAIN
+========================================================= */
 
 function loadRealBrain(){
 
@@ -1907,15 +1998,19 @@ function loadRealBrain(){
 
   function tryLoad(){
 
-    if(
-      urlIndex >= urls.length
-    ){
+    if(urlIndex >= urls.length){
 
       loadText.textContent =
-        "Brain model could not be loaded.";
+        "Brain model unavailable";
+
+      loadBar.style.width =
+        "100%";
+
+      createLocationGuide();
+
+      onReady();
 
       return;
-
     }
 
 
@@ -1936,9 +2031,7 @@ function loadRealBrain(){
           gltf.scene;
 
 
-        /*
-         Normalize the SAME brain model.
-        */
+        /* Normalize model */
 
         const box =
           new THREE.Box3()
@@ -1973,18 +2066,11 @@ function loadRealBrain(){
           center.multiplyScalar(scale)
         );
 
-        model.position.y -= 0.60;
+        model.position.y -=
+          0.60;
 
 
-        /*
-         Traverse the model.
-
-         The brain stays baby pink.
-
-         We DO NOT create a new basal ganglia
-         sphere, tube, mesh, or fake anatomical
-         structure.
-        */
+        /* Inspect every mesh */
 
         model.traverse(
           function(child){
@@ -1995,61 +2081,72 @@ function loadRealBrain(){
 
 
             child.castShadow = true;
+
             child.receiveShadow = true;
 
 
-            const name =
-              child.name || "";
-
+            /*
+              Determine whether this mesh is actually a
+              named basal-ganglia structure.
+            */
 
             if(
-              isBasalGangliaMesh(name)
+              isBasalGangliaMesh(child)
             ){
 
-              highlightAnatomicalMesh(
+              basalMeshes.push(
                 child
               );
 
-              return;
+              /*
+                Preserve its original material.
+              */
+
+              child.userData.originalMaterial =
+                child.material;
+
+            }else{
+
+              /*
+                Everything else is the brain.
+              */
+
+              brainMeshes.push(
+                child
+              );
+
+
+              /*
+                Keep the model visually baby pink.
+              */
+
+              const newMaterial =
+                brainMaterial.clone();
+
+              child.material =
+                newMaterial;
 
             }
-
-
-            /*
-             Every other existing brain
-             surface gets the same baby-pink
-             material.
-            */
-
-            child.material =
-              normalMaterial.clone();
 
           }
         );
 
 
-        brainGroup.add(model);
+        brainGroup.add(
+          model
+        );
 
 
         /*
-         If the supplied generic model does not
-         contain deep anatomical meshes, do NOT
-         manufacture a fake basal ganglia object.
-
-         The viewer remains the actual brain model.
+          If the downloaded model does not contain separately
+          named basal-ganglia meshes, create only a location guide.
         */
 
         if(
-          highlightedMeshes.length === 0
+          basalMeshes.length === 0
         ){
 
-          loadText.textContent =
-            "Brain model loaded";
-
-        }else{
-
-          loadText.textContent =
-            "Basal ganglia identified";
+          createLocationGuide();
 
         }
 
@@ -2057,14 +2154,15 @@ function loadRealBrain(){
         loadBar.style.width =
           "100%";
 
-
         onReady();
 
       },
 
       function(progress){
 
-        if(progress.total > 0){
+        if(
+          progress.total > 0
+        ){
 
           const pct =
             Math.min(
@@ -2084,7 +2182,7 @@ function loadRealBrain(){
       function(error){
 
         console.warn(
-          "Model failed:",
+          "Brain model failed:",
           error
         );
 
@@ -2102,7 +2200,9 @@ function loadRealBrain(){
 }
 
 
-/* READY */
+/* =========================================================
+   READY
+========================================================= */
 
 function onReady(){
 
@@ -2113,16 +2213,6 @@ function onReady(){
         "hide"
       );
 
-      if(
-        highlighted
-      ){
-
-        structureLabel.classList.add(
-          "show"
-        );
-
-      }
-
     },
     500
   );
@@ -2130,43 +2220,83 @@ function onReady(){
 }
 
 
-/* LABEL POSITION */
+/* =========================================================
+   GET LOCATION TARGET
+========================================================= */
 
-function updateLabel(){
+function getLocationTarget(){
 
   if(
-    !anatomicalTarget
+    basalMeshes.length > 0
   ){
 
-    /*
-     If the model does not expose a
-     basal-ganglia mesh, there is no
-     fake marker to position.
-    */
+    const box =
+      new THREE.Box3();
 
-    structureLabel.style.display =
-      "none";
+    basalMeshes.forEach(
+      mesh => {
+
+        box.expandByObject(
+          mesh
+        );
+
+      }
+    );
+
+    const center =
+      box.getCenter(
+        new THREE.Vector3()
+      );
+
+    return center;
+
+  }
+
+
+  if(fallbackLocation){
+
+    const center =
+      new THREE.Vector3();
+
+    fallbackLocation.getWorldPosition(
+      center
+    );
+
+    return center;
+
+  }
+
+
+  return null;
+
+}
+
+
+/* =========================================================
+   UPDATE LABEL
+========================================================= */
+
+function updateLocationLabel(){
+
+  if(
+    !locationMode
+  ){
 
     return;
 
   }
 
 
-  structureLabel.style.display =
-    highlighted
-      ? "block"
-      : "none";
+  const target =
+    getLocationTarget();
+
+  if(!target){
+    return;
+  }
 
 
   const position =
-    new THREE.Vector3();
-
-
-  anatomicalTarget
-    .getWorldPosition(
-      position
-    );
-
+    target.clone();
 
   position.project(
     camera
@@ -2174,26 +2304,208 @@ function updateLabel(){
 
 
   const x =
-    (position.x + 1) / 2 *
+    (
+      position.x + 1
+    ) / 2 *
     canvas.clientWidth;
 
 
   const y =
-    (-position.y + 1) / 2 *
+    (
+      -position.y + 1
+    ) / 2 *
     canvas.clientHeight;
 
 
-  structureLabel.style.left =
+  locationLabel.style.left =
     x + "px";
 
 
-  structureLabel.style.top =
-    (y - 45) + "px";
+  locationLabel.style.top =
+    (
+      y - 45
+    ) + "px";
 
 }
 
 
-/* RESIZE */
+/* =========================================================
+   SHOW / HIDE LOCATION
+========================================================= */
+
+function setLocationMode(active){
+
+  locationMode =
+    active;
+
+
+  if(active){
+
+    /*
+      Make the external brain slightly transparent.
+    */
+
+    setBrainTransparency(
+      true
+    );
+
+
+    /*
+      If actual basal-ganglia meshes exist in the GLB,
+      highlight those meshes.
+    */
+
+    if(
+      basalMeshes.length > 0
+    ){
+
+      highlightBasalGanglia();
+
+    }else{
+
+      /*
+        Otherwise show only the internal location guide.
+      */
+
+      if(!fallbackLocation){
+        createLocationGuide();
+      }
+
+      fallbackLocation.visible =
+        true;
+
+    }
+
+
+    locationLabel.classList.add(
+      "show"
+    );
+
+
+    showLocationButton.classList.add(
+      "location-active"
+    );
+
+
+    showLocationButton.textContent =
+      "📍 Hide Basal Ganglia";
+
+
+  }else{
+
+    setBrainTransparency(
+      false
+    );
+
+
+    restoreBasalGanglia();
+
+
+    if(fallbackLocation){
+
+      fallbackLocation.visible =
+        false;
+
+    }
+
+
+    locationLabel.classList.remove(
+      "show"
+    );
+
+
+    showLocationButton.classList.remove(
+      "location-active"
+    );
+
+
+    showLocationButton.textContent =
+      "📍 Show Basal Ganglia";
+
+  }
+
+}
+
+
+/* =========================================================
+   LOCATION BUTTON
+========================================================= */
+
+showLocationButton.addEventListener(
+  "click",
+  function(){
+
+    setLocationMode(
+      !locationMode
+    );
+
+  }
+);
+
+
+/* =========================================================
+   AUTO ROTATE
+========================================================= */
+
+const rotateButton =
+  document.getElementById(
+    "rotate"
+  );
+
+rotateButton.addEventListener(
+  "click",
+  function(){
+
+    controls.autoRotate =
+      !controls.autoRotate;
+
+
+    rotateButton.classList.toggle(
+      "active",
+      controls.autoRotate
+    );
+
+
+    rotateButton.textContent =
+      controls.autoRotate
+        ? "⟳ Auto Rotate"
+        : "▶ Auto Rotate";
+
+  }
+);
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+document
+  .getElementById("reset")
+  .addEventListener(
+    "click",
+    function(){
+
+      camera.position.set(
+        3.2,
+        0.3,
+        8.5
+      );
+
+      controls.target.set(
+        0,
+        -0.3,
+        0
+      );
+
+      controls.update();
+
+    }
+  );
+
+
+/* =========================================================
+   RESIZE
+========================================================= */
 
 function resize(){
 
@@ -2235,121 +2547,9 @@ window.addEventListener(
 );
 
 
-/* HIGHLIGHT */
-
-const highlightBtn =
-  document.getElementById(
-    "highlight"
-  );
-
-
-highlightBtn.addEventListener(
-  "click",
-  function(){
-
-    highlighted =
-      !highlighted;
-
-
-    highlightedMeshes.forEach(
-      function(mesh){
-
-        if(highlighted){
-
-          mesh.material =
-            basalHighlightMaterial;
-
-        }else{
-
-          mesh.material =
-            mesh.userData.originalMaterial;
-
-        }
-
-      }
-    );
-
-
-    structureLabel.classList.toggle(
-      "show",
-      highlighted &&
-      anatomicalTarget !== null
-    );
-
-
-    highlightBtn.classList.toggle(
-      "active",
-      highlighted
-    );
-
-
-    highlightBtn.textContent =
-      highlighted
-        ? "⚪ Basal Ganglia Highlighted"
-        : "🧠 Highlight Basal Ganglia";
-
-  }
-);
-
-
-/* AUTO ROTATE */
-
-const rotateBtn =
-  document.getElementById(
-    "rotate"
-  );
-
-
-rotateBtn.addEventListener(
-  "click",
-  function(){
-
-    controls.autoRotate =
-      !controls.autoRotate;
-
-
-    rotateBtn.classList.toggle(
-      "active",
-      controls.autoRotate
-    );
-
-
-    rotateBtn.textContent =
-      controls.autoRotate
-        ? "⟳ Auto Rotate"
-        : "▶ Auto Rotate";
-
-  }
-);
-
-
-/* RESET */
-
-document
-  .getElementById("reset")
-  .addEventListener(
-    "click",
-    function(){
-
-      camera.position.set(
-        3.2,
-        0.3,
-        8.5
-      );
-
-      controls.target.set(
-        0,
-        -0.3,
-        0
-      );
-
-      controls.update();
-
-    }
-  );
-
-
-/* ANIMATION */
+/* =========================================================
+   ANIMATION
+========================================================= */
 
 function animate(){
 
@@ -2357,9 +2557,12 @@ function animate(){
     animate
   );
 
+
   controls.update();
 
-  updateLabel();
+
+  updateLocationLabel();
+
 
   renderer.render(
     scene,
@@ -2369,7 +2572,9 @@ function animate(){
 }
 
 
-/* START */
+/* =========================================================
+   START
+========================================================= */
 
 resize();
 
