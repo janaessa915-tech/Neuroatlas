@@ -1,10 +1,10 @@
-<!-- /occipital-lobe.html -->
+<!-- /medulla.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>NeuroAtlas | Occipital Lobe</title>
+<title>NeuroAtlas | Medulla Oblongata</title>
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -48,7 +48,7 @@ nav a:hover{color:#fff}
 }
 
 h1{
-  font-size:clamp(55px,8vw,90px);
+  font-size:clamp(48px,7vw,82px);
   line-height:.95;
   letter-spacing:-4px;
   margin-bottom:10px
@@ -74,7 +74,8 @@ h1{
   margin-top:30px
 }
 
-.action-button{
+.action-button,
+.controls button{
   padding:11px 17px;
   border-radius:9px;
   background:#0b1928;
@@ -85,10 +86,17 @@ h1{
   transition:.2s
 }
 
-.action-button:hover{
+.action-button:hover,
+.controls button:hover{
   background:#14304a;
   color:#fff;
   border-color:#61b5ff
+}
+
+.controls button.active{
+  background:#321218;
+  border-color:#ff4055;
+  color:#ffd9de
 }
 
 .viewer{
@@ -125,12 +133,7 @@ h1{
   width:100%;
   height:700px;
   background:
-    radial-gradient(
-      circle at 50% 45%,
-      #203b51 0%,
-      #0d1c2e 42%,
-      #02060b 100%
-    )
+    radial-gradient(circle at 50% 45%,#203b51 0%,#0d1c2e 42%,#02060b 100%)
 }
 
 #brainCanvas{
@@ -189,15 +192,15 @@ h1{
   padding:9px 15px;
   border-radius:10px;
   background:rgba(5,10,17,.96);
-  border:1.5px solid #ff4055;
+  border:1.5px solid #ffb6c1;
   color:#ffd9de;
   font-size:12px;
   font-weight:bold;
   letter-spacing:1px;
   white-space:nowrap;
   box-shadow:
-    0 0 12px rgba(255,64,85,.35),
-    0 0 30px rgba(255,64,85,.2)
+    0 0 12px rgba(255,182,193,.35),
+    0 0 30px rgba(255,182,193,.2)
 }
 
 .label-box::after{
@@ -207,7 +210,7 @@ h1{
   bottom:-15px;
   width:1.5px;
   height:15px;
-  background:#ff4055;
+  background:#ffb6c1;
   transform:translateX(-50%)
 }
 
@@ -217,27 +220,6 @@ h1{
   flex-wrap:wrap;
   padding:15px;
   border-top:1px solid rgba(255,255,255,.08)
-}
-
-.controls button{
-  padding:11px 17px;
-  border-radius:9px;
-  background:#0b1928;
-  border:1px solid #31516d;
-  color:#bdd0e0;
-  cursor:pointer;
-  transition:.2s
-}
-
-.controls button:hover{
-  background:#14304a;
-  color:#fff
-}
-
-.controls button.active{
-  background:#321218;
-  border-color:#ff4055;
-  color:#ffd9de
 }
 
 .section{
@@ -295,12 +277,214 @@ h1{
   border-radius:16px;
   overflow:hidden;
   background:
-    radial-gradient(
-      ellipse at center,
-      #182a39 0%,
-      #07111c 68%,
-      #02060b 100%
-    )
+    radial-gradient(ellipse at center,#182a39 0%,#07111c 68%,#02060b 100%)
+}
+
+.brain-svg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%
+}
+
+.brain-outline{
+  fill:url(#brainGradient);
+  stroke:#c7b3b8;
+  stroke-width:3;
+  filter:url(#brainShadow)
+}
+
+.cortex-line{
+  fill:none;
+  stroke:#796b72;
+  stroke-width:2.2;
+  opacity:.72;
+  stroke-linecap:round
+}
+
+.cortex-line-light{
+  fill:none;
+  stroke:#d3c1c5;
+  stroke-width:1.2;
+  opacity:.28;
+  stroke-linecap:round
+}
+
+.deep-region{
+  fill:#76666d;
+  opacity:.32
+}
+
+.thalamus{
+  fill:#8f7c84;
+  stroke:#cdbbc0;
+  stroke-width:1.8;
+  opacity:.82
+}
+
+.midbrain{
+  fill:#806f77;
+  stroke:#bdaab0;
+  stroke-width:1.8;
+  opacity:.85
+}
+
+.pons{
+  fill:#a58e95;
+  stroke:#d0bdc2;
+  stroke-width:2.5
+}
+
+.pons-detail{
+  fill:none;
+  stroke:#695b61;
+  stroke-width:2;
+  opacity:.7
+}
+
+.medulla-highlight{
+  fill:url(#medullaGradient);
+  stroke:#ff4055;
+  stroke-width:3;
+  filter:url(#cortexGlow);
+  opacity:1
+}
+
+.spinal-cord{
+  fill:#806d75;
+  stroke:#cdbbc0;
+  stroke-width:2
+}
+
+.spinal-detail{
+  fill:none;
+  stroke:#66585f;
+  stroke-width:2;
+  opacity:.7
+}
+
+.cerebellum-body{
+  fill:url(#cerebellumGradient);
+  stroke:#d2bdc2;
+  stroke-width:2.5
+}
+
+.cerebellar-folia{
+  fill:none;
+  stroke:#76666d;
+  stroke-width:2;
+  opacity:.8;
+  stroke-linecap:round
+}
+
+.callout{
+  fill:none;
+  stroke:#ffb6c1;
+  stroke-width:1.7;
+  stroke-linecap:round
+}
+
+.callout-dot{
+  fill:#ffb6c1;
+  stroke:#fff;
+  stroke-width:1
+}
+
+.medulla-svg-label{
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:13px;
+  font-weight:bold;
+  letter-spacing:.8px;
+  fill:#fff
+}
+
+.medulla-sub{
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:10px;
+  fill:#ffb6c1
+}
+
+.brain-label{
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:12px;
+  fill:#91a5b8;
+  letter-spacing:1.5px
+}
+
+.orientation-label{
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:10px;
+  fill:#71879a;
+  letter-spacing:1.2px
+}
+
+.anatomy-title{
+  position:absolute;
+  left:50%;
+  top:24px;
+  transform:translateX(-50%);
+  color:#d5e0e9;
+  font-size:13px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  text-align:center
+}
+
+.view-badge{
+  position:absolute;
+  left:25px;
+  bottom:22px;
+  padding:8px 12px;
+  border:1px solid #31516d;
+  border-radius:8px;
+  background:rgba(4,10,17,.82);
+  color:#8195a8;
+  font-size:10px;
+  letter-spacing:1.5px
+}
+
+.cortex-legend{
+  position:absolute;
+  right:22px;
+  bottom:20px;
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap
+}
+
+.legend-item{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  color:#aebdca;
+  font-size:10px
+}
+
+.legend-dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  box-shadow:0 0 10px currentColor
+}
+
+.legend-dot.medulla{
+  background:#ff4055;
+  color:#ff4055
+}
+
+@keyframes medullaPulse{
+  0%,100%{
+    opacity:1;
+    filter:drop-shadow(0 0 5px rgba(255,64,85,.65))
+  }
+  50%{
+    opacity:.9;
+    filter:drop-shadow(0 0 18px rgba(255,64,85,1))
+  }
+}
+
+.medulla-highlight.active{
+  animation:medullaPulse 1.8s infinite
 }
 
 .location-caption{
@@ -479,216 +663,6 @@ h1{
   display:none
 }
 
-/* ===== 2D OCCIPITAL LOBE ===== */
-
-.brain-svg{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%
-}
-
-.brain-outline{
-  fill:url(#brainGradient);
-  stroke:#c7b3b8;
-  stroke-width:3;
-  filter:url(#brainShadow)
-}
-
-.occipital-highlight{
-  fill:url(#occipitalGradient);
-  stroke:#ff4055;
-  stroke-width:3;
-  filter:url(#cortexGlow);
-  opacity:1
-}
-
-.cortex-line{
-  fill:none;
-  stroke:#796b72;
-  stroke-width:2.2;
-  opacity:.72;
-  stroke-linecap:round
-}
-
-.cortex-line-highlight{
-  fill:none;
-  stroke:#ffd1d7;
-  stroke-width:2.2;
-  opacity:.9;
-  stroke-linecap:round
-}
-
-.cortex-line-light{
-  fill:none;
-  stroke:#d3c1c5;
-  stroke-width:1.2;
-  opacity:.28;
-  stroke-linecap:round
-}
-
-.brain-cutaway{
-  fill:#bdabb1;
-  opacity:.28;
-  stroke:#e0ced2;
-  stroke-width:1.5
-}
-
-.deep-region{
-  fill:#76666d;
-  opacity:.24
-}
-
-.thalamus{
-  fill:#8f7c84;
-  stroke:#cdbbc0;
-  stroke-width:1.8;
-  opacity:.82
-}
-
-.cerebellum-body{
-  fill:url(#cerebellumGradient);
-  stroke:#d2bdc2;
-  stroke-width:2.5
-}
-
-.cerebellar-folia{
-  fill:none;
-  stroke:#76666d;
-  stroke-width:2;
-  opacity:.8;
-  stroke-linecap:round
-}
-
-.brainstem{
-  fill:#a58e95;
-  stroke:#d0bdc2;
-  stroke-width:2.5
-}
-
-.brainstem-detail{
-  fill:none;
-  stroke:#695b61;
-  stroke-width:2;
-  opacity:.7
-}
-
-/*
- * These two callout lines are permanently baby pink.
- * They are separate SVG elements and are never affected by
- * the occipital-lobe highlight.
- */
-.callout{
-  fill:none;
-  stroke:#ffb6c1;
-  stroke-width:1.7;
-  stroke-linecap:round
-}
-
-.callout-dot{
-  fill:#ffb6c1;
-  stroke:#fff;
-  stroke-width:1
-}
-
-.brain-label{
-  font-family:Arial,Helvetica,sans-serif;
-  font-size:12px;
-  fill:#91a5b8;
-  letter-spacing:1.5px
-}
-
-.occipital-svg-label{
-  font-family:Arial,Helvetica,sans-serif;
-  font-size:13px;
-  font-weight:bold;
-  letter-spacing:.8px;
-  fill:#fff
-}
-
-.occipital-sub{
-  font-family:Arial,Helvetica,sans-serif;
-  font-size:10px;
-  fill:#ffb6c1
-}
-
-.orientation-label{
-  font-family:Arial,Helvetica,sans-serif;
-  font-size:10px;
-  fill:#71879a;
-  letter-spacing:1.2px
-}
-
-.anatomy-title{
-  position:absolute;
-  left:50%;
-  top:24px;
-  transform:translateX(-50%);
-  color:#d5e0e9;
-  font-size:13px;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  text-align:center
-}
-
-.view-badge{
-  position:absolute;
-  left:25px;
-  bottom:22px;
-  padding:8px 12px;
-  border:1px solid #31516d;
-  border-radius:8px;
-  background:rgba(4,10,17,.82);
-  color:#8195a8;
-  font-size:10px;
-  letter-spacing:1.5px
-}
-
-.cortex-legend{
-  position:absolute;
-  right:22px;
-  bottom:20px;
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-  justify-content:flex-end
-}
-
-.legend-item{
-  display:flex;
-  align-items:center;
-  gap:6px;
-  color:#aebdca;
-  font-size:10px
-}
-
-.legend-dot{
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  box-shadow:0 0 10px currentColor
-}
-
-.legend-dot.occipital{
-  background:#ff4055;
-  color:#ff4055
-}
-
-@keyframes occipitalPulse{
-  0%,100%{
-    opacity:1;
-    filter:drop-shadow(0 0 5px rgba(255,64,85,.65))
-  }
-  50%{
-    opacity:.9;
-    filter:drop-shadow(0 0 18px rgba(255,64,85,1))
-  }
-}
-
-.occipital-highlight.active{
-  animation:occipitalPulse 1.8s infinite
-}
-
 @media(max-width:900px){
   .cards{grid-template-columns:repeat(2,1fr)}
   .facts-grid{grid-template-columns:repeat(2,1fr)}
@@ -705,31 +679,14 @@ h1{
 @media(max-width:600px){
   .cards{grid-template-columns:1fr}
   .facts-grid{grid-template-columns:1fr}
-
   h1{letter-spacing:-2px}
-
   .location{padding:20px}
   .anatomy-viewer{height:390px}
-
-  .anatomy-title{
-    font-size:9px
-  }
-
-  .brain-label{
-    font-size:9px
-  }
-
-  .occipital-svg-label{
-    font-size:9px
-  }
-
-  .occipital-sub{
-    font-size:7px
-  }
-
-  .cortex-legend{
-    display:none
-  }
+  .anatomy-title{font-size:9px}
+  .brain-label{font-size:9px}
+  .medulla-svg-label{font-size:9px}
+  .medulla-sub{font-size:7px}
+  .cortex-legend{display:none}
 }
 </style>
 </head>
@@ -743,23 +700,23 @@ h1{
 <main class="container">
 
 <div class="eyebrow">
-Cerebrum · NeuroAtlas
+Brainstem · NeuroAtlas
 </div>
 
 <h1>
-Occipital Lobe
+Medulla Oblongata
 </h1>
 
 <div class="arabic-title">
-الفص القذالي
+النخاع المستطيل
 </div>
 
 <div class="hero">
 <p>
-The occipital lobe is the posterior region of the cerebral cortex.
-It is primarily involved in receiving and processing visual information,
-helping the brain interpret shapes, colors, motion and other aspects
-of vision.
+The medulla oblongata is the lowest part of the brainstem. It connects
+the pons above with the spinal cord below and contains important centers
+involved in breathing, heart rate, blood pressure, swallowing, coughing
+and other vital functions.
 </p>
 </div>
 
@@ -770,7 +727,7 @@ of vision.
 </a>
 
 <a class="action-button" href="#information">
-🧠 Learn About the Occipital Lobe
+🧠 Learn About the Medulla
 </a>
 
 <a class="action-button" href="#quiz">
@@ -778,8 +735,6 @@ of vision.
 </a>
 
 </div>
-
-<!-- 3D VIEWER -->
 
 <div class="viewer">
 
@@ -813,7 +768,7 @@ Loading real brain model...
 
 <div id="locationLabel" class="location-label">
 <div class="label-box">
-OCCIPITAL LOBE · الفص القذالي
+MEDULLA OBLONGATA · النخاع المستطيل
 </div>
 </div>
 
@@ -822,11 +777,11 @@ OCCIPITAL LOBE · الفص القذالي
 <div class="controls">
 
 <button id="showLocation">
-📍 Show Occipital Lobe
+📍 Show Medulla
 </button>
 
 <button id="highlight" class="active">
-🔴 Highlight Occipital Lobe
+🔴 Highlight Medulla
 </button>
 
 <button id="rotate" class="active">
@@ -841,8 +796,6 @@ OCCIPITAL LOBE · الفص القذالي
 
 </div>
 
-<!-- ANATOMICAL LOCATION -->
-
 <section id="location" class="location">
 
 <div class="section-label">
@@ -850,584 +803,382 @@ Location · الموقع
 </div>
 
 <h2>
-📍 Where Is the Occipital Lobe?
+📍 Where Is the Medulla?
 </h2>
 
 <p class="location-intro">
 
-The occipital lobe occupies the posterior portion of each cerebral
-hemisphere. It lies behind the parietal and temporal lobes and forms
-the back part of the cerebral cortex.
+The medulla oblongata is the lowest portion of the brainstem. It lies
+below the pons and continues inferiorly into the spinal cord. It forms
+an important pathway between the brain and spinal cord and contains
+neural centers that help regulate several essential functions.
 
 <br><br>
 
-الفص القذالي يشغل الجزء الخلفي من كل نصف كرة مخية. ويقع خلف الفصين
-الجداري والصدغي ويشكل الجزء الخلفي من القشرة المخية.
+النخاع المستطيل هو الجزء السفلي من جذع الدماغ. يقع أسفل الجسر ويتصل
+من الأسفل بالحبل الشوكي. ويشكل مساراً مهماً بين الدماغ والحبل الشوكي،
+كما يحتوي على مراكز عصبية تساعد في تنظيم عدد من الوظائف الحيوية.
 
 </p>
 
 <div class="anatomy-viewer">
 
 <div class="anatomy-title">
-Lateral View · Occipital Lobe
+Mid-Sagittal View · Medulla Oblongata
 </div>
 
 <svg
 class="brain-svg"
 viewBox="0 0 1000 610"
 xmlns="http://www.w3.org/2000/svg"
-aria-label="Lateral view of the human brain highlighting the occipital lobe"
+aria-label="Simplified anatomical illustration highlighting the medulla oblongata"
 >
 
 <defs>
 
-<linearGradient
-id="brainGradient"
-x1="0"
-y1="0"
-x2="1"
-y2="1"
->
+<linearGradient id="brainGradient" x1="0" y1="0" x2="1" y2="1">
 <stop offset="0%" stop-color="#d2bec3"/>
 <stop offset="48%" stop-color="#ad979e"/>
 <stop offset="100%" stop-color="#806d75"/>
 </linearGradient>
 
-<linearGradient
-id="occipitalGradient"
-x1="0"
-y1="0"
-x2="1"
-y2="1"
->
+<linearGradient id="medullaGradient" x1="0" y1="0" x2="1" y2="1">
 <stop offset="0%" stop-color="#ff8b99"/>
 <stop offset="45%" stop-color="#ff4055"/>
 <stop offset="100%" stop-color="#bd1935"/>
 </linearGradient>
 
-<linearGradient
-id="cerebellumGradient"
-x1="0"
-y1="0"
-x2="1"
-y2="1"
->
+<linearGradient id="cerebellumGradient" x1="0" y1="0" x2="1" y2="1">
 <stop offset="0%" stop-color="#c7b0b6"/>
 <stop offset="100%" stop-color="#806c74"/>
 </linearGradient>
 
-<filter
-id="brainShadow"
-x="-30%"
-y="-30%"
-width="160%"
-height="160%"
->
-<feDropShadow
-dx="0"
-dy="8"
-stdDeviation="10"
-flood-color="#000"
-flood-opacity=".65"
-/>
+<filter id="brainShadow" x="-30%" y="-30%" width="160%" height="160%">
+<feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#000" flood-opacity=".65"/>
 </filter>
 
-<filter
-id="cortexGlow"
-x="-30%"
-y="-30%"
-width="160%"
-height="160%"
->
-<feGaussianBlur
-stdDeviation="3"
-result="blur"
-/>
-
+<filter id="cortexGlow" x="-30%" y="-30%" width="160%" height="160%">
+<feGaussianBlur stdDeviation="3" result="blur"/>
 <feMerge>
 <feMergeNode in="blur"/>
 <feMergeNode in="SourceGraphic"/>
 </feMerge>
-
 </filter>
 
 </defs>
 
-<!-- Whole cerebral outline -->
+<!-- Cerebral hemisphere -->
 
 <path
 class="brain-outline"
 d="
-M145 278
-C119 250 119 210 138 177
-C157 143 193 122 231 111
-C273 67 342 45 414 48
-C486 31 569 43 631 72
-C704 82 759 112 796 153
-C830 190 846 236 837 273
-C830 302 812 321 793 337
-C767 357 751 376 741 400
-C731 425 719 442 698 451
-C674 462 651 456 632 445
-C606 430 583 412 555 402
-C518 389 478 391 442 400
-C401 411 367 424 328 428
-C286 432 242 421 207 400
-C176 381 153 354 143 323
-C137 307 137 292 145 278
+M165 242
+C139 205 151 156 190 126
+C238 88 299 70 360 77
+C423 46 499 48 559 77
+C621 69 680 84 719 116
+C754 145 772 190 758 231
+C749 259 728 280 703 298
+C680 314 660 329 650 350
+C639 373 620 386 595 385
+C564 384 545 363 523 343
+C494 318 457 307 420 309
+C380 312 349 329 312 331
+C270 334 229 321 199 296
+C181 281 168 263 165 242
 Z
 "
 filter="url(#brainShadow)"
 />
 
-<!--
-     ACTUAL OCCIPITAL LOBE
+<!-- Cerebral folds -->
 
-     Posterior region of the cerebral hemisphere,
-     behind the parietal and temporal regions.
--->
+<path class="cortex-line" d="M187 184 C240 151 291 157 330 184 C367 210 405 212 442 190 C478 168 518 172 548 198"/>
+<path class="cortex-line" d="M172 228 C222 203 269 207 309 233 C345 257 383 258 420 240 C456 222 491 226 522 251"/>
+<path class="cortex-line" d="M193 270 C237 249 276 254 311 278 C345 301 381 304 417 290 C452 276 484 282 512 301"/>
+<path class="cortex-line-light" d="M227 135 C269 111 316 113 352 133"/>
+<path class="cortex-line-light" d="M403 105 C448 91 494 99 530 119"/>
+<path class="cortex-line-light" d="M554 126 C605 113 650 128 683 156"/>
 
-<path
-class="occipital-highlight active"
-d="
-M632 72
-C704 82 759 112 796 153
-C830 190 846 236 837 273
-C830 302 812 321 793 337
-C775 350 758 364 748 382
-C739 398 731 416 715 431
-C700 445 682 449 664 442
-C646 435 631 420 620 403
-C609 386 600 367 595 348
-C590 327 591 307 601 288
-C612 268 626 253 638 235
-C651 215 656 192 650 169
-C645 143 637 112 632 72
-Z
-"/>
-
-<!-- Boundary between major posterior regions -->
-
-<path
-class="cortex-line"
-d="
-M595 112
-C606 137 616 163 619 189
-C622 216 618 240 608 262
-C598 284 591 307 594 330
-C597 354 607 377 620 399
-"/>
-
-<!-- Occipital cortical folds -->
-
-<path
-class="cortex-line-highlight"
-d="
-M661 105
-C684 91 710 94 730 107
-C749 119 764 135 785 137
-C804 139 821 131 832 120
-"/>
-
-<path
-class="cortex-line-highlight"
-d="
-M653 135
-C675 122 699 124 719 139
-C739 154 755 170 778 169
-C798 168 815 158 830 146
-"/>
-
-<path
-class="cortex-line-highlight"
-d="
-M648 167
-C670 154 692 157 712 171
-C732 185 748 202 770 202
-C793 202 811 190 827 178
-"/>
-
-<path
-class="cortex-line-highlight"
-d="
-M643 200
-C665 187 686 190 706 204
-C726 219 742 236 763 235
-C785 234 803 222 820 211
-"/>
-
-<path
-class="cortex-line-highlight"
-d="
-M636 234
-C657 222 678 225 696 239
-C715 253 731 270 751 269
-C773 268 792 258 808 247
-"/>
-
-<path
-class="cortex-line-highlight"
-d="
-M625 270
-C646 258 666 262 683 276
-C701 291 716 307 735 307
-C755 307 774 297 791 286
-"/>
-
-<path
-class="cortex-line-highlight"
-d="
-M614 306
-C634 295 653 299 670 313
-C687 327 701 343 720 344
-C739 344 756 336 773 325
-"/>
-
-<path
-class="cortex-line-highlight"
-d="
-M610 341
-C629 331 647 335 663 348
-C679 361 693 377 711 379
-C728 381 744 373 758 363
-"/>
-
-<!-- Lower cortical folds remain normal -->
-
-<path
-class="cortex-line"
-d="
-M171 233
-C214 205 251 213 277 233
-C305 254 337 258 368 240
-C397 222 431 220 457 235
-C488 252 519 258 550 243
-"
-/>
-
-<path
-class="cortex-line"
-d="
-M154 285
-C190 268 223 273 251 290
-C280 307 310 314 341 303
-C371 292 394 278 421 283
-C450 288 475 307 506 310
-"
-/>
-
-<path
-class="cortex-line"
-d="
-M176 326
-C208 309 237 315 261 334
-C287 355 314 359 343 349
-C372 339 399 329 426 340
-C452 351 477 368 507 369
-"/>
-
-<path
-class="cortex-line"
-d="
-M203 361
-C226 348 247 350 267 364
-C287 378 307 386 330 381
-C354 376 374 366 396 373
-C418 380 437 393 460 394
-"/>
-
-<!-- Deep structures -->
-
-<path
-class="brain-cutaway"
-d="
-M310 129
-C365 101 431 94 492 111
-C550 126 604 155 641 201
-C672 239 687 285 678 325
-C669 364 641 393 607 408
-C570 425 524 423 485 410
-C445 397 408 378 373 351
-C338 324 313 286 300 245
-C287 202 287 158 310 129
-Z
-"/>
-
-<path
-class="deep-region"
-d="
-M445 235
-C461 213 489 203 515 208
-C541 213 559 231 560 254
-C561 278 544 297 519 303
-C492 309 465 298 451 279
-C441 266 438 249 445 235
-Z
-"/>
+<!-- Thalamus -->
 
 <ellipse
 class="thalamus"
-cx="545"
-cy="319"
-rx="39"
-ry="30"
+cx="500"
+cy="294"
+rx="55"
+ry="42"
 />
 
-<!-- Corpus callosum -->
+<!-- Midbrain -->
+
+<path
+class="midbrain"
+d="
+M472 356
+C456 346 449 331 453 315
+C457 298 468 283 482 270
+C492 260 498 248 499 234
+C500 221 494 209 484 198
+C474 190 474 177 483 168
+C492 159 507 159 518 166
+C531 174 537 188 536 202
+C535 217 530 230 534 244
+C538 259 550 272 558 286
+C568 303 568 321 559 337
+C548 356 530 369 509 372
+C495 373 482 368 472 356
+Z
+"
+/>
+
+<!-- Pons -->
+
+<path
+class="pons"
+d="
+M480 355
+C451 368 430 389 428 414
+C426 436 439 450 456 458
+C464 463 467 475 464 490
+C460 507 468 522 484 530
+C505 541 531 538 544 521
+C555 507 554 490 550 475
+C547 462 554 452 566 444
+C584 431 591 411 583 393
+C574 373 553 358 529 353
+C512 349 494 349 480 355
+Z
+"
+opacity=".95"
+/>
+
+<!-- Pons details -->
+
+<path class="pons-detail" d="M440 398 C473 412 526 413 575 397"/>
+<path class="pons-detail" d="M433 416 C470 430 526 432 582 414"/>
+<path class="pons-detail" d="M439 437 C472 450 525 452 574 437"/>
+
+<!-- MEDULLA -->
+
+<path
+class="medulla-highlight active"
+d="
+M478 449
+C466 456 458 468 457 483
+C456 498 461 514 472 526
+C482 537 493 544 505 545
+
+C516 545 528 538 535 528
+C544 515 548 500 547 485
+C546 470 539 458 529 450
+
+C519 443 508 440 497 441
+C490 442 484 445 478 449
+Z
+"
+/>
+
+<!-- Medulla internal landmarks -->
 
 <path
 d="
-M350 187
-C386 143 445 128 501 144
-C545 157 577 183 596 216
+M487 452
+C482 468 481 485 485 503
+C488 519 494 531 502 540
 "
 fill="none"
-stroke="#ead9dd"
-stroke-width="7"
-opacity=".22"
+stroke="#ffd5db"
+stroke-width="3"
+opacity=".48"
 stroke-linecap="round"
 />
 
-<!-- Brainstem -->
+<path
+d="
+M514 450
+C520 468 521 485 517 503
+C514 519 509 531 502 540
+"
+fill="none"
+stroke="#ffd5db"
+stroke-width="3"
+opacity=".48"
+stroke-linecap="round"
+/>
 
 <path
-class="brainstem"
 d="
-M693 359
-C713 349 731 352 744 367
-C757 382 762 401 756 420
-C749 441 739 456 728 471
-C718 484 716 500 721 515
-C727 531 718 544 702 547
-C682 551 665 538 664 520
-C663 503 672 488 677 473
-C683 455 681 438 671 421
-C662 404 666 383 677 370
-C681 365 687 361 693 359
+M468 477
+C481 471 490 470 501 474
+C512 470 523 471 538 478
+"
+fill="none"
+stroke="#735861"
+stroke-width="2"
+opacity=".65"
+/>
+
+<!-- Spinal cord -->
+
+<path
+class="spinal-cord"
+d="
+M479 535
+C479 552 480 568 480 585
+C480 594 486 599 494 599
+L510 599
+C518 599 524 594 524 585
+C524 568 525 552 525 535
+C516 540 508 544 502 544
+C495 544 487 540 479 535
 Z
-"/>
+"
+/>
 
 <path
-class="brainstem-detail"
-d="
-M682 390
-C705 401 731 401 752 388
-"/>
+class="spinal-detail"
+d="M489 549 L489 589"
+/>
 
 <path
-class="brainstem-detail"
-d="
-M678 418
-C700 429 729 431 749 420
-"/>
-
-<path
-class="brainstem-detail"
-d="
-M678 447
-C697 457 723 459 742 450
-"/>
+class="spinal-detail"
+d="M512 549 L512 589"
+/>
 
 <!-- Cerebellum -->
 
 <path
 class="cerebellum-body"
 d="
-M651 345
-C620 324 585 318 550 327
-C515 336 485 356 465 381
-C448 402 442 427 450 450
-C458 473 478 490 504 500
-C536 513 575 513 609 500
-C643 487 671 463 688 435
-C703 411 705 381 692 361
-C683 352 669 347 651 345
+M598 343
+C568 328 536 331 512 348
+C488 365 475 392 478 419
+C481 448 498 474 525 490
+C555 508 593 511 625 499
+C658 486 684 460 693 431
+C701 405 693 379 675 361
+C654 341 624 334 598 343
 Z
-"/>
+"
+/>
 
-<path
-class="cerebellar-folia"
-d="
-M466 379
-C500 365 534 365 568 376
-C603 388 639 389 685 371
-"/>
+<path class="cerebellar-folia" d="M488 379 C530 365 572 369 613 382 C645 392 670 391 690 383"/>
+<path class="cerebellar-folia" d="M481 397 C524 386 568 390 609 402 C644 413 671 411 696 400"/>
+<path class="cerebellar-folia" d="M479 416 C522 406 566 410 606 422 C642 433 671 430 697 419"/>
+<path class="cerebellar-folia" d="M482 435 C522 425 565 429 603 441 C638 452 666 449 692 438"/>
+<path class="cerebellar-folia" d="M490 454 C527 445 565 449 599 460 C631 470 657 468 682 457"/>
+<path class="cerebellar-folia" d="M503 472 C535 465 565 468 593 477 C619 486 642 484 666 474"/>
 
-<path
-class="cerebellar-folia"
-d="
-M456 394
-C491 383 528 384 562 395
-C600 407 639 408 695 388
-"/>
-
-<path
-class="cerebellar-folia"
-d="
-M450 410
-C487 401 524 404 559 415
-C597 427 641 426 699 406
-"/>
-
-<path
-class="cerebellar-folia"
-d="
-M448 427
-C485 419 522 422 558 434
-C596 447 639 445 696 425
-"/>
-
-<path
-class="cerebellar-folia"
-d="
-M451 444
-C488 437 525 440 558 451
-C594 464 633 462 686 443
-"/>
-
-<path
-class="cerebellar-folia"
-d="
-M458 461
-C492 454 524 457 555 467
-C588 478 622 476 674 457
-"/>
-
-<path
-class="cerebellar-folia"
-d="
-M470 477
-C500 471 526 474 553 482
-C583 491 613 489 655 472
-"/>
-
-<!-- OCCIPITAL CALLOUT -->
+<!-- Main callout -->
 
 <path
 class="callout"
 d="
-M758 142
-L820 90
-L850 90
-"/>
+M502 495
+L700 160
+L835 160
+"
+/>
 
 <circle
 class="callout-dot"
-cx="758"
-cy="142"
+cx="502"
+cy="495"
 r="4"
 />
 
 <text
-class="occipital-svg-label"
-x="858"
-y="85"
+class="medulla-svg-label"
+x="843"
+y="155"
 >
-OCCIPITAL LOBE
+MEDULLA OBLONGATA
 </text>
 
 <text
-class="occipital-sub"
-x="858"
-y="102"
+class="medulla-sub"
+x="843"
+y="172"
 >
-الفص القذالي
+النخاع المستطيل
 </text>
 
-<!-- SECOND CALLOUT -->
+<!-- Second callout -->
 
 <path
 class="callout"
 d="
-M735 307
-L800 190
-L850 190
-"/>
+M502 544
+L730 245
+L835 245
+"
+/>
 
 <circle
 class="callout-dot"
-cx="735"
-cy="307"
+cx="502"
+cy="544"
 r="4"
 />
 
 <text
-class="occipital-svg-label"
-x="858"
-y="185"
+class="medulla-svg-label"
+x="843"
+y="240"
 >
-POSTERIOR VISUAL CORTEX
+SPINAL CORD CONNECTION
 </text>
 
 <text
-class="occipital-sub"
-x="858"
-y="202"
+class="medulla-sub"
+x="843"
+y="257"
 >
-القشرة البصرية الخلفية
+اتصال الحبل الشوكي
 </text>
 
 <!-- Labels -->
 
-<text
-class="brain-label"
-x="450"
-y="300"
->
-DEEP BRAIN
-</text>
-
-<text
-class="brain-label"
-x="493"
-y="352"
->
+<text class="brain-label" x="443" y="287">
 THALAMUS
 </text>
 
-<text
-class="brain-label"
-x="493"
-y="520"
->
+<text class="brain-label" x="397" y="420">
+PONS
+</text>
+
+<text class="brain-label" x="388" y="507">
+MEDULLA
+</text>
+
+<text class="brain-label" x="605" y="520">
 CEREBELLUM
 </text>
 
-<text
-class="brain-label"
-x="740"
-y="555"
->
-BRAINSTEM
+<text class="brain-label" x="390" y="579">
+SPINAL CORD
 </text>
 
-<text
-class="orientation-label"
-x="175"
-y="565"
->
-ANTERIOR
+<text class="orientation-label" x="165" y="565">
+SUPERIOR
 </text>
 
-<text
-class="orientation-label"
-x="785"
-y="565"
->
-POSTERIOR
+<text class="orientation-label" x="795" y="565">
+INFERIOR
 </text>
 
 </svg>
 
 <div class="view-badge">
-LATERAL VIEW · OCCIPITAL LOBE
+MID-SAGITTAL VIEW · MEDULLA
 </div>
 
 <div class="cortex-legend">
 
 <div class="legend-item">
-<span class="legend-dot occipital"></span>
-Occipital Lobe
+<span class="legend-dot medulla"></span>
+Medulla
 </div>
 
 </div>
@@ -1435,41 +1186,39 @@ Occipital Lobe
 </div>
 
 <p class="location-caption">
-🔴 The highlighted posterior region represents the
-<strong>occipital lobe</strong>.
+🔴 The highlighted region represents the
+<strong>medulla oblongata</strong>, the lowest part of the brainstem.
 </p>
 
 <p class="source-note">
-Simplified anatomical illustration showing the lateral position of
-the occipital lobe relative to the other major brain regions.
+Simplified anatomical illustration showing the position of the medulla
+between the pons and spinal cord.
 </p>
 
 </section>
 
-<!-- INFORMATION -->
-
 <section id="information" class="section">
 
 <div class="section-label">
-Occipital Lobe Anatomy · تشريح الفص القذالي
+Medulla Anatomy · تشريح النخاع المستطيل
 </div>
 
 <h2>
-Occipital Lobe · الفص القذالي
+Medulla Oblongata · النخاع المستطيل
 </h2>
 
 <p class="section-intro">
 
-The occipital lobe is the posterior lobe of the cerebral cortex.
-It is especially important for visual processing, receiving signals
-from the eyes and helping the brain interpret visual features such
-as shape, color, movement and location.
+The medulla oblongata is the lowest division of the brainstem. It
+contains important ascending and descending pathways as well as neural
+centers involved in breathing, cardiovascular regulation, swallowing,
+coughing, vomiting and other protective reflexes.
 
 <br><br>
 
-الفص القذالي هو الفص الخلفي من القشرة المخية. وله أهمية خاصة في معالجة
-المعلومات البصرية، حيث يستقبل الإشارات القادمة من العينين ويساعد الدماغ
-على تفسير الشكل واللون والحركة والموقع.
+النخاع المستطيل هو الجزء السفلي من جذع الدماغ. يحتوي على مسارات عصبية
+صاعدة ونازلة مهمة، إضافة إلى مراكز عصبية تشارك في التنفس وتنظيم القلب
+والأوعية الدموية والبلع والسعال والقيء وغيرها من المنعكسات الوقائية.
 
 </p>
 
@@ -1478,129 +1227,131 @@ as shape, color, movement and location.
 <div class="card">
 <h3>Location · الموقع</h3>
 <p>
-The occipital lobe occupies the posterior portion of the cerebral
-hemisphere, behind the parietal and temporal lobes.
+The medulla lies below the pons and continues inferiorly into the
+spinal cord.
 <br><br>
-يقع الفص القذالي في الجزء الخلفي من نصف الكرة المخية خلف الفصين الجداري
-والصدغي.
+يقع النخاع المستطيل أسفل الجسر ويتصل من الأسفل بالحبل الشوكي.
 </p>
 </div>
 
 <div class="card">
-<h3>Visual Processing · المعالجة البصرية</h3>
+<h3>Respiration · التنفس</h3>
 <p>
-The occipital cortex is the major cortical region involved in processing
-visual information received from the eyes.
+Medullary networks contribute to generating and regulating the basic
+rhythm of breathing.
 <br><br>
-تعد القشرة القذالية المنطقة الرئيسية في معالجة المعلومات البصرية
-القادمة من العينين.
+تساهم الشبكات العصبية في النخاع المستطيل في توليد وتنظيم الإيقاع
+الأساسي للتنفس.
 </p>
 </div>
 
 <div class="card">
-<h3>Primary Visual Cortex · القشرة البصرية الأولية</h3>
+<h3>Cardiovascular Control · التحكم القلبي الوعائي</h3>
 <p>
-The primary visual cortex, also called V1, is located in the occipital
-lobe around the calcarine sulcus.
+The medulla contains centers involved in regulating heart activity
+and blood vessel tone.
 <br><br>
-تقع القشرة البصرية الأولية، المعروفة أيضاً باسم V1، في الفص القذالي حول
-الأخدود المهمازي.
+يحتوي النخاع المستطيل على مراكز تشارك في تنظيم نشاط القلب وتوتر
+الأوعية الدموية.
 </p>
 </div>
 
 <div class="card">
-<h3>Visual Features · الخصائص البصرية</h3>
+<h3>Swallowing · البلع</h3>
 <p>
-Occipital visual areas process features such as edges, orientation,
-contrast, color and motion.
+Medullary neural circuits coordinate important components of the
+swallowing reflex.
 <br><br>
-تعالج المناطق البصرية القذالية خصائص مثل الحواف والاتجاه والتباين
-واللون والحركة.
+تنسق الدوائر العصبية في النخاع المستطيل أجزاء مهمة من منعكس البلع.
 </p>
 </div>
 
 <div class="card">
-<h3>Visual Association · الترابط البصري</h3>
+<h3>Coughing · السعال</h3>
 <p>
-Visual association regions help combine basic visual information into
-more complex perceptions.
+The medulla participates in protective reflexes such as coughing,
+which helps clear the respiratory passages.
 <br><br>
-تساعد مناطق الترابط البصري في دمج المعلومات البصرية الأساسية لتكوين
-إدراكات أكثر تعقيداً.
+يشارك النخاع المستطيل في المنعكسات الوقائية مثل السعال الذي يساعد
+على تنظيف الممرات التنفسية.
 </p>
 </div>
 
 <div class="card">
-<h3>Calcarine Sulcus · الأخدود المهمازي</h3>
+<h3>Vomiting · القيء</h3>
 <p>
-The calcarine sulcus is an important anatomical landmark associated
-with the primary visual cortex.
+Neural circuits in and around the medulla participate in coordinating
+the vomiting reflex.
 <br><br>
-يعد الأخدود المهمازي علامة تشريحية مهمة مرتبطة بالقشرة البصرية الأولية.
+تشارك دوائر عصبية في النخاع المستطيل والمناطق المجاورة في تنسيق
+منعكس القيء.
 </p>
 </div>
 
 <div class="card">
-<h3>Visual Field · المجال البصري</h3>
+<h3>Pyramids · الأهرامات</h3>
 <p>
-Different areas of the visual cortex represent different portions of
-the visual field in an organized manner.
+The medullary pyramids contain major descending corticospinal pathways
+that carry motor signals toward the spinal cord.
 <br><br>
-تمثل مناطق مختلفة من القشرة البصرية أجزاء مختلفة من المجال البصري
-بطريقة منظمة.
+تحتوي الأهرامات النخاعية على مسارات قشرية شوكية نازلة مهمة تنقل
+الإشارات الحركية نحو الحبل الشوكي.
 </p>
 </div>
 
 <div class="card">
-<h3>Color · اللون</h3>
+<h3>Pyramidal Decussation · تقاطع الأهرامات</h3>
 <p>
-Visual processing networks involving occipital regions contribute to
-the perception and analysis of color.
+Many corticospinal fibers cross to the opposite side in the lower
+medulla, contributing to contralateral motor control.
 <br><br>
-تساهم الشبكات البصرية التي تشمل المناطق القذالية في إدراك وتحليل اللون.
+تعبر نسبة كبيرة من الألياف القشرية الشوكية إلى الجانب المقابل في
+الجزء السفلي من النخاع المستطيل.
 </p>
 </div>
 
 <div class="card">
-<h3>Motion · الحركة</h3>
+<h3>Inferior Olivary Nucleus · النواة الزيتونية السفلية</h3>
 <p>
-Visual pathways involving occipital and neighboring cortical regions
-help analyze movement in the visual environment.
+The inferior olivary complex participates in motor learning and
+coordination through connections with the cerebellum.
 <br><br>
-تساعد المسارات البصرية التي تشمل المناطق القذالية والمناطق المجاورة
-في تحليل الحركة في البيئة البصرية.
+تشارك النواة الزيتونية السفلية في التعلم والتنسيق الحركي من خلال
+اتصالاتها مع المخيخ.
 </p>
 </div>
 
 <div class="card">
-<h3>Shape · الشكل</h3>
+<h3>Cranial Nerve Nuclei · نوى الأعصاب القحفية</h3>
 <p>
-Occipital visual areas contribute to the analysis of contours, edges
-and shapes within visual scenes.
+The medulla contains nuclei associated with several cranial nerves,
+including structures involved in swallowing, voice and sensory
+functions.
 <br><br>
-تساهم المناطق البصرية القذالية في تحليل الحدود والحواف والأشكال داخل
-المشاهد البصرية.
+يحتوي النخاع المستطيل على نوى مرتبطة بعدة أعصاب قحفية تشارك في البلع
+والصوت وبعض الوظائف الحسية.
 </p>
 </div>
 
 <div class="card">
-<h3>Both Hemispheres · كلا النصفين</h3>
+<h3>Autonomic Functions · الوظائف اللاإرادية</h3>
 <p>
-The occipital cortex is present in both the left and right cerebral
-hemispheres.
+Medullary networks contribute to automatic regulation of cardiovascular
+and respiratory functions.
 <br><br>
-توجد القشرة القذالية في كلا نصفي الكرة المخية الأيسر والأيمن.
+تساهم شبكات النخاع المستطيل في التنظيم التلقائي لوظائف القلب والأوعية
+والتنفس.
 </p>
 </div>
 
 <div class="card">
-<h3>Visual Pathways · المسارات البصرية</h3>
+<h3>Brainstem Connection · اتصال جذع الدماغ</h3>
 <p>
-Visual information reaches the occipital cortex through pathways
-connecting the eyes with the brain.
+The medulla forms the inferior portion of the brainstem and provides
+a major connection between the brain and spinal cord.
 <br><br>
-تصل المعلومات البصرية إلى القشرة القذالية عبر مسارات تربط العينين
-بالدماغ.
+يشكل النخاع المستطيل الجزء السفلي من جذع الدماغ ويوفر اتصالاً رئيسياً
+بين الدماغ والحبل الشوكي.
 </p>
 </div>
 
@@ -1613,21 +1364,22 @@ Clinical Importance · الأهمية السريرية
 </div>
 
 <h2>
-Why the Occipital Lobe Matters
+Why the Medulla Matters
 </h2>
 
 <div class="clinical-box">
 
 <p>
-Because the occipital lobe is central to visual processing, disruption
-of its visual pathways or cortical regions can affect aspects of vision,
-including the ability to process or interpret visual information.
+Because the medulla contains pathways and neural centers involved in
+breathing, cardiovascular regulation, swallowing, movement and
+protective reflexes, significant disruption of this region can cause
+serious neurological dysfunction.
 </p>
 
 <p dir="rtl">
-نظراً لأن الفص القذالي أساسي في معالجة المعلومات البصرية، فإن اضطراب
-مساراته البصرية أو مناطقه القشرية قد يؤثر في بعض جوانب الرؤية، بما في
-ذلك القدرة على معالجة أو تفسير المعلومات البصرية.
+نظراً لاحتواء النخاع المستطيل على مسارات ومراكز عصبية تشارك في التنفس
+وتنظيم القلب والأوعية والبلع والحركة والمنعكسات الوقائية، فإن حدوث
+اضطراب كبير في هذه المنطقة قد يؤدي إلى خلل عصبي مهم.
 </p>
 
 </div>
@@ -1641,7 +1393,7 @@ Quick Facts · معلومات سريعة
 </div>
 
 <h2>
-Occipital Lobe at a Glance
+Medulla at a Glance
 </h2>
 
 <div class="facts-grid">
@@ -1650,39 +1402,37 @@ Occipital Lobe at a Glance
 <span>01</span>
 <strong>Location · الموقع</strong>
 <p>
-Posterior cerebral cortex · الجزء الخلفي من القشرة المخية
+Lower brainstem · الجزء السفلي من جذع الدماغ
 </p>
 </div>
 
 <div class="fact">
 <span>02</span>
-<strong>Main Role · الدور الرئيسي</strong>
+<strong>Scientific Name · الاسم العلمي</strong>
 <p>
-Visual information processing · معالجة المعلومات البصرية
+Medulla oblongata · النخاع المستطيل
 </p>
 </div>
 
 <div class="fact">
 <span>03</span>
-<strong>Key Cortex · القشرة الرئيسية</strong>
+<strong>Major Structures · التراكيب الرئيسية</strong>
 <p>
-Primary visual cortex · القشرة البصرية الأولية
+Pyramids, olives and cranial nerve nuclei
 </p>
 </div>
 
 <div class="fact">
 <span>04</span>
-<strong>Landmark · العلامة التشريحية</strong>
+<strong>Main Roles · الأدوار الرئيسية</strong>
 <p>
-Calcarine sulcus · الأخدود المهمازي
+Breathing, cardiovascular control and protective reflexes
 </p>
 </div>
 
 </div>
 
 </div>
-
-<!-- QUIZ -->
 
 <div id="quiz" class="quiz">
 
@@ -1701,15 +1451,15 @@ Choose the best answer for each question.
 <div class="question">
 
 <p>
-1. Where is the occipital lobe primarily located?
+1. Where is the medulla oblongata located?
 </p>
 
 <button class="option" onclick="checkAnswer(this,true)">
-A. At the posterior part of the cerebral hemisphere
+A. Between the pons and spinal cord
 </button>
 
 <button class="option" onclick="checkAnswer(this,false)">
-B. Inside the spinal cord
+B. Inside the cerebral cortex
 </button>
 
 <button class="option" onclick="checkAnswer(this,false)">
@@ -1717,7 +1467,7 @@ C. Inside the cerebellum
 </button>
 
 <button class="option" onclick="checkAnswer(this,false)">
-D. Only inside the brainstem
+D. Inside the occipital lobe
 </button>
 
 </div>
@@ -1725,23 +1475,23 @@ D. Only inside the brainstem
 <div class="question">
 
 <p>
-2. What function is strongly associated with the occipital lobe?
+2. Which function is strongly associated with the medulla?
 </p>
 
 <button class="option" onclick="checkAnswer(this,true)">
-A. Processing visual information
+A. Regulation of breathing and cardiovascular functions
 </button>
 
 <button class="option" onclick="checkAnswer(this,false)">
-B. Pumping blood
+B. Creating visual images
 </button>
 
 <button class="option" onclick="checkAnswer(this,false)">
-C. Digesting food
+C. Producing conscious memories
 </button>
 
 <button class="option" onclick="checkAnswer(this,false)">
-D. Producing hormones only
+D. Processing written language
 </button>
 
 </div>
@@ -1749,23 +1499,23 @@ D. Producing hormones only
 <div class="question">
 
 <p>
-3. Which cortex is located in the occipital lobe?
+3. What happens to many corticospinal fibers in the lower medulla?
 </p>
 
 <button class="option" onclick="checkAnswer(this,true)">
-A. Primary visual cortex
+A. They cross to the opposite side
 </button>
 
 <button class="option" onclick="checkAnswer(this,false)">
-B. Primary somatosensory cortex
+B. They terminate inside the cerebellum
 </button>
 
 <button class="option" onclick="checkAnswer(this,false)">
-C. Primary motor cortex
+C. They enter the hippocampus
 </button>
 
 <button class="option" onclick="checkAnswer(this,false)">
-D. Primary olfactory bulb
+D. They become cranial nerves
 </button>
 
 </div>
@@ -1809,11 +1559,7 @@ const camera=new THREE.PerspectiveCamera(
   100
 );
 
-camera.position.set(
-  3.2,
-  .3,
-  8.5
-);
+camera.position.set(3.2,.3,8.5);
 
 const renderer=new THREE.WebGLRenderer({
   canvas,
@@ -1866,12 +1612,7 @@ const keyLight=new THREE.DirectionalLight(
   1.4
 );
 
-keyLight.position.set(
-  6,
-  10,
-  8
-);
-
+keyLight.position.set(6,10,8);
 scene.add(keyLight);
 
 const fillLight=new THREE.DirectionalLight(
@@ -1879,16 +1620,10 @@ const fillLight=new THREE.DirectionalLight(
   .4
 );
 
-fillLight.position.set(
-  -7,
-  2,
-  6
-);
-
+fillLight.position.set(-7,2,6);
 scene.add(fillLight);
 
 const brainGroup=new THREE.Group();
-
 scene.add(brainGroup);
 
 let targetMeshes=[];
@@ -1922,7 +1657,7 @@ const brainTransparentMaterial=
     depthWrite:false
   });
 
-const occipitalMaterial=
+const medullaMaterial=
   new THREE.MeshPhysicalMaterial({
     color:0xff2948,
     roughness:.3,
@@ -1936,7 +1671,7 @@ const occipitalMaterial=
     opacity:1
   });
 
-const occipitalNormalMaterial=
+const medullaNormalMaterial=
   new THREE.MeshPhysicalMaterial({
     color:0xf1c5d0,
     roughness:.62,
@@ -1965,34 +1700,40 @@ function getMeshName(mesh){
 
 }
 
-function isExplicitOccipital(mesh){
+function isExplicitMedulla(mesh){
 
   const name=normalizeName(
     getMeshName(mesh)
   );
 
-  const occipitalNames=[
-    "occipital",
-    "occipitallobe",
-    "leftoccipital",
-    "rightoccipital",
-    "leftoccipitallobe",
-    "rightoccipitallobe",
-    "primaryvisual",
-    "primaryvisualcortex",
-    "visualcortex",
-    "v1",
-    "calcarine",
-    "calcarinesulcus"
+  const medullaNames=[
+    "medulla",
+    "medullaoblongata",
+    "medullary",
+    "medullaryregion",
+    "medullarystructure",
+    "medullaoblongataregion",
+    "medullaoblongatastructure",
+    "pyramids",
+    "medullarypyramid",
+    "medullarypyramids",
+    "inferiorolive",
+    "inferiorolivarynucleus",
+    "olivarynucleus",
+    "olivarycomplex",
+    "nucleusambiguus",
+    "hypoglossalnucleus",
+    "dorsalmotornucleus",
+    "nucleusofsolitarytract"
   ];
 
-  return occipitalNames.some(
+  return medullaNames.some(
     item=>name.includes(item)
   );
 
 }
 
-function isClearlyNotOccipital(mesh){
+function isClearlyNotMedulla(mesh){
 
   const name=normalizeName(
     getMeshName(mesh)
@@ -2005,20 +1746,21 @@ function isClearlyNotOccipital(mesh){
     "parietallobe",
     "temporal",
     "temporallobe",
+    "occipital",
+    "occipitallobe",
     "cerebell",
-    "brainstem",
-    "medulla",
     "pons",
     "midbrain",
+    "mesencephalon",
+    "spinalcord",
     "thalam",
     "hypothalam",
-    "ventricle",
-    "aqueduct",
-    "fourthventricle",
-    "thirdventricle",
-    "corpuscallosum",
     "hippocamp",
-    "amygdala"
+    "amygdala",
+    "corpuscallosum",
+    "ventricle",
+    "fourthventricle",
+    "thirdventricle"
   ];
 
   return excludedNames.some(
@@ -2027,7 +1769,7 @@ function isClearlyNotOccipital(mesh){
 
 }
 
-function calculateOccipitalCandidates(model){
+function calculateMedullaCandidates(model){
 
   const meshes=[];
 
@@ -2045,18 +1787,18 @@ function calculateOccipitalCandidates(model){
 
   const explicit=meshes.filter(
     mesh=>
-      isExplicitOccipital(mesh) &&
-      !isClearlyNotOccipital(mesh)
+      isExplicitMedulla(mesh) &&
+      !isClearlyNotMedulla(mesh)
   );
 
+  /*
+   * Geometry alone cannot reliably identify the medulla.
+   * Highlight only explicitly named anatomical meshes.
+   */
   if(explicit.length>0){
     return explicit;
   }
 
-  /*
-   * Do not guess an occipital surface from geometry alone.
-   * If the GLB does not identify it, leave the 3D surface unchanged.
-   */
   return [];
 
 }
@@ -2081,12 +1823,12 @@ function prepareMaterials(model){
   });
 
   targetMeshes=
-    calculateOccipitalCandidates(model);
+    calculateMedullaCandidates(model);
 
   targetMeshes.forEach(mesh=>{
 
     mesh.material=
-      occipitalMaterial.clone();
+      medullaMaterial.clone();
 
   });
 
@@ -2126,7 +1868,6 @@ function loadRealBrain(){
       },500);
 
       return;
-
     }
 
     const url=urls[index++];
@@ -2160,8 +1901,7 @@ function loadRealBrain(){
             size.z
           );
 
-        const scale=
-          4.5/maxDim;
+        const scale=4.5/maxDim;
 
         model.scale.setScalar(scale);
 
@@ -2178,16 +1918,14 @@ function loadRealBrain(){
         if(targetMeshes.length===0){
 
           loadText.textContent=
-            "Brain loaded · named occipital surface unavailable";
+            "Brain loaded · named medulla surface unavailable";
 
         }else{
 
           loadText.textContent=
-            "Occipital lobe surface located";
+            "Medulla surface located";
 
-          locationLabel.classList.add(
-            "show"
-          );
+          locationLabel.classList.add("show");
 
         }
 
@@ -2206,8 +1944,8 @@ function loadRealBrain(){
           const pct=Math.min(
             95,
             progress.loaded/
-              progress.total*
-              95
+            progress.total*
+            95
           );
 
           loadBar.style.width=
@@ -2259,49 +1997,39 @@ function setTargetHighlight(enabled){
 
     mesh.material=
       enabled
-        ?occipitalMaterial.clone()
-        :occipitalNormalMaterial.clone();
+        ?medullaMaterial.clone()
+        :medullaNormalMaterial.clone();
 
   });
 
 }
 
 const showLocationBtn=
-  document.getElementById(
-    "showLocation"
-  );
+  document.getElementById("showLocation");
 
 showLocationBtn.addEventListener(
   "click",
   ()=>{
 
-    locationShown=
-      !locationShown;
+    locationShown=!locationShown;
 
     if(locationShown){
 
       setBrainTransparency(true);
-
       setTargetHighlight(true);
 
       highlighted=true;
 
-      locationLabel.classList.add(
-        "show"
-      );
+      locationLabel.classList.add("show");
 
-      showLocationBtn.classList.add(
-        "active"
-      );
+      showLocationBtn.classList.add("active");
 
       showLocationBtn.textContent=
-        "📍 Hide Occipital Lobe";
+        "📍 Hide Medulla";
 
       controls.autoRotate=false;
 
-      rotateBtn.classList.remove(
-        "active"
-      );
+      rotateBtn.classList.remove("active");
 
       rotateBtn.textContent=
         "▶ Auto Rotate";
@@ -2310,20 +2038,14 @@ showLocationBtn.addEventListener(
 
       setBrainTransparency(false);
 
-      setTargetHighlight(
-        highlighted
-      );
+      setTargetHighlight(highlighted);
 
-      locationLabel.classList.remove(
-        "show"
-      );
+      locationLabel.classList.remove("show");
 
-      showLocationBtn.classList.remove(
-        "active"
-      );
+      showLocationBtn.classList.remove("active");
 
       showLocationBtn.textContent=
-        "📍 Show Occipital Lobe";
+        "📍 Show Medulla";
 
     }
 
@@ -2331,54 +2053,41 @@ showLocationBtn.addEventListener(
 );
 
 const highlightBtn=
-  document.getElementById(
-    "highlight"
-  );
+  document.getElementById("highlight");
 
 highlightBtn.addEventListener(
   "click",
   ()=>{
 
-    highlighted=
-      !highlighted;
+    highlighted=!highlighted;
 
-    setTargetHighlight(
-      highlighted
-    );
+    setTargetHighlight(highlighted);
 
     if(highlighted){
 
-      highlightBtn.classList.add(
-        "active"
-      );
+      highlightBtn.classList.add("active");
 
       highlightBtn.textContent=
-        "🔴 Highlight Occipital Lobe";
+        "🔴 Highlight Medulla";
 
     }else{
 
-      highlightBtn.classList.remove(
-        "active"
-      );
+      highlightBtn.classList.remove("active");
 
       highlightBtn.textContent=
-        "🧠 Highlight Occipital Lobe";
+        "🧠 Highlight Medulla";
 
     }
 
     if(locationShown){
-
       setBrainTransparency(true);
-
     }
 
   }
 );
 
 const rotateBtn=
-  document.getElementById(
-    "rotate"
-  );
+  document.getElementById("rotate");
 
 rotateBtn.addEventListener(
   "click",
@@ -2421,30 +2130,22 @@ document
       controls.update();
 
       locationShown=false;
-
-      setBrainTransparency(false);
-
-      setTargetHighlight(true);
-
-      locationLabel.classList.remove(
-        "show"
-      );
-
-      showLocationBtn.classList.remove(
-        "active"
-      );
-
-      showLocationBtn.textContent=
-        "📍 Show Occipital Lobe";
-
       highlighted=true;
 
-      highlightBtn.classList.add(
-        "active"
-      );
+      setBrainTransparency(false);
+      setTargetHighlight(true);
+
+      locationLabel.classList.remove("show");
+
+      showLocationBtn.classList.remove("active");
+
+      showLocationBtn.textContent=
+        "📍 Show Medulla";
+
+      highlightBtn.classList.add("active");
 
       highlightBtn.textContent=
-        "🔴 Highlight Occipital Lobe";
+        "🔴 Highlight Medulla";
 
     }
   );
@@ -2488,11 +2189,8 @@ function updateLabel(){
 
 function resize(){
 
-  const width=
-    canvas.clientWidth;
-
-  const height=
-    canvas.clientHeight;
+  const width=canvas.clientWidth;
+  const height=canvas.clientHeight;
 
   if(width<=0||height<=0){
     return;
@@ -2523,7 +2221,6 @@ function animate(){
   );
 
   controls.update();
-
   updateLabel();
 
   renderer.render(
@@ -2534,9 +2231,7 @@ function animate(){
 }
 
 resize();
-
 animate();
-
 loadRealBrain();
 
 </script>
@@ -2552,9 +2247,7 @@ function checkAnswer(
     button.parentElement;
 
   const options=
-    parent.querySelectorAll(
-      ".option"
-    );
+    parent.querySelectorAll(".option");
 
   options.forEach(option=>{
     option.classList.remove(
@@ -2620,8 +2313,7 @@ function updateQuizScore(){
 
   if(answered>0){
 
-    result.style.display=
-      "block";
+    result.style.display="block";
 
     result.textContent=
       "Score: "+
