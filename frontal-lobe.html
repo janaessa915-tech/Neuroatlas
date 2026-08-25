@@ -1,830 +1,742 @@
+<!-- /frontal-lobe.html -->
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>NeuroAtlas | Frontal Lobe</title>
 
 <style>
+*{box-sizing:border-box;margin:0;padding:0}
 
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-html{
-    scroll-behavior:smooth;
-}
+html{scroll-behavior:smooth}
 
 body{
-    background:#050b13;
-    color:#eef4fa;
-    font-family:Arial,Helvetica,sans-serif;
-    line-height:1.6;
+  background:#050b13;
+  color:#eef4fa;
+  font-family:Arial,Helvetica,sans-serif;
+  line-height:1.7
 }
 
-/* ==================================================
-   NAVIGATION
-================================================== */
-
 nav{
-    height:70px;
-    padding:0 7%;
-    display:flex;
-    align-items:center;
-    border-bottom:1px solid rgba(255,255,255,.08);
+  height:70px;
+  padding:0 7%;
+  display:flex;
+  align-items:center;
+  border-bottom:1px solid rgba(255,255,255,.08)
 }
 
 nav a{
-    color:#9db0c3;
-    text-decoration:none;
-    font-size:14px;
+  color:#9db0c3;
+  text-decoration:none;
+  font-size:14px
 }
 
-nav a:hover{
-    color:white;
-}
-
-/* ==================================================
-   MAIN
-================================================== */
+nav a:hover{color:#fff}
 
 .container{
-    max-width:1200px;
-    margin:auto;
-    padding:60px 7% 100px;
+  max-width:1200px;
+  margin:auto;
+  padding:60px 7% 100px
 }
 
-/* ==================================================
-   HERO
-================================================== */
-
 .eyebrow{
-    color:#61b5ff;
-    letter-spacing:3px;
-    font-size:12px;
-    text-transform:uppercase;
-    margin-bottom:15px;
+  color:#61b5ff;
+  letter-spacing:3px;
+  font-size:12px;
+  text-transform:uppercase;
+  margin-bottom:15px
 }
 
 h1{
-    font-size:clamp(55px,8vw,90px);
-    line-height:.95;
-    letter-spacing:-4px;
-    margin-bottom:12px;
+  font-size:clamp(55px,8vw,90px);
+  line-height:.95;
+  letter-spacing:-4px;
+  margin-bottom:10px
 }
 
 .arabic-title{
-    color:#ffffff;
-    font-size:25px;
-    margin-bottom:25px;
+  color:#ff4055;
+  font-size:24px;
+  margin-bottom:25px
 }
 
 .hero p{
-    color:#a6b6c7;
-    max-width:900px;
-    font-size:18px;
-    line-height:1.8;
+  color:#a6b6c7;
+  max-width:780px;
+  font-size:18px;
+  line-height:1.8
 }
 
-/* ==================================================
-   ACTIONS
-================================================== */
-
 .actions{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    margin-top:28px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:30px
 }
 
 .action-button{
-    padding:11px 17px;
-    border-radius:9px;
-    background:#0b1928;
-    border:1px solid #31516d;
-    color:#bdd0e0;
-    cursor:pointer;
-    text-decoration:none;
-    font-size:14px;
-    transition:.2s;
+  padding:11px 17px;
+  border-radius:9px;
+  background:#0b1928;
+  border:1px solid #31516d;
+  color:#bdd0e0;
+  text-decoration:none;
+  cursor:pointer;
+  transition:.2s
 }
 
 .action-button:hover{
-    background:#14304a;
-    color:white;
-    border-color:#ffffff;
+  background:#14304a;
+  color:#fff;
+  border-color:#61b5ff
 }
 
-/* ==================================================
-   3D VIEWER
-================================================== */
-
 .viewer{
-    margin-top:60px;
-    border:1px solid rgba(255,255,255,.10);
-    border-radius:24px;
-    overflow:hidden;
-    background:#02060b;
-    box-shadow:0 25px 80px rgba(0,0,0,.45);
+  margin-top:60px;
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:24px;
+  overflow:hidden;
+  background:#02060b;
+  box-shadow:0 25px 80px rgba(0,0,0,.45)
 }
 
 .viewer-header{
-    min-height:65px;
-    padding:0 22px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    border-bottom:1px solid rgba(255,255,255,.08);
+  min-height:65px;
+  padding:0 22px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid rgba(255,255,255,.08)
 }
 
 .viewer-title{
-    font-size:14px;
-    color:#d2dce6;
+  font-size:14px;
+  color:#d2dce6
 }
 
 .viewer-status{
-    color:#708499;
-    font-size:11px;
-    letter-spacing:1px;
+  color:#708499;
+  font-size:11px;
+  letter-spacing:1px
 }
 
 .scene{
-    position:relative;
-    width:100%;
-    height:700px;
-
-    background:
+  position:relative;
+  width:100%;
+  height:700px;
+  background:
     radial-gradient(
-        circle at 50% 45%,
-        #203b51 0%,
-        #0d1c2e 42%,
-        #02060b 100%
-    );
+      circle at 50% 45%,
+      #203b51 0%,
+      #0d1c2e 42%,
+      #02060b 100%
+    )
 }
 
 #brainCanvas{
-    width:100%;
-    height:100%;
-    display:block;
+  width:100%;
+  height:100%;
+  display:block
 }
 
-/* ==================================================
-   LOADING
-================================================== */
-
 .loading{
-    position:absolute;
-    inset:0;
-    z-index:20;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-direction:column;
-
-    gap:16px;
-
-    background:#02060b;
-
-    color:#9db0c3;
-    font-size:14px;
-
-    transition:opacity .8s;
+  position:absolute;
+  inset:0;
+  z-index:20;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:16px;
+  background:#02060b;
+  color:#9db0c3;
+  font-size:14px;
+  transition:opacity .8s
 }
 
 .loading.hide{
-    opacity:0;
-    pointer-events:none;
+  opacity:0;
+  pointer-events:none
 }
 
 .loading-bar{
-    width:180px;
-    height:2px;
-
-    background:rgba(255,255,255,.08);
-
-    border-radius:2px;
-    overflow:hidden;
+  width:180px;
+  height:2px;
+  background:rgba(255,255,255,.08);
+  border-radius:2px;
+  overflow:hidden
 }
 
 .loading-bar-inner{
-    width:0%;
-    height:100%;
-
-    background:#ffffff;
-
-    transition:width .3s;
+  width:0%;
+  height:100%;
+  background:#ff4055;
+  transition:width .3s
 }
 
-/* ==================================================
-   FRONTAL LABEL
-================================================== */
-
-.frontal-label{
-    position:absolute;
-
-    z-index:30;
-
-    pointer-events:none;
-
-    transform:translate(-50%,-100%);
-
-    display:none;
+.location-label{
+  position:absolute;
+  z-index:30;
+  pointer-events:none;
+  transform:translate(-50%,-100%);
+  display:none
 }
 
-.frontal-label.show{
-    display:block;
-}
+.location-label.show{display:block}
 
 .label-box{
-    position:relative;
-
-    padding:9px 15px;
-
-    border-radius:10px;
-
-    background:rgba(5,10,17,.96);
-
-    border:1.5px solid #ffffff;
-
-    color:#ffffff;
-
-    font-size:12px;
-
-    font-weight:bold;
-
-    letter-spacing:1px;
-
-    white-space:nowrap;
-
-    box-shadow:
-        0 0 12px rgba(255,255,255,.25),
-        0 0 30px rgba(255,255,255,.10);
+  position:relative;
+  padding:9px 15px;
+  border-radius:10px;
+  background:rgba(5,10,17,.96);
+  border:1.5px solid #ff4055;
+  color:#ffd9de;
+  font-size:12px;
+  font-weight:bold;
+  letter-spacing:1px;
+  white-space:nowrap;
+  box-shadow:
+    0 0 12px rgba(255,64,85,.35),
+    0 0 30px rgba(255,64,85,.2)
 }
 
 .label-box::after{
-    content:"";
-
-    position:absolute;
-
-    left:50%;
-    bottom:-15px;
-
-    width:1.5px;
-    height:15px;
-
-    background:#ffffff;
-
-    transform:translateX(-50%);
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:-15px;
+  width:1.5px;
+  height:15px;
+  background:#ff4055;
+  transform:translateX(-50%)
 }
 
-/* ==================================================
-   CONTROLS
-================================================== */
-
 .controls{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-
-    padding:15px;
-
-    border-top:1px solid rgba(255,255,255,.08);
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  padding:15px;
+  border-top:1px solid rgba(255,255,255,.08)
 }
 
 .controls button{
-    padding:11px 17px;
-
-    border-radius:9px;
-
-    background:#0b1928;
-
-    border:1px solid #31516d;
-
-    color:#bdd0e0;
-
-    cursor:pointer;
-
-    transition:.2s;
+  padding:11px 17px;
+  border-radius:9px;
+  background:#0b1928;
+  border:1px solid #31516d;
+  color:#bdd0e0;
+  cursor:pointer;
+  transition:.2s
 }
 
 .controls button:hover{
-    background:#14304a;
-    color:white;
+  background:#14304a;
+  color:#fff
 }
 
 .controls button.active{
-    background:#17191c;
-    border-color:#ffffff;
-    color:white;
+  background:#321218;
+  border-color:#ff4055;
+  color:#ffd9de
 }
 
-/* ==================================================
-   SECTIONS
-================================================== */
-
 .section{
-    margin-top:70px;
+  margin-top:70px
 }
 
 .section-label{
-    color:#61b5ff;
-    letter-spacing:2px;
-    font-size:11px;
-    text-transform:uppercase;
-    margin-bottom:8px;
+  color:#61b5ff;
+  letter-spacing:2px;
+  font-size:11px;
+  text-transform:uppercase;
+  margin-bottom:8px
 }
 
 .section h2{
-    font-size:32px;
-    margin-bottom:25px;
+  font-size:32px;
+  margin-bottom:25px
 }
 
 .section-intro{
-    color:#91a5b8;
-    max-width:900px;
-    font-size:15px;
-    line-height:1.9;
-    margin-bottom:30px;
+  color:#91a5b8;
+  max-width:900px;
+  font-size:15px;
+  line-height:1.9;
+  margin-bottom:30px
 }
-
-/* ==================================================
-   CARDS
-================================================== */
-
-.cards{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:20px;
-}
-
-.card{
-    padding:27px;
-
-    background:#091522;
-
-    border:1px solid #172b3e;
-
-    border-radius:18px;
-
-    transition:
-    transform .2s,
-    border-color .2s;
-}
-
-.card:hover{
-    transform:translateY(-3px);
-    border-color:#2b506c;
-}
-
-.card h3{
-    font-size:18px;
-    margin-bottom:13px;
-    color:#eef4fa;
-    line-height:1.45;
-}
-
-.card p{
-    color:#91a5b8;
-    font-size:14px;
-    line-height:1.8;
-}
-
-/* ==================================================
-   LOCATION
-================================================== */
 
 .location{
-    margin-top:70px;
-
-    padding:32px;
-
-    background:#091522;
-
-    border:1px solid #172b3e;
-
-    border-radius:18px;
+  margin-top:70px;
+  padding:35px;
+  background:#091522;
+  border:1px solid #172b3e;
+  border-radius:18px
 }
 
 .location h2{
-    font-size:30px;
-    margin-bottom:12px;
+  font-size:32px;
+  margin-bottom:12px
 }
 
 .location-intro{
-    color:#91a5b8;
-    max-width:900px;
-    line-height:1.9;
-    margin-bottom:25px;
+  color:#91a5b8;
+  max-width:900px;
+  line-height:1.9;
+  margin-bottom:30px
 }
 
-/* ==================================================
-   LOCATION VISUAL
-================================================== */
-
-.location-visual{
-    display:none;
-    margin-top:25px;
-    padding:20px;
-
-    background:#050b13;
-
-    border:1px solid #20364b;
-
-    border-radius:16px;
-
-    animation:fadeIn .45s ease;
-}
-
-.location-visual.show{
-    display:block;
-}
-
-@keyframes fadeIn{
-
-    from{
-        opacity:0;
-        transform:translateY(8px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-
-}
-
-.brain-svg{
-    display:block;
-    width:100%;
-    max-width:850px;
-    height:auto;
-    margin:auto;
-}
-
-.svg-brain{
-    fill:#263d55;
-    stroke:#71869e;
-    stroke-width:3;
-}
-
-.svg-cerebellum{
-    fill:#344d66;
-    stroke:#71869e;
-    stroke-width:3;
-}
-
-.svg-brainstem{
-    fill:#29465b;
-    stroke:#71869e;
-    stroke-width:3;
-}
-
-.svg-frontal{
-    fill:#ffffff;
-    stroke:#ffffff;
-    stroke-width:4;
-}
-
-.svg-line{
-    stroke:#ffffff;
-    stroke-width:2;
-}
-
-.svg-label{
-    fill:white;
-    font-size:18px;
-    font-weight:bold;
+.anatomy-viewer{
+  position:relative;
+  width:100%;
+  max-width:1000px;
+  height:610px;
+  margin:auto;
+  border:1px solid #243b50;
+  border-radius:16px;
+  overflow:hidden;
+  background:
+    radial-gradient(
+      ellipse at center,
+      #182a39 0%,
+      #07111c 68%,
+      #02060b 100%
+    )
 }
 
 .location-caption{
-    text-align:center;
-    color:#9fb0c3;
-    margin-top:15px;
+  text-align:center;
+  color:#9fb0c3;
+  margin-top:15px;
+  line-height:1.8
 }
 
-/* ==================================================
-   CLINICAL
-================================================== */
+.source-note{
+  max-width:900px;
+  margin:15px auto 0;
+  color:#617487;
+  font-size:11px;
+  text-align:center
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px
+}
+
+.card{
+  padding:27px;
+  background:#091522;
+  border:1px solid #172b3e;
+  border-radius:18px;
+  transition:transform .2s,border-color .2s
+}
+
+.card:hover{
+  transform:translateY(-3px);
+  border-color:#4a2027
+}
+
+.card h3{
+  font-size:18px;
+  margin-bottom:13px;
+  color:#eef4fa;
+  line-height:1.45
+}
+
+.card p{
+  color:#91a5b8;
+  font-size:14px;
+  line-height:1.8
+}
 
 .clinical-section{
-    margin-top:65px;
+  margin-top:65px
 }
 
 .clinical-box{
-    padding:30px;
-
-    background:#091522;
-
-    border:1px solid #172b3e;
-
-    border-left:3px solid #ffffff;
-
-    border-radius:18px;
+  padding:30px;
+  background:#091522;
+  border:1px solid #172b3e;
+  border-left:3px solid #ff4055;
+  border-radius:18px
 }
 
 .clinical-box p{
-    color:#a7b7c6;
-    font-size:15px;
-    line-height:1.9;
-    margin-bottom:18px;
+  color:#a7b7c6;
+  font-size:15px;
+  line-height:1.9;
+  margin-bottom:18px
 }
 
-.clinical-box p:last-child{
-    margin-bottom:0;
-}
-
-/* ==================================================
-   INSIGHT
-================================================== */
-
-.insight{
-    margin-top:30px;
-
-    padding:25px;
-
-    background:#091522;
-
-    border-left:3px solid #ffffff;
-
-    border-radius:10px;
-
-    color:#aebdce;
-}
-
-.insight strong{
-    color:#ffffff;
-}
-
-/* ==================================================
-   QUICK FACTS
-================================================== */
+.clinical-box p:last-child{margin-bottom:0}
 
 .facts-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:15px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px
 }
 
 .fact{
-    padding:22px;
-
-    background:#091522;
-
-    border:1px solid #172b3e;
-
-    border-radius:16px;
+  padding:22px;
+  background:#091522;
+  border:1px solid #172b3e;
+  border-radius:16px
 }
 
 .fact span{
-    display:block;
-
-    color:#ffffff;
-
-    font-size:11px;
-
-    letter-spacing:2px;
-
-    margin-bottom:12px;
+  display:block;
+  color:#ff4055;
+  font-size:11px;
+  letter-spacing:2px;
+  margin-bottom:12px
 }
 
 .fact strong{
-    display:block;
-
-    color:#eef4fa;
-
-    font-size:14px;
-
-    margin-bottom:8px;
-
-    line-height:1.5;
+  display:block;
+  color:#eef4fa;
+  font-size:14px;
+  margin-bottom:8px;
+  line-height:1.5
 }
 
 .fact p{
-    color:#8195a8;
-
-    font-size:13px;
-
-    line-height:1.7;
+  color:#8195a8;
+  font-size:13px;
+  line-height:1.7
 }
 
-/* ==================================================
-   QUIZ
-================================================== */
-
 .quiz{
-    margin-top:65px;
-
-    padding:30px;
-
-    background:#091522;
-
-    border:1px solid #172b3e;
-
-    border-radius:18px;
+  margin-top:65px;
+  padding:30px;
+  background:#091522;
+  border:1px solid #172b3e;
+  border-radius:18px
 }
 
 .quiz h2{
-    font-size:27px;
-    margin-bottom:25px;
+  font-size:28px;
+  margin-bottom:10px
 }
 
-.question-block{
-    padding:22px;
-
-    margin-bottom:18px;
-
-    background:#07111d;
-
-    border:1px solid #172b3e;
-
-    border-radius:14px;
+.quiz-intro{
+  color:#91a5b8;
+  margin-bottom:25px
 }
 
-.question-number{
-    color:#61b5ff;
-    font-size:12px;
-    letter-spacing:2px;
-    text-transform:uppercase;
-    margin-bottom:8px;
+.question{
+  margin-bottom:30px
 }
 
-.question-en{
-    color:#eef4fa;
-    font-size:16px;
-    margin-bottom:5px;
-}
+.question:last-child{margin-bottom:0}
 
-.question-ar{
-    color:#91a5b8;
-    font-size:15px;
-    margin-bottom:15px;
+.question p{
+  color:#eef4fa;
+  font-size:16px;
+  margin-bottom:12px;
+  font-weight:bold
 }
 
 .option{
-    display:block;
-
-    width:100%;
-
-    padding:13px;
-
-    margin-top:10px;
-
-    background:#10233a;
-
-    color:white;
-
-    border:1px solid #263951;
-
-    border-radius:8px;
-
-    text-align:left;
-
-    cursor:pointer;
-
-    font-size:14px;
-
-    transition:.2s;
+  display:block;
+  width:100%;
+  padding:12px 15px;
+  margin-top:9px;
+  background:#0b1928;
+  color:#c7d5e2;
+  border:1px solid #263951;
+  border-radius:9px;
+  text-align:left;
+  cursor:pointer;
+  font-size:14px;
+  transition:.2s
 }
 
 .option:hover{
-    border-color:#ffffff;
+  border-color:#ff4055;
+  background:#111e2c
 }
 
 .option.correct{
-    background:#17251f;
-    border-color:#78e0a0;
+  border-color:#8fd3a8;
+  background:#14291e;
+  color:#b9f0c9
 }
 
 .option.wrong{
-    background:#291a1d;
-    border-color:#ff8792;
-}
-
-.question-feedback{
-    margin-top:12px;
-    font-size:14px;
-    min-height:22px;
+  border-color:#d88b9b;
+  background:#2a171d;
+  color:#ffc2cc
 }
 
 .quiz-result{
-    margin-top:25px;
-
-    padding:20px;
-
-    border-radius:12px;
-
-    background:#07111d;
-
-    border:1px solid #263951;
-
-    text-align:center;
-
-    font-size:17px;
-
-    color:#ffffff;
+  margin-top:25px;
+  padding:15px;
+  border-radius:10px;
+  background:#0b1928;
+  border:1px solid #263951;
+  color:#aebdce;
+  display:none
 }
 
-/* ==================================================
-   BACK
-================================================== */
+/* ===== 2D FRONTAL LOBE ===== */
 
-.back{
-    display:inline-block;
-
-    margin-top:40px;
-
-    padding:12px 18px;
-
-    border:1px solid #263951;
-
-    border-radius:9px;
-
-    color:white;
-
-    text-decoration:none;
+.brain-svg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%
 }
 
-.back:hover{
-    border-color:#ffffff;
+.brain-outline{
+  fill:url(#brainGradient);
+  stroke:#c7b3b8;
+  stroke-width:3;
+  filter:url(#brainShadow)
 }
 
-/* ==================================================
-   MOBILE
-================================================== */
+.cortex-highlight{
+  fill:url(#cortexGradient);
+  stroke:#ff4055;
+  stroke-width:3;
+  filter:url(#cortexGlow);
+  opacity:1
+}
+
+.cortex-line{
+  fill:none;
+  stroke:#796b72;
+  stroke-width:2.2;
+  opacity:.72;
+  stroke-linecap:round
+}
+
+.cortex-line-highlight{
+  fill:none;
+  stroke:#ffd1d7;
+  stroke-width:2.2;
+  opacity:.9;
+  stroke-linecap:round
+}
+
+.cortex-line-light{
+  fill:none;
+  stroke:#d3c1c5;
+  stroke-width:1.2;
+  opacity:.28;
+  stroke-linecap:round
+}
+
+.brain-cutaway{
+  fill:#bdabb1;
+  opacity:.28;
+  stroke:#e0ced2;
+  stroke-width:1.5
+}
+
+.deep-region{
+  fill:#76666d;
+  opacity:.24
+}
+
+.thalamus{
+  fill:#8f7c84;
+  stroke:#cdbbc0;
+  stroke-width:1.8;
+  opacity:.82
+}
+
+.cerebellum-body{
+  fill:url(#cerebellumGradient);
+  stroke:#d2bdc2;
+  stroke-width:2.5
+}
+
+.cerebellar-folia{
+  fill:none;
+  stroke:#76666d;
+  stroke-width:2;
+  opacity:.8;
+  stroke-linecap:round
+}
+
+.brainstem{
+  fill:#a58e95;
+  stroke:#d0bdc2;
+  stroke-width:2.5
+}
+
+.brainstem-detail{
+  fill:none;
+  stroke:#695b61;
+  stroke-width:2;
+  opacity:.7
+}
+
+.callout{
+  fill:none;
+  stroke:#ffb6c1;
+  stroke-width:1.7;
+  stroke-linecap:round
+}
+
+.callout-dot{
+  fill:#ffb6c1;
+  stroke:#fff;
+  stroke-width:1
+}
+
+.brain-label{
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:12px;
+  fill:#91a5b8;
+  letter-spacing:1.5px
+}
+
+.cortex-svg-label{
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:13px;
+  font-weight:bold;
+  letter-spacing:.8px;
+  fill:#fff
+}
+
+.cortex-sub{
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:10px;
+  fill:#ffb6bf
+}
+
+.orientation-label{
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:10px;
+  fill:#71879a;
+  letter-spacing:1.2px
+}
+
+.anatomy-title{
+  position:absolute;
+  left:50%;
+  top:24px;
+  transform:translateX(-50%);
+  color:#d5e0e9;
+  font-size:13px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  text-align:center
+}
+
+.view-badge{
+  position:absolute;
+  left:25px;
+  bottom:22px;
+  padding:8px 12px;
+  border:1px solid #31516d;
+  border-radius:8px;
+  background:rgba(4,10,17,.82);
+  color:#8195a8;
+  font-size:10px;
+  letter-spacing:1.5px
+}
+
+.cortex-legend{
+  position:absolute;
+  right:22px;
+  bottom:20px;
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  justify-content:flex-end
+}
+
+.legend-item{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  color:#aebdca;
+  font-size:10px
+}
+
+.legend-dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  box-shadow:0 0 10px currentColor
+}
+
+.legend-dot.cortex{
+  background:#ff4055;
+  color:#ff4055
+}
+
+@keyframes cortexPulse{
+  0%,100%{
+    opacity:1;
+    filter:drop-shadow(0 0 5px rgba(255,64,85,.65))
+  }
+  50%{
+    opacity:.9;
+    filter:drop-shadow(0 0 18px rgba(255,64,85,1))
+  }
+}
+
+.cortex-highlight.active{
+  animation:cortexPulse 1.8s infinite
+}
 
 @media(max-width:900px){
-
-    .cards{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .facts-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
+  .cards{grid-template-columns:repeat(2,1fr)}
+  .facts-grid{grid-template-columns:repeat(2,1fr)}
+  .anatomy-viewer{height:530px}
 }
 
 @media(max-width:800px){
-
-    .scene{
-        height:450px;
-    }
-
-    .viewer-status{
-        display:none;
-    }
-
+  .scene{height:450px}
+  .viewer-status{display:none}
+  .location{padding:25px}
+  .anatomy-viewer{height:500px}
 }
 
 @media(max-width:600px){
+  .cards{grid-template-columns:1fr}
+  .facts-grid{grid-template-columns:1fr}
 
-    .cards{
-        grid-template-columns:1fr;
-    }
+  h1{letter-spacing:-2px}
 
-    .facts-grid{
-        grid-template-columns:1fr;
-    }
+  .location{padding:20px}
+  .anatomy-viewer{height:390px}
 
-    h1{
-        letter-spacing:-2px;
-    }
+  .anatomy-title{
+    font-size:9px
+  }
 
-    .location{
-        padding:20px;
-    }
+  .brain-label{
+    font-size:9px
+  }
 
+  .cortex-svg-label{
+    font-size:9px
+  }
+
+  .cortex-sub{
+    font-size:7px
+  }
+
+  .cortex-legend{
+    display:none
+  }
 }
-
 </style>
-
 </head>
 
 <body>
 
-<!-- ==================================================
-     NAVIGATION
-================================================== -->
-
 <nav>
-
-<a href="./explore.html">
-← Back to Explore Anatomy
-</a>
-
+<a href="./explore.html">← Back to Explore</a>
 </nav>
 
 <main class="container">
-
-<!-- ==================================================
-     HERO
-================================================== -->
 
 <div class="eyebrow">
 Cerebrum · NeuroAtlas
@@ -839,57 +751,30 @@ Frontal Lobe
 </div>
 
 <div class="hero">
-
 <p>
-
-The frontal lobe is the largest lobe of the cerebral cortex.
-It plays an important role in voluntary movement, planning,
-decision-making, attention, personality, behavior, and several
-aspects of language.
-
-<br><br>
-
-الفص الجبهي هو أكبر فصوص القشرة المخية، ويشارك في الحركة
-الإرادية والتخطيط واتخاذ القرار والانتباه والشخصية والسلوك
-وبعض جوانب اللغة.
-
+The frontal lobe is the anterior portion of the cerebral cortex.
+It contributes to voluntary movement, planning, decision-making,
+attention, speech production and several aspects of behavior.
 </p>
-
 </div>
-
-<!-- ==================================================
-     ACTIONS
-================================================== -->
 
 <div class="actions">
 
-<a
-class="action-button"
-href="#location"
-id="locationButton"
->
-📍 View Location
+<a class="action-button" href="#location">
+📍 Show Location
 </a>
 
-<a
-class="action-button"
-href="#anatomy"
->
-🧠 Frontal Lobe Anatomy
+<a class="action-button" href="#information">
+🧠 Learn About the Frontal Lobe
 </a>
 
-<a
-class="action-button"
-href="#quiz"
->
-🧪 Test Yourself
+<a class="action-button" href="#quiz">
+📝 Test Yourself
 </a>
 
 </div>
 
-<!-- ==================================================
-     3D VIEWER
-================================================== -->
+<!-- 3D VIEWER -->
 
 <div class="viewer">
 
@@ -907,32 +792,21 @@ DRAG TO ROTATE · SCROLL TO ZOOM
 
 <div class="scene">
 
-<div
-id="loading"
-class="loading"
->
+<div id="loading" class="loading">
 
 <span id="loadText">
 Loading real brain model...
 </span>
 
 <div class="loading-bar">
-
-<div
-id="loadBar"
-class="loading-bar-inner"
-></div>
-
+<div id="loadBar" class="loading-bar-inner"></div>
 </div>
 
 </div>
 
 <canvas id="brainCanvas"></canvas>
 
-<div
-id="frontalLabel"
-class="frontal-label"
->
+<div id="locationLabel" class="location-label">
 
 <div class="label-box">
 FRONTAL LOBE · الفص الجبهي
@@ -944,23 +818,19 @@ FRONTAL LOBE · الفص الجبهي
 
 <div class="controls">
 
-<button
-id="highlight"
-class="active"
->
-⚪ Highlight Frontal Lobe
+<button id="showLocation">
+📍 Show Frontal Lobe
 </button>
 
-<button
-id="rotate"
-class="active"
->
+<button id="highlight" class="active">
+🔴 Highlight Frontal Lobe
+</button>
+
+<button id="rotate" class="active">
 ⟳ Auto Rotate
 </button>
 
-<button
-id="reset"
->
+<button id="reset">
 ↻ Reset View
 </button>
 
@@ -968,404 +838,702 @@ id="reset"
 
 </div>
 
-<!-- ==================================================
-     ANATOMY
-================================================== -->
+<!-- ANATOMICAL LOCATION -->
 
-<section
-id="anatomy"
-class="section"
->
+<section id="location" class="location">
 
 <div class="section-label">
-Frontal Lobe · الفص الجبهي
+Location · الموقع
 </div>
 
 <h2>
+📍 Where Is the Frontal Lobe?
+</h2>
+
+<p class="location-intro">
+
+The frontal lobe is the anterior part of each cerebral hemisphere.
+In a lateral view of the brain, it occupies the region toward the
+front of the head and extends posteriorly to the central sulcus.
+
+<br><br>
+
+الفص الجبهي هو الجزء الأمامي من كل نصف من نصفي الكرة المخية.
+وفي المنظر الجانبي للدماغ يقع في المنطقة الأمامية ويمتد خلفياً
+حتى الأخدود المركزي.
+
+</p>
+
+<div class="anatomy-viewer">
+
+<div class="anatomy-title">
+Lateral View · Frontal Lobe
+</div>
+
+<svg
+class="brain-svg"
+viewBox="0 0 1000 610"
+xmlns="http://www.w3.org/2000/svg"
+aria-label="Lateral view of the human brain highlighting the frontal lobe"
+>
+
+<defs>
+
+<linearGradient
+id="brainGradient"
+x1="0"
+y1="0"
+x2="1"
+y2="1"
+>
+
+<stop offset="0%" stop-color="#d2bec3"/>
+<stop offset="48%" stop-color="#ad979e"/>
+<stop offset="100%" stop-color="#806d75"/>
+
+</linearGradient>
+
+<linearGradient
+id="cortexGradient"
+x1="0"
+y1="0"
+x2="1"
+y2="1"
+>
+
+<stop offset="0%" stop-color="#ff8b99"/>
+<stop offset="45%" stop-color="#ff4055"/>
+<stop offset="100%" stop-color="#bd1935"/>
+
+</linearGradient>
+
+<linearGradient
+id="cerebellumGradient"
+x1="0"
+y1="0"
+x2="1"
+y2="1"
+>
+
+<stop offset="0%" stop-color="#c7b0b6"/>
+<stop offset="100%" stop-color="#806c74"/>
+
+</linearGradient>
+
+<filter
+id="brainShadow"
+x="-30%"
+y="-30%"
+width="160%"
+height="160%"
+>
+
+<feDropShadow
+dx="0"
+dy="8"
+stdDeviation="10"
+flood-color="#000"
+flood-opacity=".65"
+/>
+
+</filter>
+
+<filter
+id="cortexGlow"
+x="-30%"
+y="-30%"
+width="160%"
+height="160%"
+>
+
+<feGaussianBlur
+stdDeviation="3"
+result="blur"
+/>
+
+<feMerge>
+<feMergeNode in="blur"/>
+<feMergeNode in="SourceGraphic"/>
+</feMerge>
+
+</filter>
+
+</defs>
+
+<!-- Full brain silhouette underneath -->
+
+<path
+class="brain-outline"
+d="
+M145 278
+C119 250 119 210 138 177
+C157 143 193 122 231 111
+C273 67 342 45 414 48
+C486 31 569 43 631 72
+C704 82 759 112 796 153
+C830 190 846 236 837 273
+C830 302 812 321 793 337
+C767 357 751 376 741 400
+C731 425 719 442 698 451
+C674 462 651 456 632 445
+C606 430 583 412 555 402
+C518 389 478 391 442 400
+C401 411 367 424 328 428
+C286 432 242 421 207 400
+C176 381 153 354 143 323
+C137 307 137 292 145 278
+Z
+"/>
+
+<!-- =========================================================
+     FRONTAL LOBE ONLY
+     Anterior/left region of the cerebrum.
+     The posterior boundary approximates the central sulcus.
+     ========================================================= -->
+
+<path
+class="cortex-highlight active"
+d="
+M145 278
+C119 250 119 210 138 177
+C157 143 193 122 231 111
+C273 67 342 45 414 48
+C451 39 486 39 515 47
+
+C500 72 492 101 490 132
+C488 165 492 198 500 226
+C506 247 509 267 505 286
+
+C489 300 475 307 456 310
+C432 312 409 301 386 291
+C363 281 342 276 319 281
+C294 286 274 300 251 290
+C223 273 190 268 154 285
+
+C147 282 145 280 145 278
+Z
+"/>
+
+<!-- Frontal lobe cortical folds -->
+
+<path
+class="cortex-line-highlight"
+d="
+M171 233
+C214 205 251 213 277 233
+C305 254 337 258 368 240
+C397 222 431 220 457 235
+C474 245 489 250 505 249
+"/>
+
+<path
+class="cortex-line-highlight"
+d="
+M154 285
+C190 268 223 273 251 290
+C280 307 310 314 341 303
+C371 292 394 278 421 283
+C451 288 478 303 505 306
+"/>
+
+<path
+class="cortex-line-highlight"
+d="
+M176 326
+C208 309 237 315 261 334
+C287 355 314 359 343 349
+C372 339 399 329 426 340
+C452 351 477 368 505 369
+"/>
+
+<path
+class="cortex-line-highlight"
+d="
+M208 165
+C239 143 272 147 297 163
+C323 180 349 186 376 174
+C404 161 430 153 455 165
+C480 176 497 191 490 205
+"/>
+
+<path
+class="cortex-line-highlight"
+d="
+M155 260
+C184 245 207 245 230 257
+C251 269 274 273 296 264
+C319 254 341 244 365 249
+C388 254 410 267 435 267
+C461 267 483 255 503 247
+"/>
+
+<path
+class="cortex-line-highlight"
+d="
+M203 361
+C226 348 247 350 267 364
+C287 378 307 386 330 381
+C354 376 374 366 396 373
+C418 380 437 393 460 394
+C476 394 492 388 503 382
+"/>
+
+<!-- Posterior cortex remains normal -->
+
+<path
+class="cortex-line"
+d="
+M538 218
+C562 205 586 207 607 218
+C628 229 649 234 671 225
+C692 216 709 203 731 205
+C752 207 770 217 786 229
+"/>
+
+<path
+class="cortex-line"
+d="
+M506 310
+C540 314 566 300 591 284
+C618 266 647 264 674 279
+C703 295 727 307 752 295
+C777 284 797 268 819 270
+"/>
+
+<path
+class="cortex-line"
+d="
+M507 369
+C539 370 561 354 587 338
+C613 322 639 319 662 334
+C688 350 708 365 731 357
+C755 349 772 331 791 325
+"/>
+
+<!-- Subcortical structures -->
+
+<path
+class="brain-cutaway"
+d="
+M310 129
+C365 101 431 94 492 111
+C550 126 604 155 641 201
+C672 239 687 285 678 325
+C669 364 641 393 607 408
+C570 425 524 423 485 410
+C445 397 408 378 373 351
+C338 324 313 286 300 245
+C287 202 287 158 310 129
+Z
+"/>
+
+<path
+class="deep-region"
+d="
+M445 235
+C461 213 489 203 515 208
+C541 213 559 231 560 254
+C561 278 544 297 519 303
+C492 309 465 298 451 279
+C441 266 438 249 445 235
+Z
+"/>
+
+<ellipse
+class="thalamus"
+cx="545"
+cy="319"
+rx="39"
+ry="30"
+/>
+
+<!-- Corpus callosum -->
+
+<path
+d="
+M350 187
+C386 143 445 128 501 144
+C545 157 577 183 596 216
+"
+fill="none"
+stroke="#ead9dd"
+stroke-width="7"
+opacity=".22"
+stroke-linecap="round"
+/>
+
+<!-- Brainstem -->
+
+<path
+class="brainstem"
+d="
+M693 359
+C713 349 731 352 744 367
+C757 382 762 401 756 420
+C749 441 739 456 728 471
+C718 484 716 500 721 515
+C727 531 718 544 702 547
+C682 551 665 538 664 520
+C663 503 672 488 677 473
+C683 455 681 438 671 421
+C662 404 666 383 677 370
+C681 365 687 361 693 359
+Z
+"/>
+
+<path
+class="brainstem-detail"
+d="
+M682 390
+C705 401 731 401 752 388
+"/>
+
+<path
+class="brainstem-detail"
+d="
+M678 418
+C700 429 729 431 749 420
+"/>
+
+<path
+class="brainstem-detail"
+d="
+M678 447
+C697 457 723 459 742 450
+"/>
+
+<!-- Cerebellum -->
+
+<path
+class="cerebellum-body"
+d="
+M651 345
+C620 324 585 318 550 327
+C515 336 485 356 465 381
+C448 402 442 427 450 450
+C458 473 478 490 504 500
+C536 513 575 513 609 500
+C643 487 671 463 688 435
+C703 411 705 381 692 361
+C683 352 669 347 651 345
+Z
+"/>
+
+<path
+class="cerebellar-folia"
+d="
+M466 379
+C500 365 534 365 568 376
+C603 388 639 389 685 371
+"/>
+
+<path
+class="cerebellar-folia"
+d="
+M456 394
+C491 383 528 384 562 395
+C600 407 639 408 695 388
+"/>
+
+<path
+class="cerebellar-folia"
+d="
+M450 410
+C487 401 524 404 559 415
+C597 427 641 426 699 406
+"/>
+
+<path
+class="cerebellar-folia"
+d="
+M448 427
+C485 419 522 422 558 434
+C596 447 639 445 696 425
+"/>
+
+<path
+class="cerebellar-folia"
+d="
+M451 444
+C488 437 525 440 558 451
+C594 464 633 462 686 443
+"/>
+
+<path
+class="cerebellar-folia"
+d="
+M458 461
+C492 454 524 457 555 467
+C588 478 622 476 674 457
+"/>
+
+<path
+class="cerebellar-folia"
+d="
+M470 477
+C500 471 526 474 553 482
+C583 491 613 489 655 472
+"/>
+
+<!-- Frontal lobe callout only -->
+
+<path
+class="callout"
+d="
+M240 112
+L690 105
+L850 105
+"/>
+
+<circle
+class="callout-dot"
+cx="240"
+cy="112"
+r="4"
+/>
+
+<text
+class="cortex-svg-label"
+x="858"
+y="100"
+>
+FRONTAL LOBE
+</text>
+
+<text
+class="cortex-sub"
+x="858"
+y="117"
+>
+الفص الجبهي
+</text>
+
+<!-- Labels -->
+
+<text
+class="brain-label"
+x="450"
+y="300"
+>
+DEEP BRAIN
+</text>
+
+<text
+class="brain-label"
+x="493"
+y="352"
+>
+THALAMUS
+</text>
+
+<text
+class="brain-label"
+x="493"
+y="520"
+>
+CEREBELLUM
+</text>
+
+<text
+class="brain-label"
+x="740"
+y="555"
+>
+BRAINSTEM
+</text>
+
+<text
+class="orientation-label"
+x="175"
+y="565"
+>
+ANTERIOR
+</text>
+
+<text
+class="orientation-label"
+x="785"
+y="565"
+>
+POSTERIOR
+</text>
+
+</svg>
+
+<div class="view-badge">
+LATERAL VIEW · FRONTAL LOBE
+</div>
+
+<div class="cortex-legend">
+
+<div class="legend-item">
+<span class="legend-dot cortex"></span>
+Frontal Lobe
+</div>
+
+</div>
+
+</div>
+
+<p class="location-caption">
+🔴 The highlighted anterior region represents the
+<strong>frontal lobe</strong> of the cerebral cortex.
+</p>
+
+<p class="source-note">
+Simplified anatomical illustration designed to demonstrate the
+frontal lobe and its relationship to deeper brain structures.
+</p>
+
+</section>
+
+<!-- INFORMATION -->
+
+<section id="information" class="section">
+
+<div class="section-label">
 Frontal Lobe Anatomy · تشريح الفص الجبهي
+</div>
+
+<h2>
+Frontal Lobe · الفص الجبهي
 </h2>
 
 <p class="section-intro">
 
-The frontal lobe occupies the anterior portion of each cerebral
-hemisphere. It is separated from the parietal lobe by the central
-sulcus and from the temporal lobe by the lateral sulcus.
+The frontal lobe is the anterior portion of the cerebral cortex.
+It participates in voluntary movement, planning, decision-making,
+attention, language production and several higher cognitive functions.
 
 <br><br>
 
-يشغل الفص الجبهي الجزء الأمامي من كل نصف كرة مخية. ويفصله
-التلم المركزي عن الفص الجداري، بينما يفصله التلم الجانبي
-عن الفص الصدغي.
+الفص الجبهي هو الجزء الأمامي من القشرة المخية.
+ويساهم في الحركة الإرادية والتخطيط واتخاذ القرار والانتباه
+وإنتاج اللغة وعدة وظائف معرفية عليا.
 
 </p>
 
 <div class="cards">
 
 <div class="card">
-
-<h3>
-Primary Motor Cortex · القشرة الحركية الأولية
-</h3>
-
+<h3>Anterior Position · الموقع الأمامي</h3>
 <p>
-
-Located in the precentral gyrus, the primary motor cortex
-controls many voluntary movements of the opposite side
-of the body.
-
+The frontal lobe occupies the anterior portion of each cerebral
+hemisphere.
 <br><br>
-
-تقع القشرة الحركية الأولية في التلفيف أمام المركزي وتتحكم
-في العديد من الحركات الإرادية للجانب المقابل من الجسم.
-
+يقع الفص الجبهي في الجزء الأمامي من كل نصف من نصفي الكرة المخية.
 </p>
-
 </div>
 
 <div class="card">
-
-<h3>
-Prefrontal Cortex · قشرة الفص الجبهي الأمامية
-</h3>
-
+<h3>Motor Cortex · القشرة الحركية</h3>
 <p>
-
-The prefrontal cortex contributes to planning, working memory,
-decision-making, attention, and behavioral regulation.
-
+The primary motor cortex is located in the frontal lobe and helps
+control voluntary movements.
 <br><br>
-
-تساهم القشرة أمام الجبهية في التخطيط والذاكرة العاملة
-واتخاذ القرار والانتباه وتنظيم السلوك.
-
+تقع القشرة الحركية الأولية في الفص الجبهي وتساعد على التحكم في الحركة الإرادية.
 </p>
-
 </div>
 
 <div class="card">
-
-<h3>
-Broca's Area · منطقة بروكا
-</h3>
-
+<h3>Planning · التخطيط</h3>
 <p>
-
-In many people, Broca's area in the dominant frontal lobe
-contributes to speech production and language expression.
-
+Frontal regions contribute to planning, organization and goal-directed
+behavior.
 <br><br>
-
-تساهم منطقة بروكا في الفص الجبهي المسيطر لدى كثير من الأشخاص
-في إنتاج الكلام والتعبير اللغوي.
-
+تساهم مناطق الفص الجبهي في التخطيط والتنظيم والسلوك الموجه نحو الأهداف.
 </p>
-
 </div>
 
 <div class="card">
-
-<h3>
-Premotor Cortex · القشرة قبل الحركية
-</h3>
-
+<h3>Decision-Making · اتخاذ القرار</h3>
 <p>
-
-The premotor cortex contributes to planning and organizing
-movements before they are performed.
-
+Prefrontal regions contribute to evaluating information and making
+complex decisions.
 <br><br>
-
-تساهم القشرة قبل الحركية في تخطيط وتنظيم الحركات قبل تنفيذها.
-
+تساهم المناطق أمام الجبهية في تقييم المعلومات واتخاذ القرارات المعقدة.
 </p>
-
 </div>
 
 <div class="card">
-
-<h3>
-Frontal Eye Fields · حقول العين الجبهية
-</h3>
-
+<h3>Attention · الانتباه</h3>
 <p>
-
-Frontal eye fields participate in voluntary control of eye
-movements and visual attention.
-
+Frontal cortical networks participate in maintaining attention and
+controlling goal-directed behavior.
 <br><br>
-
-تشارك حقول العين الجبهية في التحكم الإرادي بحركات العين
-والانتباه البصري.
-
+تشارك الشبكات الجبهية في الحفاظ على الانتباه والتحكم في السلوك الموجه نحو الهدف.
 </p>
-
 </div>
 
 <div class="card">
-
-<h3>
-Executive Functions · الوظائف التنفيذية
-</h3>
-
+<h3>Speech Production · إنتاج الكلام</h3>
 <p>
-
-Frontal networks help organize complex behavior including
-planning, reasoning, inhibition, and flexible problem solving.
-
+Parts of the dominant frontal lobe are involved in language production.
 <br><br>
-
-تساعد الشبكات الجبهية في تنظيم السلوك المعقد مثل التخطيط
-والاستدلال وكبح الاستجابات وحل المشكلات بمرونة.
-
+تشارك أجزاء من الفص الجبهي في النصف المسيطر في إنتاج اللغة.
 </p>
-
 </div>
 
 <div class="card">
-
-<h3>
-Personality & Behavior · الشخصية والسلوك
-</h3>
-
+<h3>Prefrontal Cortex · القشرة أمام الجبهية</h3>
 <p>
-
-Frontal systems contribute to behavioral regulation,
-social judgment, motivation, and aspects of personality.
-
+The prefrontal cortex contributes to working memory, reasoning,
+planning and behavioral control.
 <br><br>
-
-تساهم المناطق الجبهية في تنظيم السلوك والحكم الاجتماعي
-والدافعية وبعض جوانب الشخصية.
-
+تساهم القشرة أمام الجبهية في الذاكرة العاملة والاستدلال والتخطيط والتحكم بالسلوك.
 </p>
-
 </div>
 
 <div class="card">
-
-<h3>
-Voluntary Movement · الحركة الإرادية
-</h3>
-
+<h3>Frontal Eye Fields · حقول العين الجبهية</h3>
 <p>
-
-The frontal lobe contains important motor areas that help
-initiate and control purposeful voluntary movements.
-
+Frontal cortical regions contribute to voluntary control of eye
+movements.
 <br><br>
-
-يحتوي الفص الجبهي على مناطق حركية مهمة تساعد في بدء
-وتنظيم الحركات الإرادية الهادفة.
-
+تساهم مناطق جبهية في التحكم الإرادي بحركات العين.
 </p>
-
 </div>
 
 <div class="card">
-
-<h3>
-Planning & Decision-Making · التخطيط واتخاذ القرار
-</h3>
-
+<h3>Higher Cognition · الإدراك العالي</h3>
 <p>
-
-Frontal networks integrate information to help evaluate
-choices, anticipate consequences, and select actions.
-
+The frontal lobe participates in complex cognitive processes that
+support flexible and goal-directed behavior.
 <br><br>
-
-تدمج الشبكات الجبهية المعلومات للمساعدة في تقييم الاختيارات
-وتوقع النتائج واختيار التصرفات المناسبة.
-
+يشارك الفص الجبهي في العمليات المعرفية المعقدة التي تدعم السلوك المرن والموجه نحو الأهداف.
 </p>
-
 </div>
 
-</div>
-
-</section>
-
-<!-- ==================================================
-     LOCATION
-================================================== -->
-
-<section
-id="location"
-class="location"
->
-
-<h2>
-📍 Where is the Frontal Lobe? · أين يقع الفص الجبهي؟
-</h2>
-
-<p class="location-intro">
-
-The frontal lobe occupies the anterior part of the cerebral
-hemisphere, lying in front of the central sulcus and above
-the lateral sulcus.
-
+<div class="card">
+<h3>Frontal Pole · القطب الجبهي</h3>
+<p>
+The frontal pole is the most anterior portion of the frontal cortex.
 <br><br>
-
-يقع الفص الجبهي في الجزء الأمامي من نصف الكرة المخية،
-أمام التلم المركزي وفوق التلم الجانبي.
-
+القطب الجبهي هو الجزء الأكثر أمامية من القشرة الجبهية.
 </p>
-
-<div
-id="locationVisual"
-class="location-visual"
->
-
-<svg
-class="brain-svg"
-viewBox="0 0 900 600"
-xmlns="http://www.w3.org/2000/svg"
-aria-label="Simplified frontal lobe location diagram"
->
-
-<!-- WHOLE CEREBRAL HEMISPHERE -->
-
-<path
-class="svg-brain"
-d="
-M145 260
-C110 180 145 95 235 55
-C330 12 450 38 510 105
-C565 165 555 260 520 320
-C490 370 435 395 370 395
-C295 395 225 370 180 325
-C160 305 150 285 145 260Z
-"
-/>
-
-<!-- FRONTAL REGION -->
-
-<path
-class="svg-frontal"
-d="
-M145 260
-C110 180 145 95 235 55
-C300 25 365 35 405 65
-C350 85 305 125 285 180
-C265 230 270 285 300 330
-C250 345 205 330 180 305
-C160 290 150 275 145 260Z
-"
-/>
-
-<!-- INNER BRAIN -->
-
-<path
-class="svg-brain"
-d="
-M300 210
-C325 160 385 135 430 150
-C475 165 495 210 480 255
-C465 295 420 320 370 310
-C325 300 285 260 300 210Z
-"
-/>
-
-<!-- BRAINSTEM -->
-
-<path
-class="svg-brainstem"
-d="
-M405 300
-C410 345 410 390 405 440
-L440 440
-C445 390 440 345 430 300Z
-"
-/>
-
-<!-- CEREBELLUM -->
-
-<path
-class="svg-cerebellum"
-d="
-M445 330
-C510 305 570 330 595 380
-C615 430 590 480 535 490
-C485 495 450 460 440 415
-C435 380 435 350 445 330Z
-"
-/>
-
-<!-- LABEL -->
-
-<line
-class="svg-line"
-x1="260"
-y1="120"
-x2="650"
-y2="85"
-/>
-
-<text
-class="svg-label"
-x="665"
-y="91"
->
-FRONTAL LOBE
-</text>
-
-<text
-class="svg-label"
-x="665"
-y="116"
->
-الفص الجبهي
-</text>
-
-<line
-class="svg-line"
-x1="480"
-y1="230"
-x2="650"
-y2="230"
-/>
-
-<text
-class="svg-label"
-x="665"
-y="236"
->
-DEEPER BRAIN
-</text>
-
-<line
-class="svg-line"
-x1="565"
-y1="380"
-x2="650"
-y2="350"
-/>
-
-<text
-class="svg-label"
-x="665"
-y="356"
->
-CEREBELLUM
-</text>
-
-</svg>
-
-<p class="location-caption">
-
-⚪ The white anterior region represents the frontal lobe.
-<br>
-المنطقة البيضاء الأمامية تمثل الفص الجبهي.
-
-</p>
-
 </div>
 
-</section>
+<div class="card">
+<h3>Central Sulcus · الأخدود المركزي</h3>
+<p>
+The central sulcus forms an important boundary between the frontal
+and parietal lobes.
+<br><br>
+يشكل الأخدود المركزي حداً مهماً بين الفص الجبهي والفص الجداري.
+</p>
+</div>
 
-<!-- ==================================================
-     CLINICAL
-================================================== -->
+<div class="card">
+<h3>Gray Matter · المادة الرمادية</h3>
+<p>
+The cerebral cortex forming the frontal lobe is primarily composed
+of gray matter.
+<br><br>
+تتكون القشرة المخية التي تشكل الفص الجبهي بشكل أساسي من المادة الرمادية.
+</p>
+</div>
+
+</div>
 
 <div class="clinical-section">
 
@@ -1380,52 +1548,19 @@ Why the Frontal Lobe Matters
 <div class="clinical-box">
 
 <p>
-
-Damage to different frontal regions can affect movement,
-speech production, planning, attention, judgment, or behavior.
-The exact effects depend on the location and extent of the injury.
-
+Because the frontal lobe contains regions involved in movement,
+language and executive functions, injury to different frontal
+areas can produce different neurological and cognitive effects.
 </p>
 
 <p dir="rtl">
-
-يمكن أن تؤثر إصابة مناطق مختلفة من الفص الجبهي على الحركة
-أو إنتاج الكلام أو التخطيط أو الانتباه أو الحكم أو السلوك.
-وتعتمد الأعراض على مكان الإصابة ومدى تأثيرها.
-
+نظراً لأن الفص الجبهي يحتوي على مناطق مرتبطة بالحركة واللغة والوظائف
+التنفيذية، فقد تؤدي إصابة مناطق مختلفة منه إلى تأثيرات عصبية ومعرفية مختلفة.
 </p>
 
 </div>
 
 </div>
-
-<!-- ==================================================
-     INSIGHT
-================================================== -->
-
-<div class="insight">
-
-<strong>
-NeuroAtlas Insight
-</strong>
-
-<br><br>
-
-Think of the frontal lobe as one of the brain's major
-"decision and action" systems. It helps transform goals
-and information into organized behavior and voluntary action.
-
-<br><br>
-
-فكري في الفص الجبهي باعتباره أحد أهم أنظمة
-"اتخاذ القرار وتنفيذ الفعل" في الدماغ. فهو يساعد على
-تحويل الأهداف والمعلومات إلى سلوك منظم وحركات إرادية.
-
-</div>
-
-<!-- ==================================================
-     QUICK FACTS
-================================================== -->
 
 <div class="section">
 
@@ -1440,1216 +1575,994 @@ Frontal Lobe at a Glance
 <div class="facts-grid">
 
 <div class="fact">
-
-<span>
-01
-</span>
-
-<strong>
-Location · الموقع
-</strong>
-
+<span>01</span>
+<strong>Location · الموقع</strong>
 <p>
-Anterior portion of the cerebral hemisphere
+Anterior part of the cerebral hemisphere · الجزء الأمامي من نصف الكرة المخية
 </p>
-
 </div>
 
 <div class="fact">
-
-<span>
-02
-</span>
-
-<strong>
-Motor Area · المنطقة الحركية
-</strong>
-
+<span>02</span>
+<strong>Boundary · الحد</strong>
 <p>
-Contains the primary motor cortex
+Separated posteriorly from the parietal lobe by the central sulcus
 </p>
-
 </div>
 
 <div class="fact">
-
-<span>
-03
-</span>
-
-<strong>
-Executive Function · الوظائف التنفيذية
-</strong>
-
+<span>03</span>
+<strong>Motor · الحركة</strong>
 <p>
-Planning, reasoning, inhibition, and decision-making
+Contains the primary motor cortex · يحتوي على القشرة الحركية الأولية
 </p>
-
 </div>
 
 <div class="fact">
-
-<span>
-04
-</span>
-
-<strong>
-Language · اللغة
-</strong>
-
+<span>04</span>
+<strong>Cognition · الإدراك</strong>
 <p>
-Includes important language-related cortical networks
+Planning, attention and decision-making · التخطيط والانتباه واتخاذ القرار
 </p>
-
 </div>
 
 </div>
 
 </div>
 
-<!-- ==================================================
-     QUIZ
-================================================== -->
+<!-- QUIZ -->
 
-<div
-id="quiz"
-class="quiz"
->
+<div id="quiz" class="quiz">
+
+<div class="section-label">
+Mini Test
+</div>
 
 <h2>
-🧠 Mini Test · اختبار قصير
+🧠 Test Yourself
 </h2>
 
-<!-- QUESTION 1 -->
+<p class="quiz-intro">
+Choose the best answer for each question.
+</p>
 
-<div
-class="question-block"
-data-answer="A"
->
+<div class="question">
 
-<div class="question-number">
-Question 01 · السؤال الأول
-</div>
+<p>
+1. Where is the frontal lobe located?
+</p>
 
-<div class="question-en">
-Which cortical area is primarily involved in voluntary movement?
-</div>
-
-<div
-class="question-ar"
-dir="rtl"
->
-أي منطقة قشرية تشارك بشكل أساسي في الحركة الإرادية؟
-</div>
-
-<button
-class="option"
-data-option="A"
->
-A. Primary Motor Cortex · القشرة الحركية الأولية
+<button class="option" onclick="checkAnswer(this,true)">
+A. At the anterior part of the cerebral hemisphere
 </button>
 
-<button
-class="option"
-data-option="B"
->
-B. Primary Visual Cortex · القشرة البصرية الأولية
+<button class="option" onclick="checkAnswer(this,false)">
+B. Inside the cerebellum only
 </button>
 
-<button
-class="option"
-data-option="C"
->
-C. Primary Auditory Cortex · القشرة السمعية الأولية
+<button class="option" onclick="checkAnswer(this,false)">
+C. Inside the spinal cord
 </button>
 
-<button
-class="option"
-data-option="D"
->
-D. Cerebellar Cortex · قشرة المخيخ
+<button class="option" onclick="checkAnswer(this,false)">
+D. Only inside the brainstem
 </button>
-
-<div class="question-feedback"></div>
 
 </div>
 
-<!-- QUESTION 2 -->
+<div class="question">
 
-<div
-class="question-block"
-data-answer="C"
->
+<p>
+2. Which major cortical area is located in the frontal lobe?
+</p>
 
-<div class="question-number">
-Question 02 · السؤال الثاني
-</div>
-
-<div class="question-en">
-Which frontal region is strongly associated with planning and decision-making?
-</div>
-
-<div
-class="question-ar"
-dir="rtl"
->
-أي منطقة جبهية ترتبط بشكل كبير بالتخطيط واتخاذ القرار؟
-</div>
-
-<button
-class="option"
-data-option="A"
->
-A. Occipital Cortex · القشرة القذالية
+<button class="option" onclick="checkAnswer(this,true)">
+A. Primary motor cortex
 </button>
 
-<button
-class="option"
-data-option="B"
->
-B. Cerebellum · المخيخ
+<button class="option" onclick="checkAnswer(this,false)">
+B. Primary visual cortex
 </button>
 
-<button
-class="option"
-data-option="C"
->
-C. Prefrontal Cortex · قشرة الفص الجبهي الأمامية
+<button class="option" onclick="checkAnswer(this,false)">
+C. Cerebellar cortex
 </button>
 
-<button
-class="option"
-data-option="D"
->
-D. Medulla · النخاع المستطيل
+<button class="option" onclick="checkAnswer(this,false)">
+D. Hippocampal formation
 </button>
-
-<div class="question-feedback"></div>
 
 </div>
 
-<!-- QUESTION 3 -->
+<div class="question">
 
-<div
-class="question-block"
-data-answer="B"
->
+<p>
+3. Which function is strongly associated with the frontal lobe?
+</p>
 
-<div class="question-number">
-Question 03 · السؤال الثالث
-</div>
-
-<div class="question-en">
-Which structure separates the frontal lobe from the parietal lobe?
-</div>
-
-<div
-class="question-ar"
-dir="rtl"
->
-أي تركيب يفصل الفص الجبهي عن الفص الجداري؟
-</div>
-
-<button
-class="option"
-data-option="A"
->
-A. Lateral Sulcus · التلم الجانبي
+<button class="option" onclick="checkAnswer(this,true)">
+A. Planning and decision-making
 </button>
 
-<button
-class="option"
-data-option="B"
->
-B. Central Sulcus · التلم المركزي
+<button class="option" onclick="checkAnswer(this,false)">
+B. Producing red blood cells
 </button>
 
-<button
-class="option"
-data-option="C"
->
-C. Longitudinal Fissure · الشق الطولي
+<button class="option" onclick="checkAnswer(this,false)">
+C. Pumping blood through the body
 </button>
 
-<button
-class="option"
-data-option="D"
->
-D. Calcarine Sulcus · التلم المهمازي
+<button class="option" onclick="checkAnswer(this,false)">
+D. Digesting food
 </button>
-
-<div class="question-feedback"></div>
 
 </div>
 
-<div
-id="quizResult"
-class="quiz-result"
->
-Answer all three questions to see your final score.
-<br>
-أجب عن الأسئلة الثلاثة لرؤية نتيجتك النهائية.
-</div>
+<div id="quizResult" class="quiz-result"></div>
 
 </div>
 
-<a
-class="back"
-href="explore.html"
->
-← Back to Explore Anatomy
-</a>
+</section>
 
 </main>
 
-<!-- ==================================================
-     THREE.JS IMPORT MAP
-================================================== -->
-
 <script type="importmap">
-
 {
-    "imports": {
-
-        "three":
-        "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
-
-        "three/addons/":
-        "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
-
-    }
+  "imports":{
+    "three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
 }
-
 </script>
-
-<!-- ==================================================
-     THREE.JS
-================================================== -->
 
 <script type="module">
 
 import * as THREE from "three";
+import {OrbitControls} from "three/addons/controls/OrbitControls.js";
+import {GLTFLoader} from "three/addons/loaders/GLTFLoader.js";
+import {DRACOLoader} from "three/addons/loaders/DRACOLoader.js";
 
-import {
-    OrbitControls
-} from "three/addons/controls/OrbitControls.js";
+const canvas=document.getElementById("brainCanvas");
+const loading=document.getElementById("loading");
+const loadText=document.getElementById("loadText");
+const loadBar=document.getElementById("loadBar");
+const locationLabel=document.getElementById("locationLabel");
 
-import {
-    GLTFLoader
-} from "three/addons/loaders/GLTFLoader.js";
+const scene=new THREE.Scene();
 
-import {
-    DRACOLoader
-} from "three/addons/loaders/DRACOLoader.js";
-
-
-/* ==================================================
-   ELEMENTS
-================================================== */
-
-const canvas =
-document.getElementById("brainCanvas");
-
-const loading =
-document.getElementById("loading");
-
-const loadText =
-document.getElementById("loadText");
-
-const loadBar =
-document.getElementById("loadBar");
-
-const frontalLabel =
-document.getElementById("frontalLabel");
-
-
-/* ==================================================
-   SCENE
-================================================== */
-
-const scene =
-new THREE.Scene();
-
-
-/* ==================================================
-   CAMERA
-================================================== */
-
-const camera =
-new THREE.PerspectiveCamera(
-    30,
-    1,
-    0.01,
-    100
+const camera=new THREE.PerspectiveCamera(
+  30,
+  1,
+  .01,
+  100
 );
 
 camera.position.set(
-    3.2,
-    0.3,
-    8.5
+  3.2,
+  .3,
+  8.5
 );
 
-
-/* ==================================================
-   RENDERER
-================================================== */
-
-const renderer =
-new THREE.WebGLRenderer({
-
-    canvas:canvas,
-
-    antialias:true,
-
-    alpha:true
-
+const renderer=new THREE.WebGLRenderer({
+  canvas,
+  antialias:true,
+  alpha:true
 });
 
 renderer.setPixelRatio(
-    Math.min(
-        window.devicePixelRatio || 1,
-        2
-    )
+  Math.min(window.devicePixelRatio||1,2)
 );
 
-renderer.toneMapping =
-THREE.ACESFilmicToneMapping;
+renderer.toneMapping=THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure=.75;
 
-renderer.toneMappingExposure =
-0.75;
-
-
-/* ==================================================
-   CONTROLS
-================================================== */
-
-const controls =
-new OrbitControls(
-    camera,
-    canvas
+const controls=new OrbitControls(
+  camera,
+  canvas
 );
 
-controls.enableRotate = true;
+controls.enableRotate=true;
+controls.rotateSpeed=.6;
+controls.enableDamping=true;
+controls.dampingFactor=.05;
+controls.enableZoom=true;
+controls.zoomSpeed=.6;
+controls.enablePan=false;
+controls.autoRotate=true;
+controls.autoRotateSpeed=.2;
+controls.target.set(0,-.3,0);
+controls.minDistance=3.5;
+controls.maxDistance=16;
 
-controls.rotateSpeed = 0.6;
-
-controls.enableDamping = true;
-
-controls.dampingFactor = 0.05;
-
-controls.enableZoom = true;
-
-controls.zoomSpeed = 0.6;
-
-controls.enablePan = false;
-
-controls.autoRotate = true;
-
-controls.autoRotateSpeed = 0.2;
-
-controls.target.set(
-    0,
-    -0.3,
-    0
-);
-
-controls.minDistance = 3.5;
-
-controls.maxDistance = 16;
-
-
-/* ==================================================
-   LIGHTING
-================================================== */
-
-const ambient =
-new THREE.AmbientLight(
+scene.add(
+  new THREE.AmbientLight(
     0xffffff,
-    0.55
+    .55
+  )
 );
 
-scene.add(ambient);
-
-
-const hemi =
-new THREE.HemisphereLight(
-    0xffffff,
+scene.add(
+  new THREE.HemisphereLight(
+    0xffdce6,
     0x081018,
-    0.75
+    .75
+  )
 );
 
-scene.add(hemi);
-
-
-const keyLight =
-new THREE.DirectionalLight(
-    0xffffff,
-    1.4
+const keyLight=new THREE.DirectionalLight(
+  0xfff5f0,
+  1.4
 );
 
 keyLight.position.set(
-    6,
-    10,
-    8
+  6,
+  10,
+  8
 );
 
 scene.add(keyLight);
 
-
-const fillLight =
-new THREE.DirectionalLight(
-    0x8ca9bd,
-    0.4
+const fillLight=new THREE.DirectionalLight(
+  0x8ca9bd,
+  .4
 );
 
 fillLight.position.set(
-    -7,
-    2,
-    6
+  -7,
+  2,
+  6
 );
 
 scene.add(fillLight);
 
-
-/* ==================================================
-   BRAIN GROUP
-================================================== */
-
-const brainGroup =
-new THREE.Group();
+const brainGroup=new THREE.Group();
 
 scene.add(brainGroup);
 
+let targetMeshes=[];
+let brainMeshes=[];
 
-let frontalMesh = null;
+let locationShown=false;
+let highlighted=true;
 
-let frontalHighlightMesh = null;
-
-let frontalOutline = null;
-
-let highlighted = true;
-
-
-/* ==================================================
-   NORMAL BRAIN MATERIAL
-================================================== */
-
-const brainMaterial =
-new THREE.MeshPhysicalMaterial({
-
+const brainOpaqueMaterial=
+  new THREE.MeshPhysicalMaterial({
     color:0xf1c5d0,
-
-    roughness:0.62,
-
+    roughness:.62,
     metalness:0,
+    clearcoat:.12,
+    clearcoatRoughness:.5,
+    side:THREE.DoubleSide,
+    transparent:false,
+    opacity:1
+  });
 
-    clearcoat:0.12,
-
-    clearcoatRoughness:0.5,
-
-    side:THREE.DoubleSide
-
-});
-
-
-/* ==================================================
-   WHITE FRONTAL MATERIAL
-================================================== */
-
-const frontalWhiteMaterial =
-new THREE.MeshPhysicalMaterial({
-
-    color:0xffffff,
-
-    roughness:0.30,
-
-    metalness:0.02,
-
-    clearcoat:0.35,
-
-    clearcoatRoughness:0.25,
-
-    side:THREE.DoubleSide
-
-});
-
-
-/* ==================================================
-   OUTLINE
-================================================== */
-
-const outlineMaterial =
-new THREE.MeshBasicMaterial({
-
-    color:0xffffff,
-
+const brainTransparentMaterial=
+  new THREE.MeshPhysicalMaterial({
+    color:0xf1c5d0,
+    roughness:.55,
+    metalness:0,
+    clearcoat:.1,
+    clearcoatRoughness:.5,
+    side:THREE.DoubleSide,
     transparent:true,
+    opacity:.16,
+    depthWrite:false
+  });
 
-    opacity:0.9,
+const cortexMaterial=
+  new THREE.MeshPhysicalMaterial({
+    color:0xff2948,
+    roughness:.3,
+    metalness:0,
+    clearcoat:.6,
+    clearcoatRoughness:.12,
+    emissive:0x5c0613,
+    emissiveIntensity:1.05,
+    side:THREE.DoubleSide,
+    transparent:false,
+    opacity:1
+  });
 
-    side:THREE.BackSide
+const cortexNormalMaterial=
+  new THREE.MeshPhysicalMaterial({
+    color:0xf1c5d0,
+    roughness:.62,
+    metalness:0,
+    clearcoat:.12,
+    clearcoatRoughness:.5,
+    side:THREE.DoubleSide
+  });
 
-});
+function normalizeName(name){
 
+  return String(name||"")
+    .toLowerCase()
+    .replace(/[\s_\-\.]+/g,"");
 
-/* ==================================================
-   FALLBACK FRONTAL LOBE
-================================================== */
+}
 
-function createFrontalMarker(){
+function getMeshName(mesh){
 
-    const geometry =
-    new THREE.SphereGeometry(
-        1.15,
-        64,
-        40
+  const userName=
+    mesh.userData&&mesh.userData.name
+      ?mesh.userData.name
+      :"";
+
+  return `${mesh.name} ${userName}`;
+
+}
+
+function explicitlyNamedFrontalLobe(mesh){
+
+  const name=normalizeName(
+    getMeshName(mesh)
+  );
+
+  const frontalNames=[
+    "frontallobe",
+    "frontalcortex",
+    "prefrontalcortex",
+    "prefrontal",
+    "motorcortex",
+    "frontal"
+  ];
+
+  return frontalNames.some(
+    item=>name.includes(item)
+  );
+
+}
+
+function isClearlyNotFrontal(mesh){
+
+  const name=normalizeName(
+    getMeshName(mesh)
+  );
+
+  const excludedNames=[
+    "cerebell",
+    "brainstem",
+    "medulla",
+    "pons",
+    "midbrain",
+    "thalam",
+    "hypothalam",
+    "ventricle",
+    "aqueduct",
+    "fourthventricle",
+    "thirdventricle",
+    "occipital",
+    "temporallobe",
+    "parietal"
+  ];
+
+  return excludedNames.some(
+    item=>name.includes(item)
+  );
+
+}
+
+function getWorldBox(mesh){
+
+  mesh.updateWorldMatrix(
+    true,
+    false
+  );
+
+  return new THREE.Box3()
+    .setFromObject(mesh);
+
+}
+
+function getWorldSphere(mesh){
+
+  const box=getWorldBox(mesh);
+
+  const sphere=new THREE.Sphere();
+
+  box.getBoundingSphere(sphere);
+
+  return sphere;
+
+}
+
+function calculateFrontalCandidates(model){
+
+  const meshes=[];
+
+  model.traverse(child=>{
+
+    if(!child.isMesh)return;
+
+    meshes.push(child);
+
+  });
+
+  if(meshes.length===0){
+    return [];
+  }
+
+  const explicit=meshes.filter(
+    mesh=>
+      explicitlyNamedFrontalLobe(mesh) &&
+      !isClearlyNotFrontal(mesh)
+  );
+
+  if(explicit.length>0){
+    return explicit;
+  }
+
+  const measurements=meshes.map(mesh=>{
+
+    const box=getWorldBox(mesh);
+
+    const size=box.getSize(
+      new THREE.Vector3()
     );
 
+    const sphere=getWorldSphere(mesh);
 
-    frontalHighlightMesh =
-    new THREE.Mesh(
-        geometry,
-        frontalWhiteMaterial
+    const volume=
+      Math.max(size.x,.001)*
+      Math.max(size.y,.001)*
+      Math.max(size.z,.001);
+
+    return {
+      mesh,
+      box,
+      size,
+      sphere,
+      volume
+    };
+
+  }).filter(item=>
+    !isClearlyNotFrontal(item.mesh)
+  );
+
+  if(measurements.length===0){
+    return [];
+  }
+
+  let maxVolume=0;
+
+  measurements.forEach(item=>{
+    maxVolume=Math.max(
+      maxVolume,
+      item.volume
+    );
+  });
+
+  const largeCandidates=
+    measurements.filter(item=>
+      item.volume>=maxVolume*.18
     );
 
+  if(largeCandidates.length===0){
+    return [];
+  }
+
+  const allBox=new THREE.Box3();
+
+  largeCandidates.forEach(item=>{
+    allBox.union(item.box);
+  });
+
+  const overallSize=
+    allBox.getSize(
+      new THREE.Vector3()
+    );
+
+  const overallCenter=
+    allBox.getCenter(
+      new THREE.Vector3()
+    );
+
+  const filtered=largeCandidates.filter(item=>{
+
+    const center=item.sphere.center;
+
+    const normalizedX=
+      overallSize.x>0
+        ?(center.x-overallCenter.x)/
+          overallSize.x
+        :0;
+
+    const sufficientlyLarge=
+      item.volume>=maxVolume*.28;
 
     /*
-       Front/anterior shell.
-       It is intentionally positioned
-       toward the front of the brain.
-    */
+     * The model's anterior direction can vary with its
+     * original orientation. This selection avoids low
+     * posterior structures while retaining the main
+     * cerebral mass.
+     */
 
-    frontalHighlightMesh.scale.set(
-        1.18,
-        1.02,
-        0.72
+    const isSmall=
+      item.volume<maxVolume*.28;
+
+    return sufficientlyLarge && !isSmall && normalizedX<.45;
+
+  });
+
+  if(filtered.length>0){
+    return filtered.map(
+      item=>item.mesh
     );
+  }
 
-
-    frontalHighlightMesh.position.set(
-        -0.72,
-        0.05,
-        0
-    );
-
-
-    brainGroup.add(
-        frontalHighlightMesh
-    );
-
-
-    frontalOutline =
-    new THREE.Mesh(
-        geometry.clone(),
-        outlineMaterial
-    );
-
-
-    frontalOutline.scale.set(
-        1.23,
-        1.07,
-        0.76
-    );
-
-
-    frontalOutline.position.set(
-        -0.72,
-        0.05,
-        0
-    );
-
-
-    brainGroup.add(
-        frontalOutline
-    );
+  return largeCandidates.map(
+    item=>item.mesh
+  );
 
 }
 
+function prepareMaterials(model){
 
-/* ==================================================
-   ADD FRONTAL HIGHLIGHT
-================================================== */
+  brainMeshes=[];
+  targetMeshes=[];
 
-function addFrontalHighlight(mesh){
+  model.traverse(child=>{
 
-    if(!mesh)
-        return;
+    if(!child.isMesh)return;
 
+    child.castShadow=true;
+    child.receiveShadow=true;
 
-    frontalMesh =
-    mesh;
+    child.material=
+      brainOpaqueMaterial.clone();
 
+    brainMeshes.push(child);
 
-    frontalHighlightMesh =
-    mesh.clone();
+  });
 
+  targetMeshes=
+    calculateFrontalCandidates(model);
 
-    frontalHighlightMesh.material =
-    frontalWhiteMaterial.clone();
+  targetMeshes.forEach(mesh=>{
 
+    mesh.material=
+      cortexMaterial.clone();
 
-    frontalHighlightMesh.scale.multiplyScalar(
-        1.012
-    );
-
-
-    mesh.parent.add(
-        frontalHighlightMesh
-    );
-
-
-    frontalOutline =
-    mesh.clone();
-
-
-    frontalOutline.material =
-    outlineMaterial.clone();
-
-
-    frontalOutline.scale.multiplyScalar(
-        1.045
-    );
-
-
-    mesh.parent.add(
-        frontalOutline
-    );
+  });
 
 }
-
-
-/* ==================================================
-   LOAD REAL BRAIN
-================================================== */
 
 function loadRealBrain(){
 
-    const loader =
-    new GLTFLoader();
+  const loader=new GLTFLoader();
 
+  const dracoLoader=new DRACOLoader();
 
-    const dracoLoader =
-    new DRACOLoader();
+  dracoLoader.setDecoderPath(
+    "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/"
+  );
 
+  loader.setDRACOLoader(dracoLoader);
 
-    dracoLoader.setDecoderPath(
-        "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/"
-    );
+  const urls=[
+    "https://cdn.jsdelivr.net/gh/itayinbarr/brainproject@main/brain-atlas/models/brain.glb",
+    "https://raw.githubusercontent.com/itayinbarr/brainproject/main/brain-atlas/models/brain.glb",
+    "https://itayinbarr.github.io/brainproject/models/brain.glb"
+  ];
 
+  let index=0;
 
-    loader.setDRACOLoader(
-        dracoLoader
-    );
+  function tryLoad(){
 
+    if(index>=urls.length){
 
-    const urls = [
+      loadText.textContent=
+        "Brain model could not be loaded.";
 
-        "https://cdn.jsdelivr.net/gh/itayinbarr/brainproject@main/brain-atlas/models/brain.glb",
+      loadBar.style.width="100%";
 
-        "https://raw.githubusercontent.com/itayinbarr/brainproject/main/brain-atlas/models/brain.glb",
+      setTimeout(()=>{
+        loading.classList.add("hide");
+      },500);
 
-        "https://itayinbarr.github.io/brainproject/models/brain.glb"
+      return;
+    }
 
-    ];
+    const url=urls[index++];
 
+    loader.load(
 
-    let urlIndex = 0;
+      url,
 
+      gltf=>{
 
-    function tryLoad(){
+        const model=gltf.scene;
 
-        if(
-            urlIndex >= urls.length
-        ){
+        const box=
+          new THREE.Box3()
+            .setFromObject(model);
 
-            createFrontalMarker();
+        const center=
+          box.getCenter(
+            new THREE.Vector3()
+          );
 
-            onReady();
+        const size=
+          box.getSize(
+            new THREE.Vector3()
+          );
 
-            return;
+        const maxDim=
+          Math.max(
+            size.x,
+            size.y,
+            size.z
+          );
+
+        const scale=
+          4.5/maxDim;
+
+        model.scale.setScalar(scale);
+
+        model.position.sub(
+          center.multiplyScalar(scale)
+        );
+
+        model.position.y-=.6;
+
+        brainGroup.add(model);
+
+        prepareMaterials(model);
+
+        if(targetMeshes.length===0){
+
+          loadText.textContent=
+            "Brain loaded · frontal lobe surface unavailable";
+
+        }else{
+
+          loadText.textContent=
+            "Frontal lobe surface located";
 
         }
 
+        loadBar.style.width="100%";
 
-        const url =
-        urls[urlIndex++];
+        setTimeout(()=>{
+          loading.classList.add("hide");
+        },500);
 
+      },
 
-        loader.load(
+      progress=>{
 
-            url,
+        if(progress.total>0){
 
-            function(gltf){
+          const pct=Math.min(
+            95,
+            progress.loaded/
+              progress.total*
+              95
+          );
 
-                const model =
-                gltf.scene;
+          loadBar.style.width=
+            pct+"%";
 
+        }
 
-                /* =================================
-                   CENTER + SCALE
-                ================================= */
+      },
 
-                const box =
-                new THREE.Box3()
-                .setFromObject(model);
+      error=>{
 
-
-                const center =
-                box.getCenter(
-                    new THREE.Vector3()
-                );
-
-
-                const size =
-                box.getSize(
-                    new THREE.Vector3()
-                );
-
-
-                const maxDim =
-                Math.max(
-                    size.x,
-                    size.y,
-                    size.z
-                );
-
-
-                const scale =
-                4.5 / maxDim;
-
-
-                model.scale.setScalar(
-                    scale
-                );
-
-
-                model.position.sub(
-                    center.multiplyScalar(
-                        scale
-                    )
-                );
-
-
-                model.position.y -= 0.60;
-
-
-                /* =================================
-                   PROCESS MODEL
-                ================================= */
-
-                model.traverse(
-                function(child){
-
-                    if(
-                        !child.isMesh
-                    )
-                        return;
-
-
-                    child.castShadow = true;
-
-                    child.receiveShadow = true;
-
-
-                    const name =
-                    (
-                        child.name || ""
-                    ).toLowerCase();
-
-
-                    /*
-                       Try to detect a true
-                       frontal-lobe mesh.
-                    */
-
-                    const isFrontal =
-
-                        name.includes("frontal") ||
-
-                        name.includes("frontal_lobe") ||
-
-                        name.includes("frontallobe") ||
-
-                        name.includes("prefrontal") ||
-
-                        name.includes("frontalcortex");
-
-
-                    if(
-                        isFrontal &&
-                        !frontalMesh
-                    ){
-
-                        addFrontalHighlight(
-                            child
-                        );
-
-                    }
-
-
-                    /*
-                       All normal brain structures
-                       remain pink.
-                    */
-
-                    if(
-                        child.material
-                    ){
-
-                        child.material =
-                        brainMaterial.clone();
-
-                    }
-
-                });
-
-
-                brainGroup.add(
-                    model
-                );
-
-
-                /*
-                   If the GLB doesn't expose
-                   a frontal-lobe mesh,
-                   create a visual marker.
-                */
-
-                if(
-                    !frontalMesh
-                ){
-
-                    createFrontalMarker();
-
-                }
-
-
-                loadBar.style.width =
-                "100%";
-
-
-                onReady();
-
-            },
-
-            function(progress){
-
-                if(
-                    progress.total > 0
-                ){
-
-                    const pct =
-                    Math.min(
-                        90,
-                        progress.loaded /
-                        progress.total *
-                        90
-                    );
-
-
-                    loadBar.style.width =
-                    pct + "%";
-
-                }
-
-            },
-
-            function(error){
-
-                console.warn(
-                    "Model failed:",
-                    error
-                );
-
-
-                tryLoad();
-
-            }
-
+        console.warn(
+          "Brain model loading failed:",
+          error
         );
+
+        tryLoad();
+
+      }
+
+    );
+
+  }
+
+  tryLoad();
+
+}
+
+function setBrainTransparency(enabled){
+
+  brainMeshes.forEach(mesh=>{
+
+    if(targetMeshes.includes(mesh)){
+      return;
+    }
+
+    mesh.material=
+      enabled
+        ?brainTransparentMaterial.clone()
+        :brainOpaqueMaterial.clone();
+
+  });
+
+}
+
+function setTargetHighlight(enabled){
+
+  targetMeshes.forEach(mesh=>{
+
+    mesh.material=
+      enabled
+        ?cortexMaterial.clone()
+        :cortexNormalMaterial.clone();
+
+  });
+
+}
+
+const showLocationBtn=
+  document.getElementById(
+    "showLocation"
+  );
+
+showLocationBtn.addEventListener(
+  "click",
+  ()=>{
+
+    locationShown=
+      !locationShown;
+
+    if(locationShown){
+
+      setBrainTransparency(true);
+
+      setTargetHighlight(true);
+
+      highlighted=true;
+
+      locationLabel.classList.add(
+        "show"
+      );
+
+      showLocationBtn.classList.add(
+        "active"
+      );
+
+      showLocationBtn.textContent=
+        "📍 Hide Frontal Lobe";
+
+      controls.autoRotate=false;
+
+      rotateBtn.classList.remove(
+        "active"
+      );
+
+      rotateBtn.textContent=
+        "▶ Auto Rotate";
+
+    }else{
+
+      setBrainTransparency(false);
+
+      setTargetHighlight(
+        highlighted
+      );
+
+      locationLabel.classList.remove(
+        "show"
+      );
+
+      showLocationBtn.classList.remove(
+        "active"
+      );
+
+      showLocationBtn.textContent=
+        "📍 Show Frontal Lobe";
 
     }
 
+  }
+);
 
-    tryLoad();
+const highlightBtn=
+  document.getElementById(
+    "highlight"
+  );
 
-}
+highlightBtn.addEventListener(
+  "click",
+  ()=>{
 
+    highlighted=
+      !highlighted;
 
-/* ==================================================
-   READY
-================================================== */
+    setTargetHighlight(
+      highlighted
+    );
 
-function onReady(){
+    if(highlighted){
 
-    setTimeout(
-    function(){
+      highlightBtn.classList.add(
+        "active"
+      );
 
-        loading.classList.add(
-            "hide"
-        );
+      highlightBtn.textContent=
+        "🔴 Highlight Frontal Lobe";
 
+    }else{
 
-        if(
-            highlighted
-        ){
+      highlightBtn.classList.remove(
+        "active"
+      );
 
-            frontalLabel.classList.add(
-                "show"
-            );
+      highlightBtn.textContent=
+        "🧠 Highlight Frontal Lobe";
 
-        }
+    }
 
-    },500);
+    if(locationShown){
 
-}
+      setBrainTransparency(true);
 
+    }
 
-/* ==================================================
-   LABEL POSITION
-================================================== */
+  }
+);
+
+const rotateBtn=
+  document.getElementById(
+    "rotate"
+  );
+
+rotateBtn.addEventListener(
+  "click",
+  ()=>{
+
+    controls.autoRotate=
+      !controls.autoRotate;
+
+    rotateBtn.classList.toggle(
+      "active",
+      controls.autoRotate
+    );
+
+    rotateBtn.textContent=
+      controls.autoRotate
+        ?"⟳ Auto Rotate"
+        :"▶ Auto Rotate";
+
+  }
+);
+
+document
+  .getElementById("reset")
+  .addEventListener(
+    "click",
+    ()=>{
+
+      camera.position.set(
+        3.2,
+        .3,
+        8.5
+      );
+
+      controls.target.set(
+        0,
+        -.3,
+        0
+      );
+
+      controls.update();
+
+      locationShown=false;
+
+      setBrainTransparency(false);
+
+      setTargetHighlight(true);
+
+      locationLabel.classList.remove(
+        "show"
+      );
+
+      showLocationBtn.classList.remove(
+        "active"
+      );
+
+      showLocationBtn.textContent=
+        "📍 Show Frontal Lobe";
+
+      highlighted=true;
+
+      highlightBtn.classList.add(
+        "active"
+      );
+
+      highlightBtn.textContent=
+        "🔴 Highlight Frontal Lobe";
+
+    }
+  );
 
 function updateLabel(){
 
-    if(
-        !frontalHighlightMesh
-    )
-        return;
+  if(!locationShown)return;
 
+  if(targetMeshes.length===0)return;
 
-    const position =
-    new THREE.Vector3();
+  const box=new THREE.Box3();
 
+  targetMeshes.forEach(mesh=>{
+    box.expandByObject(mesh);
+  });
 
-    frontalHighlightMesh
-    .getWorldPosition(
-        position
+  if(box.isEmpty())return;
+
+  const position=
+    box.getCenter(
+      new THREE.Vector3()
     );
 
+  position.project(camera);
 
-    position.project(
-        camera
-    );
-
-
-    const x =
-    (position.x + 1) /
-    2 *
+  const x=
+    (position.x+1)/2*
     canvas.clientWidth;
 
-
-    const y =
-    (-position.y + 1) /
-    2 *
+  const y=
+    (-position.y+1)/2*
     canvas.clientHeight;
 
+  locationLabel.style.left=
+    x+"px";
 
-    frontalLabel.style.left =
-    x + "px";
-
-
-    frontalLabel.style.top =
-    (y - 80) + "px";
+  locationLabel.style.top=
+    (y-35)+"px";
 
 }
-
-
-/* ==================================================
-   RESIZE
-================================================== */
 
 function resize(){
 
-    const width =
+  const width=
     canvas.clientWidth;
 
-
-    const height =
+  const height=
     canvas.clientHeight;
 
+  if(width<=0||height<=0){
+    return;
+  }
 
-    if(
-        width <= 0 ||
-        height <= 0
-    )
-        return;
+  camera.aspect=
+    width/height;
 
+  camera.updateProjectionMatrix();
 
-    camera.aspect =
-    width / height;
-
-
-    camera.updateProjectionMatrix();
-
-
-    renderer.setSize(
-        width,
-        height,
-        false
-    );
+  renderer.setSize(
+    width,
+    height,
+    false
+  );
 
 }
 
-
 window.addEventListener(
-"resize",
-resize
+  "resize",
+  resize
 );
-
-
-/* ==================================================
-   HIGHLIGHT BUTTON
-================================================== */
-
-const highlightBtn =
-document.getElementById(
-    "highlight"
-);
-
-
-highlightBtn.addEventListener(
-"click",
-function(){
-
-    highlighted =
-    !highlighted;
-
-
-    if(
-        frontalHighlightMesh
-    ){
-
-        frontalHighlightMesh.visible =
-        highlighted;
-
-    }
-
-
-    if(
-        frontalOutline
-    ){
-
-        frontalOutline.visible =
-        highlighted;
-
-    }
-
-
-    frontalLabel.classList.toggle(
-        "show",
-        highlighted
-    );
-
-
-    highlightBtn.classList.toggle(
-        "active",
-        highlighted
-    );
-
-
-    highlightBtn.textContent =
-
-    highlighted
-
-    ? "⚪ Highlight Frontal Lobe"
-
-    : "⚫ Show Frontal Lobe";
-
-});
-
-
-/* ==================================================
-   AUTO ROTATE
-================================================== */
-
-const rotateBtn =
-document.getElementById(
-    "rotate"
-);
-
-
-rotateBtn.addEventListener(
-"click",
-function(){
-
-    controls.autoRotate =
-    !controls.autoRotate;
-
-
-    rotateBtn.classList.toggle(
-        "active",
-        controls.autoRotate
-    );
-
-
-    rotateBtn.textContent =
-
-    controls.autoRotate
-
-    ? "⟳ Auto Rotate"
-
-    : "▶ Auto Rotate";
-
-});
-
-
-/* ==================================================
-   RESET
-================================================== */
-
-document.getElementById(
-    "reset"
-).addEventListener(
-"click",
-function(){
-
-    camera.position.set(
-        3.2,
-        0.3,
-        8.5
-    );
-
-
-    controls.target.set(
-        0,
-        -0.3,
-        0
-    );
-
-
-    controls.update();
-
-});
-
-
-/* ==================================================
-   ANIMATION
-================================================== */
 
 function animate(){
 
-    requestAnimationFrame(
-        animate
-    );
+  requestAnimationFrame(
+    animate
+  );
 
+  controls.update();
 
-    controls.update();
+  updateLabel();
 
-
-    updateLabel();
-
-
-    renderer.render(
-        scene,
-        camera
-    );
+  renderer.render(
+    scene,
+    camera
+  );
 
 }
-
-
-/* ==================================================
-   START
-================================================== */
 
 resize();
 
@@ -2657,248 +2570,101 @@ animate();
 
 loadRealBrain();
 
+</script>
 
-/* ==================================================
-   LOCATION BUTTON
-================================================== */
+<script>
 
-const locationButton =
-document.getElementById(
-    "locationButton"
-);
+function checkAnswer(
+  button,
+  correct
+){
 
-const locationVisual =
-document.getElementById(
-    "locationVisual"
-);
+  const parent=
+    button.parentElement;
 
+  const options=
+    parent.querySelectorAll(
+      ".option"
+    );
 
-locationButton.addEventListener(
-"click",
-function(){
+  options.forEach(option=>{
+    option.classList.remove(
+      "correct",
+      "wrong"
+    );
+  });
 
-    setTimeout(
-    function(){
+  if(correct){
 
-        locationVisual.classList.add(
-            "show"
+    button.classList.add(
+      "correct"
+    );
+
+  }else{
+
+    button.classList.add(
+      "wrong"
+    );
+
+  }
+
+  updateQuizScore();
+
+}
+
+function updateQuizScore(){
+
+  const result=
+    document.getElementById(
+      "quizResult"
+    );
+
+  let answered=0;
+  let correctAnswers=0;
+
+  document
+    .querySelectorAll(".question")
+    .forEach(question=>{
+
+      const selected=
+        question.querySelector(
+          ".correct,.wrong"
         );
 
-    },50);
+      if(selected){
 
-});
+        answered++;
 
+        if(
+          selected.classList.contains(
+            "correct"
+          )
+        ){
 
-/* ==================================================
-   QUIZ
-================================================== */
+          correctAnswers++;
 
-let score = 0;
+        }
 
-let answered = 0;
-
-
-const questionBlocks =
-document.querySelectorAll(
-    ".question-block"
-);
-
-
-questionBlocks.forEach(
-function(question){
-
-    const correctAnswer =
-    question.dataset.answer;
-
-
-    const options =
-    question.querySelectorAll(
-        ".option"
-    );
-
-
-    const feedback =
-    question.querySelector(
-        ".question-feedback"
-    );
-
-
-    let alreadyAnswered =
-    false;
-
-
-    options.forEach(
-    function(option){
-
-        option.addEventListener(
-        "click",
-        function(){
-
-            if(
-                alreadyAnswered
-            )
-                return;
-
-
-            alreadyAnswered =
-            true;
-
-
-            const selected =
-            option.dataset.option;
-
-
-            options.forEach(
-            function(btn){
-
-                btn.disabled =
-                true;
-
-            });
-
-
-            if(
-                selected === correctAnswer
-            ){
-
-                score++;
-
-
-                option.classList.add(
-                    "correct"
-                );
-
-
-                feedback.textContent =
-                "✓ Correct! · إجابة صحيحة";
-
-
-                feedback.style.color =
-                "#78e0a0";
-
-            }
-
-            else{
-
-                option.classList.add(
-                    "wrong"
-                );
-
-
-                options.forEach(
-                function(btn){
-
-                    if(
-                        btn.dataset.option ===
-                        correctAnswer
-                    ){
-
-                        btn.classList.add(
-                            "correct"
-                        );
-
-                    }
-
-                });
-
-
-                feedback.textContent =
-                "✗ Incorrect. The correct answer is highlighted. · إجابة غير صحيحة، الإجابة الصحيحة موضحة بالأعلى.";
-
-
-                feedback.style.color =
-                "#ff8792";
-
-            }
-
-
-            answered++;
-
-
-            if(
-                answered ===
-                questionBlocks.length
-            ){
-
-                showFinalScore();
-
-            }
-
-        });
+      }
 
     });
 
-});
+  if(answered>0){
 
+    result.style.display=
+      "block";
 
-/* ==================================================
-   FINAL QUIZ SCORE
-================================================== */
+    result.textContent=
+      "Score: "+
+      correctAnswers+
+      " / "+
+      answered;
 
-function showFinalScore(){
-
-    const result =
-    document.getElementById(
-        "quizResult"
-    );
-
-
-    let message = "";
-
-
-    if(
-        score === 3
-    ){
-
-        message =
-        "🔥 Perfect! Excellent work! · ممتاز! إجاباتك كلها صحيحة!";
-
-    }
-
-    else if(
-        score === 2
-    ){
-
-        message =
-        "👏 Great job! Just one more to master it. · شغل ممتاز! باقي إجابة واحدة فقط.";
-
-    }
-
-    else if(
-        score === 1
-    ){
-
-        message =
-        "💡 Good start! Review the frontal lobe and try again. · بداية جيدة! راجعي الفص الجبهي وجربي مرة أخرى.";
-
-    }
-
-    else{
-
-        message =
-        "🧠 Keep learning! Review the frontal lobe sections and try again. · كملي تعلم! راجعي أقسام الفص الجبهي وجربي مرة أخرى.";
-
-    }
-
-
-    result.innerHTML =
-
-    "<strong>" +
-    message +
-    "</strong>" +
-
-    "<br><br>" +
-
-    "Final Score · النتيجة النهائية: " +
-
-    score +
-
-    " / 3";
+  }
 
 }
 
 </script>
 
 </body>
-
-  </html>
+</html>
