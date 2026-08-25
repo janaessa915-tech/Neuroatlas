@@ -1,907 +1,729 @@
+<!-- /pons.html -->
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>NeuroAtlas | Pons</title>
 
 <style>
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-html{
-    scroll-behavior:smooth;
-}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
 
 body{
-    background:#050b13;
-    color:#eef4fa;
-    font-family:Arial,Helvetica,sans-serif;
-    line-height:1.6;
+  background:#050b13;
+  color:#eef4fa;
+  font-family:Arial,Helvetica,sans-serif;
+  line-height:1.7
 }
 
-/* =========================
-   NAVIGATION
-========================= */
-
 nav{
-    height:70px;
-    padding:0 7%;
-    display:flex;
-    align-items:center;
-    border-bottom:1px solid rgba(255,255,255,.08);
+  height:70px;
+  padding:0 7%;
+  display:flex;
+  align-items:center;
+  border-bottom:1px solid rgba(255,255,255,.08)
 }
 
 nav a{
-    color:#9db0c3;
-    text-decoration:none;
-    font-size:14px;
+  color:#9db0c3;
+  text-decoration:none;
+  font-size:14px
 }
 
-nav a:hover{
-    color:white;
-}
-
-/* =========================
-   MAIN
-========================= */
+nav a:hover{color:#fff}
 
 .container{
-    max-width:1200px;
-    margin:auto;
-    padding:60px 7% 100px;
+  max-width:1200px;
+  margin:auto;
+  padding:60px 7% 100px
 }
 
-/* =========================
-   HERO
-========================= */
-
 .eyebrow{
-    color:#61b5ff;
-    letter-spacing:3px;
-    font-size:12px;
-    text-transform:uppercase;
-    margin-bottom:15px;
+  color:#61b5ff;
+  letter-spacing:3px;
+  font-size:12px;
+  text-transform:uppercase;
+  margin-bottom:15px
 }
 
 h1{
-    font-size:clamp(60px,8vw,90px);
-    line-height:.95;
-    letter-spacing:-4px;
-    margin-bottom:12px;
+  font-size:clamp(55px,8vw,90px);
+  line-height:.95;
+  letter-spacing:-4px;
+  margin-bottom:10px
 }
 
 .arabic-title{
-    color:#ffb6c9;
-    font-size:25px;
-    margin-bottom:25px;
+  color:#ff4055;
+  font-size:24px;
+  margin-bottom:25px
 }
 
 .hero p{
-    color:#a6b6c7;
-    max-width:850px;
-    font-size:18px;
-    line-height:1.8;
+  color:#a6b6c7;
+  max-width:780px;
+  font-size:18px;
+  line-height:1.8
 }
-
-/* =========================
-   ACTIONS
-========================= */
 
 .actions{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    margin-top:28px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:30px
 }
 
-.action-button{
-    padding:11px 17px;
-    border-radius:9px;
-    background:#0b1928;
-    border:1px solid #31516d;
-    color:#bdd0e0;
-    cursor:pointer;
-    text-decoration:none;
-    font-size:14px;
-    transition:.2s;
-}
-
-.action-button:hover{
-    background:#14304a;
-    color:white;
-    border-color:#ffb6c9;
-}
-
-/* =========================
-   3D VIEWER
-========================= */
-
-.viewer{
-    margin-top:60px;
-    border:1px solid rgba(255,255,255,.10);
-    border-radius:24px;
-    overflow:hidden;
-    background:#02060b;
-    box-shadow:0 25px 80px rgba(0,0,0,.45);
-}
-
-.viewer-header{
-    min-height:65px;
-    padding:0 22px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    border-bottom:1px solid rgba(255,255,255,.08);
-}
-
-.viewer-title{
-    font-size:14px;
-    color:#d2dce6;
-}
-
-.viewer-status{
-    color:#708499;
-    font-size:11px;
-    letter-spacing:1px;
-}
-
-.scene{
-    position:relative;
-    width:100%;
-    height:700px;
-
-    background:
-    radial-gradient(
-        circle at 50% 45%,
-        #203b51 0%,
-        #0d1c2e 42%,
-        #02060b 100%
-    );
-}
-
-#brainCanvas{
-    width:100%;
-    height:100%;
-    display:block;
-}
-
-/* =========================
-   LOADING
-========================= */
-
-.loading{
-    position:absolute;
-    inset:0;
-    z-index:20;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-direction:column;
-
-    gap:16px;
-
-    background:#02060b;
-
-    color:#9db0c3;
-    font-size:14px;
-
-    transition:opacity .8s;
-}
-
-.loading.hide{
-    opacity:0;
-    pointer-events:none;
-}
-
-.loading-bar{
-    width:180px;
-    height:2px;
-
-    background:rgba(255,255,255,.08);
-
-    border-radius:2px;
-    overflow:hidden;
-}
-
-.loading-bar-inner{
-    width:0%;
-    height:100%;
-
-    background:#ffb6c9;
-
-    transition:width .3s;
-}
-
-/* =========================
-   PONS LABEL
-========================= */
-
-.pons-label{
-    position:absolute;
-
-    z-index:30;
-
-    pointer-events:none;
-
-    transform:translate(-50%,-100%);
-
-    display:none;
-}
-
-.pons-label.show{
-    display:block;
-}
-
-.label-box{
-    position:relative;
-
-    padding:9px 15px;
-
-    border-radius:10px;
-
-    background:rgba(5,10,17,.96);
-
-    border:1.5px solid #ffb6c9;
-
-    color:#ffd5df;
-
-    font-size:12px;
-
-    font-weight:bold;
-
-    letter-spacing:1px;
-
-    white-space:nowrap;
-
-    box-shadow:
-        0 0 12px rgba(255,182,201,.18),
-        0 0 25px rgba(255,182,201,.08);
-}
-
-.label-box::after{
-    content:"";
-
-    position:absolute;
-
-    left:50%;
-    bottom:-15px;
-
-    width:1.5px;
-    height:15px;
-
-    background:#ffb6c9;
-
-    transform:translateX(-50%);
-}
-
-/* =========================
-   CONTROLS
-========================= */
-
-.controls{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-
-    padding:15px;
-
-    border-top:1px solid rgba(255,255,255,.08);
-}
-
+.action-button,
 .controls button{
-    padding:11px 17px;
-
-    border-radius:9px;
-
-    background:#0b1928;
-
-    border:1px solid #31516d;
-
-    color:#bdd0e0;
-
-    cursor:pointer;
-
-    transition:.2s;
+  padding:11px 17px;
+  border-radius:9px;
+  background:#0b1928;
+  border:1px solid #31516d;
+  color:#bdd0e0;
+  text-decoration:none;
+  cursor:pointer;
+  transition:.2s
 }
 
+.action-button:hover,
 .controls button:hover{
-    background:#14304a;
-    color:white;
+  background:#14304a;
+  color:#fff;
+  border-color:#61b5ff
 }
 
 .controls button.active{
-    background:#241c20;
-
-    border-color:#ffb6c9;
-
-    color:#ffd5df;
+  background:#321218;
+  border-color:#ff4055;
+  color:#ffd9de
 }
 
-/* =========================
-   SECTIONS
-========================= */
+.viewer{
+  margin-top:60px;
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:24px;
+  overflow:hidden;
+  background:#02060b;
+  box-shadow:0 25px 80px rgba(0,0,0,.45)
+}
+
+.viewer-header{
+  min-height:65px;
+  padding:0 22px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid rgba(255,255,255,.08)
+}
+
+.viewer-title{
+  font-size:14px;
+  color:#d2dce6
+}
+
+.viewer-status{
+  color:#708499;
+  font-size:11px;
+  letter-spacing:1px
+}
+
+.scene{
+  position:relative;
+  width:100%;
+  height:700px;
+  background:
+    radial-gradient(circle at 50% 45%,#203b51 0%,#0d1c2e 42%,#02060b 100%)
+}
+
+#brainCanvas{
+  width:100%;
+  height:100%;
+  display:block
+}
+
+.loading{
+  position:absolute;
+  inset:0;
+  z-index:20;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:16px;
+  background:#02060b;
+  color:#9db0c3;
+  font-size:14px;
+  transition:opacity .8s
+}
+
+.loading.hide{
+  opacity:0;
+  pointer-events:none
+}
+
+.loading-bar{
+  width:180px;
+  height:2px;
+  background:rgba(255,255,255,.08);
+  border-radius:2px;
+  overflow:hidden
+}
+
+.loading-bar-inner{
+  width:0%;
+  height:100%;
+  background:#ff4055;
+  transition:width .3s
+}
+
+.location-label{
+  position:absolute;
+  z-index:30;
+  pointer-events:none;
+  transform:translate(-50%,-100%);
+  display:none
+}
+
+.location-label.show{display:block}
+
+.label-box{
+  position:relative;
+  padding:9px 15px;
+  border-radius:10px;
+  background:rgba(5,10,17,.96);
+  border:1.5px solid #ffb6c1;
+  color:#ffd9de;
+  font-size:12px;
+  font-weight:bold;
+  letter-spacing:1px;
+  white-space:nowrap;
+  box-shadow:
+    0 0 12px rgba(255,182,193,.35),
+    0 0 30px rgba(255,182,193,.2)
+}
+
+.label-box::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:-15px;
+  width:1.5px;
+  height:15px;
+  background:#ffb6c1;
+  transform:translateX(-50%)
+}
+
+.controls{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  padding:15px;
+  border-top:1px solid rgba(255,255,255,.08)
+}
 
 .section{
-    margin-top:70px;
+  margin-top:70px
 }
 
 .section-label{
-    color:#61b5ff;
-    letter-spacing:2px;
-    font-size:11px;
-    text-transform:uppercase;
-    margin-bottom:8px;
+  color:#61b5ff;
+  letter-spacing:2px;
+  font-size:11px;
+  text-transform:uppercase;
+  margin-bottom:8px
 }
 
 .section h2{
-    font-size:32px;
-    margin-bottom:25px;
+  font-size:32px;
+  margin-bottom:25px
 }
 
 .section-intro{
-    color:#91a5b8;
-    max-width:900px;
-    font-size:15px;
-    line-height:1.9;
-    margin-bottom:30px;
+  color:#91a5b8;
+  max-width:900px;
+  font-size:15px;
+  line-height:1.9;
+  margin-bottom:30px
 }
-
-/* =========================
-   CARDS
-========================= */
-
-.cards{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:20px;
-}
-
-.card{
-    padding:27px;
-
-    background:#091522;
-
-    border:1px solid #172b3e;
-
-    border-radius:18px;
-
-    transition:
-    transform .2s,
-    border-color .2s;
-}
-
-.card:hover{
-    transform:translateY(-3px);
-    border-color:#2b506c;
-}
-
-.card h3{
-    font-size:18px;
-    margin-bottom:13px;
-    color:#eef4fa;
-    line-height:1.45;
-}
-
-.card p{
-    color:#91a5b8;
-    font-size:14px;
-    line-height:1.8;
-}
-
-/* =========================
-   LOCATION
-========================= */
 
 .location{
-    margin-top:70px;
-
-    padding:32px;
-
-    background:#091522;
-
-    border:1px solid #172b3e;
-
-    border-radius:18px;
+  margin-top:70px;
+  padding:35px;
+  background:#091522;
+  border:1px solid #172b3e;
+  border-radius:18px
 }
 
 .location h2{
-    font-size:30px;
-    margin-bottom:12px;
+  font-size:32px;
+  margin-bottom:12px
 }
 
 .location-intro{
-    color:#91a5b8;
-    max-width:900px;
-    line-height:1.9;
-    margin-bottom:25px;
+  color:#91a5b8;
+  max-width:900px;
+  line-height:1.9;
+  margin-bottom:30px
 }
 
-.brain-visual{
-    width:100%;
-    overflow:hidden;
+.anatomy-viewer{
+  position:relative;
+  width:100%;
+  max-width:1000px;
+  height:610px;
+  margin:auto;
+  border:1px solid #243b50;
+  border-radius:16px;
+  overflow:hidden;
+  background:
+    radial-gradient(ellipse at center,#182a39 0%,#07111c 68%,#02060b 100%)
 }
 
 .brain-svg{
-    display:block;
-    width:100%;
-    max-width:800px;
-    height:auto;
-    margin:auto;
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%
 }
 
-.brain{
-    fill:#263d55;
-    stroke:#71869e;
-    stroke-width:3;
+.brain-outline{
+  fill:url(#brainGradient);
+  stroke:#c7b3b8;
+  stroke-width:3;
+  filter:url(#brainShadow)
 }
 
-.cerebellum{
-    fill:#344d66;
-    stroke:#71869e;
-    stroke-width:3;
+.cortex-line{
+  fill:none;
+  stroke:#796b72;
+  stroke-width:2.2;
+  opacity:.72;
+  stroke-linecap:round
 }
 
-.midbrain{
-    fill:#29465b;
-    stroke:#71869e;
-    stroke-width:3;
+.cortex-line-light{
+  fill:none;
+  stroke:#d3c1c5;
+  stroke-width:1.2;
+  opacity:.28;
+  stroke-linecap:round
 }
 
-.pons{
-    fill:#ffb6c9;
-    stroke:#ffffff;
-    stroke-width:4;
+.thalamus{
+  fill:#8f7c84;
+  stroke:#cdbbc0;
+  stroke-width:1.8;
+  opacity:.82
 }
 
-.medulla{
-    fill:#29465b;
-    stroke:#71869e;
-    stroke-width:3;
+.hypothalamus{
+  fill:#77656d;
+  stroke:#cdbbc0;
+  stroke-width:1.5;
+  opacity:.85
 }
 
-.line{
-    stroke:#ffb6c9;
-    stroke-width:2;
+.midbrain-region{
+  fill:#806f77;
+  opacity:.72
 }
 
-.svg-label{
-    fill:white;
-    font-size:18px;
-    font-weight:bold;
+.pons-highlight{
+  fill:url(#ponsGradient);
+  stroke:#ff4055;
+  stroke-width:3;
+  filter:url(#cortexGlow);
+  opacity:1
+}
+
+.medulla-region{
+  fill:#a58e95;
+  stroke:#d0bdc2;
+  stroke-width:2
+}
+
+.brainstem-detail{
+  fill:none;
+  stroke:#695b61;
+  stroke-width:2;
+  opacity:.7
+}
+
+.cerebellum-body{
+  fill:url(#cerebellumGradient);
+  stroke:#d2bdc2;
+  stroke-width:2.5
+}
+
+.cerebellar-folia{
+  fill:none;
+  stroke:#76666d;
+  stroke-width:2;
+  opacity:.8;
+  stroke-linecap:round
+}
+
+.callout{
+  fill:none;
+  stroke:#ffb6c1;
+  stroke-width:1.7;
+  stroke-linecap:round
+}
+
+.callout-dot{
+  fill:#ffb6c1;
+  stroke:#fff;
+  stroke-width:1
+}
+
+.pons-svg-label{
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:13px;
+  font-weight:bold;
+  letter-spacing:.8px;
+  fill:#fff
+}
+
+.pons-sub{
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:10px;
+  fill:#ffb6c1
+}
+
+.brain-label{
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:12px;
+  fill:#91a5b8;
+  letter-spacing:1.5px
+}
+
+.orientation-label{
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:10px;
+  fill:#71879a;
+  letter-spacing:1.2px
+}
+
+.anatomy-title{
+  position:absolute;
+  left:50%;
+  top:24px;
+  transform:translateX(-50%);
+  color:#d5e0e9;
+  font-size:13px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  text-align:center
+}
+
+.view-badge{
+  position:absolute;
+  left:25px;
+  bottom:22px;
+  padding:8px 12px;
+  border:1px solid #31516d;
+  border-radius:8px;
+  background:rgba(4,10,17,.82);
+  color:#8195a8;
+  font-size:10px;
+  letter-spacing:1.5px
+}
+
+.cortex-legend{
+  position:absolute;
+  right:22px;
+  bottom:20px;
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap
+}
+
+.legend-item{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  color:#aebdca;
+  font-size:10px
+}
+
+.legend-dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  box-shadow:0 0 10px currentColor
+}
+
+.legend-dot.pons{
+  background:#ff4055;
+  color:#ff4055
+}
+
+@keyframes ponsPulse{
+  0%,100%{
+    opacity:1;
+    filter:drop-shadow(0 0 5px rgba(255,64,85,.65))
+  }
+  50%{
+    opacity:.9;
+    filter:drop-shadow(0 0 18px rgba(255,64,85,1))
+  }
+}
+
+.pons-highlight.active{
+  animation:ponsPulse 1.8s infinite
 }
 
 .location-caption{
-    text-align:center;
-    color:#9fb0c3;
-    margin-top:15px;
+  text-align:center;
+  color:#9fb0c3;
+  margin-top:15px;
+  line-height:1.8
 }
 
-/* =========================
-   CLINICAL
-========================= */
+.source-note{
+  max-width:900px;
+  margin:15px auto 0;
+  color:#617487;
+  font-size:11px;
+  text-align:center
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px
+}
+
+.card{
+  padding:27px;
+  background:#091522;
+  border:1px solid #172b3e;
+  border-radius:18px;
+  transition:transform .2s,border-color .2s
+}
+
+.card:hover{
+  transform:translateY(-3px);
+  border-color:#4a2027
+}
+
+.card h3{
+  font-size:18px;
+  margin-bottom:13px;
+  color:#eef4fa;
+  line-height:1.45
+}
+
+.card p{
+  color:#91a5b8;
+  font-size:14px;
+  line-height:1.8
+}
 
 .clinical-section{
-    margin-top:65px;
+  margin-top:65px
 }
 
 .clinical-box{
-    padding:30px;
-
-    background:#091522;
-
-    border:1px solid #172b3e;
-
-    border-left:3px solid #ffb6c9;
-
-    border-radius:18px;
+  padding:30px;
+  background:#091522;
+  border:1px solid #172b3e;
+  border-left:3px solid #ff4055;
+  border-radius:18px
 }
 
 .clinical-box p{
-    color:#a7b7c6;
-    font-size:15px;
-    line-height:1.9;
-    margin-bottom:18px;
+  color:#a7b7c6;
+  font-size:15px;
+  line-height:1.9;
+  margin-bottom:18px
 }
 
-.clinical-box p:last-child{
-    margin-bottom:0;
-}
-
-/* =========================
-   INSIGHT
-========================= */
-
-.insight{
-    margin-top:30px;
-
-    padding:25px;
-
-    background:#091522;
-
-    border-left:3px solid #ffb6c9;
-
-    border-radius:10px;
-
-    color:#aebdce;
-}
-
-.insight strong{
-    color:#ffd5df;
-}
-
-/* =========================
-   QUICK FACTS
-========================= */
+.clinical-box p:last-child{margin-bottom:0}
 
 .facts-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:15px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px
 }
 
 .fact{
-    padding:22px;
-
-    background:#091522;
-
-    border:1px solid #172b3e;
-
-    border-radius:16px;
+  padding:22px;
+  background:#091522;
+  border:1px solid #172b3e;
+  border-radius:16px
 }
 
 .fact span{
-    display:block;
-
-    color:#ffb6c9;
-
-    font-size:11px;
-
-    letter-spacing:2px;
-
-    margin-bottom:12px;
+  display:block;
+  color:#ff4055;
+  font-size:11px;
+  letter-spacing:2px;
+  margin-bottom:12px
 }
 
 .fact strong{
-    display:block;
-
-    color:#eef4fa;
-
-    font-size:14px;
-
-    margin-bottom:8px;
-
-    line-height:1.5;
+  display:block;
+  color:#eef4fa;
+  font-size:14px;
+  margin-bottom:8px;
+  line-height:1.5
 }
 
 .fact p{
-    color:#8195a8;
-
-    font-size:13px;
-
-    line-height:1.7;
+  color:#8195a8;
+  font-size:13px;
+  line-height:1.7
 }
 
-/* =========================
-   QUIZ
-========================= */
-
 .quiz{
-    margin-top:65px;
-
-    padding:30px;
-
-    background:#091522;
-
-    border:1px solid #172b3e;
-
-    border-radius:18px;
+  margin-top:65px;
+  padding:30px;
+  background:#091522;
+  border:1px solid #172b3e;
+  border-radius:18px
 }
 
 .quiz h2{
-    font-size:27px;
-    margin-bottom:25px;
+  font-size:28px;
+  margin-bottom:10px
 }
 
-.quiz-question{
-    color:#eef4fa;
-    font-size:17px;
-    margin-bottom:15px;
+.quiz-intro{
+  color:#91a5b8;
+  margin-bottom:25px
 }
 
-.question-block{
-    padding:22px;
-    margin-top:20px;
-
-    background:#07111d;
-
-    border:1px solid #172b3e;
-
-    border-radius:14px;
+.question{
+  margin-bottom:30px
 }
 
-.question-number{
-    color:#ffb6c9;
-    font-size:11px;
-    letter-spacing:2px;
-    text-transform:uppercase;
-    margin-bottom:8px;
+.question:last-child{margin-bottom:0}
+
+.question p{
+  color:#eef4fa;
+  font-size:16px;
+  margin-bottom:12px;
+  font-weight:bold
 }
 
 .option{
-    display:block;
-
-    width:100%;
-
-    padding:13px;
-
-    margin-top:10px;
-
-    background:#10233a;
-
-    color:white;
-
-    border:1px solid #263951;
-
-    border-radius:8px;
-
-    text-align:left;
-
-    cursor:pointer;
-
-    font-size:15px;
-
-    transition:.2s;
+  display:block;
+  width:100%;
+  padding:12px 15px;
+  margin-top:9px;
+  background:#0b1928;
+  color:#c7d5e2;
+  border:1px solid #263951;
+  border-radius:9px;
+  text-align:left;
+  cursor:pointer;
+  font-size:14px;
+  transition:.2s
 }
 
 .option:hover{
-    border-color:#ffb6c9;
-    background:#162d43;
+  border-color:#ff4055;
+  background:#111e2c
 }
 
 .option.correct{
-    border-color:#7ee2a8;
-    background:#123526;
-    color:#aaffc9;
+  border-color:#8fd3a8;
+  background:#14291e;
+  color:#b9f0c9
 }
 
 .option.wrong{
-    border-color:#ff7189;
-    background:#3a1820;
-    color:#ffb6c0;
+  border-color:#d88b9b;
+  background:#2a171d;
+  color:#ffc2cc
 }
 
-.option.disabled{
-    cursor:default;
+.quiz-result{
+  margin-top:25px;
+  padding:15px;
+  border-radius:10px;
+  background:#0b1928;
+  border:1px solid #263951;
+  color:#aebdce;
+  display:none
 }
-
-.question-feedback{
-    margin-top:13px;
-    font-size:14px;
-    min-height:22px;
-}
-
-.feedback-correct{
-    color:#8ff0b0;
-}
-
-.feedback-wrong{
-    color:#ff9eac;
-}
-
-#finalScore{
-    display:none;
-
-    margin-top:30px;
-    padding:22px;
-
-    border-radius:14px;
-
-    background:#101d2b;
-
-    border:1px solid #ffb6c9;
-
-    text-align:center;
-}
-
-#finalScore.show{
-    display:block;
-}
-
-.score-title{
-    color:#ffb6c9;
-    font-size:12px;
-    letter-spacing:2px;
-    text-transform:uppercase;
-    margin-bottom:8px;
-}
-
-.score-number{
-    font-size:34px;
-    font-weight:bold;
-    margin-bottom:8px;
-}
-
-.score-message{
-    color:#aebdce;
-    font-size:14px;
-}
-
-/* =========================
-   BACK
-========================= */
-
-.back{
-    display:inline-block;
-
-    margin-top:40px;
-
-    padding:12px 18px;
-
-    border:1px solid #263951;
-
-    border-radius:9px;
-
-    color:white;
-
-    text-decoration:none;
-}
-
-.back:hover{
-    border-color:#ffb6c9;
-}
-
-/* =========================
-   MOBILE
-========================= */
 
 @media(max-width:900px){
-
-    .cards{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .facts-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
+  .cards{grid-template-columns:repeat(2,1fr)}
+  .facts-grid{grid-template-columns:repeat(2,1fr)}
+  .anatomy-viewer{height:530px}
 }
 
 @media(max-width:800px){
-
-    .scene{
-        height:450px;
-    }
-
-    .viewer-status{
-        display:none;
-    }
-
+  .scene{height:450px}
+  .viewer-status{display:none}
+  .location{padding:25px}
+  .anatomy-viewer{height:500px}
 }
 
 @media(max-width:600px){
-
-    .cards{
-        grid-template-columns:1fr;
-    }
-
-    .facts-grid{
-        grid-template-columns:1fr;
-    }
-
-    h1{
-        letter-spacing:-2px;
-    }
-
-    .location{
-        padding:20px;
-    }
-
+  .cards{grid-template-columns:1fr}
+  .facts-grid{grid-template-columns:1fr}
+  h1{letter-spacing:-2px}
+  .location{padding:20px}
+  .anatomy-viewer{height:390px}
+  .anatomy-title{font-size:9px}
+  .brain-label{font-size:9px}
+  .pons-svg-label{font-size:9px}
+  .pons-sub{font-size:7px}
+  .cortex-legend{display:none}
 }
-
 </style>
-
 </head>
-
 
 <body>
 
-
-<!-- =========================
-     NAVIGATION
-========================= -->
-
 <nav>
-
-<a href="./explore.html">
-← Back to Explore Anatomy
-</a>
-
+<a href="./explore.html">← Back to Explore</a>
 </nav>
 
-
 <main class="container">
-
-
-<!-- =========================
-     HERO
-========================= -->
 
 <div class="eyebrow">
 Brainstem · NeuroAtlas
 </div>
 
-
 <h1>
 Pons
 </h1>
-
 
 <div class="arabic-title">
 الجسر
 </div>
 
-
 <div class="hero">
-
 <p>
-
-The pons is the middle portion of the brainstem. It acts as an
-important communication bridge between the cerebrum, cerebellum,
-and spinal cord. It contributes to movement, sensation, breathing,
-sleep, facial movement, and several important cranial nerve functions.
-
+The pons is the rounded middle portion of the brainstem. It lies between
+the midbrain and medulla and contains important pathways and nuclei
+involved in communication between the brain and cerebellum, sleep,
+breathing, sensation and movement.
 </p>
-
 </div>
-
-
-<!-- =========================
-     ACTIONS
-========================= -->
 
 <div class="actions">
 
-<a
-class="action-button"
-href="#location"
->
+<a class="action-button" href="#location">
 📍 Show Location
 </a>
 
-
-<a
-class="action-button"
-href="#anatomy"
->
-🧠 Pons Anatomy
+<a class="action-button" href="#information">
+🧠 Learn About the Pons
 </a>
 
-
-<a
-class="action-button"
-href="#quiz"
->
-🧪 Test Yourself
+<a class="action-button" href="#quiz">
+📝 Test Yourself
 </a>
 
 </div>
 
-
-<!-- =========================
-     3D VIEWER
-========================= -->
-
 <div class="viewer">
-
 
 <div class="viewer-header">
 
@@ -909,2074 +731,1557 @@ href="#quiz"
 Human Brain · Interactive 3D
 </div>
 
-
 <div class="viewer-status">
 DRAG TO ROTATE · SCROLL TO ZOOM
 </div>
 
 </div>
 
-
 <div class="scene">
 
-
-<div
-id="loading"
-class="loading"
->
+<div id="loading" class="loading">
 
 <span id="loadText">
 Loading real brain model...
 </span>
 
-
 <div class="loading-bar">
-
-<div
-id="loadBar"
-class="loading-bar-inner"
-></div>
-
+<div id="loadBar" class="loading-bar-inner"></div>
 </div>
 
 </div>
-
 
 <canvas id="brainCanvas"></canvas>
 
-
-<div
-id="ponsLabel"
-class="pons-label"
->
-
+<div id="locationLabel" class="location-label">
 <div class="label-box">
 PONS · الجسر
 </div>
-
 </div>
 
-
 </div>
-
 
 <div class="controls">
 
-
-<button
-id="highlight"
-class="active"
->
-⚫ Highlight Pons
+<button id="showLocation">
+📍 Show Pons
 </button>
 
+<button id="highlight" class="active">
+🔴 Highlight Pons
+</button>
 
-<button
-id="rotate"
-class="active"
->
+<button id="rotate" class="active">
 ⟳ Auto Rotate
 </button>
-
 
 <button id="reset">
 ↻ Reset View
 </button>
 
+</div>
 
 </div>
 
+<section id="location" class="location">
 
+<div class="section-label">
+Location · الموقع
 </div>
 
+<h2>
+📍 Where Is the Pons?
+</h2>
 
-<!-- ==================================================
-     ANATOMY
-================================================== -->
+<p class="location-intro">
 
-<section
-id="anatomy"
-class="section"
+The pons is the middle portion of the brainstem. It lies below the
+midbrain and above the medulla oblongata. Posteriorly, it is closely
+related to the cerebellum and forms part of the pathway connecting
+the cerebrum, cerebellum and spinal cord.
+
+<br><br>
+
+الجسر هو الجزء الأوسط من جذع الدماغ. يقع أسفل الدماغ الأوسط وفوق
+النخاع المستطيل. ويرتبط من الخلف بالمخيخ، ويشكل جزءاً من المسارات
+التي تصل بين المخ والمخيخ والحبل الشوكي.
+
+</p>
+
+<div class="anatomy-viewer">
+
+<div class="anatomy-title">
+Mid-Sagittal View · Pons
+</div>
+
+<svg
+class="brain-svg"
+viewBox="0 0 1000 610"
+xmlns="http://www.w3.org/2000/svg"
+aria-label="Simplified anatomical illustration highlighting the pons"
 >
 
+<defs>
+
+<linearGradient id="brainGradient" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#d2bec3"/>
+<stop offset="48%" stop-color="#ad979e"/>
+<stop offset="100%" stop-color="#806d75"/>
+</linearGradient>
+
+<linearGradient id="ponsGradient" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#ff8b99"/>
+<stop offset="45%" stop-color="#ff4055"/>
+<stop offset="100%" stop-color="#bd1935"/>
+</linearGradient>
+
+<linearGradient id="cerebellumGradient" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#c7b0b6"/>
+<stop offset="100%" stop-color="#806c74"/>
+</linearGradient>
+
+<filter id="brainShadow" x="-30%" y="-30%" width="160%" height="160%">
+<feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#000" flood-opacity=".65"/>
+</filter>
+
+<filter id="cortexGlow" x="-30%" y="-30%" width="160%" height="160%">
+<feGaussianBlur stdDeviation="3" result="blur"/>
+<feMerge>
+<feMergeNode in="blur"/>
+<feMergeNode in="SourceGraphic"/>
+</feMerge>
+</filter>
+
+</defs>
+
+<!-- Cerebral hemisphere -->
+
+<path
+class="brain-outline"
+d="
+M165 242
+C139 205 151 156 190 126
+C238 88 299 70 360 77
+C423 46 499 48 559 77
+C621 69 680 84 719 116
+C754 145 772 190 758 231
+C749 259 728 280 703 298
+C680 314 660 329 650 350
+C639 373 620 386 595 385
+C564 384 545 363 523 343
+C494 318 457 307 420 309
+C380 312 349 329 312 331
+C270 334 229 321 199 296
+C181 281 168 263 165 242
+Z
+"
+filter="url(#brainShadow)"
+/>
+
+<!-- Cerebral folds -->
+
+<path class="cortex-line" d="M187 184 C240 151 291 157 330 184 C367 210 405 212 442 190 C478 168 518 172 548 198"/>
+<path class="cortex-line" d="M172 228 C222 203 269 207 309 233 C345 257 383 258 420 240 C456 222 491 226 522 251"/>
+<path class="cortex-line" d="M193 270 C237 249 276 254 311 278 C345 301 381 304 417 290 C452 276 484 282 512 301"/>
+<path class="cortex-line-light" d="M227 135 C269 111 316 113 352 133"/>
+<path class="cortex-line-light" d="M403 105 C448 91 494 99 530 119"/>
+<path class="cortex-line-light" d="M554 126 C605 113 650 128 683 156"/>
+
+<!-- Thalamus -->
+
+<ellipse
+class="thalamus"
+cx="500"
+cy="294"
+rx="55"
+ry="42"
+/>
+
+<!-- Hypothalamus -->
+
+<path
+class="hypothalamus"
+d="
+M457 329
+C472 315 497 313 520 323
+C535 330 544 344 538 357
+C530 373 505 379 483 371
+C464 364 451 345 457 329
+Z
+"
+/>
+
+<!-- Midbrain -->
+
+<path
+class="midbrain-region"
+d="
+M472 356
+C456 346 449 331 453 315
+C457 298 468 283 482 270
+C492 260 498 248 499 234
+C500 221 494 209 484 198
+C474 190 474 177 483 168
+C492 159 507 159 518 166
+C531 174 537 188 536 202
+C535 217 530 230 534 244
+C538 259 550 272 558 286
+C568 303 568 321 559 337
+C548 356 530 369 509 372
+C495 373 482 368 472 356
+Z
+"/>
+
+<!-- Pons -->
+
+<path
+class="pons-highlight"
+d="
+M478 351
+C457 353 435 363 420 378
+C405 393 399 411 402 428
+C405 446 417 461 434 469
+C452 478 472 480 492 478
+C514 476 534 468 548 455
+C562 442 569 425 566 408
+C563 391 552 376 536 366
+C519 356 499 350 478 351
+Z
+"/>
+
+<!-- Pons surface details -->
+
+<path
+class="brainstem-detail"
+d="
+M414 390
+C444 400 476 403 509 397
+C532 393 550 386 558 379
+"/>
+
+<path
+class="brainstem-detail"
+d="
+M403 409
+C438 420 475 422 509 416
+C535 412 552 404 564 397
+"/>
+
+<path
+class="brainstem-detail"
+d="
+M405 430
+C438 440 473 443 508 438
+C534 434 552 427 562 419
+"/>
+
+<path
+class="brainstem-detail"
+d="
+M417 449
+C449 458 479 459 508 455
+C530 451 546 445 555 437
+"/>
+
+<!-- Medulla -->
+
+<path
+class="medulla-region"
+d="
+M454 467
+C441 478 435 492 438 508
+C441 526 454 540 470 547
+C488 555 511 554 528 545
+C544 536 552 522 550 506
+C548 489 540 476 527 468
+C506 456 474 456 454 467
+Z
+"/>
+
+<!-- Cerebellum -->
+
+<path
+class="cerebellum-body"
+d="
+M598 343
+C568 328 536 331 512 348
+C488 365 475 392 478 419
+C481 448 498 474 525 490
+C555 508 593 511 625 499
+C658 486 684 460 693 431
+C701 405 693 379 675 361
+C654 341 624 334 598 343
+Z
+"/>
+
+<path class="cerebellar-folia" d="M488 379 C530 365 572 369 613 382 C645 392 670 391 690 383"/>
+<path class="cerebellar-folia" d="M481 397 C524 386 568 390 609 402 C644 413 671 411 696 400"/>
+<path class="cerebellar-folia" d="M479 416 C522 406 566 410 606 422 C642 433 671 430 697 419"/>
+<path class="cerebellar-folia" d="M482 435 C522 425 565 429 603 441 C638 452 666 449 692 438"/>
+<path class="cerebellar-folia" d="M490 454 C527 445 565 449 599 460 C631 470 657 468 682 457"/>
+<path class="cerebellar-folia" d="M503 472 C535 465 565 468 593 477 C619 486 642 484 666 474"/>
+
+<!-- Pons callout -->
+
+<path
+class="callout"
+d="
+M505 415
+L705 150
+L835 150
+"/>
+
+<circle
+class="callout-dot"
+cx="505"
+cy="415"
+r="4"
+/>
+
+<text
+class="pons-svg-label"
+x="843"
+y="145"
+>
+PONS
+</text>
+
+<text
+class="pons-sub"
+x="843"
+y="162"
+>
+الجسر
+</text>
+
+<!-- Second callout -->
+
+<path
+class="callout"
+d="
+M527 455
+L730 225
+L835 225
+"/>
+
+<circle
+class="callout-dot"
+cx="527"
+cy="455"
+r="4"
+/>
+
+<text
+class="pons-svg-label"
+x="843"
+y="220"
+>
+BRAINSTEM CONNECTION
+</text>
+
+<text
+class="pons-sub"
+x="843"
+y="237"
+>
+اتصال جذع الدماغ
+</text>
+
+<!-- Labels -->
+
+<text class="brain-label" x="443" y="287">
+THALAMUS
+</text>
+
+<text class="brain-label" x="433" y="349">
+HYPOTHALAMUS
+</text>
+
+<text class="brain-label" x="386" y="425">
+PONS
+</text>
+
+<text class="brain-label" x="390" y="518">
+MEDULLA
+</text>
+
+<text class="brain-label" x="615" y="520">
+CEREBELLUM
+</text>
+
+<text class="brain-label" x="454" y="254">
+MIDBRAIN
+</text>
+
+<text class="orientation-label" x="165" y="565">
+SUPERIOR
+</text>
+
+<text class="orientation-label" x="795" y="565">
+INFERIOR
+</text>
+
+</svg>
+
+<div class="view-badge">
+MID-SAGITTAL VIEW · PONS
+</div>
+
+<div class="cortex-legend">
+
+<div class="legend-item">
+<span class="legend-dot pons"></span>
+Pons
+</div>
+
+</div>
+
+</div>
+
+<p class="location-caption">
+🔴 The highlighted region represents the
+<strong>pons</strong>, the rounded middle portion of the brainstem.
+</p>
+
+<p class="source-note">
+Simplified anatomical illustration showing the position of the pons
+between the midbrain and medulla and its relationship to the cerebellum.
+</p>
+
+</section>
+
+<section id="information" class="section">
 
 <div class="section-label">
 Pons Anatomy · تشريح الجسر
 </div>
 
-
 <h2>
 Pons · الجسر
 </h2>
 
-
 <p class="section-intro">
 
-The pons is the middle portion of the brainstem. It lies between
-the midbrain and medulla and forms an important connection between
-the cerebrum, cerebellum, and spinal cord.
+The pons is a major component of the brainstem. It contains ascending
+and descending pathways and several cranial nerve nuclei. Its pontine
+nuclei relay information from the cerebral cortex to the cerebellum,
+while other pontine structures contribute to breathing, sleep,
+facial sensation and movement, hearing and balance.
 
 <br><br>
 
-الجسر هو الجزء الأوسط من جذع الدماغ. يقع بين الدماغ الأوسط
-والنخاع المستطيل، ويكوّن اتصالًا مهمًا بين المخ والمخيخ
-والحبل الشوكي.
+الجسر هو أحد المكونات الرئيسية لجذع الدماغ. يحتوي على مسارات عصبية
+صاعدة ونازلة وعدة نوى للأعصاب القحفية. وتنقل النوى الجسرية المعلومات
+من القشرة المخية إلى المخيخ، بينما تساهم تراكيب جسرية أخرى في التنفس
+والنوم والإحساس والحركة في الوجه والسمع والتوازن.
 
 </p>
-
 
 <div class="cards">
 
+<div class="card">
+<h3>Location · الموقع</h3>
+<p>
+The pons lies between the midbrain and medulla and forms the middle
+portion of the brainstem.
+<br><br>
+يقع الجسر بين الدماغ الأوسط والنخاع المستطيل ويشكل الجزء الأوسط من جذع الدماغ.
+</p>
+</div>
 
 <div class="card">
-
-<h3>
-Communication Bridge · جسر الاتصال العصبي
-</h3>
-
+<h3>Pontine Nuclei · النوى الجسرية</h3>
 <p>
-
-The pons contains major pathways that relay information between
-the cerebral cortex, cerebellum, and spinal cord.
-
+Pontine nuclei relay information from the cerebral cortex to the
+contralateral cerebellum and are important for coordinating movement.
 <br><br>
-
-يحتوي الجسر على مسارات عصبية رئيسية تنقل المعلومات بين
-القشرة المخية والمخيخ والحبل الشوكي.
-
+تنقل النوى الجسرية المعلومات من القشرة المخية إلى الجانب المقابل من
+المخيخ وتساهم في تنسيق الحركة.
 </p>
-
 </div>
-
 
 <div class="card">
-
-<h3>
-Cerebellar Connections · الاتصالات مع المخيخ
-</h3>
-
+<h3>Cerebellar Connection · الاتصال بالمخيخ</h3>
 <p>
-
-Pontine nuclei receive information from the cerebral cortex
-and send signals to the cerebellum through pontocerebellar fibers.
-
+The middle cerebellar peduncles connect the pons with the cerebellum
+and carry major pontocerebellar fibers.
 <br><br>
-
-تستقبل النوى الجسرية المعلومات من القشرة المخية وترسل
-إشارات إلى المخيخ من خلال الألياف الجسرية المخيخية.
-
+تصل السويقات المخيخية الوسطى الجسر بالمخيخ وتحمل أليافاً جسرية مخيخية مهمة.
 </p>
-
 </div>
-
 
 <div class="card">
-
-<h3>
-Movement · الحركة
-</h3>
-
+<h3>Breathing · التنفس</h3>
 <p>
-
-The pons contributes to motor coordination by helping relay
-signals between the cerebral cortex and cerebellum.
-
+Pontine respiratory networks help regulate the timing and pattern of
+breathing together with respiratory centers in the medulla.
 <br><br>
-
-يساهم الجسر في تنسيق الحركة من خلال نقل الإشارات بين
-القشرة المخية والمخيخ.
-
+تساهم الشبكات التنفسية في الجسر في تنظيم توقيت ونمط التنفس مع مراكز
+التنفس الموجودة في النخاع المستطيل.
 </p>
-
 </div>
-
 
 <div class="card">
-
-<h3>
-Cranial Nerves · الأعصاب القحفية
-</h3>
-
+<h3>Facial Sensation · إحساس الوجه</h3>
 <p>
-
-Important cranial nerve nuclei associated with the pons are
-involved in facial sensation, facial movement, hearing,
-and balance.
-
+The pons contains important trigeminal sensory pathways and nuclei
+involved in sensation from the face.
 <br><br>
-
-ترتبط منطقة الجسر بأنوية أعصاب قحفية مهمة تشارك في الإحساس
-بمنطقة الوجه وحركة عضلات الوجه والسمع والتوازن.
-
+يحتوي الجسر على مسارات ونوى مهمة للعصب ثلاثي التوائم تشارك في الإحساس من الوجه.
 </p>
-
 </div>
-
 
 <div class="card">
-
-<h3>
-Breathing · التنفس
-</h3>
-
+<h3>Facial Movement · حركة الوجه</h3>
 <p>
-
-Pontine networks interact with medullary respiratory circuits
-to help shape and regulate breathing patterns.
-
+The facial motor nucleus is located in the pons and controls muscles
+used for facial expression.
 <br><br>
-
-تتفاعل شبكات الجسر مع دوائر التنفس الموجودة في النخاع
-المستطيل للمساعدة في تنظيم نمط التنفس.
-
+تقع نواة العصب الوجهي في الجسر وتتحكم في العضلات المستخدمة في تعابير الوجه.
 </p>
-
 </div>
-
 
 <div class="card">
-
-<h3>
-Sleep & Arousal · النوم واليقظة
-</h3>
-
+<h3>Abducens Nucleus · نواة العصب المُبعِد</h3>
 <p>
-
-The pons participates in neural networks involved in sleep,
-wakefulness, and transitions between different brain states.
-
+The abducens nucleus is located in the caudal pons and is involved in
+lateral movement of the eye.
 <br><br>
-
-يشارك الجسر في شبكات عصبية مرتبطة بالنوم واليقظة
-والانتقال بين حالات نشاط الدماغ المختلفة.
-
+تقع نواة العصب المُبعِد في الجزء السفلي من الجسر وتشارك في حركة العين
+نحو الجانب.
 </p>
-
 </div>
-
 
 <div class="card">
-
-<h3>
-Facial Sensation · إحساس الوجه
-</h3>
-
+<h3>Sleep & Arousal · النوم واليقظة</h3>
 <p>
-
-The pons contains important components of the trigeminal
-system, which carries sensory information from the face.
-
+Pontine networks contribute to sleep-wake regulation, arousal and
+several stages of normal sleep.
 <br><br>
-
-يحتوي الجسر على أجزاء مهمة من الجهاز المرتبط بالعصب
-الثلاثي التوائم، الذي ينقل المعلومات الحسية من الوجه.
-
+تساهم الشبكات الجسرية في تنظيم النوم واليقظة والاستثارة وبعض مراحل النوم الطبيعية.
 </p>
-
 </div>
-
 
 <div class="card">
-
-<h3>
-Facial Movement · حركة الوجه
-</h3>
-
+<h3>Hearing & Balance · السمع والتوازن</h3>
 <p>
-
-The facial nerve nucleus is located in the pons and contributes
-to voluntary movements of facial muscles.
-
+The pons contains pathways and nuclei associated with auditory and
+vestibular information.
 <br><br>
-
-تقع نواة العصب الوجهي في منطقة الجسر وتساهم في التحكم
-في الحركات الإرادية لعضلات الوجه.
-
+يحتوي الجسر على مسارات ونوى مرتبطة بالمعلومات السمعية والدهليزية.
 </p>
-
 </div>
-
 
 <div class="card">
-
-<h3>
-Hearing & Balance · السمع والتوازن
-</h3>
-
+<h3>Ascending Pathways · المسارات الصاعدة</h3>
 <p>
-
-The pontine region is associated with pathways and nuclei
-involved in auditory and vestibular information.
-
+The pons contains pathways carrying sensory and other information
+toward higher regions of the nervous system.
 <br><br>
-
-ترتبط منطقة الجسر بمسارات وأنوية تشارك في معالجة المعلومات
-السمعية ومعلومات التوازن.
-
+يحتوي الجسر على مسارات تنقل المعلومات الحسية وغيرها نحو المناطق العليا
+من الجهاز العصبي.
 </p>
-
 </div>
-
 
 <div class="card">
-
-<h3>
-Ascending Pathways · المسارات الصاعدة
-</h3>
-
+<h3>Descending Pathways · المسارات النازلة</h3>
 <p>
-
-Several ascending pathways pass through the pons and carry
-sensory information toward higher regions of the brain.
-
+Motor-related pathways pass through the pons on their way from higher
+brain regions toward lower brainstem and spinal structures.
 <br><br>
-
-تمر عدة مسارات حسية صاعدة عبر الجسر وتنقل المعلومات
-الحسية نحو المناطق الأعلى في الدماغ.
-
+تمر المسارات المرتبطة بالحركة عبر الجسر في طريقها من مناطق الدماغ العليا
+نحو تراكيب جذع الدماغ والحبل الشوكي.
 </p>
-
 </div>
-
 
 <div class="card">
-
-<h3>
-Descending Pathways · المسارات النازلة
-</h3>
-
+<h3>Fourth Ventricle · البطين الرابع</h3>
 <p>
-
-Motor pathways traveling from the cerebral cortex toward
-the brainstem and spinal cord pass through the pontine region.
-
+The dorsal surface of the pons contributes to the floor of the fourth
+ventricle.
 <br><br>
-
-تمر المسارات الحركية القادمة من القشرة المخية والمتجهة
-نحو جذع الدماغ والحبل الشوكي عبر منطقة الجسر.
-
+يساهم السطح الظهري للجسر في تكوين أرضية البطين الرابع.
 </p>
-
 </div>
 
-
-<div class="card">
-
-<h3>
-Brainstem Position · موقعه في جذع الدماغ
-</h3>
-
-<p>
-
-The pons occupies the middle position of the brainstem,
-between the midbrain superiorly and medulla inferiorly.
-
-<br><br>
-
-يشغل الجسر الموضع الأوسط من جذع الدماغ، بين الدماغ الأوسط
-من الأعلى والنخاع المستطيل من الأسفل.
-
-</p>
-
 </div>
-
-
-</div>
-
-</section>
-
-
-<!-- ==================================================
-     LOCATION
-================================================== -->
-
-<section
-id="location"
-class="location"
->
-
-
-<h2>
-📍 Where is the Pons? · أين يقع الجسر؟
-</h2>
-
-
-<p class="location-intro">
-
-The pons is located in the middle of the brainstem.
-It lies <strong>below the midbrain</strong> and
-<strong>above the medulla</strong>. The cerebellum is positioned
-posterior to the pons.
-
-<br><br>
-
-يقع الجسر في منتصف جذع الدماغ، أسفل
-<strong>الدماغ الأوسط</strong> وفوق
-<strong>النخاع المستطيل</strong>، بينما يقع المخيخ خلفه.
-
-</p>
-
-
-<div class="brain-visual">
-
-
-<svg
-class="brain-svg"
-viewBox="0 0 800 560"
-xmlns="http://www.w3.org/2000/svg"
-aria-label="Simplified brainstem location diagram"
->
-
-
-<!-- CEREBRUM -->
-
-<path
-class="brain"
-d="M150 100
-C200 45 300 30 400 50
-C510 70 575 150 570 235
-C568 300 525 330 470 330
-C410 330 375 285 315 275
-C255 265 190 300 150 255
-C115 215 115 145 150 100Z"
-/>
-
-
-<!-- CEREBELLUM -->
-
-<path
-class="cerebellum"
-d="M465 315
-C530 285 600 315 620 370
-C640 425 605 475 545 475
-C485 475 450 430 450 380
-C450 350 455 330 465 315Z"
-/>
-
-
-<!-- MIDBRAIN -->
-
-<ellipse
-class="midbrain"
-cx="380"
-cy="300"
-rx="27"
-ry="21"
-/>
-
-
-<!-- PONS HIGHLIGHTED -->
-
-<ellipse
-class="pons"
-cx="380"
-cy="345"
-rx="42"
-ry="30"
-/>
-
-
-<!-- MEDULLA NOT HIGHLIGHTED -->
-
-<path
-class="medulla"
-d="M365 365
-C370 400 375 440 365 485
-L400 485
-C405 440 405 400 395 360Z"
-/>
-
-
-<!-- PONS LABEL -->
-
-<line
-class="line"
-x1="422"
-y1="345"
-x2="570"
-y2="300"
-/>
-
-
-<text
-class="svg-label"
-x="585"
-y="306"
->
-PONS
-</text>
-
-
-<!-- MIDBRAIN LABEL -->
-
-<line
-class="line"
-x1="405"
-y1="300"
-x2="570"
-y2="230"
-/>
-
-
-<text
-class="svg-label"
-x="585"
-y="236"
->
-MIDBRAIN
-</text>
-
-
-<!-- MEDULLA LABEL -->
-
-<line
-class="line"
-x1="390"
-y1="450"
-x2="570"
-y2="440"
-/>
-
-
-<text
-class="svg-label"
-x="585"
-y="446"
->
-MEDULLA
-</text>
-
-
-</svg>
-
-
-<p class="location-caption">
-
-🌸 The highlighted pink region represents the approximate
-location of the pons.
-
-</p>
-
-
-</div>
-
-</section>
-
-
-<!-- ==================================================
-     CLINICAL
-================================================== -->
 
 <div class="clinical-section">
-
 
 <div class="section-label">
 Clinical Importance · الأهمية السريرية
 </div>
 
-
 <h2>
 Why the Pons Matters
 </h2>
 
-
 <div class="clinical-box">
 
-
 <p>
-
-Because the pons contains important neural pathways and cranial
-nerve structures, damage to this region can affect movement,
-facial function, sensation, coordination, breathing, balance,
-and consciousness.
-
+Because the pons contains important motor, sensory, cranial nerve and
+brainstem pathways, damage to this region can affect functions such as
+eye movement, facial movement or sensation, coordination, hearing,
+balance, breathing and consciousness. The effects depend on which
+structures and pathways are involved.
 </p>
-
 
 <p dir="rtl">
-
-لأن الجسر يحتوي على مسارات عصبية مهمة وأنوية مرتبطة بالأعصاب
-القحفية، فإن حدوث ضرر في هذه المنطقة قد يؤثر على الحركة،
-وظائف الوجه، الإحساس، التناسق الحركي، التنفس، التوازن، والوعي.
-
+نظراً لاحتواء الجسر على مسارات حركية وحسية ومسارات للأعصاب القحفية
+وتراكيب مهمة في جذع الدماغ، فإن إصابة هذه المنطقة قد تؤثر في وظائف
+مثل حركة العين وحركة الوجه أو الإحساس به والتنسيق والسمع والتوازن
+والتنفس والوعي. وتعتمد الأعراض على التراكيب والمسارات المتأثرة.
 </p>
 
-
 </div>
 
 </div>
-
-
-<!-- ==================================================
-     INSIGHT
-================================================== -->
-
-<div class="insight">
-
-<strong>
-NeuroAtlas Insight
-</strong>
-
-<br><br>
-
-Think of the pons as a communication bridge within the brainstem.
-It helps relay information between the cerebral cortex, cerebellum,
-and spinal cord while also participating in breathing, sleep,
-facial functions, and sensory processing.
-
-<br><br>
-
-فكر في الجسر باعتباره حلقة اتصال داخل جذع الدماغ؛ فهو يساعد
-على نقل المعلومات بين القشرة المخية والمخيخ والحبل الشوكي،
-كما يشارك في التنفس والنوم ووظائف الوجه ومعالجة بعض المعلومات الحسية.
-
-</div>
-
-
-<!-- ==================================================
-     QUICK FACTS
-================================================== -->
 
 <div class="section">
-
 
 <div class="section-label">
 Quick Facts · معلومات سريعة
 </div>
 
-
 <h2>
 Pons at a Glance
 </h2>
 
-
 <div class="facts-grid">
 
+<div class="fact">
+<span>01</span>
+<strong>Location · الموقع</strong>
+<p>
+Middle brainstem · الجزء الأوسط من جذع الدماغ
+</p>
+</div>
 
 <div class="fact">
-
-<span>
-01
-</span>
-
-<strong>
-Location · الموقع
-</strong>
-
+<span>02</span>
+<strong>Scientific Name · الاسم العلمي</strong>
 <p>
-Middle portion of the brainstem ·
-الجزء الأوسط من جذع الدماغ
+Pons · الجسر
 </p>
-
 </div>
-
 
 <div class="fact">
-
-<span>
-02
-</span>
-
-<strong>
-Above · أعلى منه
-</strong>
-
+<span>03</span>
+<strong>Major Connection · الاتصال الرئيسي</strong>
 <p>
-Midbrain · الدماغ الأوسط
+Cerebral cortex ↔ cerebellum
 </p>
-
 </div>
-
 
 <div class="fact">
-
-<span>
-03
-</span>
-
-<strong>
-Below · أسفل منه
-</strong>
-
+<span>04</span>
+<strong>Main Roles · الأدوار الرئيسية</strong>
 <p>
-Medulla · النخاع المستطيل
+Relay pathways, breathing, sleep, facial function and sensory processing
 </p>
-
 </div>
-
-
-<div class="fact">
-
-<span>
-04
-</span>
-
-<strong>
-Major Role · الوظيفة الأساسية
-</strong>
-
-<p>
-Communication and coordination ·
-الاتصال والتنسيق العصبي
-</p>
-
-</div>
-
 
 </div>
 
 </div>
 
+<div id="quiz" class="quiz">
 
-<!-- ==================================================
-     MINI TEST — 3 QUESTIONS
-================================================== -->
-
-<div
-id="quiz"
-class="quiz"
->
+<div class="section-label">
+Mini Test
+</div>
 
 <h2>
-🧠 Mini Test · اختبار قصير
+🧠 Test Yourself
 </h2>
 
-
-<!-- QUESTION 1 -->
-
-<div class="question-block">
-
-<div class="question-number">
-Question 01 · السؤال الأول
-</div>
-
-<p class="quiz-question">
-Which structure is located between the midbrain and the medulla?
-<br>
-أي تركيب يقع بين الدماغ الأوسط والنخاع المستطيل؟
+<p class="quiz-intro">
+Choose the best answer for each question.
 </p>
 
+<div class="question">
 
-<button
-class="option"
-onclick="checkAnswer(1, this, true)"
->
-A. Pons · الجسر
-</button>
-
-
-<button
-class="option"
-onclick="checkAnswer(1, this, false)"
->
-B. Hippocampus · الحُصين
-</button>
-
-
-<button
-class="option"
-onclick="checkAnswer(1, this, false)"
->
-C. Thalamus · المهاد
-</button>
-
-
-<button
-class="option"
-onclick="checkAnswer(1, this, false)"
->
-D. Occipital Lobe · الفص القذالي
-</button>
-
-
-<div
-id="feedback1"
-class="question-feedback"
-></div>
-
-</div>
-
-
-<!-- QUESTION 2 -->
-
-<div class="question-block">
-
-<div class="question-number">
-Question 02 · السؤال الثاني
-</div>
-
-<p class="quiz-question">
-Which structure sends information to the cerebellum through pontocerebellar fibers?
-<br>
-أي تركيب يرسل المعلومات إلى المخيخ من خلال الألياف الجسرية المخيخية؟
+<p>
+1. Where is the pons located?
 </p>
 
-
-<button
-class="option"
-onclick="checkAnswer(2, this, true)"
->
-A. Pontine nuclei · النوى الجسرية
+<button class="option" onclick="checkAnswer(this,true)">
+A. Between the midbrain and medulla
 </button>
 
-
-<button
-class="option"
-onclick="checkAnswer(2, this, false)"
->
-B. Hippocampal formation · تكوين الحُصين
+<button class="option" onclick="checkAnswer(this,false)">
+B. Inside the occipital lobe
 </button>
 
-
-<button
-class="option"
-onclick="checkAnswer(2, this, false)"
->
-C. Amygdala · اللوزة الدماغية
+<button class="option" onclick="checkAnswer(this,false)">
+C. Inside the hippocampus
 </button>
 
-
-<button
-class="option"
-onclick="checkAnswer(2, this, false)"
->
-D. Occipital cortex · القشرة القذالية
+<button class="option" onclick="checkAnswer(this,false)">
+D. Inside the spinal cord only
 </button>
-
-
-<div
-id="feedback2"
-class="question-feedback"
-></div>
 
 </div>
 
+<div class="question">
 
-<!-- QUESTION 3 -->
-
-<div class="question-block">
-
-<div class="question-number">
-Question 03 · السؤال الثالث
-</div>
-
-<p class="quiz-question">
-Which function is strongly associated with the pons?
-<br>
-أي وظيفة ترتبط بشكل مهم بالجسر؟
+<p>
+2. Which structure connects the pons strongly with the cerebellum?
 </p>
 
-
-<button
-class="option"
-onclick="checkAnswer(3, this, false)"
->
-A. Long-term memory storage · تخزين الذاكرة طويلة المدى
+<button class="option" onclick="checkAnswer(this,true)">
+A. Middle cerebellar peduncle
 </button>
 
-
-<button
-class="option"
-onclick="checkAnswer(3, this, true)"
->
-B. Relaying information and helping regulate breathing · نقل المعلومات والمساعدة في تنظيم التنفس
+<button class="option" onclick="checkAnswer(this,false)">
+B. Corpus callosum
 </button>
 
-
-<button
-class="option"
-onclick="checkAnswer(3, this, false)"
->
-C. Vision processing in the retina · معالجة الرؤية في الشبكية
+<button class="option" onclick="checkAnswer(this,false)">
+C. Optic nerve
 </button>
 
-
-<button
-class="option"
-onclick="checkAnswer(3, this, false)"
->
-D. Producing cerebrospinal fluid · إنتاج السائل الدماغي الشوكي
+<button class="option" onclick="checkAnswer(this,false)">
+D. Hippocampal commissure
 </button>
 
+</div>
 
-<div
-id="feedback3"
-class="question-feedback"
-></div>
+<div class="question">
+
+<p>
+3. Which cranial nerve nucleus in the pons controls lateral eye movement?
+</p>
+
+<button class="option" onclick="checkAnswer(this,true)">
+A. Abducens nucleus
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+B. Olfactory nucleus
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+C. Spinal accessory nucleus
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+D. Hypoglossal nucleus
+</button>
 
 </div>
 
-
-<!-- FINAL SCORE -->
-
-<div id="finalScore">
-
-<div class="score-title">
-Final Result · النتيجة النهائية
-</div>
-
-<div
-id="scoreNumber"
-class="score-number"
->
-0 / 3
-</div>
-
-<div
-id="scoreMessage"
-class="score-message"
->
-Answer all three questions to see your result.
-</div>
+<div id="quizResult" class="quiz-result"></div>
 
 </div>
 
-
-</div>
-
-
-<a
-class="back"
-href="explore.html"
->
-← Back to Explore Anatomy
-</a>
-
+</section>
 
 </main>
 
-
-<!-- ==================================================
-     THREE.JS
-================================================== -->
-
 <script type="importmap">
-
 {
-    "imports": {
-
-        "three":
-        "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
-
-        "three/addons/":
-        "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
-
-    }
+  "imports":{
+    "three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
 }
-
 </script>
-
 
 <script type="module">
 
 import * as THREE from "three";
+import {OrbitControls} from "three/addons/controls/OrbitControls.js";
+import {GLTFLoader} from "three/addons/loaders/GLTFLoader.js";
+import {DRACOLoader} from "three/addons/loaders/DRACOLoader.js";
 
-import {
-    OrbitControls
-} from "three/addons/controls/OrbitControls.js";
+const canvas=document.getElementById("brainCanvas");
+const loading=document.getElementById("loading");
+const loadText=document.getElementById("loadText");
+const loadBar=document.getElementById("loadBar");
+const locationLabel=document.getElementById("locationLabel");
 
-import {
-    GLTFLoader
-} from "three/addons/loaders/GLTFLoader.js";
+const scene=new THREE.Scene();
 
-import {
-    DRACOLoader
-} from "three/addons/loaders/DRACOLoader.js";
-
-
-/* =========================================
-   ELEMENTS
-========================================= */
-
-const canvas =
-document.getElementById("brainCanvas");
-
-const loading =
-document.getElementById("loading");
-
-const loadText =
-document.getElementById("loadText");
-
-const loadBar =
-document.getElementById("loadBar");
-
-const ponsLabel =
-document.getElementById("ponsLabel");
-
-
-/* =========================================
-   SCENE
-========================================= */
-
-const scene =
-new THREE.Scene();
-
-
-/* =========================================
-   CAMERA
-========================================= */
-
-const camera =
-new THREE.PerspectiveCamera(
-    30,
-    1,
-    0.01,
-    100
+const camera=new THREE.PerspectiveCamera(
+  30,
+  1,
+  .01,
+  100
 );
 
-camera.position.set(
-    3.2,
-    0.3,
-    8.5
-);
+camera.position.set(3.2,.3,8.5);
 
-
-/* =========================================
-   RENDERER
-========================================= */
-
-const renderer =
-new THREE.WebGLRenderer({
-
-    canvas:canvas,
-
-    antialias:true,
-
-    alpha:true
-
+const renderer=new THREE.WebGLRenderer({
+  canvas,
+  antialias:true,
+  alpha:true
 });
 
 renderer.setPixelRatio(
-    Math.min(
-        window.devicePixelRatio || 1,
-        2
-    )
+  Math.min(window.devicePixelRatio||1,2)
 );
 
-renderer.toneMapping =
-THREE.ACESFilmicToneMapping;
+renderer.toneMapping=THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure=.75;
 
-renderer.toneMappingExposure =
-0.75;
-
-
-/* =========================================
-   CONTROLS
-========================================= */
-
-const controls =
-new OrbitControls(
-    camera,
-    canvas
+const controls=new OrbitControls(
+  camera,
+  canvas
 );
 
-controls.enableRotate = true;
+controls.enableRotate=true;
+controls.rotateSpeed=.6;
+controls.enableDamping=true;
+controls.dampingFactor=.05;
+controls.enableZoom=true;
+controls.zoomSpeed=.6;
+controls.enablePan=false;
+controls.autoRotate=true;
+controls.autoRotateSpeed=.2;
+controls.target.set(0,-.3,0);
+controls.minDistance=3.5;
+controls.maxDistance=16;
 
-controls.rotateSpeed = 0.6;
-
-controls.enableDamping = true;
-
-controls.dampingFactor = 0.05;
-
-controls.enableZoom = true;
-
-controls.zoomSpeed = 0.6;
-
-controls.enablePan = false;
-
-controls.autoRotate = true;
-
-controls.autoRotateSpeed = 0.2;
-
-controls.target.set(
-    0,
-    -0.3,
-    0
-);
-
-controls.minDistance = 3.5;
-
-controls.maxDistance = 16;
-
-
-/* =========================================
-   LIGHTING
-========================================= */
-
-const ambient =
-new THREE.AmbientLight(
+scene.add(
+  new THREE.AmbientLight(
     0xffffff,
-    0.55
+    .55
+  )
 );
 
-scene.add(ambient);
-
-
-const hemi =
-new THREE.HemisphereLight(
+scene.add(
+  new THREE.HemisphereLight(
     0xffdce6,
     0x081018,
-    0.75
+    .75
+  )
 );
 
-scene.add(hemi);
-
-
-const keyLight =
-new THREE.DirectionalLight(
-    0xfff5f0,
-    1.4
+const keyLight=new THREE.DirectionalLight(
+  0xfff5f0,
+  1.4
 );
 
-keyLight.position.set(
-    6,
-    10,
-    8
-);
-
+keyLight.position.set(6,10,8);
 scene.add(keyLight);
 
-
-const fillLight =
-new THREE.DirectionalLight(
-    0x8ca9bd,
-    0.4
+const fillLight=new THREE.DirectionalLight(
+  0x8ca9bd,
+  .4
 );
 
-fillLight.position.set(
-    -7,
-    2,
-    6
-);
-
+fillLight.position.set(-7,2,6);
 scene.add(fillLight);
 
-
-/* =========================================
-   BRAIN GROUP
-========================================= */
-
-const brainGroup =
-new THREE.Group();
-
+const brainGroup=new THREE.Group();
 scene.add(brainGroup);
 
+let targetMeshes=[];
+let brainMeshes=[];
 
-let ponsMesh = null;
+let locationShown=false;
+let highlighted=true;
 
-let ponsHighlightMesh = null;
-
-let ponsOutline = null;
-
-let highlighted = true;
-
-
-/* =========================================
-   BABY PINK BRAIN
-========================================= */
-
-const brainPinkMaterial =
-new THREE.MeshPhysicalMaterial({
-
+const brainOpaqueMaterial=
+  new THREE.MeshPhysicalMaterial({
     color:0xf1c5d0,
-
-    roughness:0.62,
-
+    roughness:.62,
     metalness:0,
+    clearcoat:.12,
+    clearcoatRoughness:.5,
+    side:THREE.DoubleSide,
+    transparent:false,
+    opacity:1
+  });
 
-    clearcoat:0.12,
-
-    clearcoatRoughness:0.5,
-
-    side:THREE.DoubleSide
-
-});
-
-
-/* =========================================
-   BLACK PONS HIGHLIGHT
-========================================= */
-
-const ponsBlackMaterial =
-new THREE.MeshPhysicalMaterial({
-
-    color:0x15151a,
-
-    roughness:0.42,
-
-    metalness:0.02,
-
-    clearcoat:0.25,
-
-    clearcoatRoughness:0.35,
-
-    side:THREE.DoubleSide
-
-});
-
-
-/* =========================================
-   PINK OUTLINE
-========================================= */
-
-const outlineMaterial =
-new THREE.MeshBasicMaterial({
-
-    color:0xffb6c9,
-
+const brainTransparentMaterial=
+  new THREE.MeshPhysicalMaterial({
+    color:0xf1c5d0,
+    roughness:.55,
+    metalness:0,
+    clearcoat:.1,
+    clearcoatRoughness:.5,
+    side:THREE.DoubleSide,
     transparent:true,
+    opacity:.16,
+    depthWrite:false
+  });
 
-    opacity:0.9,
+const ponsMaterial=
+  new THREE.MeshPhysicalMaterial({
+    color:0xff2948,
+    roughness:.3,
+    metalness:0,
+    clearcoat:.6,
+    clearcoatRoughness:.12,
+    emissive:0x5c0613,
+    emissiveIntensity:1.05,
+    side:THREE.DoubleSide,
+    transparent:false,
+    opacity:1
+  });
 
-    side:THREE.BackSide
+const ponsNormalMaterial=
+  new THREE.MeshPhysicalMaterial({
+    color:0xf1c5d0,
+    roughness:.62,
+    metalness:0,
+    clearcoat:.12,
+    clearcoatRoughness:.5,
+    side:THREE.DoubleSide
+  });
 
-});
+function normalizeName(name){
 
-
-/* =========================================
-   FALLBACK PONS MARKER
-========================================= */
-
-function createPonsMarker(){
-
-    const geometry =
-    new THREE.SphereGeometry(
-        0.30,
-        24,
-        18
-    );
-
-
-    ponsHighlightMesh =
-    new THREE.Mesh(
-        geometry,
-        ponsBlackMaterial
-    );
-
-
-    ponsHighlightMesh.position.set(
-        0,
-        -0.55,
-        0.08
-    );
-
-
-    ponsHighlightMesh.scale.set(
-        1.35,
-        0.82,
-        0.85
-    );
-
-
-    brainGroup.add(
-        ponsHighlightMesh
-    );
-
-
-    ponsOutline =
-    new THREE.Mesh(
-        geometry.clone(),
-        outlineMaterial
-    );
-
-
-    ponsOutline.scale.set(
-        1.15,
-        1.15,
-        1.10
-    );
-
-
-    ponsHighlightMesh.add(
-        ponsOutline
-    );
+  return String(name||"")
+    .toLowerCase()
+    .replace(/[\s_\-\.]+/g,"");
 
 }
 
+function getMeshName(mesh){
 
-/* =========================================
-   LOAD REAL BRAIN
-========================================= */
+  const userName=
+    mesh.userData&&mesh.userData.name
+      ?mesh.userData.name
+      :"";
+
+  return `${mesh.name} ${userName}`;
+
+}
+
+function isExplicitPons(mesh){
+
+  const name=normalizeName(
+    getMeshName(mesh)
+  );
+
+  const ponsNames=[
+    "pons",
+    "pontine",
+    "pontinebasis",
+    "pontinetegmentum",
+    "pontinebase",
+    "basilarpons",
+    "ventralpons",
+    "dorsalpons",
+    "ponsregion",
+    "ponsstructure",
+    "pontinenucleus",
+    "pontinenuclei",
+    "middlecerebellarpeduncle",
+    "middlecerebellarpeduncles",
+    "trigeminalnucleus",
+    "trigeminalnuclei",
+    "facialnucleus",
+    "abducensnucleus",
+    "cochlearnucleus",
+    "vestibularnucleus"
+  ];
+
+  return ponsNames.some(
+    item=>name.includes(item)
+  );
+
+}
+
+function isClearlyNotPons(mesh){
+
+  const name=normalizeName(
+    getMeshName(mesh)
+  );
+
+  const excludedNames=[
+    "frontal",
+    "frontallobe",
+    "parietal",
+    "parietallobe",
+    "temporal",
+    "temporallobe",
+    "occipital",
+    "occipitallobe",
+    "cerebell",
+    "midbrain",
+    "mesencephalon",
+    "medulla",
+    "medullaoblongata",
+    "spinalcord",
+    "thalam",
+    "hypothalam",
+    "hippocamp",
+    "amygdala",
+    "corpuscallosum",
+    "ventricle",
+    "fourthventricle",
+    "thirdventricle",
+    "substantianigra",
+    "rednucleus"
+  ];
+
+  return excludedNames.some(
+    item=>name.includes(item)
+  );
+
+}
+
+function calculatePonsCandidates(model){
+
+  const meshes=[];
+
+  model.traverse(child=>{
+
+    if(!child.isMesh)return;
+
+    meshes.push(child);
+
+  });
+
+  if(meshes.length===0){
+    return [];
+  }
+
+  const explicit=meshes.filter(
+    mesh=>
+      isExplicitPons(mesh) &&
+      !isClearlyNotPons(mesh)
+  );
+
+  /*
+   * Do not guess from position alone.
+   * A false anatomical highlight is worse than no highlight.
+   */
+  if(explicit.length>0){
+    return explicit;
+  }
+
+  return [];
+
+}
+
+function prepareMaterials(model){
+
+  brainMeshes=[];
+  targetMeshes=[];
+
+  model.traverse(child=>{
+
+    if(!child.isMesh)return;
+
+    child.castShadow=true;
+    child.receiveShadow=true;
+
+    child.material=
+      brainOpaqueMaterial.clone();
+
+    brainMeshes.push(child);
+
+  });
+
+  targetMeshes=
+    calculatePonsCandidates(model);
+
+  targetMeshes.forEach(mesh=>{
+
+    mesh.material=
+      ponsMaterial.clone();
+
+  });
+
+}
 
 function loadRealBrain(){
 
-    const loader =
-    new GLTFLoader();
+  const loader=new GLTFLoader();
 
+  const dracoLoader=new DRACOLoader();
 
-    const dracoLoader =
-    new DRACOLoader();
+  dracoLoader.setDecoderPath(
+    "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/"
+  );
 
+  loader.setDRACOLoader(dracoLoader);
 
-    dracoLoader.setDecoderPath(
-        "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/"
-    );
+  const urls=[
+    "https://cdn.jsdelivr.net/gh/itayinbarr/brainproject@main/brain-atlas/models/brain.glb",
+    "https://raw.githubusercontent.com/itayinbarr/brainproject/main/brain-atlas/models/brain.glb",
+    "https://itayinbarr.github.io/brainproject/models/brain.glb"
+  ];
 
+  let index=0;
 
-    loader.setDRACOLoader(
-        dracoLoader
-    );
+  function tryLoad(){
 
+    if(index>=urls.length){
 
-    const urls = [
+      loadText.textContent=
+        "Brain model could not be loaded.";
 
-        "https://cdn.jsdelivr.net/gh/itayinbarr/brainproject@main/brain-atlas/models/brain.glb",
+      loadBar.style.width="100%";
 
-        "https://raw.githubusercontent.com/itayinbarr/brainproject/main/brain-atlas/models/brain.glb",
+      setTimeout(()=>{
+        loading.classList.add("hide");
+      },500);
 
-        "https://itayinbarr.github.io/brainproject/models/brain.glb"
+      return;
+    }
 
-    ];
+    const url=urls[index++];
 
+    loader.load(
 
-    let urlIndex = 0;
+      url,
 
+      gltf=>{
 
-    function tryLoad(){
+        const model=gltf.scene;
 
-        if(
-            urlIndex >= urls.length
-        ){
+        const box=
+          new THREE.Box3()
+            .setFromObject(model);
 
-            createPonsMarker();
+        const center=
+          box.getCenter(
+            new THREE.Vector3()
+          );
 
-            onReady();
+        const size=
+          box.getSize(
+            new THREE.Vector3()
+          );
 
-            return;
+        const maxDim=
+          Math.max(
+            size.x,
+            size.y,
+            size.z
+          );
+
+        const scale=4.5/maxDim;
+
+        model.scale.setScalar(scale);
+
+        model.position.sub(
+          center.multiplyScalar(scale)
+        );
+
+        model.position.y-=.6;
+
+        brainGroup.add(model);
+
+        prepareMaterials(model);
+
+        if(targetMeshes.length===0){
+
+          loadText.textContent=
+            "Brain loaded · named pons surface unavailable";
+
+        }else{
+
+          loadText.textContent=
+            "Pons surface located";
+
+          locationLabel.classList.add("show");
 
         }
 
+        loadBar.style.width="100%";
 
-        const url =
-        urls[urlIndex++];
+        setTimeout(()=>{
+          loading.classList.add("hide");
+        },500);
 
+      },
 
-        loadText.textContent =
-        "Loading real brain model...";
+      progress=>{
 
+        if(progress.total>0){
 
-        loader.load(
+          const pct=Math.min(
+            95,
+            progress.loaded/
+            progress.total*
+            95
+          );
 
-            url,
+          loadBar.style.width=
+            pct+"%";
 
+        }
 
-            function(gltf){
+      },
 
-                const model =
-                gltf.scene;
+      error=>{
 
-
-                /* =================================
-                   CENTER + SCALE
-                ================================= */
-
-                const box =
-                new THREE.Box3()
-                .setFromObject(model);
-
-
-                const center =
-                box.getCenter(
-                    new THREE.Vector3()
-                );
-
-
-                const size =
-                box.getSize(
-                    new THREE.Vector3()
-                );
-
-
-                const maxDim =
-                Math.max(
-                    size.x,
-                    size.y,
-                    size.z
-                );
-
-
-                const scale =
-                4.5 / maxDim;
-
-
-                model.scale.setScalar(
-                    scale
-                );
-
-
-                model.position.sub(
-                    center.multiplyScalar(
-                        scale
-                    )
-                );
-
-
-                model.position.y -= 0.60;
-
-
-                /* =================================
-                   PROCESS MODEL
-                ================================= */
-
-                model.traverse(
-                function(child){
-
-                    if(
-                        !child.isMesh
-                    )
-                        return;
-
-
-                    child.castShadow = true;
-
-                    child.receiveShadow = true;
-
-
-                    const name =
-                    (
-                        child.name || ""
-                    ).toLowerCase();
-
-
-                    /* =================================
-                       PONS DETECTION
-                    ================================= */
-
-                    if(
-
-                        name.includes("pons") ||
-
-                        name.includes("pontine") ||
-
-                        name.includes("pontis")
-
-                    ){
-
-                        ponsMesh =
-                        child;
-
-
-                        ponsHighlightMesh =
-                        child.clone();
-
-
-                        ponsHighlightMesh.material =
-                        ponsBlackMaterial.clone();
-
-
-                        ponsHighlightMesh.scale.multiplyScalar(
-                            1.012
-                        );
-
-
-                        child.parent.add(
-                            ponsHighlightMesh
-                        );
-
-
-                        ponsOutline =
-                        child.clone();
-
-
-                        ponsOutline.material =
-                        outlineMaterial.clone();
-
-
-                        ponsOutline.scale.multiplyScalar(
-                            1.055
-                        );
-
-
-                        child.parent.add(
-                            ponsOutline
-                        );
-
-                    }
-
-                    else{
-
-                        if(
-                            child.material
-                        ){
-
-                            child.material =
-                            brainPinkMaterial.clone();
-
-                        }
-
-                    }
-
-                });
-
-
-                brainGroup.add(
-                    model
-                );
-
-
-                if(
-                    !ponsMesh
-                ){
-
-                    createPonsMarker();
-
-                }
-
-
-                loadBar.style.width =
-                "100%";
-
-
-                onReady();
-
-            },
-
-
-            function(progress){
-
-                if(
-                    progress.total > 0
-                ){
-
-                    const pct =
-                    Math.min(
-                        90,
-                        progress.loaded /
-                        progress.total *
-                        90
-                    );
-
-
-                    loadBar.style.width =
-                    pct + "%";
-
-                }
-
-            },
-
-
-            function(error){
-
-                console.warn(
-                    "Model failed:",
-                    error
-                );
-
-
-                tryLoad();
-
-            }
-
+        console.warn(
+          "Brain model loading failed:",
+          error
         );
+
+        tryLoad();
+
+      }
+
+    );
+
+  }
+
+  tryLoad();
+
+}
+
+function setBrainTransparency(enabled){
+
+  brainMeshes.forEach(mesh=>{
+
+    if(targetMeshes.includes(mesh)){
+      return;
+    }
+
+    mesh.material=
+      enabled
+        ?brainTransparentMaterial.clone()
+        :brainOpaqueMaterial.clone();
+
+  });
+
+}
+
+function setTargetHighlight(enabled){
+
+  targetMeshes.forEach(mesh=>{
+
+    mesh.material=
+      enabled
+        ?ponsMaterial.clone()
+        :ponsNormalMaterial.clone();
+
+  });
+
+}
+
+const showLocationBtn=
+  document.getElementById("showLocation");
+
+showLocationBtn.addEventListener(
+  "click",
+  ()=>{
+
+    locationShown=!locationShown;
+
+    if(locationShown){
+
+      setBrainTransparency(true);
+      setTargetHighlight(true);
+
+      highlighted=true;
+
+      locationLabel.classList.add("show");
+
+      showLocationBtn.classList.add("active");
+
+      showLocationBtn.textContent=
+        "📍 Hide Pons";
+
+      controls.autoRotate=false;
+
+      rotateBtn.classList.remove("active");
+
+      rotateBtn.textContent=
+        "▶ Auto Rotate";
+
+    }else{
+
+      setBrainTransparency(false);
+
+      setTargetHighlight(highlighted);
+
+      locationLabel.classList.remove("show");
+
+      showLocationBtn.classList.remove("active");
+
+      showLocationBtn.textContent=
+        "📍 Show Pons";
 
     }
 
+  }
+);
 
-    tryLoad();
+const highlightBtn=
+  document.getElementById("highlight");
 
-}
+highlightBtn.addEventListener(
+  "click",
+  ()=>{
 
+    highlighted=!highlighted;
 
-/* =========================================
-   READY
-========================================= */
+    setTargetHighlight(highlighted);
 
-function onReady(){
+    if(highlighted){
 
-    setTimeout(
-    function(){
+      highlightBtn.classList.add("active");
 
-        loading.classList.add(
-            "hide"
-        );
+      highlightBtn.textContent=
+        "🔴 Highlight Pons";
 
+    }else{
 
-        if(
-            highlighted
-        ){
+      highlightBtn.classList.remove("active");
 
-            ponsLabel.classList.add(
-                "show"
-            );
+      highlightBtn.textContent=
+        "🧠 Highlight Pons";
 
-        }
+    }
 
-    },500);
+    if(locationShown){
+      setBrainTransparency(true);
+    }
 
-}
+  }
+);
 
+const rotateBtn=
+  document.getElementById("rotate");
 
-/* =========================================
-   UPDATE PONS LABEL
-========================================= */
+rotateBtn.addEventListener(
+  "click",
+  ()=>{
+
+    controls.autoRotate=
+      !controls.autoRotate;
+
+    rotateBtn.classList.toggle(
+      "active",
+      controls.autoRotate
+    );
+
+    rotateBtn.textContent=
+      controls.autoRotate
+        ?"⟳ Auto Rotate"
+        :"▶ Auto Rotate";
+
+  }
+);
+
+document
+  .getElementById("reset")
+  .addEventListener(
+    "click",
+    ()=>{
+
+      camera.position.set(
+        3.2,
+        .3,
+        8.5
+      );
+
+      controls.target.set(
+        0,
+        -.3,
+        0
+      );
+
+      controls.update();
+
+      locationShown=false;
+      highlighted=true;
+
+      setBrainTransparency(false);
+      setTargetHighlight(true);
+
+      locationLabel.classList.remove("show");
+
+      showLocationBtn.classList.remove("active");
+
+      showLocationBtn.textContent=
+        "📍 Show Pons";
+
+      highlightBtn.classList.add("active");
+
+      highlightBtn.textContent=
+        "🔴 Highlight Pons";
+
+    }
+  );
 
 function updateLabel(){
 
-    if(
-        !ponsHighlightMesh
-    )
-        return;
+  if(!locationShown)return;
 
+  if(targetMeshes.length===0)return;
 
-    const position =
-    new THREE.Vector3();
+  const box=new THREE.Box3();
 
+  targetMeshes.forEach(mesh=>{
+    box.expandByObject(mesh);
+  });
 
-    ponsHighlightMesh
-    .getWorldPosition(
-        position
+  if(box.isEmpty())return;
+
+  const position=
+    box.getCenter(
+      new THREE.Vector3()
     );
 
+  position.project(camera);
 
-    position.project(
-        camera
-    );
-
-
-    const x =
-    (position.x + 1) /
-    2 *
+  const x=
+    (position.x+1)/2*
     canvas.clientWidth;
 
-
-    const y =
-    (-position.y + 1) /
-    2 *
+  const y=
+    (-position.y+1)/2*
     canvas.clientHeight;
 
+  locationLabel.style.left=
+    x+"px";
 
-    ponsLabel.style.left =
-    x + "px";
-
-
-    ponsLabel.style.top =
-    (y - 45) + "px";
+  locationLabel.style.top=
+    (y-35)+"px";
 
 }
-
-
-/* =========================================
-   RESIZE
-========================================= */
 
 function resize(){
 
-    const width =
-    canvas.clientWidth;
+  const width=canvas.clientWidth;
+  const height=canvas.clientHeight;
 
+  if(width<=0||height<=0){
+    return;
+  }
 
-    const height =
-    canvas.clientHeight;
+  camera.aspect=
+    width/height;
 
+  camera.updateProjectionMatrix();
 
-    if(
-        width <= 0 ||
-        height <= 0
-    )
-        return;
-
-
-    camera.aspect =
-    width / height;
-
-
-    camera.updateProjectionMatrix();
-
-
-    renderer.setSize(
-        width,
-        height,
-        false
-    );
+  renderer.setSize(
+    width,
+    height,
+    false
+  );
 
 }
 
-
 window.addEventListener(
-    "resize",
-    resize
+  "resize",
+  resize
 );
-
-
-/* =========================================
-   HIGHLIGHT BUTTON
-========================================= */
-
-const highlightBtn =
-document.getElementById(
-    "highlight"
-);
-
-
-highlightBtn.addEventListener(
-"click",
-function(){
-
-    highlighted =
-    !highlighted;
-
-
-    if(
-        ponsHighlightMesh
-    ){
-
-        ponsHighlightMesh.visible =
-        highlighted;
-
-    }
-
-
-    if(
-        ponsOutline
-    ){
-
-        ponsOutline.visible =
-        highlighted;
-
-    }
-
-
-    ponsLabel.classList.toggle(
-        "show",
-        highlighted
-    );
-
-
-    highlightBtn.classList.toggle(
-        "active",
-        highlighted
-    );
-
-
-    highlightBtn.textContent =
-
-    highlighted
-
-    ? "⚫ Highlight Pons"
-
-    : "⚪ Show Pons";
-
-});
-
-
-/* =========================================
-   AUTO ROTATE
-========================================= */
-
-const rotateBtn =
-document.getElementById(
-    "rotate"
-);
-
-
-rotateBtn.addEventListener(
-"click",
-function(){
-
-    controls.autoRotate =
-    !controls.autoRotate;
-
-
-    rotateBtn.classList.toggle(
-        "active",
-        controls.autoRotate
-    );
-
-
-    rotateBtn.textContent =
-
-    controls.autoRotate
-
-    ? "⟳ Auto Rotate"
-
-    : "▶ Auto Rotate";
-
-});
-
-
-/* =========================================
-   RESET
-========================================= */
-
-document.getElementById(
-    "reset"
-).addEventListener(
-"click",
-function(){
-
-    camera.position.set(
-        3.2,
-        0.3,
-        8.5
-    );
-
-
-    controls.target.set(
-        0,
-        -0.3,
-        0
-    );
-
-
-    controls.update();
-
-});
-
-
-/* =========================================
-   ANIMATION
-========================================= */
 
 function animate(){
 
-    requestAnimationFrame(
-        animate
-    );
+  requestAnimationFrame(
+    animate
+  );
 
+  controls.update();
+  updateLabel();
 
-    controls.update();
-
-
-    updateLabel();
-
-
-    renderer.render(
-        scene,
-        camera
-    );
+  renderer.render(
+    scene,
+    camera
+  );
 
 }
 
-
-/* =========================================
-   START
-========================================= */
-
 resize();
-
 animate();
-
 loadRealBrain();
 
 </script>
 
-
-<!-- ==================================================
-     QUIZ JAVASCRIPT
-================================================== -->
-
 <script>
 
-let score = 0;
-
-let answered = {
-    1:false,
-    2:false,
-    3:false
-};
-
-
 function checkAnswer(
-    questionNumber,
-    button,
-    correct
+  button,
+  correct
 ){
 
-    /* Prevent answering the same question twice */
+  const parent=
+    button.parentElement;
 
-    if(
-        answered[questionNumber]
-    ){
-        return;
-    }
+  const options=
+    parent.querySelectorAll(".option");
 
+  options.forEach(option=>{
+    option.classList.remove(
+      "correct",
+      "wrong"
+    );
+  });
 
-    answered[questionNumber] = true;
+  if(correct){
 
-
-    /* Disable all options for this question */
-
-    const questionBlock =
-    button.closest(
-        ".question-block"
+    button.classList.add(
+      "correct"
     );
 
+  }else{
 
-    const buttons =
-    questionBlock.querySelectorAll(
-        ".option"
+    button.classList.add(
+      "wrong"
     );
 
+  }
 
-    buttons.forEach(
-    function(btn){
-
-        btn.classList.add(
-            "disabled"
-        );
-
-        btn.disabled = true;
-
-    });
-
-
-    const feedback =
-    document.getElementById(
-        "feedback" + questionNumber
-    );
-
-
-    /* Correct answer */
-
-    if(correct){
-
-        score++;
-
-
-        button.classList.add(
-            "correct"
-        );
-
-
-        feedback.textContent =
-        "✓ Correct! Great job! · إجابة صحيحة! أحسنت!";
-
-
-        feedback.className =
-        "question-feedback feedback-correct";
-
-    }
-
-    /* Wrong answer */
-
-    else{
-
-        button.classList.add(
-            "wrong"
-        );
-
-
-        feedback.textContent =
-        "✗ Not quite. Try reviewing the pons anatomy. · إجابة غير صحيحة، راجعي تشريح الجسر.";
-
-
-        feedback.className =
-        "question-feedback feedback-wrong";
-
-
-        /* Highlight the correct answer */
-
-        buttons.forEach(
-        function(btn){
-
-            if(
-                btn.getAttribute(
-                    "onclick"
-                ).includes(
-                    "true"
-                )
-            ){
-
-                btn.classList.add(
-                    "correct"
-                );
-
-            }
-
-        });
-
-    }
-
-
-    /* Check if all questions are answered */
-
-    if(
-        answered[1] &&
-        answered[2] &&
-        answered[3]
-    ){
-
-        showFinalScore();
-
-    }
+  updateQuizScore();
 
 }
 
+function updateQuizScore(){
 
-function showFinalScore(){
-
-    const finalScore =
+  const result=
     document.getElementById(
-        "finalScore"
+      "quizResult"
     );
 
+  let answered=0;
+  let correctAnswers=0;
 
-    const scoreNumber =
-    document.getElementById(
-        "scoreNumber"
-    );
+  document
+    .querySelectorAll(".question")
+    .forEach(question=>{
 
+      const selected=
+        question.querySelector(
+          ".correct,.wrong"
+        );
 
-    const scoreMessage =
-    document.getElementById(
-        "scoreMessage"
-    );
+      if(selected){
 
+        answered++;
 
-    scoreNumber.textContent =
-    score + " / 3";
+        if(
+          selected.classList.contains(
+            "correct"
+          )
+        ){
 
+          correctAnswers++;
 
-    if(
-        score === 3
-    ){
+        }
 
-        scoreMessage.textContent =
-        "Perfect! You really know your pons. 🧠✨ · ممتاز! إنتِ فاهمة الجسر كويس جدًا.";
+      }
 
-    }
-
-    else if(
-        score === 2
-    ){
-
-        scoreMessage.textContent =
-        "Great work! Just one more detail to review. 💪 · شغل حلو جدًا! محتاجة تراجعي تفصيلة واحدة بس.";
-
-    }
-
-    else if(
-        score === 1
-    ){
-
-        scoreMessage.textContent =
-        "Good start! Review the anatomy section and try again. 📚 · بداية كويسة! راجعي قسم التشريح وجربي تاني.";
-
-    }
-
-    else{
-
-        scoreMessage.textContent =
-        "Keep learning! Review the pons sections and try again. 🧠 · كملي مذاكرة وراجعي أقسام الجسر وجربي تاني.";
-
-    }
-
-
-    finalScore.classList.add(
-        "show"
-    );
-
-
-    finalScore.scrollIntoView({
-        behavior:"smooth",
-        block:"center"
     });
+
+  if(answered>0){
+
+    result.style.display="block";
+
+    result.textContent=
+      "Score: "+
+      correctAnswers+
+      " / "+
+      answered;
+
+  }
 
 }
 
 </script>
 
-
 </body>
-
 </html>
