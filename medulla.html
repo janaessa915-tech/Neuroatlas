@@ -1,922 +1,787 @@
+<!-- /occipital-lobe.html -->
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>NeuroAtlas | Medulla</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>NeuroAtlas | Occipital Lobe</title>
 
 <style>
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-html{
-    scroll-behavior:smooth;
-}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
 
 body{
-    background:#050b13;
-    color:#eef4fa;
-    font-family:Arial,Helvetica,sans-serif;
-    line-height:1.7;
+  background:#050b13;
+  color:#eef4fa;
+  font-family:Arial,Helvetica,sans-serif;
+  line-height:1.7
 }
 
-
-/* =========================
-   NAVIGATION
-========================= */
-
 nav{
-    height:70px;
-    padding:0 7%;
-    display:flex;
-    align-items:center;
-    border-bottom:1px solid rgba(255,255,255,.08);
+  height:70px;
+  padding:0 7%;
+  display:flex;
+  align-items:center;
+  border-bottom:1px solid rgba(255,255,255,.08)
 }
 
 nav a{
-    color:#9db0c3;
-    text-decoration:none;
-    font-size:14px;
+  color:#9db0c3;
+  text-decoration:none;
+  font-size:14px
 }
 
-nav a:hover{
-    color:white;
-}
-
-
-/* =========================
-   MAIN CONTAINER
-========================= */
+nav a:hover{color:#fff}
 
 .container{
-    max-width:1200px;
-    margin:auto;
-    padding:60px 7% 100px;
+  max-width:1200px;
+  margin:auto;
+  padding:60px 7% 100px
 }
 
-
-/* =========================
-   HERO
-========================= */
-
 .eyebrow{
-    color:#61b5ff;
-    letter-spacing:3px;
-    font-size:12px;
-    text-transform:uppercase;
-    margin-bottom:15px;
+  color:#61b5ff;
+  letter-spacing:3px;
+  font-size:12px;
+  text-transform:uppercase;
+  margin-bottom:15px
 }
 
 h1{
-    font-size:clamp(60px,8vw,90px);
-    line-height:.95;
-    letter-spacing:-4px;
-    margin-bottom:10px;
+  font-size:clamp(55px,8vw,90px);
+  line-height:.95;
+  letter-spacing:-4px;
+  margin-bottom:10px
 }
 
 .arabic-title{
-    color:#ffb6c9;
-    font-size:24px;
-    margin-bottom:25px;
+  color:#ff4055;
+  font-size:24px;
+  margin-bottom:25px
 }
 
 .hero p{
-    color:#a6b6c7;
-    max-width:780px;
-    font-size:18px;
-    line-height:1.8;
+  color:#a6b6c7;
+  max-width:780px;
+  font-size:18px;
+  line-height:1.8
 }
 
-
-/* =========================
-   ACTION BUTTONS
-========================= */
-
 .actions{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    margin-top:30px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:30px
 }
 
 .action-button{
-    padding:11px 17px;
-    border-radius:9px;
-    background:#0b1928;
-    border:1px solid #31516d;
-    color:#bdd0e0;
-    text-decoration:none;
-    cursor:pointer;
-    transition:.2s;
+  padding:11px 17px;
+  border-radius:9px;
+  background:#0b1928;
+  border:1px solid #31516d;
+  color:#bdd0e0;
+  text-decoration:none;
+  cursor:pointer;
+  transition:.2s
 }
 
 .action-button:hover{
-    background:#14304a;
-    color:white;
-    border-color:#61b5ff;
+  background:#14304a;
+  color:#fff;
+  border-color:#61b5ff
 }
 
-
-/* =========================
-   3D VIEWER
-========================= */
-
 .viewer{
-    margin-top:60px;
-    border:1px solid rgba(255,255,255,.10);
-    border-radius:24px;
-    overflow:hidden;
-    background:#02060b;
-    box-shadow:0 25px 80px rgba(0,0,0,.45);
+  margin-top:60px;
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:24px;
+  overflow:hidden;
+  background:#02060b;
+  box-shadow:0 25px 80px rgba(0,0,0,.45)
 }
 
 .viewer-header{
-    min-height:65px;
-    padding:0 22px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    border-bottom:1px solid rgba(255,255,255,.08);
+  min-height:65px;
+  padding:0 22px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid rgba(255,255,255,.08)
 }
 
 .viewer-title{
-    font-size:14px;
-    color:#d2dce6;
+  font-size:14px;
+  color:#d2dce6
 }
 
 .viewer-status{
-    color:#708499;
-    font-size:11px;
-    letter-spacing:1px;
+  color:#708499;
+  font-size:11px;
+  letter-spacing:1px
 }
 
 .scene{
-    position:relative;
-    width:100%;
-    height:700px;
-
-    background:
-        radial-gradient(
-            circle at 50% 45%,
-            #203b51 0%,
-            #0d1c2e 42%,
-            #02060b 100%
-        );
+  position:relative;
+  width:100%;
+  height:700px;
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      #203b51 0%,
+      #0d1c2e 42%,
+      #02060b 100%
+    )
 }
 
 #brainCanvas{
-    width:100%;
-    height:100%;
-    display:block;
+  width:100%;
+  height:100%;
+  display:block
 }
 
-
-/* =========================
-   LOADING
-========================= */
-
 .loading{
-    position:absolute;
-    inset:0;
-    z-index:20;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-direction:column;
-
-    gap:16px;
-
-    background:#02060b;
-
-    color:#9db0c3;
-    font-size:14px;
-
-    transition:opacity .8s;
+  position:absolute;
+  inset:0;
+  z-index:20;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:16px;
+  background:#02060b;
+  color:#9db0c3;
+  font-size:14px;
+  transition:opacity .8s
 }
 
 .loading.hide{
-    opacity:0;
-    pointer-events:none;
+  opacity:0;
+  pointer-events:none
 }
 
 .loading-bar{
-    width:180px;
-    height:2px;
-
-    background:rgba(255,255,255,.08);
-
-    border-radius:2px;
-    overflow:hidden;
+  width:180px;
+  height:2px;
+  background:rgba(255,255,255,.08);
+  border-radius:2px;
+  overflow:hidden
 }
 
 .loading-bar-inner{
-    width:0%;
-    height:100%;
-
-    background:#61b5ff;
-
-    transition:width .3s;
+  width:0%;
+  height:100%;
+  background:#ff4055;
+  transition:width .3s
 }
 
-
-/* =========================
-   MEDULLA LABEL
-========================= */
-
-.medulla-label{
-    position:absolute;
-
-    z-index:30;
-
-    pointer-events:none;
-
-    transform:translate(-50%,-100%);
-
-    display:none;
+.location-label{
+  position:absolute;
+  z-index:30;
+  pointer-events:none;
+  transform:translate(-50%,-100%);
+  display:none
 }
 
-.medulla-label.show{
-    display:block;
-}
+.location-label.show{display:block}
 
 .label-box{
-    position:relative;
-
-    padding:9px 15px;
-
-    border-radius:10px;
-
-    background:rgba(5,10,17,.96);
-
-    border:1.5px solid #ffb6c9;
-
-    color:#ffd5df;
-
-    font-size:12px;
-
-    font-weight:bold;
-
-    letter-spacing:1px;
-
-    white-space:nowrap;
-
-    box-shadow:
-        0 0 12px rgba(255,182,201,.18),
-        0 0 25px rgba(255,182,201,.08);
+  position:relative;
+  padding:9px 15px;
+  border-radius:10px;
+  background:rgba(5,10,17,.96);
+  border:1.5px solid #ff4055;
+  color:#ffd9de;
+  font-size:12px;
+  font-weight:bold;
+  letter-spacing:1px;
+  white-space:nowrap;
+  box-shadow:
+    0 0 12px rgba(255,64,85,.35),
+    0 0 30px rgba(255,64,85,.2)
 }
 
 .label-box::after{
-    content:"";
-
-    position:absolute;
-
-    left:50%;
-    bottom:-15px;
-
-    width:1.5px;
-    height:15px;
-
-    background:#ffb6c9;
-
-    transform:translateX(-50%);
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:-15px;
+  width:1.5px;
+  height:15px;
+  background:#ff4055;
+  transform:translateX(-50%)
 }
 
-
-/* =========================
-   CONTROLS
-========================= */
-
 .controls{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-
-    padding:15px;
-
-    border-top:1px solid rgba(255,255,255,.08);
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  padding:15px;
+  border-top:1px solid rgba(255,255,255,.08)
 }
 
 .controls button{
-    padding:11px 17px;
-
-    border-radius:9px;
-
-    background:#0b1928;
-
-    border:1px solid #31516d;
-
-    color:#bdd0e0;
-
-    cursor:pointer;
-
-    transition:.2s;
+  padding:11px 17px;
+  border-radius:9px;
+  background:#0b1928;
+  border:1px solid #31516d;
+  color:#bdd0e0;
+  cursor:pointer;
+  transition:.2s
 }
 
 .controls button:hover{
-    background:#14304a;
-    color:white;
+  background:#14304a;
+  color:#fff
 }
 
 .controls button.active{
-    background:#241c20;
-
-    border-color:#ffb6c9;
-
-    color:#ffd5df;
+  background:#321218;
+  border-color:#ff4055;
+  color:#ffd9de
 }
 
-
-/* =========================
-   INFORMATION
-========================= */
-
 .section{
-    margin-top:70px;
+  margin-top:70px
 }
 
 .section-label{
-    color:#61b5ff;
-    letter-spacing:2px;
-    font-size:11px;
-    text-transform:uppercase;
-    margin-bottom:8px;
+  color:#61b5ff;
+  letter-spacing:2px;
+  font-size:11px;
+  text-transform:uppercase;
+  margin-bottom:8px
 }
 
 .section h2{
-    font-size:32px;
-    margin-bottom:25px;
+  font-size:32px;
+  margin-bottom:25px
 }
 
 .section-intro{
-    color:#91a5b8;
-    max-width:900px;
-    font-size:15px;
-    line-height:1.9;
-    margin-bottom:30px;
+  color:#91a5b8;
+  max-width:900px;
+  font-size:15px;
+  line-height:1.9;
+  margin-bottom:30px
 }
 
-
-/* =========================
-   LOCATION
-========================= */
-
 .location{
-    margin-top:70px;
-
-    padding:35px;
-
-    background:#091522;
-
-    border:1px solid #172b3e;
-
-    border-radius:18px;
+  margin-top:70px;
+  padding:35px;
+  background:#091522;
+  border:1px solid #172b3e;
+  border-radius:18px
 }
 
 .location h2{
-    font-size:32px;
-    margin-bottom:12px;
+  font-size:32px;
+  margin-bottom:12px
 }
 
 .location-intro{
-    color:#91a5b8;
-
-    max-width:900px;
-
-    line-height:1.9;
-
-    margin-bottom:30px;
+  color:#91a5b8;
+  max-width:900px;
+  line-height:1.9;
+  margin-bottom:30px
 }
 
-.brain-visual{
-    width:100%;
-    overflow:hidden;
-}
-
-
-/* =========================
-   LOCATION SVG
-========================= */
-
-.location-svg{
-    display:block;
-
-    width:100%;
-
-    max-width:800px;
-
-    height:auto;
-
-    margin:auto;
-}
-
-
-/* Brain */
-
-.location-brain{
-    fill:#263d55;
-    stroke:#71869e;
-    stroke-width:3;
-}
-
-
-/* Cerebellum */
-
-.location-cerebellum{
-    fill:#344d66;
-    stroke:#71869e;
-    stroke-width:3;
-}
-
-
-/* Midbrain */
-
-.location-midbrain{
-    fill:#29465b;
-    stroke:#71869e;
-    stroke-width:3;
-}
-
-
-/* Pons */
-
-.location-pons{
-    fill:#29465b;
-    stroke:#71869e;
-    stroke-width:3;
-}
-
-
-/* =========================
-   MEDULLA HIGHLIGHT
-========================= */
-
-.location-medulla-glow{
-    fill:none;
-
-    stroke:#ffb6c9;
-
-    stroke-width:11;
-
-    opacity:.38;
-
-    filter:blur(7px);
-}
-
-.location-medulla{
-    fill:#ffb6c9;
-
-    stroke:white;
-
-    stroke-width:4;
-}
-
-.location-line{
-    stroke:#8fc7ff;
-    stroke-width:2;
-}
-
-.location-medulla-line{
-    stroke:#ffb6c9;
-    stroke-width:3;
-}
-
-.location-svg-label{
-    fill:white;
-
-    font-size:18px;
-
-    font-weight:bold;
-}
-
-.location-medulla-label{
-    fill:#ffb6c9;
-
-    font-size:21px;
-
-    font-weight:bold;
-}
-
-.location-arabic-label{
-    fill:#ffdce5;
-
-    font-size:16px;
-
-    font-weight:bold;
+.anatomy-viewer{
+  position:relative;
+  width:100%;
+  max-width:1000px;
+  height:610px;
+  margin:auto;
+  border:1px solid #243b50;
+  border-radius:16px;
+  overflow:hidden;
+  background:
+    radial-gradient(
+      ellipse at center,
+      #182a39 0%,
+      #07111c 68%,
+      #02060b 100%
+    )
 }
 
 .location-caption{
-    text-align:center;
-
-    color:#9fb0c3;
-
-    margin-top:15px;
+  text-align:center;
+  color:#9fb0c3;
+  margin-top:15px;
+  line-height:1.8
 }
 
-
-/* =========================
-   CARDS
-========================= */
+.source-note{
+  max-width:900px;
+  margin:15px auto 0;
+  color:#617487;
+  font-size:11px;
+  text-align:center
+}
 
 .cards{
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:20px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px
 }
 
 .card{
-    padding:27px;
-
-    background:#091522;
-
-    border:1px solid #172b3e;
-
-    border-radius:18px;
-
-    transition:
-        transform .2s,
-        border-color .2s;
+  padding:27px;
+  background:#091522;
+  border:1px solid #172b3e;
+  border-radius:18px;
+  transition:transform .2s,border-color .2s
 }
 
 .card:hover{
-    transform:translateY(-3px);
-
-    border-color:#2b506c;
+  transform:translateY(-3px);
+  border-color:#4a2027
 }
 
 .card h3{
-    font-size:18px;
-
-    margin-bottom:13px;
-
-    color:#eef4fa;
-
-    line-height:1.45;
+  font-size:18px;
+  margin-bottom:13px;
+  color:#eef4fa;
+  line-height:1.45
 }
 
 .card p{
-    color:#91a5b8;
-
-    font-size:14px;
-
-    line-height:1.8;
+  color:#91a5b8;
+  font-size:14px;
+  line-height:1.8
 }
 
-
-/* =========================
-   CLINICAL
-========================= */
-
 .clinical-section{
-    margin-top:65px;
+  margin-top:65px
 }
 
 .clinical-box{
-    padding:30px;
-
-    background:#091522;
-
-    border:1px solid #172b3e;
-
-    border-left:3px solid #ffb6c9;
-
-    border-radius:18px;
+  padding:30px;
+  background:#091522;
+  border:1px solid #172b3e;
+  border-left:3px solid #ff4055;
+  border-radius:18px
 }
 
 .clinical-box p{
-    color:#a7b7c6;
-
-    font-size:15px;
-
-    line-height:1.9;
-
-    margin-bottom:18px;
+  color:#a7b7c6;
+  font-size:15px;
+  line-height:1.9;
+  margin-bottom:18px
 }
 
-.clinical-box p:last-child{
-    margin-bottom:0;
-}
-
-
-/* =========================
-   QUICK FACTS
-========================= */
+.clinical-box p:last-child{margin-bottom:0}
 
 .facts-grid{
-    display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
-    gap:15px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px
 }
 
 .fact{
-    padding:22px;
-
-    background:#091522;
-
-    border:1px solid #172b3e;
-
-    border-radius:16px;
+  padding:22px;
+  background:#091522;
+  border:1px solid #172b3e;
+  border-radius:16px
 }
 
 .fact span{
-    display:block;
-
-    color:#ffb6c9;
-
-    font-size:11px;
-
-    letter-spacing:2px;
-
-    margin-bottom:12px;
+  display:block;
+  color:#ff4055;
+  font-size:11px;
+  letter-spacing:2px;
+  margin-bottom:12px
 }
 
 .fact strong{
-    display:block;
-
-    color:#eef4fa;
-
-    font-size:14px;
-
-    margin-bottom:8px;
-
-    line-height:1.5;
+  display:block;
+  color:#eef4fa;
+  font-size:14px;
+  margin-bottom:8px;
+  line-height:1.5
 }
 
 .fact p{
-    color:#8195a8;
-
-    font-size:13px;
-
-    line-height:1.7;
+  color:#8195a8;
+  font-size:13px;
+  line-height:1.7
 }
 
-
-/* =========================
-   MINI TEST
-========================= */
-
 .quiz{
-    margin-top:65px;
-
-    padding:30px;
-
-    background:#091522;
-
-    border:1px solid #172b3e;
-
-    border-radius:18px;
+  margin-top:65px;
+  padding:30px;
+  background:#091522;
+  border:1px solid #172b3e;
+  border-radius:18px
 }
 
 .quiz h2{
-    font-size:28px;
-
-    margin-bottom:10px;
+  font-size:28px;
+  margin-bottom:10px
 }
 
 .quiz-intro{
-    color:#91a5b8;
-
-    margin-bottom:25px;
+  color:#91a5b8;
+  margin-bottom:25px
 }
 
 .question{
-    margin-bottom:30px;
+  margin-bottom:30px
 }
 
-.question:last-child{
-    margin-bottom:0;
-}
+.question:last-child{margin-bottom:0}
 
 .question p{
-    color:#eef4fa;
-
-    font-size:16px;
-
-    margin-bottom:12px;
-
-    font-weight:bold;
+  color:#eef4fa;
+  font-size:16px;
+  margin-bottom:12px;
+  font-weight:bold
 }
 
 .option{
-    display:block;
-
-    width:100%;
-
-    padding:12px 15px;
-
-    margin-top:9px;
-
-    background:#0b1928;
-
-    color:#c7d5e2;
-
-    border:1px solid #263951;
-
-    border-radius:9px;
-
-    text-align:left;
-
-    cursor:pointer;
-
-    font-size:14px;
-
-    transition:.2s;
+  display:block;
+  width:100%;
+  padding:12px 15px;
+  margin-top:9px;
+  background:#0b1928;
+  color:#c7d5e2;
+  border:1px solid #263951;
+  border-radius:9px;
+  text-align:left;
+  cursor:pointer;
+  font-size:14px;
+  transition:.2s
 }
 
 .option:hover{
-    border-color:#ffb6c9;
-
-    background:#111e2c;
+  border-color:#ff4055;
+  background:#111e2c
 }
 
 .option.correct{
-    border-color:#8fd3a8;
-
-    background:#14291e;
-
-    color:#b9f0c9;
+  border-color:#8fd3a8;
+  background:#14291e;
+  color:#b9f0c9
 }
 
 .option.wrong{
-    border-color:#d88b9b;
-
-    background:#2a171d;
-
-    color:#ffc2cc;
+  border-color:#d88b9b;
+  background:#2a171d;
+  color:#ffc2cc
 }
 
 .quiz-result{
-    margin-top:25px;
-
-    padding:15px;
-
-    border-radius:10px;
-
-    background:#0b1928;
-
-    border:1px solid #263951;
-
-    color:#aebdce;
-
-    display:none;
+  margin-top:25px;
+  padding:15px;
+  border-radius:10px;
+  background:#0b1928;
+  border:1px solid #263951;
+  color:#aebdce;
+  display:none
 }
 
+/* ===== 2D OCCIPITAL LOBE ===== */
 
-/* =========================
-   MOBILE
-========================= */
+.brain-svg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%
+}
+
+.brain-outline{
+  fill:url(#brainGradient);
+  stroke:#c7b3b8;
+  stroke-width:3;
+  filter:url(#brainShadow)
+}
+
+.occipital-highlight{
+  fill:url(#occipitalGradient);
+  stroke:#ff4055;
+  stroke-width:3;
+  filter:url(#cortexGlow);
+  opacity:1
+}
+
+.cortex-line{
+  fill:none;
+  stroke:#796b72;
+  stroke-width:2.2;
+  opacity:.72;
+  stroke-linecap:round
+}
+
+.cortex-line-highlight{
+  fill:none;
+  stroke:#ffd1d7;
+  stroke-width:2.2;
+  opacity:.9;
+  stroke-linecap:round
+}
+
+.cortex-line-light{
+  fill:none;
+  stroke:#d3c1c5;
+  stroke-width:1.2;
+  opacity:.28;
+  stroke-linecap:round
+}
+
+.brain-cutaway{
+  fill:#bdabb1;
+  opacity:.28;
+  stroke:#e0ced2;
+  stroke-width:1.5
+}
+
+.deep-region{
+  fill:#76666d;
+  opacity:.24
+}
+
+.thalamus{
+  fill:#8f7c84;
+  stroke:#cdbbc0;
+  stroke-width:1.8;
+  opacity:.82
+}
+
+.cerebellum-body{
+  fill:url(#cerebellumGradient);
+  stroke:#d2bdc2;
+  stroke-width:2.5
+}
+
+.cerebellar-folia{
+  fill:none;
+  stroke:#76666d;
+  stroke-width:2;
+  opacity:.8;
+  stroke-linecap:round
+}
+
+.brainstem{
+  fill:#a58e95;
+  stroke:#d0bdc2;
+  stroke-width:2.5
+}
+
+.brainstem-detail{
+  fill:none;
+  stroke:#695b61;
+  stroke-width:2;
+  opacity:.7
+}
+
+/*
+ * These two callout lines are permanently baby pink.
+ * They are separate SVG elements and are never affected by
+ * the occipital-lobe highlight.
+ */
+.callout{
+  fill:none;
+  stroke:#ffb6c1;
+  stroke-width:1.7;
+  stroke-linecap:round
+}
+
+.callout-dot{
+  fill:#ffb6c1;
+  stroke:#fff;
+  stroke-width:1
+}
+
+.brain-label{
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:12px;
+  fill:#91a5b8;
+  letter-spacing:1.5px
+}
+
+.occipital-svg-label{
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:13px;
+  font-weight:bold;
+  letter-spacing:.8px;
+  fill:#fff
+}
+
+.occipital-sub{
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:10px;
+  fill:#ffb6c1
+}
+
+.orientation-label{
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:10px;
+  fill:#71879a;
+  letter-spacing:1.2px
+}
+
+.anatomy-title{
+  position:absolute;
+  left:50%;
+  top:24px;
+  transform:translateX(-50%);
+  color:#d5e0e9;
+  font-size:13px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  text-align:center
+}
+
+.view-badge{
+  position:absolute;
+  left:25px;
+  bottom:22px;
+  padding:8px 12px;
+  border:1px solid #31516d;
+  border-radius:8px;
+  background:rgba(4,10,17,.82);
+  color:#8195a8;
+  font-size:10px;
+  letter-spacing:1.5px
+}
+
+.cortex-legend{
+  position:absolute;
+  right:22px;
+  bottom:20px;
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  justify-content:flex-end
+}
+
+.legend-item{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  color:#aebdca;
+  font-size:10px
+}
+
+.legend-dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  box-shadow:0 0 10px currentColor
+}
+
+.legend-dot.occipital{
+  background:#ff4055;
+  color:#ff4055
+}
+
+@keyframes occipitalPulse{
+  0%,100%{
+    opacity:1;
+    filter:drop-shadow(0 0 5px rgba(255,64,85,.65))
+  }
+  50%{
+    opacity:.9;
+    filter:drop-shadow(0 0 18px rgba(255,64,85,1))
+  }
+}
+
+.occipital-highlight.active{
+  animation:occipitalPulse 1.8s infinite
+}
 
 @media(max-width:900px){
-
-    .cards{
-        grid-template-columns:
-            repeat(2,1fr);
-    }
-
-    .facts-grid{
-        grid-template-columns:
-            repeat(2,1fr);
-    }
-
+  .cards{grid-template-columns:repeat(2,1fr)}
+  .facts-grid{grid-template-columns:repeat(2,1fr)}
+  .anatomy-viewer{height:530px}
 }
 
 @media(max-width:800px){
-
-    .scene{
-        height:450px;
-    }
-
-    .viewer-status{
-        display:none;
-    }
-
+  .scene{height:450px}
+  .viewer-status{display:none}
+  .location{padding:25px}
+  .anatomy-viewer{height:500px}
 }
 
 @media(max-width:600px){
+  .cards{grid-template-columns:1fr}
+  .facts-grid{grid-template-columns:1fr}
 
-    .cards{
-        grid-template-columns:1fr;
-    }
+  h1{letter-spacing:-2px}
 
-    .facts-grid{
-        grid-template-columns:1fr;
-    }
+  .location{padding:20px}
+  .anatomy-viewer{height:390px}
 
-    h1{
-        letter-spacing:-2px;
-    }
+  .anatomy-title{
+    font-size:9px
+  }
 
-    .location{
-        padding:20px;
-    }
+  .brain-label{
+    font-size:9px
+  }
 
+  .occipital-svg-label{
+    font-size:9px
+  }
+
+  .occipital-sub{
+    font-size:7px
+  }
+
+  .cortex-legend{
+    display:none
+  }
 }
-
 </style>
-
 </head>
-
 
 <body>
 
-
-<!-- =========================
-     NAVIGATION
-========================= -->
-
 <nav>
-
-<a href="./explore.html">
-← Back to Explore
-</a>
-
+<a href="./explore.html">← Back to Explore</a>
 </nav>
-
 
 <main class="container">
 
-
-<!-- =========================
-     HERO
-========================= -->
-
 <div class="eyebrow">
-Brainstem · NeuroAtlas
+Cerebrum · NeuroAtlas
 </div>
 
 <h1>
-Medulla
+Occipital Lobe
 </h1>
 
 <div class="arabic-title">
-النخاع المستطيل
+الفص القذالي
 </div>
 
 <div class="hero">
-
 <p>
-
-The medulla oblongata is the most inferior part of the brainstem.
-It connects the pons with the spinal cord and participates in
-breathing, cardiovascular regulation, swallowing, and protective
-reflexes.
-
+The occipital lobe is the posterior region of the cerebral cortex.
+It is primarily involved in receiving and processing visual information,
+helping the brain interpret shapes, colors, motion and other aspects
+of vision.
 </p>
-
 </div>
-
-
-<!-- =========================
-     ACTION BUTTONS
-========================= -->
 
 <div class="actions">
 
-<a
-class="action-button"
-href="#location"
->
+<a class="action-button" href="#location">
 📍 Show Location
 </a>
 
-<a
-class="action-button"
-href="#information"
->
-🧠 Learn About the Medulla
+<a class="action-button" href="#information">
+🧠 Learn About the Occipital Lobe
 </a>
 
-<a
-class="action-button"
-href="#quiz"
->
+<a class="action-button" href="#quiz">
 📝 Test Yourself
 </a>
 
 </div>
 
-
-<!-- =========================
-     3D VIEWER
-     KEPT AS BEFORE
-========================= -->
+<!-- 3D VIEWER -->
 
 <div class="viewer">
-
 
 <div class="viewer-header">
 
@@ -930,9 +795,7 @@ DRAG TO ROTATE · SCROLL TO ZOOM
 
 </div>
 
-
 <div class="scene">
-
 
 <div id="loading" class="loading">
 
@@ -941,1851 +804,1734 @@ Loading real brain model...
 </span>
 
 <div class="loading-bar">
-
-<div
-id="loadBar"
-class="loading-bar-inner">
+<div id="loadBar" class="loading-bar-inner"></div>
 </div>
 
 </div>
-
-</div>
-
 
 <canvas id="brainCanvas"></canvas>
 
-
-<div
-id="medullaLabel"
-class="medulla-label">
-
+<div id="locationLabel" class="location-label">
 <div class="label-box">
-MEDULLA OBLONGATA
+OCCIPITAL LOBE · الفص القذالي
+</div>
 </div>
 
 </div>
-
-
-</div>
-
 
 <div class="controls">
 
-<button
-id="highlight"
-class="active">
-
-⚫ Highlight Medulla
-
+<button id="showLocation">
+📍 Show Occipital Lobe
 </button>
 
+<button id="highlight" class="active">
+🔴 Highlight Occipital Lobe
+</button>
 
-<button
-id="rotate"
-class="active">
-
+<button id="rotate" class="active">
 ⟳ Auto Rotate
-
 </button>
-
 
 <button id="reset">
-
 ↻ Reset View
-
 </button>
 
 </div>
 
-
 </div>
 
+<!-- ANATOMICAL LOCATION -->
 
-<!-- ==================================================
-     LOCATION
-================================================== -->
-
-<section
-id="location"
-class="location"
->
-
+<section id="location" class="location">
 
 <div class="section-label">
 Location · الموقع
 </div>
 
-
 <h2>
-📍 Where is the Medulla?
+📍 Where Is the Occipital Lobe?
 </h2>
-
 
 <p class="location-intro">
 
-The medulla oblongata is the lowest part of the brainstem.
-It lies <strong>below the pons</strong> and continues inferiorly
-into the <strong>spinal cord</strong>. The cerebellum lies
-posterior to the brainstem.
+The occipital lobe occupies the posterior portion of each cerebral
+hemisphere. It lies behind the parietal and temporal lobes and forms
+the back part of the cerebral cortex.
 
 <br><br>
 
-النخاع المستطيل هو الجزء السفلي من جذع الدماغ. يقع
-<strong>أسفل الجسر (Pons)</strong> ويستمر لأسفل ليتصل
-<strong>بالحبل الشوكي</strong>، بينما يقع المخيخ خلف جذع الدماغ.
+الفص القذالي يشغل الجزء الخلفي من كل نصف كرة مخية. ويقع خلف الفصين
+الجداري والصدغي ويشكل الجزء الخلفي من القشرة المخية.
 
 </p>
 
+<div class="anatomy-viewer">
 
-<div class="brain-visual">
-
+<div class="anatomy-title">
+Lateral View · Occipital Lobe
+</div>
 
 <svg
-class="location-svg"
-viewBox="0 0 800 560"
+class="brain-svg"
+viewBox="0 0 1000 610"
 xmlns="http://www.w3.org/2000/svg"
-aria-label="Simplified brainstem location diagram highlighting the medulla"
+aria-label="Lateral view of the human brain highlighting the occipital lobe"
 >
 
+<defs>
 
-<!-- =========================
-     CEREBRUM
-========================= -->
+<linearGradient
+id="brainGradient"
+x1="0"
+y1="0"
+x2="1"
+y2="1"
+>
+<stop offset="0%" stop-color="#d2bec3"/>
+<stop offset="48%" stop-color="#ad979e"/>
+<stop offset="100%" stop-color="#806d75"/>
+</linearGradient>
+
+<linearGradient
+id="occipitalGradient"
+x1="0"
+y1="0"
+x2="1"
+y2="1"
+>
+<stop offset="0%" stop-color="#ff8b99"/>
+<stop offset="45%" stop-color="#ff4055"/>
+<stop offset="100%" stop-color="#bd1935"/>
+</linearGradient>
+
+<linearGradient
+id="cerebellumGradient"
+x1="0"
+y1="0"
+x2="1"
+y2="1"
+>
+<stop offset="0%" stop-color="#c7b0b6"/>
+<stop offset="100%" stop-color="#806c74"/>
+</linearGradient>
+
+<filter
+id="brainShadow"
+x="-30%"
+y="-30%"
+width="160%"
+height="160%"
+>
+<feDropShadow
+dx="0"
+dy="8"
+stdDeviation="10"
+flood-color="#000"
+flood-opacity=".65"
+/>
+</filter>
+
+<filter
+id="cortexGlow"
+x="-30%"
+y="-30%"
+width="160%"
+height="160%"
+>
+<feGaussianBlur
+stdDeviation="3"
+result="blur"
+/>
+
+<feMerge>
+<feMergeNode in="blur"/>
+<feMergeNode in="SourceGraphic"/>
+</feMerge>
+
+</filter>
+
+</defs>
+
+<!-- Whole cerebral outline -->
 
 <path
-class="location-brain"
-d="M150 100
-C200 45 300 30 400 50
-C510 70 575 150 570 235
-C568 300 525 330 470 330
-C410 330 375 285 315 275
-C255 265 190 300 150 255
-C115 215 115 145 150 100Z"
+class="brain-outline"
+d="
+M145 278
+C119 250 119 210 138 177
+C157 143 193 122 231 111
+C273 67 342 45 414 48
+C486 31 569 43 631 72
+C704 82 759 112 796 153
+C830 190 846 236 837 273
+C830 302 812 321 793 337
+C767 357 751 376 741 400
+C731 425 719 442 698 451
+C674 462 651 456 632 445
+C606 430 583 412 555 402
+C518 389 478 391 442 400
+C401 411 367 424 328 428
+C286 432 242 421 207 400
+C176 381 153 354 143 323
+C137 307 137 292 145 278
+Z
+"
+filter="url(#brainShadow)"
 />
 
+<!--
+     ACTUAL OCCIPITAL LOBE
 
-<!-- =========================
-     CEREBELLUM
-========================= -->
+     Posterior region of the cerebral hemisphere,
+     behind the parietal and temporal regions.
+-->
 
 <path
-class="location-cerebellum"
-d="M465 315
-C530 285 600 315 620 370
-C640 425 605 475 545 475
-C485 475 450 430 450 380
-C450 350 455 330 465 315Z"
+class="occipital-highlight active"
+d="
+M632 72
+C704 82 759 112 796 153
+C830 190 846 236 837 273
+C830 302 812 321 793 337
+C775 350 758 364 748 382
+C739 398 731 416 715 431
+C700 445 682 449 664 442
+C646 435 631 420 620 403
+C609 386 600 367 595 348
+C590 327 591 307 601 288
+C612 268 626 253 638 235
+C651 215 656 192 650 169
+C645 143 637 112 632 72
+Z
+"/>
+
+<!-- Boundary between major posterior regions -->
+
+<path
+class="cortex-line"
+d="
+M595 112
+C606 137 616 163 619 189
+C622 216 618 240 608 262
+C598 284 591 307 594 330
+C597 354 607 377 620 399
+"/>
+
+<!-- Occipital cortical folds -->
+
+<path
+class="cortex-line-highlight"
+d="
+M661 105
+C684 91 710 94 730 107
+C749 119 764 135 785 137
+C804 139 821 131 832 120
+"/>
+
+<path
+class="cortex-line-highlight"
+d="
+M653 135
+C675 122 699 124 719 139
+C739 154 755 170 778 169
+C798 168 815 158 830 146
+"/>
+
+<path
+class="cortex-line-highlight"
+d="
+M648 167
+C670 154 692 157 712 171
+C732 185 748 202 770 202
+C793 202 811 190 827 178
+"/>
+
+<path
+class="cortex-line-highlight"
+d="
+M643 200
+C665 187 686 190 706 204
+C726 219 742 236 763 235
+C785 234 803 222 820 211
+"/>
+
+<path
+class="cortex-line-highlight"
+d="
+M636 234
+C657 222 678 225 696 239
+C715 253 731 270 751 269
+C773 268 792 258 808 247
+"/>
+
+<path
+class="cortex-line-highlight"
+d="
+M625 270
+C646 258 666 262 683 276
+C701 291 716 307 735 307
+C755 307 774 297 791 286
+"/>
+
+<path
+class="cortex-line-highlight"
+d="
+M614 306
+C634 295 653 299 670 313
+C687 327 701 343 720 344
+C739 344 756 336 773 325
+"/>
+
+<path
+class="cortex-line-highlight"
+d="
+M610 341
+C629 331 647 335 663 348
+C679 361 693 377 711 379
+C728 381 744 373 758 363
+"/>
+
+<!-- Lower cortical folds remain normal -->
+
+<path
+class="cortex-line"
+d="
+M171 233
+C214 205 251 213 277 233
+C305 254 337 258 368 240
+C397 222 431 220 457 235
+C488 252 519 258 550 243
+"
 />
 
-
-<!-- =========================
-     MIDBRAIN
-========================= -->
-
-<ellipse
-class="location-midbrain"
-cx="380"
-cy="300"
-rx="27"
-ry="21"
+<path
+class="cortex-line"
+d="
+M154 285
+C190 268 223 273 251 290
+C280 307 310 314 341 303
+C371 292 394 278 421 283
+C450 288 475 307 506 310
+"
 />
 
+<path
+class="cortex-line"
+d="
+M176 326
+C208 309 237 315 261 334
+C287 355 314 359 343 349
+C372 339 399 329 426 340
+C452 351 477 368 507 369
+"/>
 
-<!-- =========================
-     PONS
-========================= -->
+<path
+class="cortex-line"
+d="
+M203 361
+C226 348 247 350 267 364
+C287 378 307 386 330 381
+C354 376 374 366 396 373
+C418 380 437 393 460 394
+"/>
+
+<!-- Deep structures -->
+
+<path
+class="brain-cutaway"
+d="
+M310 129
+C365 101 431 94 492 111
+C550 126 604 155 641 201
+C672 239 687 285 678 325
+C669 364 641 393 607 408
+C570 425 524 423 485 410
+C445 397 408 378 373 351
+C338 324 313 286 300 245
+C287 202 287 158 310 129
+Z
+"/>
+
+<path
+class="deep-region"
+d="
+M445 235
+C461 213 489 203 515 208
+C541 213 559 231 560 254
+C561 278 544 297 519 303
+C492 309 465 298 451 279
+C441 266 438 249 445 235
+Z
+"/>
 
 <ellipse
-class="location-pons"
-cx="380"
-cy="345"
-rx="42"
+class="thalamus"
+cx="545"
+cy="319"
+rx="39"
 ry="30"
 />
 
-
-<!-- ==================================================
-     MEDULLA
-     ONLY THIS AREA IS HIGHLIGHTED
-================================================== -->
-
-
-<!-- Glow -->
+<!-- Corpus callosum -->
 
 <path
-class="location-medulla-glow"
-d="M365 365
-C370 400 375 440 365 485
-L400 485
-C405 440 405 400 395 360Z"
+d="
+M350 187
+C386 143 445 128 501 144
+C545 157 577 183 596 216
+"
+fill="none"
+stroke="#ead9dd"
+stroke-width="7"
+opacity=".22"
+stroke-linecap="round"
 />
 
-
-<!-- Main Medulla -->
+<!-- Brainstem -->
 
 <path
-class="location-medulla"
-d="M365 365
-C370 400 375 440 365 485
-L400 485
-C405 440 405 400 395 360Z"
-/>
+class="brainstem"
+d="
+M693 359
+C713 349 731 352 744 367
+C757 382 762 401 756 420
+C749 441 739 456 728 471
+C718 484 716 500 721 515
+C727 531 718 544 702 547
+C682 551 665 538 664 520
+C663 503 672 488 677 473
+C683 455 681 438 671 421
+C662 404 666 383 677 370
+C681 365 687 361 693 359
+Z
+"/>
 
+<path
+class="brainstem-detail"
+d="
+M682 390
+C705 401 731 401 752 388
+"/>
 
-<!-- =========================
-     PONS LABEL
-========================= -->
+<path
+class="brainstem-detail"
+d="
+M678 418
+C700 429 729 431 749 420
+"/>
 
-<line
-class="location-line"
-x1="422"
-y1="345"
-x2="570"
-y2="300"
+<path
+class="brainstem-detail"
+d="
+M678 447
+C697 457 723 459 742 450
+"/>
+
+<!-- Cerebellum -->
+
+<path
+class="cerebellum-body"
+d="
+M651 345
+C620 324 585 318 550 327
+C515 336 485 356 465 381
+C448 402 442 427 450 450
+C458 473 478 490 504 500
+C536 513 575 513 609 500
+C643 487 671 463 688 435
+C703 411 705 381 692 361
+C683 352 669 347 651 345
+Z
+"/>
+
+<path
+class="cerebellar-folia"
+d="
+M466 379
+C500 365 534 365 568 376
+C603 388 639 389 685 371
+"/>
+
+<path
+class="cerebellar-folia"
+d="
+M456 394
+C491 383 528 384 562 395
+C600 407 639 408 695 388
+"/>
+
+<path
+class="cerebellar-folia"
+d="
+M450 410
+C487 401 524 404 559 415
+C597 427 641 426 699 406
+"/>
+
+<path
+class="cerebellar-folia"
+d="
+M448 427
+C485 419 522 422 558 434
+C596 447 639 445 696 425
+"/>
+
+<path
+class="cerebellar-folia"
+d="
+M451 444
+C488 437 525 440 558 451
+C594 464 633 462 686 443
+"/>
+
+<path
+class="cerebellar-folia"
+d="
+M458 461
+C492 454 524 457 555 467
+C588 478 622 476 674 457
+"/>
+
+<path
+class="cerebellar-folia"
+d="
+M470 477
+C500 471 526 474 553 482
+C583 491 613 489 655 472
+"/>
+
+<!-- OCCIPITAL CALLOUT -->
+
+<path
+class="callout"
+d="
+M758 142
+L820 90
+L850 90
+"/>
+
+<circle
+class="callout-dot"
+cx="758"
+cy="142"
+r="4"
 />
 
 <text
-class="location-svg-label"
-x="585"
-y="306"
+class="occipital-svg-label"
+x="858"
+y="85"
 >
-PONS
+OCCIPITAL LOBE
 </text>
 
+<text
+class="occipital-sub"
+x="858"
+y="102"
+>
+الفص القذالي
+</text>
 
-<!-- =========================
-     MIDBRAIN LABEL
-========================= -->
+<!-- SECOND CALLOUT -->
 
-<line
-class="location-line"
-x1="405"
-y1="300"
-x2="570"
-y2="230"
+<path
+class="callout"
+d="
+M735 307
+L800 190
+L850 190
+"/>
+
+<circle
+class="callout-dot"
+cx="735"
+cy="307"
+r="4"
 />
 
 <text
-class="location-svg-label"
-x="585"
-y="236"
+class="occipital-svg-label"
+x="858"
+y="185"
 >
-MIDBRAIN
+POSTERIOR VISUAL CORTEX
 </text>
-
-
-<!-- =========================
-     MEDULLA LABEL
-========================= -->
-
-<line
-class="location-medulla-line"
-x1="400"
-y1="425"
-x2="570"
-y2="430"
-/>
-
 
 <text
-class="location-medulla-label"
-x="585"
-y="436"
+class="occipital-sub"
+x="858"
+y="202"
 >
-MEDULLA
+القشرة البصرية الخلفية
 </text>
 
+<!-- Labels -->
 
 <text
-class="location-arabic-label"
-x="585"
-y="463"
+class="brain-label"
+x="450"
+y="300"
 >
-النخاع المستطيل
+DEEP BRAIN
 </text>
 
+<text
+class="brain-label"
+x="493"
+y="352"
+>
+THALAMUS
+</text>
+
+<text
+class="brain-label"
+x="493"
+y="520"
+>
+CEREBELLUM
+</text>
+
+<text
+class="brain-label"
+x="740"
+y="555"
+>
+BRAINSTEM
+</text>
+
+<text
+class="orientation-label"
+x="175"
+y="565"
+>
+ANTERIOR
+</text>
+
+<text
+class="orientation-label"
+x="785"
+y="565"
+>
+POSTERIOR
+</text>
 
 </svg>
 
+<div class="view-badge">
+LATERAL VIEW · OCCIPITAL LOBE
+</div>
 
-<p class="location-caption">
+<div class="cortex-legend">
 
-🌸 The highlighted pink region represents the approximate
-location of the medulla oblongata.
-
-</p>
-
+<div class="legend-item">
+<span class="legend-dot occipital"></span>
+Occipital Lobe
+</div>
 
 </div>
+
+</div>
+
+<p class="location-caption">
+🔴 The highlighted posterior region represents the
+<strong>occipital lobe</strong>.
+</p>
+
+<p class="source-note">
+Simplified anatomical illustration showing the lateral position of
+the occipital lobe relative to the other major brain regions.
+</p>
 
 </section>
 
+<!-- INFORMATION -->
 
-<!-- ==================================================
-     DETAILED INFORMATION
-================================================== -->
-
-<section
-id="information"
-class="section"
->
-
+<section id="information" class="section">
 
 <div class="section-label">
-Medulla Anatomy · تشريح النخاع المستطيل
+Occipital Lobe Anatomy · تشريح الفص القذالي
 </div>
 
-
 <h2>
-Medulla Oblongata · النخاع المستطيل
+Occipital Lobe · الفص القذالي
 </h2>
-
 
 <p class="section-intro">
 
-The medulla oblongata is the lowest part of the brainstem.
-It connects the pons to the spinal cord and contains important
-neural pathways and nuclei involved in vital automatic functions
-and protective reflexes.
+The occipital lobe is the posterior lobe of the cerebral cortex.
+It is especially important for visual processing, receiving signals
+from the eyes and helping the brain interpret visual features such
+as shape, color, movement and location.
 
 <br><br>
 
-النخاع المستطيل هو الجزء السفلي من جذع الدماغ.
-يربط بين الجسر والحبل الشوكي، ويحتوي على مسارات وأنوية عصبية
-مهمة تشارك في تنظيم الوظائف الحيوية اللاإرادية والمنعكسات الوقائية.
+الفص القذالي هو الفص الخلفي من القشرة المخية. وله أهمية خاصة في معالجة
+المعلومات البصرية، حيث يستقبل الإشارات القادمة من العينين ويساعد الدماغ
+على تفسير الشكل واللون والحركة والموقع.
 
 </p>
-
 
 <div class="cards">
 
-
-<!-- CARD 1 -->
+<div class="card">
+<h3>Location · الموقع</h3>
+<p>
+The occipital lobe occupies the posterior portion of the cerebral
+hemisphere, behind the parietal and temporal lobes.
+<br><br>
+يقع الفص القذالي في الجزء الخلفي من نصف الكرة المخية خلف الفصين الجداري
+والصدغي.
+</p>
+</div>
 
 <div class="card">
-
-<h3>
-Respiratory Control · التحكم في التنفس
-</h3>
-
+<h3>Visual Processing · المعالجة البصرية</h3>
 <p>
-
-The medulla contains neural circuits that help generate and
-regulate the basic rhythm of breathing. It works with other
-regions of the brainstem to adjust breathing according to
-the body's needs.
-
+The occipital cortex is the major cortical region involved in processing
+visual information received from the eyes.
 <br><br>
-
-يحتوي النخاع المستطيل على دوائر عصبية تساعد في توليد وتنظيم
-الإيقاع الأساسي للتنفس، ويعمل مع أجزاء أخرى من جذع الدماغ
-لتعديل التنفس حسب احتياجات الجسم.
-
+تعد القشرة القذالية المنطقة الرئيسية في معالجة المعلومات البصرية
+القادمة من العينين.
 </p>
-
 </div>
-
-
-<!-- CARD 2 -->
 
 <div class="card">
-
-<h3>
-Cardiovascular Control · تنظيم القلب والدورة الدموية
-</h3>
-
+<h3>Primary Visual Cortex · القشرة البصرية الأولية</h3>
 <p>
-
-Medullary centers contribute to the regulation of heart rate,
-blood vessel tone, and blood pressure through autonomic pathways.
-
+The primary visual cortex, also called V1, is located in the occipital
+lobe around the calcarine sulcus.
 <br><br>
-
-تساهم مراكز النخاع المستطيل في تنظيم معدل ضربات القلب،
-وتوتر الأوعية الدموية، وضغط الدم من خلال المسارات اللاإرادية.
-
+تقع القشرة البصرية الأولية، المعروفة أيضاً باسم V1، في الفص القذالي حول
+الأخدود المهمازي.
 </p>
-
 </div>
-
-
-<!-- CARD 3 -->
 
 <div class="card">
-
-<h3>
-Swallowing · البلع
-</h3>
-
+<h3>Visual Features · الخصائص البصرية</h3>
 <p>
-
-The medulla contains nuclei involved in the coordinated
-movements required for swallowing. These circuits interact
-with several cranial nerves.
-
+Occipital visual areas process features such as edges, orientation,
+contrast, color and motion.
 <br><br>
-
-يحتوي النخاع المستطيل على أنوية تشارك في تنسيق الحركات
-اللازمة لعملية البلع، وتتفاعل هذه الدوائر مع عدة أعصاب قحفية.
-
+تعالج المناطق البصرية القذالية خصائص مثل الحواف والاتجاه والتباين
+واللون والحركة.
 </p>
-
 </div>
-
-
-<!-- CARD 4 -->
 
 <div class="card">
-
-<h3>
-Protective Reflexes · المنعكسات الوقائية
-</h3>
-
+<h3>Visual Association · الترابط البصري</h3>
 <p>
-
-The medulla participates in important protective reflexes,
-including coughing, sneezing, gagging, and vomiting.
-
+Visual association regions help combine basic visual information into
+more complex perceptions.
 <br><br>
-
-يشارك النخاع المستطيل في منعكسات وقائية مهمة، مثل السعال
-والعطس ومنعكس البلعوم والقيء.
-
+تساعد مناطق الترابط البصري في دمج المعلومات البصرية الأساسية لتكوين
+إدراكات أكثر تعقيداً.
 </p>
-
 </div>
-
-
-<!-- CARD 5 -->
 
 <div class="card">
-
-<h3>
-Pyramids · الأهرامات
-</h3>
-
+<h3>Calcarine Sulcus · الأخدود المهمازي</h3>
 <p>
-
-The medullary pyramids contain descending corticospinal fibers.
-These fibers carry voluntary motor commands from the cerebral
-cortex toward the spinal cord.
-
+The calcarine sulcus is an important anatomical landmark associated
+with the primary visual cortex.
 <br><br>
-
-تحتوي أهرامات النخاع المستطيل على ألياف القناة القشرية
-الشوكية النازلة، والتي تنقل الأوامر الحركية الإرادية من
-القشرة المخية نحو الحبل الشوكي.
-
+يعد الأخدود المهمازي علامة تشريحية مهمة مرتبطة بالقشرة البصرية الأولية.
 </p>
-
 </div>
-
-
-<!-- CARD 6 -->
 
 <div class="card">
-
-<h3>
-Pyramidal Decussation · تقاطع الأهرامات
-</h3>
-
+<h3>Visual Field · المجال البصري</h3>
 <p>
-
-Near the lower part of the medulla, many corticospinal fibers
-cross to the opposite side. This crossing is called the
-pyramidal decussation.
-
+Different areas of the visual cortex represent different portions of
+the visual field in an organized manner.
 <br><br>
-
-بالقرب من الجزء السفلي للنخاع المستطيل، تعبر نسبة كبيرة
-من ألياف القناة القشرية الشوكية إلى الجانب المقابل،
-ويُعرف هذا العبور باسم تقاطع الأهرامات.
-
+تمثل مناطق مختلفة من القشرة البصرية أجزاء مختلفة من المجال البصري
+بطريقة منظمة.
 </p>
-
 </div>
-
-
-<!-- CARD 7 -->
 
 <div class="card">
-
-<h3>
-Inferior Olive · الزيتونة السفلية
-</h3>
-
+<h3>Color · اللون</h3>
 <p>
-
-The inferior olivary nuclei communicate strongly with the
-cerebellum and contribute to motor coordination and motor learning.
-
+Visual processing networks involving occipital regions contribute to
+the perception and analysis of color.
 <br><br>
-
-تتواصل النوى الزيتونية السفلية بشكل مهم مع المخيخ، وتساهم
-في تنسيق الحركة والتعلم الحركي.
-
+تساهم الشبكات البصرية التي تشمل المناطق القذالية في إدراك وتحليل اللون.
 </p>
-
 </div>
-
-
-<!-- CARD 8 -->
 
 <div class="card">
-
-<h3>
-Cranial Nerves · الأعصاب القحفية
-</h3>
-
+<h3>Motion · الحركة</h3>
 <p>
-
-The medullary region contains important nuclei and pathways
-associated with cranial nerves IX, X, XI, and XII.
-These are involved in swallowing, voice, tongue movement,
-and visceral functions.
-
+Visual pathways involving occipital and neighboring cortical regions
+help analyze movement in the visual environment.
 <br><br>
-
-تحتوي منطقة النخاع المستطيل على أنوية ومسارات مهمة مرتبطة
-بالأعصاب القحفية التاسع والعاشر والحادي عشر والثاني عشر،
-والتي ترتبط بالبلع والصوت وحركة اللسان وبعض الوظائف الحشوية.
-
+تساعد المسارات البصرية التي تشمل المناطق القذالية والمناطق المجاورة
+في تحليل الحركة في البيئة البصرية.
 </p>
-
 </div>
-
-
-<!-- CARD 9 -->
 
 <div class="card">
-
-<h3>
-Autonomic Functions · الوظائف اللاإرادية
-</h3>
-
+<h3>Shape · الشكل</h3>
 <p>
-
-The medulla helps regulate essential functions that normally
-occur without conscious control, especially cardiovascular
-and respiratory activity.
-
+Occipital visual areas contribute to the analysis of contours, edges
+and shapes within visual scenes.
 <br><br>
-
-يساعد النخاع المستطيل في تنظيم وظائف أساسية تحدث عادةً
-دون تحكم واعٍ، وخاصة نشاط الجهازين التنفسي والقلب والأوعية الدموية.
-
+تساهم المناطق البصرية القذالية في تحليل الحدود والحواف والأشكال داخل
+المشاهد البصرية.
 </p>
-
 </div>
-
-
-<!-- CARD 10 -->
 
 <div class="card">
-
-<h3>
-Sensory Pathways · المسارات الحسية
-</h3>
-
+<h3>Both Hemispheres · كلا النصفين</h3>
 <p>
-
-The medulla contains important ascending sensory pathways
-that carry information from the body toward higher regions
-of the brain.
-
+The occipital cortex is present in both the left and right cerebral
+hemispheres.
 <br><br>
-
-يحتوي النخاع المستطيل على مسارات حسية صاعدة مهمة تنقل
-المعلومات من الجسم إلى المناطق الأعلى في الدماغ.
-
+توجد القشرة القذالية في كلا نصفي الكرة المخية الأيسر والأيمن.
 </p>
-
 </div>
-
-
-<!-- CARD 11 -->
 
 <div class="card">
-
-<h3>
-Motor Pathways · المسارات الحركية
-</h3>
-
+<h3>Visual Pathways · المسارات البصرية</h3>
 <p>
-
-Several major motor pathways pass through the medulla,
-allowing signals from the brain to reach the spinal cord
-and influence movement.
-
+Visual information reaches the occipital cortex through pathways
+connecting the eyes with the brain.
 <br><br>
-
-تمر عدة مسارات حركية رئيسية عبر النخاع المستطيل، مما يسمح
-للإشارات القادمة من الدماغ بالوصول إلى الحبل الشوكي والمساهمة
-في التحكم في الحركة.
-
+تصل المعلومات البصرية إلى القشرة القذالية عبر مسارات تربط العينين
+بالدماغ.
 </p>
-
 </div>
 
-
-<!-- CARD 12 -->
-
-<div class="card">
-
-<h3>
-Brainstem Connection · اتصال جذع الدماغ
-</h3>
-
-<p>
-
-The medulla forms an important transition between the pons
-above and the spinal cord below, making it a major pathway
-between the brain and the rest of the nervous system.
-
-<br><br>
-
-يمثل النخاع المستطيل منطقة انتقال مهمة بين الجسر في الأعلى
-والحبل الشوكي في الأسفل، ويعمل كطريق رئيسي بين الدماغ
-وباقي الجهاز العصبي.
-
-</p>
-
 </div>
-
-
-</div>
-
-
-<!-- ==================================================
-     CLINICAL IMPORTANCE
-================================================== -->
 
 <div class="clinical-section">
-
 
 <div class="section-label">
 Clinical Importance · الأهمية السريرية
 </div>
 
-
 <h2>
-Why the Medulla Matters
+Why the Occipital Lobe Matters
 </h2>
-
 
 <div class="clinical-box">
 
-
 <p>
-
-Because the medulla contains pathways and centers involved
-in vital functions, damage to this region can affect breathing,
-cardiovascular regulation, swallowing, movement, and other
-neurological functions.
-
+Because the occipital lobe is central to visual processing, disruption
+of its visual pathways or cortical regions can affect aspects of vision,
+including the ability to process or interpret visual information.
 </p>
-
 
 <p dir="rtl">
-
-لأن النخاع المستطيل يحتوي على مسارات ومراكز تشارك في وظائف
-حيوية، فإن حدوث ضرر في هذه المنطقة قد يؤثر على التنفس،
-وتنظيم الدورة الدموية، والبلع، والحركة، وغيرها من الوظائف العصبية.
-
+نظراً لأن الفص القذالي أساسي في معالجة المعلومات البصرية، فإن اضطراب
+مساراته البصرية أو مناطقه القشرية قد يؤثر في بعض جوانب الرؤية، بما في
+ذلك القدرة على معالجة أو تفسير المعلومات البصرية.
 </p>
 
-
 </div>
 
 </div>
-
-
-<!-- ==================================================
-     QUICK FACTS
-================================================== -->
 
 <div class="section">
-
 
 <div class="section-label">
 Quick Facts · معلومات سريعة
 </div>
 
-
 <h2>
-Medulla at a Glance
+Occipital Lobe at a Glance
 </h2>
-
 
 <div class="facts-grid">
 
+<div class="fact">
+<span>01</span>
+<strong>Location · الموقع</strong>
+<p>
+Posterior cerebral cortex · الجزء الخلفي من القشرة المخية
+</p>
+</div>
 
 <div class="fact">
-
-<span>
-01
-</span>
-
-<strong>
-Location · الموقع
-</strong>
-
+<span>02</span>
+<strong>Main Role · الدور الرئيسي</strong>
 <p>
-
-Lowest part of the brainstem ·
-الجزء السفلي من جذع الدماغ
-
+Visual information processing · معالجة المعلومات البصرية
 </p>
-
 </div>
-
 
 <div class="fact">
-
-<span>
-02
-</span>
-
-<strong>
-Connects · يربط
-</strong>
-
+<span>03</span>
+<strong>Key Cortex · القشرة الرئيسية</strong>
 <p>
-
-Pons and spinal cord ·
-الجسر والحبل الشوكي
-
+Primary visual cortex · القشرة البصرية الأولية
 </p>
-
 </div>
-
 
 <div class="fact">
-
-<span>
-03
-</span>
-
-<strong>
-Major Role · الوظيفة الأساسية
-</strong>
-
+<span>04</span>
+<strong>Landmark · العلامة التشريحية</strong>
 <p>
-
-Regulation of vital automatic functions ·
-تنظيم الوظائف الحيوية اللاإرادية
-
+Calcarine sulcus · الأخدود المهمازي
 </p>
-
 </div>
-
-
-<div class="fact">
-
-<span>
-04
-</span>
-
-<strong>
-Motor Pathway · المسار الحركي
-</strong>
-
-<p>
-
-Contains corticospinal fibers ·
-يحتوي على ألياف القناة القشرية الشوكية
-
-</p>
-
-</div>
-
 
 </div>
 
 </div>
 
+<!-- QUIZ -->
 
-<!-- ==================================================
-     MINI TEST
-================================================== -->
-
-<div
-id="quiz"
-class="quiz"
->
-
+<div id="quiz" class="quiz">
 
 <div class="section-label">
 Mini Test
 </div>
 
-
 <h2>
 🧠 Test Yourself
 </h2>
 
-
 <p class="quiz-intro">
-
 Choose the best answer for each question.
-
 </p>
-
-
-<!-- QUESTION 1 -->
 
 <div class="question">
 
 <p>
-1. Which part of the brainstem lies directly below the pons?
+1. Where is the occipital lobe primarily located?
 </p>
 
-
-<button
-class="option"
-onclick="checkAnswer(this,true)"
->
-A. Medulla oblongata
+<button class="option" onclick="checkAnswer(this,true)">
+A. At the posterior part of the cerebral hemisphere
 </button>
 
-
-<button
-class="option"
-onclick="checkAnswer(this,false)"
->
-B. Cerebellum
+<button class="option" onclick="checkAnswer(this,false)">
+B. Inside the spinal cord
 </button>
 
-
-<button
-class="option"
-onclick="checkAnswer(this,false)"
->
-C. Thalamus
+<button class="option" onclick="checkAnswer(this,false)">
+C. Inside the cerebellum
 </button>
 
-
-<button
-class="option"
-onclick="checkAnswer(this,false)"
->
-D. Hippocampus
+<button class="option" onclick="checkAnswer(this,false)">
+D. Only inside the brainstem
 </button>
 
 </div>
-
-
-<!-- QUESTION 2 -->
 
 <div class="question">
 
 <p>
-2. Which function is strongly associated with the medulla?
+2. What function is strongly associated with the occipital lobe?
 </p>
 
-
-<button
-class="option"
-onclick="checkAnswer(this,false)"
->
-A. Visual processing
+<button class="option" onclick="checkAnswer(this,true)">
+A. Processing visual information
 </button>
 
-
-<button
-class="option"
-onclick="checkAnswer(this,true)"
->
-B. Regulation of breathing and cardiovascular activity
+<button class="option" onclick="checkAnswer(this,false)">
+B. Pumping blood
 </button>
 
-
-<button
-class="option"
-onclick="checkAnswer(this,false)"
->
-C. Long-term memory formation
+<button class="option" onclick="checkAnswer(this,false)">
+C. Digesting food
 </button>
 
-
-<button
-class="option"
-onclick="checkAnswer(this,false)"
->
-D. Color perception
+<button class="option" onclick="checkAnswer(this,false)">
+D. Producing hormones only
 </button>
 
 </div>
-
-
-<!-- QUESTION 3 -->
 
 <div class="question">
 
 <p>
-3. What happens at the pyramidal decussation?
+3. Which cortex is located in the occipital lobe?
 </p>
 
-
-<button
-class="option"
-onclick="checkAnswer(this,false)"
->
-A. The cerebellum produces hormones
+<button class="option" onclick="checkAnswer(this,true)">
+A. Primary visual cortex
 </button>
 
-
-<button
-class="option"
-onclick="checkAnswer(this,true)"
->
-B. Many corticospinal fibers cross to the opposite side
+<button class="option" onclick="checkAnswer(this,false)">
+B. Primary somatosensory cortex
 </button>
 
-
-<button
-class="option"
-onclick="checkAnswer(this,false)"
->
-C. The pons connects to the cerebellum
+<button class="option" onclick="checkAnswer(this,false)">
+C. Primary motor cortex
 </button>
 
-
-<button
-class="option"
-onclick="checkAnswer(this,false)"
->
-D. Sensory receptors are activated
+<button class="option" onclick="checkAnswer(this,false)">
+D. Primary olfactory bulb
 </button>
 
 </div>
 
-
-<div
-id="quizResult"
-class="quiz-result"
->
-</div>
-
+<div id="quizResult" class="quiz-result"></div>
 
 </div>
-
 
 </section>
 
-
 </main>
 
-
-<!-- ==================================================
-     THREE.JS IMPORT MAP
-================================================== -->
-
 <script type="importmap">
-
 {
-    "imports": {
-
-        "three":
-        "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
-
-        "three/addons/":
-        "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
-
-    }
+  "imports":{
+    "three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
 }
-
 </script>
-
 
 <script type="module">
 
 import * as THREE from "three";
+import {OrbitControls} from "three/addons/controls/OrbitControls.js";
+import {GLTFLoader} from "three/addons/loaders/GLTFLoader.js";
+import {DRACOLoader} from "three/addons/loaders/DRACOLoader.js";
 
-import {
-    OrbitControls
-} from "three/addons/controls/OrbitControls.js";
+const canvas=document.getElementById("brainCanvas");
+const loading=document.getElementById("loading");
+const loadText=document.getElementById("loadText");
+const loadBar=document.getElementById("loadBar");
+const locationLabel=document.getElementById("locationLabel");
 
-import {
-    GLTFLoader
-} from "three/addons/loaders/GLTFLoader.js";
+const scene=new THREE.Scene();
 
-import {
-    DRACOLoader
-} from "three/addons/loaders/DRACOLoader.js";
-
-
-/* =========================================
-   ELEMENTS
-========================================= */
-
-const canvas =
-document.getElementById(
-    "brainCanvas"
-);
-
-const loading =
-document.getElementById(
-    "loading"
-);
-
-const loadText =
-document.getElementById(
-    "loadText"
-);
-
-const loadBar =
-document.getElementById(
-    "loadBar"
-);
-
-const medullaLabel =
-document.getElementById(
-    "medullaLabel"
-);
-
-
-/* =========================================
-   SCENE
-========================================= */
-
-const scene =
-new THREE.Scene();
-
-
-/* =========================================
-   CAMERA
-========================================= */
-
-const camera =
-new THREE.PerspectiveCamera(
-    30,
-    1,
-    0.01,
-    100
+const camera=new THREE.PerspectiveCamera(
+  30,
+  1,
+  .01,
+  100
 );
 
 camera.position.set(
-    3.2,
-    0.3,
-    8.5
+  3.2,
+  .3,
+  8.5
 );
 
-
-/* =========================================
-   RENDERER
-========================================= */
-
-const renderer =
-new THREE.WebGLRenderer({
-
-    canvas:canvas,
-
-    antialias:true,
-
-    alpha:true
-
+const renderer=new THREE.WebGLRenderer({
+  canvas,
+  antialias:true,
+  alpha:true
 });
 
 renderer.setPixelRatio(
-    Math.min(
-        window.devicePixelRatio || 1,
-        2
-    )
+  Math.min(window.devicePixelRatio||1,2)
 );
 
-renderer.toneMapping =
-THREE.ACESFilmicToneMapping;
+renderer.toneMapping=THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure=.75;
 
-renderer.toneMappingExposure =
-0.75;
-
-
-/* =========================================
-   CONTROLS
-========================================= */
-
-const controls =
-new OrbitControls(
-    camera,
-    canvas
+const controls=new OrbitControls(
+  camera,
+  canvas
 );
 
-controls.enableRotate = true;
+controls.enableRotate=true;
+controls.rotateSpeed=.6;
+controls.enableDamping=true;
+controls.dampingFactor=.05;
+controls.enableZoom=true;
+controls.zoomSpeed=.6;
+controls.enablePan=false;
+controls.autoRotate=true;
+controls.autoRotateSpeed=.2;
+controls.target.set(0,-.3,0);
+controls.minDistance=3.5;
+controls.maxDistance=16;
 
-controls.rotateSpeed = 0.6;
-
-controls.enableDamping = true;
-
-controls.dampingFactor = 0.05;
-
-controls.enableZoom = true;
-
-controls.zoomSpeed = 0.6;
-
-controls.enablePan = false;
-
-controls.autoRotate = true;
-
-controls.autoRotateSpeed = 0.2;
-
-controls.target.set(
-    0,
-    -0.3,
-    0
-);
-
-controls.minDistance = 3.5;
-
-controls.maxDistance = 16;
-
-
-/* =========================================
-   LIGHTING
-========================================= */
-
-const ambient =
-new THREE.AmbientLight(
+scene.add(
+  new THREE.AmbientLight(
     0xffffff,
-    0.55
+    .55
+  )
 );
 
-scene.add(ambient);
-
-const hemi =
-new THREE.HemisphereLight(
+scene.add(
+  new THREE.HemisphereLight(
     0xffdce6,
     0x081018,
-    0.75
+    .75
+  )
 );
 
-scene.add(hemi);
-
-const keyLight =
-new THREE.DirectionalLight(
-    0xfff5f0,
-    1.4
+const keyLight=new THREE.DirectionalLight(
+  0xfff5f0,
+  1.4
 );
 
 keyLight.position.set(
-    6,
-    10,
-    8
+  6,
+  10,
+  8
 );
 
 scene.add(keyLight);
 
-const fillLight =
-new THREE.DirectionalLight(
-    0x8ca9bd,
-    0.4
+const fillLight=new THREE.DirectionalLight(
+  0x8ca9bd,
+  .4
 );
 
 fillLight.position.set(
-    -7,
-    2,
-    6
+  -7,
+  2,
+  6
 );
 
 scene.add(fillLight);
 
-
-/* =========================================
-   BRAIN GROUP
-========================================= */
-
-const brainGroup =
-new THREE.Group();
+const brainGroup=new THREE.Group();
 
 scene.add(brainGroup);
 
-let medullaMesh = null;
+let targetMeshes=[];
+let brainMeshes=[];
 
-let medullaHighlightMesh = null;
+let locationShown=false;
+let highlighted=true;
 
-let medullaOutline = null;
-
-let highlighted = true;
-
-let isRealModel = false;
-
-
-/* =========================================
-   BABY PINK BRAIN MATERIAL
-========================================= */
-
-const brainPinkMaterial =
-new THREE.MeshPhysicalMaterial({
-
+const brainOpaqueMaterial=
+  new THREE.MeshPhysicalMaterial({
     color:0xf1c5d0,
-
-    roughness:0.62,
-
+    roughness:.62,
     metalness:0,
+    clearcoat:.12,
+    clearcoatRoughness:.5,
+    side:THREE.DoubleSide,
+    transparent:false,
+    opacity:1
+  });
 
-    clearcoat:0.12,
-
-    clearcoatRoughness:0.5,
-
-    side:THREE.DoubleSide
-
-});
-
-
-/* =========================================
-   BLACK MEDULLA MATERIAL
-========================================= */
-
-const medullaBlackMaterial =
-new THREE.MeshPhysicalMaterial({
-
-    color:0x15151a,
-
-    roughness:0.42,
-
-    metalness:0.02,
-
-    clearcoat:0.25,
-
-    clearcoatRoughness:0.35,
-
-    side:THREE.DoubleSide
-
-});
-
-
-/* =========================================
-   MEDULLA OUTLINE
-========================================= */
-
-const outlineMaterial =
-new THREE.MeshBasicMaterial({
-
-    color:0xffb6c9,
-
+const brainTransparentMaterial=
+  new THREE.MeshPhysicalMaterial({
+    color:0xf1c5d0,
+    roughness:.55,
+    metalness:0,
+    clearcoat:.1,
+    clearcoatRoughness:.5,
+    side:THREE.DoubleSide,
     transparent:true,
+    opacity:.16,
+    depthWrite:false
+  });
 
-    opacity:0.9,
+const occipitalMaterial=
+  new THREE.MeshPhysicalMaterial({
+    color:0xff2948,
+    roughness:.3,
+    metalness:0,
+    clearcoat:.6,
+    clearcoatRoughness:.12,
+    emissive:0x5c0613,
+    emissiveIntensity:1.05,
+    side:THREE.DoubleSide,
+    transparent:false,
+    opacity:1
+  });
 
-    side:THREE.BackSide
+const occipitalNormalMaterial=
+  new THREE.MeshPhysicalMaterial({
+    color:0xf1c5d0,
+    roughness:.62,
+    metalness:0,
+    clearcoat:.12,
+    clearcoatRoughness:.5,
+    side:THREE.DoubleSide
+  });
 
-});
+function normalizeName(name){
 
-
-/* =========================================
-   FALLBACK MEDULLA
-========================================= */
-
-function createMedullaMarker(){
-
-    const geometry =
-    new THREE.CapsuleGeometry(
-        0.19,
-        0.65,
-        12,
-        24
-    );
-
-    medullaHighlightMesh =
-    new THREE.Mesh(
-        geometry,
-        medullaBlackMaterial
-    );
-
-    medullaHighlightMesh.position.set(
-        0,
-        -1.25,
-        0.05
-    );
-
-    medullaHighlightMesh.scale.set(
-        1,
-        1.15,
-        0.85
-    );
-
-    brainGroup.add(
-        medullaHighlightMesh
-    );
-
-    medullaOutline =
-    new THREE.Mesh(
-        geometry.clone(),
-        outlineMaterial
-    );
-
-    medullaOutline.scale.set(
-        1.14,
-        1.20,
-        1.02
-    );
-
-    medullaHighlightMesh.add(
-        medullaOutline
-    );
+  return String(name||"")
+    .toLowerCase()
+    .replace(/[\s_\-\.]+/g,"");
 
 }
 
+function getMeshName(mesh){
 
-/* =========================================
-   LOAD REAL BRAIN MODEL
-========================================= */
+  const userName=
+    mesh.userData&&mesh.userData.name
+      ?mesh.userData.name
+      :"";
+
+  return `${mesh.name} ${userName}`;
+
+}
+
+function isExplicitOccipital(mesh){
+
+  const name=normalizeName(
+    getMeshName(mesh)
+  );
+
+  const occipitalNames=[
+    "occipital",
+    "occipitallobe",
+    "leftoccipital",
+    "rightoccipital",
+    "leftoccipitallobe",
+    "rightoccipitallobe",
+    "primaryvisual",
+    "primaryvisualcortex",
+    "visualcortex",
+    "v1",
+    "calcarine",
+    "calcarinesulcus"
+  ];
+
+  return occipitalNames.some(
+    item=>name.includes(item)
+  );
+
+}
+
+function isClearlyNotOccipital(mesh){
+
+  const name=normalizeName(
+    getMeshName(mesh)
+  );
+
+  const excludedNames=[
+    "frontal",
+    "frontallobe",
+    "parietal",
+    "parietallobe",
+    "temporal",
+    "temporallobe",
+    "cerebell",
+    "brainstem",
+    "medulla",
+    "pons",
+    "midbrain",
+    "thalam",
+    "hypothalam",
+    "ventricle",
+    "aqueduct",
+    "fourthventricle",
+    "thirdventricle",
+    "corpuscallosum",
+    "hippocamp",
+    "amygdala"
+  ];
+
+  return excludedNames.some(
+    item=>name.includes(item)
+  );
+
+}
+
+function calculateOccipitalCandidates(model){
+
+  const meshes=[];
+
+  model.traverse(child=>{
+
+    if(!child.isMesh)return;
+
+    meshes.push(child);
+
+  });
+
+  if(meshes.length===0){
+    return [];
+  }
+
+  const explicit=meshes.filter(
+    mesh=>
+      isExplicitOccipital(mesh) &&
+      !isClearlyNotOccipital(mesh)
+  );
+
+  if(explicit.length>0){
+    return explicit;
+  }
+
+  /*
+   * Do not guess an occipital surface from geometry alone.
+   * If the GLB does not identify it, leave the 3D surface unchanged.
+   */
+  return [];
+
+}
+
+function prepareMaterials(model){
+
+  brainMeshes=[];
+  targetMeshes=[];
+
+  model.traverse(child=>{
+
+    if(!child.isMesh)return;
+
+    child.castShadow=true;
+    child.receiveShadow=true;
+
+    child.material=
+      brainOpaqueMaterial.clone();
+
+    brainMeshes.push(child);
+
+  });
+
+  targetMeshes=
+    calculateOccipitalCandidates(model);
+
+  targetMeshes.forEach(mesh=>{
+
+    mesh.material=
+      occipitalMaterial.clone();
+
+  });
+
+}
 
 function loadRealBrain(){
 
-    const loader =
-    new GLTFLoader();
+  const loader=new GLTFLoader();
 
-    const dracoLoader =
-    new DRACOLoader();
+  const dracoLoader=new DRACOLoader();
 
-    dracoLoader.setDecoderPath(
-        "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/"
-    );
+  dracoLoader.setDecoderPath(
+    "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/"
+  );
 
-    loader.setDRACOLoader(
-        dracoLoader
-    );
+  loader.setDRACOLoader(dracoLoader);
 
+  const urls=[
+    "https://cdn.jsdelivr.net/gh/itayinbarr/brainproject@main/brain-atlas/models/brain.glb",
+    "https://raw.githubusercontent.com/itayinbarr/brainproject/main/brain-atlas/models/brain.glb",
+    "https://itayinbarr.github.io/brainproject/models/brain.glb"
+  ];
 
-    const urls = [
+  let index=0;
 
-        "https://cdn.jsdelivr.net/gh/itayinbarr/brainproject@main/brain-atlas/models/brain.glb",
+  function tryLoad(){
 
-        "https://raw.githubusercontent.com/itayinbarr/brainproject/main/brain-atlas/models/brain.glb",
+    if(index>=urls.length){
 
-        "https://itayinbarr.github.io/brainproject/models/brain.glb"
+      loadText.textContent=
+        "Brain model could not be loaded.";
 
-    ];
+      loadBar.style.width="100%";
 
+      setTimeout(()=>{
+        loading.classList.add("hide");
+      },500);
 
-    let urlIndex = 0;
-
-
-    function tryLoad(){
-
-        if(
-            urlIndex >= urls.length
-        ){
-
-            createMedullaMarker();
-
-            onReady();
-
-            return;
-        }
-
-
-        const url =
-        urls[urlIndex++];
-
-
-        loadText.textContent =
-        "Loading real brain model...";
-
-
-        loader.load(
-
-            url,
-
-
-            function(gltf){
-
-                isRealModel = true;
-
-
-                const model =
-                gltf.scene;
-
-
-                /* CENTER + SCALE */
-
-                const box =
-                new THREE.Box3()
-                .setFromObject(
-                    model
-                );
-
-
-                const center =
-                box.getCenter(
-                    new THREE.Vector3()
-                );
-
-
-                const size =
-                box.getSize(
-                    new THREE.Vector3()
-                );
-
-
-                const maxDim =
-                Math.max(
-                    size.x,
-                    size.y,
-                    size.z
-                );
-
-
-                const scale =
-                4.5 / maxDim;
-
-
-                model.scale.setScalar(
-                    scale
-                );
-
-
-                model.position.sub(
-                    center.multiplyScalar(
-                        scale
-                    )
-                );
-
-
-                /* KEEP MODEL POSITION */
-
-                model.position.y -= 0.60;
-
-
-                /* PROCESS MODEL */
-
-                model.traverse(
-                function(child){
-
-                    if(!child.isMesh)
-                        return;
-
-
-                    child.castShadow = true;
-
-                    child.receiveShadow = true;
-
-
-                    const name =
-                    (
-                        child.name || ""
-                    ).toLowerCase();
-
-
-                    /* MEDULLA DETECTION */
-
-                    if(
-
-                        name.includes("medulla") ||
-
-                        name.includes("bulb") ||
-
-                        name.includes("myelencephalon")
-
-                    ){
-
-                        medullaMesh =
-                        child;
-
-
-                        /* BLACK MEDULLA */
-
-                        medullaHighlightMesh =
-                        child.clone();
-
-
-                        medullaHighlightMesh.material =
-                        medullaBlackMaterial.clone();
-
-
-                        medullaHighlightMesh.scale.multiplyScalar(
-                            1.01
-                        );
-
-
-                        child.parent.add(
-                            medullaHighlightMesh
-                        );
-
-
-                        /* PINK OUTLINE */
-
-                        medullaOutline =
-                        child.clone();
-
-
-                        medullaOutline.material =
-                        outlineMaterial.clone();
-
-
-                        medullaOutline.scale.multiplyScalar(
-                            1.055
-                        );
-
-
-                        child.parent.add(
-                            medullaOutline
-                        );
-
-                    }
-
-                    else{
-
-                        /* BABY PINK BRAIN */
-
-                        if(
-                            child.material
-                        ){
-
-                            child.material =
-                            brainPinkMaterial.clone();
-
-                        }
-
-                    }
-
-                });
-
-
-                brainGroup.add(
-                    model
-                );
-
-
-                /* FALLBACK */
-
-                if(
-                    !medullaMesh
-                ){
-
-                    createMedullaMarker();
-
-                }
-
-
-                loadBar.style.width =
-                "100%";
-
-
-                onReady();
-
-            },
-
-
-            function(progress){
-
-                if(
-                    progress.total > 0
-                ){
-
-                    const pct =
-                    Math.min(
-                        90,
-                        progress.loaded /
-                        progress.total *
-                        90
-                    );
-
-
-                    loadBar.style.width =
-                    pct + "%";
-
-                }
-
-            },
-
-
-            function(error){
-
-                console.warn(
-                    "Model failed:",
-                    error
-                );
-
-
-                tryLoad();
-
-            }
-
-        );
+      return;
 
     }
 
+    const url=urls[index++];
 
-    tryLoad();
+    loader.load(
 
-}
+      url,
 
+      gltf=>{
 
-/* =========================================
-   READY
-========================================= */
+        const model=gltf.scene;
 
-function onReady(){
+        const box=
+          new THREE.Box3()
+            .setFromObject(model);
 
-    setTimeout(
-    function(){
+        const center=
+          box.getCenter(
+            new THREE.Vector3()
+          );
 
-        loading.classList.add(
-            "hide"
+        const size=
+          box.getSize(
+            new THREE.Vector3()
+          );
+
+        const maxDim=
+          Math.max(
+            size.x,
+            size.y,
+            size.z
+          );
+
+        const scale=
+          4.5/maxDim;
+
+        model.scale.setScalar(scale);
+
+        model.position.sub(
+          center.multiplyScalar(scale)
         );
 
-        if(
-            highlighted
-        ){
+        model.position.y-=.6;
 
-            medullaLabel.classList.add(
-                "show"
-            );
+        brainGroup.add(model);
+
+        prepareMaterials(model);
+
+        if(targetMeshes.length===0){
+
+          loadText.textContent=
+            "Brain loaded · named occipital surface unavailable";
+
+        }else{
+
+          loadText.textContent=
+            "Occipital lobe surface located";
+
+          locationLabel.classList.add(
+            "show"
+          );
 
         }
 
-    },500);
+        loadBar.style.width="100%";
+
+        setTimeout(()=>{
+          loading.classList.add("hide");
+        },500);
+
+      },
+
+      progress=>{
+
+        if(progress.total>0){
+
+          const pct=Math.min(
+            95,
+            progress.loaded/
+              progress.total*
+              95
+          );
+
+          loadBar.style.width=
+            pct+"%";
+
+        }
+
+      },
+
+      error=>{
+
+        console.warn(
+          "Brain model loading failed:",
+          error
+        );
+
+        tryLoad();
+
+      }
+
+    );
+
+  }
+
+  tryLoad();
 
 }
 
+function setBrainTransparency(enabled){
 
-/* =========================================
-   LABEL POSITION
-========================================= */
+  brainMeshes.forEach(mesh=>{
+
+    if(targetMeshes.includes(mesh)){
+      return;
+    }
+
+    mesh.material=
+      enabled
+        ?brainTransparentMaterial.clone()
+        :brainOpaqueMaterial.clone();
+
+  });
+
+}
+
+function setTargetHighlight(enabled){
+
+  targetMeshes.forEach(mesh=>{
+
+    mesh.material=
+      enabled
+        ?occipitalMaterial.clone()
+        :occipitalNormalMaterial.clone();
+
+  });
+
+}
+
+const showLocationBtn=
+  document.getElementById(
+    "showLocation"
+  );
+
+showLocationBtn.addEventListener(
+  "click",
+  ()=>{
+
+    locationShown=
+      !locationShown;
+
+    if(locationShown){
+
+      setBrainTransparency(true);
+
+      setTargetHighlight(true);
+
+      highlighted=true;
+
+      locationLabel.classList.add(
+        "show"
+      );
+
+      showLocationBtn.classList.add(
+        "active"
+      );
+
+      showLocationBtn.textContent=
+        "📍 Hide Occipital Lobe";
+
+      controls.autoRotate=false;
+
+      rotateBtn.classList.remove(
+        "active"
+      );
+
+      rotateBtn.textContent=
+        "▶ Auto Rotate";
+
+    }else{
+
+      setBrainTransparency(false);
+
+      setTargetHighlight(
+        highlighted
+      );
+
+      locationLabel.classList.remove(
+        "show"
+      );
+
+      showLocationBtn.classList.remove(
+        "active"
+      );
+
+      showLocationBtn.textContent=
+        "📍 Show Occipital Lobe";
+
+    }
+
+  }
+);
+
+const highlightBtn=
+  document.getElementById(
+    "highlight"
+  );
+
+highlightBtn.addEventListener(
+  "click",
+  ()=>{
+
+    highlighted=
+      !highlighted;
+
+    setTargetHighlight(
+      highlighted
+    );
+
+    if(highlighted){
+
+      highlightBtn.classList.add(
+        "active"
+      );
+
+      highlightBtn.textContent=
+        "🔴 Highlight Occipital Lobe";
+
+    }else{
+
+      highlightBtn.classList.remove(
+        "active"
+      );
+
+      highlightBtn.textContent=
+        "🧠 Highlight Occipital Lobe";
+
+    }
+
+    if(locationShown){
+
+      setBrainTransparency(true);
+
+    }
+
+  }
+);
+
+const rotateBtn=
+  document.getElementById(
+    "rotate"
+  );
+
+rotateBtn.addEventListener(
+  "click",
+  ()=>{
+
+    controls.autoRotate=
+      !controls.autoRotate;
+
+    rotateBtn.classList.toggle(
+      "active",
+      controls.autoRotate
+    );
+
+    rotateBtn.textContent=
+      controls.autoRotate
+        ?"⟳ Auto Rotate"
+        :"▶ Auto Rotate";
+
+  }
+);
+
+document
+  .getElementById("reset")
+  .addEventListener(
+    "click",
+    ()=>{
+
+      camera.position.set(
+        3.2,
+        .3,
+        8.5
+      );
+
+      controls.target.set(
+        0,
+        -.3,
+        0
+      );
+
+      controls.update();
+
+      locationShown=false;
+
+      setBrainTransparency(false);
+
+      setTargetHighlight(true);
+
+      locationLabel.classList.remove(
+        "show"
+      );
+
+      showLocationBtn.classList.remove(
+        "active"
+      );
+
+      showLocationBtn.textContent=
+        "📍 Show Occipital Lobe";
+
+      highlighted=true;
+
+      highlightBtn.classList.add(
+        "active"
+      );
+
+      highlightBtn.textContent=
+        "🔴 Highlight Occipital Lobe";
+
+    }
+  );
 
 function updateLabel(){
 
-    if(
-        !medullaHighlightMesh
-    )
-        return;
+  if(!locationShown)return;
 
+  if(targetMeshes.length===0)return;
 
-    const position =
-    new THREE.Vector3();
+  const box=new THREE.Box3();
 
+  targetMeshes.forEach(mesh=>{
+    box.expandByObject(mesh);
+  });
 
-    medullaHighlightMesh
-    .getWorldPosition(
-        position
+  if(box.isEmpty())return;
+
+  const position=
+    box.getCenter(
+      new THREE.Vector3()
     );
 
+  position.project(camera);
 
-    position.project(
-        camera
-    );
-
-
-    const x =
-    (position.x + 1) /
-    2 *
+  const x=
+    (position.x+1)/2*
     canvas.clientWidth;
 
-
-    const y =
-    (-position.y + 1) /
-    2 *
+  const y=
+    (-position.y+1)/2*
     canvas.clientHeight;
 
+  locationLabel.style.left=
+    x+"px";
 
-    medullaLabel.style.left =
-    x + "px";
-
-
-    medullaLabel.style.top =
-    (y - 45) + "px";
+  locationLabel.style.top=
+    (y-35)+"px";
 
 }
-
-
-/* =========================================
-   RESIZE
-========================================= */
 
 function resize(){
 
-    const width =
+  const width=
     canvas.clientWidth;
 
-
-    const height =
+  const height=
     canvas.clientHeight;
 
+  if(width<=0||height<=0){
+    return;
+  }
 
-    if(
-        width <= 0 ||
-        height <= 0
-    )
-        return;
+  camera.aspect=
+    width/height;
 
+  camera.updateProjectionMatrix();
 
-    camera.aspect =
-    width / height;
-
-
-    camera.updateProjectionMatrix();
-
-
-    renderer.setSize(
-        width,
-        height,
-        false
-    );
+  renderer.setSize(
+    width,
+    height,
+    false
+  );
 
 }
 
-
 window.addEventListener(
-    "resize",
-    resize
+  "resize",
+  resize
 );
-
-
-/* =========================================
-   HIGHLIGHT BUTTON
-========================================= */
-
-const highlightBtn =
-document.getElementById(
-    "highlight"
-);
-
-
-highlightBtn.addEventListener(
-"click",
-function(){
-
-    highlighted =
-    !highlighted;
-
-
-    if(
-        medullaHighlightMesh
-    ){
-
-        medullaHighlightMesh.visible =
-        highlighted;
-
-    }
-
-
-    if(
-        medullaOutline
-    ){
-
-        medullaOutline.visible =
-        highlighted;
-
-    }
-
-
-    medullaLabel.classList.toggle(
-        "show",
-        highlighted
-    );
-
-
-    highlightBtn.classList.toggle(
-        "active",
-        highlighted
-    );
-
-
-    highlightBtn.textContent =
-
-    highlighted
-
-    ? "⚫ Highlight Medulla"
-
-    : "⚪ Show Medulla";
-
-});
-
-
-/* =========================================
-   AUTO ROTATE
-========================================= */
-
-const rotateBtn =
-document.getElementById(
-    "rotate"
-);
-
-
-rotateBtn.addEventListener(
-"click",
-function(){
-
-    controls.autoRotate =
-    !controls.autoRotate;
-
-
-    rotateBtn.classList.toggle(
-        "active",
-        controls.autoRotate
-    );
-
-
-    rotateBtn.textContent =
-
-    controls.autoRotate
-
-    ? "⟳ Auto Rotate"
-
-    : "▶ Auto Rotate";
-
-});
-
-
-/* =========================================
-   RESET
-========================================= */
-
-document.getElementById(
-    "reset"
-).addEventListener(
-"click",
-function(){
-
-    camera.position.set(
-        3.2,
-        0.3,
-        8.5
-    );
-
-
-    controls.target.set(
-        0,
-        -0.3,
-        0
-    );
-
-
-    controls.update();
-
-});
-
-
-/* =========================================
-   ANIMATION
-========================================= */
 
 function animate(){
 
-    requestAnimationFrame(
-        animate
-    );
+  requestAnimationFrame(
+    animate
+  );
 
+  controls.update();
 
-    controls.update();
+  updateLabel();
 
-
-    updateLabel();
-
-
-    renderer.render(
-        scene,
-        camera
-    );
+  renderer.render(
+    scene,
+    camera
+  );
 
 }
-
-
-/* =========================================
-   START
-========================================= */
 
 resize();
 
@@ -2795,125 +2541,99 @@ loadRealBrain();
 
 </script>
 
-
-<!-- ==================================================
-     MINI TEST JAVASCRIPT
-================================================== -->
-
 <script>
 
-function checkAnswer(button,correct){
+function checkAnswer(
+  button,
+  correct
+){
 
-    const parent =
+  const parent=
     button.parentElement;
 
-    const options =
+  const options=
     parent.querySelectorAll(
-        ".option"
+      ".option"
     );
 
-    options.forEach(function(option){
+  options.forEach(option=>{
+    option.classList.remove(
+      "correct",
+      "wrong"
+    );
+  });
 
-        option.classList.remove(
-            "correct",
-            "wrong"
-        );
+  if(correct){
 
-    });
+    button.classList.add(
+      "correct"
+    );
 
+  }else{
 
-    if(correct){
+    button.classList.add(
+      "wrong"
+    );
 
-        button.classList.add(
-            "correct"
-        );
+  }
 
-    }
-
-    else{
-
-        button.classList.add(
-            "wrong"
-        );
-
-    }
-
-
-    updateQuizScore();
+  updateQuizScore();
 
 }
 
-
-let answered = 0;
-
-let correctAnswers = 0;
-
-
 function updateQuizScore(){
 
-    const result =
+  const result=
     document.getElementById(
-        "quizResult"
+      "quizResult"
     );
 
+  let answered=0;
+  let correctAnswers=0;
 
-    answered = 0;
+  document
+    .querySelectorAll(".question")
+    .forEach(question=>{
 
-    correctAnswers = 0;
-
-
-    const questions =
-    document.querySelectorAll(
-        ".question"
-    );
-
-
-    questions.forEach(function(question){
-
-        const selected =
+      const selected=
         question.querySelector(
-            ".correct, .wrong"
+          ".correct,.wrong"
         );
 
+      if(selected){
 
-        if(selected){
+        answered++;
 
-            answered++;
+        if(
+          selected.classList.contains(
+            "correct"
+          )
+        ){
 
-            if(
-                selected.classList.contains(
-                    "correct"
-                )
-            ){
-
-                correctAnswers++;
-
-            }
+          correctAnswers++;
 
         }
 
+      }
+
     });
 
+  if(answered>0){
 
-    if(answered > 0){
+    result.style.display=
+      "block";
 
-        result.style.display =
-        "block";
+    result.textContent=
+      "Score: "+
+      correctAnswers+
+      " / "+
+      answered;
 
-
-        result.textContent =
-        "Score: " +
-        correctAnswers +
-        " / " +
-        answered;
-
-    }
+  }
 
 }
 
 </script>
 
-
 </body>
-
-    </html>
+</html>
