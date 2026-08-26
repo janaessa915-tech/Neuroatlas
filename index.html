@@ -1,322 +1,566 @@
+<!-- index.html -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>NeuroAtlas | Explore the Brain</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
 
-body{
-font-family:Arial,sans-serif;
-background:#07111f;
-color:#f4f7fb;
-line-height:1.6;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-nav{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:22px 7%;
-border-bottom:1px solid rgba(255,255,255,.08);
+body {
+    font-family: Arial, sans-serif;
+    background: #07111f;
+    color: #f4f7fb;
+    line-height: 1.6;
 }
 
-.logo{
-font-size:24px;
-font-weight:700;
+/* =========================
+   NAVIGATION
+========================= */
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 7%;
+    border-bottom: 1px solid rgba(255,255,255,.08);
 }
 
-.logo span{color:#4da6ff}
-
-nav a{
-color:#cbd5e1;
-text-decoration:none;
-margin-left:25px;
-font-size:14px;
+.logo {
+    font-size: 24px;
+    font-weight: 700;
 }
 
-nav a:hover{color:white}
-
-.hero{
-min-height:75vh;
-display:flex;
-align-items:center;
-padding:80px 7%;
-background:
-radial-gradient(circle at 75% 45%,rgba(40,130,255,.18),transparent 30%),
-#07111f;
+.logo span {
+    color: #4da6ff;
 }
 
-.hero-content{max-width:720px}
-
-.eyebrow{
-color:#4da6ff;
-font-size:14px;
-letter-spacing:2px;
-text-transform:uppercase;
-margin-bottom:18px;
+nav a {
+    color: #cbd5e1;
+    text-decoration: none;
+    margin-left: 25px;
+    font-size: 14px;
+    transition: .2s;
 }
 
-h1{
-font-size:clamp(48px,8vw,88px);
-line-height:1;
-margin-bottom:25px;
+nav a:hover {
+    color: white;
 }
 
-.hero h1 span{color:#4da6ff}
+/* =========================
+   HERO
+========================= */
 
-.hero p{
-max-width:650px;
-color:#aebdce;
-font-size:19px;
-margin-bottom:35px;
+.hero {
+    min-height: 75vh;
+
+    display: flex;
+    align-items: center;
+
+    padding: 80px 7%;
+
+    background:
+        radial-gradient(
+            circle at 75% 45%,
+            rgba(40,130,255,.18),
+            transparent 30%
+        ),
+        #07111f;
 }
 
-.buttons{
-display:flex;
-gap:15px;
-flex-wrap:wrap;
+.hero-content {
+    max-width: 720px;
 }
 
-.btn{
-display:inline-block;
-padding:14px 23px;
-border-radius:10px;
-text-decoration:none;
-font-weight:600;
-transition:.2s;
+.eyebrow {
+    color: #4da6ff;
+
+    font-size: 14px;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+
+    margin-bottom: 18px;
 }
 
-.primary{
-background:#2688ff;
-color:white;
+h1 {
+    font-size: clamp(48px, 8vw, 88px);
+
+    line-height: 1;
+
+    margin-bottom: 25px;
 }
 
-.secondary{
-border:1px solid #33465e;
-color:white;
+.hero h1 span {
+    color: #4da6ff;
 }
 
-.btn:hover{transform:translateY(-2px)}
+.hero p {
+    max-width: 650px;
 
-section{padding:80px 7%}
+    color: #aebdce;
 
-.section-label{
-color:#4da6ff;
-text-transform:uppercase;
-letter-spacing:2px;
-font-size:13px;
-margin-bottom:12px;
+    font-size: 19px;
+
+    margin-bottom: 35px;
 }
 
-h2{
-font-size:40px;
-margin-bottom:15px;
+/* =========================
+   BUTTONS
+========================= */
+
+.buttons {
+    display: flex;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
 }
 
-.section-intro{
-color:#aebdce;
-max-width:650px;
-margin-bottom:40px;
+.btn {
+    display: inline-block;
+
+    padding: 14px 23px;
+
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+    transition: .2s;
 }
 
-.cards{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:20px;
+.primary {
+    background: #2688ff;
+
+    color: white;
 }
 
-.card{
-background:rgba(255,255,255,.035);
-border:1px solid rgba(255,255,255,.08);
-border-radius:16px;
-padding:28px;
-transition:.25s;
+.secondary {
+    border: 1px solid #33465e;
+
+    color: white;
 }
 
-.card:hover{
-transform:translateY(-5px);
-border-color:rgba(77,166,255,.5);
+.btn:hover {
+    transform: translateY(-2px);
 }
 
-.icon{
-font-size:30px;
-margin-bottom:18px;
+/* =========================
+   SECTIONS
+========================= */
+
+section {
+    padding: 80px 7%;
 }
 
-.card h3{margin-bottom:10px}
+.section-label {
+    color: #4da6ff;
 
-.card p{
-color:#9fb0c3;
-font-size:15px;
-}
+    text-transform: uppercase;
 
-.card-link{
-display:block;
-color:inherit;
-text-decoration:none;
-}
+    letter-spacing: 2px;
 
-.bilingual{
-text-align:center;
-background:#0a1728;
+    font-size: 13px;
+
+    margin-bottom: 12px;
 }
 
-.bilingual p{
-color:#aebdce;
-max-width:700px;
-margin:auto;
+h2 {
+    font-size: 40px;
+
+    margin-bottom: 15px;
 }
 
-footer{
-padding:35px 7%;
-border-top:1px solid rgba(255,255,255,.08);
-color:#718197;
-font-size:14px;
-text-align:center;
+.section-intro {
+    color: #aebdce;
+
+    max-width: 650px;
+
+    margin-bottom: 40px;
 }
 
-@media(max-width:800px){
-nav{
-flex-direction:column;
-gap:15px;
+/* =========================
+   CARDS
+========================= */
+
+.cards {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 20px;
 }
-nav a{margin:0 8px}
-.cards{grid-template-columns:1fr}
-.hero{
-padding-top:60px;
-padding-bottom:60px;
+
+.card {
+    background: rgba(255,255,255,.035);
+
+    border: 1px solid rgba(255,255,255,.08);
+
+    border-radius: 16px;
+
+    padding: 28px;
+
+    transition: .25s;
 }
+
+.card:hover {
+    transform: translateY(-5px);
+
+    border-color: rgba(77,166,255,.5);
 }
+
+.icon {
+    font-size: 30px;
+
+    margin-bottom: 18px;
+}
+
+.card h3 {
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: #9fb0c3;
+
+    font-size: 15px;
+}
+
+.card-link {
+    display: block;
+
+    color: inherit;
+
+    text-decoration: none;
+}
+
+/* =========================
+   BILINGUAL SECTION
+========================= */
+
+.bilingual {
+    text-align: center;
+
+    background: #0a1728;
+}
+
+.bilingual p {
+    color: #aebdce;
+
+    max-width: 700px;
+
+    margin: auto;
+}
+
+/* =========================
+   ABOUT
+========================= */
+
+#about {
+    min-height: 300px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    padding: 35px 7%;
+
+    border-top: 1px solid rgba(255,255,255,.08);
+
+    color: #718197;
+
+    font-size: 14px;
+
+    text-align: center;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 800px) {
+
+    nav {
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+    nav a {
+        margin: 0 8px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        padding-top: 60px;
+
+        padding-bottom: 60px;
+    }
+
+}
+
 </style>
 </head>
 
+
 <body>
 
-<nav>
-<div class="logo">Neuro<span>Atlas</span></div>
 
-<div>
-<a href="explore.html">Explore</a>
-<a href="explore.html">Learn</a>
-<a href="#about">About</a>
-</div>
+<!-- =========================
+     NAVIGATION
+========================= -->
+
+<nav>
+
+    <div class="logo">
+        Neuro<span>Atlas</span>
+    </div>
+
+    <div>
+
+        <a href="explore.html">
+            Explore
+        </a>
+
+        <a href="explore.html">
+            Learn
+        </a>
+
+        <a href="#about">
+            About
+        </a>
+
+    </div>
+
 </nav>
+
 
 <main>
 
+
+<!-- =========================
+     HERO
+========================= -->
+
 <section class="hero">
 
-<div class="hero-content">
+    <div class="hero-content">
 
-<div class="eyebrow">
-Bilingual Neuroanatomy Learning Platform
-</div>
+        <div class="eyebrow">
+            Bilingual Neuroanatomy Learning Platform
+        </div>
 
-<h1>
-Explore the <span>Brain.</span><br>
-Understand the Connections.
-</h1>
+        <h1>
+            Explore the <span>Brain.</span><br>
+            Understand the Connections.
+        </h1>
 
-<p>
-NeuroAtlas is a free English-Arabic learning platform that helps
-students visualize neuroanatomy, understand neural relationships,
-and practice neurological localization.
-</p>
+        <p>
+            NeuroAtlas is a free English-Arabic learning platform
+            that helps students visualize neuroanatomy, understand
+            neural relationships, and practice neurological localization.
+        </p>
 
-<div class="buttons">
+        <div class="buttons">
 
-<a class="btn primary" href="explore.html">
-Explore Anatomy →
-</a>
+            <a
+                class="btn primary"
+                href="explore.html"
+            >
+                Explore Anatomy →
+            </a>
 
-<a class="btn secondary" href="explore.html">
-Start Learning
-</a>
+            <a
+                class="btn secondary"
+                href="explore.html"
+            >
+                Start Learning
+            </a>
 
-</div>
+        </div>
 
-</div>
+    </div>
 
 </section>
+
+
+<!-- =========================
+     EXPLORE
+========================= -->
 
 <section>
 
-<div class="section-label">Explore</div>
+    <div class="section-label">
+        Explore
+    </div>
 
-<h2>Navigate the nervous system.</h2>
+    <h2>
+        Navigate the nervous system.
+    </h2>
 
-<p class="section-intro">
-Move beyond memorizing isolated structures. Learn how regions,
-pathways, and functions connect.
-</p>
+    <p class="section-intro">
+        Move beyond memorizing isolated structures.
+        Learn how regions, pathways, and functions connect.
+    </p>
 
-<div class="cards">
 
-<a class="card card-link" href="explore.html">
-<div class="icon">🧠</div>
-<h3>Brain Structures</h3>
-<p>
-Explore cortical regions, deep brain structures,
-cerebellum, brainstem, and more.
-</p>
-</a>
+    <div class="cards">
 
-<a class="card card-link" href="explore.html">
-<div class="icon">〰️</div>
-<h3>Neural Pathways</h3>
-<p>
-Follow major pathways from their origins through
-their connections and destinations.
-</p>
-</a>
 
-<a class="card card-link" href="explore.html">
-<div class="icon">🧩</div>
-<h3>Clinical Localization</h3>
-<p>
-Practice connecting neurological findings with
-relevant anatomical regions.
-</p>
-</a>
+        <!-- =========================
+             BRAIN STRUCTURES
+        ========================== -->
 
-</div>
+        <a
+            class="card card-link"
+            href="explore.html"
+        >
+
+            <div class="icon">
+                🧠
+            </div>
+
+            <h3>
+                Brain Structures
+            </h3>
+
+            <p>
+                Explore cortical regions, deep brain structures,
+                cerebellum, brainstem, and more.
+            </p>
+
+        </a>
+
+
+        <!-- =========================
+             NEURAL PATHWAYS
+        ========================== -->
+
+        <a
+            class="card card-link"
+            href="pathways.html"
+        >
+
+            <div class="icon">
+                〰️
+            </div>
+
+            <h3>
+                Neural Pathways
+            </h3>
+
+            <p>
+                Follow major pathways from their origins through
+                their connections and destinations.
+            </p>
+
+        </a>
+
+
+        <!-- =========================
+             CLINICAL LOCALIZATION
+        ========================== -->
+
+        <a
+            class="card card-link"
+            href="explore.html"
+        >
+
+            <div class="icon">
+                🧩
+            </div>
+
+            <h3>
+                Clinical Localization
+            </h3>
+
+            <p>
+                Practice connecting neurological findings with
+                relevant anatomical regions.
+            </p>
+
+        </a>
+
+
+    </div>
 
 </section>
+
+
+<!-- =========================
+     BILINGUAL
+========================= -->
 
 <section class="bilingual">
 
-<div class="section-label">Learn</div>
+    <div class="section-label">
+        Learn
+    </div>
 
-<h2>Understand. Practice. Connect.</h2>
+    <h2>
+        Understand. Practice. Connect.
+    </h2>
 
-<p>
-Learn neuroanatomy in English and Arabic through structured
-explanations, interactive challenges, and clinical reasoning.
-</p>
+    <p>
+        Learn neuroanatomy in English and Arabic through
+        structured explanations, interactive challenges,
+        and clinical reasoning.
+    </p>
 
 </section>
+
+
+<!-- =========================
+     ABOUT
+========================= -->
 
 <section id="about">
 
-<div class="section-label">About NeuroAtlas</div>
+    <div class="section-label">
+        About NeuroAtlas
+    </div>
 
-<h2>Making neuroanatomy easier to understand.</h2>
+    <h2>
+        Making neuroanatomy easier to understand.
+    </h2>
 
-<p class="section-intro">
-NeuroAtlas transforms complex anatomical relationships into
-visual and interactive learning experiences for students.
-</p>
+    <p class="section-intro">
+        NeuroAtlas transforms complex anatomical relationships
+        into visual and interactive learning experiences for students.
+    </p>
 
 </section>
 
+
 </main>
 
+
+<!-- =========================
+     FOOTER
+========================= -->
+
 <footer>
-NeuroAtlas · Free bilingual neuroanatomy education
+
+    NeuroAtlas · Free bilingual neuroanatomy education
+
 </footer>
+
 
 </body>
 </html>
