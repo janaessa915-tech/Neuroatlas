@@ -3,692 +3,766 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>NeuroAtlas | Neural Pathways</title>
-
-<meta
-  name="description"
-  content="Explore major neural pathways of the human nervous system in English and Arabic."
->
-
-<style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  min-height: 100vh;
-  background:
-    radial-gradient(
-      circle at 50% -10%,
-      rgba(97, 181, 255, 0.08),
-      transparent 35%
-    ),
-    #050b13;
-  color: #eef4fa;
-  font-family: Arial, Helvetica, sans-serif;
-  line-height: 1.7;
-}
-
-a {
-  color: inherit;
-}
-
-button,
-input {
-  font: inherit;
-}
-
-nav {
-  height: 70px;
-  padding: 0 7%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(5, 11, 19, 0.88);
-  backdrop-filter: blur(12px);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-.nav-left {
-  display: flex;
-  align-items: center;
-  gap: 22px;
-}
-
-.nav-back {
-  color: #9db0c3;
-  text-decoration: none;
-  font-size: 14px;
-  transition: 0.2s;
-}
-
-.nav-back:hover {
-  color: #ffffff;
-}
-
-.nav-back:focus-visible {
-  outline: 2px solid #61b5ff;
-  outline-offset: 4px;
-  border-radius: 3px;
-}
-
-.nav-brand {
-  color: #eef4fa;
-  font-size: 14px;
-  font-weight: bold;
-  letter-spacing: 1.5px;
-}
-
-.nav-badge {
-  color: #61b5ff;
-  font-size: 10px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-
-.container {
-  width: min(1200px, 86%);
-  margin: auto;
-  padding: 75px 0 110px;
-}
-
-.hero {
-  max-width: 950px;
-}
-
-.eyebrow {
-  color: #61b5ff;
-  letter-spacing: 3px;
-  font-size: 12px;
-  text-transform: uppercase;
-  margin-bottom: 17px;
-}
-
-h1 {
-  font-size: clamp(48px, 8vw, 88px);
-  line-height: 0.94;
-  letter-spacing: -5px;
-  margin-bottom: 14px;
-}
-
-.arabic-title {
-  color: #ff4055;
-  font-size: 25px;
-  margin-bottom: 25px;
-  direction: rtl;
-  width: fit-content;
-}
-
-.hero-description {
-  color: #9dafc0;
-  max-width: 850px;
-  font-size: 18px;
-  line-height: 1.9;
-}
-
-.hero-description strong {
-  color: #dce8f2;
-}
-
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 30px;
-}
-
-.hero-button {
-  padding: 12px 18px;
-  border-radius: 9px;
-  border: 1px solid #31516d;
-  background: #0b1928;
-  color: #bdd0e0;
-  text-decoration: none;
-  font-size: 14px;
-  transition: 0.2s;
-}
-
-.hero-button:hover {
-  background: #14304a;
-  border-color: #61b5ff;
-  color: #ffffff;
-}
-
-.hero-button:focus-visible {
-  outline: 2px solid #61b5ff;
-  outline-offset: 3px;
-}
-
-.hero-button.primary {
-  background: #321218;
-  border-color: #ff4055;
-  color: #ffd9de;
-}
-
-.hero-button.primary:hover {
-  background: #4a1821;
-}
-
-.stats {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
-  margin-top: 55px;
-}
-
-.stat {
-  padding: 20px;
-  border: 1px solid #172b3e;
-  border-radius: 15px;
-  background: #091522;
-}
-
-.stat-number {
-  color: #61b5ff;
-  font-size: 25px;
-  font-weight: bold;
-}
-
-.stat-label {
-  color: #8195a8;
-  font-size: 11px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  margin-top: 4px;
-}
-
-.pathway-map {
-  margin-top: 75px;
-  padding: 30px;
-  border: 1px solid #172b3e;
-  border-radius: 20px;
-  background:
-    linear-gradient(
-      135deg,
-      rgba(97, 181, 255, 0.05),
-      rgba(255, 64, 85, 0.025)
-    ),
-    #07111c;
-}
-
-.map-header {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  align-items: flex-end;
-  margin-bottom: 22px;
-}
-
-.section-label {
-  color: #61b5ff;
-  font-size: 11px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: 7px;
-}
-
-.map-header h2 {
-  font-size: 29px;
-}
-
-.map-description {
-  color: #8195a8;
-  max-width: 700px;
-  font-size: 14px;
-}
-
-.pathway-flow {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 8px;
-  margin-top: 30px;
-}
-
-.flow-node {
-  position: relative;
-  min-height: 82px;
-  padding: 15px;
-  border: 1px solid #263951;
-  border-radius: 12px;
-  background: #0a1724;
-  text-align: center;
-}
-
-.flow-node:not(:last-child)::after {
-  content: "→";
-  position: absolute;
-  right: -15px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #ff4055;
-  font-size: 18px;
-  z-index: 2;
-}
-
-.flow-number {
-  color: #ff4055;
-  font-size: 10px;
-  letter-spacing: 1px;
-}
-
-.flow-node strong {
-  display: block;
-  color: #e7eff6;
-  font-size: 12px;
-  margin-top: 4px;
-}
-
-.flow-node span {
-  display: block;
-  color: #71879a;
-  font-size: 10px;
-  margin-top: 3px;
-}
-
-.toolbar {
-  margin-top: 70px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 25px;
-}
-
-.toolbar h2 {
-  font-size: 34px;
-}
-
-.toolbar-description {
-  color: #8195a8;
-  max-width: 700px;
-  font-size: 14px;
-}
-
-.search-wrap {
-  margin-top: 25px;
-  position: relative;
-}
-
-.search {
-  width: 100%;
-  padding: 15px 18px 15px 45px;
-  background: #091522;
-  border: 1px solid #263951;
-  border-radius: 11px;
-  outline: none;
-  color: #eef4fa;
-  font-size: 14px;
-  transition: 0.2s;
-}
-
-.search:focus {
-  border-color: #61b5ff;
-  box-shadow: 0 0 0 3px rgba(97, 181, 255, 0.08);
-}
-
-.search::placeholder {
-  color: #617487;
-}
-
-.search-icon {
-  position: absolute;
-  left: 17px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #617487;
-  font-size: 16px;
-  pointer-events: none;
-}
-
-.search-clear {
-  display: none;
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  border: 0;
-  border-radius: 7px;
-  padding: 4px 8px;
-  background: transparent;
-  color: #71879a;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.search-clear:hover {
-  background: #122538;
-  color: #ffffff;
-}
-
-.search-clear:focus-visible {
-  outline: 2px solid #61b5ff;
-  outline-offset: 2px;
-}
-
-.search-clear.visible {
-  display: block;
-}
-
-.categories {
-  margin-top: 35px;
-}
-
-.category {
-  margin-bottom: 28px;
-  padding: 30px;
-  border-radius: 19px;
-  background: #091522;
-  border: 1px solid #172b3e;
-  transition: border-color 0.2s;
-}
-
-.category:hover {
-  border-color: #263f55;
-}
-
-.category-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 25px;
-  margin-bottom: 23px;
-}
-
-.category-heading {
-  display: flex;
-  gap: 16px;
-  align-items: flex-start;
-}
-
-.category-icon {
-  width: 46px;
-  height: 46px;
-  flex: 0 0 46px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 12px;
-  background: #0c1c2c;
-  border: 1px solid #29455e;
-  font-size: 20px;
-}
-
-.category h3 {
-  color: #eef4fa;
-  font-size: 22px;
-  line-height: 1.3;
-}
-
-.category-arabic {
-  color: #ff7180;
-  font-size: 13px;
-  margin-top: 2px;
-  direction: rtl;
-  width: fit-content;
-}
-
-.category-description {
-  color: #8195a8;
-  max-width: 760px;
-  font-size: 13px;
-  margin-top: 7px;
-  line-height: 1.75;
-}
-
-.category-count {
-  color: #617487;
-  font-size: 10px;
-  letter-spacing: 1.5px;
-  white-space: nowrap;
-  text-transform: uppercase;
-  padding-top: 5px;
-}
-
-.pathway-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-}
-
-.pathway-card {
-  display: block;
-  padding: 19px;
-  min-height: 145px;
-  text-decoration: none;
-  border-radius: 13px;
-  background: #0b1928;
-  border: 1px solid #1d3449;
-  transition:
-    transform 0.2s,
-    border-color 0.2s,
-    background 0.2s;
-}
-
-.pathway-card:hover {
-  transform: translateY(-3px);
-  border-color: #61b5ff;
-  background: #0d2032;
-}
-
-.pathway-card:focus-visible {
-  outline: 2px solid #61b5ff;
-  outline-offset: 3px;
-}
-
-.pathway-card h4 {
-  color: #eaf2f8;
-  font-size: 15px;
-  line-height: 1.45;
-  margin-bottom: 3px;
-}
-
-.pathway-arabic {
-  color: #ff6a79;
-  font-size: 11px;
-  margin-bottom: 8px;
-  direction: rtl;
-  width: fit-content;
-}
-
-.pathway-card p {
-  color: #71879a;
-  font-size: 12px;
-  line-height: 1.6;
-}
-
-.pathway-arrow {
-  display: block;
-  color: #4e7797;
-  font-size: 12px;
-  margin-top: 10px;
-}
-
-.no-results {
-  display: none;
-  margin-top: 25px;
-  padding: 30px;
-  border: 1px dashed #263951;
-  border-radius: 14px;
-  text-align: center;
-  color: #8195a8;
-}
-
-.no-results strong {
-  color: #dce8f2;
-}
-
-.learning-section {
-  margin-top: 75px;
-}
-
-.learning-section h2 {
-  font-size: 31px;
-  margin-bottom: 25px;
-}
-
-.learning-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-}
-
-.learning-card {
-  padding: 25px;
-  background: #091522;
-  border: 1px solid #172b3e;
-  border-radius: 17px;
-}
-
-.learning-card-number {
-  color: #ff4055;
-  font-size: 11px;
-  letter-spacing: 2px;
-}
-
-.learning-card h3 {
-  margin-top: 8px;
-  margin-bottom: 10px;
-  font-size: 17px;
-}
-
-.learning-card p {
-  color: #8195a8;
-  font-size: 13px;
-  line-height: 1.8;
-}
-
-.footer {
-  margin-top: 80px;
-  padding-top: 25px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  color: #617487;
-  font-size: 11px;
-  text-align: center;
-}
-
-.hidden {
-  display: none !important;
-}
-
-@media (max-width: 950px) {
-  .stats {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .pathway-flow {
-    grid-template-columns: 1fr;
-  }
-
-  .flow-node:not(:last-child)::after {
-    content: "↓";
-    right: 50%;
-    top: auto;
-    bottom: -19px;
-    transform: translateX(50%);
-  }
-
-  .pathway-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .learning-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 700px) {
-  nav {
-    padding: 0 5%;
-  }
-
-  .nav-brand,
-  .nav-badge {
-    display: none;
-  }
-
-  .container {
-    width: 90%;
-    padding-top: 55px;
-  }
-
-  h1 {
-    letter-spacing: -3px;
-  }
-
-  .stats {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .toolbar,
-  .map-header {
-    display: block;
-  }
-
-  .toolbar h2 {
-    margin-bottom: 7px;
-  }
-
-  .category {
-    padding: 22px;
-  }
-
-  .category-header {
-    display: block;
-  }
-
-  .category-count {
-    margin-top: 15px;
-    display: block;
-  }
-
-  .pathway-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 450px) {
-  .stats {
-    grid-template-columns: 1fr;
-  }
-
-  .hero-description {
-    font-size: 16px;
-  }
-
-  .category-heading {
-    gap: 11px;
-  }
-
-  .category-icon {
-    width: 40px;
-    height: 40px;
-    flex-basis: 40px;
-    font-size: 17px;
-  }
-
-  .search {
-    padding-right: 50px;
-  }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>NeuroAtlas | Neural Pathways</title>
+
+  <meta
+    name="description"
+    content="Explore major neural pathways of the human nervous system in English and Arabic."
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(
+          circle at 50% -10%,
+          rgba(97, 181, 255, 0.08),
+          transparent 35%
+        ),
+        #050b13;
+      color: #eef4fa;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.7;
+    }
+
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    nav {
+      height: 70px;
+      padding: 0 7%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(5, 11, 19, 0.88);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .nav-back {
+      color: #9db0c3;
+      text-decoration: none;
+      font-size: 14px;
+      transition: 0.2s;
+    }
+
+    .nav-back:hover {
+      color: #ffffff;
+    }
+
+    .nav-brand {
+      color: #eef4fa;
+      font-size: 14px;
+      font-weight: bold;
+      letter-spacing: 1.5px;
+    }
+
+    .nav-badge {
+      color: #61b5ff;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .container {
+      width: min(1200px, 86%);
+      margin: auto;
+      padding: 75px 0 110px;
+    }
+
+    .hero {
+      max-width: 950px;
+    }
+
+    .eyebrow {
+      color: #61b5ff;
+      letter-spacing: 3px;
+      font-size: 12px;
+      text-transform: uppercase;
+      margin-bottom: 17px;
+    }
+
+    h1 {
+      font-size: clamp(48px, 8vw, 88px);
+      line-height: 0.94;
+      letter-spacing: -5px;
+      margin-bottom: 14px;
+    }
+
+    .arabic-title {
+      color: #ff4055;
+      font-size: 25px;
+      margin-bottom: 25px;
+    }
+
+    .hero-description {
+      color: #9dafc0;
+      max-width: 850px;
+      font-size: 18px;
+      line-height: 1.9;
+    }
+
+    .hero-description strong {
+      color: #dce8f2;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 30px;
+    }
+
+    .hero-button {
+      padding: 12px 18px;
+      border-radius: 9px;
+      border: 1px solid #31516d;
+      background: #0b1928;
+      color: #bdd0e0;
+      text-decoration: none;
+      font-size: 14px;
+      transition: 0.2s;
+    }
+
+    .hero-button:hover {
+      background: #14304a;
+      border-color: #61b5ff;
+      color: #ffffff;
+    }
+
+    .hero-button.primary {
+      background: #321218;
+      border-color: #ff4055;
+      color: #ffd9de;
+    }
+
+    .hero-button.primary:hover {
+      background: #4a1821;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 55px;
+    }
+
+    .stat {
+      padding: 20px;
+      border: 1px solid #172b3e;
+      border-radius: 15px;
+      background: #091522;
+    }
+
+    .stat-number {
+      color: #61b5ff;
+      font-size: 25px;
+      font-weight: bold;
+    }
+
+    .stat-label {
+      color: #8195a8;
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .pathway-map {
+      margin-top: 75px;
+      padding: 30px;
+      border: 1px solid #172b3e;
+      border-radius: 20px;
+      background:
+        linear-gradient(
+          135deg,
+          rgba(97, 181, 255, 0.05),
+          rgba(255, 64, 85, 0.025)
+        ),
+        #07111c;
+    }
+
+    .map-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: flex-end;
+      margin-bottom: 22px;
+    }
+
+    .section-label {
+      color: #61b5ff;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 7px;
+    }
+
+    .map-header h2 {
+      font-size: 29px;
+    }
+
+    .map-description {
+      color: #8195a8;
+      max-width: 700px;
+      font-size: 14px;
+    }
+
+    .pathway-flow {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin-top: 30px;
+    }
+
+    .flow-node {
+      position: relative;
+      min-height: 82px;
+      padding: 15px;
+      border: 1px solid #263951;
+      border-radius: 12px;
+      background: #0a1724;
+      text-align: center;
+    }
+
+    .flow-node:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      right: -15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #ff4055;
+      font-size: 18px;
+      z-index: 2;
+    }
+
+    .flow-number {
+      color: #ff4055;
+      font-size: 10px;
+      letter-spacing: 1px;
+    }
+
+    .flow-node strong {
+      display: block;
+      color: #e7eff6;
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    .flow-node span {
+      display: block;
+      color: #71879a;
+      font-size: 10px;
+      margin-top: 3px;
+    }
+
+    .toolbar {
+      margin-top: 70px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 25px;
+    }
+
+    .toolbar h2 {
+      font-size: 34px;
+    }
+
+    .toolbar-description {
+      color: #8195a8;
+      max-width: 700px;
+      font-size: 14px;
+    }
+
+    .search-wrap {
+      margin-top: 25px;
+      position: relative;
+    }
+
+    .search {
+      width: 100%;
+      padding: 15px 18px 15px 45px;
+      background: #091522;
+      border: 1px solid #263951;
+      border-radius: 11px;
+      outline: none;
+      color: #eef4fa;
+      font-size: 14px;
+      transition: 0.2s;
+    }
+
+    .search:focus {
+      border-color: #61b5ff;
+      box-shadow: 0 0 0 3px rgba(97, 181, 255, 0.08);
+    }
+
+    .search::placeholder {
+      color: #617487;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 17px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #617487;
+      font-size: 16px;
+      pointer-events: none;
+    }
+
+    .categories {
+      margin-top: 35px;
+    }
+
+    .category {
+      margin-bottom: 28px;
+      padding: 30px;
+      border-radius: 19px;
+      background: #091522;
+      border: 1px solid #172b3e;
+      transition: border-color 0.2s;
+    }
+
+    .category:hover {
+      border-color: #263f55;
+    }
+
+    .category-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 25px;
+      margin-bottom: 23px;
+    }
+
+    .category-heading {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .category-icon {
+      width: 46px;
+      height: 46px;
+      flex: 0 0 46px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      background: #0c1c2c;
+      border: 1px solid #29455e;
+      font-size: 20px;
+    }
+
+    .category h3 {
+      color: #eef4fa;
+      font-size: 22px;
+      line-height: 1.3;
+    }
+
+    .category-arabic {
+      color: #ff7180;
+      font-size: 13px;
+      margin-top: 2px;
+    }
+
+    .category-description {
+      color: #8195a8;
+      max-width: 760px;
+      font-size: 13px;
+      margin-top: 7px;
+      line-height: 1.75;
+    }
+
+    .category-count {
+      color: #617487;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      white-space: nowrap;
+      text-transform: uppercase;
+      padding-top: 5px;
+    }
+
+    .pathway-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .pathway-card {
+      display: block;
+      width: 100%;
+      padding: 19px;
+      min-height: 145px;
+      text-decoration: none;
+      border-radius: 13px;
+      background: #0b1928;
+      border: 1px solid #1d3449;
+      transition:
+        transform 0.2s,
+        border-color 0.2s,
+        background 0.2s;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .pathway-card:hover {
+      transform: translateY(-3px);
+      border-color: #61b5ff;
+      background: #0d2032;
+    }
+
+    .pathway-card:focus-visible {
+      outline: 2px solid #61b5ff;
+      outline-offset: 3px;
+    }
+
+    .pathway-card h4 {
+      color: #eaf2f8;
+      font-size: 15px;
+      line-height: 1.45;
+      margin-bottom: 3px;
+    }
+
+    .pathway-arabic {
+      color: #ff6a79;
+      font-size: 11px;
+      margin-bottom: 8px;
+    }
+
+    .pathway-card p {
+      color: #71879a;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .pathway-arrow {
+      display: block;
+      color: #4e7797;
+      font-size: 12px;
+      margin-top: 10px;
+    }
+
+    .no-results {
+      display: none;
+      margin-top: 25px;
+      padding: 30px;
+      border: 1px dashed #263951;
+      border-radius: 14px;
+      text-align: center;
+      color: #8195a8;
+    }
+
+    .learning-section {
+      margin-top: 75px;
+    }
+
+    .learning-section h2 {
+      font-size: 31px;
+      margin-bottom: 25px;
+    }
+
+    .learning-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .learning-card {
+      padding: 25px;
+      background: #091522;
+      border: 1px solid #172b3e;
+      border-radius: 17px;
+    }
+
+    .learning-card-number {
+      color: #ff4055;
+      font-size: 11px;
+      letter-spacing: 2px;
+    }
+
+    .learning-card h3 {
+      margin-top: 8px;
+      margin-bottom: 10px;
+      font-size: 17px;
+    }
+
+    .learning-card p {
+      color: #8195a8;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .footer {
+      margin-top: 80px;
+      padding-top: 25px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      color: #617487;
+      font-size: 11px;
+      text-align: center;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .pathway-modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 25px;
+      background: rgba(0, 0, 0, 0.72);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+    }
+
+    .pathway-modal.open {
+      display: flex;
+    }
+
+    .modal-panel {
+      width: min(850px, 100%);
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 34px;
+      border: 1px solid #29455e;
+      border-radius: 20px;
+      background: #08131f;
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.55);
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 18px;
+      width: 38px;
+      height: 38px;
+      border: 1px solid #29455e;
+      border-radius: 50%;
+      background: #0b1928;
+      color: #9dafc0;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    .modal-close:hover {
+      color: #ffffff;
+      border-color: #61b5ff;
+    }
+
+    .modal-kicker {
+      color: #61b5ff;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .modal-title {
+      padding-right: 45px;
+      font-size: clamp(28px, 5vw, 48px);
+      line-height: 1.1;
+    }
+
+    .modal-arabic {
+      color: #ff7180;
+      font-size: 16px;
+      margin-top: 8px;
+    }
+
+    .modal-description {
+      color: #9dafc0;
+      margin-top: 18px;
+      line-height: 1.8;
+    }
+
+    .modal-sections {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 13px;
+      margin-top: 28px;
+    }
+
+    .modal-section {
+      padding: 18px;
+      border: 1px solid #172b3e;
+      border-radius: 13px;
+      background: #0b1928;
+    }
+
+    .modal-section h3 {
+      color: #61b5ff;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 7px;
+    }
+
+    .modal-section p {
+      color: #9dafc0;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .modal-note {
+      margin-top: 20px;
+      padding: 15px;
+      border-left: 3px solid #ff4055;
+      background: #160d11;
+      color: #aebdca;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 950px) {
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .pathway-flow {
+        grid-template-columns: 1fr;
+      }
+
+      .flow-node:not(:last-child)::after {
+        content: "↓";
+        right: 50%;
+        top: auto;
+        bottom: -19px;
+        transform: translateX(50%);
+      }
+
+      .pathway-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .learning-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 700px) {
+      nav {
+        padding: 0 5%;
+      }
+
+      .nav-brand,
+      .nav-badge {
+        display: none;
+      }
+
+      .container {
+        width: 90%;
+        padding-top: 55px;
+      }
+
+      h1 {
+        letter-spacing: -3px;
+      }
+
+      .stats {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .toolbar,
+      .map-header {
+        display: block;
+      }
+
+      .toolbar h2 {
+        margin-bottom: 7px;
+      }
+
+      .category {
+        padding: 22px;
+      }
+
+      .category-header {
+        display: block;
+      }
+
+      .category-count {
+        margin-top: 15px;
+        display: block;
+      }
+
+      .pathway-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .modal-sections {
+        grid-template-columns: 1fr;
+      }
+
+      .modal-panel {
+        padding: 25px;
+      }
+    }
+
+    @media (max-width: 450px) {
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-description {
+        font-size: 16px;
+      }
+
+      .category-heading {
+        gap: 11px;
+      }
+
+      .category-icon {
+        width: 40px;
+        height: 40px;
+        flex-basis: 40px;
+        font-size: 17px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
 <nav>
   <div class="nav-left">
-
     <a
       class="nav-back"
       href="./explore.html"
@@ -699,7 +773,6 @@ h1 {
     <div class="nav-brand">
       NEUROATLAS
     </div>
-
   </div>
 
   <div class="nav-badge">
@@ -709,1256 +782,1299 @@ h1 {
 
 <main class="container">
 
-<section class="hero">
+  <section class="hero">
 
-  <div class="eyebrow">
-    Neural Pathways · المسارات العصبية
-  </div>
-
-  <h1>
-    Neural Pathways
-  </h1>
-
-  <div class="arabic-title">
-    المسارات العصبية
-  </div>
-
-  <p class="hero-description">
-    Follow information through the nervous system. Explore how signals
-    travel from their <strong>origin</strong>, through their anatomical
-    pathway, to their <strong>destination</strong> — and understand where
-    lesions produce neurological deficits.
-  </p>
-
-  <div class="hero-actions">
-
-    <a
-      class="hero-button primary"
-      href="#pathways"
-    >
-      〰️ Explore Pathways
-    </a>
-
-    <a
-      class="hero-button"
-      href="#how-to-learn"
-    >
-      🧠 How to Study
-    </a>
-
-    <a
-      class="hero-button"
-      href="./explore.html"
-    >
-      ← Brain Structures
-    </a>
-
-  </div>
-
-</section>
-
-<section class="stats">
-
-  <div class="stat">
-    <div class="stat-number">8</div>
-    <div class="stat-label">Major Systems</div>
-  </div>
-
-  <div class="stat">
-    <div class="stat-number">30+</div>
-    <div class="stat-label">Core Pathways</div>
-  </div>
-
-  <div class="stat">
-    <div class="stat-number">5</div>
-    <div class="stat-label">Key Questions</div>
-  </div>
-
-  <div class="stat">
-    <div class="stat-number">EN / AR</div>
-    <div class="stat-label">Bilingual Learning</div>
-  </div>
-
-</section>
-
-<section class="pathway-map">
-
-  <div class="map-header">
-
-    <div>
-
-      <div class="section-label">
-        The Big Picture
-      </div>
-
-      <h2>
-        How to Think About a Pathway
-      </h2>
-
+    <div class="eyebrow">
+      Neural Pathways · المسارات العصبية
     </div>
 
-    <p class="map-description">
-      Every pathway can be studied as a connected sequence rather than as
-      isolated anatomical structures.
+    <h1>
+      Neural Pathways
+    </h1>
+
+    <div class="arabic-title">
+      المسارات العصبية
+    </div>
+
+    <p class="hero-description">
+      Follow information through the nervous system. Explore how signals
+      travel from their <strong>origin</strong>, through their anatomical
+      pathway, to their <strong>destination</strong> — and understand where
+      lesions produce neurological deficits.
     </p>
 
-  </div>
+    <div class="hero-actions">
 
-  <div class="pathway-flow">
+      <a
+        class="hero-button primary"
+        href="#pathways"
+      >
+        〰️ Explore Pathways
+      </a>
 
-    <div class="flow-node">
-      <div class="flow-number">01</div>
-      <strong>Origin</strong>
-      <span>Where does the signal begin?</span>
+      <a
+        class="hero-button"
+        href="#how-to-learn"
+      >
+        🧠 How to Study
+      </a>
+
+      <a
+        class="hero-button"
+        href="./explore.html"
+      >
+        ← Brain Structures
+      </a>
+
     </div>
 
-    <div class="flow-node">
-      <div class="flow-number">02</div>
-      <strong>First Neuron</strong>
-      <span>Initial neural segment</span>
+  </section>
+
+  <section class="stats">
+
+    <div class="stat">
+      <div class="stat-number">8</div>
+      <div class="stat-label">Major Systems</div>
     </div>
 
-    <div class="flow-node">
-      <div class="flow-number">03</div>
-      <strong>Relay / Crossing</strong>
-      <span>Synapse and decussation</span>
+    <div class="stat">
+      <div class="stat-number">30+</div>
+      <div class="stat-label">Core Pathways</div>
     </div>
 
-    <div class="flow-node">
-      <div class="flow-number">04</div>
-      <strong>Second / Third Neuron</strong>
-      <span>Ascending or descending</span>
+    <div class="stat">
+      <div class="stat-number">5</div>
+      <div class="stat-label">Key Questions</div>
     </div>
 
-    <div class="flow-node">
-      <div class="flow-number">05</div>
-      <strong>Destination</strong>
-      <span>Final target region</span>
+    <div class="stat">
+      <div class="stat-number">EN / AR</div>
+      <div class="stat-label">Bilingual Learning</div>
     </div>
 
-  </div>
+  </section>
 
-</section>
+  <section class="pathway-map">
 
-<section id="pathways">
+    <div class="map-header">
 
-  <div class="toolbar">
+      <div>
+        <div class="section-label">
+          The Big Picture
+        </div>
 
-    <div>
-
-      <div class="section-label">
-        Explore
+        <h2>
+          How to Think About a Pathway
+        </h2>
       </div>
 
-      <h2>
-        Choose a Pathway System
-      </h2>
-
-      <p class="toolbar-description">
-        Start with a major system, then open an individual pathway to study
-        its anatomy, function, course, crossings, clinical localization,
-        and key relationships.
+      <p class="map-description">
+        Every pathway can be studied as a connected sequence rather than as
+        isolated anatomical structures.
       </p>
 
     </div>
 
-  </div>
+    <div class="pathway-flow">
 
-  <div class="search-wrap">
+      <div class="flow-node">
+        <div class="flow-number">01</div>
+        <strong>Origin</strong>
+        <span>Where does the signal begin?</span>
+      </div>
 
-    <span class="search-icon" aria-hidden="true">
-      ⌕
-    </span>
+      <div class="flow-node">
+        <div class="flow-number">02</div>
+        <strong>First Neuron</strong>
+        <span>Initial neural segment</span>
+      </div>
 
-    <input
-      id="pathwaySearch"
-      class="search"
-      type="search"
-      autocomplete="off"
-      spellcheck="false"
-      placeholder="Search pathways... e.g. corticospinal, optic, dorsal column"
-      aria-label="Search neural pathways"
-      aria-controls="categories"
-    >
+      <div class="flow-node">
+        <div class="flow-number">03</div>
+        <strong>Relay / Crossing</strong>
+        <span>Synapse and decussation</span>
+      </div>
+
+      <div class="flow-node">
+        <div class="flow-number">04</div>
+        <strong>Second / Third Neuron</strong>
+        <span>Ascending or descending</span>
+      </div>
+
+      <div class="flow-node">
+        <div class="flow-number">05</div>
+        <strong>Destination</strong>
+        <span>Final target region</span>
+      </div>
+
+    </div>
+
+  </section>
+
+  <section id="pathways">
+
+    <div class="toolbar">
+
+      <div>
+        <div class="section-label">
+          Explore
+        </div>
+
+        <h2>
+          Choose a Pathway System
+        </h2>
+
+        <p class="toolbar-description">
+          Search by pathway, function, structure, or Arabic terminology.
+          Select any pathway to open its study panel.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="search-wrap">
+
+      <span class="search-icon">
+        ⌕
+      </span>
+
+      <input
+        id="pathwaySearch"
+        class="search"
+        type="search"
+        autocomplete="off"
+        placeholder="Search pathways... e.g. corticospinal, optic, dorsal column"
+        aria-label="Search neural pathways"
+      >
+
+    </div>
+
+    <div id="categories" class="categories">
+
+      <!-- MOTOR -->
+
+      <section class="category">
+
+        <div class="category-header">
+
+          <div class="category-heading">
+
+            <div class="category-icon">
+              ⚡
+            </div>
+
+            <div>
+
+              <h3>
+                Motor Pathways
+              </h3>
+
+              <div class="category-arabic">
+                المسارات الحركية
+              </div>
+
+              <p class="category-description">
+                Descending systems that carry motor commands from the brain
+                toward the spinal cord and muscles.
+              </p>
+
+            </div>
+
+          </div>
+
+          <div class="category-count">
+            6 pathways
+          </div>
+
+        </div>
+
+        <div class="pathway-grid">
+
+          <button
+            class="pathway-card"
+            type="button"
+            data-title="Corticospinal Tract"
+            data-arabic="السبيل القشري النخاعي"
+            data-category="Motor Pathway"
+            data-search="corticospinal pyramidal motor tract voluntary movement upper motor neuron"
+            data-description="The major descending motor pathway for voluntary skilled movement."
+            data-origin="Primary motor cortex and related motor cortical areas."
+            data-course="Corona radiata → internal capsule → cerebral peduncle → pons → medullary pyramids."
+            data-crossing="Most corticospinal fibers cross at the pyramidal decussation in the caudal medulla."
+            data-destination="Lateral corticospinal tract and spinal motor circuitry."
+            data-clinical="Lesion localization depends on whether damage occurs above or below the pyramidal decussation."
+          >
+            <h4>Corticospinal Tract</h4>
+            <div class="pathway-arabic">السبيل القشري النخاعي</div>
+            <p>Major descending pathway for voluntary skilled movement.</p>
+            <span class="pathway-arrow">Open pathway →</span>
+          </button>
+
+          <button
+            class="pathway-card"
+            type="button"
+            data-title="Corticobulbar Tract"
+            data-arabic="السبيل القشري البصلي"
+            data-category="Motor Pathway"
+            data-search="corticobulbar motor cranial nerves face tongue swallowing"
+            data-description="Carries cortical motor commands to motor nuclei of cranial nerves."
+            data-origin="Motor regions of the cerebral cortex."
+            data-course="Fibers descend through the corona radiata and genu of the internal capsule toward the brainstem."
+            data-crossing="Many projections are bilateral, while some cranial motor systems have stronger contralateral cortical input."
+            data-destination="Motor cranial nerve nuclei in the brainstem."
+            data-clinical="Patterns of facial, tongue, jaw, or swallowing weakness help localize corticobulbar lesions."
+          >
+            <h4>Corticobulbar Tract</h4>
+            <div class="pathway-arabic">السبيل القشري البصلي</div>
+            <p>Carries cortical motor commands to cranial motor nuclei.</p>
+            <span class="pathway-arrow">Open pathway →</span>
+          </button>
+
+          <button
+            class="pathway-card"
+            type="button"
+            data-title="Rubrospinal Tract"
+            data-arabic="السبيل الأحمر النخاعي"
+            data-category="Motor Pathway"
+            data-search="rubrospinal red nucleus motor flexor"
+            data-description="A descending brainstem pathway associated with motor control."
+            data-origin="Red nucleus of the midbrain."
+            data-course="Fibers cross near the level of the red nucleus and descend mainly in the lateral funiculus."
+            data-crossing="The tract crosses in the ventral tegmental decussation."
+            data-destination="Interneuronal circuits of the spinal cord."
+            data-clinical="In humans, the rubrospinal tract has a more limited role than the corticospinal system."
+          >
+            <h4>Rubrospinal Tract</h4>
+            <div class="pathway-arabic">السبيل الأحمر النخاعي</div>
+            <p>Descending brainstem pathway associated with motor control.</p>
+            <span class="pathway-arrow">Open pathway →</span>
+          </button>
+
+          <button
+            class="pathway-card"
+            type="button"
+            data-title="Vestibulospinal Tracts"
+            data-arabic="السبل الدهليزية النخاعية"
+            data-category="Motor Pathway"
+            data-search="vestibulospinal vestibular posture balance antigravity"
+            data-description="Descending vestibular pathways that help regulate posture, balance, and antigravity activity."
+            data-origin="Vestibular nuclei of the brainstem."
+            data-course="Medial and lateral vestibulospinal components descend through the brainstem and spinal cord."
+            data-crossing="The lateral tract is predominantly uncrossed; the medial tract has bilateral projections."
+            data-destination="Spinal interneurons and motor circuits controlling axial and postural muscles."
+            data-clinical="Damage can affect balance, postural control, and coordinated head and body responses."
+          >
+            <h4>Vestibulospinal Tracts</h4>
+            <div class="pathway-arabic">السبل الدهليزية النخاعية</div>
+            <p>Help regulate posture, balance, and antigravity activity.</p>
+            <span class="pathway-arrow">Open pathway →</span>
+          </button>
+
+          <button
+            class="pathway-card"
+            type="button"
+            data-title="Reticulospinal Tracts"
+            data-arabic="السبل الشبكية النخاعية"
+            data-category="Motor Pathway"
+            data-search="reticulospinal reticular formation posture locomotion"
+            data-description="Descending pathways involved in posture, locomotion, and motor modulation."
+            data-origin="Reticular formation of the brainstem."
+            data-course="Fibers descend through the brainstem into the spinal cord."
+            data-crossing="Projections can be bilateral and vary between pontine and medullary systems."
+            data-destination="Spinal interneuronal networks involved in posture and locomotion."
+            data-clinical="Important for understanding automatic postural and locomotor control."
+          >
+            <h4>Reticulospinal Tracts</h4>
+            <div class="pathway-arabic">السبل الشبكية النخاعية</div>
+            <p>Participate in posture, locomotion, and motor modulation.</p>
+            <span class="pathway-arrow">Open pathway →</span>
+          </button>
+
+          <button
+            class="pathway-card"
+            type="button"
+            data-title="Tectospinal Tract"
+            data-arabic="السبيل السقفي النخاعي"
+            data-category="Motor Pathway"
+            data-search="tectospinal superior colliculus head neck reflex"
+            data-description="Coordinates reflexive head and neck orientation toward sensory stimuli."
+            data-origin="Superior colliculus of the midbrain."
+            data-course="Fibers descend through the brainstem toward the upper cervical spinal cord."
+            data-crossing="Fibers cross in the dorsal tegmental decussation."
+            data-destination="Cervical spinal motor circuitry."
+            data-clinical="Supports reflexive orientation of the head and neck."
+          >
+            <h4>Tectospinal Tract</h4>
+            <div class="pathway-arabic">السبيل السقفي النخاعي</div>
+            <p>Coordinates reflexive head and neck orientation.</p>
+            <span class="pathway-arrow">Open pathway →</span>
+          </button>
+
+        </div>
+
+      </section>
+
+      <!-- SOMATOSENSORY -->
+
+      <section class="category">
+
+        <div class="category-header">
+
+          <div class="category-heading">
+
+            <div class="category-icon">
+              ◈
+            </div>
+
+            <div>
+
+              <h3>Somatosensory Pathways</h3>
+
+              <div class="category-arabic">
+                المسارات الحسية الجسدية
+              </div>
+
+              <p class="category-description">
+                Ascending pathways carrying touch, vibration, proprioception,
+                pain, temperature, and related somatic sensations.
+              </p>
+
+            </div>
+
+          </div>
+
+          <div class="category-count">
+            5 pathways
+          </div>
+
+        </div>
+
+        <div class="pathway-grid">
+
+          <button
+            class="pathway-card"
+            type="button"
+            data-title="Dorsal Column–Medial Lemniscus"
+            data-arabic="العمود الظهري - الليمينسق الإنسي"
+            data-category="Somatosensory Pathway"
+            data-search="dorsal column medial lemniscus dcml touch vibration proprioception fine touch"
+            data-description="Ascending system for fine touch, vibration, and conscious proprioception."
+            data-origin="Peripheral sensory receptors and first-order sensory neurons."
+            data-course="Dorsal columns → gracile/cuneate nuclei → medial lemniscus → thalamus."
+            data-crossing="Second-order fibers cross in the caudal medulla as internal arcuate fibers."
+            data-destination="Ventral posterolateral nucleus of the thalamus, then primary somatosensory cortex."
+            data-clinical="Lesions produce characteristic deficits in discriminative touch, vibration, and proprioception."
+          >
+            <h4>Dorsal Column–Medial Lemniscus</h4>
+            <div class="pathway-arabic">العمود الظهري - الليمينسق الإنسي</div>
+            <p>Fine touch, vibration, and conscious proprioception.</p>
+            <span class="pathway-arrow">Open pathway →</span>
+          </button>
+
+          <button
+            class="pathway-card"
+            type="button"
+            data-title="Spinothalamic Tract"
+            data-arabic="السبيل الشوكي المهادي"
+            data-category="Somatosensory Pathway"
+            data-search="spinothalamic pain temperature crude touch anterolateral"
+            data-description="Major ascending pathway for pain, temperature, and crude touch."
+            data-origin="Peripheral nociceptive and thermoreceptive sensory neurons."
+            data-course="Dorsal horn → anterior white commissure → anterolateral spinal cord → brainstem → thalamus."
+            data-crossing="Second-order fibers usually cross near their spinal level of entry."
+            data-destination="Thalamic nuclei and then somatosensory cortical regions."
+            data-clinical="Spinal lesions can cause contralateral pain and temperature deficits below the lesion."
+          >
+            <h4>Spinothalamic Tract</h4>
+            <div class="pathway-arabic">السبيل الشوكي المهادي</div>
+            <p>Important pathway for pain, temperature, and crude touch.</p>
+            <span class="pathway-arrow">Open pathway →</span>
+          </button>
+
+          <button
+            class="pathway-card"
+            type="button"
+            data-title="Spinocerebellar Tracts"
+            data-arabic="السبل الشوكية المخيخية"
+            data-category="Somatosensory Pathway"
+            data-search="spinocerebellar unconscious proprioception cerebellum coordination"
+            data-description="Carry proprioceptive information to the cerebellum for coordination."
+            data-origin="Proprioceptors and spinal interneuronal circuits."
+            data-course="Spinal cord → spinocerebellar pathways → cerebellum."
+            data-crossing="Crossing patterns differ between individual spinocerebellar tracts."
+            data-destination="Cerebellar cortex."
+            data-clinical="Damage can impair coordination and proprioceptive feedback used for movement."
+          >
+            <h4>Spinocerebellar Tracts</h4>
+            <div class="pathway-arabic">السبل الشوكية المخيخية</div>
+            <p>Carry proprioceptive information to the cerebellum.</p>
+            <span class="pathway-arrow">Open pathway →</span>
+          </button>
+
+          <button
+            class="pathway-card"
+            type="button"
+            data-title="Trigeminal Sensory Pathway"
+            data-arabic="المسار الحسي للعصب ثلاثي التوائم"
+            data-category="Somatosensory Pathway"
+            data-search="trigeminal sensory face touch pain temperature cranial nerve V"
+            data-description="Carries major somatic sensory information from the face."
+            data-origin="Sensory receptors of the face and cranial structures."
+            data-course="Trigeminal nerve → trigeminal sensory nuclei → trigeminothalamic pathways."
+            data-crossing="Many second-order fibers cross before ascending to the thalamus."
+            data-destination="Ventral posteromedial thalamus and somatosensory cortex."
+            data-clinical="Lesions can produce characteristic facial sensory deficits."
+          >
+            <h4>Trigeminal Sensory Pathway</h4>
+            <div class="pathway-arabic">المسار الحسي للعصب ثلاثي التوائم</div>
+            <p>Carries major somatic sensory information from the face.</p>
+            <span class="pathway-arrow">Open pathway →</span>
+          </button>
+
+          <button
+            class="pathway-card"
+            type="button"
+            data-title="Solitary Tract"
+            data-arabic="السبيل المنفرد"
+            data-category="Somatosensory Pathway"
+            data-search="solitary tract visceral taste sensory nucleus"
+            data-description="Carries important visceral and taste-related sensory information."
+            data-origin="Visceral and taste-related sensory receptors."
+            data-course="Cranial sensory fibers enter the brainstem and descend within the solitary tract."
+            data-crossing="Subsequent pathways differ according to visceral or gustatory modality."
+            data-destination="Nucleus of the solitary tract and its associated ascending networks."
+            data-clinical="Important for understanding visceral sensory and taste pathways."
+          >
+            <h4>Solitary Tract</h4>
+            <div class="pathway-arabic">السبيل المنفرد</div>
+            <p>Carries important visceral and taste-related sensory information.</p>
+            <span class="pathway-arrow">Open pathway →</span>
+          </button>
+
+        </div>
+
+      </section>
+
+      <!-- VISUAL -->
+
+      <section class="category">
+
+        <div class="category-header">
+
+          <div class="category-heading">
+
+            <div class="category-icon">
+              ◉
+            </div>
+
+            <div>
+
+              <h3>Visual Pathways</h3>
+
+              <div class="category-arabic">
+                المسارات البصرية
+              </div>
+
+              <p class="category-description">
+                Neural routes carrying visual information from the retina
+                through optic pathways to cortical and subcortical targets.
+              </p>
+
+            </div>
+
+          </div>
+
+          <div class="category-count">
+            3 pathways
+          </div>
+
+        </div>
+
+        <div class="pathway-grid">
+
+          <button
+            class="pathway-card"
+            type="button"
+            data-title="Optic Pathway"
+            data-arabic="المسار البصري"
+            data-category="Visual Pathway"
+            data-search="optic visual retina optic nerve chiasm tract visual cortex"
+            data-description="Carries visual information from the retina toward visual cortical and subcortical targets."
+            data-origin="Photoreceptors and retinal neural circuits."
+            data-course="Retina → optic nerve → optic chiasm → optic tract → lateral geniculate nucleus → optic radiations."
+            data-crossing="Nasal retinal fibers cross at the optic chiasm; temporal retinal fibers remain ipsilateral."
+            data-destination="Primary visual cortex and related visual targets."
+            data-clinical="Lesion location along the pathway produces characteristic visual-field deficits."
+          >
+            <h4>Optic Pathway</h4>
+            <div class="pathway-arabic">المسار البصري</div>
+            <p>Retina → optic nerve → chiasm → tract → visual cortex.</p>
+            <span class="pathway-arrow">Open pathway →</span>
+          </button>
+
+          <button
+            class="pathway-card"
+            type="button"
+            data-title="Optic Radiations"
+            data-arabic="الإشعاعات البصرية"
+            data-category="Visual Pathway"
+            data-search="optic radiation visual cortex geniculocalcarine lateral geniculate"
+            data-description="Carry visual information from the lateral geniculate nucleus to visual cortex."
+            data-origin="Lateral geniculate nucleus of the thalamus."
+            data-course="Fibers fan through temporal and parietal regions toward the occipital lobe."
+            data-crossing="The major fibers remain on the same side after the optic tract."
+            data-destination="Primary visual cortex around the calcarine sulcus."
+            data-clinical="Temporal and parietal pathway lesions can produce different visual-field patterns."
+          >
+            <h4>Optic Radiations</h4>
+            <div class="pathway-arabic">الإشعاعات البصرية</div>
+            <p>Carry visual information from the lateral geniculate nucleus to cortex.</p>
+            <span class="pathway-arrow">Open pathway →</span>
+          </button>
+
+          <button
+            class="pathway-card"
+            type="button"
+            data-title="Pupillary Light Reflex"
+            data-arabic="منعكس الضوء الحدقي"
+            data-category="Visual Pathway"
+            data-search="pupillary light reflex optic edinger westphal pretectal"
+            data-description="A neural circuit controlling pupillary constriction in response to light."
+            data-origin="Retinal ganglion cells detecting illumination."
+            data-course="Optic nerve → optic tract → pretectal region → Edinger–Westphal nuclei → oculomotor nerve."
+            data-crossing="Pretectal projections reach both Edinger–Westphal nuclei."
+            data-destination="Parasympathetic pathway to the sphincter pupillae."
+            data-clinical="Useful for localizing lesions affecting the afferent or efferent limbs of the reflex."
+          >
+            <h4>Pupillary Light Reflex</h4>
+            <div class="pathway-arabic">منعكس الضوء الحدقي</div>
+            <p>Neural circuit controlling the pupillary response to light.</p>
+            <span class="pathway-arrow">Open pathway →</span>
+          </button>
+
+        </div>
+
+      </section>
+
+      <!-- AUDITORY -->
+
+      <section class="category">
+
+        <div class="category-header">
+
+          <div class="category-heading">
+
+            <div class="category-icon">
+              )))
+            </div>
+
+            <div>
+
+              <h3>Auditory Pathways</h3>
+
+              <div class="category-arabic">
+                المسارات السمعية
+              </div>
+
+              <p class="category-description">
+                Ascending auditory circuits carrying sound information from
+                the cochlea through the brainstem and thalamus to auditory cortex.
+              </p>
+
+            </div>
+
+          </div>
+
+          <div class="category-count">
+            2 pathways
+          </div>
+
+        </div>
+
+        <div class="pathway-grid">
+
+          <button
+            class="pathway-card"
+            type="button"
+            data-title="Auditory Pathway"
+            data-arabic="المسار السمعي"
+            data-category="Auditory Pathway"
+            data-search="auditory hearing cochlea cochlear nucleus lateral lemniscus medial geniculate"
+            data-description="Carries auditory information from the cochlea through brainstem relays to auditory cortex."
+            data-origin="Hair cells of the cochlea."
+            data-course="Cochlear nerve → cochlear nuclei → superior olivary complex → lateral lemniscus → inferior colliculus → medial geniculate body."
+            data-crossing="Auditory information becomes bilateral early in the brainstem pathway."
+            data-destination="Primary auditory cortex in the temporal lobe."
+            data-clinical="Because the pathway is bilateral above the cochlear nuclei, unilateral central lesions often do not cause complete unilateral deafness."
+          >
+            <h4>Auditory Pathway</h4>
+            <div class="pathway-arabic">المسار السمعي</div>
+            <p>Cochlea → cochlear nuclei → brainstem → thalamus → auditory cortex.</p>
+            <span class="pathway-arrow">Open pathway →</span>
+          </button>
+
+          <button
+            class="pathway-card"
+            type="button"
+            data-title="Auditory Reflex Pathways"
+            data-arabic="المسارات الانعكاسية السمعية"
+            data-category="Auditory Pathway"
+            data-search="auditory reflex superior olive inferior colliculus brainstem"
+            data-description="Brainstem circuits involved in auditory reflex responses."
+            data-origin="Auditory input from the cochlear nuclei."
+            data-course="Brainstem auditory nuclei interact with motor and orienting systems."
+            data-crossing="Auditory brainstem circuits are predominantly bilateral."
+            data-destination="Motor and orienting networks including brainstem reflex circuits."
+            data-clinical="Supports understanding of automatic responses to auditory stimuli."
+          >
+            <h4>Auditory Reflex Pathways</h4>
+            <div class="pathway-arabic">المسارات الانعكاسية السمعية</div>
+            <p>Brainstem circuits involved in auditory reflex responses.</p>
+            <span class="pathway-arrow">Open pathway →</span>
+          </button>
+
+        </div>
+
+      </section>
+
+      <!-- CEREBELLAR -->
+
+      <section class="category">
+
+        <div class="category-header">
+
+          <div class="category-heading">
+
+            <div class="category-icon">
+              ✦
+            </div>
+
+            <div>
+
+              <h3>Cerebellar Pathways</h3>
+
+              <div class="category-arabic">
+                المسارات المخيخية
+              </div>
+
+              <p class="category-description">
+                Connections between the cerebellum, spinal cord, and brainstem
+                supporting coordination, timing, balance, and motor learning.
+              </p>
+
+            </div>
+
+          </div>
+
+          <div class="category-count">
+            3 pathways
+          </div>
+
+        </div>
+
+        <div class="pathway-grid">
+
+          <button
+            class="pathway-card"
+            type="button"
+            data-title="Cerebellar Afferent Pathways"
+            data-arabic="المسارات الواردة للمخيخ"
+            data-category="Cerebellar Pathway"
+            data-search="cerebellar afferent pathways input spinocerebellar pontocerebellar climbing mossy"
+            data-description="Carry proprioceptive, cortical, and other information into the cerebellum."
+            data-origin="Spinal proprioceptive systems, pontine nuclei, vestibular nuclei, and other brainstem sources."
+            data-course="Multiple pathways enter the cerebellum through its three cerebellar peduncles."
+            data-crossing="Crossing patterns vary by afferent pathway."
+            data-destination="Cerebellar cortex and deep cerebellar nuclei."
+            data-clinical="Important for understanding cerebellar coordination and ipsilateral patterns of dysfunction."
+          >
+            <h4>Cerebellar Afferent Pathways</h4>
+            <div class="pathway-arabic">المسارات الواردة للمخيخ</div>
+            <p>Carry proprioceptive and cortical information into the cerebellum.</p>
+            <span class="pathway-arrow">Open pathway →</span>
+          </button>
+
+          <button
+            class="pathway-card"
+            type="button"
+            data-title="Cerebellar Efferent Pathways"
+            data-arabic="المسارات الصادرة من المخيخ"
+            data-category="Cerebellar Pathway"
+            data-search="cerebellar efferent pathways output dentate thalamus red nucleus"
+            data-description="Carry cerebellar output toward motor and premotor systems."
+            data-origin="Deep cerebellar nuclei."
+            data-course="Major output fibers pass through the superior cerebellar peduncle toward brainstem and thalamic targets."
+            data-crossing="Many major cerebellar output fibers cross in the midbrain."
+            data-destination="Thalamus, red nucleus, vestibular and other motor-related systems."
+            data-clinical="Cerebellar output helps coordinate movement rather than directly initiating voluntary contraction."
+          >
+            <h4>Cerebellar Efferent Pathways</h4>
+            <div class="pathway-arabic">المسارات الصادرة من المخيخ</div>
+            <p>Carry cerebellar output toward motor and premotor systems.</p>
+            <span class="pathway-arrow">Open pathway →</span>
+          </button>
+
+          <button
+            class="pathway-card"
+            type="button"
+            data-title="Cerebellar Peduncles"
+            data-arabic="السويقات المخيخية"
+            data-category="Cerebellar Pathway"
+            data-search="cerebellar peduncles superior middle inferior brainstem"
+            data-description="Major connection routes between the cerebellum and brainstem."
+            data-origin="Brainstem and cerebellar systems."
+            data-course="Superior, middle, and inferior cerebellar peduncles connect the cerebellum with different brainstem regions."
+            data-crossing="Crossing varies according to the pathway carried by each peduncle."
+            data-destination="Cerebellar cortex, deep nuclei, and brainstem networks."
+            data-clinical="Peduncle anatomy is useful when localizing cerebellar and brainstem lesions."
+          >
+            <h4>Cerebellar Peduncles</h4>
+            <div class="pathway-arabic">السويقات المخيخية</div>
+            <p>Major connection routes between the cerebellum and brainstem.</p>
+            <span class="pathway-arrow">Open pathway →</span>
+          </button>
+
+        </div>
+
+      </section>
+
+      <!-- LIMBIC -->
+
+      <section class="category">
+
+        <div class="category-header">
+
+          <div class="category-heading">
+
+            <div class="category-icon">
+              ♢
+            </div>
+
+            <div>
+
+              <h3>Limbic Pathways</h3>
+
+              <div class="category-arabic">
+                المسارات الحوفية
+              </div>
+
+              <p class="category-description">
+                Interconnected circuits involved in memory, emotion,
+                motivation, learning, and communication between limbic structures.
+              </p>
+
+            </div>
+
+          </div>
+
+          <div class="category-count">
+            4 pathways
+          </div>
+
+        </div>
+
+        <div class="pathway-grid">
+
+          <button
+            class="pathway-card"
+            type="button"
+            data-title="Fornix"
+            data-arabic="القبو"
+            data-category="Limbic Pathway"
+            data-search="fornix hippocampus mammillary bodies memory limbic"
+            data-description="A major hippocampal output pathway within the limbic system."
+            data-origin="Hippocampal formation."
+            data-course="Hippocampal fibers form the fimbria and continue as the fornix toward septal and hypothalamic regions."
+            data-crossing="Most fibers remain associated with the ipsilateral pathway, with commissural components connecting hippocampal formations."
+            data-destination="Mammillary bodies, septal region, and other limbic targets."
+            data-clinical="Damage can disrupt memory-related networks."
+          >
+            <h4>Fornix</h4>
+            <div class="pathway-arabic">القبو</div>
+            <p>Major hippocampal output pathway within the limbic system.</p>
+            <span class="pathway-arrow">Open pathway →</span>
+          </button>
+
+          <button
+            class="pathway-card"
+            type="button"
+            data-title="Papez Circuit"
+            data-arabic="دائرة بابيز"
+            data-category="Limbic Pathway"
+            data-search="papez circuit hippocampus mammillary thalamus cingulate memory"
+            data-description="Classic circuit linking hippocampal and limbic structures."
+            data-origin="Hippocampal formation."
+            data-course="Hippocampus → fornix → mammillary bodies → anterior thalamic nuclei → cingulate cortex → parahippocampal region."
+            data-crossing="The classic circuit is predominantly organized through ipsilateral limbic connections."
+            data-destination="Hippocampal formation."
+            data-clinical="Provides a framework for understanding memory-related limbic anatomy."
+          >
+            <h4>Papez Circuit</h4>
+            <div class="pathway-arabic">دائرة بابيز</div>
+            <p>Classic circuit linking hippocampal and limbic structures.</p>
+            <span class="pathway-arrow">Open pathway →</span>
+          </button>
+
+          <button
+            class="pathway-card"
+            type="button"
+            data-title="Amygdala Pathways"
+            data-arabic="مسارات اللوزة الدماغية"
+            data-category="Limbic Pathway"
+            data-search="amygdala pathway emotion fear hypothalamus cortex limbic"
+            data-description="Connections involved in emotional processing and behavioral responses."
+            data-origin="Amygdaloid complex."
+            data-course="Amygdala communicates with hypothalamic, brainstem, cortical, and limbic regions."
+            data-crossing="Different amygdala connections have different bilateral and ipsilateral components."
+            data-destination="Hypothalamus, brainstem autonomic systems, cortex, and hippocampal networks."
+            data-clinical="Important for understanding emotional and autonomic responses."
+          >
+            <h4>Amygdala Pathways</h4>
+            <div class="pathway-arabic">مسارات اللوزة الدماغية</div>
+            <p>Connections involved in emotional processing and behavioral responses.</p>
+            <span class="pathway-arrow">Open pathway →</span>
+          </button>
+
+          <button
+            class="pathway-card"
+            type="button"
+            data-title="Medial Forebrain Bundle"
+            data-arabic="الحزمة الدماغية الأمامية الإنسية"
+            data-category="Limbic Pathway"
+            data-search="medial forebrain bundle reward motivation limbic hypothalamus"
+            data-description="Distributed pathway connecting limbic and reward-related systems."
+            data-origin="Distributed limbic and basal forebrain networks."
+            data-course="Longitudinal fiber system linking basal forebrain, hypothalamic, septal, and brainstem regions."
+            data-crossing="Contains fibers with varied origins, destinations, and crossing patterns."
+            data-destination="Distributed limbic, hypothalamic, and brainstem networks."
+            data-clinical="Useful as an anatomical framework for limbic and motivational circuitry."
+          >
+            <h4>Medial Forebrain Bundle</h4>
+            <div class="pathway-arabic">الحزمة الدماغية الأمامية الإنسية</div>
+            <p>Distributed pathway connecting limbic and reward-related systems.</p>
+            <span class="pathway-arrow">Open pathway →</span>
+          </button>
+
+        </div>
+
+      </section>
+
+      <!-- AUTONOMIC -->
+
+      <section class="category">
+
+        <div class="category-header">
+
+          <div class="category-heading">
+
+            <div class="category-icon">
+              ⌁
+            </div>
+
+            <div>
+
+              <h3>Autonomic Pathways</h3>
+
+              <div class="category-arabic">
+                المسارات اللاإرادية
+              </div>
+
+              <p class="category-description">
+                Neural circuits regulating visceral functions through
+                sympathetic, parasympathetic, and central autonomic systems.
+              </p>
+
+            </div>
+
+          </div>
+
+          <div class="category-count">
+            3 pathways
+          </div>
+
+        </div>
+
+        <div class="pathway-grid">
+
+          <button
+            class="pathway-card"
+            type="button"
+            data-title="Sympathetic Pathway"
+            data-arabic="المسار الودي"
+            data-category="Autonomic Pathway"
+            data-search="sympathetic autonomic thoracolumbar pathway visceral"
+            data-description="Thoracolumbar autonomic pathway controlling many visceral responses."
+            data-origin="Preganglionic sympathetic neurons in the thoracolumbar spinal cord."
+            data-course="Spinal cord → sympathetic chain or prevertebral ganglia → target organs."
+            data-crossing="Individual pathways vary; sympathetic fibers may ascend, descend, or pass through the sympathetic chain."
+            data-destination="Smooth muscle, cardiac muscle, and glands."
+            data-clinical="Helps explain patterns of autonomic dysfunction and sympathetic denervation."
+          >
+            <h4>Sympathetic Pathway</h4>
+            <div class="pathway-arabic">المسار الودي</div>
+            <p>Thoracolumbar autonomic pathway controlling visceral responses.</p>
+            <span class="pathway-arrow">Open pathway →</span>
+          </button>
+
+          <button
+            class="pathway-card"
+            type="button"
+            data-title="Parasympathetic Pathway"
+            data-arabic="المسار نظير الودي"
+            data-category="Autonomic Pathway"
+            data-search="parasympathetic autonomic craniosacral pathway rest digest"
+            data-description="Craniosacral autonomic pathway supporting many resting and visceral functions."
+            data-origin="Brainstem parasympathetic nuclei and sacral spinal cord."
+            data-course="Cranial or sacral preganglionic fibers → peripheral ganglia near or within target organs."
+            data-crossing="Individual pathways have distinct local organization."
+            data-destination="Visceral organs and glands."
+            data-clinical="Useful for understanding autonomic control of thoracic, abdominal, pelvic, and ocular functions."
+          >
+            <h4>Parasympathetic Pathway</h4>
+            <div class="pathway-arabic">المسار نظير الودي</div>
+            <p>Craniosacral pathway supporting rest-and-digest functions.</p>
+            <span class="pathway-arrow">Open pathway →</span>
+          </button>
+
+          <button
+            class="pathway-card"
+            type="button"
+            data-title="Hypothalamic Autonomic Pathway"
+            data-arabic="المسار اللاإرادي الوطائي"
+            data-category="Autonomic Pathway"
+            data-search="hypothalamic autonomic pathway hypothalamus brainstem spinal cord"
+            data-description="Links hypothalamic control with autonomic brainstem and spinal systems."
+            data-origin="Hypothalamic autonomic control regions."
+            data-course="Hypothalamic projections descend through brainstem pathways toward autonomic nuclei."
+            data-crossing="Organization is distributed and includes bilateral projections."
+            data-destination="Autonomic nuclei of the brainstem and spinal cord."
+            data-clinical="Important for understanding central regulation of visceral and homeostatic functions."
+          >
+            <h4>Hypothalamic Autonomic Pathway</h4>
+            <div class="pathway-arabic">المسار اللاإرادي الوطائي</div>
+            <p>Links hypothalamic control with autonomic brainstem and spinal systems.</p>
+            <span class="pathway-arrow">Open pathway →</span>
+          </button>
+
+        </div>
+
+      </section>
+
+      <!-- ASSOCIATION -->
+
+      <section class="category">
+
+        <div class="category-header">
+
+          <div class="category-heading">
+
+            <div class="category-icon">
+              ⟷
+            </div>
+
+            <div>
+
+              <h3>Association &amp; Commissural Pathways</h3>
+
+              <div class="category-arabic">
+                مسارات الارتباط والموصلات
+              </div>
+
+              <p class="category-description">
+                White-matter systems connecting cortical regions within one
+                hemisphere or linking the two cerebral hemispheres.
+              </p>
+
+            </div>
+
+          </div>
+
+          <div class="category-count">
+            4 pathways
+          </div>
+
+        </div>
+
+        <div class="pathway-grid">
+
+          <button
+            class="pathway-card"
+            type="button"
+            data-title="Arcuate Fasciculus"
+            data-arabic="الحزمة المقوسة"
+            data-category="Association Pathway"
+            data-search="arcuate fasciculus language association broca wernicke"
+            data-description="Association pathway strongly associated with language networks."
+            data-origin="Distributed frontal, temporal, and parietal language-related cortical regions."
+            data-course="Long association fibers connect posterior temporal/parietal regions with frontal language-related cortex."
+            data-crossing="Predominantly intrahemispheric."
+            data-destination="Distributed language and higher-order association cortex."
+            data-clinical="Classically associated with repetition and language-network dysfunction when damaged."
+          >
+            <h4>Arcuate Fasciculus</h4>
+            <div class="pathway-arabic">الحزمة المقوسة</div>
+            <p>Association pathway strongly associated with language networks.</p>
+            <span class="pathway-arrow">Open pathway →</span>
+          </button>
+
+          <button
+            class="pathway-card"
+            type="button"
+            data-title="Corpus Callosum"
+            data-arabic="الجسم الثفني"
+            data-category="Commissural Pathway"
+            data-search="corpus callosum commissural hemispheres interhemispheric"
+            data-description="The major commissural connection between the cerebral hemispheres."
+            data-origin="Cortical neurons throughout both cerebral hemispheres."
+            data-course="Fibers cross the midline through the corpus callosum."
+            data-crossing="Fibers cross directly through the corpus callosum."
+            data-destination="Corresponding and related cortical regions of the opposite hemisphere."
+            data-clinical="Callosal lesions can disrupt interhemispheric information transfer."
+          >
+            <h4>Corpus Callosum</h4>
+            <div class="pathway-arabic">الجسم الثفني</div>
+            <p>Major commissural connection between the cerebral hemispheres.</p>
+            <span class="pathway-arrow">Open pathway →</span>
+          </button>
+
+          <button
+            class="pathway-card"
+            type="button"
+            data-title="Superior Longitudinal Fasciculus"
+            data-arabic="الحزمة الطولية العلوية"
+            data-category="Association Pathway"
+            data-search="superior longitudinal fasciculus association white matter cortical"
+            data-description="Large association system connecting distributed cortical regions."
+            data-origin="Distributed frontal, parietal, temporal, and occipital association cortex."
+            data-course="Longitudinal white-matter system running through the cerebral hemisphere."
+            data-crossing="Predominantly intrahemispheric."
+            data-destination="Distributed association cortical regions."
+            data-clinical="Associated with attention, language, spatial processing, and other higher-order networks."
+          >
+            <h4>Superior Longitudinal Fasciculus</h4>
+            <div class="pathway-arabic">الحزمة الطولية العلوية</div>
+            <p>Large association system connecting distributed cortical regions.</p>
+            <span class="pathway-arrow">Open pathway →</span>
+          </button>
+
+          <button
+            class="pathway-card"
+            type="button"
+            data-title="Uncinate Fasciculus"
+            data-arabic="الحزمة الخطافية"
+            data-category="Association Pathway"
+            data-search="uncinate fasciculus frontal temporal limbic association"
+            data-description="Association pathway connecting anterior temporal and frontal regions."
+            data-origin="Anterior temporal and limbic-related cortical regions."
+            data-course="Curved white-matter bundle connecting temporal and frontal regions."
+            data-crossing="Predominantly intrahemispheric."
+            data-destination="Orbitofrontal and anterior temporal association cortex."
+            data-clinical="Associated with higher-order memory, semantic, and emotional networks."
+          >
+            <h4>Uncinate Fasciculus</h4>
+            <div class="pathway-arabic">الحزمة الخطافية</div>
+            <p>Association pathway connecting anterior temporal and frontal regions.</p>
+            <span class="pathway-arrow">Open pathway →</span>
+          </button>
+
+        </div>
+
+      </section>
+
+    </div>
+
+    <div id="noResults" class="no-results">
+      No pathways match your search. Try another term such as
+      <strong>motor</strong>,
+      <strong>visual</strong>,
+      <strong>corticospinal</strong>,
+      or <strong>pain</strong>.
+    </div>
+
+  </section>
+
+  <section
+    id="how-to-learn"
+    class="learning-section"
+  >
+
+    <div class="section-label">
+      Study Strategy · طريقة الدراسة
+    </div>
+
+    <h2>
+      Learn Every Pathway the Same Way
+    </h2>
+
+    <div class="learning-grid">
+
+      <div class="learning-card">
+        <div class="learning-card-number">01 · ORIGIN</div>
+        <h3>Where does it start?</h3>
+        <p>
+          Identify the receptor, cortical region, nucleus, or other structure
+          where the pathway begins.
+        </p>
+      </div>
+
+      <div class="learning-card">
+        <div class="learning-card-number">02 · COURSE</div>
+        <h3>Where does it travel?</h3>
+        <p>
+          Follow the pathway through the brainstem, spinal cord, white matter,
+          or other anatomical regions.
+        </p>
+      </div>
+
+      <div class="learning-card">
+        <div class="learning-card-number">03 · CROSSING</div>
+        <h3>Where does it cross?</h3>
+        <p>
+          Learn whether and where fibers decussate. This is critical for
+          understanding neurological localization.
+        </p>
+      </div>
+
+      <div class="learning-card">
+        <div class="learning-card-number">04 · DESTINATION</div>
+        <h3>Where does it end?</h3>
+        <p>
+          Identify the final nucleus, cortical region, cerebellar region,
+          spinal segment, or other destination.
+        </p>
+      </div>
+
+      <div class="learning-card">
+        <div class="learning-card-number">05 · CLINICAL</div>
+        <h3>What happens if it is damaged?</h3>
+        <p>
+          Connect the pathway to the expected neurological deficit and
+          lesion localization.
+        </p>
+      </div>
+
+      <div class="learning-card">
+        <div class="learning-card-number">06 · CONNECT</div>
+        <h3>What structures surround it?</h3>
+        <p>
+          Relate the pathway to nearby nuclei, tracts, vessels, ventricles,
+          and other clinically important structures.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <footer class="footer">
+    NeuroAtlas · Neural Pathways ·
+    Explore the anatomy. Understand the connections.
+  </footer>
+
+</main>
+
+<div
+  id="pathwayModal"
+  class="pathway-modal"
+  aria-hidden="true"
+>
+
+  <div
+    class="modal-panel"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modalTitle"
+  >
 
     <button
-      id="searchClear"
-      class="search-clear"
+      id="modalClose"
+      class="modal-close"
       type="button"
-      aria-label="Clear pathway search"
+      aria-label="Close pathway"
     >
       ×
     </button>
 
-  </div>
+    <div
+      id="modalKicker"
+      class="modal-kicker"
+    ></div>
 
-  <div id="categories" class="categories">
+    <h2
+      id="modalTitle"
+      class="modal-title"
+    ></h2>
 
-    <!-- MOTOR -->
+    <div
+      id="modalArabic"
+      class="modal-arabic"
+    ></div>
 
-    <section
-      class="category"
-      data-category="motor"
-      data-category-search="motor movement descending corticospinal corticobulbar brainstem"
-    >
+    <p
+      id="modalDescription"
+      class="modal-description"
+    ></p>
 
-      <div class="category-header">
+    <div class="modal-sections">
 
-        <div class="category-heading">
-
-          <div class="category-icon">
-            ⚡
-          </div>
-
-          <div>
-
-            <h3>
-              Motor Pathways
-            </h3>
-
-            <div class="category-arabic">
-              المسارات الحركية
-            </div>
-
-            <p class="category-description">
-              Descending systems that carry motor commands from the brain
-              toward the spinal cord and muscles, including voluntary movement
-              and important brainstem motor pathways.
-            </p>
-
-          </div>
-
-        </div>
-
-        <div class="category-count">
-          6 pathways
-        </div>
-
+      <div class="modal-section">
+        <h3>Origin</h3>
+        <p id="modalOrigin"></p>
       </div>
 
-      <div class="pathway-grid">
-
-        <a
-          class="pathway-card"
-          href="./pathways/corticospinal.html"
-          data-search="corticospinal pyramidal motor tract voluntary movement upper motor neuron corticospinal tract السبيل القشري النخاعي"
-        >
-          <h4>Corticospinal Tract</h4>
-          <div class="pathway-arabic">
-            السبيل القشري النخاعي
-          </div>
-          <p>
-            Major descending pathway for voluntary skilled movement.
-          </p>
-          <span class="pathway-arrow">
-            Open pathway →
-          </span>
-        </a>
-
-        <a
-          class="pathway-card"
-          href="./pathways/corticobulbar.html"
-          data-search="corticobulbar motor cranial nerves face tongue swallowing corticobulbar tract السبيل القشري البصلي"
-        >
-          <h4>Corticobulbar Tract</h4>
-          <div class="pathway-arabic">
-            السبيل القشري البصلي
-          </div>
-          <p>
-            Carries cortical motor commands to cranial motor nuclei.
-          </p>
-          <span class="pathway-arrow">
-            Open pathway →
-          </span>
-        </a>
-
-        <a
-          class="pathway-card"
-          href="./pathways/rubrospinal.html"
-          data-search="rubrospinal red nucleus motor flexor rubrospinal tract السبيل الأحمر النخاعي"
-        >
-          <h4>Rubrospinal Tract</h4>
-          <div class="pathway-arabic">
-            السبيل الأحمر النخاعي
-          </div>
-          <p>
-            Descending brainstem pathway associated with motor control.
-          </p>
-          <span class="pathway-arrow">
-            Open pathway →
-          </span>
-        </a>
-
-        <a
-          class="pathway-card"
-          href="./pathways/vestibulospinal.html"
-          data-search="vestibulospinal vestibular posture balance antigravity vestibulospinal tracts السبل الدهليزية النخاعية"
-        >
-          <h4>Vestibulospinal Tracts</h4>
-          <div class="pathway-arabic">
-            السبل الدهليزية النخاعية
-          </div>
-          <p>
-            Help regulate posture, balance, and antigravity activity.
-          </p>
-          <span class="pathway-arrow">
-            Open pathway →
-          </span>
-        </a>
-
-        <a
-          class="pathway-card"
-          href="./pathways/reticulospinal.html"
-          data-search="reticulospinal reticular formation posture locomotion reticulospinal tracts السبل الشبكية النخاعية"
-        >
-          <h4>Reticulospinal Tracts</h4>
-          <div class="pathway-arabic">
-            السبل الشبكية النخاعية
-          </div>
-          <p>
-            Participate in posture, locomotion, and motor modulation.
-          </p>
-          <span class="pathway-arrow">
-            Open pathway →
-          </span>
-        </a>
-
-        <a
-          class="pathway-card"
-          href="./pathways/tectospinal.html"
-          data-search="tectospinal superior colliculus head neck reflex tectospinal tract السبيل السقفي النخاعي"
-        >
-          <h4>Tectospinal Tract</h4>
-          <div class="pathway-arabic">
-            السبيل السقفي النخاعي
-          </div>
-          <p>
-            Coordinates reflexive head and neck orientation.
-          </p>
-          <span class="pathway-arrow">
-            Open pathway →
-          </span>
-        </a>
-
+      <div class="modal-section">
+        <h3>Course</h3>
+        <p id="modalCourse"></p>
       </div>
 
-    </section>
-
-    <!-- SENSORY -->
-
-    <section
-      class="category"
-      data-category="sensory"
-      data-category-search="sensory somatosensory touch vibration proprioception pain temperature"
-    >
-
-      <div class="category-header">
-
-        <div class="category-heading">
-
-          <div class="category-icon">
-            ◈
-          </div>
-
-          <div>
-
-            <h3>
-              Somatosensory Pathways
-            </h3>
-
-            <div class="category-arabic">
-              المسارات الحسية الجسدية
-            </div>
-
-            <p class="category-description">
-              Ascending pathways carrying information about touch, vibration,
-              proprioception, pain, temperature, and related somatic sensations.
-            </p>
-
-          </div>
-
-        </div>
-
-        <div class="category-count">
-          5 pathways
-        </div>
-
+      <div class="modal-section">
+        <h3>Crossing</h3>
+        <p id="modalCrossing"></p>
       </div>
 
-      <div class="pathway-grid">
-
-        <a
-          class="pathway-card"
-          href="./pathways/dorsal-column.html"
-          data-search="dorsal column medial lemniscus dcml touch vibration proprioception fine touch dorsal column medial lemniscus العمود الظهري الليمينسق الإنسي"
-        >
-          <h4>Dorsal Column–Medial Lemniscus</h4>
-          <div class="pathway-arabic">
-            العمود الظهري - الليمينسق الإنسي
-          </div>
-          <p>
-            Fine touch, vibration, and conscious proprioception.
-          </p>
-          <span class="pathway-arrow">
-            Open pathway →
-          </span>
-        </a>
-
-        <a
-          class="pathway-card"
-          href="./pathways/spinothalamic.html"
-          data-search="spinothalamic pain temperature crude touch anterolateral spinothalamic tract السبيل الشوكي المهادي"
-        >
-          <h4>Spinothalamic Tract</h4>
-          <div class="pathway-arabic">
-            السبيل الشوكي المهادي
-          </div>
-          <p>
-            Important pathway for pain, temperature, and crude touch.
-          </p>
-          <span class="pathway-arrow">
-            Open pathway →
-          </span>
-        </a>
-
-        <a
-          class="pathway-card"
-          href="./pathways/spinocerebellar.html"
-          data-search="spinocerebellar unconscious proprioception cerebellum coordination spinocerebellar tracts السبل الشوكية المخيخية"
-        >
-          <h4>Spinocerebellar Tracts</h4>
-          <div class="pathway-arabic">
-            السبل الشوكية المخيخية
-          </div>
-          <p>
-            Carry proprioceptive information to the cerebellum.
-          </p>
-          <span class="pathway-arrow">
-            Open pathway →
-          </span>
-        </a>
-
-        <a
-          class="pathway-card"
-          href="./pathways/trigeminal-sensory.html"
-          data-search="trigeminal sensory face touch pain temperature cranial nerve V trigeminal sensory pathway المسار الحسي للعصب ثلاثي التوائم"
-        >
-          <h4>Trigeminal Sensory Pathway</h4>
-          <div class="pathway-arabic">
-            المسار الحسي للعصب ثلاثي التوائم
-          </div>
-          <p>
-            Carries major somatic sensory information from the face.
-          </p>
-          <span class="pathway-arrow">
-            Open pathway →
-          </span>
-        </a>
-
-        <a
-          class="pathway-card"
-          href="./pathways/solitary.html"
-          data-search="solitary tract visceral taste sensory nucleus solitary tract السبيل المنفرد"
-        >
-          <h4>Solitary Tract</h4>
-          <div class="pathway-arabic">
-            السبيل المنفرد
-          </div>
-          <p>
-            Carries important visceral and taste-related sensory information.
-          </p>
-          <span class="pathway-arrow">
-            Open pathway →
-          </span>
-        </a>
-
+      <div class="modal-section">
+        <h3>Destination</h3>
+        <p id="modalDestination"></p>
       </div>
 
-    </section>
-
-    <!-- VISUAL -->
-
-    <section
-      class="category"
-      data-category="visual"
-      data-category-search="visual vision optic retina eye"
-    >
-
-      <div class="category-header">
-
-        <div class="category-heading">
-
-          <div class="category-icon">
-            ◉
-          </div>
-
-          <div>
-
-            <h3>
-              Visual Pathways
-            </h3>
-
-            <div class="category-arabic">
-              المسارات البصرية
-            </div>
-
-            <p class="category-description">
-              Neural routes carrying visual information from the retina
-              through the optic pathways to cortical and subcortical
-              visual targets.
-            </p>
-
-          </div>
-
-        </div>
-
-        <div class="category-count">
-          3 pathways
-        </div>
-
-      </div>
-
-      <div class="pathway-grid">
-
-        <a
-          class="pathway-card"
-          href="./pathways/optic.html"
-          data-search="optic visual retina optic nerve chiasm tract visual cortex optic pathway المسار البصري"
-        >
-          <h4>Optic Pathway</h4>
-          <div class="pathway-arabic">
-            المسار البصري
-          </div>
-          <p>
-            Retina → optic nerve → chiasm → tract → visual cortex.
-          </p>
-          <span class="pathway-arrow">
-            Open pathway →
-          </span>
-        </a>
-
-        <a
-          class="pathway-card"
-          href="./pathways/visual-radiation.html"
-          data-search="optic radiation visual cortex geniculocalcarine lateral geniculate visual radiations الإشعاعات البصرية"
-        >
-          <h4>Optic Radiations</h4>
-          <div class="pathway-arabic">
-            الإشعاعات البصرية
-          </div>
-          <p>
-            Carry visual information from the lateral geniculate nucleus
-            to cortex.
-          </p>
-          <span class="pathway-arrow">
-            Open pathway →
-          </span>
-        </a>
-
-        <a
-          class="pathway-card"
-          href="./pathways/pupillary-light-reflex.html"
-          data-search="pupillary light reflex optic edinger westphal pretectal pupil pupillary منعكس الضوء الحدقي"
-        >
-          <h4>Pupillary Light Reflex</h4>
-          <div class="pathway-arabic">
-            منعكس الضوء الحدقي
-          </div>
-          <p>
-            Neural circuit controlling the pupillary response to light.
-          </p>
-          <span class="pathway-arrow">
-            Open pathway →
-          </span>
-        </a>
-
-      </div>
-
-    </section>
-
-    <!-- AUDITORY -->
-
-    <section
-      class="category"
-      data-category="auditory"
-      data-category-search="auditory hearing sound cochlea brainstem"
-    >
-
-      <div class="category-header">
-
-        <div class="category-heading">
-
-          <div class="category-icon">
-            )))
-          </div>
-
-          <div>
-
-            <h3>
-              Auditory Pathways
-            </h3>
-
-            <div class="category-arabic">
-              المسارات السمعية
-            </div>
-
-            <p class="category-description">
-              Ascending auditory circuits carrying sound information from
-              the cochlea through the brainstem and thalamus to auditory cortex.
-            </p>
-
-          </div>
-
-        </div>
-
-        <div class="category-count">
-          2 pathways
-        </div>
-
-      </div>
-
-      <div class="pathway-grid">
-
-        <a
-          class="pathway-card"
-          href="./pathways/auditory.html"
-          data-search="auditory hearing cochlea cochlear nucleus lateral lemniscus medial geniculate auditory pathway المسار السمعي"
-        >
-          <h4>Auditory Pathway</h4>
-          <div class="pathway-arabic">
-            المسار السمعي
-          </div>
-          <p>
-            Cochlea → cochlear nuclei → brainstem → thalamus → auditory cortex.
-          </p>
-          <span class="pathway-arrow">
-            Open pathway →
-          </span>
-        </a>
-
-        <a
-          class="pathway-card"
-          href="./pathways/auditory-reflex.html"
-          data-search="auditory reflex superior olive inferior colliculus brainstem auditory reflex pathways المسارات الانعكاسية السمعية"
-        >
-          <h4>Auditory Reflex Pathways</h4>
-          <div class="pathway-arabic">
-            المسارات الانعكاسية السمعية
-          </div>
-          <p>
-            Brainstem circuits involved in auditory reflex responses.
-          </p>
-          <span class="pathway-arrow">
-            Open pathway →
-          </span>
-        </a>
-
-      </div>
-
-    </section>
-
-    <!-- CEREBELLAR -->
-
-    <section
-      class="category"
-      data-category="cerebellar"
-      data-category-search="cerebellar coordination balance motor learning peduncle"
-    >
-
-      <div class="category-header">
-
-        <div class="category-heading">
-
-          <div class="category-icon">
-            ✦
-          </div>
-
-          <div>
-
-            <h3>
-              Cerebellar Pathways
-            </h3>
-
-            <div class="category-arabic">
-              المسارات المخيخية
-            </div>
-
-            <p class="category-description">
-              Pathways connecting the cerebellum with the spinal cord and
-              brainstem to support coordination, timing, balance, and motor learning.
-            </p>
-
-          </div>
-
-        </div>
-
-        <div class="category-count">
-          3 pathways
-        </div>
-
-      </div>
-
-      <div class="pathway-grid">
-
-        <a
-          class="pathway-card"
-          href="./pathways/cerebellar-afferents.html"
-          data-search="cerebellar afferent pathways input spinocerebellar pontocerebellar climbing mossy cerebellar afferents المسارات الواردة للمخيخ"
-        >
-          <h4>Cerebellar Afferent Pathways</h4>
-          <div class="pathway-arabic">
-            المسارات الواردة للمخيخ
-          </div>
-          <p>
-            Carry proprioceptive and cortical information into the cerebellum.
-          </p>
-          <span class="pathway-arrow">
-            Open pathway →
-          </span>
-        </a>
-
-        <a
-          class="pathway-card"
-          href="./pathways/cerebellar-efferents.html"
-          data-search="cerebellar efferent pathways output dentate thalamus red nucleus cerebellar efferents المسارات الصادرة من المخيخ"
-        >
-          <h4>Cerebellar Efferent Pathways</h4>
-          <div class="pathway-arabic">
-            المسارات الصادرة من المخيخ
-          </div>
-          <p>
-            Carry cerebellar output toward motor and premotor systems.
-          </p>
-          <span class="pathway-arrow">
-            Open pathway →
-          </span>
-        </a>
-
-        <a
-          class="pathway-card"
-          href="./pathways/cerebellar-peduncles.html"
-          data-search="cerebellar peduncles superior middle inferior brainstem cerebellar peduncle السويقات المخيخية"
-        >
-          <h4>Cerebellar Peduncles</h4>
-          <div class="pathway-arabic">
-            السويقات المخيخية
-          </div>
-          <p>
-            Major connection routes between the cerebellum and brainstem.
-          </p>
-          <span class="pathway-arrow">
-            Open pathway →
-          </span>
-        </a>
-
-      </div>
-
-    </section>
-
-    <!-- LIMBIC -->
-
-    <section
-      class="category"
-      data-category="limbic"
-      data-category-search="limbic memory emotion motivation learning hippocampus amygdala"
-    >
-
-      <div class="category-header">
-
-        <div class="category-heading">
-
-          <div class="category-icon">
-            ♢
-          </div>
-
-          <div>
-
-            <h3>
-              Limbic Pathways
-            </h3>
-
-            <div class="category-arabic">
-              المسارات الحوفية
-            </div>
-
-            <p class="category-description">
-              Interconnected circuits involved in memory, emotion, motivation,
-              learning, and communication between limbic structures.
-            </p>
-
-          </div>
-
-        </div>
-
-        <div class="category-count">
-          4 pathways
-        </div>
-
-      </div>
-
-      <div class="pathway-grid">
-
-        <a
-          class="pathway-card"
-          href="./pathways/fornix.html"
-          data-search="fornix hippocampus mammillary bodies memory limbic fornix القبو"
-        >
-          <h4>Fornix</h4>
-          <div class="pathway-arabic">
-            القبو
-          </div>
-          <p>
-            Major hippocampal output pathway within the limbic system.
-          </p>
-          <span class="pathway-arrow">
-            Open pathway →
-          </span>
-        </a>
-
-        <a
-          class="pathway-card"
-          href="./pathways/papez-circuit.html"
-          data-search="papez circuit hippocampus mammillary thalamus cingulate memory papez دائرة بابيز"
-        >
-          <h4>Papez Circuit</h4>
-          <div class="pathway-arabic">
-            دائرة بابيز
-          </div>
-          <p>
-            Classic circuit linking hippocampal and limbic structures.
-          </p>
-          <span class="pathway-arrow">
-            Open pathway →
-          </span>
-        </a>
-
-        <a
-          class="pathway-card"
-          href="./pathways/amygdala-pathways.html"
-          data-search="amygdala pathway emotion fear hypothalamus cortex limbic amygdala pathways مسارات اللوزة الدماغية"
-        >
-          <h4>Amygdala Pathways</h4>
-          <div class="pathway-arabic">
-            مسارات اللوزة الدماغية
-          </div>
-          <p>
-            Connections involved in emotional processing and behavioral responses.
-          </p>
-          <span class="pathway-arrow">
-            Open pathway →
-          </span>
-        </a>
-
-        <a
-          class="pathway-card"
-          href="./pathways/medial-forebrain-bundle.html"
-          data-search="medial forebrain bundle reward motivation limbic hypothalamus mfb الحزمة الدماغية الأمامية الإنسية"
-        >
-          <h4>Medial Forebrain Bundle</h4>
-          <div class="pathway-arabic">
-            الحزمة الدماغية الأمامية الإنسية
-          </div>
-          <p>
-            Distributed pathway connecting limbic and reward-related systems.
-          </p>
-          <span class="pathway-arrow">
-            Open pathway →
-          </span>
-        </a>
-
-      </div>
-
-    </section>
-
-    <!-- AUTONOMIC -->
-
-    <section
-      class="category"
-      data-category="autonomic"
-      data-category-search="autonomic visceral sympathetic parasympathetic hypothalamus"
-    >
-
-      <div class="category-header">
-
-        <div class="category-heading">
-
-          <div class="category-icon">
-            ⌁
-          </div>
-
-          <div>
-
-            <h3>
-              Autonomic Pathways
-            </h3>
-
-            <div class="category-arabic">
-              المسارات اللاإرادية
-            </div>
-
-            <p class="category-description">
-              Neural circuits regulating visceral functions through
-              sympathetic, parasympathetic, and central autonomic systems.
-            </p>
-
-          </div>
-
-        </div>
-
-        <div class="category-count">
-          3 pathways
-        </div>
-
-      </div>
-
-      <div class="pathway-grid">
-
-        <a
-          class="pathway-card"
-          href="./pathways/sympathetic.html"
-          data-search="sympathetic autonomic thoracolumbar pathway visceral sympathetic pathway المسار الودي"
-        >
-          <h4>Sympathetic Pathway</h4>
-          <div class="pathway-arabic">
-            المسار الودي
-          </div>
-          <p>
-            Thoracolumbar autonomic pathway controlling visceral responses.
-          </p>
-          <span class="pathway-arrow">
-            Open pathway →
-          </span>
-        </a>
-
-        <a
-          class="pathway-card"
-          href="./pathways/parasympathetic.html"
-          data-search="parasympathetic autonomic craniosacral pathway rest digest parasympathetic pathway المسار نظير الودي"
-        >
-          <h4>Parasympathetic Pathway</h4>
-          <div class="pathway-arabic">
-            المسار نظير الودي
-          </div>
-          <p>
-            Craniosacral pathway supporting rest-and-digest functions.
-          </p>
-          <span class="pathway-arrow">
-            Open pathway →
-          </span>
-        </a>
-
-        <a
-          class="pathway-card"
-          href="./pathways/hypothalamic-autonomic.html"
-          data-search="hypothalamic autonomic pathway hypothalamus brainstem spinal cord central autonomic المسار اللاإرادي الوطائي"
-        >
-          <h4>Hypothalamic Autonomic Pathway</h4>
-          <div class="pathway-arabic">
-            المسار اللاإرادي الوطائي
-          </div>
-          <p>
-            Links hypothalamic control with autonomic brainstem and spinal systems.
-          </p>
-          <span class="pathway-arrow">
-            Open pathway →
-          </span>
-        </a>
-
-      </div>
-
-    </section>
-
-    <!-- ASSOCIATION / COMMISSURAL -->
-
-    <section
-      class="category"
-      data-category="association"
-      data-category-search="association commissural white matter cortical hemisphere language"
-    >
-
-      <div class="category-header">
-
-        <div class="category-heading">
-
-          <div class="category-icon">
-            ⟷
-          </div>
-
-          <div>
-
-            <h3>
-              Association &amp; Commissural Pathways
-            </h3>
-
-            <div class="category-arabic">
-              مسارات الارتباط والموصلات
-            </div>
-
-            <p class="category-description">
-              White-matter systems connecting cortical regions within one
-              hemisphere or linking the two cerebral hemispheres.
-            </p>
-
-          </div>
-
-        </div>
-
-        <div class="category-count">
-          4 pathways
-        </div>
-
-      </div>
-
-      <div class="pathway-grid">
-
-        <a
-          class="pathway-card"
-          href="./pathways/arcuate-fasciculus.html"
-          data-search="arcuate fasciculus language association broca wernicke arcuate fasciculus الحزمة المقوسة"
-        >
-          <h4>Arcuate Fasciculus</h4>
-          <div class="pathway-arabic">
-            الحزمة المقوسة
-          </div>
-          <p>
-            Association pathway strongly associated with language networks.
-          </p>
-          <span class="pathway-arrow">
-            Open pathway →
-          </span>
-        </a>
-
-        <a
-          class="pathway-card"
-          href="./pathways/corpus-callosum.html"
-          data-search="corpus callosum commissural hemispheres interhemispheric corpus callosum الجسم الثفني"
-        >
-          <h4>Corpus Callosum</h4>
-          <div class="pathway-arabic">
-            الجسم الثفني
-          </div>
-          <p>
-            Major commissural connection between the cerebral hemispheres.
-          </p>
-          <span class="pathway-arrow">
-            Open pathway →
-          </span>
-        </a>
-
-        <a
-          class="pathway-card"
-          href="./pathways/superior-longitudinal-fasciculus.html"
-          data-search="superior longitudinal fasciculus association white matter cortical slf superior longitudinal fasciculus الحزمة الطولية العلوية"
-        >
-          <h4>Superior Longitudinal Fasciculus</h4>
-          <div class="pathway-arabic">
-            الحزمة الطولية العلوية
-          </div>
-          <p>
-            Large association system connecting distributed cortical regions.
-          </p>
-          <span class="pathway-arrow">
-            Open pathway →
-          </span>
-        </a>
-
-        <a
-          class="pathway-card"
-          href="./pathways/uncinate-fasciculus.html"
-          data-search="uncinate fasciculus frontal temporal limbic association uncinate fasciculus الحزمة الخطافية"
-        >
-          <h4>Uncinate Fasciculus</h4>
-          <div class="pathway-arabic">
-            الحزمة الخطافية
-          </div>
-          <p>
-            Association pathway connecting anterior temporal and frontal regions.
-          </p>
-          <span class="pathway-arrow">
-            Open pathway →
-          </span>
-        </a>
-
-      </div>
-
-    </section>
-
-  </div>
-
-  <div
-    id="noResults"
-    class="no-results"
-    role="status"
-    aria-live="polite"
-  >
-    No pathways match your search. Try another term such as
-    <strong>motor</strong>,
-    <strong>visual</strong>,
-    <strong>corticospinal</strong>,
-    or <strong>pain</strong>.
-  </div>
-
-</section>
-
-<section
-  id="how-to-learn"
-  class="learning-section"
->
-
-  <div class="section-label">
-    Study Strategy · طريقة الدراسة
-  </div>
-
-  <h2>
-    Learn Every Pathway the Same Way
-  </h2>
-
-  <div class="learning-grid">
-
-    <div class="learning-card">
-      <div class="learning-card-number">
-        01 · ORIGIN
-      </div>
-
-      <h3>
-        Where does it start?
-      </h3>
-
-      <p>
-        Identify the receptor, cortical region, nucleus, or other structure
-        where the pathway begins.
-      </p>
     </div>
 
-    <div class="learning-card">
-      <div class="learning-card-number">
-        02 · COURSE
-      </div>
-
-      <h3>
-        Where does it travel?
-      </h3>
-
-      <p>
-        Follow the pathway through the brainstem, spinal cord, white matter,
-        or other anatomical regions.
-      </p>
-    </div>
-
-    <div class="learning-card">
-      <div class="learning-card-number">
-        03 · CROSSING
-      </div>
-
-      <h3>
-        Where does it cross?
-      </h3>
-
-      <p>
-        Learn whether and where fibers decussate. This is critical for
-        understanding neurological localization.
-      </p>
-    </div>
-
-    <div class="learning-card">
-      <div class="learning-card-number">
-        04 · DESTINATION
-      </div>
-
-      <h3>
-        Where does it end?
-      </h3>
-
-      <p>
-        Identify the final nucleus, cortical region, cerebellar region,
-        spinal segment, or other destination.
-      </p>
-    </div>
-
-    <div class="learning-card">
-      <div class="learning-card-number">
-        05 · CLINICAL
-      </div>
-
-      <h3>
-        What happens if it is damaged?
-      </h3>
-
-      <p>
-        Connect the pathway to the expected neurological deficit and
-        lesion localization.
-      </p>
-    </div>
-
-    <div class="learning-card">
-      <div class="learning-card-number">
-        06 · CONNECT
-      </div>
-
-      <h3>
-        What structures surround it?
-      </h3>
-
-      <p>
-        Relate the pathway to nearby nuclei, tracts, vessels, ventricles,
-        and other clinically important structures.
-      </p>
+    <div class="modal-note">
+      <strong>Clinical localization:</strong>
+      <span id="modalClinical"></span>
     </div>
 
   </div>
 
-</section>
-
-<footer class="footer">
-
-  NeuroAtlas · Neural Pathways ·
-  Explore the anatomy. Understand the connections.
-
-</footer>
-
-</main>
+</div>
 
 <script>
 "use strict";
 
 const searchInput = document.getElementById("pathwaySearch");
-const searchClear = document.getElementById("searchClear");
-const categories = Array.from(
-  document.querySelectorAll(".category")
-);
+const categories = document.querySelectorAll(".category");
 const noResults = document.getElementById("noResults");
+
+const pathwayModal = document.getElementById("pathwayModal");
+const modalClose = document.getElementById("modalClose");
+
+const modalKicker = document.getElementById("modalKicker");
+const modalTitle = document.getElementById("modalTitle");
+const modalArabic = document.getElementById("modalArabic");
+const modalDescription = document.getElementById("modalDescription");
+const modalOrigin = document.getElementById("modalOrigin");
+const modalCourse = document.getElementById("modalCourse");
+const modalCrossing = document.getElementById("modalCrossing");
+const modalDestination = document.getElementById("modalDestination");
+const modalClinical = document.getElementById("modalClinical");
+
+const pathwayCards = document.querySelectorAll(".pathway-card");
 
 function normalizeSearch(value) {
   return String(value)
-    .toLocaleLowerCase()
+    .toLowerCase()
     .trim()
     .replace(/\s+/g, " ");
-}
-
-function getCategorySearchText(category) {
-  return [
-    category.textContent,
-    category.dataset.category || "",
-    category.dataset.categorySearch || ""
-  ]
-    .join(" ")
-    .toLocaleLowerCase();
-}
-
-function getCardSearchText(card) {
-  return [
-    card.textContent,
-    card.dataset.search || ""
-  ]
-    .join(" ")
-    .toLocaleLowerCase();
-}
-
-function updateClearButton(query) {
-  searchClear.classList.toggle(
-    "visible",
-    query.length > 0
-  );
 }
 
 function filterPathways() {
@@ -1966,26 +2082,24 @@ function filterPathways() {
   let visibleCards = 0;
 
   categories.forEach((category) => {
-    const cards = Array.from(
-      category.querySelectorAll(".pathway-card")
-    );
-
-    const categoryText = getCategorySearchText(category);
-
+    const cards = category.querySelectorAll(".pathway-card");
     let categoryVisible = 0;
 
     cards.forEach((card) => {
-      const cardText = getCardSearchText(card);
+      const searchableText = [
+        card.textContent,
+        card.dataset.search || "",
+        card.dataset.category || "",
+        card.dataset.arabic || ""
+      ]
+        .join(" ")
+        .toLowerCase();
 
       const matches =
         query === "" ||
-        cardText.includes(query) ||
-        categoryText.includes(query);
+        searchableText.includes(query);
 
-      card.classList.toggle(
-        "hidden",
-        !matches
-      );
+      card.classList.toggle("hidden", !matches);
 
       if (matches) {
         categoryVisible += 1;
@@ -2001,29 +2115,85 @@ function filterPathways() {
 
   noResults.style.display =
     visibleCards === 0 ? "block" : "none";
-
-  noResults.setAttribute(
-    "aria-hidden",
-    visibleCards === 0 ? "false" : "true"
-  );
-
-  updateClearButton(query);
 }
 
-function clearSearch() {
-  searchInput.value = "";
-  filterPathways();
-  searchInput.focus();
+function openPathway(card) {
+  modalKicker.textContent =
+    card.dataset.category || "Neural Pathway";
+
+  modalTitle.textContent =
+    card.dataset.title || "Neural Pathway";
+
+  modalArabic.textContent =
+    card.dataset.arabic || "";
+
+  modalDescription.textContent =
+    card.dataset.description || "";
+
+  modalOrigin.textContent =
+    card.dataset.origin || "Not specified.";
+
+  modalCourse.textContent =
+    card.dataset.course || "Not specified.";
+
+  modalCrossing.textContent =
+    card.dataset.crossing || "Not specified.";
+
+  modalDestination.textContent =
+    card.dataset.destination || "Not specified.";
+
+  modalClinical.textContent =
+    card.dataset.clinical || "Not specified.";
+
+  pathwayModal.classList.add("open");
+  pathwayModal.setAttribute("aria-hidden", "false");
+  document.body.classList.add("modal-open");
+
+  modalClose.focus();
 }
+
+function closePathway() {
+  pathwayModal.classList.remove("open");
+  pathwayModal.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("modal-open");
+}
+
+function handleModalBackgroundClick(event) {
+  if (event.target === pathwayModal) {
+    closePathway();
+  }
+}
+
+function handleKeyboard(event) {
+  if (event.key === "Escape") {
+    closePathway();
+  }
+}
+
+pathwayCards.forEach((card) => {
+  card.addEventListener("click", () => {
+    openPathway(card);
+  });
+});
 
 searchInput.addEventListener(
   "input",
   filterPathways
 );
 
-searchClear.addEventListener(
+modalClose.addEventListener(
   "click",
-  clearSearch
+  closePathway
+);
+
+pathwayModal.addEventListener(
+  "click",
+  handleModalBackgroundClick
+);
+
+document.addEventListener(
+  "keydown",
+  handleKeyboard
 );
 
 filterPathways();
