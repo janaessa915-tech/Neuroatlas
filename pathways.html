@@ -4,16 +4,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>NeuroAtlas | Neural Pathways</title>
 
   <meta
     name="description"
-    content="Explore major neural pathways of the human nervous system in English and Arabic."
+    content="Explore major neural pathways of the human nervous system."
   >
 
   <style>
@@ -41,17 +38,8 @@
       line-height: 1.7;
     }
 
-    body.modal-open {
-      overflow: hidden;
-    }
-
     a {
       color: inherit;
-    }
-
-    button,
-    input {
-      font: inherit;
     }
 
     nav {
@@ -478,16 +466,6 @@
       margin-top: 10px;
     }
 
-    .no-results {
-      display: none;
-      margin-top: 25px;
-      padding: 30px;
-      border: 1px dashed #263951;
-      border-radius: 14px;
-      text-align: center;
-      color: #8195a8;
-    }
-
     .learning-section {
       margin-top: 75px;
     }
@@ -535,121 +513,6 @@
       color: #617487;
       font-size: 11px;
       text-align: center;
-    }
-
-    .hidden {
-      display: none !important;
-    }
-
-    .pathway-modal {
-      position: fixed;
-      inset: 0;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 25px;
-      background: rgba(0, 0, 0, 0.72);
-      backdrop-filter: blur(8px);
-      z-index: 1000;
-    }
-
-    .pathway-modal.open {
-      display: flex;
-    }
-
-    .modal-panel {
-      width: min(850px, 100%);
-      max-height: 90vh;
-      overflow-y: auto;
-      padding: 34px;
-      border: 1px solid #29455e;
-      border-radius: 20px;
-      background: #08131f;
-      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.55);
-      position: relative;
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 16px;
-      right: 18px;
-      width: 38px;
-      height: 38px;
-      border: 1px solid #29455e;
-      border-radius: 50%;
-      background: #0b1928;
-      color: #9dafc0;
-      cursor: pointer;
-      font-size: 18px;
-    }
-
-    .modal-close:hover {
-      color: #ffffff;
-      border-color: #61b5ff;
-    }
-
-    .modal-kicker {
-      color: #61b5ff;
-      font-size: 10px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-
-    .modal-title {
-      padding-right: 45px;
-      font-size: clamp(28px, 5vw, 48px);
-      line-height: 1.1;
-    }
-
-    .modal-arabic {
-      color: #ff7180;
-      font-size: 16px;
-      margin-top: 8px;
-    }
-
-    .modal-description {
-      color: #9dafc0;
-      margin-top: 18px;
-      line-height: 1.8;
-    }
-
-    .modal-sections {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 13px;
-      margin-top: 28px;
-    }
-
-    .modal-section {
-      padding: 18px;
-      border: 1px solid #172b3e;
-      border-radius: 13px;
-      background: #0b1928;
-    }
-
-    .modal-section h3 {
-      color: #61b5ff;
-      font-size: 11px;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      margin-bottom: 7px;
-    }
-
-    .modal-section p {
-      color: #9dafc0;
-      font-size: 13px;
-      line-height: 1.7;
-    }
-
-    .modal-note {
-      margin-top: 20px;
-      padding: 15px;
-      border-left: 3px solid #ff4055;
-      background: #160d11;
-      color: #aebdca;
-      font-size: 12px;
-      line-height: 1.7;
     }
 
     @media (max-width: 950px) {
@@ -730,10 +593,6 @@
       .modal-sections {
         grid-template-columns: 1fr;
       }
-
-      .modal-panel {
-        padding: 25px;
-      }
     }
 
     @media (max-width: 450px) {
@@ -763,6 +622,7 @@
 
 <nav>
   <div class="nav-left">
+
     <a
       class="nav-back"
       href="./explore.html"
@@ -773,6 +633,7 @@
     <div class="nav-brand">
       NEUROATLAS
     </div>
+
   </div>
 
   <div class="nav-badge">
@@ -916,6 +777,7 @@
     <div class="toolbar">
 
       <div>
+
         <div class="section-label">
           Explore
         </div>
@@ -925,9 +787,9 @@
         </h2>
 
         <p class="toolbar-description">
-          Search by pathway, function, structure, or Arabic terminology.
-          Select any pathway to open its study panel.
+          Select any pathway to open its dedicated study page.
         </p>
+
       </div>
 
     </div>
@@ -943,7 +805,7 @@
         class="search"
         type="search"
         autocomplete="off"
-        placeholder="Search pathways... e.g. corticospinal, optic, dorsal column"
+        placeholder="Search pathways..."
         aria-label="Search neural pathways"
       >
 
@@ -990,125 +852,137 @@
 
         <div class="pathway-grid">
 
-          <button
+          <a
             class="pathway-card"
-            type="button"
-            data-title="Corticospinal Tract"
-            data-arabic="السبيل القشري النخاعي"
-            data-category="Motor Pathway"
+            href="./corticospinal.html"
             data-search="corticospinal pyramidal motor tract voluntary movement upper motor neuron"
-            data-description="The major descending motor pathway for voluntary skilled movement."
-            data-origin="Primary motor cortex and related motor cortical areas."
-            data-course="Corona radiata → internal capsule → cerebral peduncle → pons → medullary pyramids."
-            data-crossing="Most corticospinal fibers cross at the pyramidal decussation in the caudal medulla."
-            data-destination="Lateral corticospinal tract and spinal motor circuitry."
-            data-clinical="Lesion localization depends on whether damage occurs above or below the pyramidal decussation."
           >
-            <h4>Corticospinal Tract</h4>
-            <div class="pathway-arabic">السبيل القشري النخاعي</div>
-            <p>Major descending pathway for voluntary skilled movement.</p>
-            <span class="pathway-arrow">Open pathway →</span>
-          </button>
+            <h4>
+              Corticospinal Tract
+            </h4>
 
-          <button
+            <div class="pathway-arabic">
+              السبيل القشري النخاعي
+            </div>
+
+            <p>
+              Major descending pathway for voluntary skilled movement.
+            </p>
+
+            <span class="pathway-arrow">
+              Open pathway →
+            </span>
+          </a>
+
+          <a
             class="pathway-card"
-            type="button"
-            data-title="Corticobulbar Tract"
-            data-arabic="السبيل القشري البصلي"
-            data-category="Motor Pathway"
+            href="./corticobulbar.html"
             data-search="corticobulbar motor cranial nerves face tongue swallowing"
-            data-description="Carries cortical motor commands to motor nuclei of cranial nerves."
-            data-origin="Motor regions of the cerebral cortex."
-            data-course="Fibers descend through the corona radiata and genu of the internal capsule toward the brainstem."
-            data-crossing="Many projections are bilateral, while some cranial motor systems have stronger contralateral cortical input."
-            data-destination="Motor cranial nerve nuclei in the brainstem."
-            data-clinical="Patterns of facial, tongue, jaw, or swallowing weakness help localize corticobulbar lesions."
           >
-            <h4>Corticobulbar Tract</h4>
-            <div class="pathway-arabic">السبيل القشري البصلي</div>
-            <p>Carries cortical motor commands to cranial motor nuclei.</p>
-            <span class="pathway-arrow">Open pathway →</span>
-          </button>
+            <h4>
+              Corticobulbar Tract
+            </h4>
 
-          <button
+            <div class="pathway-arabic">
+              السبيل القشري البصلي
+            </div>
+
+            <p>
+              Carries cortical motor commands to cranial motor nuclei.
+            </p>
+
+            <span class="pathway-arrow">
+              Open pathway →
+            </span>
+          </a>
+
+          <a
             class="pathway-card"
-            type="button"
-            data-title="Rubrospinal Tract"
-            data-arabic="السبيل الأحمر النخاعي"
-            data-category="Motor Pathway"
+            href="./rubrospinal.html"
             data-search="rubrospinal red nucleus motor flexor"
-            data-description="A descending brainstem pathway associated with motor control."
-            data-origin="Red nucleus of the midbrain."
-            data-course="Fibers cross near the level of the red nucleus and descend mainly in the lateral funiculus."
-            data-crossing="The tract crosses in the ventral tegmental decussation."
-            data-destination="Interneuronal circuits of the spinal cord."
-            data-clinical="In humans, the rubrospinal tract has a more limited role than the corticospinal system."
           >
-            <h4>Rubrospinal Tract</h4>
-            <div class="pathway-arabic">السبيل الأحمر النخاعي</div>
-            <p>Descending brainstem pathway associated with motor control.</p>
-            <span class="pathway-arrow">Open pathway →</span>
-          </button>
+            <h4>
+              Rubrospinal Tract
+            </h4>
 
-          <button
+            <div class="pathway-arabic">
+              السبيل الأحمر النخاعي
+            </div>
+
+            <p>
+              Descending brainstem pathway associated with motor control.
+            </p>
+
+            <span class="pathway-arrow">
+              Open pathway →
+            </span>
+          </a>
+
+          <a
             class="pathway-card"
-            type="button"
-            data-title="Vestibulospinal Tracts"
-            data-arabic="السبل الدهليزية النخاعية"
-            data-category="Motor Pathway"
+            href="./vestibulospinal.html"
             data-search="vestibulospinal vestibular posture balance antigravity"
-            data-description="Descending vestibular pathways that help regulate posture, balance, and antigravity activity."
-            data-origin="Vestibular nuclei of the brainstem."
-            data-course="Medial and lateral vestibulospinal components descend through the brainstem and spinal cord."
-            data-crossing="The lateral tract is predominantly uncrossed; the medial tract has bilateral projections."
-            data-destination="Spinal interneurons and motor circuits controlling axial and postural muscles."
-            data-clinical="Damage can affect balance, postural control, and coordinated head and body responses."
           >
-            <h4>Vestibulospinal Tracts</h4>
-            <div class="pathway-arabic">السبل الدهليزية النخاعية</div>
-            <p>Help regulate posture, balance, and antigravity activity.</p>
-            <span class="pathway-arrow">Open pathway →</span>
-          </button>
+            <h4>
+              Vestibulospinal Tracts
+            </h4>
 
-          <button
+            <div class="pathway-arabic">
+              السبل الدهليزية النخاعية
+            </div>
+
+            <p>
+              Help regulate posture, balance, and antigravity activity.
+            </p>
+
+            <span class="pathway-arrow">
+              Open pathway →
+            </span>
+          </a>
+
+          <a
             class="pathway-card"
-            type="button"
-            data-title="Reticulospinal Tracts"
-            data-arabic="السبل الشبكية النخاعية"
-            data-category="Motor Pathway"
+            href="./reticulospinal.html"
             data-search="reticulospinal reticular formation posture locomotion"
-            data-description="Descending pathways involved in posture, locomotion, and motor modulation."
-            data-origin="Reticular formation of the brainstem."
-            data-course="Fibers descend through the brainstem into the spinal cord."
-            data-crossing="Projections can be bilateral and vary between pontine and medullary systems."
-            data-destination="Spinal interneuronal networks involved in posture and locomotion."
-            data-clinical="Important for understanding automatic postural and locomotor control."
           >
-            <h4>Reticulospinal Tracts</h4>
-            <div class="pathway-arabic">السبل الشبكية النخاعية</div>
-            <p>Participate in posture, locomotion, and motor modulation.</p>
-            <span class="pathway-arrow">Open pathway →</span>
-          </button>
+            <h4>
+              Reticulospinal Tracts
+            </h4>
 
-          <button
+            <div class="pathway-arabic">
+              السبل الشبكية النخاعية
+            </div>
+
+            <p>
+              Participate in posture, locomotion, and motor modulation.
+            </p>
+
+            <span class="pathway-arrow">
+              Open pathway →
+            </span>
+          </a>
+
+          <a
             class="pathway-card"
-            type="button"
-            data-title="Tectospinal Tract"
-            data-arabic="السبيل السقفي النخاعي"
-            data-category="Motor Pathway"
+            href="./tectospinal.html"
             data-search="tectospinal superior colliculus head neck reflex"
-            data-description="Coordinates reflexive head and neck orientation toward sensory stimuli."
-            data-origin="Superior colliculus of the midbrain."
-            data-course="Fibers descend through the brainstem toward the upper cervical spinal cord."
-            data-crossing="Fibers cross in the dorsal tegmental decussation."
-            data-destination="Cervical spinal motor circuitry."
-            data-clinical="Supports reflexive orientation of the head and neck."
           >
-            <h4>Tectospinal Tract</h4>
-            <div class="pathway-arabic">السبيل السقفي النخاعي</div>
-            <p>Coordinates reflexive head and neck orientation.</p>
-            <span class="pathway-arrow">Open pathway →</span>
-          </button>
+            <h4>
+              Tectospinal Tract
+            </h4>
+
+            <div class="pathway-arabic">
+              السبيل السقفي النخاعي
+            </div>
+
+            <p>
+              Coordinates reflexive head and neck orientation.
+            </p>
+
+            <span class="pathway-arrow">
+              Open pathway →
+            </span>
+          </a>
 
         </div>
 
@@ -1128,7 +1002,9 @@
 
             <div>
 
-              <h3>Somatosensory Pathways</h3>
+              <h3>
+                Somatosensory Pathways
+              </h3>
 
               <div class="category-arabic">
                 المسارات الحسية الجسدية
@@ -1151,105 +1027,115 @@
 
         <div class="pathway-grid">
 
-          <button
+          <a
             class="pathway-card"
-            type="button"
-            data-title="Dorsal Column–Medial Lemniscus"
-            data-arabic="العمود الظهري - الليمينسق الإنسي"
-            data-category="Somatosensory Pathway"
+            href="./dorsal-column-medial-lemniscus.html"
             data-search="dorsal column medial lemniscus dcml touch vibration proprioception fine touch"
-            data-description="Ascending system for fine touch, vibration, and conscious proprioception."
-            data-origin="Peripheral sensory receptors and first-order sensory neurons."
-            data-course="Dorsal columns → gracile/cuneate nuclei → medial lemniscus → thalamus."
-            data-crossing="Second-order fibers cross in the caudal medulla as internal arcuate fibers."
-            data-destination="Ventral posterolateral nucleus of the thalamus, then primary somatosensory cortex."
-            data-clinical="Lesions produce characteristic deficits in discriminative touch, vibration, and proprioception."
           >
-            <h4>Dorsal Column–Medial Lemniscus</h4>
-            <div class="pathway-arabic">العمود الظهري - الليمينسق الإنسي</div>
-            <p>Fine touch, vibration, and conscious proprioception.</p>
-            <span class="pathway-arrow">Open pathway →</span>
-          </button>
+            <h4>
+              Dorsal Column–Medial Lemniscus
+            </h4>
 
-          <button
+            <div class="pathway-arabic">
+              العمود الظهري - الليمينسق الإنسي
+            </div>
+
+            <p>
+              Fine touch, vibration, and conscious proprioception.
+            </p>
+
+            <span class="pathway-arrow">
+              Open pathway →
+            </span>
+          </a>
+
+          <a
             class="pathway-card"
-            type="button"
-            data-title="Spinothalamic Tract"
-            data-arabic="السبيل الشوكي المهادي"
-            data-category="Somatosensory Pathway"
+            href="./spinothalamic.html"
             data-search="spinothalamic pain temperature crude touch anterolateral"
-            data-description="Major ascending pathway for pain, temperature, and crude touch."
-            data-origin="Peripheral nociceptive and thermoreceptive sensory neurons."
-            data-course="Dorsal horn → anterior white commissure → anterolateral spinal cord → brainstem → thalamus."
-            data-crossing="Second-order fibers usually cross near their spinal level of entry."
-            data-destination="Thalamic nuclei and then somatosensory cortical regions."
-            data-clinical="Spinal lesions can cause contralateral pain and temperature deficits below the lesion."
           >
-            <h4>Spinothalamic Tract</h4>
-            <div class="pathway-arabic">السبيل الشوكي المهادي</div>
-            <p>Important pathway for pain, temperature, and crude touch.</p>
-            <span class="pathway-arrow">Open pathway →</span>
-          </button>
+            <h4>
+              Spinothalamic Tract
+            </h4>
 
-          <button
+            <div class="pathway-arabic">
+              السبيل الشوكي المهادي
+            </div>
+
+            <p>
+              Important pathway for pain, temperature, and crude touch.
+            </p>
+
+            <span class="pathway-arrow">
+              Open pathway →
+            </span>
+          </a>
+
+          <a
             class="pathway-card"
-            type="button"
-            data-title="Spinocerebellar Tracts"
-            data-arabic="السبل الشوكية المخيخية"
-            data-category="Somatosensory Pathway"
+            href="./spinocerebellar.html"
             data-search="spinocerebellar unconscious proprioception cerebellum coordination"
-            data-description="Carry proprioceptive information to the cerebellum for coordination."
-            data-origin="Proprioceptors and spinal interneuronal circuits."
-            data-course="Spinal cord → spinocerebellar pathways → cerebellum."
-            data-crossing="Crossing patterns differ between individual spinocerebellar tracts."
-            data-destination="Cerebellar cortex."
-            data-clinical="Damage can impair coordination and proprioceptive feedback used for movement."
           >
-            <h4>Spinocerebellar Tracts</h4>
-            <div class="pathway-arabic">السبل الشوكية المخيخية</div>
-            <p>Carry proprioceptive information to the cerebellum.</p>
-            <span class="pathway-arrow">Open pathway →</span>
-          </button>
+            <h4>
+              Spinocerebellar Tracts
+            </h4>
 
-          <button
+            <div class="pathway-arabic">
+              السبل الشوكية المخيخية
+            </div>
+
+            <p>
+              Carry proprioceptive information to the cerebellum.
+            </p>
+
+            <span class="pathway-arrow">
+              Open pathway →
+            </span>
+          </a>
+
+          <a
             class="pathway-card"
-            type="button"
-            data-title="Trigeminal Sensory Pathway"
-            data-arabic="المسار الحسي للعصب ثلاثي التوائم"
-            data-category="Somatosensory Pathway"
+            href="./trigeminal-sensory.html"
             data-search="trigeminal sensory face touch pain temperature cranial nerve V"
-            data-description="Carries major somatic sensory information from the face."
-            data-origin="Sensory receptors of the face and cranial structures."
-            data-course="Trigeminal nerve → trigeminal sensory nuclei → trigeminothalamic pathways."
-            data-crossing="Many second-order fibers cross before ascending to the thalamus."
-            data-destination="Ventral posteromedial thalamus and somatosensory cortex."
-            data-clinical="Lesions can produce characteristic facial sensory deficits."
           >
-            <h4>Trigeminal Sensory Pathway</h4>
-            <div class="pathway-arabic">المسار الحسي للعصب ثلاثي التوائم</div>
-            <p>Carries major somatic sensory information from the face.</p>
-            <span class="pathway-arrow">Open pathway →</span>
-          </button>
+            <h4>
+              Trigeminal Sensory Pathway
+            </h4>
 
-          <button
+            <div class="pathway-arabic">
+              المسار الحسي للعصب ثلاثي التوائم
+            </div>
+
+            <p>
+              Carries major somatic sensory information from the face.
+            </p>
+
+            <span class="pathway-arrow">
+              Open pathway →
+            </span>
+          </a>
+
+          <a
             class="pathway-card"
-            type="button"
-            data-title="Solitary Tract"
-            data-arabic="السبيل المنفرد"
-            data-category="Somatosensory Pathway"
+            href="./solitary-tract.html"
             data-search="solitary tract visceral taste sensory nucleus"
-            data-description="Carries important visceral and taste-related sensory information."
-            data-origin="Visceral and taste-related sensory receptors."
-            data-course="Cranial sensory fibers enter the brainstem and descend within the solitary tract."
-            data-crossing="Subsequent pathways differ according to visceral or gustatory modality."
-            data-destination="Nucleus of the solitary tract and its associated ascending networks."
-            data-clinical="Important for understanding visceral sensory and taste pathways."
           >
-            <h4>Solitary Tract</h4>
-            <div class="pathway-arabic">السبيل المنفرد</div>
-            <p>Carries important visceral and taste-related sensory information.</p>
-            <span class="pathway-arrow">Open pathway →</span>
-          </button>
+            <h4>
+              Solitary Tract
+            </h4>
+
+            <div class="pathway-arabic">
+              السبيل المنفرد
+            </div>
+
+            <p>
+              Carries important visceral and taste-related sensory information.
+            </p>
+
+            <span class="pathway-arrow">
+              Open pathway →
+            </span>
+          </a>
 
         </div>
 
@@ -1269,7 +1155,9 @@
 
             <div>
 
-              <h3>Visual Pathways</h3>
+              <h3>
+                Visual Pathways
+              </h3>
 
               <div class="category-arabic">
                 المسارات البصرية
@@ -1292,65 +1180,72 @@
 
         <div class="pathway-grid">
 
-          <button
+          <a
             class="pathway-card"
-            type="button"
-            data-title="Optic Pathway"
-            data-arabic="المسار البصري"
-            data-category="Visual Pathway"
+            href="./optic-pathway.html"
             data-search="optic visual retina optic nerve chiasm tract visual cortex"
-            data-description="Carries visual information from the retina toward visual cortical and subcortical targets."
-            data-origin="Photoreceptors and retinal neural circuits."
-            data-course="Retina → optic nerve → optic chiasm → optic tract → lateral geniculate nucleus → optic radiations."
-            data-crossing="Nasal retinal fibers cross at the optic chiasm; temporal retinal fibers remain ipsilateral."
-            data-destination="Primary visual cortex and related visual targets."
-            data-clinical="Lesion location along the pathway produces characteristic visual-field deficits."
           >
-            <h4>Optic Pathway</h4>
-            <div class="pathway-arabic">المسار البصري</div>
-            <p>Retina → optic nerve → chiasm → tract → visual cortex.</p>
-            <span class="pathway-arrow">Open pathway →</span>
-          </button>
+            <h4>
+              Optic Pathway
+            </h4>
 
-          <button
+            <div class="pathway-arabic">
+              المسار البصري
+            </div>
+
+            <p>
+              Retina → optic nerve → chiasm → tract → visual cortex.
+            </p>
+
+            <span class="pathway-arrow">
+              Open pathway →
+            </span>
+          </a>
+
+          <a
             class="pathway-card"
-            type="button"
-            data-title="Optic Radiations"
-            data-arabic="الإشعاعات البصرية"
-            data-category="Visual Pathway"
+            href="./optic-radiations.html"
             data-search="optic radiation visual cortex geniculocalcarine lateral geniculate"
-            data-description="Carry visual information from the lateral geniculate nucleus to visual cortex."
-            data-origin="Lateral geniculate nucleus of the thalamus."
-            data-course="Fibers fan through temporal and parietal regions toward the occipital lobe."
-            data-crossing="The major fibers remain on the same side after the optic tract."
-            data-destination="Primary visual cortex around the calcarine sulcus."
-            data-clinical="Temporal and parietal pathway lesions can produce different visual-field patterns."
           >
-            <h4>Optic Radiations</h4>
-            <div class="pathway-arabic">الإشعاعات البصرية</div>
-            <p>Carry visual information from the lateral geniculate nucleus to cortex.</p>
-            <span class="pathway-arrow">Open pathway →</span>
-          </button>
+            <h4>
+              Optic Radiations
+            </h4>
 
-          <button
+            <div class="pathway-arabic">
+              الإشعاعات البصرية
+            </div>
+
+            <p>
+              Carry visual information from the lateral geniculate nucleus
+              to cortex.
+            </p>
+
+            <span class="pathway-arrow">
+              Open pathway →
+            </span>
+          </a>
+
+          <a
             class="pathway-card"
-            type="button"
-            data-title="Pupillary Light Reflex"
-            data-arabic="منعكس الضوء الحدقي"
-            data-category="Visual Pathway"
+            href="./pupillary-light-reflex.html"
             data-search="pupillary light reflex optic edinger westphal pretectal"
-            data-description="A neural circuit controlling pupillary constriction in response to light."
-            data-origin="Retinal ganglion cells detecting illumination."
-            data-course="Optic nerve → optic tract → pretectal region → Edinger–Westphal nuclei → oculomotor nerve."
-            data-crossing="Pretectal projections reach both Edinger–Westphal nuclei."
-            data-destination="Parasympathetic pathway to the sphincter pupillae."
-            data-clinical="Useful for localizing lesions affecting the afferent or efferent limbs of the reflex."
           >
-            <h4>Pupillary Light Reflex</h4>
-            <div class="pathway-arabic">منعكس الضوء الحدقي</div>
-            <p>Neural circuit controlling the pupillary response to light.</p>
-            <span class="pathway-arrow">Open pathway →</span>
-          </button>
+            <h4>
+              Pupillary Light Reflex
+            </h4>
+
+            <div class="pathway-arabic">
+              منعكس الضوء الحدقي
+            </div>
+
+            <p>
+              Neural circuit controlling the pupillary response to light.
+            </p>
+
+            <span class="pathway-arrow">
+              Open pathway →
+            </span>
+          </a>
 
         </div>
 
@@ -1370,7 +1265,9 @@
 
             <div>
 
-              <h3>Auditory Pathways</h3>
+              <h3>
+                Auditory Pathways
+              </h3>
 
               <div class="category-arabic">
                 المسارات السمعية
@@ -1393,45 +1290,49 @@
 
         <div class="pathway-grid">
 
-          <button
+          <a
             class="pathway-card"
-            type="button"
-            data-title="Auditory Pathway"
-            data-arabic="المسار السمعي"
-            data-category="Auditory Pathway"
+            href="./auditory-pathway.html"
             data-search="auditory hearing cochlea cochlear nucleus lateral lemniscus medial geniculate"
-            data-description="Carries auditory information from the cochlea through brainstem relays to auditory cortex."
-            data-origin="Hair cells of the cochlea."
-            data-course="Cochlear nerve → cochlear nuclei → superior olivary complex → lateral lemniscus → inferior colliculus → medial geniculate body."
-            data-crossing="Auditory information becomes bilateral early in the brainstem pathway."
-            data-destination="Primary auditory cortex in the temporal lobe."
-            data-clinical="Because the pathway is bilateral above the cochlear nuclei, unilateral central lesions often do not cause complete unilateral deafness."
           >
-            <h4>Auditory Pathway</h4>
-            <div class="pathway-arabic">المسار السمعي</div>
-            <p>Cochlea → cochlear nuclei → brainstem → thalamus → auditory cortex.</p>
-            <span class="pathway-arrow">Open pathway →</span>
-          </button>
+            <h4>
+              Auditory Pathway
+            </h4>
 
-          <button
+            <div class="pathway-arabic">
+              المسار السمعي
+            </div>
+
+            <p>
+              Cochlea → cochlear nuclei → brainstem → thalamus → auditory cortex.
+            </p>
+
+            <span class="pathway-arrow">
+              Open pathway →
+            </span>
+          </a>
+
+          <a
             class="pathway-card"
-            type="button"
-            data-title="Auditory Reflex Pathways"
-            data-arabic="المسارات الانعكاسية السمعية"
-            data-category="Auditory Pathway"
+            href="./auditory-reflex.html"
             data-search="auditory reflex superior olive inferior colliculus brainstem"
-            data-description="Brainstem circuits involved in auditory reflex responses."
-            data-origin="Auditory input from the cochlear nuclei."
-            data-course="Brainstem auditory nuclei interact with motor and orienting systems."
-            data-crossing="Auditory brainstem circuits are predominantly bilateral."
-            data-destination="Motor and orienting networks including brainstem reflex circuits."
-            data-clinical="Supports understanding of automatic responses to auditory stimuli."
           >
-            <h4>Auditory Reflex Pathways</h4>
-            <div class="pathway-arabic">المسارات الانعكاسية السمعية</div>
-            <p>Brainstem circuits involved in auditory reflex responses.</p>
-            <span class="pathway-arrow">Open pathway →</span>
-          </button>
+            <h4>
+              Auditory Reflex Pathways
+            </h4>
+
+            <div class="pathway-arabic">
+              المسارات الانعكاسية السمعية
+            </div>
+
+            <p>
+              Brainstem circuits involved in auditory reflex responses.
+            </p>
+
+            <span class="pathway-arrow">
+              Open pathway →
+            </span>
+          </a>
 
         </div>
 
@@ -1451,7 +1352,9 @@
 
             <div>
 
-              <h3>Cerebellar Pathways</h3>
+              <h3>
+                Cerebellar Pathways
+              </h3>
 
               <div class="category-arabic">
                 المسارات المخيخية
@@ -1474,65 +1377,71 @@
 
         <div class="pathway-grid">
 
-          <button
+          <a
             class="pathway-card"
-            type="button"
-            data-title="Cerebellar Afferent Pathways"
-            data-arabic="المسارات الواردة للمخيخ"
-            data-category="Cerebellar Pathway"
+            href="./cerebellar-afferent.html"
             data-search="cerebellar afferent pathways input spinocerebellar pontocerebellar climbing mossy"
-            data-description="Carry proprioceptive, cortical, and other information into the cerebellum."
-            data-origin="Spinal proprioceptive systems, pontine nuclei, vestibular nuclei, and other brainstem sources."
-            data-course="Multiple pathways enter the cerebellum through its three cerebellar peduncles."
-            data-crossing="Crossing patterns vary by afferent pathway."
-            data-destination="Cerebellar cortex and deep cerebellar nuclei."
-            data-clinical="Important for understanding cerebellar coordination and ipsilateral patterns of dysfunction."
           >
-            <h4>Cerebellar Afferent Pathways</h4>
-            <div class="pathway-arabic">المسارات الواردة للمخيخ</div>
-            <p>Carry proprioceptive and cortical information into the cerebellum.</p>
-            <span class="pathway-arrow">Open pathway →</span>
-          </button>
+            <h4>
+              Cerebellar Afferent Pathways
+            </h4>
 
-          <button
+            <div class="pathway-arabic">
+              المسارات الواردة للمخيخ
+            </div>
+
+            <p>
+              Carry proprioceptive and cortical information into the cerebellum.
+            </p>
+
+            <span class="pathway-arrow">
+              Open pathway →
+            </span>
+          </a>
+
+          <a
             class="pathway-card"
-            type="button"
-            data-title="Cerebellar Efferent Pathways"
-            data-arabic="المسارات الصادرة من المخيخ"
-            data-category="Cerebellar Pathway"
+            href="./cerebellar-efferent.html"
             data-search="cerebellar efferent pathways output dentate thalamus red nucleus"
-            data-description="Carry cerebellar output toward motor and premotor systems."
-            data-origin="Deep cerebellar nuclei."
-            data-course="Major output fibers pass through the superior cerebellar peduncle toward brainstem and thalamic targets."
-            data-crossing="Many major cerebellar output fibers cross in the midbrain."
-            data-destination="Thalamus, red nucleus, vestibular and other motor-related systems."
-            data-clinical="Cerebellar output helps coordinate movement rather than directly initiating voluntary contraction."
           >
-            <h4>Cerebellar Efferent Pathways</h4>
-            <div class="pathway-arabic">المسارات الصادرة من المخيخ</div>
-            <p>Carry cerebellar output toward motor and premotor systems.</p>
-            <span class="pathway-arrow">Open pathway →</span>
-          </button>
+            <h4>
+              Cerebellar Efferent Pathways
+            </h4>
 
-          <button
+            <div class="pathway-arabic">
+              المسارات الصادرة من المخيخ
+            </div>
+
+            <p>
+              Carry cerebellar output toward motor and premotor systems.
+            </p>
+
+            <span class="pathway-arrow">
+              Open pathway →
+            </span>
+          </a>
+
+          <a
             class="pathway-card"
-            type="button"
-            data-title="Cerebellar Peduncles"
-            data-arabic="السويقات المخيخية"
-            data-category="Cerebellar Pathway"
+            href="./cerebellar-peduncles.html"
             data-search="cerebellar peduncles superior middle inferior brainstem"
-            data-description="Major connection routes between the cerebellum and brainstem."
-            data-origin="Brainstem and cerebellar systems."
-            data-course="Superior, middle, and inferior cerebellar peduncles connect the cerebellum with different brainstem regions."
-            data-crossing="Crossing varies according to the pathway carried by each peduncle."
-            data-destination="Cerebellar cortex, deep nuclei, and brainstem networks."
-            data-clinical="Peduncle anatomy is useful when localizing cerebellar and brainstem lesions."
           >
-            <h4>Cerebellar Peduncles</h4>
-            <div class="pathway-arabic">السويقات المخيخية</div>
-            <p>Major connection routes between the cerebellum and brainstem.</p>
-            <span class="pathway-arrow">Open pathway →</span>
-          </button>
+            <h4>
+              Cerebellar Peduncles
+            </h4>
+
+            <div class="pathway-arabic">
+              السويقات المخيخية
+            </div>
+
+            <p>
+              Major connection routes between the cerebellum and brainstem.
+            </p>
+
+            <span class="pathway-arrow">
+              Open pathway →
+            </span>
+          </a>
 
         </div>
 
@@ -1552,7 +1461,9 @@
 
             <div>
 
-              <h3>Limbic Pathways</h3>
+              <h3>
+                Limbic Pathways
+              </h3>
 
               <div class="category-arabic">
                 المسارات الحوفية
@@ -1575,85 +1486,93 @@
 
         <div class="pathway-grid">
 
-          <button
+          <a
             class="pathway-card"
-            type="button"
-            data-title="Fornix"
-            data-arabic="القبو"
-            data-category="Limbic Pathway"
+            href="./fornix.html"
             data-search="fornix hippocampus mammillary bodies memory limbic"
-            data-description="A major hippocampal output pathway within the limbic system."
-            data-origin="Hippocampal formation."
-            data-course="Hippocampal fibers form the fimbria and continue as the fornix toward septal and hypothalamic regions."
-            data-crossing="Most fibers remain associated with the ipsilateral pathway, with commissural components connecting hippocampal formations."
-            data-destination="Mammillary bodies, septal region, and other limbic targets."
-            data-clinical="Damage can disrupt memory-related networks."
           >
-            <h4>Fornix</h4>
-            <div class="pathway-arabic">القبو</div>
-            <p>Major hippocampal output pathway within the limbic system.</p>
-            <span class="pathway-arrow">Open pathway →</span>
-          </button>
+            <h4>
+              Fornix
+            </h4>
 
-          <button
+            <div class="pathway-arabic">
+              القبو
+            </div>
+
+            <p>
+              Major hippocampal output pathway within the limbic system.
+            </p>
+
+            <span class="pathway-arrow">
+              Open pathway →
+            </span>
+          </a>
+
+          <a
             class="pathway-card"
-            type="button"
-            data-title="Papez Circuit"
-            data-arabic="دائرة بابيز"
-            data-category="Limbic Pathway"
+            href="./papez-circuit.html"
             data-search="papez circuit hippocampus mammillary thalamus cingulate memory"
-            data-description="Classic circuit linking hippocampal and limbic structures."
-            data-origin="Hippocampal formation."
-            data-course="Hippocampus → fornix → mammillary bodies → anterior thalamic nuclei → cingulate cortex → parahippocampal region."
-            data-crossing="The classic circuit is predominantly organized through ipsilateral limbic connections."
-            data-destination="Hippocampal formation."
-            data-clinical="Provides a framework for understanding memory-related limbic anatomy."
           >
-            <h4>Papez Circuit</h4>
-            <div class="pathway-arabic">دائرة بابيز</div>
-            <p>Classic circuit linking hippocampal and limbic structures.</p>
-            <span class="pathway-arrow">Open pathway →</span>
-          </button>
+            <h4>
+              Papez Circuit
+            </h4>
 
-          <button
+            <div class="pathway-arabic">
+              دائرة بابيز
+            </div>
+
+            <p>
+              Classic circuit linking hippocampal and limbic structures.
+            </p>
+
+            <span class="pathway-arrow">
+              Open pathway →
+            </span>
+          </a>
+
+          <a
             class="pathway-card"
-            type="button"
-            data-title="Amygdala Pathways"
-            data-arabic="مسارات اللوزة الدماغية"
-            data-category="Limbic Pathway"
+            href="./amygdala-pathways.html"
             data-search="amygdala pathway emotion fear hypothalamus cortex limbic"
-            data-description="Connections involved in emotional processing and behavioral responses."
-            data-origin="Amygdaloid complex."
-            data-course="Amygdala communicates with hypothalamic, brainstem, cortical, and limbic regions."
-            data-crossing="Different amygdala connections have different bilateral and ipsilateral components."
-            data-destination="Hypothalamus, brainstem autonomic systems, cortex, and hippocampal networks."
-            data-clinical="Important for understanding emotional and autonomic responses."
           >
-            <h4>Amygdala Pathways</h4>
-            <div class="pathway-arabic">مسارات اللوزة الدماغية</div>
-            <p>Connections involved in emotional processing and behavioral responses.</p>
-            <span class="pathway-arrow">Open pathway →</span>
-          </button>
+            <h4>
+              Amygdala Pathways
+            </h4>
 
-          <button
+            <div class="pathway-arabic">
+              مسارات اللوزة الدماغية
+            </div>
+
+            <p>
+              Connections involved in emotional processing and behavioral responses.
+            </p>
+
+            <span class="pathway-arrow">
+              Open pathway →
+            </span>
+          </a>
+
+          <a
             class="pathway-card"
-            type="button"
-            data-title="Medial Forebrain Bundle"
-            data-arabic="الحزمة الدماغية الأمامية الإنسية"
-            data-category="Limbic Pathway"
+            href="./medial-forebrain-bundle.html"
             data-search="medial forebrain bundle reward motivation limbic hypothalamus"
-            data-description="Distributed pathway connecting limbic and reward-related systems."
-            data-origin="Distributed limbic and basal forebrain networks."
-            data-course="Longitudinal fiber system linking basal forebrain, hypothalamic, septal, and brainstem regions."
-            data-crossing="Contains fibers with varied origins, destinations, and crossing patterns."
-            data-destination="Distributed limbic, hypothalamic, and brainstem networks."
-            data-clinical="Useful as an anatomical framework for limbic and motivational circuitry."
           >
-            <h4>Medial Forebrain Bundle</h4>
-            <div class="pathway-arabic">الحزمة الدماغية الأمامية الإنسية</div>
-            <p>Distributed pathway connecting limbic and reward-related systems.</p>
-            <span class="pathway-arrow">Open pathway →</span>
-          </button>
+            <h4>
+              Medial Forebrain Bundle
+            </h4>
+
+            <div class="pathway-arabic">
+              الحزمة الدماغية الأمامية الإنسية
+            </div>
+
+            <p>
+              Distributed pathway connecting limbic and reward-related systems.
+            </p>
+
+            <span class="pathway-arrow">
+              Open pathway →
+            </span>
+          </a>
 
         </div>
 
@@ -1673,7 +1592,9 @@
 
             <div>
 
-              <h3>Autonomic Pathways</h3>
+              <h3>
+                Autonomic Pathways
+              </h3>
 
               <div class="category-arabic">
                 المسارات اللاإرادية
@@ -1696,199 +1617,76 @@
 
         <div class="pathway-grid">
 
-          <button
+          <a
             class="pathway-card"
-            type="button"
-            data-title="Sympathetic Pathway"
-            data-arabic="المسار الودي"
-            data-category="Autonomic Pathway"
+            href="./sympathetic-pathway.html"
             data-search="sympathetic autonomic thoracolumbar pathway visceral"
-            data-description="Thoracolumbar autonomic pathway controlling many visceral responses."
-            data-origin="Preganglionic sympathetic neurons in the thoracolumbar spinal cord."
-            data-course="Spinal cord → sympathetic chain or prevertebral ganglia → target organs."
-            data-crossing="Individual pathways vary; sympathetic fibers may ascend, descend, or pass through the sympathetic chain."
-            data-destination="Smooth muscle, cardiac muscle, and glands."
-            data-clinical="Helps explain patterns of autonomic dysfunction and sympathetic denervation."
           >
-            <h4>Sympathetic Pathway</h4>
-            <div class="pathway-arabic">المسار الودي</div>
-            <p>Thoracolumbar autonomic pathway controlling visceral responses.</p>
-            <span class="pathway-arrow">Open pathway →</span>
-          </button>
+            <h4>
+              Sympathetic Pathway
+            </h4>
 
-          <button
-            class="pathway-card"
-            type="button"
-            data-title="Parasympathetic Pathway"
-            data-arabic="المسار نظير الودي"
-            data-category="Autonomic Pathway"
-            data-search="parasympathetic autonomic craniosacral pathway rest digest"
-            data-description="Craniosacral autonomic pathway supporting many resting and visceral functions."
-            data-origin="Brainstem parasympathetic nuclei and sacral spinal cord."
-            data-course="Cranial or sacral preganglionic fibers → peripheral ganglia near or within target organs."
-            data-crossing="Individual pathways have distinct local organization."
-            data-destination="Visceral organs and glands."
-            data-clinical="Useful for understanding autonomic control of thoracic, abdominal, pelvic, and ocular functions."
-          >
-            <h4>Parasympathetic Pathway</h4>
-            <div class="pathway-arabic">المسار نظير الودي</div>
-            <p>Craniosacral pathway supporting rest-and-digest functions.</p>
-            <span class="pathway-arrow">Open pathway →</span>
-          </button>
+            <div class="pathway-arabic">
+              المسار الودي
+            </div>
 
-          <button
+            <p>
+              Thoracolumbar autonomic pathway controlling visceral responses.
+            </p>
+
+            <span class="pathway-arrow">
+              Open pathway →
+            </span>
+          </a>
+
+          <a
             class="pathway-card"
-            type="button"
-            data-title="Hypothalamic Autonomic Pathway"
-            data-arabic="المسار اللاإرادي الوطائي"
-            data-category="Autonomic Pathway"
-            data-search="hypothalamic autonomic pathway hypothalamus brainstem spinal cord"
-            data-description="Links hypothalamic control with autonomic brainstem and spinal systems."
-            data-origin="Hypothalamic autonomic control regions."
-            data-course="Hypothalamic projections descend through brainstem pathways toward autonomic nuclei."
-            data-crossing="Organization is distributed and includes bilateral projections."
-            data-destination="Autonomic nuclei of the brainstem and spinal cord."
-            data-clinical="Important for understanding central regulation of visceral and homeostatic functions."
+            href="./parasympathetic-pathway.html"
+            data-search="parasympathetic autonomic craniosacral pathway visceral"
           >
-            <h4>Hypothalamic Autonomic Pathway</h4>
-            <div class="pathway-arabic">المسار اللاإرادي الوطائي</div>
-            <p>Links hypothalamic control with autonomic brainstem and spinal systems.</p>
-            <span class="pathway-arrow">Open pathway →</span>
-          </button>
+            <h4>
+              Parasympathetic Pathway
+            </h4>
+
+            <div class="pathway-arabic">
+              المسار نظير الودي
+            </div>
+
+            <p>
+              Craniosacral autonomic pathway supporting visceral regulation.
+            </p>
+
+            <span class="pathway-arrow">
+              Open pathway →
+            </span>
+          </a>
+
+          <a
+            class="pathway-card"
+            href="./hypothalamic-autonomic.html"
+            data-search="hypothalamic autonomic pathway visceral regulation hypothalamus"
+          >
+            <h4>
+              Hypothalamic Autonomic Pathway
+            </h4>
+
+            <div class="pathway-arabic">
+              المسار الوطائي اللاإرادي
+            </div>
+
+            <p>
+              Central pathway connecting hypothalamic control with autonomic systems.
+            </p>
+
+            <span class="pathway-arrow">
+              Open pathway →
+            </span>
+          </a>
 
         </div>
 
       </section>
 
-      <!-- ASSOCIATION -->
-
-      <section class="category">
-
-        <div class="category-header">
-
-          <div class="category-heading">
-
-            <div class="category-icon">
-              ⟷
-            </div>
-
-            <div>
-
-              <h3>Association &amp; Commissural Pathways</h3>
-
-              <div class="category-arabic">
-                مسارات الارتباط والموصلات
-              </div>
-
-              <p class="category-description">
-                White-matter systems connecting cortical regions within one
-                hemisphere or linking the two cerebral hemispheres.
-              </p>
-
-            </div>
-
-          </div>
-
-          <div class="category-count">
-            4 pathways
-          </div>
-
-        </div>
-
-        <div class="pathway-grid">
-
-          <button
-            class="pathway-card"
-            type="button"
-            data-title="Arcuate Fasciculus"
-            data-arabic="الحزمة المقوسة"
-            data-category="Association Pathway"
-            data-search="arcuate fasciculus language association broca wernicke"
-            data-description="Association pathway strongly associated with language networks."
-            data-origin="Distributed frontal, temporal, and parietal language-related cortical regions."
-            data-course="Long association fibers connect posterior temporal/parietal regions with frontal language-related cortex."
-            data-crossing="Predominantly intrahemispheric."
-            data-destination="Distributed language and higher-order association cortex."
-            data-clinical="Classically associated with repetition and language-network dysfunction when damaged."
-          >
-            <h4>Arcuate Fasciculus</h4>
-            <div class="pathway-arabic">الحزمة المقوسة</div>
-            <p>Association pathway strongly associated with language networks.</p>
-            <span class="pathway-arrow">Open pathway →</span>
-          </button>
-
-          <button
-            class="pathway-card"
-            type="button"
-            data-title="Corpus Callosum"
-            data-arabic="الجسم الثفني"
-            data-category="Commissural Pathway"
-            data-search="corpus callosum commissural hemispheres interhemispheric"
-            data-description="The major commissural connection between the cerebral hemispheres."
-            data-origin="Cortical neurons throughout both cerebral hemispheres."
-            data-course="Fibers cross the midline through the corpus callosum."
-            data-crossing="Fibers cross directly through the corpus callosum."
-            data-destination="Corresponding and related cortical regions of the opposite hemisphere."
-            data-clinical="Callosal lesions can disrupt interhemispheric information transfer."
-          >
-            <h4>Corpus Callosum</h4>
-            <div class="pathway-arabic">الجسم الثفني</div>
-            <p>Major commissural connection between the cerebral hemispheres.</p>
-            <span class="pathway-arrow">Open pathway →</span>
-          </button>
-
-          <button
-            class="pathway-card"
-            type="button"
-            data-title="Superior Longitudinal Fasciculus"
-            data-arabic="الحزمة الطولية العلوية"
-            data-category="Association Pathway"
-            data-search="superior longitudinal fasciculus association white matter cortical"
-            data-description="Large association system connecting distributed cortical regions."
-            data-origin="Distributed frontal, parietal, temporal, and occipital association cortex."
-            data-course="Longitudinal white-matter system running through the cerebral hemisphere."
-            data-crossing="Predominantly intrahemispheric."
-            data-destination="Distributed association cortical regions."
-            data-clinical="Associated with attention, language, spatial processing, and other higher-order networks."
-          >
-            <h4>Superior Longitudinal Fasciculus</h4>
-            <div class="pathway-arabic">الحزمة الطولية العلوية</div>
-            <p>Large association system connecting distributed cortical regions.</p>
-            <span class="pathway-arrow">Open pathway →</span>
-          </button>
-
-          <button
-            class="pathway-card"
-            type="button"
-            data-title="Uncinate Fasciculus"
-            data-arabic="الحزمة الخطافية"
-            data-category="Association Pathway"
-            data-search="uncinate fasciculus frontal temporal limbic association"
-            data-description="Association pathway connecting anterior temporal and frontal regions."
-            data-origin="Anterior temporal and limbic-related cortical regions."
-            data-course="Curved white-matter bundle connecting temporal and frontal regions."
-            data-crossing="Predominantly intrahemispheric."
-            data-destination="Orbitofrontal and anterior temporal association cortex."
-            data-clinical="Associated with higher-order memory, semantic, and emotional networks."
-          >
-            <h4>Uncinate Fasciculus</h4>
-            <div class="pathway-arabic">الحزمة الخطافية</div>
-            <p>Association pathway connecting anterior temporal and frontal regions.</p>
-            <span class="pathway-arrow">Open pathway →</span>
-          </button>
-
-        </div>
-
-      </section>
-
-    </div>
-
-    <div id="noResults" class="no-results">
-      No pathways match your search. Try another term such as
-      <strong>motor</strong>,
-      <strong>visual</strong>,
-      <strong>corticospinal</strong>,
-      or <strong>pain</strong>.
     </div>
 
   </section>
@@ -1899,304 +1697,95 @@
   >
 
     <div class="section-label">
-      Study Strategy · طريقة الدراسة
+      Study Method
     </div>
 
     <h2>
-      Learn Every Pathway the Same Way
+      How to Study Neural Pathways
     </h2>
 
     <div class="learning-grid">
 
-      <div class="learning-card">
-        <div class="learning-card-number">01 · ORIGIN</div>
-        <h3>Where does it start?</h3>
-        <p>
-          Identify the receptor, cortical region, nucleus, or other structure
-          where the pathway begins.
-        </p>
-      </div>
+      <article class="learning-card">
 
-      <div class="learning-card">
-        <div class="learning-card-number">02 · COURSE</div>
-        <h3>Where does it travel?</h3>
-        <p>
-          Follow the pathway through the brainstem, spinal cord, white matter,
-          or other anatomical regions.
-        </p>
-      </div>
+        <div class="learning-card-number">
+          01
+        </div>
 
-      <div class="learning-card">
-        <div class="learning-card-number">03 · CROSSING</div>
-        <h3>Where does it cross?</h3>
-        <p>
-          Learn whether and where fibers decussate. This is critical for
-          understanding neurological localization.
-        </p>
-      </div>
+        <h3>
+          Find the Origin
+        </h3>
 
-      <div class="learning-card">
-        <div class="learning-card-number">04 · DESTINATION</div>
-        <h3>Where does it end?</h3>
         <p>
-          Identify the final nucleus, cortical region, cerebellar region,
-          spinal segment, or other destination.
+          Identify where the pathway starts and which neurons or receptors
+          provide its initial input.
         </p>
-      </div>
 
-      <div class="learning-card">
-        <div class="learning-card-number">05 · CLINICAL</div>
-        <h3>What happens if it is damaged?</h3>
-        <p>
-          Connect the pathway to the expected neurological deficit and
-          lesion localization.
-        </p>
-      </div>
+      </article>
 
-      <div class="learning-card">
-        <div class="learning-card-number">06 · CONNECT</div>
-        <h3>What structures surround it?</h3>
+      <article class="learning-card">
+
+        <div class="learning-card-number">
+          02
+        </div>
+
+        <h3>
+          Follow the Course
+        </h3>
+
         <p>
-          Relate the pathway to nearby nuclei, tracts, vessels, ventricles,
-          and other clinically important structures.
+          Trace the pathway through the important anatomical structures,
+          relays, and crossings.
         </p>
-      </div>
+
+      </article>
+
+      <article class="learning-card">
+
+        <div class="learning-card-number">
+          03
+        </div>
+
+        <h3>
+          Know the Destination
+        </h3>
+
+        <p>
+          Finish by identifying the final target and connecting pathway
+          anatomy with its function.
+        </p>
+
+      </article>
 
     </div>
 
   </section>
 
   <footer class="footer">
-    NeuroAtlas · Neural Pathways ·
-    Explore the anatomy. Understand the connections.
+    NeuroAtlas · Neural Pathways · المسارات العصبية
   </footer>
 
 </main>
 
-<div
-  id="pathwayModal"
-  class="pathway-modal"
-  aria-hidden="true"
->
-
-  <div
-    class="modal-panel"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="modalTitle"
-  >
-
-    <button
-      id="modalClose"
-      class="modal-close"
-      type="button"
-      aria-label="Close pathway"
-    >
-      ×
-    </button>
-
-    <div
-      id="modalKicker"
-      class="modal-kicker"
-    ></div>
-
-    <h2
-      id="modalTitle"
-      class="modal-title"
-    ></h2>
-
-    <div
-      id="modalArabic"
-      class="modal-arabic"
-    ></div>
-
-    <p
-      id="modalDescription"
-      class="modal-description"
-    ></p>
-
-    <div class="modal-sections">
-
-      <div class="modal-section">
-        <h3>Origin</h3>
-        <p id="modalOrigin"></p>
-      </div>
-
-      <div class="modal-section">
-        <h3>Course</h3>
-        <p id="modalCourse"></p>
-      </div>
-
-      <div class="modal-section">
-        <h3>Crossing</h3>
-        <p id="modalCrossing"></p>
-      </div>
-
-      <div class="modal-section">
-        <h3>Destination</h3>
-        <p id="modalDestination"></p>
-      </div>
-
-    </div>
-
-    <div class="modal-note">
-      <strong>Clinical localization:</strong>
-      <span id="modalClinical"></span>
-    </div>
-
-  </div>
-
-</div>
-
 <script>
-"use strict";
+  const searchInput = document.getElementById("pathwaySearch");
+  const pathwayCards = document.querySelectorAll(".pathway-card");
 
-const searchInput = document.getElementById("pathwaySearch");
-const categories = document.querySelectorAll(".category");
-const noResults = document.getElementById("noResults");
+  searchInput.addEventListener("input", () => {
+    const query = searchInput.value.trim().toLowerCase();
 
-const pathwayModal = document.getElementById("pathwayModal");
-const modalClose = document.getElementById("modalClose");
+    pathwayCards.forEach((card) => {
+      const title = card.querySelector("h4")?.textContent.toLowerCase() || "";
+      const arabic = card.querySelector(".pathway-arabic")?.textContent.toLowerCase() || "";
+      const description = card.querySelector("p")?.textContent.toLowerCase() || "";
+      const keywords = card.dataset.search?.toLowerCase() || "";
 
-const modalKicker = document.getElementById("modalKicker");
-const modalTitle = document.getElementById("modalTitle");
-const modalArabic = document.getElementById("modalArabic");
-const modalDescription = document.getElementById("modalDescription");
-const modalOrigin = document.getElementById("modalOrigin");
-const modalCourse = document.getElementById("modalCourse");
-const modalCrossing = document.getElementById("modalCrossing");
-const modalDestination = document.getElementById("modalDestination");
-const modalClinical = document.getElementById("modalClinical");
+      const searchableText = `${title} ${arabic} ${description} ${keywords}`;
+      const matches = searchableText.includes(query);
 
-const pathwayCards = document.querySelectorAll(".pathway-card");
-
-function normalizeSearch(value) {
-  return String(value)
-    .toLowerCase()
-    .trim()
-    .replace(/\s+/g, " ");
-}
-
-function filterPathways() {
-  const query = normalizeSearch(searchInput.value);
-  let visibleCards = 0;
-
-  categories.forEach((category) => {
-    const cards = category.querySelectorAll(".pathway-card");
-    let categoryVisible = 0;
-
-    cards.forEach((card) => {
-      const searchableText = [
-        card.textContent,
-        card.dataset.search || "",
-        card.dataset.category || "",
-        card.dataset.arabic || ""
-      ]
-        .join(" ")
-        .toLowerCase();
-
-      const matches =
-        query === "" ||
-        searchableText.includes(query);
-
-      card.classList.toggle("hidden", !matches);
-
-      if (matches) {
-        categoryVisible += 1;
-        visibleCards += 1;
-      }
+      card.style.display = matches ? "" : "none";
     });
-
-    category.classList.toggle(
-      "hidden",
-      categoryVisible === 0
-    );
   });
-
-  noResults.style.display =
-    visibleCards === 0 ? "block" : "none";
-}
-
-function openPathway(card) {
-  modalKicker.textContent =
-    card.dataset.category || "Neural Pathway";
-
-  modalTitle.textContent =
-    card.dataset.title || "Neural Pathway";
-
-  modalArabic.textContent =
-    card.dataset.arabic || "";
-
-  modalDescription.textContent =
-    card.dataset.description || "";
-
-  modalOrigin.textContent =
-    card.dataset.origin || "Not specified.";
-
-  modalCourse.textContent =
-    card.dataset.course || "Not specified.";
-
-  modalCrossing.textContent =
-    card.dataset.crossing || "Not specified.";
-
-  modalDestination.textContent =
-    card.dataset.destination || "Not specified.";
-
-  modalClinical.textContent =
-    card.dataset.clinical || "Not specified.";
-
-  pathwayModal.classList.add("open");
-  pathwayModal.setAttribute("aria-hidden", "false");
-  document.body.classList.add("modal-open");
-
-  modalClose.focus();
-}
-
-function closePathway() {
-  pathwayModal.classList.remove("open");
-  pathwayModal.setAttribute("aria-hidden", "true");
-  document.body.classList.remove("modal-open");
-}
-
-function handleModalBackgroundClick(event) {
-  if (event.target === pathwayModal) {
-    closePathway();
-  }
-}
-
-function handleKeyboard(event) {
-  if (event.key === "Escape") {
-    closePathway();
-  }
-}
-
-pathwayCards.forEach((card) => {
-  card.addEventListener("click", () => {
-    openPathway(card);
-  });
-});
-
-searchInput.addEventListener(
-  "input",
-  filterPathways
-);
-
-modalClose.addEventListener(
-  "click",
-  closePathway
-);
-
-pathwayModal.addEventListener(
-  "click",
-  handleModalBackgroundClick
-);
-
-document.addEventListener(
-  "keydown",
-  handleKeyboard
-);
-
-filterPathways();
 </script>
 
 </body>
