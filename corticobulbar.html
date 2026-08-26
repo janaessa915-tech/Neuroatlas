@@ -1,0 +1,3734 @@
+<!-- /corticobulbar.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NeuroAtlas | Corticobulbar Pathway</title>
+
+<style>
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #050b13;
+  color: #eef4fa;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.7;
+}
+
+/* Navigation */
+
+nav {
+  height: 70px;
+  padding: 0 7%;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+nav a {
+  color: #9db0c3;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+nav a:hover {
+  color: #fff;
+}
+
+/* Layout */
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 60px 7% 100px;
+}
+
+.eyebrow {
+  color: #61b5ff;
+  letter-spacing: 3px;
+  font-size: 12px;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+
+h1 {
+  font-size: clamp(46px, 7vw, 82px);
+  line-height: .95;
+  letter-spacing: -4px;
+  margin-bottom: 10px;
+}
+
+.arabic-title {
+  color: #ff4055;
+  font-size: 24px;
+  margin-bottom: 25px;
+}
+
+.hero p {
+  color: #a6b6c7;
+  max-width: 850px;
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.action-button,
+.controls button {
+  padding: 11px 17px;
+  border-radius: 9px;
+  background: #0b1928;
+  border: 1px solid #31516d;
+  color: #bdd0e0;
+  text-decoration: none;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.action-button:hover,
+.controls button:hover {
+  background: #14304a;
+  color: #fff;
+  border-color: #61b5ff;
+}
+
+.controls button.active {
+  background: #321218;
+  border-color: #ff4055;
+  color: #ffd9de;
+}
+
+/* Main viewer */
+
+.viewer {
+  margin-top: 60px;
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 24px;
+  overflow: hidden;
+  background: #02060b;
+  box-shadow: 0 25px 80px rgba(0,0,0,.45);
+}
+
+.viewer-header {
+  min-height: 65px;
+  padding: 0 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.viewer-title {
+  font-size: 14px;
+  color: #d2dce6;
+}
+
+.viewer-status {
+  color: #708499;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.scene {
+  position: relative;
+  width: 100%;
+  height: 700px;
+
+  background:
+    radial-gradient(
+      ellipse at 50% 45%,
+      #203b51 0%,
+      #0d1c2e 45%,
+      #02060b 100%
+    );
+}
+
+#brainCanvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Loading */
+
+.loading {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  gap: 16px;
+
+  background: #02060b;
+  color: #9db0c3;
+
+  font-size: 14px;
+
+  transition: opacity .8s;
+}
+
+.loading.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loading-bar {
+  width: 180px;
+  height: 2px;
+  background: rgba(255,255,255,.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.loading-bar-inner {
+  width: 0%;
+  height: 100%;
+  background: #ff4055;
+  transition: width .3s;
+}
+
+/* Location label */
+
+.location-label {
+  position: absolute;
+  z-index: 30;
+  pointer-events: none;
+
+  transform: translate(-50%,-100%);
+
+  display: none;
+}
+
+.location-label.show {
+  display: block;
+}
+
+.label-box {
+  position: relative;
+
+  padding: 9px 15px;
+
+  border-radius: 10px;
+
+  background: rgba(5,10,17,.96);
+
+  border: 1.5px solid #ffb6c1;
+
+  color: #ffd9de;
+
+  font-size: 12px;
+  font-weight: bold;
+
+  letter-spacing: 1px;
+
+  white-space: nowrap;
+
+  box-shadow:
+    0 0 12px rgba(255,182,193,.35),
+    0 0 30px rgba(255,182,193,.2);
+}
+
+.label-box::after {
+  content: "";
+
+  position: absolute;
+
+  left: 50%;
+  bottom: -15px;
+
+  width: 1.5px;
+  height: 15px;
+
+  background: #ffb6c1;
+
+  transform: translateX(-50%);
+}
+
+/* Controls */
+
+.controls {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+
+  padding: 15px;
+
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
+/* Sections */
+
+.section {
+  margin-top: 70px;
+}
+
+.section-label {
+  color: #61b5ff;
+  letter-spacing: 2px;
+  font-size: 11px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.section h2 {
+  font-size: 32px;
+  margin-bottom: 25px;
+}
+
+.section-intro {
+  color: #91a5b8;
+  max-width: 900px;
+  font-size: 15px;
+  line-height: 1.9;
+  margin-bottom: 30px;
+}
+
+/* Pathway viewer */
+
+.pathway-viewer {
+  position: relative;
+
+  width: 100%;
+  max-width: 1100px;
+  height: 690px;
+
+  margin: auto;
+
+  border: 1px solid #243b50;
+  border-radius: 20px;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      ellipse at 50% 48%,
+      #182b3b 0%,
+      #0a1622 62%,
+      #02060b 100%
+    );
+}
+
+.pathway-svg {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+}
+
+.pathway-title {
+  position: absolute;
+
+  left: 50%;
+  top: 20px;
+
+  transform: translateX(-50%);
+
+  color: #d9e3eb;
+
+  font-size: 12px;
+  letter-spacing: 2px;
+
+  text-transform: uppercase;
+
+  white-space: nowrap;
+}
+
+/* Brain silhouette */
+
+.brain-outline {
+  fill: url(#brainGradient);
+  stroke: #cdbdc2;
+  stroke-width: 3;
+  opacity: .92;
+}
+
+.brain-inner {
+  fill: #776770;
+  opacity: .18;
+  stroke: #d2c2c7;
+  stroke-width: 1;
+}
+
+.cortex-line {
+  fill: none;
+  stroke: #594d55;
+  stroke-width: 3;
+  opacity: .7;
+  stroke-linecap: round;
+}
+
+/* Brainstem */
+
+.brainstem {
+  fill: #75656d;
+  stroke: #c7b5bb;
+  stroke-width: 2;
+}
+
+.midbrain {
+  fill: #806f77;
+  stroke: #d5c4ca;
+  stroke-width: 1.5;
+}
+
+.pons {
+  fill: #8d7982;
+  stroke: #d9c7cd;
+  stroke-width: 1.5;
+}
+
+.medulla {
+  fill: #75646c;
+  stroke: #cdbbc2;
+  stroke-width: 1.5;
+}
+
+/* Cortex */
+
+.motor-cortex {
+  fill: #a58e97;
+  stroke: #ffb6c1;
+  stroke-width: 2;
+}
+
+/* Internal capsule */
+
+.internal-capsule {
+  fill: #d6cfd2;
+  stroke: #eee6e8;
+  stroke-width: 1.5;
+  opacity: .9;
+}
+
+/* Cranial nuclei */
+
+.cranial-nucleus {
+  fill: #ff526b;
+  stroke: #ffd0d6;
+  stroke-width: 1.5;
+}
+
+.cranial-nucleus.secondary {
+  fill: #ff8495;
+}
+
+/* Pathway */
+
+.pathway-track {
+  fill: none;
+  stroke: #ff4055;
+  stroke-width: 9;
+  opacity: .18;
+
+  filter: url(#glow);
+}
+
+.pathway-main {
+  fill: none;
+  stroke: #ff4055;
+  stroke-width: 4;
+
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.pathway-branch {
+  fill: none;
+  stroke: #ff8796;
+  stroke-width: 3;
+
+  stroke-linecap: round;
+}
+
+/* Nodes */
+
+.path-node {
+  fill: #ff4055;
+  stroke: #fff;
+  stroke-width: 1.5;
+}
+
+.path-node-secondary {
+  fill: #ff9aa7;
+  stroke: #fff;
+  stroke-width: 1;
+}
+
+/* Labels */
+
+.callout {
+  fill: none;
+  stroke: #ffb6c1;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+
+.callout-dot {
+  fill: #ffb6c1;
+  stroke: #fff;
+  stroke-width: 1;
+}
+
+.svg-label {
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 13px;
+  font-weight: bold;
+
+  letter-spacing: .8px;
+
+  fill: #fff;
+}
+
+.svg-sub {
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 10px;
+
+  fill: #ffb6c1;
+}
+
+.orientation-label {
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 10px;
+
+  fill: #71879a;
+
+  letter-spacing: 1.5px;
+}
+
+/* Badges */
+
+.view-badge {
+  position: absolute;
+
+  left: 22px;
+  bottom: 20px;
+
+  padding: 8px 12px;
+
+  border: 1px solid #31516d;
+  border-radius: 8px;
+
+  background: rgba(4,10,17,.88);
+
+  color: #8195a8;
+
+  font-size: 10px;
+  letter-spacing: 1.5px;
+}
+
+.legend {
+  position: absolute;
+
+  right: 22px;
+  bottom: 20px;
+
+  display: flex;
+  gap: 14px;
+
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  color: #b5c2ce;
+
+  font-size: 10px;
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  box-shadow: 0 0 12px currentColor;
+}
+
+.legend-dot.pathway {
+  background: #ff4055;
+  color: #ff4055;
+}
+
+.legend-dot.brain {
+  background: #c4b2b8;
+  color: #c4b2b8;
+}
+
+/* Animation */
+
+@keyframes pathwayPulse {
+
+  0%,
+  100% {
+    opacity: .8;
+    filter:
+      drop-shadow(
+        0 0 4px
+        rgba(255,64,85,.35)
+      );
+  }
+
+  50% {
+    opacity: 1;
+    filter:
+      drop-shadow(
+        0 0 15px
+        rgba(255,64,85,.9)
+      );
+  }
+
+}
+
+.pathway-active {
+  animation:
+    pathwayPulse 2s infinite;
+}
+
+/* Location */
+
+.location {
+  margin-top: 70px;
+
+  padding: 35px;
+
+  background: #091522;
+
+  border: 1px solid #172b3e;
+
+  border-radius: 18px;
+}
+
+.location h2 {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+.location-intro {
+  color: #91a5b8;
+
+  max-width: 900px;
+
+  line-height: 1.9;
+
+  margin-bottom: 30px;
+}
+
+.location-caption {
+  text-align: center;
+
+  color: #9fb0c3;
+
+  margin-top: 15px;
+
+  line-height: 1.8;
+}
+
+.source-note {
+  max-width: 900px;
+
+  margin: 15px auto 0;
+
+  color: #617487;
+
+  font-size: 11px;
+
+  text-align: center;
+}
+
+/* Cards */
+
+.cards {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap: 20px;
+}
+
+.card {
+  padding: 27px;
+
+  background: #091522;
+
+  border: 1px solid #172b3e;
+
+  border-radius: 18px;
+
+  transition:
+    transform .2s,
+    border-color .2s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+
+  border-color: #4a2027;
+}
+
+.card h3 {
+  font-size: 18px;
+
+  margin-bottom: 13px;
+
+  color: #eef4fa;
+
+  line-height: 1.45;
+}
+
+.card p {
+  color: #91a5b8;
+
+  font-size: 14px;
+
+  line-height: 1.8;
+}
+
+/* Clinical */
+
+.clinical-section {
+  margin-top: 65px;
+}
+
+.clinical-box {
+  padding: 30px;
+
+  background: #091522;
+
+  border: 1px solid #172b3e;
+
+  border-left: 3px solid #ff4055;
+
+  border-radius: 18px;
+}
+
+.clinical-box p {
+  color: #a7b7c6;
+
+  font-size: 15px;
+
+  line-height: 1.9;
+
+  margin-bottom: 18px;
+}
+
+.clinical-box p:last-child {
+  margin-bottom: 0;
+}
+
+/* Facts */
+
+.facts-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4,1fr);
+
+  gap: 15px;
+}
+
+.fact {
+  padding: 22px;
+
+  background: #091522;
+
+  border: 1px solid #172b3e;
+
+  border-radius: 16px;
+}
+
+.fact span {
+  display: block;
+
+  color: #ff4055;
+
+  font-size: 11px;
+
+  letter-spacing: 2px;
+
+  margin-bottom: 12px;
+}
+
+.fact strong {
+  display: block;
+
+  color: #eef4fa;
+
+  font-size: 14px;
+
+  margin-bottom: 8px;
+
+  line-height: 1.5;
+}
+
+.fact p {
+  color: #8195a8;
+
+  font-size: 13px;
+
+  line-height: 1.7;
+}
+
+/* Quiz */
+
+.quiz {
+  margin-top: 65px;
+
+  padding: 30px;
+
+  background: #091522;
+
+  border: 1px solid #172b3e;
+
+  border-radius: 18px;
+}
+
+.quiz h2 {
+  font-size: 28px;
+
+  margin-bottom: 10px;
+}
+
+.quiz-intro {
+  color: #91a5b8;
+
+  margin-bottom: 25px;
+}
+
+.question {
+  margin-bottom: 30px;
+}
+
+.question:last-child {
+  margin-bottom: 0;
+}
+
+.question p {
+  color: #eef4fa;
+
+  font-size: 16px;
+
+  margin-bottom: 12px;
+
+  font-weight: bold;
+}
+
+.option {
+  display: block;
+
+  width: 100%;
+
+  padding: 12px 15px;
+
+  margin-top: 9px;
+
+  background: #0b1928;
+
+  color: #c7d5e2;
+
+  border: 1px solid #263951;
+
+  border-radius: 9px;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  font-size: 14px;
+
+  transition: .2s;
+}
+
+.option:hover {
+  border-color: #ff4055;
+
+  background: #111e2c;
+}
+
+.option.correct {
+  border-color: #8fd3a8;
+
+  background: #14291e;
+
+  color: #b9f0c9;
+}
+
+.option.wrong {
+  border-color: #d88b9b;
+
+  background: #2a171d;
+
+  color: #ffc2cc;
+}
+
+.quiz-result {
+  margin-top: 25px;
+
+  padding: 15px;
+
+  border-radius: 10px;
+
+  background: #0b1928;
+
+  border: 1px solid #263951;
+
+  color: #aebdce;
+
+  display: none;
+}
+
+/* Responsive */
+
+@media (max-width: 900px) {
+
+  .cards {
+    grid-template-columns:
+      repeat(2,1fr);
+  }
+
+  .facts-grid {
+    grid-template-columns:
+      repeat(2,1fr);
+  }
+
+  .pathway-viewer {
+    height: 580px;
+  }
+
+}
+
+@media (max-width: 800px) {
+
+  .scene {
+    height: 450px;
+  }
+
+  .viewer-status {
+    display: none;
+  }
+
+  .location {
+    padding: 25px;
+  }
+
+  .pathway-viewer {
+    height: 500px;
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .facts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  h1 {
+    letter-spacing: -2px;
+  }
+
+  .location {
+    padding: 20px;
+  }
+
+  .pathway-viewer {
+    height: 430px;
+  }
+
+  .pathway-title {
+    font-size: 8px;
+  }
+
+  .svg-label {
+    font-size: 8px;
+  }
+
+  .svg-sub {
+    font-size: 7px;
+  }
+
+  .legend {
+    display: none;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+  <a href="./pathways.html">
+    ← Back to Neural Pathways
+  </a>
+</nav>
+
+<main class="container">
+
+<div class="eyebrow">
+  Motor Pathways · NeuroAtlas
+</div>
+
+<h1>
+  Corticobulbar
+</h1>
+
+<div class="arabic-title">
+  السبيل القشري البصلي
+</div>
+
+<div class="hero">
+
+<p>
+The corticobulbar pathway is a major descending motor pathway that
+connects the cerebral cortex with motor nuclei of the cranial nerves in
+the brainstem. It is especially important for voluntary control of the
+muscles of the face, jaw, pharynx, larynx, and tongue.
+</p>
+
+</div>
+
+<div class="actions">
+
+<a class="action-button" href="#pathway">
+  🧠 Explore Pathway
+</a>
+
+<a class="action-button" href="#information">
+  📚 Learn the Anatomy
+</a>
+
+<a class="action-button" href="#clinical">
+  🩺 Clinical Importance
+</a>
+
+<a class="action-button" href="#quiz">
+  📝 Test Yourself
+</a>
+
+</div>
+
+<!-- =========================================================
+     INTERACTIVE 3D VIEWER
+     ========================================================= -->
+
+<div class="viewer">
+
+<div class="viewer-header">
+
+<div class="viewer-title">
+  Human Brain · Interactive 3D
+</div>
+
+<div class="viewer-status">
+  DRAG TO ROTATE · SCROLL TO ZOOM
+</div>
+
+</div>
+
+<div class="scene">
+
+<div id="loading" class="loading">
+
+<span id="loadText">
+Loading brain model...
+</span>
+
+<div class="loading-bar">
+  <div
+    id="loadBar"
+    class="loading-bar-inner">
+  </div>
+</div>
+
+</div>
+
+<canvas id="brainCanvas"></canvas>
+
+<div
+  id="locationLabel"
+  class="location-label">
+
+  <div class="label-box">
+    CORTICOBULBAR PATHWAY · السبيل القشري البصلي
+  </div>
+
+</div>
+
+</div>
+
+<div class="controls">
+
+<button id="showLocation">
+  📍 Show Pathway
+</button>
+
+<button
+  id="highlight"
+  class="active">
+  🔴 Highlight Pathway
+</button>
+
+<button
+  id="rotate"
+  class="active">
+  ⟳ Auto Rotate
+</button>
+
+<button id="reset">
+  ↻ Reset View
+</button>
+
+</div>
+
+</div>
+
+<!-- =========================================================
+     PATHWAY
+     ========================================================= -->
+
+<section
+  id="pathway"
+  class="location">
+
+<div class="section-label">
+  Pathway · المسار
+</div>
+
+<h2>
+  📍 Course of the Corticobulbar Pathway
+</h2>
+
+<p class="location-intro">
+
+The corticobulbar pathway begins primarily in the motor cortex and
+descends through the subcortical white matter and the genu of the
+internal capsule before reaching motor nuclei associated with cranial
+nerves in the brainstem.
+
+<br><br>
+
+يبدأ السبيل القشري البصلي بشكل رئيسي من القشرة الحركية وينزل عبر
+المادة البيضاء تحت القشرية ثم عبر ركبة المحفظة الداخلية، قبل أن يصل
+إلى النوى الحركية المرتبطة بالأعصاب القحفية في جذع الدماغ.
+
+</p>
+
+<div class="pathway-viewer">
+
+<div class="pathway-title">
+  Corticobulbar Pathway · Motor Cortex to Cranial Motor Nuclei
+</div>
+
+<svg
+  class="pathway-svg"
+  viewBox="0 0 1200 690"
+  xmlns="http://www.w3.org/2000/svg"
+  aria-label="Corticobulbar pathway anatomical illustration"
+>
+
+<defs>
+
+<linearGradient
+  id="brainGradient"
+  x1="0"
+  y1="0"
+  x2="1"
+  y2="1">
+
+<stop
+  offset="0%"
+  stop-color="#d7c3c9"/>
+
+<stop
+  offset="40%"
+  stop-color="#ae949e"/>
+
+<stop
+  offset="75%"
+  stop-color="#806a73"/>
+
+<stop
+  offset="100%"
+  stop-color="#594950"/>
+
+</linearGradient>
+
+<filter
+  id="glow"
+  x="-100%"
+  y="-100%"
+  width="300%"
+  height="300%">
+
+<feGaussianBlur
+  stdDeviation="5"/>
+
+</filter>
+
+</defs>
+
+<!-- Brain -->
+
+<path
+  class="brain-outline"
+  d="
+M600 75
+
+C525 48 438 52 361 72
+C278 93 211 131 166 181
+
+C123 228 102 281 106 332
+C110 383 139 431 184 469
+
+C234 511 303 537 381 557
+
+C453 575 527 582 600 582
+
+C673 582 747 575 819 557
+
+C897 537 966 511 1016 469
+
+C1061 431 1090 383 1094 332
+
+C1098 281 1077 228 1034 181
+
+C989 131 922 93 839 72
+
+C762 52 675 48 600 75
+Z
+"/>
+
+<path
+  class="brain-inner"
+  d="
+M600 103
+
+C526 80 448 82 380 99
+C309 117 252 149 211 190
+
+C173 229 154 272 157 318
+
+C160 362 185 401 224 434
+
+C268 471 329 495 397 511
+
+C462 526 531 533 600 533
+
+C669 533 738 526 803 511
+
+C871 495 932 471 976 434
+
+C1015 401 1040 362 1043 318
+
+C1046 272 1027 229 989 190
+
+C948 149 891 117 820 99
+
+C752 82 674 80 600 103
+Z
+"/>
+
+<!-- Cortical folds -->
+
+<path
+  class="cortex-line"
+  d="
+M175 214
+C240 174 305 166 369 185
+C417 199 454 197 493 180
+"/>
+
+<path
+  class="cortex-line"
+  d="
+M153 276
+C213 238 278 235 337 254
+C383 268 421 270 462 254
+"/>
+
+<path
+  class="cortex-line"
+  d="
+M160 342
+C217 310 274 310 327 326
+C372 340 415 343 455 328
+"/>
+
+<path
+  class="cortex-line"
+  d="
+M190 402
+C243 377 296 380 343 397
+C381 410 417 411 451 400
+"/>
+
+<path
+  class="cortex-line"
+  d="
+M1025 214
+C960 174 895 166 831 185
+C783 199 746 197 707 180
+"/>
+
+<path
+  class="cortex-line"
+  d="
+M1047 276
+C987 238 922 235 863 254
+C817 268 779 270 738 254
+"/>
+
+<path
+  class="cortex-line"
+  d="
+M1040 342
+C983 310 926 310 873 326
+C828 340 785 343 745 328
+"/>
+
+<!-- Motor cortex -->
+
+<path
+  class="motor-cortex"
+  d="
+M448 151
+C473 129 507 118 541 121
+C566 123 584 134 600 150
+C616 134 634 123 659 121
+C693 118 727 129 752 151
+L727 196
+C702 181 675 176 648 180
+C629 183 614 190 600 202
+C586 190 571 183 552 180
+C525 176 498 181 473 196
+Z
+"/>
+
+<!-- Internal capsule -->
+
+<path
+  class="internal-capsule"
+  d="
+M570 211
+C556 229 549 251 551 275
+C553 297 566 316 584 332
+L600 342
+L616 332
+C634 316 647 297 649 275
+C651 251 644 229 630 211
+C620 198 608 193 600 202
+C592 193 580 198 570 211
+Z
+"/>
+
+<!-- Brainstem -->
+
+<path
+  class="brainstem"
+  d="
+M530 328
+
+C548 314 573 309 600 312
+C627 309 652 314 670 328
+
+L665 379
+
+C658 397 646 408 630 416
+
+L617 445
+
+L600 469
+
+L583 445
+
+L570 416
+
+C554 408 542 397 535 379
+Z
+"/>
+
+<!-- Midbrain -->
+
+<ellipse
+  class="midbrain"
+  cx="600"
+  cy="342"
+  rx="58"
+  ry="31"
+/>
+
+<!-- Pons -->
+
+<ellipse
+  class="pons"
+  cx="600"
+  cy="391"
+  rx="72"
+  ry="40"
+/>
+
+<!-- Medulla -->
+
+<path
+  class="medulla"
+  d="
+M558 419
+C571 431 585 439 600 442
+C615 439 629 431 642 419
+L631 493
+C623 519 615 536 600 548
+C585 536 577 519 569 493
+Z
+"/>
+
+<!-- Main corticobulbar track -->
+
+<path
+  class="pathway-track pathway-active"
+  d="
+M600 166
+
+C600 203 600 240 600 273
+
+C600 299 600 320 600 342
+
+C600 354 587 360 574 363
+
+C553 368 530 368 510 366
+"/>
+
+<path
+  class="pathway-main pathway-active"
+  d="
+M600 166
+
+C600 203 600 240 600 273
+
+C600 299 600 320 600 342
+
+C600 354 587 360 574 363
+
+C553 368 530 368 510 366
+"/>
+
+<!-- Right descending branch -->
+
+<path
+  class="pathway-branch pathway-active"
+  d="
+M600 342
+C615 351 630 357 648 359
+C670 361 691 356 708 348
+"/>
+
+<!-- Lower cranial branches -->
+
+<path
+  class="pathway-branch pathway-active"
+  d="
+M600 373
+C581 385 560 393 539 397
+C520 401 501 398 485 390
+"/>
+
+<path
+  class="pathway-branch pathway-active"
+  d="
+M600 391
+C618 402 638 410 658 412
+C678 414 697 409 713 400
+"/>
+
+<path
+  class="pathway-branch pathway-active"
+  d="
+M600 411
+C582 422 563 429 543 431
+C523 433 505 428 490 418
+"/>
+
+<!-- Cranial motor nuclei -->
+
+<circle
+  class="cranial-nucleus"
+  cx="510"
+  cy="366"
+  r="9"
+/>
+
+<circle
+  class="cranial-nucleus"
+  cx="708"
+  cy="348"
+  r="9"
+/>
+
+<circle
+  class="cranial-nucleus secondary"
+  cx="485"
+  cy="390"
+  r="8"
+/>
+
+<circle
+  class="cranial-nucleus secondary"
+  cx="713"
+  cy="400"
+  r="8"
+/>
+
+<circle
+  class="cranial-nucleus secondary"
+  cx="490"
+  cy="418"
+  r="8"
+/>
+
+<circle
+  class="cranial-nucleus secondary"
+  cx="710"
+  cy="430"
+  r="8"
+/>
+
+<!-- Nodes -->
+
+<circle
+  class="path-node"
+  cx="600"
+  cy="166"
+  r="8"
+/>
+
+<circle
+  class="path-node"
+  cx="600"
+  cy="273"
+  r="8"
+/>
+
+<circle
+  class="path-node"
+  cx="600"
+  cy="342"
+  r="8"
+/>
+
+<!-- Left callouts -->
+
+<path
+  class="callout"
+  d="
+M600 166
+L380 110
+L90 110
+"/>
+
+<circle
+  class="callout-dot"
+  cx="600"
+  cy="166"
+  r="4"
+/>
+
+<text
+  class="svg-label"
+  x="90"
+  y="103">
+
+MOTOR CORTEX
+
+</text>
+
+<text
+  class="svg-sub"
+  x="90"
+  y="121">
+
+القشرة الحركية
+
+</text>
+
+<path
+  class="callout"
+  d="
+M600 273
+L350 235
+L90 235
+"/>
+
+<circle
+  class="callout-dot"
+  cx="600"
+  cy="273"
+  r="4"
+/>
+
+<text
+  class="svg-label"
+  x="90"
+  y="228">
+
+GENU OF INTERNAL CAPSULE
+
+</text>
+
+<text
+  class="svg-sub"
+  x="90"
+  y="246">
+
+ركبة المحفظة الداخلية
+
+</text>
+
+<path
+  class="callout"
+  d="
+M510 366
+L335 345
+L90 345
+"/>
+
+<circle
+  class="callout-dot"
+  cx="510"
+  cy="366"
+  r="4"
+/>
+
+<text
+  class="svg-label"
+  x="90"
+  y="338">
+
+CRANIAL MOTOR NUCLEI
+
+</text>
+
+<text
+  class="svg-sub"
+  x="90"
+  y="356">
+
+النوى الحركية للأعصاب القحفية
+
+</text>
+
+<!-- Right callouts -->
+
+<path
+  class="callout"
+  d="
+M600 342
+L850 285
+L1110 285
+"/>
+
+<circle
+  class="callout-dot"
+  cx="600"
+  cy="342"
+  r="4"
+/>
+
+<text
+  class="svg-label"
+  x="850"
+  y="278">
+
+BRAINSTEM
+
+</text>
+
+<text
+  class="svg-sub"
+  x="850"
+  y="296">
+
+جذع الدماغ
+
+</text>
+
+<path
+  class="callout"
+  d="
+M708 348
+L875 385
+L1110 385
+"/>
+
+<circle
+  class="callout-dot"
+  cx="708"
+  cy="348"
+  r="4"
+/>
+
+<text
+  class="svg-label"
+  x="875"
+  y="378">
+
+FACIAL / TRIGEMINAL SYSTEMS
+
+</text>
+
+<text
+  class="svg-sub"
+  x="875"
+  y="396">
+
+أنظمة العصب الوجهي وثلاثي التوائم
+
+</text>
+
+<path
+  class="callout"
+  d="
+M713 400
+L875 455
+L1110 455
+"/>
+
+<circle
+  class="callout-dot"
+  cx="713"
+  cy="400"
+  r="4"
+/>
+
+<text
+  class="svg-label"
+  x="875"
+  y="448">
+
+BULBAR MOTOR NUCLEI
+
+</text>
+
+<text
+  class="svg-sub"
+  x="875"
+  y="466">
+
+النوى الحركية البصلية
+
+</text>
+
+<!-- Orientation -->
+
+<text
+  class="orientation-label"
+  x="125"
+  y="620">
+
+ANTERIOR
+
+</text>
+
+<text
+  class="orientation-label"
+  x="1030"
+  y="620">
+
+POSTERIOR
+
+</text>
+
+<text
+  class="orientation-label"
+  x="568"
+  y="655">
+
+DESCENDING MOTOR PATHWAY
+
+</text>
+
+</svg>
+
+<div class="view-badge">
+  MOTOR PATHWAY · CORTEX → BRAINSTEM
+</div>
+
+<div class="legend">
+
+<div class="legend-item">
+
+<span class="legend-dot pathway"></span>
+
+Corticobulbar Pathway
+
+</div>
+
+<div class="legend-item">
+
+<span class="legend-dot brain"></span>
+
+Brain Structures
+
+</div>
+
+</div>
+
+</div>
+
+<p class="location-caption">
+
+🔴 The highlighted pathway represents the descending
+<strong>corticobulbar motor system</strong> from the cerebral cortex
+toward motor nuclei of the cranial nerves.
+
+</p>
+
+<p class="source-note">
+
+Simplified anatomical illustration designed to demonstrate the general
+course and relationships of the corticobulbar pathway. It is not
+intended as a radiological diagnostic image.
+
+</p>
+
+</section>
+
+<!-- =========================================================
+     INFORMATION
+     ========================================================= -->
+
+<section
+  id="information"
+  class="section">
+
+<div class="section-label">
+  Anatomy · التشريح
+</div>
+
+<h2>
+  Corticobulbar Pathway
+  · السبيل القشري البصلي
+</h2>
+
+<p class="section-intro">
+
+The corticobulbar pathway is a descending motor pathway that carries
+voluntary motor commands from the cerebral cortex to motor nuclei of
+cranial nerves in the brainstem. These connections allow the cortex to
+control movements involving the face, jaw, tongue, pharynx, and larynx.
+
+<br><br>
+
+السبيل القشري البصلي هو مسار حركي نازل ينقل الأوامر الحركية الإرادية
+من القشرة المخية إلى النوى الحركية للأعصاب القحفية في جذع الدماغ.
+وتسمح هذه الاتصالات للقشرة بالتحكم في حركات الوجه والفك واللسان والبلعوم
+والحنجرة.
+
+</p>
+
+<div class="cards">
+
+<div class="card">
+
+<h3>
+Motor Cortex · القشرة الحركية
+</h3>
+
+<p>
+
+The pathway begins mainly in the primary motor cortex, with additional
+contributions from premotor and other motor-related cortical regions.
+
+<br><br>
+
+يبدأ المسار بشكل رئيسي من القشرة الحركية الأولية مع مساهمات من المناطق
+الحركية قبل الحركية ومناطق قشرية حركية أخرى.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Corona Radiata · الإكليل المشع
+</h3>
+
+<p>
+
+Descending corticobulbar fibers travel through the subcortical white
+matter as they leave the cerebral cortex.
+
+<br><br>
+
+تمر الألياف القشرية البصلية النازلة عبر المادة البيضاء تحت القشرية
+أثناء مغادرتها للقشرة المخية.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Genu of Internal Capsule · ركبة المحفظة الداخلية
+</h3>
+
+<p>
+
+A major concentration of corticobulbar fibers passes through the genu
+of the internal capsule.
+
+<br><br>
+
+تمر كمية مهمة من الألياف القشرية البصلية عبر ركبة المحفظة الداخلية.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Brainstem · جذع الدماغ
+</h3>
+
+<p>
+
+The pathway descends through the midbrain, pons, and medulla and gives
+off fibers to appropriate cranial motor nuclei.
+
+<br><br>
+
+ينزل المسار عبر الدماغ المتوسط والجسر والبصلة السيسائية ويعطي أليافاً
+للنوى الحركية القحفية المناسبة.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Cranial Motor Nuclei · النوى الحركية القحفية
+</h3>
+
+<p>
+
+Corticobulbar fibers influence motor nuclei associated with cranial
+nerves including CN V, VII, IX/X, and XII, among others.
+
+<br><br>
+
+تؤثر الألياف القشرية البصلية في النوى الحركية المرتبطة بالأعصاب القحفية
+مثل الخامس والسابع والتاسع والعاشر والثاني عشر وغيرها.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Bilateral Innervation · التعصيب ثنائي الجانب
+</h3>
+
+<p>
+
+Many cranial motor nuclei receive input from both cerebral hemispheres,
+although the degree of bilateral control varies between nuclei.
+
+<br><br>
+
+تتلقى العديد من النوى الحركية القحفية تعصيباً من نصفي الكرة المخية،
+لكن درجة هذا التعصيب الثنائي تختلف بين النوى.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Facial Movement · حركة الوجه
+</h3>
+
+<p>
+
+Corticobulbar pathways contribute to voluntary control of facial
+expression through connections with the facial motor nucleus.
+
+<br><br>
+
+تساهم المسارات القشرية البصلية في التحكم الإرادي بتعابير الوجه من خلال
+اتصالاتها مع النواة الحركية للعصب الوجهي.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Tongue Movement · حركة اللسان
+</h3>
+
+<p>
+
+Corticobulbar fibers influence the hypoglossal motor system, allowing
+cortical control of tongue movements.
+
+<br><br>
+
+تؤثر الألياف القشرية البصلية في النظام الحركي للعصب تحت اللسان، مما يسمح
+بالتحكم القشري في حركات اللسان.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Speech · الكلام
+</h3>
+
+<p>
+
+The pathway contributes to voluntary motor control required for
+articulation and coordinated movements of structures involved in speech.
+
+<br><br>
+
+يساهم المسار في التحكم الحركي الإرادي اللازم للنطق والتنسيق بين التراكيب
+المشاركة في الكلام.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Swallowing · البلع
+</h3>
+
+<p>
+
+Corticobulbar connections influence brainstem motor networks involved
+in swallowing.
+
+<br><br>
+
+تؤثر الاتصالات القشرية البصلية في الشبكات الحركية بجذع الدماغ المشاركة
+في عملية البلع.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Facial Sensory-Motor Integration · التكامل الحسي الحركي الوجهي
+</h3>
+
+<p>
+
+Corticobulbar motor control works within larger cranial nerve networks
+that integrate sensory information with motor responses.
+
+<br><br>
+
+يعمل التحكم الحركي القشري البصلي ضمن شبكات أوسع للأعصاب القحفية تدمج
+المعلومات الحسية مع الاستجابات الحركية.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Voluntary Motor Control · التحكم الحركي الإرادي
+</h3>
+
+<p>
+
+The corticobulbar system is particularly important for intentional,
+precise movements of cranial and bulbar musculature.
+
+<br><br>
+
+يعد النظام القشري البصلي مهماً بشكل خاص للحركات الإرادية الدقيقة
+لعضلات الوجه والتراكيب البصلية.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- =========================================================
+     CLINICAL
+     ========================================================= -->
+
+<section
+  id="clinical"
+  class="clinical-section">
+
+<div class="section-label">
+  Clinical Importance · الأهمية السريرية
+</div>
+
+<h2>
+  Why the Corticobulbar Pathway Matters
+</h2>
+
+<div class="clinical-box">
+
+<p>
+
+Damage to corticobulbar pathways can produce upper motor neuron signs
+affecting voluntary control of facial, tongue, pharyngeal, or laryngeal
+muscles. The exact clinical pattern depends on the location and extent
+of the lesion and on the particular cranial motor system involved.
+
+</p>
+
+<p>
+
+One important neurological principle is that many corticobulbar
+connections are bilateral. However, some portions of cranial motor
+control have stronger contralateral cortical influence. This helps
+explain why a unilateral supranuclear lesion can produce selective
+weakness rather than complete paralysis of all muscles controlled by
+that cranial nerve.
+
+</p>
+
+<p dir="rtl">
+
+يمكن أن يؤدي تلف المسارات القشرية البصلية إلى ظهور علامات عصبون حركي
+علوي تؤثر في التحكم الإرادي بعضلات الوجه أو اللسان أو البلعوم أو الحنجرة.
+ويعتمد النمط السريري على موقع واتساع الآفة وعلى النظام الحركي القحفي
+المتأثر.
+
+</p>
+
+<p dir="rtl">
+
+ومن المبادئ العصبية المهمة أن العديد من الاتصالات القشرية البصلية ثنائية
+الجانب، بينما تتمتع بعض أجزاء التحكم الحركي القحفي بتأثير قشري مقابل
+أقوى. ويساعد ذلك في تفسير ظهور ضعف انتقائي عند حدوث آفة فوق نووية أحادية
+الجانب بدلاً من شلل كامل لجميع العضلات التي يتحكم فيها العصب القحفي.
+
+</p>
+
+</div>
+
+</section>
+
+<!-- =========================================================
+     FACTS
+     ========================================================= -->
+
+<section class="section">
+
+<div class="section-label">
+  Quick Facts · معلومات سريعة
+</div>
+
+<h2>
+  Corticobulbar at a Glance
+</h2>
+
+<div class="facts-grid">
+
+<div class="fact">
+
+<span>01</span>
+
+<strong>
+Origin · المنشأ
+</strong>
+
+<p>
+Motor and motor-related areas of the cerebral cortex
+</p>
+
+</div>
+
+<div class="fact">
+
+<span>02</span>
+
+<strong>
+Major White Matter · المادة البيضاء
+</strong>
+
+<p>
+Corona radiata and genu of the internal capsule
+</p>
+
+</div>
+
+<div class="fact">
+
+<span>03</span>
+
+<strong>
+Destination · الوجهة
+</strong>
+
+<p>
+Motor nuclei of cranial nerves in the brainstem
+</p>
+
+</div>
+
+<div class="fact">
+
+<span>04</span>
+
+<strong>
+Main Function · الوظيفة
+</strong>
+
+<p>
+Voluntary control of cranial and bulbar musculature
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- =========================================================
+     SUMMARY
+     ========================================================= -->
+
+<section class="section">
+
+<div class="section-label">
+  Pathway Summary · ملخص المسار
+</div>
+
+<h2>
+  Follow the Fibers
+</h2>
+
+<p class="section-intro">
+
+<strong>
+Motor Cortex
+</strong>
+
+→
+
+<strong>
+Corona Radiata
+</strong>
+
+→
+
+<strong>
+Genu of Internal Capsule
+</strong>
+
+→
+
+<strong>
+Brainstem
+</strong>
+
+→
+
+<strong>
+Cranial Motor Nuclei
+</strong>
+
+→
+
+<strong>
+Cranial Muscle Movement
+</strong>
+
+<br><br>
+
+القشرة الحركية
+
+→
+
+الإكليل المشع
+
+→
+
+ركبة المحفظة الداخلية
+
+→
+
+جذع الدماغ
+
+→
+
+النوى الحركية القحفية
+
+→
+
+حركة عضلات الرأس والوجه والتراكيب البصلية
+
+</p>
+
+</section>
+
+<!-- =========================================================
+     QUIZ
+     ========================================================= -->
+
+<div
+  id="quiz"
+  class="quiz">
+
+<div class="section-label">
+  Mini Test
+</div>
+
+<h2>
+  🧠 Test Yourself
+</h2>
+
+<p class="quiz-intro">
+Choose the best answer for each question.
+</p>
+
+<div class="question">
+
+<p>
+1. What is the main function of the corticobulbar pathway?
+</p>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,true)">
+
+A. Voluntary motor control of cranial and bulbar muscles
+
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)">
+
+B. Transmission of visual information from the retina
+
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)">
+
+C. Regulation of cerebrospinal fluid production
+
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)">
+
+D. Control of lower-limb reflexes only
+
+</button>
+
+</div>
+
+<div class="question">
+
+<p>
+2. Where do many corticobulbar fibers pass through the internal capsule?
+</p>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,true)">
+
+A. Genu
+
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)">
+
+B. Posterior limb only
+
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)">
+
+C. Retrolenticular part only
+
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)">
+
+D. Sublenticular part only
+
+</button>
+
+</div>
+
+<div class="question">
+
+<p>
+3. Where do corticobulbar fibers ultimately influence motor neurons?
+</p>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,true)">
+
+A. Cranial motor nuclei in the brainstem
+
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)">
+
+B. Dorsal columns of the spinal cord
+
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)">
+
+C. Cerebellar cortex only
+
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)">
+
+D. Retina
+
+</button>
+
+</div>
+
+<div class="question">
+
+<p>
+4. How do many corticobulbar connections differ from corticospinal
+connections?
+</p>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,true)">
+
+A. Many cranial motor nuclei receive bilateral cortical input
+
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)">
+
+B. They always cross completely in the medulla
+
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)">
+
+C. They never reach the brainstem
+
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)">
+
+D. They only control the legs
+
+</button>
+
+</div>
+
+<div class="question">
+
+<p>
+5. Which structure is strongly associated with corticobulbar control?
+</p>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,true)">
+
+A. Facial motor nucleus
+
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)">
+
+B. Lateral geniculate nucleus only
+
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)">
+
+C. Caudate nucleus only
+
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)">
+
+D. Dentate nucleus only
+
+</button>
+
+</div>
+
+<div
+  id="quizResult"
+  class="quiz-result">
+</div>
+
+</div>
+
+</main>
+
+<!-- =========================================================
+     THREE.JS
+     ========================================================= -->
+
+<script type="importmap">
+
+{
+  "imports": {
+    "three":
+      "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+
+    "three/addons/":
+      "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+
+</script>
+
+<script type="module">
+
+import * as THREE from "three";
+
+import {
+  OrbitControls
+}
+from "three/addons/controls/OrbitControls.js";
+
+import {
+  GLTFLoader
+}
+from "three/addons/loaders/GLTFLoader.js";
+
+import {
+  DRACOLoader
+}
+from "three/addons/loaders/DRACOLoader.js";
+
+
+const canvas =
+  document.getElementById(
+    "brainCanvas"
+  );
+
+const loading =
+  document.getElementById(
+    "loading"
+  );
+
+const loadText =
+  document.getElementById(
+    "loadText"
+  );
+
+const loadBar =
+  document.getElementById(
+    "loadBar"
+  );
+
+const locationLabel =
+  document.getElementById(
+    "locationLabel"
+  );
+
+
+const scene =
+  new THREE.Scene();
+
+
+const camera =
+  new THREE.PerspectiveCamera(
+    30,
+    1,
+    .01,
+    100
+  );
+
+
+camera.position.set(
+  3.2,
+  .3,
+  8.5
+);
+
+
+const renderer =
+  new THREE.WebGLRenderer({
+    canvas,
+    antialias: true,
+    alpha: true
+  });
+
+
+renderer.setPixelRatio(
+  Math.min(
+    window.devicePixelRatio || 1,
+    2
+  )
+);
+
+renderer.toneMapping =
+  THREE.ACESFilmicToneMapping;
+
+renderer.toneMappingExposure =
+  .75;
+
+
+const controls =
+  new OrbitControls(
+    camera,
+    canvas
+  );
+
+
+controls.enableRotate = true;
+
+controls.rotateSpeed = .6;
+
+controls.enableDamping = true;
+
+controls.dampingFactor = .05;
+
+controls.enableZoom = true;
+
+controls.zoomSpeed = .6;
+
+controls.enablePan = false;
+
+controls.autoRotate = true;
+
+controls.autoRotateSpeed = .2;
+
+controls.target.set(
+  0,
+  -.3,
+  0
+);
+
+controls.minDistance = 3.5;
+
+controls.maxDistance = 16;
+
+
+/* Lighting */
+
+scene.add(
+  new THREE.AmbientLight(
+    0xffffff,
+    .55
+  )
+);
+
+scene.add(
+  new THREE.HemisphereLight(
+    0xffdce6,
+    0x081018,
+    .75
+  )
+);
+
+
+const keyLight =
+  new THREE.DirectionalLight(
+    0xfff5f0,
+    1.4
+  );
+
+keyLight.position.set(
+  6,
+  10,
+  8
+);
+
+scene.add(keyLight);
+
+
+const fillLight =
+  new THREE.DirectionalLight(
+    0x8ca9bd,
+    .4
+  );
+
+fillLight.position.set(
+  -7,
+  2,
+  6
+);
+
+scene.add(fillLight);
+
+
+/* Brain */
+
+const brainGroup =
+  new THREE.Group();
+
+scene.add(
+  brainGroup
+);
+
+
+let brainMeshes = [];
+
+let pathwayMeshes = [];
+
+let locationShown = false;
+
+let highlighted = true;
+
+
+/* Materials */
+
+const brainOpaqueMaterial =
+  new THREE.MeshPhysicalMaterial({
+
+    color: 0xf1c5d0,
+
+    roughness: .62,
+
+    metalness: 0,
+
+    clearcoat: .12,
+
+    clearcoatRoughness: .5,
+
+    side: THREE.DoubleSide,
+
+    transparent: false,
+
+    opacity: 1
+
+  });
+
+
+const brainTransparentMaterial =
+  new THREE.MeshPhysicalMaterial({
+
+    color: 0xf1c5d0,
+
+    roughness: .55,
+
+    metalness: 0,
+
+    clearcoat: .1,
+
+    clearcoatRoughness: .5,
+
+    side: THREE.DoubleSide,
+
+    transparent: true,
+
+    opacity: .14,
+
+    depthWrite: false
+
+  });
+
+
+const pathwayMaterial =
+  new THREE.MeshPhysicalMaterial({
+
+    color: 0xff2948,
+
+    roughness: .3,
+
+    metalness: 0,
+
+    clearcoat: .6,
+
+    clearcoatRoughness: .12,
+
+    emissive: 0x5c0613,
+
+    emissiveIntensity: 1.05,
+
+    side: THREE.DoubleSide,
+
+    transparent: false,
+
+    opacity: 1
+
+  });
+
+
+function normalizeName(name) {
+
+  return String(name || "")
+    .toLowerCase()
+    .replace(
+      /[\s_\-.]+/g,
+      ""
+    );
+
+}
+
+
+function getMeshName(mesh) {
+
+  const userName =
+    mesh.userData &&
+    mesh.userData.name
+      ? mesh.userData.name
+      : "";
+
+  return `
+    ${mesh.name}
+    ${userName}
+  `;
+
+}
+
+
+function isPathwayRelated(mesh) {
+
+  const name =
+    normalizeName(
+      getMeshName(mesh)
+    );
+
+
+  const pathwayNames = [
+
+    "cortex",
+    "motorcortex",
+
+    "frontal",
+    "precentral",
+
+    "coronaradiata",
+
+    "internalcapsule",
+    "genu",
+
+    "brainstem",
+    "midbrain",
+    "pons",
+    "medulla",
+
+    "facial",
+    "trigeminal",
+
+    "hypoglossal",
+    "nucleus",
+
+    "cranial"
+
+  ];
+
+
+  return pathwayNames.some(
+    item =>
+      name.includes(item)
+  );
+
+}
+
+
+function isExcluded(mesh) {
+
+  const name =
+    normalizeName(
+      getMeshName(mesh)
+    );
+
+
+  const excluded = [
+
+    "cerebellum",
+
+    "artery",
+    "vein",
+    "vessel",
+
+    "skull",
+    "skin"
+
+  ];
+
+
+  return excluded.some(
+    item =>
+      name.includes(item)
+  );
+
+}
+
+
+function prepareMaterials(model) {
+
+  brainMeshes = [];
+
+  pathwayMeshes = [];
+
+
+  model.traverse(
+    child => {
+
+      if (!child.isMesh) {
+        return;
+      }
+
+
+      child.castShadow = true;
+
+      child.receiveShadow = true;
+
+
+      child.material =
+        brainOpaqueMaterial.clone();
+
+
+      brainMeshes.push(
+        child
+      );
+
+    }
+  );
+
+
+  pathwayMeshes =
+    brainMeshes.filter(
+      mesh =>
+        isPathwayRelated(mesh) &&
+        !isExcluded(mesh)
+    );
+
+
+  pathwayMeshes.forEach(
+    mesh => {
+
+      mesh.material =
+        pathwayMaterial.clone();
+
+    }
+  );
+
+}
+
+
+function finishLoading(message) {
+
+  loadText.textContent =
+    message;
+
+  loadBar.style.width =
+    "100%";
+
+  setTimeout(
+    () => {
+
+      loading.classList.add(
+        "hide"
+      );
+
+    },
+    500
+  );
+
+}
+
+
+function loadRealBrain() {
+
+  const loader =
+    new GLTFLoader();
+
+
+  const dracoLoader =
+    new DRACOLoader();
+
+
+  dracoLoader.setDecoderPath(
+    "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/"
+  );
+
+
+  loader.setDRACOLoader(
+    dracoLoader
+  );
+
+
+  const urls = [
+
+    "https://cdn.jsdelivr.net/gh/itayinbarr/brainproject@main/brain-atlas/models/brain.glb",
+
+    "https://raw.githubusercontent.com/itayinbarr/brainproject/main/brain-atlas/models/brain.glb",
+
+    "https://itayinbarr.github.io/brainproject/models/brain.glb"
+
+  ];
+
+
+  let index = 0;
+
+
+  function tryLoad() {
+
+    if (index >= urls.length) {
+
+      finishLoading(
+        "Interactive brain model unavailable · pathway diagram ready"
+      );
+
+      return;
+
+    }
+
+
+    const url =
+      urls[index++];
+
+
+    loader.load(
+
+      url,
+
+      gltf => {
+
+        const model =
+          gltf.scene;
+
+
+        const box =
+          new THREE.Box3()
+            .setFromObject(
+              model
+            );
+
+
+        const center =
+          box.getCenter(
+            new THREE.Vector3()
+          );
+
+
+        const size =
+          box.getSize(
+            new THREE.Vector3()
+          );
+
+
+        const maxDim =
+          Math.max(
+            size.x,
+            size.y,
+            size.z
+          );
+
+
+        const scale =
+          4.5 / maxDim;
+
+
+        model.scale.setScalar(
+          scale
+        );
+
+
+        model.position.sub(
+          center.multiplyScalar(
+            scale
+          )
+        );
+
+
+        model.position.y -= .6;
+
+
+        brainGroup.add(
+          model
+        );
+
+
+        prepareMaterials(
+          model
+        );
+
+
+        if (
+          pathwayMeshes.length > 0
+        ) {
+
+          locationLabel.classList.add(
+            "show"
+          );
+
+          finishLoading(
+            "Corticobulbar-related structures located"
+          );
+
+        } else {
+
+          finishLoading(
+            "Brain loaded · pathway diagram available"
+          );
+
+        }
+
+      },
+
+      progress => {
+
+        if (
+          progress.total > 0
+        ) {
+
+          const pct =
+            Math.min(
+              95,
+              progress.loaded /
+              progress.total *
+              95
+            );
+
+
+          loadBar.style.width =
+            pct + "%";
+
+        }
+
+      },
+
+      error => {
+
+        console.warn(
+          "Brain model loading failed:",
+          error
+        );
+
+        tryLoad();
+
+      }
+
+    );
+
+  }
+
+
+  tryLoad();
+
+}
+
+
+function setBrainTransparency(
+  enabled
+) {
+
+  brainMeshes.forEach(
+    mesh => {
+
+      if (
+        pathwayMeshes.includes(
+          mesh
+        )
+      ) {
+        return;
+      }
+
+
+      mesh.material =
+        enabled
+          ? brainTransparentMaterial.clone()
+          : brainOpaqueMaterial.clone();
+
+    }
+  );
+
+}
+
+
+function setPathwayHighlight(
+  enabled
+) {
+
+  pathwayMeshes.forEach(
+    mesh => {
+
+      mesh.material =
+        enabled
+          ? pathwayMaterial.clone()
+          : brainOpaqueMaterial.clone();
+
+    }
+  );
+
+}
+
+
+/* Show pathway */
+
+const showLocationBtn =
+  document.getElementById(
+    "showLocation"
+  );
+
+
+showLocationBtn.addEventListener(
+  "click",
+  () => {
+
+    locationShown =
+      !locationShown;
+
+
+    if (locationShown) {
+
+      setBrainTransparency(
+        true
+      );
+
+      setPathwayHighlight(
+        true
+      );
+
+
+      highlighted = true;
+
+
+      locationLabel.classList.add(
+        "show"
+      );
+
+
+      showLocationBtn.classList.add(
+        "active"
+      );
+
+
+      showLocationBtn.textContent =
+        "📍 Hide Pathway";
+
+
+      controls.autoRotate =
+        false;
+
+
+      rotateBtn.classList.remove(
+        "active"
+      );
+
+
+      rotateBtn.textContent =
+        "▶ Auto Rotate";
+
+    } else {
+
+      setBrainTransparency(
+        false
+      );
+
+      setPathwayHighlight(
+        highlighted
+      );
+
+
+      locationLabel.classList.remove(
+        "show"
+      );
+
+
+      showLocationBtn.classList.remove(
+        "active"
+      );
+
+
+      showLocationBtn.textContent =
+        "📍 Show Pathway";
+
+    }
+
+  }
+);
+
+
+/* Highlight */
+
+const highlightBtn =
+  document.getElementById(
+    "highlight"
+  );
+
+
+highlightBtn.addEventListener(
+  "click",
+  () => {
+
+    highlighted =
+      !highlighted;
+
+
+    setPathwayHighlight(
+      highlighted
+    );
+
+
+    if (highlighted) {
+
+      highlightBtn.classList.add(
+        "active"
+      );
+
+      highlightBtn.textContent =
+        "🔴 Highlight Pathway";
+
+    } else {
+
+      highlightBtn.classList.remove(
+        "active"
+      );
+
+      highlightBtn.textContent =
+        "🧠 Highlight Pathway";
+
+    }
+
+
+    if (locationShown) {
+
+      setBrainTransparency(
+        true
+      );
+
+    }
+
+  }
+);
+
+
+/* Rotate */
+
+const rotateBtn =
+  document.getElementById(
+    "rotate"
+  );
+
+
+rotateBtn.addEventListener(
+  "click",
+  () => {
+
+    controls.autoRotate =
+      !controls.autoRotate;
+
+
+    rotateBtn.classList.toggle(
+      "active",
+      controls.autoRotate
+    );
+
+
+    rotateBtn.textContent =
+      controls.autoRotate
+        ? "⟳ Auto Rotate"
+        : "▶ Auto Rotate";
+
+  }
+);
+
+
+/* Reset */
+
+document
+  .getElementById(
+    "reset"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      camera.position.set(
+        3.2,
+        .3,
+        8.5
+      );
+
+
+      controls.target.set(
+        0,
+        -.3,
+        0
+      );
+
+
+      controls.update();
+
+
+      locationShown =
+        false;
+
+
+      highlighted =
+        true;
+
+
+      setBrainTransparency(
+        false
+      );
+
+
+      setPathwayHighlight(
+        true
+      );
+
+
+      locationLabel.classList.remove(
+        "show"
+      );
+
+
+      showLocationBtn.classList.remove(
+        "active"
+      );
+
+
+      showLocationBtn.textContent =
+        "📍 Show Pathway";
+
+
+      highlightBtn.classList.add(
+        "active"
+      );
+
+
+      highlightBtn.textContent =
+        "🔴 Highlight Pathway";
+
+    }
+  );
+
+
+function updateLabel() {
+
+  if (!locationShown) {
+    return;
+  }
+
+
+  if (
+    pathwayMeshes.length === 0
+  ) {
+    return;
+  }
+
+
+  const box =
+    new THREE.Box3();
+
+
+  pathwayMeshes.forEach(
+    mesh => {
+
+      box.expandByObject(
+        mesh
+      );
+
+    }
+  );
+
+
+  if (box.isEmpty()) {
+    return;
+  }
+
+
+  const position =
+    box.getCenter(
+      new THREE.Vector3()
+    );
+
+
+  position.project(
+    camera
+  );
+
+
+  const x =
+    (position.x + 1) / 2 *
+    canvas.clientWidth;
+
+
+  const y =
+    (-position.y + 1) / 2 *
+    canvas.clientHeight;
+
+
+  locationLabel.style.left =
+    x + "px";
+
+
+  locationLabel.style.top =
+    (y - 35) + "px";
+
+}
+
+
+function resize() {
+
+  const width =
+    canvas.clientWidth;
+
+
+  const height =
+    canvas.clientHeight;
+
+
+  if (
+    width <= 0 ||
+    height <= 0
+  ) {
+    return;
+  }
+
+
+  camera.aspect =
+    width / height;
+
+
+  camera.updateProjectionMatrix();
+
+
+  renderer.setSize(
+    width,
+    height,
+    false
+  );
+
+}
+
+
+window.addEventListener(
+  "resize",
+  resize
+);
+
+
+function animate() {
+
+  requestAnimationFrame(
+    animate
+  );
+
+
+  controls.update();
+
+
+  updateLabel();
+
+
+  renderer.render(
+    scene,
+    camera
+  );
+
+}
+
+
+resize();
+
+animate();
+
+loadRealBrain();
+
+</script>
+
+<!-- =========================================================
+     QUIZ SCRIPT
+     ========================================================= -->
+
+<script>
+
+function checkAnswer(
+  button,
+  correct
+) {
+
+  const parent =
+    button.parentElement;
+
+
+  const options =
+    parent.querySelectorAll(
+      ".option"
+    );
+
+
+  options.forEach(
+    option => {
+
+      option.classList.remove(
+        "correct",
+        "wrong"
+      );
+
+    }
+  );
+
+
+  if (correct) {
+
+    button.classList.add(
+      "correct"
+    );
+
+  } else {
+
+    button.classList.add(
+      "wrong"
+    );
+
+  }
+
+
+  updateQuizScore();
+
+}
+
+
+function updateQuizScore() {
+
+  const result =
+    document.getElementById(
+      "quizResult"
+    );
+
+
+  let answered = 0;
+
+  let correctAnswers = 0;
+
+
+  document
+    .querySelectorAll(
+      ".question"
+    )
+    .forEach(
+      question => {
+
+        const selected =
+          question.querySelector(
+            ".correct,.wrong"
+          );
+
+
+        if (selected) {
+
+          answered++;
+
+
+          if (
+            selected.classList.contains(
+              "correct"
+            )
+          ) {
+
+            correctAnswers++;
+
+          }
+
+        }
+
+      }
+    );
+
+
+  if (answered > 0) {
+
+    result.style.display =
+      "block";
+
+
+    result.textContent =
+      "Score: " +
+      correctAnswers +
+      " / " +
+      answered;
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>
