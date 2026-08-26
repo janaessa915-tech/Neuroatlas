@@ -42,6 +42,11 @@ a {
   color: inherit;
 }
 
+button,
+input {
+  font: inherit;
+}
+
 nav {
   height: 70px;
   padding: 0 7%;
@@ -71,6 +76,12 @@ nav {
 
 .nav-back:hover {
   color: #ffffff;
+}
+
+.nav-back:focus-visible {
+  outline: 2px solid #61b5ff;
+  outline-offset: 4px;
+  border-radius: 3px;
 }
 
 .nav-brand {
@@ -116,6 +127,8 @@ h1 {
   color: #ff4055;
   font-size: 25px;
   margin-bottom: 25px;
+  direction: rtl;
+  width: fit-content;
 }
 
 .hero-description {
@@ -151,6 +164,11 @@ h1 {
   background: #14304a;
   border-color: #61b5ff;
   color: #ffffff;
+}
+
+.hero-button:focus-visible {
+  outline: 2px solid #61b5ff;
+  outline-offset: 3px;
 }
 
 .hero-button.primary {
@@ -333,6 +351,35 @@ h1 {
   pointer-events: none;
 }
 
+.search-clear {
+  display: none;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  border-radius: 7px;
+  padding: 4px 8px;
+  background: transparent;
+  color: #71879a;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.search-clear:hover {
+  background: #122538;
+  color: #ffffff;
+}
+
+.search-clear:focus-visible {
+  outline: 2px solid #61b5ff;
+  outline-offset: 2px;
+}
+
+.search-clear.visible {
+  display: block;
+}
+
 .categories {
   margin-top: 35px;
 }
@@ -387,6 +434,8 @@ h1 {
   color: #ff7180;
   font-size: 13px;
   margin-top: 2px;
+  direction: rtl;
+  width: fit-content;
 }
 
 .category-description {
@@ -448,6 +497,8 @@ h1 {
   color: #ff6a79;
   font-size: 11px;
   margin-bottom: 8px;
+  direction: rtl;
+  width: fit-content;
 }
 
 .pathway-card p {
@@ -471,6 +522,10 @@ h1 {
   border-radius: 14px;
   text-align: center;
   color: #8195a8;
+}
+
+.no-results strong {
+  color: #dce8f2;
 }
 
 .learning-section {
@@ -620,6 +675,10 @@ h1 {
     height: 40px;
     flex-basis: 40px;
     font-size: 17px;
+  }
+
+  .search {
+    padding-right: 50px;
   }
 }
 </style>
@@ -807,7 +866,7 @@ h1 {
 
   <div class="search-wrap">
 
-    <span class="search-icon">
+    <span class="search-icon" aria-hidden="true">
       ⌕
     </span>
 
@@ -816,9 +875,20 @@ h1 {
       class="search"
       type="search"
       autocomplete="off"
+      spellcheck="false"
       placeholder="Search pathways... e.g. corticospinal, optic, dorsal column"
       aria-label="Search neural pathways"
+      aria-controls="categories"
     >
+
+    <button
+      id="searchClear"
+      class="search-clear"
+      type="button"
+      aria-label="Clear pathway search"
+    >
+      ×
+    </button>
 
   </div>
 
@@ -829,6 +899,7 @@ h1 {
     <section
       class="category"
       data-category="motor"
+      data-category-search="motor movement descending corticospinal corticobulbar brainstem"
     >
 
       <div class="category-header">
@@ -870,7 +941,7 @@ h1 {
         <a
           class="pathway-card"
           href="./pathways/corticospinal.html"
-          data-search="corticospinal pyramidal motor tract voluntary movement upper motor neuron"
+          data-search="corticospinal pyramidal motor tract voluntary movement upper motor neuron corticospinal tract السبيل القشري النخاعي"
         >
           <h4>Corticospinal Tract</h4>
           <div class="pathway-arabic">
@@ -887,7 +958,7 @@ h1 {
         <a
           class="pathway-card"
           href="./pathways/corticobulbar.html"
-          data-search="corticobulbar motor cranial nerves face tongue swallowing"
+          data-search="corticobulbar motor cranial nerves face tongue swallowing corticobulbar tract السبيل القشري البصلي"
         >
           <h4>Corticobulbar Tract</h4>
           <div class="pathway-arabic">
@@ -904,7 +975,7 @@ h1 {
         <a
           class="pathway-card"
           href="./pathways/rubrospinal.html"
-          data-search="rubrospinal red nucleus motor flexor"
+          data-search="rubrospinal red nucleus motor flexor rubrospinal tract السبيل الأحمر النخاعي"
         >
           <h4>Rubrospinal Tract</h4>
           <div class="pathway-arabic">
@@ -921,7 +992,7 @@ h1 {
         <a
           class="pathway-card"
           href="./pathways/vestibulospinal.html"
-          data-search="vestibulospinal vestibular posture balance antigravity"
+          data-search="vestibulospinal vestibular posture balance antigravity vestibulospinal tracts السبل الدهليزية النخاعية"
         >
           <h4>Vestibulospinal Tracts</h4>
           <div class="pathway-arabic">
@@ -938,7 +1009,7 @@ h1 {
         <a
           class="pathway-card"
           href="./pathways/reticulospinal.html"
-          data-search="reticulospinal reticular formation posture locomotion"
+          data-search="reticulospinal reticular formation posture locomotion reticulospinal tracts السبل الشبكية النخاعية"
         >
           <h4>Reticulospinal Tracts</h4>
           <div class="pathway-arabic">
@@ -955,7 +1026,7 @@ h1 {
         <a
           class="pathway-card"
           href="./pathways/tectospinal.html"
-          data-search="tectospinal superior colliculus head neck reflex"
+          data-search="tectospinal superior colliculus head neck reflex tectospinal tract السبيل السقفي النخاعي"
         >
           <h4>Tectospinal Tract</h4>
           <div class="pathway-arabic">
@@ -978,6 +1049,7 @@ h1 {
     <section
       class="category"
       data-category="sensory"
+      data-category-search="sensory somatosensory touch vibration proprioception pain temperature"
     >
 
       <div class="category-header">
@@ -1018,11 +1090,9 @@ h1 {
         <a
           class="pathway-card"
           href="./pathways/dorsal-column.html"
-          data-search="dorsal column medial lemniscus dcml touch vibration proprioception fine touch"
+          data-search="dorsal column medial lemniscus dcml touch vibration proprioception fine touch dorsal column medial lemniscus العمود الظهري الليمينسق الإنسي"
         >
-          <h4>
-            Dorsal Column–Medial Lemniscus
-          </h4>
+          <h4>Dorsal Column–Medial Lemniscus</h4>
           <div class="pathway-arabic">
             العمود الظهري - الليمينسق الإنسي
           </div>
@@ -1037,11 +1107,9 @@ h1 {
         <a
           class="pathway-card"
           href="./pathways/spinothalamic.html"
-          data-search="spinothalamic pain temperature crude touch anterolateral"
+          data-search="spinothalamic pain temperature crude touch anterolateral spinothalamic tract السبيل الشوكي المهادي"
         >
-          <h4>
-            Spinothalamic Tract
-          </h4>
+          <h4>Spinothalamic Tract</h4>
           <div class="pathway-arabic">
             السبيل الشوكي المهادي
           </div>
@@ -1056,11 +1124,9 @@ h1 {
         <a
           class="pathway-card"
           href="./pathways/spinocerebellar.html"
-          data-search="spinocerebellar unconscious proprioception cerebellum coordination"
+          data-search="spinocerebellar unconscious proprioception cerebellum coordination spinocerebellar tracts السبل الشوكية المخيخية"
         >
-          <h4>
-            Spinocerebellar Tracts
-          </h4>
+          <h4>Spinocerebellar Tracts</h4>
           <div class="pathway-arabic">
             السبل الشوكية المخيخية
           </div>
@@ -1075,11 +1141,9 @@ h1 {
         <a
           class="pathway-card"
           href="./pathways/trigeminal-sensory.html"
-          data-search="trigeminal sensory face touch pain temperature cranial nerve V"
+          data-search="trigeminal sensory face touch pain temperature cranial nerve V trigeminal sensory pathway المسار الحسي للعصب ثلاثي التوائم"
         >
-          <h4>
-            Trigeminal Sensory Pathway
-          </h4>
+          <h4>Trigeminal Sensory Pathway</h4>
           <div class="pathway-arabic">
             المسار الحسي للعصب ثلاثي التوائم
           </div>
@@ -1094,11 +1158,9 @@ h1 {
         <a
           class="pathway-card"
           href="./pathways/solitary.html"
-          data-search="solitary tract visceral taste sensory nucleus"
+          data-search="solitary tract visceral taste sensory nucleus solitary tract السبيل المنفرد"
         >
-          <h4>
-            Solitary Tract
-          </h4>
+          <h4>Solitary Tract</h4>
           <div class="pathway-arabic">
             السبيل المنفرد
           </div>
@@ -1119,6 +1181,7 @@ h1 {
     <section
       class="category"
       data-category="visual"
+      data-category-search="visual vision optic retina eye"
     >
 
       <div class="category-header">
@@ -1160,11 +1223,9 @@ h1 {
         <a
           class="pathway-card"
           href="./pathways/optic.html"
-          data-search="optic visual retina optic nerve chiasm tract visual cortex"
+          data-search="optic visual retina optic nerve chiasm tract visual cortex optic pathway المسار البصري"
         >
-          <h4>
-            Optic Pathway
-          </h4>
+          <h4>Optic Pathway</h4>
           <div class="pathway-arabic">
             المسار البصري
           </div>
@@ -1179,11 +1240,9 @@ h1 {
         <a
           class="pathway-card"
           href="./pathways/visual-radiation.html"
-          data-search="optic radiation visual cortex geniculocalcarine lateral geniculate"
+          data-search="optic radiation visual cortex geniculocalcarine lateral geniculate visual radiations الإشعاعات البصرية"
         >
-          <h4>
-            Optic Radiations
-          </h4>
+          <h4>Optic Radiations</h4>
           <div class="pathway-arabic">
             الإشعاعات البصرية
           </div>
@@ -1199,11 +1258,9 @@ h1 {
         <a
           class="pathway-card"
           href="./pathways/pupillary-light-reflex.html"
-          data-search="pupillary light reflex optic edinger westphal pretectal"
+          data-search="pupillary light reflex optic edinger westphal pretectal pupil pupillary منعكس الضوء الحدقي"
         >
-          <h4>
-            Pupillary Light Reflex
-          </h4>
+          <h4>Pupillary Light Reflex</h4>
           <div class="pathway-arabic">
             منعكس الضوء الحدقي
           </div>
@@ -1224,6 +1281,7 @@ h1 {
     <section
       class="category"
       data-category="auditory"
+      data-category-search="auditory hearing sound cochlea brainstem"
     >
 
       <div class="category-header">
@@ -1264,11 +1322,9 @@ h1 {
         <a
           class="pathway-card"
           href="./pathways/auditory.html"
-          data-search="auditory hearing cochlea cochlear nucleus lateral lemniscus medial geniculate"
+          data-search="auditory hearing cochlea cochlear nucleus lateral lemniscus medial geniculate auditory pathway المسار السمعي"
         >
-          <h4>
-            Auditory Pathway
-          </h4>
+          <h4>Auditory Pathway</h4>
           <div class="pathway-arabic">
             المسار السمعي
           </div>
@@ -1283,11 +1339,9 @@ h1 {
         <a
           class="pathway-card"
           href="./pathways/auditory-reflex.html"
-          data-search="auditory reflex superior olive inferior colliculus brainstem"
+          data-search="auditory reflex superior olive inferior colliculus brainstem auditory reflex pathways المسارات الانعكاسية السمعية"
         >
-          <h4>
-            Auditory Reflex Pathways
-          </h4>
+          <h4>Auditory Reflex Pathways</h4>
           <div class="pathway-arabic">
             المسارات الانعكاسية السمعية
           </div>
@@ -1308,6 +1362,7 @@ h1 {
     <section
       class="category"
       data-category="cerebellar"
+      data-category-search="cerebellar coordination balance motor learning peduncle"
     >
 
       <div class="category-header">
@@ -1348,11 +1403,9 @@ h1 {
         <a
           class="pathway-card"
           href="./pathways/cerebellar-afferents.html"
-          data-search="cerebellar afferent pathways input spinocerebellar pontocerebellar climbing mossy"
+          data-search="cerebellar afferent pathways input spinocerebellar pontocerebellar climbing mossy cerebellar afferents المسارات الواردة للمخيخ"
         >
-          <h4>
-            Cerebellar Afferent Pathways
-          </h4>
+          <h4>Cerebellar Afferent Pathways</h4>
           <div class="pathway-arabic">
             المسارات الواردة للمخيخ
           </div>
@@ -1367,11 +1420,9 @@ h1 {
         <a
           class="pathway-card"
           href="./pathways/cerebellar-efferents.html"
-          data-search="cerebellar efferent pathways output dentate thalamus red nucleus"
+          data-search="cerebellar efferent pathways output dentate thalamus red nucleus cerebellar efferents المسارات الصادرة من المخيخ"
         >
-          <h4>
-            Cerebellar Efferent Pathways
-          </h4>
+          <h4>Cerebellar Efferent Pathways</h4>
           <div class="pathway-arabic">
             المسارات الصادرة من المخيخ
           </div>
@@ -1386,11 +1437,9 @@ h1 {
         <a
           class="pathway-card"
           href="./pathways/cerebellar-peduncles.html"
-          data-search="cerebellar peduncles superior middle inferior brainstem"
+          data-search="cerebellar peduncles superior middle inferior brainstem cerebellar peduncle السويقات المخيخية"
         >
-          <h4>
-            Cerebellar Peduncles
-          </h4>
+          <h4>Cerebellar Peduncles</h4>
           <div class="pathway-arabic">
             السويقات المخيخية
           </div>
@@ -1411,6 +1460,7 @@ h1 {
     <section
       class="category"
       data-category="limbic"
+      data-category-search="limbic memory emotion motivation learning hippocampus amygdala"
     >
 
       <div class="category-header">
@@ -1451,11 +1501,9 @@ h1 {
         <a
           class="pathway-card"
           href="./pathways/fornix.html"
-          data-search="fornix hippocampus mammillary bodies memory limbic"
+          data-search="fornix hippocampus mammillary bodies memory limbic fornix القبو"
         >
-          <h4>
-            Fornix
-          </h4>
+          <h4>Fornix</h4>
           <div class="pathway-arabic">
             القبو
           </div>
@@ -1470,11 +1518,9 @@ h1 {
         <a
           class="pathway-card"
           href="./pathways/papez-circuit.html"
-          data-search="papez circuit hippocampus mammillary thalamus cingulate memory"
+          data-search="papez circuit hippocampus mammillary thalamus cingulate memory papez دائرة بابيز"
         >
-          <h4>
-            Papez Circuit
-          </h4>
+          <h4>Papez Circuit</h4>
           <div class="pathway-arabic">
             دائرة بابيز
           </div>
@@ -1489,11 +1535,9 @@ h1 {
         <a
           class="pathway-card"
           href="./pathways/amygdala-pathways.html"
-          data-search="amygdala pathway emotion fear hypothalamus cortex limbic"
+          data-search="amygdala pathway emotion fear hypothalamus cortex limbic amygdala pathways مسارات اللوزة الدماغية"
         >
-          <h4>
-            Amygdala Pathways
-          </h4>
+          <h4>Amygdala Pathways</h4>
           <div class="pathway-arabic">
             مسارات اللوزة الدماغية
           </div>
@@ -1508,11 +1552,9 @@ h1 {
         <a
           class="pathway-card"
           href="./pathways/medial-forebrain-bundle.html"
-          data-search="medial forebrain bundle reward motivation limbic hypothalamus"
+          data-search="medial forebrain bundle reward motivation limbic hypothalamus mfb الحزمة الدماغية الأمامية الإنسية"
         >
-          <h4>
-            Medial Forebrain Bundle
-          </h4>
+          <h4>Medial Forebrain Bundle</h4>
           <div class="pathway-arabic">
             الحزمة الدماغية الأمامية الإنسية
           </div>
@@ -1533,6 +1575,7 @@ h1 {
     <section
       class="category"
       data-category="autonomic"
+      data-category-search="autonomic visceral sympathetic parasympathetic hypothalamus"
     >
 
       <div class="category-header">
@@ -1573,11 +1616,9 @@ h1 {
         <a
           class="pathway-card"
           href="./pathways/sympathetic.html"
-          data-search="sympathetic autonomic thoracolumbar pathway visceral"
+          data-search="sympathetic autonomic thoracolumbar pathway visceral sympathetic pathway المسار الودي"
         >
-          <h4>
-            Sympathetic Pathway
-          </h4>
+          <h4>Sympathetic Pathway</h4>
           <div class="pathway-arabic">
             المسار الودي
           </div>
@@ -1592,11 +1633,9 @@ h1 {
         <a
           class="pathway-card"
           href="./pathways/parasympathetic.html"
-          data-search="parasympathetic autonomic craniosacral pathway rest digest"
+          data-search="parasympathetic autonomic craniosacral pathway rest digest parasympathetic pathway المسار نظير الودي"
         >
-          <h4>
-            Parasympathetic Pathway
-          </h4>
+          <h4>Parasympathetic Pathway</h4>
           <div class="pathway-arabic">
             المسار نظير الودي
           </div>
@@ -1611,11 +1650,9 @@ h1 {
         <a
           class="pathway-card"
           href="./pathways/hypothalamic-autonomic.html"
-          data-search="hypothalamic autonomic pathway hypothalamus brainstem spinal cord"
+          data-search="hypothalamic autonomic pathway hypothalamus brainstem spinal cord central autonomic المسار اللاإرادي الوطائي"
         >
-          <h4>
-            Hypothalamic Autonomic Pathway
-          </h4>
+          <h4>Hypothalamic Autonomic Pathway</h4>
           <div class="pathway-arabic">
             المسار اللاإرادي الوطائي
           </div>
@@ -1636,6 +1673,7 @@ h1 {
     <section
       class="category"
       data-category="association"
+      data-category-search="association commissural white matter cortical hemisphere language"
     >
 
       <div class="category-header">
@@ -1676,11 +1714,9 @@ h1 {
         <a
           class="pathway-card"
           href="./pathways/arcuate-fasciculus.html"
-          data-search="arcuate fasciculus language association broca wernicke"
+          data-search="arcuate fasciculus language association broca wernicke arcuate fasciculus الحزمة المقوسة"
         >
-          <h4>
-            Arcuate Fasciculus
-          </h4>
+          <h4>Arcuate Fasciculus</h4>
           <div class="pathway-arabic">
             الحزمة المقوسة
           </div>
@@ -1695,11 +1731,9 @@ h1 {
         <a
           class="pathway-card"
           href="./pathways/corpus-callosum.html"
-          data-search="corpus callosum commissural hemispheres interhemispheric"
+          data-search="corpus callosum commissural hemispheres interhemispheric corpus callosum الجسم الثفني"
         >
-          <h4>
-            Corpus Callosum
-          </h4>
+          <h4>Corpus Callosum</h4>
           <div class="pathway-arabic">
             الجسم الثفني
           </div>
@@ -1714,11 +1748,9 @@ h1 {
         <a
           class="pathway-card"
           href="./pathways/superior-longitudinal-fasciculus.html"
-          data-search="superior longitudinal fasciculus association white matter cortical"
+          data-search="superior longitudinal fasciculus association white matter cortical slf superior longitudinal fasciculus الحزمة الطولية العلوية"
         >
-          <h4>
-            Superior Longitudinal Fasciculus
-          </h4>
+          <h4>Superior Longitudinal Fasciculus</h4>
           <div class="pathway-arabic">
             الحزمة الطولية العلوية
           </div>
@@ -1733,11 +1765,9 @@ h1 {
         <a
           class="pathway-card"
           href="./pathways/uncinate-fasciculus.html"
-          data-search="uncinate fasciculus frontal temporal limbic association"
+          data-search="uncinate fasciculus frontal temporal limbic association uncinate fasciculus الحزمة الخطافية"
         >
-          <h4>
-            Uncinate Fasciculus
-          </h4>
+          <h4>Uncinate Fasciculus</h4>
           <div class="pathway-arabic">
             الحزمة الخطافية
           </div>
@@ -1758,6 +1788,8 @@ h1 {
   <div
     id="noResults"
     class="no-results"
+    role="status"
+    aria-live="polite"
   >
     No pathways match your search. Try another term such as
     <strong>motor</strong>,
@@ -1890,14 +1922,43 @@ h1 {
 "use strict";
 
 const searchInput = document.getElementById("pathwaySearch");
-const categories = document.querySelectorAll(".category");
+const searchClear = document.getElementById("searchClear");
+const categories = Array.from(
+  document.querySelectorAll(".category")
+);
 const noResults = document.getElementById("noResults");
 
 function normalizeSearch(value) {
-  return value
-    .toLowerCase()
+  return String(value)
+    .toLocaleLowerCase()
     .trim()
     .replace(/\s+/g, " ");
+}
+
+function getCategorySearchText(category) {
+  return [
+    category.textContent,
+    category.dataset.category || "",
+    category.dataset.categorySearch || ""
+  ]
+    .join(" ")
+    .toLocaleLowerCase();
+}
+
+function getCardSearchText(card) {
+  return [
+    card.textContent,
+    card.dataset.search || ""
+  ]
+    .join(" ")
+    .toLocaleLowerCase();
+}
+
+function updateClearButton(query) {
+  searchClear.classList.toggle(
+    "visible",
+    query.length > 0
+  );
 }
 
 function filterPathways() {
@@ -1905,22 +1966,26 @@ function filterPathways() {
   let visibleCards = 0;
 
   categories.forEach((category) => {
-    const cards = category.querySelectorAll(".pathway-card");
+    const cards = Array.from(
+      category.querySelectorAll(".pathway-card")
+    );
+
+    const categoryText = getCategorySearchText(category);
+
     let categoryVisible = 0;
 
     cards.forEach((card) => {
-      const searchableText = [
-        card.textContent,
-        card.dataset.search || ""
-      ]
-        .join(" ")
-        .toLowerCase();
+      const cardText = getCardSearchText(card);
 
       const matches =
         query === "" ||
-        searchableText.includes(query);
+        cardText.includes(query) ||
+        categoryText.includes(query);
 
-      card.classList.toggle("hidden", !matches);
+      card.classList.toggle(
+        "hidden",
+        !matches
+      );
 
       if (matches) {
         categoryVisible += 1;
@@ -1936,23 +2001,19 @@ function filterPathways() {
 
   noResults.style.display =
     visibleCards === 0 ? "block" : "none";
-}
 
-function validatePathwayLinks() {
-  const pathwayLinks = document.querySelectorAll(
-    '.pathway-card[href^="./pathways/"]'
+  noResults.setAttribute(
+    "aria-hidden",
+    visibleCards === 0 ? "false" : "true"
   );
 
-  pathwayLinks.forEach((link) => {
-    const href = link.getAttribute("href");
+  updateClearButton(query);
+}
 
-    if (!href.endsWith(".html")) {
-      link.setAttribute(
-        "href",
-        `${href}.html`
-      );
-    }
-  });
+function clearSearch() {
+  searchInput.value = "";
+  filterPathways();
+  searchInput.focus();
 }
 
 searchInput.addEventListener(
@@ -1960,7 +2021,12 @@ searchInput.addEventListener(
   filterPathways
 );
 
-validatePathwayLinks();
+searchClear.addEventListener(
+  "click",
+  clearSearch
+);
+
+filterPathways();
 </script>
 
 </body>
