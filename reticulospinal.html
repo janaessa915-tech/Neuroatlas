@@ -1,0 +1,3136 @@
+<!-- /reticulospinal.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NeuroAtlas | Reticulospinal Tract</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #050b13;
+  color: #eef4fa;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.7;
+}
+
+nav {
+  height: 70px;
+  padding: 0 7%;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+nav a {
+  color: #9db0c3;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+nav a:hover {
+  color: #fff;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 60px 7% 100px;
+}
+
+.eyebrow {
+  color: #61b5ff;
+  letter-spacing: 3px;
+  font-size: 12px;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+
+h1 {
+  font-size: clamp(46px, 7vw, 82px);
+  line-height: .95;
+  letter-spacing: -4px;
+  margin-bottom: 10px;
+}
+
+.arabic-title {
+  color: #ff4055;
+  font-size: 24px;
+  margin-bottom: 25px;
+}
+
+.hero p {
+  color: #a6b6c7;
+  max-width: 850px;
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.action-button,
+.controls button {
+  padding: 11px 17px;
+  border-radius: 9px;
+  background: #0b1928;
+  border: 1px solid #31516d;
+  color: #bdd0e0;
+  text-decoration: none;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.action-button:hover,
+.controls button:hover {
+  background: #14304a;
+  color: #fff;
+  border-color: #61b5ff;
+}
+
+.controls button.active {
+  background: #321218;
+  border-color: #ff4055;
+  color: #ffd9de;
+}
+
+.viewer {
+  margin-top: 60px;
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 24px;
+  overflow: hidden;
+  background: #02060b;
+  box-shadow: 0 25px 80px rgba(0,0,0,.45);
+}
+
+.viewer-header {
+  min-height: 65px;
+  padding: 0 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.viewer-title {
+  font-size: 14px;
+  color: #d2dce6;
+}
+
+.viewer-status {
+  color: #708499;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.scene {
+  position: relative;
+  width: 100%;
+  height: 700px;
+  background:
+    radial-gradient(
+      ellipse at 50% 45%,
+      #203b51 0%,
+      #0d1c2e 45%,
+      #02060b 100%
+    );
+}
+
+#brainCanvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.loading {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 16px;
+  background: #02060b;
+  color: #9db0c3;
+  font-size: 14px;
+  transition: opacity .8s;
+}
+
+.loading.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loading-bar {
+  width: 180px;
+  height: 2px;
+  background: rgba(255,255,255,.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.loading-bar-inner {
+  width: 0%;
+  height: 100%;
+  background: #ff4055;
+  transition: width .3s;
+}
+
+.location-label {
+  position: absolute;
+  z-index: 30;
+  pointer-events: none;
+  transform: translate(-50%,-100%);
+  display: none;
+}
+
+.location-label.show {
+  display: block;
+}
+
+.label-box {
+  position: relative;
+  padding: 9px 15px;
+  border-radius: 10px;
+  background: rgba(5,10,17,.96);
+  border: 1.5px solid #ffb6c1;
+  color: #ffd9de;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  box-shadow:
+    0 0 12px rgba(255,182,193,.35),
+    0 0 30px rgba(255,182,193,.2);
+}
+
+.label-box::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -15px;
+  width: 1.5px;
+  height: 15px;
+  background: #ffb6c1;
+  transform: translateX(-50%);
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 15px;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.section {
+  margin-top: 70px;
+}
+
+.section-label {
+  color: #61b5ff;
+  letter-spacing: 2px;
+  font-size: 11px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.section h2 {
+  font-size: 32px;
+  margin-bottom: 25px;
+}
+
+.section-intro {
+  color: #91a5b8;
+  max-width: 900px;
+  font-size: 15px;
+  line-height: 1.9;
+  margin-bottom: 30px;
+}
+
+.location {
+  margin-top: 70px;
+  padding: 35px;
+  background: #091522;
+  border: 1px solid #172b3e;
+  border-radius: 18px;
+}
+
+.location h2 {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+.location-intro {
+  color: #91a5b8;
+  max-width: 900px;
+  line-height: 1.9;
+  margin-bottom: 30px;
+}
+
+/* =========================================================
+   ANATOMICAL SAGITTAL PATHWAY VIEW
+   ========================================================= */
+
+.anatomy-viewer {
+  position: relative;
+  width: 100%;
+  max-width: 1120px;
+  height: 720px;
+  margin: auto;
+  border: 1px solid #243b50;
+  border-radius: 22px;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      ellipse at 48% 48%,
+      #243c4e 0%,
+      #102131 55%,
+      #03070d 100%
+    );
+  box-shadow:
+    inset 0 0 100px rgba(0,0,0,.35),
+    0 25px 70px rgba(0,0,0,.3);
+}
+
+.brain-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.brain-title {
+  position: absolute;
+  left: 50%;
+  top: 18px;
+  transform: translateX(-50%);
+  z-index: 4;
+  color: #d9e3eb;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Brain tissue */
+
+.brain-tissue {
+  fill: url(#brainTissue);
+  stroke: #d6c5ca;
+  stroke-width: 3;
+  filter: url(#brainShadow);
+}
+
+.brain-inner {
+  fill: url(#innerBrain);
+  opacity: .72;
+  stroke: #c8b5bc;
+  stroke-width: 1.5;
+}
+
+.brain-depth {
+  fill: #493e45;
+  opacity: .34;
+}
+
+.cortical-fold {
+  fill: none;
+  stroke: #5d4e56;
+  stroke-width: 4;
+  opacity: .72;
+  stroke-linecap: round;
+}
+
+.cortical-light {
+  fill: none;
+  stroke: #eee1e4;
+  stroke-width: 1.3;
+  opacity: .22;
+  stroke-linecap: round;
+}
+
+.white-matter {
+  fill: url(#whiteMatter);
+  stroke: #b8a9ae;
+  stroke-width: 1.5;
+  opacity: .8;
+}
+
+.ventricle {
+  fill: #111d27;
+  stroke: #82919d;
+  stroke-width: 1.5;
+}
+
+.thalamus {
+  fill: #737d8b;
+  stroke: #c0cad4;
+  stroke-width: 1.5;
+}
+
+.corpus-callosum {
+  fill: url(#callosum);
+  stroke: #e5dadd;
+  stroke-width: 1.6;
+}
+
+/* Brainstem */
+
+.brainstem {
+  fill: url(#brainstem);
+  stroke: #c9b7bd;
+  stroke-width: 2;
+}
+
+.brainstem-detail {
+  fill: none;
+  stroke: #66565e;
+  stroke-width: 2;
+  opacity: .65;
+}
+
+.cerebellum {
+  fill: url(#cerebellum);
+  stroke: #cdbbc1;
+  stroke-width: 2;
+}
+
+.cerebellar-fold {
+  fill: none;
+  stroke: #62525a;
+  stroke-width: 2.2;
+  opacity: .7;
+  stroke-linecap: round;
+}
+
+/* Reticular formation */
+
+.reticular-zone {
+  fill: #ff6578;
+  opacity: .28;
+  stroke: #ff9aaa;
+  stroke-width: 1.5;
+}
+
+.reticular-core {
+  fill: #ff4055;
+  opacity: .72;
+  filter: url(#softGlow);
+}
+
+/* Spinal cord */
+
+.spinal-cord {
+  fill: url(#spinalCord);
+  stroke: #c8b6bc;
+  stroke-width: 2;
+}
+
+.spinal-inner {
+  fill: #b48f98;
+  opacity: .42;
+}
+
+.spinal-fiber {
+  fill: none;
+  stroke: #6e555d;
+  stroke-width: 1.4;
+  opacity: .7;
+}
+
+/* Pathway */
+
+.pathway-glow {
+  fill: none;
+  stroke: #ff4055;
+  stroke-width: 18;
+  opacity: .18;
+  stroke-linecap: round;
+  filter: url(#pathGlow);
+}
+
+.pathway-main {
+  fill: none;
+  stroke: #ff4055;
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: url(#pathGlow);
+}
+
+.pathway-core {
+  fill: none;
+  stroke: #ffb0ba;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 8 7;
+  animation: pathwayFlow 2.2s linear infinite;
+}
+
+.pathway-arrow {
+  fill: #ff4055;
+  filter: url(#softGlow);
+}
+
+@keyframes pathwayFlow {
+  to {
+    stroke-dashoffset: -30;
+  }
+}
+
+.pathway-node {
+  fill: #ff4055;
+  stroke: #ffe2e6;
+  stroke-width: 2;
+  filter: url(#softGlow);
+}
+
+.pathway-node-label {
+  fill: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: .7px;
+}
+
+.callout {
+  fill: none;
+  stroke: #ffb6c1;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+
+.callout-dot {
+  fill: #ffb6c1;
+  stroke: #fff;
+  stroke-width: 1;
+}
+
+.svg-label {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: .7px;
+  fill: #fff;
+}
+
+.svg-sub {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  fill: #ffb6c1;
+}
+
+.anatomy-note {
+  fill: #91a5b8;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  letter-spacing: 1.2px;
+}
+
+.orientation-label {
+  fill: #71879a;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+}
+
+.pathway-direction {
+  fill: #ff9eaa;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+}
+
+.view-badge {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  padding: 8px 12px;
+  border: 1px solid #31516d;
+  border-radius: 8px;
+  background: rgba(4,10,17,.9);
+  color: #8195a8;
+  font-size: 10px;
+  letter-spacing: 1.4px;
+}
+
+.legend {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #b5c2ce;
+  font-size: 10px;
+}
+
+.legend-line {
+  width: 25px;
+  height: 4px;
+  border-radius: 4px;
+  background: #ff4055;
+  box-shadow: 0 0 12px rgba(255,64,85,.7);
+}
+
+.legend-brain {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #bda6ad;
+}
+
+.location-caption {
+  text-align: center;
+  color: #9fb0c3;
+  margin-top: 15px;
+  line-height: 1.8;
+}
+
+.source-note {
+  max-width: 900px;
+  margin: 15px auto 0;
+  color: #617487;
+  font-size: 11px;
+  text-align: center;
+}
+
+/* Information */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 20px;
+}
+
+.card {
+  padding: 27px;
+  background: #091522;
+  border: 1px solid #172b3e;
+  border-radius: 18px;
+  transition: transform .2s, border-color .2s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  border-color: #4a2027;
+}
+
+.card h3 {
+  font-size: 18px;
+  margin-bottom: 13px;
+  color: #eef4fa;
+  line-height: 1.45;
+}
+
+.card p {
+  color: #91a5b8;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.clinical-section {
+  margin-top: 65px;
+}
+
+.clinical-box {
+  padding: 30px;
+  background: #091522;
+  border: 1px solid #172b3e;
+  border-left: 3px solid #ff4055;
+  border-radius: 18px;
+}
+
+.clinical-box p {
+  color: #a7b7c6;
+  font-size: 15px;
+  line-height: 1.9;
+  margin-bottom: 18px;
+}
+
+.clinical-box p:last-child {
+  margin-bottom: 0;
+}
+
+.facts-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 15px;
+}
+
+.fact {
+  padding: 22px;
+  background: #091522;
+  border: 1px solid #172b3e;
+  border-radius: 16px;
+}
+
+.fact span {
+  display: block;
+  color: #ff4055;
+  font-size: 11px;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+.fact strong {
+  display: block;
+  color: #eef4fa;
+  font-size: 14px;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.fact p {
+  color: #8195a8;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.quiz {
+  margin-top: 65px;
+  padding: 30px;
+  background: #091522;
+  border: 1px solid #172b3e;
+  border-radius: 18px;
+}
+
+.quiz h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.quiz-intro {
+  color: #91a5b8;
+  margin-bottom: 25px;
+}
+
+.question {
+  margin-bottom: 30px;
+}
+
+.question:last-child {
+  margin-bottom: 0;
+}
+
+.question p {
+  color: #eef4fa;
+  font-size: 16px;
+  margin-bottom: 12px;
+  font-weight: bold;
+}
+
+.option {
+  display: block;
+  width: 100%;
+  padding: 12px 15px;
+  margin-top: 9px;
+  background: #0b1928;
+  color: #c7d5e2;
+  border: 1px solid #263951;
+  border-radius: 9px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+  transition: .2s;
+}
+
+.option:hover {
+  border-color: #ff4055;
+  background: #111e2c;
+}
+
+.option.correct {
+  border-color: #8fd3a8;
+  background: #14291e;
+  color: #b9f0c9;
+}
+
+.option.wrong {
+  border-color: #d88b9b;
+  background: #2a171d;
+  color: #ffc2cc;
+}
+
+.quiz-result {
+  margin-top: 25px;
+  padding: 15px;
+  border-radius: 10px;
+  background: #0b1928;
+  border: 1px solid #263951;
+  color: #aebdce;
+  display: none;
+}
+
+@media (max-width: 950px) {
+  .cards {
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  .facts-grid {
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  .anatomy-viewer {
+    height: 640px;
+  }
+}
+
+@media (max-width: 800px) {
+  .scene {
+    height: 450px;
+  }
+
+  .viewer-status {
+    display: none;
+  }
+
+  .location {
+    padding: 25px;
+  }
+
+  .anatomy-viewer {
+    height: 560px;
+  }
+
+  .svg-label {
+    font-size: 11px;
+  }
+
+  .svg-sub {
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 600px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .facts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  h1 {
+    letter-spacing: -2px;
+  }
+
+  .location {
+    padding: 20px;
+  }
+
+  .anatomy-viewer {
+    height: 500px;
+  }
+
+  .brain-title {
+    font-size: 8px;
+  }
+
+  .legend {
+    display: none;
+  }
+
+  .view-badge {
+    left: 12px;
+    bottom: 12px;
+    font-size: 8px;
+  }
+
+  .orientation-label,
+  .anatomy-note {
+    font-size: 8px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <a href="./explore.html">← Back to Explore</a>
+</nav>
+
+<main class="container">
+
+<div class="eyebrow">
+  Descending Motor Pathways · NeuroAtlas
+</div>
+
+<h1>Reticulospinal Tract</h1>
+
+<div class="arabic-title">
+  السبيل الشبكي الشوكي
+</div>
+
+<div class="hero">
+
+<p>
+The reticulospinal tract is a descending motor pathway that originates
+from the reticular formation of the brainstem and projects to the spinal
+cord. It contributes to posture, muscle tone, locomotor activity, and
+the automatic coordination of movements.
+</p>
+
+</div>
+
+<div class="actions">
+
+<a class="action-button" href="#location">
+  📍 Show Pathway
+</a>
+
+<a class="action-button" href="#information">
+  🧠 Learn the Pathway
+</a>
+
+<a class="action-button" href="#quiz">
+  📝 Test Yourself
+</a>
+
+</div>
+
+<div class="viewer">
+
+<div class="viewer-header">
+
+<div class="viewer-title">
+  Human Brain · Interactive 3D
+</div>
+
+<div class="viewer-status">
+  DRAG TO ROTATE · SCROLL TO ZOOM
+</div>
+
+</div>
+
+<div class="scene">
+
+<div id="loading" class="loading">
+
+<span id="loadText">
+Loading real brain model...
+</span>
+
+<div class="loading-bar">
+  <div id="loadBar" class="loading-bar-inner"></div>
+</div>
+
+</div>
+
+<canvas id="brainCanvas"></canvas>
+
+<div id="locationLabel" class="location-label">
+
+<div class="label-box">
+  RETICULOSPINAL TRACT · السبيل الشبكي الشوكي
+</div>
+
+</div>
+
+</div>
+
+<div class="controls">
+
+<button id="showLocation">
+  📍 Show Pathway
+</button>
+
+<button id="highlight" class="active">
+  🔴 Highlight Pathway
+</button>
+
+<button id="rotate" class="active">
+  ⟳ Auto Rotate
+</button>
+
+<button id="reset">
+  ↻ Reset View
+</button>
+
+</div>
+
+</div>
+
+<section id="location" class="location">
+
+<div class="section-label">
+  Pathway · المسار
+</div>
+
+<h2>
+  📍 Where Does the Reticulospinal Tract Run?
+</h2>
+
+<p class="location-intro">
+
+The reticulospinal system begins within the reticular formation of the
+brainstem. Fibers descend through the brainstem and enter the spinal
+cord, where they influence interneurons and motor networks involved in
+posture, muscle tone, locomotion, and coordinated automatic movements.
+
+<br><br>
+
+ينشأ الجهاز الشبكي الشوكي من التكوين الشبكي في جذع الدماغ. وتنزل أليافه
+عبر جذع الدماغ إلى الحبل الشوكي، حيث تؤثر في العصبونات البينية والشبكات
+الحركية المشاركة في وضعية الجسم وتوتر العضلات والمشي والحركات التلقائية
+المنسقة.
+
+</p>
+
+<div class="anatomy-viewer">
+
+<div class="brain-title">
+  Sagittal Brain View · Reticulospinal Pathway
+</div>
+
+<svg
+  class="brain-svg"
+  viewBox="0 0 1200 720"
+  xmlns="http://www.w3.org/2000/svg"
+  aria-label="Sagittal anatomical illustration of the reticulospinal tract"
+>
+
+<defs>
+
+<linearGradient id="brainTissue"
+  x1="0"
+  y1="0"
+  x2="1"
+  y2="1">
+
+<stop offset="0%" stop-color="#dfcbd0"/>
+<stop offset="28%" stop-color="#c2aeb5"/>
+<stop offset="62%" stop-color="#967d86"/>
+<stop offset="100%" stop-color="#66545d"/>
+
+</linearGradient>
+
+<linearGradient id="innerBrain"
+  x1="0"
+  y1="0"
+  x2="1"
+  y2="1">
+
+<stop offset="0%" stop-color="#bba5ad"/>
+<stop offset="100%" stop-color="#74616a"/>
+
+</linearGradient>
+
+<linearGradient id="whiteMatter"
+  x1="0"
+  y1="0"
+  x2="0"
+  y2="1">
+
+<stop offset="0%" stop-color="#e8e0e2"/>
+<stop offset="100%" stop-color="#aaa0a5"/>
+
+</linearGradient>
+
+<linearGradient id="callosum"
+  x1="0"
+  y1="0"
+  x2="0"
+  y2="1">
+
+<stop offset="0%" stop-color="#f1e9eb"/>
+<stop offset="100%" stop-color="#afa3a8"/>
+
+</linearGradient>
+
+<linearGradient id="brainstem"
+  x1="0"
+  y1="0"
+  x2="1"
+  y2="1">
+
+<stop offset="0%" stop-color="#c6a5ad"/>
+<stop offset="55%" stop-color="#9a707c"/>
+<stop offset="100%" stop-color="#684e58"/>
+
+</linearGradient>
+
+<linearGradient id="cerebellum"
+  x1="0"
+  y1="0"
+  x2="1"
+  y2="1">
+
+<stop offset="0%" stop-color="#d0b2ba"/>
+<stop offset="60%" stop-color="#9d7480"/>
+<stop offset="100%" stop-color="#604952"/>
+
+</linearGradient>
+
+<linearGradient id="spinalCord"
+  x1="0"
+  y1="0"
+  x2="1"
+  y2="1">
+
+<stop offset="0%" stop-color="#cdb1b8"/>
+<stop offset="55%" stop-color="#936f79"/>
+<stop offset="100%" stop-color="#5c4650"/>
+
+</linearGradient>
+
+<filter
+  id="brainShadow"
+  x="-20%"
+  y="-20%"
+  width="150%"
+  height="160%"
+>
+
+<feDropShadow
+  dx="0"
+  dy="15"
+  stdDeviation="15"
+  flood-color="#000"
+  flood-opacity=".7"
+/>
+
+</filter>
+
+<filter
+  id="softGlow"
+  x="-100%"
+  y="-100%"
+  width="300%"
+  height="300%"
+>
+
+<feGaussianBlur
+  stdDeviation="4"
+/>
+
+</filter>
+
+<filter
+  id="pathGlow"
+  x="-100%"
+  y="-100%"
+  width="300%"
+  height="300%"
+>
+
+<feGaussianBlur
+  stdDeviation="7"
+/>
+
+</filter>
+
+</defs>
+
+<!-- =====================================================
+     CEREBRAL HEMISPHERE
+     ===================================================== -->
+
+<path
+class="brain-tissue"
+d="
+M620 84
+
+C556 54 473 48 397 61
+C311 76 240 111 188 160
+C139 206 115 261 118 316
+
+C120 367 144 413 179 448
+C211 480 257 504 303 520
+
+C347 535 391 544 428 553
+
+C464 562 493 580 519 598
+
+C543 614 568 625 595 625
+
+C617 625 633 612 646 595
+
+C660 576 666 551 663 526
+
+C659 496 670 472 695 449
+
+C722 424 749 398 765 365
+
+C782 329 786 290 776 252
+
+C764 205 735 161 696 129
+
+C674 111 649 96 620 84
+Z
+"
+/>
+
+<!-- Internal brain -->
+
+<path
+class="brain-inner"
+d="
+M587 119
+
+C527 92 455 89 389 103
+C319 118 261 146 218 185
+C178 222 159 264 160 308
+
+C162 350 181 389 211 420
+C246 456 292 476 344 492
+
+C397 508 443 518 477 538
+
+C508 556 535 580 561 587
+
+C584 593 603 582 613 563
+
+C624 543 624 518 617 495
+
+C610 470 618 445 640 421
+
+C667 392 697 365 708 330
+
+C720 292 714 251 698 216
+
+C679 174 640 140 587 119
+Z
+"
+/>
+
+<!-- Deep cortical shading -->
+
+<path
+class="brain-depth"
+d="
+M184 395
+C237 455 309 485 388 503
+C450 518 497 543 540 575
+C512 533 505 495 526 454
+C546 414 573 390 606 365
+C557 389 504 404 449 409
+C351 418 257 409 184 395
+Z
+"/>
+
+<!-- =====================================================
+     CORTICAL FOLDS
+     ===================================================== -->
+
+<path
+class="cortical-fold"
+d="M160 220 C222 169 294 151 365 168 C418 181 454 181 494 162"
+/>
+
+<path
+class="cortical-fold"
+d="M137 270 C197 226 263 220 322 240 C370 256 411 257 449 242"
+/>
+
+<path
+class="cortical-fold"
+d="M139 322 C198 285 258 282 315 302 C366 320 405 321 442 307"
+/>
+
+<path
+class="cortical-fold"
+d="M160 373 C215 343 271 342 324 360 C371 376 407 377 440 365"
+/>
+
+<path
+class="cortical-fold"
+d="M195 425 C248 405 300 409 346 426 C384 441 416 442 444 432"
+/>
+
+<path
+class="cortical-fold"
+d="M227 469 C276 454 322 458 361 471 C391 481 418 483 442 477"
+/>
+
+<path
+class="cortical-light"
+d="M177 201 C231 161 293 151 351 163"
+/>
+
+<path
+class="cortical-light"
+d="M153 286 C207 249 260 247 309 264"
+/>
+
+<path
+class="cortical-light"
+d="M176 397 C225 376 274 379 317 394"
+/>
+
+<!-- =====================================================
+     WHITE MATTER
+     ===================================================== -->
+
+<path
+class="white-matter"
+d="
+M327 240
+
+C374 198 432 178 491 185
+C531 190 562 207 588 230
+
+C615 252 631 282 632 316
+C633 350 616 379 590 401
+
+C567 420 543 437 526 459
+C508 483 505 510 514 535
+
+C489 516 457 500 418 489
+C366 475 318 460 283 431
+C247 402 225 366 226 328
+C228 294 253 267 289 252
+C301 247 314 244 327 240
+Z
+"
+/>
+
+<!-- =====================================================
+     CORPUS CALLOSUM
+     ===================================================== -->
+
+<path
+class="corpus-callosum"
+d="
+M397 231
+
+C434 205 475 197 514 204
+C546 210 570 225 590 245
+
+C570 254 547 258 524 255
+C502 252 484 241 463 239
+C441 237 418 241 397 249
+Z
+"
+/>
+
+<path
+class="corpus-callosum"
+d="
+M412 249
+C434 266 453 276 474 279
+C493 282 512 278 530 270
+C511 287 489 297 466 299
+C445 301 427 292 412 277
+Z
+"
+/>
+
+<!-- =====================================================
+     LATERAL VENTRICLE
+     ===================================================== -->
+
+<path
+class="ventricle"
+d="
+M423 277
+
+C450 261 480 258 506 269
+C530 279 545 296 548 316
+C551 336 541 352 523 361
+C503 371 481 365 465 351
+C450 338 442 320 433 305
+C425 293 419 284 423 277
+Z
+"
+/>
+
+<!-- =====================================================
+     THALAMUS
+     ===================================================== -->
+
+<ellipse
+class="thalamus"
+cx="536"
+cy="360"
+rx="42"
+ry="37"
+/>
+
+<!-- =====================================================
+     CEREBELLUM
+     ===================================================== -->
+
+<path
+class="cerebellum"
+d="
+M700 356
+
+C739 337 786 341 817 367
+C845 391 851 431 839 466
+C828 500 803 523 770 526
+C740 529 712 514 695 492
+C679 471 672 442 679 415
+C684 391 689 372 700 356
+Z
+"
+/>
+
+<path
+class="cerebellar-fold"
+d="M697 384 C735 370 781 372 815 394"
+/>
+
+<path
+class="cerebellar-fold"
+d="M687 404 C733 393 785 398 830 419"
+/>
+
+<path
+class="cerebellar-fold"
+d="M683 428 C730 417 784 423 836 444"
+/>
+
+<path
+class="cerebellar-fold"
+d="M687 452 C733 441 785 448 827 469"
+/>
+
+<path
+class="cerebellar-fold"
+d="M697 476 C738 466 777 472 811 490"
+/>
+
+<!-- =====================================================
+     BRAINSTEM
+     ===================================================== -->
+
+<path
+class="brainstem"
+d="
+M620 382
+
+C641 371 660 369 680 377
+C695 384 704 397 708 413
+
+C713 432 706 449 695 464
+
+C684 479 678 495 680 514
+
+L687 582
+
+C689 608 678 631 658 642
+
+C642 651 622 650 609 638
+
+C596 626 591 606 593 584
+
+L598 516
+
+C600 493 594 474 583 457
+
+C570 438 566 418 574 401
+
+C582 391 600 384 620 382
+Z
+"
+/>
+
+<path
+class="brainstem-detail"
+d="M589 419 C617 430 674 430 701 417"
+/>
+
+<path
+class="brainstem-detail"
+d="M594 444 C620 454 672 455 697 442"
+/>
+
+<path
+class="brainstem-detail"
+d="M598 473 C622 482 668 484 688 475"
+/>
+
+<path
+class="brainstem-detail"
+d="M599 505 C620 512 661 513 681 506"
+/>
+
+<!-- =====================================================
+     RETICULAR FORMATION
+     ===================================================== -->
+
+<ellipse
+class="reticular-zone"
+cx="626"
+cy="433"
+rx="35"
+ry="52"
+/>
+
+<ellipse
+class="reticular-core"
+cx="626"
+cy="440"
+rx="11"
+ry="27"
+/>
+
+<!-- =====================================================
+     SPINAL CORD
+     ===================================================== -->
+
+<path
+class="spinal-cord"
+d="
+M606 580
+
+C620 572 642 572 657 580
+
+L661 676
+
+C654 690 641 698 626 698
+
+C611 698 599 690 593 676
+
+Z
+"
+/>
+
+<path
+class="spinal-inner"
+d="
+M612 585
+C624 580 640 580 651 586
+L653 675
+C645 684 636 688 626 688
+C616 688 607 684 601 675
+Z
+"
+/>
+
+<path
+class="spinal-fiber"
+d="M614 594 L611 673"
+/>
+
+<path
+class="spinal-fiber"
+d="M624 589 L623 682"
+/>
+
+<path
+class="spinal-fiber"
+d="M635 589 L636 682"
+/>
+
+<path
+class="spinal-fiber"
+d="M646 594 L648 673"
+/>
+
+<!-- =====================================================
+     RETICULOSPINAL PATHWAY GLOW
+     ===================================================== -->
+
+<path
+class="pathway-glow"
+d="
+M626 437
+C632 464 636 492 636 518
+C637 548 635 575 632 603
+C630 625 628 651 628 682
+"
+/>
+
+<!-- =====================================================
+     RETICULOSPINAL PATHWAY
+     ===================================================== -->
+
+<path
+class="pathway-main"
+d="
+M626 437
+C632 464 636 492 636 518
+C637 548 635 575 632 603
+C630 625 628 651 628 682
+"
+/>
+
+<path
+class="pathway-core"
+d="
+M626 437
+C632 464 636 492 636 518
+C637 548 635 575 632 603
+C630 625 628 651 628 682
+"
+/>
+
+<!-- Direction arrows -->
+
+<polygon
+class="pathway-arrow"
+points="628,488 619,471 637,471"
+/>
+
+<polygon
+class="pathway-arrow"
+points="635,551 626,534 644,534"
+/>
+
+<polygon
+class="pathway-arrow"
+points="631,616 622,599 640,599"
+/>
+
+<polygon
+class="pathway-arrow"
+points="628,665 619,648 637,648"
+/>
+
+<!-- Nodes -->
+
+<circle
+class="pathway-node"
+cx="626"
+cy="437"
+r="7"
+/>
+
+<circle
+class="pathway-node"
+cx="636"
+cy="518"
+r="6"
+/>
+
+<circle
+class="pathway-node"
+cx="632"
+cy="603"
+r="6"
+/>
+
+<!-- =====================================================
+     LEFT CALLOUTS
+     ===================================================== -->
+
+<path
+class="callout"
+d="
+M626 437
+L470 370
+L72 370
+"
+/>
+
+<circle
+class="callout-dot"
+cx="626"
+cy="437"
+r="4"
+/>
+
+<text
+class="svg-label"
+x="72"
+y="362"
+>
+RETICULAR FORMATION
+</text>
+
+<text
+class="svg-sub"
+x="72"
+y="380"
+>
+التكوين الشبكي
+</text>
+
+<path
+class="callout"
+d="
+M536 360
+L400 318
+L72 318
+"
+/>
+
+<circle
+class="callout-dot"
+cx="536"
+cy="360"
+r="4"
+/>
+
+<text
+class="svg-label"
+x="72"
+y="310"
+>
+THALAMUS
+</text>
+
+<text
+class="svg-sub"
+x="72"
+y="328"
+>
+المهاد
+</text>
+
+<path
+class="callout"
+d="
+M486 225
+L370 155
+L72 155
+"
+/>
+
+<circle
+class="callout-dot"
+cx="486"
+cy="225"
+r="4"
+/>
+
+<text
+class="svg-label"
+x="72"
+y="147"
+>
+CORPUS CALLOSUM
+</text>
+
+<text
+class="svg-sub"
+x="72"
+y="165"
+>
+الجسم الثفني
+</text>
+
+<!-- =====================================================
+     RIGHT CALLOUTS
+     ===================================================== -->
+
+<path
+class="callout"
+d="
+M752 420
+L925 345
+L1110 345
+"
+/>
+
+<circle
+class="callout-dot"
+cx="752"
+cy="420"
+r="4"
+/>
+
+<text
+class="svg-label"
+x="925"
+y="337"
+>
+CEREBELLUM
+</text>
+
+<text
+class="svg-sub"
+x="925"
+y="355"
+>
+المخيخ
+</text>
+
+<path
+class="callout"
+d="
+M668 480
+L860 455
+L1110 455
+"
+/>
+
+<circle
+class="callout-dot"
+cx="668"
+cy="480"
+r="4"
+/>
+
+<text
+class="svg-label"
+x="860"
+y="447"
+>
+BRAINSTEM
+</text>
+
+<text
+class="svg-sub"
+x="860"
+y="465"
+>
+جذع الدماغ
+</text>
+
+<path
+class="callout"
+d="
+M628 603
+L845 570
+L1110 570
+"
+/>
+
+<circle
+class="callout-dot"
+cx="628"
+cy="603"
+r="4"
+/>
+
+<text
+class="svg-label"
+x="845"
+y="562"
+>
+SPINAL CORD
+</text>
+
+<text
+class="svg-sub"
+x="845"
+y="580"
+>
+الحبل الشوكي
+</text>
+
+<!-- Pathway label -->
+
+<path
+class="callout"
+d="
+M636 518
+L790 255
+L1110 255
+"
+/>
+
+<circle
+class="callout-dot"
+cx="636"
+cy="518"
+r="4"
+/>
+
+<text
+class="svg-label"
+x="790"
+y="247"
+>
+RETICULOSPINAL TRACT
+</text>
+
+<text
+class="svg-sub"
+x="790"
+y="265"
+>
+السبيل الشبكي الشوكي
+</text>
+
+<!-- =====================================================
+     ORIENTATION
+     ===================================================== -->
+
+<text
+class="orientation-label"
+x="165"
+y="650"
+>
+ANTERIOR
+</text>
+
+<text
+class="orientation-label"
+x="770"
+y="650"
+>
+POSTERIOR
+</text>
+
+<text
+class="pathway-direction"
+x="530"
+y="615"
+>
+DESCENDING
+</text>
+
+<text
+class="anatomy-note"
+x="78"
+y="690"
+>
+SAGITTAL MEDIAN-LEANING VIEW · SIMPLIFIED ANATOMICAL SCHEMATIC
+</text>
+
+</svg>
+
+<div class="view-badge">
+  SAGITTAL VIEW · DESCENDING MOTOR PATHWAY
+</div>
+
+<div class="legend">
+
+<div class="legend-item">
+  <span class="legend-line"></span>
+  Reticulospinal pathway
+</div>
+
+<div class="legend-item">
+  <span class="legend-brain"></span>
+  Brain structures
+</div>
+
+</div>
+
+</div>
+
+<p class="location-caption">
+  🔴 The highlighted pathway represents the descending
+  <strong>reticulospinal tract</strong> from the brainstem reticular
+  formation toward the spinal cord.
+</p>
+
+<p class="source-note">
+  Simplified anatomical illustration designed to demonstrate the
+  organization and general course of the reticulospinal pathway.
+  It is not intended as a radiological or diagnostic image.
+</p>
+
+</section>
+
+<section id="information" class="section">
+
+<div class="section-label">
+  Reticulospinal Anatomy · تشريح السبيل الشبكي الشوكي
+</div>
+
+<h2>
+  Reticulospinal Tract · السبيل الشبكي الشوكي
+</h2>
+
+<p class="section-intro">
+
+The reticulospinal tract is part of the descending motor system. It
+connects the brainstem reticular formation with spinal motor networks
+and contributes particularly to posture, muscle tone, locomotion, and
+automatic adjustments that accompany voluntary movement.
+
+<br><br>
+
+يعد السبيل الشبكي الشوكي جزءاً من الجهاز الحركي النازل. ويربط التكوين
+الشبكي في جذع الدماغ بالشبكات الحركية في الحبل الشوكي، ويساهم بشكل خاص
+في وضعية الجسم وتوتر العضلات والمشي والتعديلات التلقائية المصاحبة
+للحركة الإرادية.
+
+</p>
+
+<div class="cards">
+
+<div class="card">
+<h3>Reticular Formation · التكوين الشبكي</h3>
+<p>
+The reticular formation of the brainstem provides the principal origin
+for reticulospinal projections.
+<br><br>
+يمثل التكوين الشبكي في جذع الدماغ المصدر الرئيسي للإسقاطات الشبكية الشوكية.
+</p>
+</div>
+
+<div class="card">
+<h3>Pontine Reticulospinal System · الجهاز الشبكي الجسري</h3>
+<p>
+Pontine reticulospinal pathways are associated with facilitation of
+postural and extensor-related activity.
+<br><br>
+ترتبط المسارات الشبكية الجسرية بتسهيل النشاط الوضعي ونشاط العضلات الباسطة.
+</p>
+</div>
+
+<div class="card">
+<h3>Medullary Reticulospinal System · الجهاز الشبكي البصلي</h3>
+<p>
+Medullary reticulospinal pathways contribute to descending regulation
+of spinal motor activity and can modulate postural responses.
+<br><br>
+تساهم المسارات الشبكية البصلية في التنظيم النازل للنشاط الحركي الشوكي
+وتعديل الاستجابات الوضعية.
+</p>
+</div>
+
+<div class="card">
+<h3>Spinal Cord · الحبل الشوكي</h3>
+<p>
+Reticulospinal fibers descend into the spinal cord and influence spinal
+interneurons and motor networks.
+<br><br>
+تنزل الألياف الشبكية الشوكية إلى الحبل الشوكي وتؤثر في العصبونات البينية
+والشبكات الحركية الشوكية.
+</p>
+</div>
+
+<div class="card">
+<h3>Posture · وضعية الجسم</h3>
+<p>
+The reticulospinal system helps organize automatic postural activity
+required to maintain body position.
+<br><br>
+يساعد الجهاز الشبكي الشوكي في تنظيم النشاط الوضعي التلقائي اللازم
+للحفاظ على وضعية الجسم.
+</p>
+</div>
+
+<div class="card">
+<h3>Muscle Tone · توتر العضلات</h3>
+<p>
+Descending reticulospinal influences contribute to the regulation of
+muscle tone and spinal motor excitability.
+<br><br>
+تساهم التأثيرات الشبكية الشوكية النازلة في تنظيم توتر العضلات وقابلية
+الاستثارة الحركية في الحبل الشوكي.
+</p>
+</div>
+
+<div class="card">
+<h3>Locomotion · المشي</h3>
+<p>
+Reticulospinal pathways interact with spinal locomotor networks and
+participate in the control of walking-related activity.
+<br><br>
+تتفاعل المسارات الشبكية الشوكية مع شبكات المشي في الحبل الشوكي وتشارك
+في التحكم في النشاط المرتبط بالمشي.
+</p>
+</div>
+
+<div class="card">
+<h3>Automatic Movement · الحركة التلقائية</h3>
+<p>
+The pathway helps coordinate automatic motor adjustments that accompany
+voluntary movements.
+<br><br>
+يساعد السبيل في تنسيق التعديلات الحركية التلقائية المصاحبة للحركات الإرادية.
+</p>
+</div>
+
+<div class="card">
+<h3>Brainstem Origin · منشأ جذع الدماغ</h3>
+<p>
+Unlike the corticospinal tract, the reticulospinal tract originates in
+the brainstem rather than directly from the cerebral motor cortex.
+<br><br>
+على عكس السبيل القشري الشوكي، ينشأ السبيل الشبكي الشوكي في جذع الدماغ
+وليس مباشرة من القشرة الحركية المخية.
+</p>
+</div>
+
+<div class="card">
+<h3>Descending Motor System · الجهاز الحركي النازل</h3>
+<p>
+The reticulospinal tract belongs to the group of descending pathways
+that regulate spinal motor circuits.
+<br><br>
+ينتمي السبيل الشبكي الشوكي إلى مجموعة المسارات النازلة التي تنظم
+الدوائر الحركية الشوكية.
+</p>
+</div>
+
+<div class="card">
+<h3>Interneurons · العصبونات البينية</h3>
+<p>
+Many reticulospinal effects are mediated through spinal interneuronal
+networks rather than direct connections with every motor neuron.
+<br><br>
+تتوسط العديد من تأثيرات السبيل الشبكي الشوكي شبكات العصبونات البينية
+في الحبل الشوكي بدلاً من الاتصال المباشر بكل عصبون حركي.
+</p>
+</div>
+
+<div class="card">
+<h3>Motor Coordination · التنسيق الحركي</h3>
+<p>
+Reticulospinal circuits coordinate background motor activity with
+ongoing voluntary actions.
+<br><br>
+تنسق الدوائر الشبكية الشوكية النشاط الحركي الأساسي مع الأفعال الإرادية
+الجارية.
+</p>
+</div>
+
+</div>
+
+<div class="clinical-section">
+
+<div class="section-label">
+  Clinical Importance · الأهمية السريرية
+</div>
+
+<h2>
+  Why the Reticulospinal Tract Matters
+</h2>
+
+<div class="clinical-box">
+
+<p>
+Reticulospinal pathways are important because movement does not depend
+only on direct cortical commands to individual muscles. The brainstem
+helps establish the postural and background motor activity that allows
+voluntary movements to occur efficiently and in an organized manner.
+</p>
+
+<p>
+Damage affecting descending motor systems can therefore influence
+posture, muscle tone, balance, gait, and the coordination of automatic
+motor responses. The clinical findings depend on the structures and
+pathways involved.
+</p>
+
+<p dir="rtl">
+تعد المسارات الشبكية الشوكية مهمة لأن الحركة لا تعتمد فقط على الأوامر
+القشرية المباشرة للعضلات. إذ يساعد جذع الدماغ في تنظيم النشاط الوضعي
+والحركي الأساسي الذي يسمح بحدوث الحركات الإرادية بصورة منظمة وفعالة.
+</p>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<div class="section-label">
+  Quick Facts · معلومات سريعة
+</div>
+
+<h2>
+  Reticulospinal Tract at a Glance
+</h2>
+
+<div class="facts-grid">
+
+<div class="fact">
+<span>01</span>
+<strong>Origin · المنشأ</strong>
+<p>
+Reticular formation of the brainstem
+</p>
+</div>
+
+<div class="fact">
+<span>02</span>
+<strong>Destination · الوجهة</strong>
+<p>
+Spinal cord motor networks
+</p>
+</div>
+
+<div class="fact">
+<span>03</span>
+<strong>Main Role · الدور الرئيسي</strong>
+<p>
+Posture, tone, locomotion, and automatic motor control
+</p>
+</div>
+
+<div class="fact">
+<span>04</span>
+<strong>Direction · الاتجاه</strong>
+<p>
+Descending from brainstem toward spinal cord
+</p>
+</div>
+
+</div>
+
+</div>
+
+<div id="quiz" class="quiz">
+
+<div class="section-label">
+  Mini Test
+</div>
+
+<h2>
+  🧠 Test Yourself
+</h2>
+
+<p class="quiz-intro">
+Choose the best answer for each question.
+</p>
+
+<div class="question">
+
+<p>
+1. Where does the reticulospinal tract primarily originate?
+</p>
+
+<button class="option" onclick="checkAnswer(this,true)">
+A. Reticular formation of the brainstem
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+B. Cerebellar cortex only
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+C. Retina
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+D. Hippocampus
+</button>
+
+</div>
+
+<div class="question">
+
+<p>
+2. Which function is strongly associated with reticulospinal pathways?
+</p>
+
+<button class="option" onclick="checkAnswer(this,true)">
+A. Postural and locomotor control
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+B. Visual image formation
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+C. Hearing transduction
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+D. Cerebrospinal fluid production
+</button>
+
+</div>
+
+<div class="question">
+
+<p>
+3. Where do reticulospinal fibers descend?
+</p>
+
+<button class="option" onclick="checkAnswer(this,true)">
+A. Into the spinal cord
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+B. Only into the cerebral cortex
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+C. Only into the cerebellum
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+D. Into the retina
+</button>
+
+</div>
+
+<div class="question">
+
+<p>
+4. The reticulospinal tract belongs to which broad system?
+</p>
+
+<button class="option" onclick="checkAnswer(this,true)">
+A. Descending motor pathways
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+B. Ascending visual pathways
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+C. Auditory sensory pathways
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+D. Olfactory pathways
+</button>
+
+</div>
+
+<div id="quizResult" class="quiz-result"></div>
+
+</div>
+
+</section>
+
+</main>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+
+import * as THREE from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
+
+const canvas = document.getElementById("brainCanvas");
+const loading = document.getElementById("loading");
+const loadText = document.getElementById("loadText");
+const loadBar = document.getElementById("loadBar");
+const locationLabel = document.getElementById("locationLabel");
+
+const scene = new THREE.Scene();
+
+const camera = new THREE.PerspectiveCamera(
+  30,
+  1,
+  .01,
+  100
+);
+
+camera.position.set(3.2, .3, 8.5);
+
+const renderer = new THREE.WebGLRenderer({
+  canvas,
+  antialias: true,
+  alpha: true
+});
+
+renderer.setPixelRatio(
+  Math.min(window.devicePixelRatio || 1, 2)
+);
+
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = .75;
+
+const controls = new OrbitControls(
+  camera,
+  canvas
+);
+
+controls.enableRotate = true;
+controls.rotateSpeed = .6;
+controls.enableDamping = true;
+controls.dampingFactor = .05;
+controls.enableZoom = true;
+controls.zoomSpeed = .6;
+controls.enablePan = false;
+controls.autoRotate = true;
+controls.autoRotateSpeed = .2;
+controls.target.set(0, -.3, 0);
+controls.minDistance = 3.5;
+controls.maxDistance = 16;
+
+scene.add(
+  new THREE.AmbientLight(
+    0xffffff,
+    .55
+  )
+);
+
+scene.add(
+  new THREE.HemisphereLight(
+    0xffdce6,
+    0x081018,
+    .75
+  )
+);
+
+const keyLight = new THREE.DirectionalLight(
+  0xfff5f0,
+  1.4
+);
+
+keyLight.position.set(6, 10, 8);
+scene.add(keyLight);
+
+const fillLight = new THREE.DirectionalLight(
+  0x8ca9bd,
+  .4
+);
+
+fillLight.position.set(-7, 2, 6);
+scene.add(fillLight);
+
+const brainGroup = new THREE.Group();
+
+scene.add(brainGroup);
+
+let targetMeshes = [];
+let brainMeshes = [];
+
+let locationShown = false;
+let highlighted = true;
+
+const brainOpaqueMaterial =
+  new THREE.MeshPhysicalMaterial({
+    color: 0xf1c5d0,
+    roughness: .62,
+    metalness: 0,
+    clearcoat: .12,
+    clearcoatRoughness: .5,
+    side: THREE.DoubleSide,
+    transparent: false,
+    opacity: 1
+  });
+
+const brainTransparentMaterial =
+  new THREE.MeshPhysicalMaterial({
+    color: 0xf1c5d0,
+    roughness: .55,
+    metalness: 0,
+    clearcoat: .1,
+    clearcoatRoughness: .5,
+    side: THREE.DoubleSide,
+    transparent: true,
+    opacity: .16,
+    depthWrite: false
+  });
+
+const targetMaterial =
+  new THREE.MeshPhysicalMaterial({
+    color: 0xff2948,
+    roughness: .3,
+    metalness: 0,
+    clearcoat: .6,
+    clearcoatRoughness: .12,
+    emissive: 0x5c0613,
+    emissiveIntensity: 1.05,
+    side: THREE.DoubleSide,
+    transparent: false,
+    opacity: 1
+  });
+
+const targetNormalMaterial =
+  new THREE.MeshPhysicalMaterial({
+    color: 0xf1c5d0,
+    roughness: .62,
+    metalness: 0,
+    clearcoat: .12,
+    clearcoatRoughness: .5,
+    side: THREE.DoubleSide
+  });
+
+function normalizeName(name) {
+
+  return String(name || "")
+    .toLowerCase()
+    .replace(/[\s_\-.]+/g, "");
+
+}
+
+function getMeshName(mesh) {
+
+  const userName =
+    mesh.userData &&
+    mesh.userData.name
+      ? mesh.userData.name
+      : "";
+
+  return `${mesh.name} ${userName}`;
+
+}
+
+function isExplicitReticulospinal(mesh) {
+
+  const name =
+    normalizeName(
+      getMeshName(mesh)
+    );
+
+  const targetNames = [
+
+    "reticulospinal",
+    "reticulospinaltract",
+    "reticulospinaltract",
+    "reticularformation",
+    "reticularnucleus",
+    "pontinereticular",
+    "medullaryreticular",
+    "reticular"
+
+  ];
+
+  return targetNames.some(
+    item => name.includes(item)
+  );
+
+}
+
+function isClearlyNotTarget(mesh) {
+
+  const name =
+    normalizeName(
+      getMeshName(mesh)
+    );
+
+  const excludedNames = [
+
+    "cerebellum",
+    "skull",
+    "skin",
+    "artery",
+    "vein",
+    "vessel"
+
+  ];
+
+  return excludedNames.some(
+    item => name.includes(item)
+  );
+
+}
+
+function calculateTargetCandidates(model) {
+
+  const meshes = [];
+
+  model.traverse(child => {
+
+    if (!child.isMesh) {
+      return;
+    }
+
+    meshes.push(child);
+
+  });
+
+  return meshes.filter(
+    mesh =>
+      isExplicitReticulospinal(mesh) &&
+      !isClearlyNotTarget(mesh)
+  );
+
+}
+
+function prepareMaterials(model) {
+
+  brainMeshes = [];
+  targetMeshes = [];
+
+  model.traverse(child => {
+
+    if (!child.isMesh) {
+      return;
+    }
+
+    child.castShadow = true;
+    child.receiveShadow = true;
+
+    child.material =
+      brainOpaqueMaterial.clone();
+
+    brainMeshes.push(child);
+
+  });
+
+  targetMeshes =
+    calculateTargetCandidates(model);
+
+  targetMeshes.forEach(mesh => {
+
+    mesh.material =
+      targetMaterial.clone();
+
+  });
+
+}
+
+function loadRealBrain() {
+
+  const loader = new GLTFLoader();
+
+  const dracoLoader = new DRACOLoader();
+
+  dracoLoader.setDecoderPath(
+    "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/"
+  );
+
+  loader.setDRACOLoader(dracoLoader);
+
+  const urls = [
+
+    "https://cdn.jsdelivr.net/gh/itayinbarr/brainproject@main/brain-atlas/models/brain.glb",
+
+    "https://raw.githubusercontent.com/itayinbarr/brainproject/main/brain-atlas/models/brain.glb",
+
+    "https://itayinbarr.github.io/brainproject/models/brain.glb"
+
+  ];
+
+  let index = 0;
+
+  function tryLoad() {
+
+    if (index >= urls.length) {
+
+      loadText.textContent =
+        "Brain model could not be loaded.";
+
+      loadBar.style.width = "100%";
+
+      setTimeout(() => {
+
+        loading.classList.add("hide");
+
+      }, 500);
+
+      return;
+
+    }
+
+    const url = urls[index++];
+
+    loader.load(
+
+      url,
+
+      gltf => {
+
+        const model = gltf.scene;
+
+        const box =
+          new THREE.Box3()
+            .setFromObject(model);
+
+        const center =
+          box.getCenter(
+            new THREE.Vector3()
+          );
+
+        const size =
+          box.getSize(
+            new THREE.Vector3()
+          );
+
+        const maxDim =
+          Math.max(
+            size.x,
+            size.y,
+            size.z
+          );
+
+        const scale =
+          4.5 / maxDim;
+
+        model.scale.setScalar(scale);
+
+        model.position.sub(
+          center.multiplyScalar(scale)
+        );
+
+        model.position.y -= .6;
+
+        brainGroup.add(model);
+
+        prepareMaterials(model);
+
+        if (targetMeshes.length === 0) {
+
+          loadText.textContent =
+            "Brain loaded · pathway surface unavailable";
+
+        } else {
+
+          loadText.textContent =
+            "Reticulospinal pathway located";
+
+          locationLabel.classList.add("show");
+
+        }
+
+        loadBar.style.width = "100%";
+
+        setTimeout(() => {
+
+          loading.classList.add("hide");
+
+        }, 500);
+
+      },
+
+      progress => {
+
+        if (progress.total > 0) {
+
+          const pct =
+            Math.min(
+              95,
+              progress.loaded /
+              progress.total *
+              95
+            );
+
+          loadBar.style.width =
+            pct + "%";
+
+        }
+
+      },
+
+      error => {
+
+        console.warn(
+          "Brain model loading failed:",
+          error
+        );
+
+        tryLoad();
+
+      }
+
+    );
+
+  }
+
+  tryLoad();
+
+}
+
+function setBrainTransparency(enabled) {
+
+  brainMeshes.forEach(mesh => {
+
+    if (targetMeshes.includes(mesh)) {
+      return;
+    }
+
+    mesh.material =
+      enabled
+        ? brainTransparentMaterial.clone()
+        : brainOpaqueMaterial.clone();
+
+  });
+
+}
+
+function setTargetHighlight(enabled) {
+
+  targetMeshes.forEach(mesh => {
+
+    mesh.material =
+      enabled
+        ? targetMaterial.clone()
+        : targetNormalMaterial.clone();
+
+  });
+
+}
+
+const showLocationBtn =
+  document.getElementById(
+    "showLocation"
+  );
+
+showLocationBtn.addEventListener(
+  "click",
+  () => {
+
+    locationShown =
+      !locationShown;
+
+    if (locationShown) {
+
+      setBrainTransparency(true);
+      setTargetHighlight(true);
+
+      highlighted = true;
+
+      locationLabel.classList.add(
+        "show"
+      );
+
+      showLocationBtn.classList.add(
+        "active"
+      );
+
+      showLocationBtn.textContent =
+        "📍 Hide Pathway";
+
+      controls.autoRotate = false;
+
+      rotateBtn.classList.remove(
+        "active"
+      );
+
+      rotateBtn.textContent =
+        "▶ Auto Rotate";
+
+    } else {
+
+      setBrainTransparency(false);
+
+      setTargetHighlight(
+        highlighted
+      );
+
+      locationLabel.classList.remove(
+        "show"
+      );
+
+      showLocationBtn.classList.remove(
+        "active"
+      );
+
+      showLocationBtn.textContent =
+        "📍 Show Pathway";
+
+    }
+
+  }
+);
+
+const highlightBtn =
+  document.getElementById(
+    "highlight"
+  );
+
+highlightBtn.addEventListener(
+  "click",
+  () => {
+
+    highlighted =
+      !highlighted;
+
+    setTargetHighlight(
+      highlighted
+    );
+
+    if (highlighted) {
+
+      highlightBtn.classList.add(
+        "active"
+      );
+
+      highlightBtn.textContent =
+        "🔴 Highlight Pathway";
+
+    } else {
+
+      highlightBtn.classList.remove(
+        "active"
+      );
+
+      highlightBtn.textContent =
+        "🧠 Highlight Pathway";
+
+    }
+
+    if (locationShown) {
+      setBrainTransparency(true);
+    }
+
+  }
+);
+
+const rotateBtn =
+  document.getElementById(
+    "rotate"
+  );
+
+rotateBtn.addEventListener(
+  "click",
+  () => {
+
+    controls.autoRotate =
+      !controls.autoRotate;
+
+    rotateBtn.classList.toggle(
+      "active",
+      controls.autoRotate
+    );
+
+    rotateBtn.textContent =
+      controls.autoRotate
+        ? "⟳ Auto Rotate"
+        : "▶ Auto Rotate";
+
+  }
+);
+
+document
+  .getElementById("reset")
+  .addEventListener(
+    "click",
+    () => {
+
+      camera.position.set(
+        3.2,
+        .3,
+        8.5
+      );
+
+      controls.target.set(
+        0,
+        -.3,
+        0
+      );
+
+      controls.update();
+
+      locationShown = false;
+      highlighted = true;
+
+      setBrainTransparency(false);
+      setTargetHighlight(true);
+
+      locationLabel.classList.remove(
+        "show"
+      );
+
+      showLocationBtn.classList.remove(
+        "active"
+      );
+
+      showLocationBtn.textContent =
+        "📍 Show Pathway";
+
+      highlightBtn.classList.add(
+        "active"
+      );
+
+      highlightBtn.textContent =
+        "🔴 Highlight Pathway";
+
+    }
+  );
+
+function updateLabel() {
+
+  if (!locationShown) {
+    return;
+  }
+
+  if (targetMeshes.length === 0) {
+    return;
+  }
+
+  const box =
+    new THREE.Box3();
+
+  targetMeshes.forEach(mesh => {
+
+    box.expandByObject(mesh);
+
+  });
+
+  if (box.isEmpty()) {
+    return;
+  }
+
+  const position =
+    box.getCenter(
+      new THREE.Vector3()
+    );
+
+  position.project(camera);
+
+  const x =
+    (position.x + 1) / 2 *
+    canvas.clientWidth;
+
+  const y =
+    (-position.y + 1) / 2 *
+    canvas.clientHeight;
+
+  locationLabel.style.left =
+    x + "px";
+
+  locationLabel.style.top =
+    (y - 35) + "px";
+
+}
+
+function resize() {
+
+  const width =
+    canvas.clientWidth;
+
+  const height =
+    canvas.clientHeight;
+
+  if (
+    width <= 0 ||
+    height <= 0
+  ) {
+    return;
+  }
+
+  camera.aspect =
+    width / height;
+
+  camera.updateProjectionMatrix();
+
+  renderer.setSize(
+    width,
+    height,
+    false
+  );
+
+}
+
+window.addEventListener(
+  "resize",
+  resize
+);
+
+function animate() {
+
+  requestAnimationFrame(
+    animate
+  );
+
+  controls.update();
+
+  updateLabel();
+
+  renderer.render(
+    scene,
+    camera
+  );
+
+}
+
+resize();
+animate();
+loadRealBrain();
+
+</script>
+
+<script>
+
+function checkAnswer(
+  button,
+  correct
+) {
+
+  const parent =
+    button.parentElement;
+
+  const options =
+    parent.querySelectorAll(
+      ".option"
+    );
+
+  options.forEach(option => {
+
+    option.classList.remove(
+      "correct",
+      "wrong"
+    );
+
+  });
+
+  if (correct) {
+
+    button.classList.add(
+      "correct"
+    );
+
+  } else {
+
+    button.classList.add(
+      "wrong"
+    );
+
+  }
+
+  updateQuizScore();
+
+}
+
+function updateQuizScore() {
+
+  const result =
+    document.getElementById(
+      "quizResult"
+    );
+
+  let answered = 0;
+  let correctAnswers = 0;
+
+  document
+    .querySelectorAll(
+      ".question"
+    )
+    .forEach(question => {
+
+      const selected =
+        question.querySelector(
+          ".correct,.wrong"
+        );
+
+      if (selected) {
+
+        answered++;
+
+        if (
+          selected.classList.contains(
+            "correct"
+          )
+        ) {
+
+          correctAnswers++;
+
+        }
+
+      }
+
+    });
+
+  if (answered > 0) {
+
+    result.style.display =
+      "block";
+
+    result.textContent =
+      "Score: " +
+      correctAnswers +
+      " / " +
+      answered;
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>
