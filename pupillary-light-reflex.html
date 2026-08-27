@@ -1,0 +1,3061 @@
+<!-- /pupillary-light-reflex.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NeuroAtlas | Pupillary Light Reflex</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #050b13;
+  color: #eef4fa;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.7;
+}
+
+nav {
+  height: 70px;
+  padding: 0 7%;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+nav a {
+  color: #9db0c3;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+nav a:hover {
+  color: #fff;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 60px 7% 100px;
+}
+
+.eyebrow {
+  color: #61b5ff;
+  letter-spacing: 3px;
+  font-size: 12px;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+
+h1 {
+  font-size: clamp(46px, 7vw, 82px);
+  line-height: .95;
+  letter-spacing: -4px;
+  margin-bottom: 10px;
+}
+
+.arabic-title {
+  color: #ff4055;
+  font-size: 24px;
+  margin-bottom: 25px;
+}
+
+.hero p {
+  color: #a6b6c7;
+  max-width: 850px;
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.action-button,
+.controls button {
+  padding: 11px 17px;
+  border-radius: 9px;
+  background: #0b1928;
+  border: 1px solid #31516d;
+  color: #bdd0e0;
+  text-decoration: none;
+  cursor: pointer;
+  transition: .2s;
+  font-size: 14px;
+}
+
+.action-button:hover,
+.controls button:hover {
+  background: #14304a;
+  color: #fff;
+  border-color: #61b5ff;
+}
+
+.controls button.active {
+  background: #321218;
+  border-color: #ff4055;
+  color: #ffd9de;
+}
+
+.viewer {
+  margin-top: 60px;
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 24px;
+  overflow: hidden;
+  background: #02060b;
+  box-shadow: 0 25px 80px rgba(0,0,0,.45);
+}
+
+.viewer-header {
+  min-height: 65px;
+  padding: 0 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.viewer-title {
+  font-size: 14px;
+  color: #d2dce6;
+}
+
+.viewer-status {
+  color: #708499;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.scene {
+  position: relative;
+  width: 100%;
+  height: 700px;
+  background:
+    radial-gradient(
+      ellipse at 50% 45%,
+      #203b51 0%,
+      #0d1c2e 45%,
+      #02060b 100%
+    );
+}
+
+#brainCanvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.loading {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 16px;
+  background: #02060b;
+  color: #9db0c3;
+  font-size: 14px;
+  transition: opacity .8s;
+}
+
+.loading.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loading-bar {
+  width: 180px;
+  height: 2px;
+  background: rgba(255,255,255,.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.loading-bar-inner {
+  width: 0%;
+  height: 100%;
+  background: #ff4055;
+  transition: width .3s;
+}
+
+.location-label {
+  position: absolute;
+  z-index: 30;
+  pointer-events: none;
+  transform: translate(-50%,-100%);
+  display: none;
+}
+
+.location-label.show {
+  display: block;
+}
+
+.label-box {
+  position: relative;
+  padding: 9px 15px;
+  border-radius: 10px;
+  background: rgba(5,10,17,.96);
+  border: 1.5px solid #ffb6c1;
+  color: #ffd9de;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  box-shadow:
+    0 0 12px rgba(255,182,193,.35),
+    0 0 30px rgba(255,182,193,.2);
+}
+
+.label-box::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -15px;
+  width: 1.5px;
+  height: 15px;
+  background: #ffb6c1;
+  transform: translateX(-50%);
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 15px;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
+/* =========================================================
+   PATHWAY VIEWER
+   ========================================================= */
+
+.pathway-viewer {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  height: 690px;
+  margin: auto;
+  border: 1px solid #243b50;
+  border-radius: 20px;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      ellipse at 50% 48%,
+      #182b3b 0%,
+      #0a1622 62%,
+      #02060b 100%
+    );
+}
+
+.pathway-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.pathway-title {
+  position: absolute;
+  left: 50%;
+  top: 20px;
+  transform: translateX(-50%);
+  color: #d9e3eb;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.brain-silhouette {
+  fill: #4e5d69;
+  stroke: #aab7c2;
+  stroke-width: 2;
+  opacity: .58;
+}
+
+.brain-inner {
+  fill: #162531;
+  stroke: #718392;
+  stroke-width: 1;
+  opacity: .7;
+}
+
+.optic-structure {
+  fill: #ff4055;
+  stroke: #ffb6c1;
+  stroke-width: 2;
+  filter: url(#pathGlow);
+}
+
+.neutral-structure {
+  fill: #67798a;
+  stroke: #aab8c5;
+  stroke-width: 1.5;
+}
+
+.nucleus {
+  fill: #ff7182;
+  stroke: #ffd0d6;
+  stroke-width: 1.8;
+  filter: url(#pathGlow);
+}
+
+.pathway-line {
+  fill: none;
+  stroke: #ff4055;
+  stroke-width: 7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: url(#pathGlow);
+}
+
+.pathway-secondary {
+  fill: none;
+  stroke: #ffb6c1;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.arrow-head {
+  fill: #ff4055;
+}
+
+.callout {
+  fill: none;
+  stroke: #ffb6c1;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+}
+
+.callout-dot {
+  fill: #ffb6c1;
+  stroke: #fff;
+  stroke-width: 1;
+}
+
+.svg-label {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: .7px;
+  fill: #fff;
+}
+
+.svg-sub {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  fill: #ffb6c1;
+}
+
+.orientation-label {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  fill: #71879a;
+  letter-spacing: 1.5px;
+}
+
+.pathway-badge {
+  position: absolute;
+  left: 22px;
+  bottom: 20px;
+  padding: 8px 12px;
+  border: 1px solid #31516d;
+  border-radius: 8px;
+  background: rgba(4,10,17,.88);
+  color: #8195a8;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+}
+
+.legend {
+  position: absolute;
+  right: 22px;
+  bottom: 20px;
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #b5c2ce;
+  font-size: 10px;
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  box-shadow: 0 0 12px currentColor;
+}
+
+.legend-dot.path {
+  background: #ff4055;
+  color: #ff4055;
+}
+
+.legend-dot.nucleus {
+  background: #ff7182;
+  color: #ff7182;
+}
+
+.legend-dot.neutral {
+  background: #718392;
+  color: #718392;
+}
+
+@keyframes pathwayPulse {
+  0%, 100% {
+    opacity: .75;
+    filter: drop-shadow(0 0 5px rgba(255,64,85,.35));
+  }
+
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 16px rgba(255,64,85,.9));
+  }
+}
+
+.pathway-active {
+  animation: pathwayPulse 2s infinite;
+}
+
+.location-caption {
+  text-align: center;
+  color: #9fb0c3;
+  margin-top: 15px;
+  line-height: 1.8;
+}
+
+.source-note {
+  max-width: 900px;
+  margin: 15px auto 0;
+  color: #617487;
+  font-size: 11px;
+  text-align: center;
+}
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.section {
+  margin-top: 70px;
+}
+
+.section-label {
+  color: #61b5ff;
+  letter-spacing: 2px;
+  font-size: 11px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.section h2 {
+  font-size: 32px;
+  margin-bottom: 25px;
+}
+
+.section-intro {
+  color: #91a5b8;
+  max-width: 900px;
+  font-size: 15px;
+  line-height: 1.9;
+  margin-bottom: 30px;
+}
+
+.location {
+  margin-top: 70px;
+  padding: 35px;
+  background: #091522;
+  border: 1px solid #172b3e;
+  border-radius: 18px;
+}
+
+.location h2 {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+.location-intro {
+  color: #91a5b8;
+  max-width: 900px;
+  line-height: 1.9;
+  margin-bottom: 30px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 20px;
+}
+
+.card {
+  padding: 27px;
+  background: #091522;
+  border: 1px solid #172b3e;
+  border-radius: 18px;
+  transition: transform .2s,border-color .2s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  border-color: #4a2027;
+}
+
+.card h3 {
+  font-size: 18px;
+  margin-bottom: 13px;
+  color: #eef4fa;
+  line-height: 1.45;
+}
+
+.card p {
+  color: #91a5b8;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.pathway-steps {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 16px;
+  margin-top: 30px;
+}
+
+.step {
+  position: relative;
+  padding: 24px;
+  background: #091522;
+  border: 1px solid #172b3e;
+  border-radius: 16px;
+}
+
+.step-number {
+  color: #ff4055;
+  font-size: 11px;
+  letter-spacing: 2px;
+  margin-bottom: 9px;
+}
+
+.step h3 {
+  color: #eef4fa;
+  font-size: 17px;
+  margin-bottom: 8px;
+}
+
+.step p {
+  color: #91a5b8;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.route {
+  margin-top: 30px;
+  padding: 26px;
+  background: #06101a;
+  border: 1px solid #1d3449;
+  border-radius: 16px;
+  overflow-x: auto;
+}
+
+.route-line {
+  min-width: 800px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.route-node {
+  min-width: 125px;
+  padding: 13px 10px;
+  text-align: center;
+  border-radius: 10px;
+  background: #0b1928;
+  border: 1px solid #31516d;
+  color: #d7e2eb;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.route-node.active {
+  border-color: #ff4055;
+  color: #ffd9de;
+  box-shadow: 0 0 18px rgba(255,64,85,.15);
+}
+
+.route-arrow {
+  color: #ff4055;
+  font-size: 20px;
+}
+
+.comparison {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.compare-box {
+  padding: 27px;
+  background: #091522;
+  border: 1px solid #172b3e;
+  border-radius: 18px;
+}
+
+.compare-box h3 {
+  font-size: 19px;
+  margin-bottom: 12px;
+}
+
+.compare-box p {
+  color: #91a5b8;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.clinical-section {
+  margin-top: 65px;
+}
+
+.clinical-box {
+  padding: 30px;
+  background: #091522;
+  border: 1px solid #172b3e;
+  border-left: 3px solid #ff4055;
+  border-radius: 18px;
+}
+
+.clinical-box p {
+  color: #a7b7c6;
+  font-size: 15px;
+  line-height: 1.9;
+  margin-bottom: 18px;
+}
+
+.clinical-box p:last-child {
+  margin-bottom: 0;
+}
+
+.facts-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 15px;
+}
+
+.fact {
+  padding: 22px;
+  background: #091522;
+  border: 1px solid #172b3e;
+  border-radius: 16px;
+}
+
+.fact span {
+  display: block;
+  color: #ff4055;
+  font-size: 11px;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+.fact strong {
+  display: block;
+  color: #eef4fa;
+  font-size: 14px;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.fact p {
+  color: #8195a8;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.quiz {
+  margin-top: 65px;
+  padding: 30px;
+  background: #091522;
+  border: 1px solid #172b3e;
+  border-radius: 18px;
+}
+
+.quiz h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.quiz-intro {
+  color: #91a5b8;
+  margin-bottom: 25px;
+}
+
+.question {
+  margin-bottom: 30px;
+}
+
+.question:last-child {
+  margin-bottom: 0;
+}
+
+.question p {
+  color: #eef4fa;
+  font-size: 16px;
+  margin-bottom: 12px;
+  font-weight: bold;
+}
+
+.option {
+  display: block;
+  width: 100%;
+  padding: 12px 15px;
+  margin-top: 9px;
+  background: #0b1928;
+  color: #c7d5e2;
+  border: 1px solid #263951;
+  border-radius: 9px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+  transition: .2s;
+}
+
+.option:hover {
+  border-color: #ff4055;
+  background: #111e2c;
+}
+
+.option.correct {
+  border-color: #8fd3a8;
+  background: #14291e;
+  color: #b9f0c9;
+}
+
+.option.wrong {
+  border-color: #d88b9b;
+  background: #2a171d;
+  color: #ffc2cc;
+}
+
+.quiz-result {
+  margin-top: 25px;
+  padding: 15px;
+  border-radius: 10px;
+  background: #0b1928;
+  border: 1px solid #263951;
+  color: #aebdce;
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .cards {
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  .facts-grid {
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  .pathway-steps {
+    grid-template-columns: 1fr;
+  }
+
+  .pathway-viewer {
+    height: 580px;
+  }
+}
+
+@media (max-width: 800px) {
+  .scene {
+    height: 450px;
+  }
+
+  .viewer-status {
+    display: none;
+  }
+
+  .location {
+    padding: 25px;
+  }
+
+  .pathway-viewer {
+    height: 500px;
+  }
+
+  .comparison {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .facts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  h1 {
+    letter-spacing: -2px;
+  }
+
+  .location {
+    padding: 20px;
+  }
+
+  .pathway-viewer {
+    height: 430px;
+  }
+
+  .pathway-title {
+    font-size: 8px;
+  }
+
+  .svg-label {
+    font-size: 8px;
+  }
+
+  .svg-sub {
+    font-size: 7px;
+  }
+
+  .legend {
+    display: none;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <a href="./explore.html">← Back to Explore</a>
+</nav>
+
+<main class="container">
+
+<div class="eyebrow">
+  Visual Pathways · NeuroAtlas
+</div>
+
+<h1>Pupillary Light Reflex</h1>
+
+<div class="arabic-title">
+  منعكس الحدقة للضوء
+</div>
+
+<div class="hero">
+
+<p>
+The pupillary light reflex is an automatic neural response in which light
+entering the eye causes constriction of the pupil. The afferent limb
+travels through the optic nerve and central visual pathways to the
+pretectal region, while the efferent limb travels through the
+Edinger–Westphal nuclei, oculomotor nerves, ciliary ganglia, and short
+ciliary nerves to the sphincter pupillae.
+</p>
+
+</div>
+
+<div class="actions">
+
+<a class="action-button" href="#pathway">
+  🧠 Explore Pathway
+</a>
+
+<a class="action-button" href="#location">
+  📍 Show Anatomy
+</a>
+
+<a class="action-button" href="#information">
+  📚 Learn the Pathway
+</a>
+
+<a class="action-button" href="#quiz">
+  📝 Test Yourself
+</a>
+
+</div>
+
+<!-- =========================================================
+     3D BRAIN VIEWER
+     ========================================================= -->
+
+<div class="viewer">
+
+<div class="viewer-header">
+
+<div class="viewer-title">
+  Human Brain · Interactive 3D
+</div>
+
+<div class="viewer-status">
+  DRAG TO ROTATE · SCROLL TO ZOOM
+</div>
+
+</div>
+
+<div class="scene">
+
+<div id="loading" class="loading">
+
+<span id="loadText">
+Loading real brain model...
+</span>
+
+<div class="loading-bar">
+  <div id="loadBar" class="loading-bar-inner"></div>
+</div>
+
+</div>
+
+<canvas id="brainCanvas"></canvas>
+
+<div id="locationLabel" class="location-label">
+  <div class="label-box">
+    PUPILLARY LIGHT REFLEX · منعكس الحدقة للضوء
+  </div>
+</div>
+
+</div>
+
+<div class="controls">
+
+<button id="showLocation">
+  📍 Show Pathway Region
+</button>
+
+<button id="highlight" class="active">
+  🔴 Highlight Pathway
+</button>
+
+<button id="rotate" class="active">
+  ⟳ Auto Rotate
+</button>
+
+<button id="reset">
+  ↻ Reset View
+</button>
+
+</div>
+
+</div>
+
+<!-- =========================================================
+     PATHWAY LOCATION
+     ========================================================= -->
+
+<section id="location" class="location">
+
+<div class="section-label">
+  Anatomy · التشريح
+</div>
+
+<h2>
+  📍 Where Does the Reflex Travel?
+</h2>
+
+<p class="location-intro">
+
+The pupillary light reflex begins in the retina and travels through the
+optic nerve, optic chiasm, and optic tract. Instead of continuing
+primarily to the visual cortex, reflex-related fibers reach the
+pretectal region of the midbrain. Pretectal neurons project bilaterally
+to the Edinger–Westphal nuclei. Parasympathetic fibers then travel with
+the oculomotor nerve to the ciliary ganglion and continue through the
+short ciliary nerves to the sphincter pupillae.
+
+<br><br>
+
+يبدأ منعكس الحدقة للضوء في الشبكية وينتقل عبر العصب البصري والتصالب
+البصري والسبيل البصري. وتصل الألياف المسؤولة عن المنعكس إلى المنطقة
+قبل السقيفية في الدماغ المتوسط، ثم تُرسل إشارات إلى نواتي إدينغر-
+فيستفال على الجانبين. بعد ذلك تنتقل الألياف نظيرة الودية مع العصب
+المحرك للعين إلى العقدة الهدبية، ثم عبر الأعصاب الهدبية القصيرة إلى
+عضلة مصرة الحدقة.
+
+</p>
+
+<div class="pathway-viewer">
+
+<div class="pathway-title">
+  Pupillary Light Reflex · Afferent + Efferent Pathway
+</div>
+
+<svg
+  class="pathway-svg"
+  viewBox="0 0 1200 690"
+  xmlns="http://www.w3.org/2000/svg"
+  aria-label="Anatomical diagram of the pupillary light reflex pathway"
+>
+
+<defs>
+
+<filter
+  id="pathGlow"
+  x="-100%"
+  y="-100%"
+  width="300%"
+  height="300%"
+>
+  <feGaussianBlur
+    stdDeviation="4"
+    result="blur"
+  />
+  <feMerge>
+    <feMergeNode in="blur"/>
+    <feMergeNode in="SourceGraphic"/>
+  </feMerge>
+</filter>
+
+<linearGradient
+  id="brainGradient"
+  x1="0"
+  y1="0"
+  x2="1"
+  y2="1"
+>
+  <stop offset="0%" stop-color="#70818e"/>
+  <stop offset="50%" stop-color="#52636f"/>
+  <stop offset="100%" stop-color="#354550"/>
+</linearGradient>
+
+</defs>
+
+<!-- =====================================================
+     BRAIN SILHOUETTE
+     ===================================================== -->
+
+<path
+class="brain-silhouette"
+fill="url(#brainGradient)"
+d="
+M600 75
+
+C526 49 437 55 362 77
+C282 100 218 141 172 196
+C131 245 115 300 123 351
+C132 408 165 458 219 499
+C280 545 365 571 456 581
+
+C512 588 555 582 600 564
+
+C645 582 688 588 744 581
+
+C835 571 920 545 981 499
+C1035 458 1068 408 1077 351
+C1085 300 1069 245 1028 196
+C982 141 918 100 838 77
+C763 55 674 49 600 75
+Z
+"
+/>
+
+<path
+class="brain-inner"
+d="
+M600 106
+
+C540 84 468 88 399 106
+C328 124 270 157 229 200
+C193 238 178 280 181 324
+C184 368 207 407 246 440
+C293 479 363 503 443 514
+C505 522 555 514 600 493
+
+C645 514 695 522 757 514
+
+C837 503 907 479 954 440
+C993 407 1016 368 1019 324
+C1022 280 1007 238 971 200
+C930 157 872 124 801 106
+C732 88 660 84 600 106
+Z
+"/>
+
+<!-- =====================================================
+     EYES
+     ===================================================== -->
+
+<ellipse
+class="neutral-structure"
+cx="190"
+cy="360"
+rx="53"
+ry="32"
+/>
+
+<ellipse
+class="neutral-structure"
+cx="1010"
+cy="360"
+rx="53"
+ry="32"
+/>
+
+<ellipse
+class="optic-structure pathway-active"
+cx="190"
+cy="360"
+rx="18"
+ry="18"
+/>
+
+<ellipse
+class="optic-structure pathway-active"
+cx="1010"
+cy="360"
+rx="18"
+ry="18"
+/>
+
+<circle
+cx="190"
+cy="360"
+r="6"
+fill="#16070b"
+/>
+
+<circle
+cx="1010"
+cy="360"
+r="6"
+fill="#16070b"
+/>
+
+<!-- =====================================================
+     OPTIC NERVES
+     ===================================================== -->
+
+<path
+class="pathway-line pathway-active"
+d="
+M218 360
+C280 358 340 353 402 350
+C454 348 490 344 525 340
+"
+/>
+
+<path
+class="pathway-line pathway-active"
+d="
+M982 360
+C920 358 860 353 798 350
+C746 348 710 344 675 340
+"
+/>
+
+<!-- =====================================================
+     OPTIC CHIASM
+     ===================================================== -->
+
+<ellipse
+class="optic-structure pathway-active"
+cx="600"
+cy="338"
+rx="40"
+ry="22"
+/>
+
+<!-- =====================================================
+     OPTIC TRACTS
+     ===================================================== -->
+
+<path
+class="pathway-line pathway-active"
+d="
+M564 343
+C520 358 489 379 469 410
+C452 437 441 462 430 491
+"
+/>
+
+<path
+class="pathway-line pathway-active"
+d="
+M636 343
+C680 358 711 379 731 410
+C748 437 759 462 770 491
+"
+/>
+
+<!-- =====================================================
+     PRETECTAL AREAS
+     ===================================================== -->
+
+<ellipse
+class="nucleus pathway-active"
+cx="430"
+cy="491"
+rx="29"
+ry="22"
+/>
+
+<ellipse
+class="nucleus pathway-active"
+cx="770"
+cy="491"
+rx="29"
+ry="22"
+/>
+
+<!-- =====================================================
+     BILATERAL PROJECTION
+     ===================================================== -->
+
+<path
+class="pathway-secondary"
+d="
+M450 486
+C505 464 548 454 600 454
+C652 454 695 464 750 486
+"
+/>
+
+<path
+class="pathway-secondary"
+d="
+M750 486
+C695 464 652 454 600 454
+C548 454 505 464 450 486
+"
+/>
+
+<!-- =====================================================
+     EDINGER-WESTPHAL NUCLEI
+     ===================================================== -->
+
+<ellipse
+class="nucleus pathway-active"
+cx="555"
+cy="540"
+rx="25"
+ry="19"
+/>
+
+<ellipse
+class="nucleus pathway-active"
+cx="645"
+cy="540"
+rx="25"
+ry="19"
+/>
+
+<!-- =====================================================
+     OCULOMOTOR NERVES
+     ===================================================== -->
+
+<path
+class="pathway-line pathway-active"
+d="
+M555 556
+C530 568 501 579 474 592
+C444 607 416 618 384 625
+"
+/>
+
+<path
+class="pathway-line pathway-active"
+d="
+M645 556
+C670 568 699 579 726 592
+C756 607 784 618 816 625
+"
+/>
+
+<!-- =====================================================
+     CILIARY GANGLIA
+     ===================================================== -->
+
+<circle
+class="nucleus pathway-active"
+cx="365"
+cy="629"
+r="15"
+/>
+
+<circle
+class="nucleus pathway-active"
+cx="835"
+cy="629"
+r="15"
+/>
+
+<!-- =====================================================
+     CALLOUTS
+     ===================================================== -->
+
+<path
+class="callout"
+d="
+M190 342
+L105 245
+L45 245
+"
+/>
+
+<circle
+class="callout-dot"
+cx="190"
+cy="342"
+r="4"
+/>
+
+<text
+class="svg-label"
+x="45"
+y="238"
+>
+RETINA
+</text>
+
+<text
+class="svg-sub"
+x="45"
+y="256"
+>
+الشبكية
+</text>
+
+<path
+class="callout"
+d="
+M330 354
+L240 300
+L45 300
+"
+/>
+
+<circle
+class="callout-dot"
+cx="330"
+cy="354"
+r="4"
+/>
+
+<text
+class="svg-label"
+x="45"
+y="293"
+>
+OPTIC NERVE
+</text>
+
+<text
+class="svg-sub"
+x="45"
+y="311"
+>
+العصب البصري
+</text>
+
+<path
+class="callout"
+d="
+M600 338
+L600 225
+L515 225
+"
+/>
+
+<circle
+class="callout-dot"
+cx="600"
+cy="338"
+r="4"
+/>
+
+<text
+class="svg-label"
+x="515"
+y="218"
+>
+OPTIC CHIASM
+</text>
+
+<text
+class="svg-sub"
+x="515"
+y="236"
+>
+التصالب البصري
+</text>
+
+<path
+class="callout"
+d="
+M430 491
+L300 525
+L45 525
+"
+/>
+
+<circle
+class="callout-dot"
+cx="430"
+cy="491"
+r="4"
+/>
+
+<text
+class="svg-label"
+x="45"
+y="518"
+>
+PRETECTAL AREA
+</text>
+
+<text
+class="svg-sub"
+x="45"
+y="536"
+>
+المنطقة قبل السقيفية
+</text>
+
+<path
+class="callout"
+d="
+M770 491
+L900 525
+L1115 525
+"
+/>
+
+<circle
+class="callout-dot"
+cx="770"
+cy="491"
+r="4"
+/>
+
+<text
+class="svg-label"
+x="900"
+y="518"
+>
+PRETECTAL AREA
+</text>
+
+<text
+class="svg-sub"
+x="900"
+y="536"
+>
+المنطقة قبل السقيفية
+</text>
+
+<path
+class="callout"
+d="
+M555 540
+L480 585
+L300 585
+"
+/>
+
+<circle
+class="callout-dot"
+cx="555"
+cy="540"
+r="4"
+/>
+
+<text
+class="svg-label"
+x="300"
+y="578"
+>
+EDINGER–WESTPHAL
+</text>
+
+<text
+class="svg-sub"
+x="300"
+y="596"
+>
+نواة إدينغر–فيستفال
+</text>
+
+<path
+class="callout"
+d="
+M645 540
+L720 585
+L900 585
+"
+/>
+
+<circle
+class="callout-dot"
+cx="645"
+cy="540"
+r="4"
+/>
+
+<text
+class="svg-label"
+x="900"
+y="578"
+>
+EDINGER–WESTPHAL
+</text>
+
+<text
+class="svg-sub"
+x="900"
+y="596"
+>
+نواة إدينغر–فيستفال
+</text>
+
+<path
+class="callout"
+d="
+M365 629
+L260 650
+L100 650
+"
+/>
+
+<circle
+class="callout-dot"
+cx="365"
+cy="629"
+r="4"
+/>
+
+<text
+class="svg-label"
+x="100"
+y="645"
+>
+CILIARY GANGLION
+</text>
+
+<text
+class="svg-sub"
+x="100"
+y="663"
+>
+العقدة الهدبية
+</text>
+
+<path
+class="callout"
+d="
+M835 629
+L940 650
+L1115 650
+"
+/>
+
+<circle
+class="callout-dot"
+cx="835"
+cy="629"
+r="4"
+/>
+
+<text
+class="svg-label"
+x="940"
+y="645"
+>
+CILIARY GANGLION
+</text>
+
+<text
+class="svg-sub"
+x="940"
+y="663"
+>
+العقدة الهدبية
+</text>
+
+<text
+class="orientation-label"
+x="105"
+y="105"
+>
+AFFERENT LIMB
+</text>
+
+<text
+class="orientation-label"
+x="1010"
+y="105"
+>
+EFFERENT LIMB
+</text>
+
+<text
+class="orientation-label"
+x="567"
+y="105"
+>
+MIDLINE
+</text>
+
+</svg>
+
+<div class="pathway-badge">
+  PUPILLARY LIGHT REFLEX · NEURAL CIRCUIT
+</div>
+
+<div class="legend">
+
+<div class="legend-item">
+  <span class="legend-dot path"></span>
+  Reflex Pathway
+</div>
+
+<div class="legend-item">
+  <span class="legend-dot nucleus"></span>
+  Relay / Nucleus
+</div>
+
+<div class="legend-item">
+  <span class="legend-dot neutral"></span>
+  Eye / Brain
+</div>
+
+</div>
+
+</div>
+
+<p class="location-caption">
+  🔴 The highlighted pathway shows the major anatomical route of the
+  <strong>pupillary light reflex</strong>, including its bilateral
+  midbrain connections.
+</p>
+
+<p class="source-note">
+  Simplified educational anatomical illustration. It demonstrates the
+  organization of the reflex pathway and is not intended as a diagnostic
+  radiological or surgical image.
+</p>
+
+</section>
+
+<!-- =========================================================
+     INFORMATION
+     ========================================================= -->
+
+<section id="information" class="section">
+
+<div class="section-label">
+  Pupillary Light Reflex · منعكس الحدقة للضوء
+</div>
+
+<h2>
+  Understanding the Pupillary Light Reflex
+</h2>
+
+<p class="section-intro">
+
+The pupillary light reflex is a protective and autonomic reflex that
+adjusts the amount of light entering the eye. Light stimulates retinal
+photoreceptors and retinal ganglion cells, and the resulting afferent
+signal travels through the optic nerve and central visual pathway to
+the pretectal region. Pretectal projections reach both Edinger–Westphal
+nuclei, producing bilateral parasympathetic output.
+
+<br><br>
+
+منعكس الحدقة للضوء هو منعكس ذاتي يساعد على تنظيم كمية الضوء الداخلة
+إلى العين. يؤدي الضوء إلى تنبيه الشبكية، ثم تنتقل الإشارة الواردة عبر
+العصب البصري والمسار البصري إلى المنطقة قبل السقيفية. وبعد ذلك تصل
+الإشارات إلى نواتي إدينغر–فيستفال على الجانبين، مما يؤدي إلى خروج
+نظير ودي ثنائي الجانب.
+
+</p>
+
+<div class="cards">
+
+<div class="card">
+<h3>Retina · الشبكية</h3>
+<p>
+The retina detects incoming light and generates the afferent neural
+signal that initiates the reflex.
+<br><br>
+تستقبل الشبكية الضوء وتولد الإشارة العصبية الواردة التي تبدأ المنعكس.
+</p>
+</div>
+
+<div class="card">
+<h3>Optic Nerve · العصب البصري</h3>
+<p>
+Cranial nerve II carries visual and pupillary afferent information from
+the retina toward the optic chiasm.
+<br><br>
+ينقل العصب القحفي الثاني المعلومات البصرية والواردة الخاصة بالحدقة
+من الشبكية نحو التصالب البصري.
+</p>
+</div>
+
+<div class="card">
+<h3>Optic Chiasm · التصالب البصري</h3>
+<p>
+At the optic chiasm, fibers from the nasal retina cross to the opposite
+side while temporal retinal fibers remain ipsilateral.
+<br><br>
+في التصالب البصري تعبر ألياف الشبكية الأنفية إلى الجانب المقابل بينما
+تبقى ألياف الشبكية الصدغية في الجانب نفسه.
+</p>
+</div>
+
+<div class="card">
+<h3>Optic Tract · السبيل البصري</h3>
+<p>
+The optic tract carries retinal information posteriorly. Some fibers
+participate in the pupillary reflex rather than reaching the visual
+cortex.
+<br><br>
+ينقل السبيل البصري المعلومات القادمة من الشبكية، وتشارك بعض أليافه في
+منعكس الحدقة بدلاً من الوصول إلى القشرة البصرية.
+</p>
+</div>
+
+<div class="card">
+<h3>Pretectal Area · المنطقة قبل السقيفية</h3>
+<p>
+The pretectal region of the midbrain is a key relay for the pupillary
+light reflex and sends projections to both Edinger–Westphal nuclei.
+<br><br>
+تعد المنطقة قبل السقيفية في الدماغ المتوسط محطة رئيسية للمنعكس وترسل
+إشارات إلى نواتي إدينغر–فيستفال.
+</p>
+</div>
+
+<div class="card">
+<h3>Edinger–Westphal Nucleus · نواة إدينغر–فيستفال</h3>
+<p>
+This parasympathetic nucleus provides the preganglionic component of
+the efferent pupillary pathway.
+<br><br>
+توفر هذه النواة نظيرة الودية الجزء قبل العقدي من المسار الصادر للحدقة.
+</p>
+</div>
+
+<div class="card">
+<h3>Oculomotor Nerve · العصب المحرك للعين</h3>
+<p>
+Parasympathetic fibers from the Edinger–Westphal nucleus travel with
+cranial nerve III toward the orbit.
+<br><br>
+تسير الألياف نظيرة الودية من نواة إدينغر–فيستفال مع العصب القحفي
+الثالث باتجاه الحجاج.
+</p>
+</div>
+
+<div class="card">
+<h3>Ciliary Ganglion · العقدة الهدبية</h3>
+<p>
+Preganglionic parasympathetic fibers synapse in the ciliary ganglion
+before continuing toward the eye.
+<br><br>
+تتشابك الألياف نظيرة الودية قبل العقدية في العقدة الهدبية قبل استمرارها
+نحو العين.
+</p>
+</div>
+
+<div class="card">
+<h3>Short Ciliary Nerves · الأعصاب الهدبية القصيرة</h3>
+<p>
+Postganglionic parasympathetic fibers travel through the short ciliary
+nerves to reach the intraocular target.
+<br><br>
+تنتقل الألياف نظيرة الودية بعد العقدية عبر الأعصاب الهدبية القصيرة إلى
+الهدف داخل العين.
+</p>
+</div>
+
+<div class="card">
+<h3>Sphincter Pupillae · مصرة الحدقة</h3>
+<p>
+Parasympathetic activation contracts the sphincter pupillae and causes
+pupillary constriction, or miosis.
+<br><br>
+يؤدي التنبيه نظير الودي إلى تقلص مصرة الحدقة وحدوث تضيق الحدقة.
+</p>
+</div>
+
+<div class="card">
+<h3>Direct Response · الاستجابة المباشرة</h3>
+<p>
+When light is directed into one eye, that same eye constricts its pupil.
+This is the direct pupillary light response.
+<br><br>
+عند تسليط الضوء على عين واحدة تنقبض حدقة العين نفسها، وتسمى هذه
+الاستجابة المباشرة.
+</p>
+</div>
+
+<div class="card">
+<h3>Consensual Response · الاستجابة التوافقية</h3>
+<p>
+The opposite pupil also constricts because pretectal projections reach
+both Edinger–Westphal nuclei.
+<br><br>
+تنقبض الحدقة المقابلة أيضاً بسبب وصول الإسقاطات قبل السقيفية إلى نواتي
+إدينغر–فيستفال على الجانبين.
+</p>
+</div>
+
+</div>
+
+<!-- =========================================================
+     PATHWAY STEPS
+     ========================================================= -->
+
+<div class="section">
+
+<div class="section-label">
+  Step by Step · خطوة بخطوة
+</div>
+
+<h2>
+  Follow the Reflex
+</h2>
+
+<p class="section-intro">
+The pathway can be divided into an afferent limb that detects the light
+stimulus and an efferent parasympathetic limb that produces pupillary
+constriction.
+</p>
+
+<div class="pathway-steps">
+
+<div class="step">
+<div class="step-number">01 · AFFERENT</div>
+<h3>Light reaches the retina</h3>
+<p>
+Light enters the eye and activates retinal photoreceptor pathways.
+Retinal ganglion cell axons carry the resulting signal centrally.
+</p>
+</div>
+
+<div class="step">
+<div class="step-number">02 · AFFERENT</div>
+<h3>Optic nerve</h3>
+<p>
+The retinal signal travels through cranial nerve II toward the optic
+chiasm.
+</p>
+</div>
+
+<div class="step">
+<div class="step-number">03 · AFFERENT</div>
+<h3>Optic chiasm and optic tract</h3>
+<p>
+Retinal fibers partially cross at the chiasm and continue through the
+optic tract.
+</p>
+</div>
+
+<div class="step">
+<div class="step-number">04 · CENTRAL RELAY</div>
+<h3>Pretectal area</h3>
+<p>
+Reflex-related fibers reach the pretectal region of the midbrain,
+which organizes the bilateral pupillary response.
+</p>
+</div>
+
+<div class="step">
+<div class="step-number">05 · CENTRAL RELAY</div>
+<h3>Edinger–Westphal nuclei</h3>
+<p>
+Pretectal neurons project to both Edinger–Westphal nuclei, explaining
+why illumination of one eye can constrict both pupils.
+</p>
+</div>
+
+<div class="step">
+<div class="step-number">06 · EFFERENT</div>
+<h3>Oculomotor nerve</h3>
+<p>
+Preganglionic parasympathetic fibers leave the Edinger–Westphal nucleus
+and travel with cranial nerve III.
+</p>
+</div>
+
+<div class="step">
+<div class="step-number">07 · EFFERENT</div>
+<h3>Ciliary ganglion</h3>
+<p>
+The preganglionic fibers synapse in the ciliary ganglion within the
+orbit.
+</p>
+</div>
+
+<div class="step">
+<div class="step-number">08 · EFFERENT</div>
+<h3>Short ciliary nerves</h3>
+<p>
+Postganglionic parasympathetic fibers travel through the short ciliary
+nerves to the iris.
+</p>
+</div>
+
+<div class="step">
+<div class="step-number">09 · RESPONSE</div>
+<h3>Sphincter pupillae contracts</h3>
+<p>
+The final parasympathetic action contracts the sphincter pupillae,
+producing miosis.
+</p>
+</div>
+
+</div>
+
+<div class="route">
+
+<div class="route-line">
+
+<div class="route-node active">
+RETINA
+</div>
+
+<div class="route-arrow">→</div>
+
+<div class="route-node active">
+OPTIC NERVE
+</div>
+
+<div class="route-arrow">→</div>
+
+<div class="route-node active">
+OPTIC CHIASM
+</div>
+
+<div class="route-arrow">→</div>
+
+<div class="route-node active">
+OPTIC TRACT
+</div>
+
+<div class="route-arrow">→</div>
+
+<div class="route-node active">
+PRETECTAL AREA
+</div>
+
+<div class="route-arrow">→</div>
+
+<div class="route-node active">
+EDINGER–WESTPHAL
+</div>
+
+<div class="route-arrow">→</div>
+
+<div class="route-node active">
+CN III
+</div>
+
+<div class="route-arrow">→</div>
+
+<div class="route-node active">
+CILIARY GANGLION
+</div>
+
+<div class="route-arrow">→</div>
+
+<div class="route-node active">
+SPHINCTER PUPILLAE
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- =========================================================
+     DIRECT / CONSENSUAL
+     ========================================================= -->
+
+<div class="section">
+
+<div class="section-label">
+  Clinical Physiology · الفيزيولوجيا السريرية
+</div>
+
+<h2>
+  Direct vs Consensual Response
+</h2>
+
+<div class="comparison">
+
+<div class="compare-box">
+<h3>Direct Light Reflex · المنعكس المباشر</h3>
+
+<p>
+If light is directed into the right eye, the right pupil constricts.
+If light is directed into the left eye, the left pupil constricts.
+
+<br><br>
+
+This occurs because the illuminated eye provides the afferent input and
+the ipsilateral Edinger–Westphal pathway contributes to the efferent
+response.
+</p>
+</div>
+
+<div class="compare-box">
+<h3>Consensual Light Reflex · المنعكس التوافقي</h3>
+
+<p>
+When one eye is illuminated, the opposite pupil also constricts.
+
+<br><br>
+
+The key anatomical explanation is that pretectal neurons project to
+both Edinger–Westphal nuclei rather than only the nucleus on the same
+side.
+</p>
+</div>
+
+</div>
+
+</div>
+
+<!-- =========================================================
+     CLINICAL
+     ========================================================= -->
+
+<div class="clinical-section">
+
+<div class="section-label">
+  Clinical Localization · التوضع السريري
+</div>
+
+<h2>
+  Why the Pathway Matters
+</h2>
+
+<div class="clinical-box">
+
+<p>
+The pupillary light reflex is useful for neurological localization
+because the response depends on an intact afferent visual pathway,
+midbrain relay, parasympathetic efferent pathway, and iris sphincter.
+Abnormal pupil responses can therefore help clinicians identify where
+along the pathway dysfunction may be occurring.
+</p>
+
+<p>
+A lesion affecting the afferent pathway can reduce the light response
+when light is presented to the affected eye. Problems involving the
+efferent pathway can impair constriction of the pupil on the affected
+side. The exact clinical pattern depends on the anatomical location of
+the lesion.
+</p>
+
+<p dir="rtl">
+يعد منعكس الحدقة للضوء مفيداً في التوضع العصبي لأن الاستجابة تعتمد على
+سلامة المسار البصري الوارد، والمحطة الموجودة في الدماغ المتوسط، والمسار
+نظير الودي الصادر، وعضلة مصرة الحدقة. لذلك يمكن أن تساعد اضطرابات
+استجابة الحدقة في تحديد مكان الخلل على طول المسار.
+</p>
+
+</div>
+
+</div>
+
+<!-- =========================================================
+     QUICK FACTS
+     ========================================================= -->
+
+<div class="section">
+
+<div class="section-label">
+  Quick Facts · معلومات سريعة
+</div>
+
+<h2>
+  Pupillary Light Reflex at a Glance
+</h2>
+
+<div class="facts-grid">
+
+<div class="fact">
+<span>01</span>
+<strong>Afferent Limb · المسار الوارد</strong>
+<p>
+Retina → CN II → optic chiasm → optic tract → pretectal area
+</p>
+</div>
+
+<div class="fact">
+<span>02</span>
+<strong>Central Relay · المحطة المركزية</strong>
+<p>
+Pretectal area of the midbrain
+</p>
+</div>
+
+<div class="fact">
+<span>03</span>
+<strong>Efferent Limb · المسار الصادر</strong>
+<p>
+Edinger–Westphal → CN III → ciliary ganglion → short ciliary nerves
+</p>
+</div>
+
+<div class="fact">
+<span>04</span>
+<strong>Final Target · الهدف النهائي</strong>
+<p>
+Sphincter pupillae
+</p>
+</div>
+
+<div class="fact">
+<span>05</span>
+<strong>Response · الاستجابة</strong>
+<p>
+Pupillary constriction, or miosis
+</p>
+</div>
+
+<div class="fact">
+<span>06</span>
+<strong>Direct · مباشر</strong>
+<p>
+The illuminated eye constricts
+</p>
+</div>
+
+<div class="fact">
+<span>07</span>
+<strong>Consensual · توافقي</strong>
+<p>
+The opposite pupil also constricts
+</p>
+</div>
+
+<div class="fact">
+<span>08</span>
+<strong>System · الجهاز</strong>
+<p>
+Parasympathetic autonomic pathway
+</p>
+</div>
+
+</div>
+
+</div>
+
+<!-- =========================================================
+     QUIZ
+     ========================================================= -->
+
+<div id="quiz" class="quiz">
+
+<div class="section-label">
+  Mini Test
+</div>
+
+<h2>
+  🧠 Test Yourself
+</h2>
+
+<p class="quiz-intro">
+Choose the best answer for each question.
+</p>
+
+<div class="question">
+
+<p>
+1. What cranial nerve carries the afferent limb of the pupillary light
+reflex?
+</p>
+
+<button class="option" onclick="checkAnswer(this,true)">
+A. Optic nerve (CN II)
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+B. Oculomotor nerve (CN III)
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+C. Trochlear nerve (CN IV)
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+D. Abducens nerve (CN VI)
+</button>
+
+</div>
+
+<div class="question">
+
+<p>
+2. Which midbrain region is a major relay for the pupillary light
+reflex?
+</p>
+
+<button class="option" onclick="checkAnswer(this,false)">
+A. Red nucleus
+</button>
+
+<button class="option" onclick="checkAnswer(this,true)">
+B. Pretectal area
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+C. Substantia nigra
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+D. Inferior olive
+</button>
+
+</div>
+
+<div class="question">
+
+<p>
+3. Why does illumination of one eye normally constrict the opposite
+pupil?
+</p>
+
+<button class="option" onclick="checkAnswer(this,false)">
+A. The optic nerves never communicate
+</button>
+
+<button class="option" onclick="checkAnswer(this,true)">
+B. Pretectal projections reach both Edinger–Westphal nuclei
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+C. The cerebellum directly controls both pupils
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+D. The spinal cord sends the reflex to the eyes
+</button>
+
+</div>
+
+<div class="question">
+
+<p>
+4. Which nerve carries the parasympathetic efferent fibers toward the
+orbit?
+</p>
+
+<button class="option" onclick="checkAnswer(this,false)">
+A. Optic nerve
+</button>
+
+<button class="option" onclick="checkAnswer(this,true)">
+B. Oculomotor nerve
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+C. Facial nerve
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+D. Trigeminal nerve
+</button>
+
+</div>
+
+<div class="question">
+
+<p>
+5. Where do the preganglionic parasympathetic fibers synapse?
+</p>
+
+<button class="option" onclick="checkAnswer(this,false)">
+A. Optic chiasm
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+B. Superior colliculus
+</button>
+
+<button class="option" onclick="checkAnswer(this,true)">
+C. Ciliary ganglion
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+D. Lateral geniculate nucleus
+</button>
+
+</div>
+
+<div id="quizResult" class="quiz-result"></div>
+
+</div>
+
+</section>
+
+</main>
+
+<!-- =========================================================
+     THREE.JS
+     ========================================================= -->
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+
+import * as THREE from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
+
+const canvas = document.getElementById("brainCanvas");
+const loading = document.getElementById("loading");
+const loadText = document.getElementById("loadText");
+const loadBar = document.getElementById("loadBar");
+const locationLabel = document.getElementById("locationLabel");
+
+const scene = new THREE.Scene();
+
+const camera = new THREE.PerspectiveCamera(
+  30,
+  1,
+  0.01,
+  100
+);
+
+camera.position.set(3.2, 0.3, 8.5);
+
+const renderer = new THREE.WebGLRenderer({
+  canvas,
+  antialias: true,
+  alpha: true
+});
+
+renderer.setPixelRatio(
+  Math.min(window.devicePixelRatio || 1, 2)
+);
+
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 0.75;
+
+const controls = new OrbitControls(
+  camera,
+  canvas
+);
+
+controls.enableRotate = true;
+controls.rotateSpeed = 0.6;
+controls.enableDamping = true;
+controls.dampingFactor = 0.05;
+controls.enableZoom = true;
+controls.zoomSpeed = 0.6;
+controls.enablePan = false;
+controls.autoRotate = true;
+controls.autoRotateSpeed = 0.2;
+controls.target.set(0, -0.3, 0);
+controls.minDistance = 3.5;
+controls.maxDistance = 16;
+
+scene.add(
+  new THREE.AmbientLight(
+    0xffffff,
+    0.55
+  )
+);
+
+scene.add(
+  new THREE.HemisphereLight(
+    0xffdce6,
+    0x081018,
+    0.75
+  )
+);
+
+const keyLight = new THREE.DirectionalLight(
+  0xfff5f0,
+  1.4
+);
+
+keyLight.position.set(6, 10, 8);
+scene.add(keyLight);
+
+const fillLight = new THREE.DirectionalLight(
+  0x8ca9bd,
+  0.4
+);
+
+fillLight.position.set(-7, 2, 6);
+scene.add(fillLight);
+
+const brainGroup = new THREE.Group();
+
+scene.add(brainGroup);
+
+let brainMeshes = [];
+let pathwayMeshes = [];
+
+let locationShown = false;
+let highlighted = true;
+
+const brainOpaqueMaterial =
+  new THREE.MeshPhysicalMaterial({
+    color: 0xf1c5d0,
+    roughness: 0.62,
+    metalness: 0,
+    clearcoat: 0.12,
+    clearcoatRoughness: 0.5,
+    side: THREE.DoubleSide,
+    transparent: false,
+    opacity: 1
+  });
+
+const brainTransparentMaterial =
+  new THREE.MeshPhysicalMaterial({
+    color: 0xf1c5d0,
+    roughness: 0.55,
+    metalness: 0,
+    clearcoat: 0.1,
+    clearcoatRoughness: 0.5,
+    side: THREE.DoubleSide,
+    transparent: true,
+    opacity: 0.16,
+    depthWrite: false
+  });
+
+const pathwayMaterial =
+  new THREE.MeshPhysicalMaterial({
+    color: 0xff2948,
+    roughness: 0.3,
+    metalness: 0,
+    clearcoat: 0.6,
+    clearcoatRoughness: 0.12,
+    emissive: 0x5c0613,
+    emissiveIntensity: 1.05,
+    side: THREE.DoubleSide,
+    transparent: false,
+    opacity: 1
+  });
+
+const pathwayNormalMaterial =
+  new THREE.MeshPhysicalMaterial({
+    color: 0xf1c5d0,
+    roughness: 0.62,
+    metalness: 0,
+    clearcoat: 0.12,
+    clearcoatRoughness: 0.5,
+    side: THREE.DoubleSide
+  });
+
+function normalizeName(name) {
+  return String(name || "")
+    .toLowerCase()
+    .replace(/[\s_\-.]+/g, "");
+}
+
+function getMeshName(mesh) {
+  const userName =
+    mesh.userData && mesh.userData.name
+      ? mesh.userData.name
+      : "";
+
+  return `${mesh.name} ${userName}`;
+}
+
+function isPathwayStructure(mesh) {
+  const name = normalizeName(
+    getMeshName(mesh)
+  );
+
+  const pathwayNames = [
+    "opticnerve",
+    "opticchiasm",
+    "optictract",
+    "retina",
+    "eye",
+    "pretectal",
+    "pretectalarea",
+    "edingerwestphal",
+    "oculomotor",
+    "ciliaryganglion",
+    "ciliary",
+    "sphincterpupillae",
+    "iris"
+  ];
+
+  return pathwayNames.some(
+    item => name.includes(item)
+  );
+}
+
+function isClearlyNotRelevant(mesh) {
+  const name = normalizeName(
+    getMeshName(mesh)
+  );
+
+  const excludedNames = [
+    "skull",
+    "skin",
+    "artery",
+    "vein",
+    "vessel"
+  ];
+
+  return excludedNames.some(
+    item => name.includes(item)
+  );
+}
+
+function calculatePathwayCandidates(model) {
+  const meshes = [];
+
+  model.traverse(child => {
+    if (!child.isMesh) {
+      return;
+    }
+
+    meshes.push(child);
+  });
+
+  return meshes.filter(
+    mesh =>
+      isPathwayStructure(mesh) &&
+      !isClearlyNotRelevant(mesh)
+  );
+}
+
+function prepareMaterials(model) {
+  brainMeshes = [];
+  pathwayMeshes = [];
+
+  model.traverse(child => {
+
+    if (!child.isMesh) {
+      return;
+    }
+
+    child.castShadow = true;
+    child.receiveShadow = true;
+
+    child.material =
+      brainOpaqueMaterial.clone();
+
+    brainMeshes.push(child);
+  });
+
+  pathwayMeshes =
+    calculatePathwayCandidates(model);
+
+  pathwayMeshes.forEach(mesh => {
+    mesh.material =
+      pathwayMaterial.clone();
+  });
+}
+
+function finishLoading(message) {
+  loadText.textContent = message;
+  loadBar.style.width = "100%";
+
+  setTimeout(() => {
+    loading.classList.add("hide");
+  }, 500);
+}
+
+function loadRealBrain() {
+
+  const loader = new GLTFLoader();
+
+  const dracoLoader = new DRACOLoader();
+
+  dracoLoader.setDecoderPath(
+    "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/"
+  );
+
+  loader.setDRACOLoader(dracoLoader);
+
+  const urls = [
+    "https://cdn.jsdelivr.net/gh/itayinbarr/brainproject@main/brain-atlas/models/brain.glb",
+    "https://raw.githubusercontent.com/itayinbarr/brainproject/main/brain-atlas/models/brain.glb",
+    "https://itayinbarr.github.io/brainproject/models/brain.glb"
+  ];
+
+  let index = 0;
+
+  function tryLoad() {
+
+    if (index >= urls.length) {
+
+      finishLoading(
+        "Brain model could not be loaded."
+      );
+
+      return;
+    }
+
+    const url = urls[index++];
+
+    loader.load(
+      url,
+
+      gltf => {
+
+        const model = gltf.scene;
+
+        const box =
+          new THREE.Box3()
+            .setFromObject(model);
+
+        const center =
+          box.getCenter(
+            new THREE.Vector3()
+          );
+
+        const size =
+          box.getSize(
+            new THREE.Vector3()
+          );
+
+        const maxDim =
+          Math.max(
+            size.x,
+            size.y,
+            size.z
+          );
+
+        if (!Number.isFinite(maxDim) || maxDim <= 0) {
+
+          finishLoading(
+            "Brain model has invalid dimensions."
+          );
+
+          return;
+        }
+
+        const scale = 4.5 / maxDim;
+
+        model.scale.setScalar(scale);
+
+        model.position.sub(
+          center.multiplyScalar(scale)
+        );
+
+        model.position.y -= 0.6;
+
+        brainGroup.add(model);
+
+        prepareMaterials(model);
+
+        if (pathwayMeshes.length === 0) {
+
+          finishLoading(
+            "Brain loaded · pathway-specific surface unavailable"
+          );
+
+        } else {
+
+          finishLoading(
+            "Pupillary pathway structures located"
+          );
+
+          locationLabel.classList.add("show");
+        }
+      },
+
+      progress => {
+
+        if (progress.total > 0) {
+
+          const pct = Math.min(
+            95,
+            progress.loaded /
+            progress.total *
+            95
+          );
+
+          loadBar.style.width =
+            pct + "%";
+        }
+      },
+
+      error => {
+
+        console.warn(
+          "Brain model loading failed:",
+          error
+        );
+
+        tryLoad();
+      }
+    );
+  }
+
+  tryLoad();
+}
+
+function setBrainTransparency(enabled) {
+
+  brainMeshes.forEach(mesh => {
+
+    if (pathwayMeshes.includes(mesh)) {
+      return;
+    }
+
+    mesh.material =
+      enabled
+        ? brainTransparentMaterial.clone()
+        : brainOpaqueMaterial.clone();
+  });
+}
+
+function setPathwayHighlight(enabled) {
+
+  pathwayMeshes.forEach(mesh => {
+
+    mesh.material =
+      enabled
+        ? pathwayMaterial.clone()
+        : pathwayNormalMaterial.clone();
+  });
+}
+
+const showLocationBtn =
+  document.getElementById("showLocation");
+
+showLocationBtn.addEventListener(
+  "click",
+  () => {
+
+    locationShown = !locationShown;
+
+    if (locationShown) {
+
+      setBrainTransparency(true);
+      setPathwayHighlight(true);
+
+      highlighted = true;
+
+      locationLabel.classList.add("show");
+
+      showLocationBtn.classList.add("active");
+
+      showLocationBtn.textContent =
+        "📍 Hide Pathway Region";
+
+      controls.autoRotate = false;
+
+      rotateBtn.classList.remove("active");
+
+      rotateBtn.textContent =
+        "▶ Auto Rotate";
+
+    } else {
+
+      setBrainTransparency(false);
+      setPathwayHighlight(highlighted);
+
+      locationLabel.classList.remove("show");
+
+      showLocationBtn.classList.remove("active");
+
+      showLocationBtn.textContent =
+        "📍 Show Pathway Region";
+    }
+  }
+);
+
+const highlightBtn =
+  document.getElementById("highlight");
+
+highlightBtn.addEventListener(
+  "click",
+  () => {
+
+    highlighted = !highlighted;
+
+    setPathwayHighlight(highlighted);
+
+    if (highlighted) {
+
+      highlightBtn.classList.add("active");
+
+      highlightBtn.textContent =
+        "🔴 Highlight Pathway";
+
+    } else {
+
+      highlightBtn.classList.remove("active");
+
+      highlightBtn.textContent =
+        "🧠 Highlight Pathway";
+    }
+
+    if (locationShown) {
+      setBrainTransparency(true);
+    }
+  }
+);
+
+const rotateBtn =
+  document.getElementById("rotate");
+
+rotateBtn.addEventListener(
+  "click",
+  () => {
+
+    controls.autoRotate =
+      !controls.autoRotate;
+
+    rotateBtn.classList.toggle(
+      "active",
+      controls.autoRotate
+    );
+
+    rotateBtn.textContent =
+      controls.autoRotate
+        ? "⟳ Auto Rotate"
+        : "▶ Auto Rotate";
+  }
+);
+
+document
+  .getElementById("reset")
+  .addEventListener(
+    "click",
+    () => {
+
+      camera.position.set(
+        3.2,
+        0.3,
+        8.5
+      );
+
+      controls.target.set(
+        0,
+        -0.3,
+        0
+      );
+
+      controls.update();
+
+      locationShown = false;
+      highlighted = true;
+
+      setBrainTransparency(false);
+      setPathwayHighlight(true);
+
+      locationLabel.classList.remove("show");
+
+      showLocationBtn.classList.remove("active");
+
+      showLocationBtn.textContent =
+        "📍 Show Pathway Region";
+
+      highlightBtn.classList.add("active");
+
+      highlightBtn.textContent =
+        "🔴 Highlight Pathway";
+    }
+  );
+
+function updateLabel() {
+
+  if (!locationShown) {
+    return;
+  }
+
+  if (pathwayMeshes.length === 0) {
+    return;
+  }
+
+  const box = new THREE.Box3();
+
+  pathwayMeshes.forEach(mesh => {
+    box.expandByObject(mesh);
+  });
+
+  if (box.isEmpty()) {
+    return;
+  }
+
+  const position =
+    box.getCenter(
+      new THREE.Vector3()
+    );
+
+  position.project(camera);
+
+  const x =
+    (position.x + 1) / 2 *
+    canvas.clientWidth;
+
+  const y =
+    (-position.y + 1) / 2 *
+    canvas.clientHeight;
+
+  locationLabel.style.left =
+    x + "px";
+
+  locationLabel.style.top =
+    (y - 35) + "px";
+}
+
+function resize() {
+
+  const width = canvas.clientWidth;
+  const height = canvas.clientHeight;
+
+  if (width <= 0 || height <= 0) {
+    return;
+  }
+
+  camera.aspect =
+    width / height;
+
+  camera.updateProjectionMatrix();
+
+  renderer.setSize(
+    width,
+    height,
+    false
+  );
+}
+
+window.addEventListener(
+  "resize",
+  resize
+);
+
+function animate() {
+
+  requestAnimationFrame(
+    animate
+  );
+
+  controls.update();
+  updateLabel();
+
+  renderer.render(
+    scene,
+    camera
+  );
+}
+
+resize();
+animate();
+loadRealBrain();
+
+</script>
+
+<script>
+
+function checkAnswer(button, correct) {
+
+  const parent =
+    button.parentElement;
+
+  const options =
+    parent.querySelectorAll(".option");
+
+  options.forEach(option => {
+
+    option.classList.remove(
+      "correct",
+      "wrong"
+    );
+  });
+
+  if (correct) {
+
+    button.classList.add(
+      "correct"
+    );
+
+  } else {
+
+    button.classList.add(
+      "wrong"
+    );
+  }
+
+  updateQuizScore();
+}
+
+function updateQuizScore() {
+
+  const result =
+    document.getElementById(
+      "quizResult"
+    );
+
+  let answered = 0;
+  let correctAnswers = 0;
+
+  document
+    .querySelectorAll(".question")
+    .forEach(question => {
+
+      const selected =
+        question.querySelector(
+          ".correct,.wrong"
+        );
+
+      if (selected) {
+
+        answered++;
+
+        if (
+          selected.classList.contains(
+            "correct"
+          )
+        ) {
+
+          correctAnswers++;
+        }
+      }
+    });
+
+  if (answered > 0) {
+
+    result.style.display = "block";
+
+    result.textContent =
+      "Score: " +
+      correctAnswers +
+      " / " +
+      answered;
+  }
+}
+
+</script>
+
+</body>
+</html>
