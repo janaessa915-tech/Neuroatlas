@@ -59,7 +59,7 @@ nav a:hover {
 }
 
 h1 {
-  font-size: clamp(45px, 7vw, 82px);
+  font-size: clamp(48px, 7vw, 82px);
   line-height: .95;
   letter-spacing: -4px;
   margin-bottom: 10px;
@@ -110,6 +110,10 @@ h1 {
   color: #ffd9de;
 }
 
+/* =========================================================
+   3D VIEWER
+   ========================================================= */
+
 .viewer {
   margin-top: 60px;
   border: 1px solid rgba(255,255,255,.10);
@@ -142,7 +146,7 @@ h1 {
 .scene {
   position: relative;
   width: 100%;
-  height: 650px;
+  height: 700px;
   background:
     radial-gradient(
       ellipse at 50% 45%,
@@ -240,6 +244,10 @@ h1 {
   border-top: 1px solid rgba(255,255,255,.08);
 }
 
+/* =========================================================
+   SECTIONS
+   ========================================================= */
+
 .section {
   margin-top: 70px;
 }
@@ -286,14 +294,14 @@ h1 {
 }
 
 /* =========================================================
-   ANATOMICAL PATHWAY VIEW
+   ANATOMICAL CROSS SECTION
    ========================================================= */
 
 .anatomy-viewer {
   position: relative;
   width: 100%;
   max-width: 1100px;
-  height: 760px;
+  height: 690px;
   margin: auto;
   border: 1px solid #243b50;
   border-radius: 20px;
@@ -326,35 +334,35 @@ h1 {
   white-space: nowrap;
 }
 
-/* Brain illustration */
+/* Brain */
 
 .brain-outline {
   fill: url(#brainGradient);
-  stroke: #d4c4c8;
+  stroke: #cdbdc2;
   stroke-width: 3;
   filter: url(#brainShadow);
 }
 
 .brain-inner {
-  fill: #806f77;
-  opacity: .28;
-  stroke: #cdbcc1;
-  stroke-width: 1.5;
+  fill: #7f727a;
+  opacity: .30;
+  stroke: #c5b2b8;
+  stroke-width: 1.2;
 }
 
-.cortex-fold {
+.brain-ridge {
   fill: none;
-  stroke: #51464d;
+  stroke: #554c53;
   stroke-width: 3;
-  opacity: .7;
+  opacity: .72;
   stroke-linecap: round;
 }
 
-.cortex-highlight {
+.brain-highlight {
   fill: none;
-  stroke: #eee1e4;
-  stroke-width: 1;
-  opacity: .18;
+  stroke: #eadde0;
+  stroke-width: 1.1;
+  opacity: .20;
   stroke-linecap: round;
 }
 
@@ -362,69 +370,105 @@ h1 {
 
 .brainstem {
   fill: url(#stemGradient);
-  stroke: #c7b5bb;
+  stroke: #bcaab0;
   stroke-width: 2;
-}
-
-.pons {
-  fill: #8b777f;
-  stroke: #cbb9bf;
-  stroke-width: 1.5;
 }
 
 .medulla {
-  fill: #76646c;
-  stroke: #c2afb5;
+  fill: #7d6d75;
+  stroke: #baa9af;
   stroke-width: 1.5;
 }
+
+.pons {
+  fill: #907d86;
+  stroke: #c5b3b9;
+  stroke-width: 1.5;
+}
+
+.midbrain {
+  fill: #75666e;
+  stroke: #b6a4aa;
+  stroke-width: 1.5;
+}
+
+/* Cerebellum */
+
+.cerebellum {
+  fill: #685962;
+  stroke: #a9959d;
+  stroke-width: 1.7;
+}
+
+.cerebellar-ridge {
+  fill: none;
+  stroke: #40383e;
+  stroke-width: 2;
+  opacity: .7;
+}
+
+/* Spinal cord */
 
 .spinal-cord {
-  fill: #62545b;
-  stroke: #bcaab0;
+  fill: #5d5058;
+  stroke: #a8949c;
   stroke-width: 1.5;
 }
 
-/* Thalamus */
+/* Solitary tract */
 
-.thalamus {
-  fill: #697686;
-  stroke: #aab7c3;
-  stroke-width: 1.5;
-}
-
-/* Pathway */
-
-.pathway {
+.solitary-tract {
   fill: none;
   stroke: #ff4055;
-  stroke-width: 7;
+  stroke-width: 8;
   stroke-linecap: round;
-  stroke-linejoin: round;
-  filter: url(#pathGlow);
+  filter: url(#redGlow);
+  opacity: .95;
 }
 
-.pathway-secondary {
+.solitary-tract-core {
   fill: none;
-  stroke: #ff9daa;
-  stroke-width: 3;
+  stroke: #ffd1d7;
+  stroke-width: 2;
   stroke-linecap: round;
-  opacity: .8;
 }
 
-.pathway-arrow {
+.solitary-nucleus {
   fill: #ff4055;
+  stroke: #ffc3cb;
+  stroke-width: 2;
+  filter: url(#redGlow);
 }
 
-.nucleus {
-  fill: #a65d69;
-  stroke: #ffb6c1;
-  stroke-width: 2;
+.solitary-nucleus-core {
+  fill: #ff8a99;
+  stroke: #fff0f2;
+  stroke-width: 1;
 }
 
-.nucleus-highlight {
-  fill: #ff4055;
-  stroke: #ffe1e5;
-  stroke-width: 2;
+/* Other structures */
+
+.fourth-ventricle {
+  fill: #101b25;
+  stroke: #81919e;
+  stroke-width: 1.5;
+}
+
+.central-canal {
+  fill: #0c151d;
+  stroke: #8796a2;
+  stroke-width: 1.2;
+}
+
+.tegmentum {
+  fill: #4e444b;
+  opacity: .55;
+}
+
+.thalamus {
+  fill: #707988;
+  stroke: #aeb9c7;
+  stroke-width: 1.5;
 }
 
 /* Labels */
@@ -470,11 +514,11 @@ h1 {
   letter-spacing: 1.5px;
 }
 
-.pathway-caption {
-  fill: #ffd9de;
+.pathway-label {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 11px;
   font-weight: bold;
+  fill: #ffb6c1;
   letter-spacing: 1px;
 }
 
@@ -515,14 +559,14 @@ h1 {
   box-shadow: 0 0 12px currentColor;
 }
 
-.legend-dot.path {
+.legend-dot.pathway {
   background: #ff4055;
   color: #ff4055;
 }
 
-.legend-dot.brain {
-  background: #b7a4aa;
-  color: #b7a4aa;
+.legend-dot.nucleus {
+  background: #ffb6c1;
+  color: #ffb6c1;
 }
 
 @keyframes pathwayPulse {
@@ -533,7 +577,7 @@ h1 {
 
   50% {
     opacity: 1;
-    filter: drop-shadow(0 0 16px rgba(255,64,85,.95));
+    filter: drop-shadow(0 0 16px rgba(255,64,85,.9));
   }
 }
 
@@ -556,7 +600,9 @@ h1 {
   text-align: center;
 }
 
-/* Information cards */
+/* =========================================================
+   INFORMATION CARDS
+   ========================================================= */
 
 .cards {
   display: grid;
@@ -590,6 +636,69 @@ h1 {
   line-height: 1.8;
 }
 
+/* =========================================================
+   PATHWAY STEPS
+   ========================================================= */
+
+.pathway-steps {
+  display: grid;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 65px 1fr;
+  gap: 20px;
+  padding: 25px;
+  background: #091522;
+  border: 1px solid #172b3e;
+  border-radius: 16px;
+}
+
+.step-number {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #321218;
+  border: 1px solid #ff4055;
+  color: #ffb6c1;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.step h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.step p {
+  color: #91a5b8;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.step-arrow {
+  position: absolute;
+  left: 47px;
+  bottom: -18px;
+  z-index: 2;
+  color: #ff4055;
+  font-size: 20px;
+}
+
+.step:last-child .step-arrow {
+  display: none;
+}
+
+/* =========================================================
+   CLINICAL
+   ========================================================= */
+
 .clinical-section {
   margin-top: 65px;
 }
@@ -612,6 +721,10 @@ h1 {
 .clinical-box p:last-child {
   margin-bottom: 0;
 }
+
+/* =========================================================
+   FACTS
+   ========================================================= */
 
 .facts-grid {
   display: grid;
@@ -647,6 +760,10 @@ h1 {
   font-size: 13px;
   line-height: 1.7;
 }
+
+/* =========================================================
+   QUIZ
+   ========================================================= */
 
 .quiz {
   margin-top: 65px;
@@ -723,6 +840,10 @@ h1 {
   display: none;
 }
 
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
 @media (max-width: 900px) {
   .cards {
     grid-template-columns: repeat(2,1fr);
@@ -733,7 +854,7 @@ h1 {
   }
 
   .anatomy-viewer {
-    height: 650px;
+    height: 580px;
   }
 }
 
@@ -751,7 +872,11 @@ h1 {
   }
 
   .anatomy-viewer {
-    height: 560px;
+    height: 500px;
+  }
+
+  .step {
+    grid-template-columns: 55px 1fr;
   }
 }
 
@@ -773,7 +898,7 @@ h1 {
   }
 
   .anatomy-viewer {
-    height: 470px;
+    height: 430px;
   }
 
   .brain-title {
@@ -795,6 +920,18 @@ h1 {
   .legend {
     display: none;
   }
+
+  .step {
+    grid-template-columns: 1fr;
+  }
+
+  .step-number {
+    margin-bottom: 3px;
+  }
+
+  .step-arrow {
+    left: 24px;
+  }
 }
 </style>
 </head>
@@ -802,13 +939,13 @@ h1 {
 <body>
 
 <nav>
-  <a href="./pathways.html">← Back to Neural Pathways</a>
+  <a href="./explore.html">← Back to Explore</a>
 </nav>
 
 <main class="container">
 
 <div class="eyebrow">
-  Visceral & Cranial Sensory Pathways · NeuroAtlas
+  Brainstem Pathways · NeuroAtlas
 </div>
 
 <h1>Solitary Tract</h1>
@@ -820,11 +957,11 @@ h1 {
 <div class="hero">
 
 <p>
-The solitary tract is a longitudinal fiber pathway in the medulla that
-carries visceral sensory and special visceral sensory information from
-cranial nerves VII, IX, and X toward the solitary nucleus. It is closely
-associated with taste, visceral sensation, and autonomic information
-from structures of the head, thorax, and abdomen.
+The solitary tract is a longitudinal sensory pathway in the brainstem
+that carries visceral sensory and taste-related information toward the
+nucleus of the solitary tract. It receives major afferent input through
+cranial nerves VII, IX, and X and plays an important role in taste,
+visceral sensation, and autonomic regulation.
 </p>
 
 </div>
@@ -832,11 +969,15 @@ from structures of the head, thorax, and abdomen.
 <div class="actions">
 
 <a class="action-button" href="#location">
-  📍 Show Pathway
+  📍 Show Location
+</a>
+
+<a class="action-button" href="#pathway">
+  〰️ Follow the Pathway
 </a>
 
 <a class="action-button" href="#information">
-  🧠 Learn the Pathway
+  🧠 Learn About the Tract
 </a>
 
 <a class="action-button" href="#quiz">
@@ -845,12 +986,16 @@ from structures of the head, thorax, and abdomen.
 
 </div>
 
+<!-- =========================================================
+     3D VIEWER
+     ========================================================= -->
+
 <div class="viewer">
 
 <div class="viewer-header">
 
 <div class="viewer-title">
-  Human Brain · Solitary Tract Pathway
+  Human Brain · Interactive 3D
 </div>
 
 <div class="viewer-status">
@@ -864,7 +1009,7 @@ from structures of the head, thorax, and abdomen.
 <div id="loading" class="loading">
 
 <span id="loadText">
-Loading brain model...
+Loading real brain model...
 </span>
 
 <div class="loading-bar">
@@ -892,7 +1037,7 @@ Loading brain model...
 </button>
 
 <button id="highlight" class="active">
-  🔴 Highlight Pathway
+  🔴 Highlight Solitary Tract
 </button>
 
 <button id="rotate" class="active">
@@ -907,98 +1052,117 @@ Loading brain model...
 
 </div>
 
+<!-- =========================================================
+     LOCATION
+     ========================================================= -->
+
 <section id="location" class="location">
 
 <div class="section-label">
-  Pathway · المسار
+  Location · الموقع
 </div>
 
 <h2>
-  📍 Course of the Solitary Tract
+  📍 Where Is the Solitary Tract?
 </h2>
 
 <p class="location-intro">
 
-The solitary tract is located in the dorsolateral medulla. It carries
-afferent fibers associated mainly with cranial nerves VII, IX, and X.
-These fibers terminate predominantly in the solitary nucleus, which
-contains distinct functional regions for taste and visceral sensory
-processing.
+The solitary tract is located in the dorsolateral region of the
+medulla and extends longitudinally through the brainstem. It lies
+closely associated with the nucleus of the solitary tract, which is
+medial to the tract.
+
+The pathway receives sensory fibers carried by cranial nerves VII,
+IX, and X. These fibers enter the brainstem and descend or ascend
+within the solitary tract before terminating primarily in the
+nucleus of the solitary tract.
 
 <br><br>
 
-يقع السبيل المنفرد في الجزء الظهري الوحشي من النخاع المستطيل. ويحمل
-أليافاً واردة مرتبطة بشكل رئيسي بالأعصاب القحفية السابع والتاسع والعاشر.
-وتنتهي هذه الألياف بصورة أساسية في النواة المنفردة، التي تحتوي على
-مناطق وظيفية لمعالجة التذوق والمعلومات الحسية الحشوية.
+يقع السبيل المنفرد في المنطقة الظهرية الوحشية من النخاع المستطيل
+ويمتد طولياً عبر جذع الدماغ. ويرتبط ارتباطاً وثيقاً بالنواة المنفردة
+التي تقع إنسياً بالنسبة للسبيل.
+
+يستقبل السبيل أليافاً حسية تحملها الأعصاب القحفية السابع والتاسع
+والعاشر. تدخل هذه الألياف جذع الدماغ وتمتد داخل السبيل المنفرد قبل
+أن تنتهي بشكل رئيسي في النواة المنفردة.
 
 </p>
 
 <div class="anatomy-viewer">
 
 <div class="brain-title">
-  Medial Brainstem View · Solitary Pathway
+  Brainstem · Solitary Tract and Nucleus
 </div>
 
 <svg
   class="brain-svg"
-  viewBox="0 0 1200 760"
+  viewBox="0 0 1200 690"
   xmlns="http://www.w3.org/2000/svg"
-  aria-label="Anatomical illustration of the solitary tract pathway"
+  aria-label="Anatomical illustration of the solitary tract and nucleus in the brainstem"
 >
 
 <defs>
 
-<linearGradient id="brainGradient"
-x1="0"
-y1="0"
-x2="1"
-y2="1">
+<linearGradient
+  id="brainGradient"
+  x1="0"
+  y1="0"
+  x2="1"
+  y2="1"
+>
 
-<stop offset="0%" stop-color="#d9c6cb"/>
-<stop offset="35%" stop-color="#b8a2a9"/>
-<stop offset="70%" stop-color="#8c747d"/>
-<stop offset="100%" stop-color="#5e4d56"/>
+<stop offset="0%" stop-color="#d8c5ca"/>
+<stop offset="35%" stop-color="#b8a1a8"/>
+<stop offset="70%" stop-color="#8f777f"/>
+<stop offset="100%" stop-color="#66545d"/>
 
 </linearGradient>
 
-<linearGradient id="stemGradient"
-x1="0"
-y1="0"
-x2="1"
-y2="1">
+<linearGradient
+  id="stemGradient"
+  x1="0"
+  y1="0"
+  x2="1"
+  y2="1"
+>
 
-<stop offset="0%" stop-color="#b39da5"/>
-<stop offset="55%" stop-color="#806b74"/>
-<stop offset="100%" stop-color="#5a4b53"/>
+<stop offset="0%" stop-color="#bba4ad"/>
+<stop offset="55%" stop-color="#876f79"/>
+<stop offset="100%" stop-color="#5c4d55"/>
 
 </linearGradient>
 
 <filter
-id="brainShadow"
-x="-20%"
-y="-20%"
-width="140%"
-height="150%">
+  id="brainShadow"
+  x="-20%"
+  y="-20%"
+  width="140%"
+  height="150%"
+>
 
 <feDropShadow
-dx="0"
-dy="15"
-stdDeviation="15"
-flood-color="#000"
-flood-opacity=".7"/>
+  dx="0"
+  dy="14"
+  stdDeviation="14"
+  flood-color="#000"
+  flood-opacity=".7"
+/>
 
 </filter>
 
 <filter
-id="pathGlow"
-x="-100%"
-y="-100%"
-width="300%"
-height="300%">
+  id="redGlow"
+  x="-100%"
+  y="-100%"
+  width="300%"
+  height="300%"
+>
 
 <feGaussianBlur
-stdDeviation="4"/>
+  stdDeviation="5"
+/>
 
 </filter>
 
@@ -1011,106 +1175,138 @@ stdDeviation="4"/>
 <path
 class="brain-outline"
 d="
-M600 70
+M600 62
 
-C530 47 446 49 370 66
-C288 84 221 117 172 162
-C126 205 101 257 98 310
-C95 361 113 412 148 454
-C180 492 225 521 279 546
-C348 577 421 592 492 596
+C525 45 435 51 353 78
+C273 104 205 148 158 202
+C121 245 103 294 107 339
+C112 395 144 443 194 476
 
-C520 598 550 593 575 582
+C247 511 316 526 385 517
 
-L600 567
+C429 511 466 494 500 469
 
-L625 582
+L545 434
 
-C650 593 680 598 708 596
+L600 415
 
-C779 592 852 577 921 546
-C975 521 1020 492 1052 454
-C1087 412 1105 361 1102 310
-C1099 257 1074 205 1028 162
-C979 117 912 84 830 66
-C754 49 670 47 600 70
+L655 434
+
+L700 469
+
+C734 494 771 511 815 517
+
+C884 526 953 511 1006 476
+
+C1056 443 1088 395 1093 339
+
+C1097 294 1079 245 1042 202
+
+C995 148 927 104 847 78
+
+C765 51 675 45 600 62
 Z
 "/>
 
 <path
 class="brain-inner"
 d="
-M600 103
+M600 90
 
-C537 82 463 83 397 98
-C323 114 263 140 218 179
-C177 215 154 258 153 305
-C151 349 168 390 198 427
-C229 463 273 489 329 512
-C390 537 453 551 516 555
+C526 72 446 77 372 101
+C302 124 244 161 202 207
+C169 243 153 283 157 322
+C161 367 187 405 229 432
 
-C547 557 577 548 600 531
+C274 461 333 470 388 460
 
-C623 548 653 557 684 555
+C435 452 469 432 502 407
 
-C747 551 810 537 871 512
-C927 489 971 463 1002 427
-C1032 390 1049 349 1047 305
-C1046 258 1023 215 982 179
-C937 140 877 114 803 98
-C737 83 663 82 600 103
+L550 370
+
+L600 352
+
+L650 370
+
+L698 407
+
+C731 432 765 452 812 460
+
+C867 470 926 461 971 432
+
+C1013 405 1039 367 1043 322
+
+C1047 283 1031 243 998 207
+
+C956 161 898 124 828 101
+
+C754 77 674 72 600 90
 Z
 "/>
 
 <!-- Cortical folds -->
 
 <path
-class="cortex-fold"
-d="M169 214 C229 169 291 157 350 177 C401 194 438 189 478 166"/>
+class="brain-ridge"
+d="M177 206 C245 165 312 157 381 177 C427 190 461 188 501 167"
+/>
 
 <path
-class="cortex-fold"
-d="M139 270 C197 228 256 220 315 240 C360 256 399 258 437 242"/>
+class="brain-ridge"
+d="M151 268 C215 224 280 221 338 240 C386 257 425 258 465 242"
+/>
 
 <path
-class="cortex-fold"
-d="M133 329 C193 290 250 286 305 304 C354 320 393 324 428 311"/>
+class="brain-ridge"
+d="M151 331 C215 294 274 292 330 308 C378 322 423 326 464 313"
+/>
 
 <path
-class="cortex-fold"
-d="M153 388 C207 354 261 352 315 368 C358 382 394 386 428 376"/>
+class="brain-ridge"
+d="M184 393 C242 361 294 361 345 377 C388 391 423 393 456 381"
+/>
 
 <path
-class="cortex-fold"
-d="M195 444 C245 421 292 422 337 438 C373 451 404 454 433 445"/>
+class="brain-ridge"
+d="M1023 206 C955 165 888 157 819 177 C773 190 739 188 699 167"
+/>
 
 <path
-class="cortex-fold"
-d="M1031 214 C971 169 909 157 850 177 C799 194 762 189 722 166"/>
+class="brain-ridge"
+d="M1049 268 C985 224 920 221 862 240 C814 257 775 258 735 242"
+/>
 
 <path
-class="cortex-fold"
-d="M1061 270 C1003 228 944 220 885 240 C840 256 801 258 763 242"/>
+class="brain-ridge"
+d="M1049 331 C985 294 926 292 870 308 C822 322 777 326 736 313"
+/>
 
 <path
-class="cortex-fold"
-d="M1067 329 C1007 290 950 286 895 304 C846 320 807 324 772 311"/>
+class="brain-ridge"
+d="M1016 393 C958 361 906 361 855 377 C812 391 777 393 744 381"
+/>
+
+<!-- Highlights -->
 
 <path
-class="cortex-fold"
-d="M1047 388 C993 354 939 352 885 368 C842 382 806 386 772 376"/>
+class="brain-highlight"
+d="M194 181 C250 146 310 141 369 158"
+/>
 
 <path
-class="cortex-fold"
-d="M1005 444 C955 421 908 422 863 438 C827 451 796 454 767 445"/>
+class="brain-highlight"
+d="M177 289 C229 256 284 251 334 267"
+/>
 
 <path
-class="cortex-highlight"
-d="M185 188 C238 151 297 143 355 158"/>
+class="brain-highlight"
+d="M1006 181 C950 146 890 141 831 158"
+/>
 
 <path
-class="cortex-highlight"
-d="M1015 188 C962 151 903 143 845 158"/>
+class="brain-highlight"
+d="M1023 289 C971 256 916 251 866 267"
+/>
 
 <!-- =====================================================
      THALAMUS
@@ -1118,27 +1314,19 @@ d="M1015 188 C962 151 903 143 845 158"/>
 
 <ellipse
 class="thalamus"
-cx="540"
-cy="424"
-rx="51"
-ry="43"
+cx="536"
+cy="320"
+rx="48"
+ry="42"
 />
 
 <ellipse
 class="thalamus"
-cx="660"
-cy="424"
-rx="51"
-ry="43"
+cx="664"
+cy="320"
+rx="48"
+ry="42"
 />
-
-<text
-class="brain-label"
-x="505"
-y="486"
->
-THALAMUS
-</text>
 
 <!-- =====================================================
      BRAINSTEM
@@ -1147,36 +1335,41 @@ THALAMUS
 <path
 class="brainstem"
 d="
-M525 465
+M520 345
 
-C511 493 506 522 509 551
-C512 578 521 600 532 621
+C531 362 537 383 537 406
 
-C541 640 548 659 549 682
+L531 466
 
-L651 682
+C527 500 530 531 544 557
 
-C652 659 659 640 668 621
+C558 582 578 596 600 601
 
-C679 600 688 578 691 551
+C622 596 642 582 656 557
 
-C694 522 689 493 675 465
+C670 531 673 500 669 466
 
-C646 449 554 449 525 465
+L663 406
+
+C663 383 669 362 680 345
+
+C650 331 626 325 600 325
+
+C574 325 550 331 520 345
 Z
 "/>
 
 <!-- Midbrain -->
 
 <path
-class="brainstem"
+class="midbrain"
 d="
-M535 470
-C548 445 570 430 600 430
-C630 430 652 445 665 470
-L660 510
-C642 522 622 528 600 528
-C578 528 558 522 540 510
+M526 345
+C543 319 565 307 600 307
+C635 307 657 319 674 345
+L663 382
+C641 369 622 362 600 362
+C578 362 559 369 537 382
 Z
 "/>
 
@@ -1185,18 +1378,18 @@ Z
 <path
 class="pons"
 d="
-M518 510
+M532 382
 
-C538 494 564 488 600 488
-C636 488 662 494 682 510
+C551 369 574 363 600 363
+C626 363 649 369 668 382
 
-C697 524 699 548 688 567
+C678 405 677 431 667 452
 
-C676 587 650 597 600 597
+C650 469 628 477 600 477
 
-C550 597 524 587 512 567
+C572 477 550 469 533 452
 
-C501 548 503 524 518 510
+C523 431 522 405 532 382
 Z
 "/>
 
@@ -1205,234 +1398,347 @@ Z
 <path
 class="medulla"
 d="
-M532 568
+M533 452
 
-C547 583 568 591 600 592
-C632 591 653 583 668 568
+C550 468 573 476 600 476
+C627 476 650 468 667 452
 
-C661 591 654 610 646 629
+L662 521
 
-C638 649 630 665 626 683
+C658 552 638 579 600 596
 
-L574 683
-
-C570 665 562 649 554 629
-
-C546 610 539 591 532 568
+C562 579 542 552 538 521
 Z
 "/>
 
-<!-- Spinal cord -->
+<!-- Fourth ventricle -->
 
 <path
-class="spinal-cord"
+class="fourth-ventricle"
 d="
-M574 675
-C585 670 615 670 626 675
-L624 732
-C615 743 585 743 576 732
+M553 399
+
+C567 386 582 381 600 381
+C618 381 633 386 647 399
+
+L634 432
+
+C624 442 612 448 600 448
+
+C588 448 576 442 566 432
 Z
 "/>
 
-<!-- =====================================================
-     SOLITARY NUCLEUS
-     ===================================================== -->
+<!-- Central canal -->
 
-<ellipse
-class="nucleus"
-cx="566"
-cy="565"
-rx="15"
-ry="27"
+<path
+class="central-canal"
+d="
+M593 474
+C597 470 603 470 607 474
+L607 558
+C603 563 597 563 593 558
+Z
+"/>
+
+<!-- Cerebellum -->
+
+<path
+class="cerebellum"
+d="
+M681 390
+
+C734 363 793 371 832 402
+
+C870 432 884 478 866 519
+
+C848 560 808 582 758 579
+
+C719 577 686 558 669 532
+
+C690 501 701 468 699 438
+
+C697 420 691 404 681 390
+Z
+"/>
+
+<path
+class="cerebellum"
+d="
+M519 390
+
+C466 363 407 371 368 402
+
+C330 432 316 478 334 519
+
+C352 560 392 582 442 579
+
+C481 577 514 558 531 532
+
+C510 501 499 468 501 438
+
+C503 420 509 404 519 390
+Z
+"/>
+
+<!-- Cerebellar folds -->
+
+<path
+class="cerebellar-ridge"
+d="M350 426 C400 405 450 408 489 432"
 />
 
-<text
-class="brain-label"
-x="380"
-y="570"
->
-SOLITARY NUCLEUS
-</text>
+<path
+class="cerebellar-ridge"
+d="M338 458 C390 439 442 444 484 465"
+/>
 
-<text
-class="svg-sub"
-x="380"
-y="588"
->
-النواة المنفردة
-</text>
+<path
+class="cerebellar-ridge"
+d="M340 491 C389 475 439 481 477 500"
+/>
+
+<path
+class="cerebellar-ridge"
+d="M850 426 C800 405 750 408 711 432"
+/>
+
+<path
+class="cerebellar-ridge"
+d="M862 458 C810 439 758 444 716 465"
+/>
+
+<path
+class="cerebellar-ridge"
+d="M860 491 C811 475 761 481 723 500"
+/>
 
 <!-- =====================================================
      SOLITARY TRACT
      ===================================================== -->
 
 <path
-class="pathway pathway-active"
+class="solitary-tract pathway-active"
 d="
-M566 565
+M548 343
 
-C557 548 555 530 558 512
+C535 365 525 386 523 409
 
-C561 494 565 478 569 463
+C521 430 522 451 525 472
 
-C573 447 575 431 573 416
+C528 492 530 513 531 532
 
-C571 401 568 388 566 375
+C532 546 536 557 543 566
+"
+/>
+
+<path
+class="solitary-tract-core"
+d="
+M548 343
+
+C535 365 525 386 523 409
+
+C521 430 522 451 525 472
+
+C528 492 530 513 531 532
+
+C532 546 536 557 543 566
+"
+/>
+
+<!-- Solitary nucleus -->
+
+<ellipse
+class="solitary-nucleus"
+cx="550"
+cy="455"
+rx="18"
+ry="30"
+/>
+
+<ellipse
+class="solitary-nucleus"
+cx="650"
+cy="455"
+rx="18"
+ry="30"
+/>
+
+<ellipse
+class="solitary-nucleus-core"
+cx="550"
+cy="455"
+rx="7"
+ry="13"
+/>
+
+<ellipse
+class="solitary-nucleus-core"
+cx="650"
+cy="455"
+rx="7"
+ry="13"
+/>
+
+<!-- =====================================================
+     CRANIAL NERVE INPUT PATHS
+     ===================================================== -->
+
+<path
+class="solitary-tract"
+d="
+M318 420
+C370 408 430 411 505 433
+"
+/>
+
+<path
+class="solitary-tract"
+d="
+M318 468
+C375 458 430 455 522 454
+"
+/>
+
+<path
+class="solitary-tract"
+d="
+M880 422
+C822 408 760 414 668 438
 "/>
 
 <path
-class="pathway-secondary"
+class="solitary-tract"
 d="
-M566 565
-
-C557 548 555 530 558 512
-
-C561 494 565 478 569 463
-
-C573 447 575 431 573 416
-
-C571 401 568 388 566 375
+M880 480
+C822 466 760 461 668 456
 "/>
 
-<!-- pathway arrow -->
+<!-- =====================================================
+     CALLOUTS
+     ===================================================== -->
 
 <path
-class="pathway-arrow"
+class="callout"
 d="
-M558 393
-L566 374
-L574 393
-L566 389
-Z
+M543 566
+L390 620
+L90 620
 "/>
+
+<circle
+class="callout-dot"
+cx="543"
+cy="566"
+r="4"
+/>
 
 <text
-class="pathway-caption"
-x="585"
-y="450"
+class="svg-label"
+x="90"
+y="612"
 >
 SOLITARY TRACT
 </text>
 
 <text
 class="svg-sub"
-x="585"
-y="469"
+x="90"
+y="632"
 >
 السبيل المنفرد
 </text>
 
-<!-- =====================================================
-     CRANIAL NERVE INPUTS
-     ===================================================== -->
-
-<path
-class="pathway-secondary"
-d="
-M567 565
-C527 548 490 535 449 521
-C407 507 370 493 337 474
-"/>
-
-<path
-class="pathway-secondary"
-d="
-M566 565
-C525 557 482 555 441 548
-C401 541 365 529 333 513
-"/>
-
-<path
-class="pathway-secondary"
-d="
-M566 565
-C526 574 485 585 445 598
-C405 611 369 626 338 646
-"/>
-
-<circle
-class="nucleus-highlight"
-cx="337"
-cy="474"
-r="7"
-/>
-
-<circle
-class="nucleus-highlight"
-cx="333"
-cy="513"
-r="7"
-/>
-
-<circle
-class="nucleus-highlight"
-cx="338"
-cy="646"
-r="7"
-/>
-
-<!-- =====================================================
-     LABELS
-     ===================================================== -->
-
 <path
 class="callout"
 d="
-M337 474
-L190 420
-L75 420
+M550 455
+L250 355
+L90 355
 "/>
 
 <circle
 class="callout-dot"
-cx="337"
-cy="474"
+cx="550"
+cy="455"
 r="4"
 />
 
 <text
 class="svg-label"
-x="75"
-y="413"
+x="90"
+y="347"
+>
+SOLITARY NUCLEUS
+</text>
+
+<text
+class="svg-sub"
+x="90"
+y="367"
+>
+النواة المنفردة
+</text>
+
+<path
+class="callout"
+d="
+M318 420
+L210 270
+L90 270
+"/>
+
+<circle
+class="callout-dot"
+cx="318"
+cy="420"
+r="4"
+/>
+
+<text
+class="svg-label"
+x="90"
+y="262"
 >
 CN VII · FACIAL
 </text>
 
 <text
 class="svg-sub"
-x="75"
-y="431"
+x="90"
+y="282"
 >
-العصب الوجهي · Taste
+العصب الوجهي
 </text>
 
 <path
 class="callout"
 d="
-M333 513
-L190 500
-L75 500
+M880 422
+L990 300
+L1110 300
 "/>
 
 <circle
 class="callout-dot"
-cx="333"
-cy="513"
+cx="880"
+cy="422"
 r="4"
 />
 
 <text
 class="svg-label"
-x="75"
-y="493"
+x="990"
+y="292"
 >
 CN IX · GLOSSOPHARYNGEAL
 </text>
 
 <text
 class="svg-sub"
-x="75"
-y="511"
+x="990"
+y="312"
 >
 العصب اللساني البلعومي
 </text>
@@ -1440,175 +1746,125 @@ y="511"
 <path
 class="callout"
 d="
-M338 646
-L190 640
-L75 640
+M880 480
+L1000 525
+L1110 525
 "/>
 
 <circle
 class="callout-dot"
-cx="338"
-cy="646"
+cx="880"
+cy="480"
 r="4"
 />
 
 <text
 class="svg-label"
-x="75"
-y="633"
+x="1000"
+y="517"
 >
 CN X · VAGUS
 </text>
 
 <text
 class="svg-sub"
-x="75"
-y="651"
+x="1000"
+y="537"
 >
-العصب المبهم · Visceral Sensation
-</text>
-
-<!-- =====================================================
-     CENTRAL STRUCTURE LABELS
-     ===================================================== -->
-
-<path
-class="callout"
-d="
-M566 375
-L820 330
-L1115 330
-"/>
-
-<circle
-class="callout-dot"
-cx="566"
-cy="375"
-r="4"
-/>
-
-<text
-class="svg-label"
-x="820"
-y="323"
->
-SOLITARY TRACT
-</text>
-
-<text
-class="svg-sub"
-x="820"
-y="341"
->
-السبيل المنفرد
+العصب المبهم
 </text>
 
 <path
 class="callout"
 d="
-M566 565
-L820 535
-L1115 535
+M650 455
+L850 560
+L1110 560
 "/>
 
 <circle
 class="callout-dot"
-cx="566"
-cy="565"
+cx="650"
+cy="455"
 r="4"
 />
 
 <text
 class="svg-label"
-x="820"
-y="528"
+x="850"
+y="552"
 >
-SOLITARY NUCLEUS
+NUCLEUS OF SOLITARY TRACT
 </text>
 
 <text
 class="svg-sub"
-x="820"
-y="546"
+x="850"
+y="572"
 >
-النواة المنفردة
+نواة السبيل المنفرد
 </text>
 
-<path
-class="callout"
-d="
-M600 570
-L820 625
-L1115 625
-"/>
-
-<circle
-class="callout-dot"
-cx="600"
-cy="570"
-r="4"
-/>
+<!-- Pathway direction -->
 
 <text
-class="svg-label"
-x="820"
-y="618"
+class="pathway-label"
+x="405"
+y="410"
 >
-MEDULLA
+SENSORY INPUT
 </text>
 
 <text
-class="svg-sub"
-x="820"
-y="636"
+class="pathway-label"
+x="705"
+y="405"
 >
-النخاع المستطيل
+VISCERAL AFFERENTS
 </text>
 
-<!-- =====================================================
-     FUNCTION LABEL
-     ===================================================== -->
-
-<text
-class="brain-label"
-x="500"
-y="718"
->
-VISCERAL + TASTE AFFERENT INFORMATION
-</text>
+<!-- Orientation -->
 
 <text
 class="orientation-label"
-x="110"
-y="715"
+x="120"
+y="90"
 >
 ROSTRAL
 </text>
 
 <text
 class="orientation-label"
-x="1015"
-y="715"
+x="1020"
+y="90"
 >
 CAUDAL
+</text>
+
+<text
+class="orientation-label"
+x="550"
+y="655"
+>
+MIDLINE
 </text>
 
 </svg>
 
 <div class="view-badge">
-  BRAINSTEM PATHWAY · CRANIAL VISCERAL SENSORY SYSTEM
+  BRAINSTEM · SENSORY PATHWAY
 </div>
 
 <div class="legend">
 
 <div class="legend-item">
-<span class="legend-dot path"></span>
-Solitary Pathway
+  <span class="legend-dot pathway"></span>
+  Solitary Tract
 </div>
 
 <div class="legend-item">
-<span class="legend-dot brain"></span>
-Brain Tissue
+  <span class="legend-dot nucleus"></span>
+  Solitary Nucleus
 </div>
 
 </div>
@@ -1618,21 +1874,188 @@ Brain Tissue
 <p class="location-caption">
   🔴 The highlighted pathway represents the
   <strong>solitary tract</strong> and its relationship with the
-  solitary nucleus in the medulla.
+  <strong>nucleus of the solitary tract</strong> in the brainstem.
 </p>
 
 <p class="source-note">
-  Simplified anatomical illustration designed to demonstrate pathway
-  organization and spatial relationships. It is not intended as a
-  radiological diagnostic image.
+  Simplified anatomical illustration designed to demonstrate the
+  organization and spatial relationships of the solitary tract,
+  solitary nucleus, and major cranial sensory inputs. It is not
+  intended as a radiological diagnostic image.
 </p>
 
 </section>
 
+<!-- =========================================================
+     PATHWAY
+     ========================================================= -->
+
+<section id="pathway" class="section">
+
+<div class="section-label">
+  Pathway · المسار
+</div>
+
+<h2>
+  Follow the Solitary Tract
+</h2>
+
+<p class="section-intro">
+
+The solitary tract carries primarily visceral sensory and taste-related
+afferent fibers into the brainstem. The major cranial nerves contributing
+to this pathway are the facial nerve (VII), glossopharyngeal nerve (IX),
+and vagus nerve (X). Their sensory fibers enter the brainstem and
+terminate in different portions of the nucleus of the solitary tract.
+
+</p>
+
+<div class="pathway-steps">
+
+<div class="step">
+
+<div class="step-number">
+  01
+</div>
+
+<div>
+
+<h3>
+  Peripheral Sensory Receptors · المستقبلات الحسية
+</h3>
+
+<p>
+Sensory information begins in peripheral receptors that detect taste,
+visceral chemical changes, pressure, stretch, and other internal
+conditions. These signals are carried centrally by visceral and
+special visceral afferent fibers.
+</p>
+
+</div>
+
+<div class="step-arrow">
+  ↓
+</div>
+
+</div>
+
+<div class="step">
+
+<div class="step-number">
+  02
+</div>
+
+<div>
+
+<h3>
+  Cranial Nerves VII, IX, and X · الأعصاب القحفية
+</h3>
+
+<p>
+The facial nerve carries taste from the anterior tongue and some
+visceral sensory information. The glossopharyngeal nerve carries
+taste from the posterior tongue and visceral information from
+structures including the carotid sinus and carotid body. The vagus
+nerve carries extensive visceral sensory information from the thorax
+and abdomen as well as taste-related input from the epiglottic region.
+</p>
+
+</div>
+
+<div class="step-arrow">
+  ↓
+</div>
+
+</div>
+
+<div class="step">
+
+<div class="step-number">
+  03
+</div>
+
+<div>
+
+<h3>
+  Brainstem Entry · دخول جذع الدماغ
+</h3>
+
+<p>
+The sensory fibers enter the brainstem and travel within the solitary
+tract. The tract runs longitudinally in the dorsolateral medulla,
+closely associated with the nucleus of the solitary tract.
+</p>
+
+</div>
+
+<div class="step-arrow">
+  ↓
+</div>
+
+</div>
+
+<div class="step">
+
+<div class="step-number">
+  04
+</div>
+
+<div>
+
+<h3>
+  Nucleus of the Solitary Tract · نواة السبيل المنفرد
+</h3>
+
+<p>
+Most primary sensory fibers terminate in the nucleus of the solitary
+tract. Its rostral portion is strongly associated with taste, while
+more caudal portions process visceral sensory information.
+</p>
+
+</div>
+
+<div class="step-arrow">
+  ↓
+</div>
+
+</div>
+
+<div class="step">
+
+<div class="step-number">
+  05
+</div>
+
+<div>
+
+<h3>
+  Higher Brainstem and Central Connections · الاتصالات المركزية
+</h3>
+
+<p>
+Neurons of the solitary nucleus project to multiple central networks,
+including autonomic control centers, hypothalamic circuits, reticular
+formation pathways, and higher sensory systems. These connections
+allow visceral sensory information to influence autonomic and
+homeostatic responses.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- =========================================================
+     INFORMATION
+     ========================================================= -->
+
 <section id="information" class="section">
 
 <div class="section-label">
-  Solitary Pathway Anatomy · تشريح السبيل المنفرد
+  Solitary Tract Anatomy · تشريح السبيل المنفرد
 </div>
 
 <h2>
@@ -1641,164 +2064,213 @@ Brain Tissue
 
 <p class="section-intro">
 
-The solitary tract is a compact ascending and descending fiber bundle
-within the medulla. It is closely associated with the solitary nucleus,
-which receives sensory information carried by cranial nerves VII, IX,
-and X.
-
-The pathway is particularly important for taste and visceral sensory
-information. Its connections participate in autonomic regulation,
-cardiovascular and respiratory reflexes, gastrointestinal sensation,
-and other visceral responses.
-
-<br><br>
-
-السبيل المنفرد عبارة عن حزمة ألياف تقع داخل النخاع المستطيل وترتبط
-ارتباطاً وثيقاً بالنواة المنفردة. تستقبل هذه النواة المعلومات الحسية
-التي تحملها الأعصاب القحفية السابع والتاسع والعاشر.
-
-ويلعب هذا النظام دوراً مهماً في التذوق والإحساس الحشوي، كما يساهم في
-تنظيم المنعكسات الذاتية المتعلقة بالقلب والتنفس والجهاز الهضمي وغيرها
-من الاستجابات الحشوية.
+The solitary tract is a compact longitudinal fiber bundle in the
+brainstem. Although relatively small, it is an important route for
+visceral sensory information and taste-related afferents entering the
+central nervous system through several cranial nerves.
 
 </p>
 
 <div class="cards">
 
 <div class="card">
-<h3>Solitary Tract · السبيل المنفرد</h3>
+
+<h3>
+  Solitary Tract · السبيل المنفرد
+</h3>
+
 <p>
-A longitudinal fiber bundle in the dorsolateral medulla carrying
-afferent information toward the solitary nucleus.
+The tract is a bundle of sensory fibers running longitudinally through
+the dorsolateral medulla. Many of these fibers terminate in the nucleus
+of the solitary tract.
 <br><br>
-حزمة طولية من الألياف في الجزء الظهري الوحشي من النخاع المستطيل تحمل
-المعلومات الواردة نحو النواة المنفردة.
+السبيل المنفرد حزمة من الألياف الحسية تمتد طولياً في المنطقة الظهرية
+الوحشية من النخاع المستطيل.
 </p>
+
 </div>
 
 <div class="card">
-<h3>Solitary Nucleus · النواة المنفردة</h3>
+
+<h3>
+  Solitary Nucleus · النواة المنفردة
+</h3>
+
 <p>
-The solitary nucleus is the major termination site for many visceral
-and taste-related afferents carried by cranial nerves VII, IX, and X.
+The nucleus of the solitary tract is the principal central termination
+site for many taste and visceral sensory afferents.
 <br><br>
-تعد النواة المنفردة موقع النهاية الرئيسي للعديد من الألياف الواردة
-الحشوية والمرتبطة بالتذوق.
+تعد النواة المنفردة الموقع المركزي الرئيسي لانتهاء العديد من الألياف
+الحسية المتعلقة بالتذوق والأحاسيس الحشوية.
 </p>
+
 </div>
 
 <div class="card">
-<h3>Facial Nerve · العصب الوجهي</h3>
+
+<h3>
+  Facial Nerve VII · العصب الوجهي
+</h3>
+
 <p>
-The facial nerve carries taste information from the anterior two-thirds
-of the tongue through the chorda tympani.
+Cranial nerve VII carries taste information from the anterior two-thirds
+of the tongue through its sensory pathway to the solitary nucleus.
 <br><br>
-يحمل العصب الوجهي معلومات التذوق من الثلثين الأماميين من اللسان عبر
-حبل الطبل.
+ينقل العصب الوجهي معلومات التذوق من الثلثين الأماميين من اللسان.
 </p>
+
 </div>
 
 <div class="card">
-<h3>Glossopharyngeal Nerve · العصب اللساني البلعومي</h3>
+
+<h3>
+  Glossopharyngeal IX · العصب اللساني البلعومي
+</h3>
+
 <p>
-The glossopharyngeal nerve carries taste and visceral sensory information,
-including information from the posterior tongue and carotid region.
+Cranial nerve IX carries taste from the posterior third of the tongue
+and visceral information from the carotid sinus and carotid body.
 <br><br>
-يحمل العصب اللساني البلعومي معلومات التذوق والإحساس الحشوي، بما في ذلك
-المعلومات من الجزء الخلفي من اللسان ومنطقة السباتي.
+ينقل العصب اللساني البلعومي التذوق من الثلث الخلفي للسان ومعلومات
+حشوية من الجيب السباتي والجسم السباتي.
 </p>
+
 </div>
 
 <div class="card">
-<h3>Vagus Nerve · العصب المبهم</h3>
+
+<h3>
+  Vagus X · العصب المبهم
+</h3>
+
 <p>
-The vagus nerve provides extensive visceral sensory information from
-thoracic and abdominal organs and also carries taste from the epiglottic
-region.
+The vagus nerve provides extensive visceral sensory input from thoracic
+and abdominal organs and contributes to the solitary pathway.
 <br><br>
-يوفر العصب المبهم كمية كبيرة من المعلومات الحسية الحشوية من أعضاء الصدر
-والبطن، كما يحمل بعض معلومات التذوق من منطقة لسان المزمار.
+يوفر العصب المبهم كمية كبيرة من المعلومات الحسية الحشوية من أعضاء
+الصدر والبطن.
 </p>
+
 </div>
 
 <div class="card">
-<h3>Taste · التذوق</h3>
+
+<h3>
+  Rostral Solitary Nucleus · الجزء المنقاري
+</h3>
+
 <p>
-Taste afferents from cranial nerves VII, IX, and X terminate in the
-rostral portion of the solitary nucleus.
+The rostral portion of the solitary nucleus is strongly associated with
+processing taste information.
 <br><br>
-تنتهي ألياف التذوق من الأعصاب القحفية VII وIX وX في الجزء المنقاري من
+يرتبط الجزء المنقاري من النواة المنفردة بشكل وثيق بمعالجة معلومات
+التذوق.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+  Caudal Solitary Nucleus · الجزء الذّيلي
+</h3>
+
+<p>
+The caudal region is particularly important for visceral sensory
+processing and autonomic regulation.
+<br><br>
+يعد الجزء الذيلي مهماً بشكل خاص لمعالجة المعلومات الحشوية وتنظيم
+الوظائف اللاإرادية.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+  Visceral Sensation · الإحساس الحشوي
+</h3>
+
+<p>
+The pathway conveys information about the internal state of organs,
+including mechanical and chemical changes.
+<br><br>
+ينقل المسار معلومات عن حالة الأعضاء الداخلية، بما في ذلك التغيرات
+الميكانيكية والكيميائية.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+  Taste · التذوق
+</h3>
+
+<p>
+Taste afferents from cranial nerves VII, IX, and X reach the solitary
+nucleus as part of the central gustatory system.
+<br><br>
+تصل ألياف التذوق من الأعصاب القحفية السابع والتاسع والعاشر إلى
 النواة المنفردة.
 </p>
+
 </div>
 
 <div class="card">
-<h3>Visceral Sensation · الإحساس الحشوي</h3>
+
+<h3>
+  Autonomic Integration · التكامل اللاإرادي
+</h3>
+
 <p>
-Visceral sensory information reaches the more caudal regions of the
-solitary nucleus and contributes to autonomic regulation.
+Solitary nucleus circuits interact with autonomic centers to help
+coordinate cardiovascular, respiratory, and gastrointestinal responses.
 <br><br>
-تصل المعلومات الحسية الحشوية إلى المناطق الأكثر ذيلية من النواة المنفردة
-وتساهم في التنظيم الذاتي.
+تتفاعل دوائر النواة المنفردة مع مراكز الجهاز العصبي اللاإرادي للمساعدة
+في تنظيم الاستجابات القلبية والتنفسية والهضمية.
 </p>
+
 </div>
 
 <div class="card">
-<h3>Autonomic Reflexes · المنعكسات الذاتية</h3>
+
+<h3>
+  Chemoreceptor Information · المعلومات الكيميائية
+</h3>
+
 <p>
-The solitary nucleus participates in circuits involved in cardiovascular,
-respiratory, and gastrointestinal reflexes.
+Visceral sensory inputs can provide information about chemical changes
+detected by peripheral sensory organs such as the carotid and aortic
+bodies.
 <br><br>
-تشارك النواة المنفردة في دوائر مرتبطة بالمنعكسات القلبية الوعائية
-والتنفسية والهضمية.
+يمكن للمعلومات الحسية الحشوية أن تنقل تغيرات كيميائية تكتشفها أعضاء
+حسية طرفية مثل الأجسام السباتية والأبهريّة.
 </p>
+
 </div>
 
 <div class="card">
-<h3>Medulla · النخاع المستطيل</h3>
-<p>
-The solitary tract and nucleus are major sensory structures within the
-medulla of the brainstem.
-<br><br>
-يعد السبيل المنفرد والنواة المنفردة من أهم التراكيب الحسية في النخاع
-المستطيل ضمن جذع الدماغ.
-</p>
-</div>
 
-<div class="card">
-<h3>Central Connections · الاتصالات المركزية</h3>
-<p>
-Neurons of the solitary nucleus connect with multiple brainstem,
-hypothalamic, thalamic, and autonomic networks.
-<br><br>
-ترتبط خلايا النواة المنفردة بشبكات متعددة في جذع الدماغ وتحت المهاد
-والمهاد والجهاز العصبي الذاتي.
-</p>
-</div>
+<h3>
+  Baroreceptor Information · معلومات مستقبلات الضغط
+</h3>
 
-<div class="card">
-<h3>Rostral Solitary Nucleus · الجزء المنقاري</h3>
 <p>
-The rostral region is strongly associated with taste processing and is
-often referred to as the gustatory portion of the nucleus.
+Signals from arterial pressure receptors reach the solitary nucleus
+and participate in cardiovascular reflex circuits.
 <br><br>
-يرتبط الجزء المنقاري بصورة قوية بمعالجة التذوق ويعرف غالباً بالجزء
-الذوقي من النواة.
+تصل إشارات مستقبلات ضغط الدم إلى النواة المنفردة وتشارك في الدوائر
+المنعكسية لتنظيم القلب والأوعية.
 </p>
-</div>
 
-<div class="card">
-<h3>Caudal Solitary Nucleus · الجزء الذيلي</h3>
-<p>
-The caudal region receives substantial visceral sensory information and
-participates in autonomic reflex circuits.
-<br><br>
-يستقبل الجزء الذيلي كمية كبيرة من المعلومات الحسية الحشوية ويشارك في
-دوائر المنعكسات الذاتية.
-</p>
 </div>
 
 </div>
+
+<!-- =========================================================
+     CLINICAL
+     ========================================================= -->
 
 <div class="clinical-section">
 
@@ -1807,29 +2279,39 @@ participates in autonomic reflex circuits.
 </div>
 
 <h2>
-  Why the Solitary Pathway Matters
+  Why the Solitary Tract Matters
 </h2>
 
 <div class="clinical-box">
 
 <p>
-Damage involving the solitary nucleus or its associated cranial sensory
-pathways can affect taste and visceral sensory processing. Because these
-circuits participate in autonomic reflexes, lesions involving the
-medullary region can also interfere with normal cardiovascular,
-respiratory, or gastrointestinal responses.
+The solitary tract and nucleus are important components of the brainstem
+sensory and autonomic system. Because they receive input from multiple
+cranial nerves, lesions affecting this region can potentially disturb
+taste, visceral sensation, and autonomic reflexes.
+</p>
+
+<p>
+The solitary nucleus also participates in cardiovascular and respiratory
+regulation. For example, sensory information from arterial
+baroreceptors and chemoreceptors reaches this region and contributes to
+brainstem reflex circuits that help maintain physiological stability.
 </p>
 
 <p dir="rtl">
-يمكن أن تؤثر الإصابات التي تشمل النواة المنفردة أو المسارات الحسية
-القحفية المرتبطة بها في التذوق ومعالجة الإحساس الحشوي. ونظراً لمشاركة
-هذه الدوائر في المنعكسات الذاتية، فقد تؤثر إصابات مناطق النخاع المستطيل
-أيضاً في الاستجابات القلبية الوعائية والتنفسية والهضمية الطبيعية.
+يعد السبيل المنفرد والنواة المنفردة من المكونات المهمة للجهاز الحسي
+واللاإرادي في جذع الدماغ. ونظراً لاستقبالهما مدخلات من عدة أعصاب قحفية،
+فإن إصابة هذه المنطقة قد تؤثر في التذوق والإحساس الحشوي وبعض المنعكسات
+اللاإرادية.
 </p>
 
 </div>
 
 </div>
+
+<!-- =========================================================
+     QUICK FACTS
+     ========================================================= -->
 
 <div class="section">
 
@@ -1844,72 +2326,124 @@ respiratory, or gastrointestinal responses.
 <div class="facts-grid">
 
 <div class="fact">
+
 <span>01</span>
-<strong>Location · الموقع</strong>
+
+<strong>
+Location · الموقع
+</strong>
+
 <p>
-Dorsolateral medulla
+Dorsolateral medulla and lower brainstem
 </p>
+
 </div>
 
 <div class="fact">
+
 <span>02</span>
-<strong>Main Cranial Nerves · الأعصاب</strong>
+
+<strong>
+Main Nerves · الأعصاب الرئيسية
+</strong>
+
 <p>
-VII, IX, and X
+CN VII, CN IX, and CN X
 </p>
+
 </div>
 
 <div class="fact">
+
 <span>03</span>
-<strong>Main Functions · الوظائف</strong>
+
+<strong>
+Major Target · الهدف الرئيسي
+</strong>
+
 <p>
-Taste and visceral sensory processing
+Nucleus of the solitary tract
 </p>
+
 </div>
 
 <div class="fact">
+
 <span>04</span>
-<strong>Main Nucleus · النواة</strong>
+
+<strong>
+Sensory Types · أنواع الحس
+</strong>
+
 <p>
-Solitary nucleus
+Taste and visceral sensory information
 </p>
+
 </div>
 
 <div class="fact">
+
 <span>05</span>
-<strong>Taste Region · منطقة التذوق</strong>
+
+<strong>
+Taste · التذوق
+</strong>
+
 <p>
 Rostral solitary nucleus
 </p>
+
 </div>
 
 <div class="fact">
+
 <span>06</span>
-<strong>Visceral Region · الحشوي</strong>
+
+<strong>
+Visceral Input · المدخلات الحشوية
+</strong>
+
 <p>
-Caudal solitary nucleus
+Predominantly caudal solitary nucleus
 </p>
+
 </div>
 
 <div class="fact">
+
 <span>07</span>
-<strong>Major System · النظام</strong>
+
+<strong>
+Autonomic Role · الدور اللاإرادي
+</strong>
+
 <p>
-Visceral sensory and gustatory pathways
+Cardiovascular, respiratory, and visceral reflexes
 </p>
+
 </div>
 
 <div class="fact">
+
 <span>08</span>
-<strong>Brainstem Level · المستوى</strong>
+
+<strong>
+Pathway Type · نوع المسار
+</strong>
+
 <p>
-Medulla
+Ascending sensory afferent pathway
 </p>
-</div>
 
 </div>
 
 </div>
+
+</div>
+
+<!-- =========================================================
+     QUIZ
+     ========================================================= -->
 
 <div id="quiz" class="quiz">
 
@@ -1931,20 +2465,32 @@ Choose the best answer for each question.
 1. Where is the solitary tract primarily located?
 </p>
 
-<button class="option" onclick="checkAnswer(this,true)">
+<button
+class="option"
+onclick="checkAnswer(this,true)"
+>
 A. Dorsolateral medulla
 </button>
 
-<button class="option" onclick="checkAnswer(this,false)">
+<button
+class="option"
+onclick="checkAnswer(this,false)"
+>
 B. Cerebellar cortex
 </button>
 
-<button class="option" onclick="checkAnswer(this,false)">
-C. Internal capsule
+<button
+class="option"
+onclick="checkAnswer(this,false)"
+>
+C. Spinal anterior horn
 </button>
 
-<button class="option" onclick="checkAnswer(this,false)">
-D. Lumbar spinal cord
+<button
+class="option"
+onclick="checkAnswer(this,false)"
+>
+D. Cerebral cortex
 </button>
 
 </div>
@@ -1952,22 +2498,34 @@ D. Lumbar spinal cord
 <div class="question">
 
 <p>
-2. Which cranial nerves contribute important afferents to the solitary nucleus?
+2. Which cranial nerves contribute major sensory fibers to the solitary pathway?
 </p>
 
-<button class="option" onclick="checkAnswer(this,true)">
+<button
+class="option"
+onclick="checkAnswer(this,true)"
+>
 A. VII, IX, and X
 </button>
 
-<button class="option" onclick="checkAnswer(this,false)">
+<button
+class="option"
+onclick="checkAnswer(this,false)"
+>
 B. II, III, and IV
 </button>
 
-<button class="option" onclick="checkAnswer(this,false)">
+<button
+class="option"
+onclick="checkAnswer(this,false)"
+>
 C. V, VI, and VIII
 </button>
 
-<button class="option" onclick="checkAnswer(this,false)">
+<button
+class="option"
+onclick="checkAnswer(this,false)"
+>
 D. XI and XII only
 </button>
 
@@ -1976,71 +2534,35 @@ D. XI and XII only
 <div class="question">
 
 <p>
-3. Which type of information is strongly associated with the solitary pathway?
+3. What is an important function of the solitary nucleus?
 </p>
 
-<button class="option" onclick="checkAnswer(this,true)">
-A. Taste and visceral sensory information
+<button
+class="option"
+onclick="checkAnswer(this,true)"
+>
+A. Processing visceral sensory and taste-related information
 </button>
 
-<button class="option" onclick="checkAnswer(this,false)">
-B. Voluntary skeletal motor output only
+<button
+class="option"
+onclick="checkAnswer(this,false)"
+>
+B. Generating voluntary skeletal muscle contractions directly
 </button>
 
-<button class="option" onclick="checkAnswer(this,false)">
-C. Visual information from the retina
+<button
+class="option"
+onclick="checkAnswer(this,false)"
+>
+C. Producing cerebrospinal fluid
 </button>
 
-<button class="option" onclick="checkAnswer(this,false)">
-D. Auditory information from the cochlea
-</button>
-
-</div>
-
-<div class="question">
-
-<p>
-4. What major nucleus receives many fibers traveling through the solitary tract?
-</p>
-
-<button class="option" onclick="checkAnswer(this,true)">
-A. Solitary nucleus
-</button>
-
-<button class="option" onclick="checkAnswer(this,false)">
-B. Caudate nucleus
-</button>
-
-<button class="option" onclick="checkAnswer(this,false)">
-C. Red nucleus
-</button>
-
-<button class="option" onclick="checkAnswer(this,false)">
-D. Dentate nucleus
-</button>
-
-</div>
-
-<div class="question">
-
-<p>
-5. Which region of the solitary nucleus is particularly associated with taste?
-</p>
-
-<button class="option" onclick="checkAnswer(this,true)">
-A. Rostral solitary nucleus
-</button>
-
-<button class="option" onclick="checkAnswer(this,false)">
-B. Caudal spinal cord
-</button>
-
-<button class="option" onclick="checkAnswer(this,false)">
-C. Cerebellar vermis
-</button>
-
-<button class="option" onclick="checkAnswer(this,false)">
-D. Occipital cortex
+<button
+class="option"
+onclick="checkAnswer(this,false)"
+>
+D. Detecting visual information from the retina
 </button>
 
 </div>
@@ -2052,6 +2574,10 @@ D. Occipital cortex
 </section>
 
 </main>
+
+<!-- =========================================================
+     THREE.JS
+     ========================================================= -->
 
 <script type="importmap">
 {
@@ -2065,62 +2591,117 @@ D. Occipital cortex
 <script type="module">
 
 import * as THREE from "three";
-import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
-const canvas = document.getElementById("brainCanvas");
-const loading = document.getElementById("loading");
-const loadText = document.getElementById("loadText");
-const loadBar = document.getElementById("loadBar");
-const locationLabel = document.getElementById("locationLabel");
+import {
+  OrbitControls
+} from "three/addons/controls/OrbitControls.js";
 
-const scene = new THREE.Scene();
+import {
+  GLTFLoader
+} from "three/addons/loaders/GLTFLoader.js";
 
-const camera = new THREE.PerspectiveCamera(
-  30,
-  1,
-  .01,
-  100
+import {
+  DRACOLoader
+} from "three/addons/loaders/DRACOLoader.js";
+
+
+const canvas =
+  document.getElementById("brainCanvas");
+
+const loading =
+  document.getElementById("loading");
+
+const loadText =
+  document.getElementById("loadText");
+
+const loadBar =
+  document.getElementById("loadBar");
+
+const locationLabel =
+  document.getElementById("locationLabel");
+
+
+const scene =
+  new THREE.Scene();
+
+
+const camera =
+  new THREE.PerspectiveCamera(
+    30,
+    1,
+    .01,
+    100
+  );
+
+
+camera.position.set(
+  3.2,
+  .3,
+  8.5
 );
 
-camera.position.set(3.2, .3, 8.5);
 
-const renderer = new THREE.WebGLRenderer({
-  canvas,
-  antialias: true,
-  alpha: true
-});
+const renderer =
+  new THREE.WebGLRenderer({
+    canvas,
+    antialias: true,
+    alpha: true
+  });
+
 
 renderer.setPixelRatio(
-  Math.min(window.devicePixelRatio || 1, 2)
+  Math.min(
+    window.devicePixelRatio || 1,
+    2
+  )
 );
 
-renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = .8;
 
-const controls = new OrbitControls(
-  camera,
-  canvas
-);
+renderer.toneMapping =
+  THREE.ACESFilmicToneMapping;
+
+renderer.toneMappingExposure =
+  .75;
+
+
+const controls =
+  new OrbitControls(
+    camera,
+    canvas
+  );
+
 
 controls.enableRotate = true;
 controls.rotateSpeed = .6;
+
 controls.enableDamping = true;
 controls.dampingFactor = .05;
+
 controls.enableZoom = true;
 controls.zoomSpeed = .6;
+
 controls.enablePan = false;
+
 controls.autoRotate = true;
 controls.autoRotateSpeed = .2;
-controls.target.set(0, -.3, 0);
+
+controls.target.set(
+  0,
+  -.3,
+  0
+);
+
 controls.minDistance = 3.5;
 controls.maxDistance = 16;
+
 
 scene.add(
   new THREE.AmbientLight(
     0xffffff,
-    .6
+    .55
   )
 );
+
 
 scene.add(
   new THREE.HemisphereLight(
@@ -2130,15 +2711,21 @@ scene.add(
   )
 );
 
+
 const keyLight =
   new THREE.DirectionalLight(
     0xfff5f0,
-    1.3
+    1.4
   );
 
-keyLight.position.set(6, 10, 8);
+keyLight.position.set(
+  6,
+  10,
+  8
+);
 
 scene.add(keyLight);
+
 
 const fillLight =
   new THREE.DirectionalLight(
@@ -2146,255 +2733,624 @@ const fillLight =
     .4
   );
 
-fillLight.position.set(-7, 2, 6);
+fillLight.position.set(
+  -7,
+  2,
+  6
+);
 
 scene.add(fillLight);
+
 
 const brainGroup =
   new THREE.Group();
 
 scene.add(brainGroup);
 
-let pathwayObjects = [];
 
-let pathwayVisible = true;
+let targetMeshes = [];
+let brainMeshes = [];
 
-function createBrainModel() {
+let locationShown = false;
+let highlighted = true;
 
-  const brainMaterial =
-    new THREE.MeshPhysicalMaterial({
-      color: 0xf0c8d0,
-      roughness: .62,
-      metalness: 0,
-      clearcoat: .15,
-      side: THREE.DoubleSide
-    });
 
-  const stemMaterial =
-    new THREE.MeshPhysicalMaterial({
-      color: 0xc39da8,
-      roughness: .68,
-      metalness: 0,
-      clearcoat: .12,
-      side: THREE.DoubleSide
-    });
+const brainOpaqueMaterial =
+  new THREE.MeshPhysicalMaterial({
+    color: 0xf1c5d0,
+    roughness: .62,
+    metalness: 0,
+    clearcoat: .12,
+    clearcoatRoughness: .5,
+    side: THREE.DoubleSide,
+    transparent: false,
+    opacity: 1
+  });
 
-  const brainGeometry =
-    new THREE.SphereGeometry(
-      2.4,
-      64,
-      48
-    );
 
-  brainGeometry.scale(
-    1.45,
-    1,
-    .82
-  );
+const brainTransparentMaterial =
+  new THREE.MeshPhysicalMaterial({
+    color: 0xf1c5d0,
+    roughness: .55,
+    metalness: 0,
+    clearcoat: .1,
+    clearcoatRoughness: .5,
+    side: THREE.DoubleSide,
+    transparent: true,
+    opacity: .16,
+    depthWrite: false
+  });
 
-  const brain =
-    new THREE.Mesh(
-      brainGeometry,
-      brainMaterial
-    );
 
-  brain.position.y = .9;
+const targetMaterial =
+  new THREE.MeshPhysicalMaterial({
+    color: 0xff2948,
+    roughness: .3,
+    metalness: 0,
+    clearcoat: .6,
+    clearcoatRoughness: .12,
+    emissive: 0x5c0613,
+    emissiveIntensity: 1.05,
+    side: THREE.DoubleSide,
+    transparent: false,
+    opacity: 1
+  });
 
-  brainGroup.add(brain);
 
-  const stemGeometry =
-    new THREE.CapsuleGeometry(
-      .52,
-      2.6,
-      16,
-      32
-    );
+const targetNormalMaterial =
+  new THREE.MeshPhysicalMaterial({
+    color: 0xf1c5d0,
+    roughness: .62,
+    metalness: 0,
+    clearcoat: .12,
+    clearcoatRoughness: .5,
+    side: THREE.DoubleSide
+  });
 
-  const stem =
-    new THREE.Mesh(
-      stemGeometry,
-      stemMaterial
-    );
 
-  stem.position.y = -1.7;
-  stem.scale.z = .8;
+function normalizeName(name) {
 
-  brainGroup.add(stem);
-
-  const pathwayMaterial =
-    new THREE.MeshBasicMaterial({
-      color: 0xff4055
-    });
-
-  const curve =
-    new THREE.CatmullRomCurve3([
-      new THREE.Vector3(
-        .42,
-        -.55,
-        .54
-      ),
-      new THREE.Vector3(
-        .35,
-        -.95,
-        .55
-      ),
-      new THREE.Vector3(
-        .31,
-        -1.35,
-        .54
-      ),
-      new THREE.Vector3(
-        .27,
-        -1.75,
-        .52
-      ),
-      new THREE.Vector3(
-        .23,
-        -2.15,
-        .49
-      )
-    ]);
-
-  const pathwayGeometry =
-    new THREE.TubeGeometry(
-      curve,
-      40,
-      .065,
-      12,
-      false
-    );
-
-  const pathway =
-    new THREE.Mesh(
-      pathwayGeometry,
-      pathwayMaterial
-    );
-
-  brainGroup.add(pathway);
-
-  pathwayObjects.push(pathway);
-
-  const nucleusGeometry =
-    new THREE.SphereGeometry(
-      .18,
-      24,
-      24
-    );
-
-  const nucleusMaterial =
-    new THREE.MeshStandardMaterial({
-      color: 0xff4055,
-      emissive: 0x660011,
-      emissiveIntensity: 1
-    });
-
-  const nucleus =
-    new THREE.Mesh(
-      nucleusGeometry,
-      nucleusMaterial
-    );
-
-  nucleus.position.set(
-    .42,
-    -.55,
-    .54
-  );
-
-  brainGroup.add(nucleus);
-
-  pathwayObjects.push(nucleus);
-
-  loadBar.style.width = "100%";
-
-  loadText.textContent =
-    "Solitary pathway ready";
-
-  setTimeout(() => {
-    loading.classList.add("hide");
-  }, 450);
+  return String(name || "")
+    .toLowerCase()
+    .replace(/[\s_\-.]+/g, "");
 }
 
-function setPathwayHighlight(enabled) {
 
-  pathwayVisible = enabled;
+function getMeshName(mesh) {
 
-  pathwayObjects.forEach(
-    object => {
-      object.visible = enabled;
+  const userName =
+    mesh.userData &&
+    mesh.userData.name
+      ? mesh.userData.name
+      : "";
+
+  return `${mesh.name} ${userName}`;
+}
+
+
+function isExplicitSolitaryStructure(mesh) {
+
+  const name =
+    normalizeName(
+      getMeshName(mesh)
+    );
+
+
+  const targetNames = [
+
+    "solitarytract",
+
+    "tractofsolitary",
+
+    "nucleusofsolitarytract",
+
+    "nucleusofthesolitarytract",
+
+    "solitarynucleus",
+
+    "nucleussolitarius",
+
+    "solitariustract",
+
+    "gustatorynucleus",
+
+    "visceralsensorynucleus"
+
+  ];
+
+
+  return targetNames.some(
+    item =>
+      name.includes(item)
+  );
+}
+
+
+function isClearlyNotTarget(mesh) {
+
+  const name =
+    normalizeName(
+      getMeshName(mesh)
+    );
+
+
+  const excludedNames = [
+
+    "cerebellum",
+
+    "cortex",
+
+    "cerebral",
+
+    "skull",
+
+    "skin",
+
+    "artery",
+
+    "vein",
+
+    "vessel",
+
+    "optic",
+
+    "cochlear",
+
+    "vestibular"
+
+  ];
+
+
+  return excludedNames.some(
+    item =>
+      name.includes(item)
+  );
+}
+
+
+function calculateTargetCandidates(model) {
+
+  const meshes = [];
+
+
+  model.traverse(child => {
+
+    if (!child.isMesh) {
+      return;
     }
+
+    meshes.push(child);
+
+  });
+
+
+  return meshes.filter(
+    mesh =>
+      isExplicitSolitaryStructure(mesh) &&
+      !isClearlyNotTarget(mesh)
+  );
+}
+
+
+function prepareMaterials(model) {
+
+  brainMeshes = [];
+  targetMeshes = [];
+
+
+  model.traverse(child => {
+
+    if (!child.isMesh) {
+      return;
+    }
+
+
+    child.castShadow = true;
+    child.receiveShadow = true;
+
+
+    child.material =
+      brainOpaqueMaterial.clone();
+
+
+    brainMeshes.push(child);
+
+  });
+
+
+  targetMeshes =
+    calculateTargetCandidates(model);
+
+
+  targetMeshes.forEach(mesh => {
+
+    mesh.material =
+      targetMaterial.clone();
+
+  });
+}
+
+
+function loadRealBrain() {
+
+  const loader =
+    new GLTFLoader();
+
+
+  const dracoLoader =
+    new DRACOLoader();
+
+
+  dracoLoader.setDecoderPath(
+    "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/"
   );
 
-  if (enabled) {
-    locationLabel.classList.add("show");
-  } else {
-    locationLabel.classList.remove("show");
+
+  loader.setDRACOLoader(
+    dracoLoader
+  );
+
+
+  const urls = [
+
+    "https://cdn.jsdelivr.net/gh/itayinbarr/brainproject@main/brain-atlas/models/brain.glb",
+
+    "https://raw.githubusercontent.com/itayinbarr/brainproject/main/brain-atlas/models/brain.glb",
+
+    "https://itayinbarr.github.io/brainproject/models/brain.glb"
+
+  ];
+
+
+  let index = 0;
+
+
+  function tryLoad() {
+
+    if (index >= urls.length) {
+
+      loadText.textContent =
+        "Brain model could not be loaded.";
+
+      loadBar.style.width =
+        "100%";
+
+
+      setTimeout(() => {
+
+        loading.classList.add(
+          "hide"
+        );
+
+      }, 500);
+
+
+      return;
+    }
+
+
+    const url =
+      urls[index++];
+
+
+    loader.load(
+
+      url,
+
+      gltf => {
+
+        const model =
+          gltf.scene;
+
+
+        const box =
+          new THREE.Box3()
+            .setFromObject(model);
+
+
+        const center =
+          box.getCenter(
+            new THREE.Vector3()
+          );
+
+
+        const size =
+          box.getSize(
+            new THREE.Vector3()
+          );
+
+
+        const maxDim =
+          Math.max(
+            size.x,
+            size.y,
+            size.z
+          );
+
+
+        const scale =
+          4.5 / maxDim;
+
+
+        model.scale.setScalar(
+          scale
+        );
+
+
+        model.position.sub(
+          center.multiplyScalar(
+            scale
+          )
+        );
+
+
+        model.position.y -= .6;
+
+
+        brainGroup.add(
+          model
+        );
+
+
+        prepareMaterials(
+          model
+        );
+
+
+        if (
+          targetMeshes.length === 0
+        ) {
+
+          loadText.textContent =
+            "Brain loaded · named solitary tract surface unavailable";
+
+        } else {
+
+          loadText.textContent =
+            "Solitary tract structures located";
+
+          locationLabel.classList.add(
+            "show"
+          );
+
+        }
+
+
+        loadBar.style.width =
+          "100%";
+
+
+        setTimeout(() => {
+
+          loading.classList.add(
+            "hide"
+          );
+
+        }, 500);
+
+      },
+
+      progress => {
+
+        if (progress.total > 0) {
+
+          const pct =
+            Math.min(
+              95,
+              progress.loaded /
+              progress.total *
+              95
+            );
+
+
+          loadBar.style.width =
+            pct + "%";
+        }
+
+      },
+
+      error => {
+
+        console.warn(
+          "Brain model loading failed:",
+          error
+        );
+
+
+        tryLoad();
+
+      }
+
+    );
+
   }
+
+
+  tryLoad();
+
 }
 
-document
-  .getElementById("showLocation")
-  .addEventListener(
-    "click",
-    () => {
 
-      const button =
-        document.getElementById(
-          "showLocation"
-        );
+function setBrainTransparency(enabled) {
 
-      pathwayVisible =
-        !pathwayVisible;
+  brainMeshes.forEach(
+    mesh => {
 
-      setPathwayHighlight(
-        pathwayVisible
-      );
+      if (
+        targetMeshes.includes(mesh)
+      ) {
+        return;
+      }
 
-      button.classList.toggle(
-        "active",
-        pathwayVisible
-      );
 
-      button.textContent =
-        pathwayVisible
-          ? "📍 Hide Solitary Tract"
-          : "📍 Show Solitary Tract";
+      mesh.material =
+        enabled
+          ? brainTransparentMaterial.clone()
+          : brainOpaqueMaterial.clone();
+
     }
   );
 
-document
-  .getElementById("highlight")
-  .addEventListener(
-    "click",
-    () => {
+}
 
-      pathwayVisible =
-        !pathwayVisible;
 
-      setPathwayHighlight(
-        pathwayVisible
-      );
+function setTargetHighlight(enabled) {
 
-      const button =
-        document.getElementById(
-          "highlight"
-        );
+  targetMeshes.forEach(
+    mesh => {
 
-      button.classList.toggle(
-        "active",
-        pathwayVisible
-      );
+      mesh.material =
+        enabled
+          ? targetMaterial.clone()
+          : targetNormalMaterial.clone();
 
-      button.textContent =
-        pathwayVisible
-          ? "🔴 Highlight Pathway"
-          : "🧠 Highlight Pathway";
     }
   );
+
+}
+
+
+const showLocationBtn =
+  document.getElementById(
+    "showLocation"
+  );
+
+
+showLocationBtn.addEventListener(
+  "click",
+  () => {
+
+    locationShown =
+      !locationShown;
+
+
+    if (locationShown) {
+
+      setBrainTransparency(
+        true
+      );
+
+      setTargetHighlight(
+        true
+      );
+
+
+      highlighted = true;
+
+
+      locationLabel.classList.add(
+        "show"
+      );
+
+
+      showLocationBtn.classList.add(
+        "active"
+      );
+
+
+      showLocationBtn.textContent =
+        "📍 Hide Solitary Tract";
+
+
+      controls.autoRotate =
+        false;
+
+
+      rotateBtn.classList.remove(
+        "active"
+      );
+
+
+      rotateBtn.textContent =
+        "▶ Auto Rotate";
+
+    } else {
+
+      setBrainTransparency(
+        false
+      );
+
+      setTargetHighlight(
+        highlighted
+      );
+
+
+      locationLabel.classList.remove(
+        "show"
+      );
+
+
+      showLocationBtn.classList.remove(
+        "active"
+      );
+
+
+      showLocationBtn.textContent =
+        "📍 Show Solitary Tract";
+
+    }
+
+  }
+);
+
+
+const highlightBtn =
+  document.getElementById(
+    "highlight"
+  );
+
+
+highlightBtn.addEventListener(
+  "click",
+  () => {
+
+    highlighted =
+      !highlighted;
+
+
+    setTargetHighlight(
+      highlighted
+    );
+
+
+    if (highlighted) {
+
+      highlightBtn.classList.add(
+        "active"
+      );
+
+      highlightBtn.textContent =
+        "🔴 Highlight Solitary Tract";
+
+    } else {
+
+      highlightBtn.classList.remove(
+        "active"
+      );
+
+      highlightBtn.textContent =
+        "🧠 Highlight Solitary Tract";
+
+    }
+
+
+    if (locationShown) {
+
+      setBrainTransparency(
+        true
+      );
+
+    }
+
+  }
+);
+
 
 const rotateBtn =
   document.getElementById(
     "rotate"
   );
+
 
 rotateBtn.addEventListener(
   "click",
@@ -2403,17 +3359,21 @@ rotateBtn.addEventListener(
     controls.autoRotate =
       !controls.autoRotate;
 
+
     rotateBtn.classList.toggle(
       "active",
       controls.autoRotate
     );
 
+
     rotateBtn.textContent =
       controls.autoRotate
         ? "⟳ Auto Rotate"
         : "▶ Auto Rotate";
+
   }
 );
+
 
 document
   .getElementById("reset")
@@ -2427,86 +3387,129 @@ document
         8.5
       );
 
+
       controls.target.set(
         0,
         -.3,
         0
       );
 
-      controls.autoRotate =
-        true;
 
       controls.update();
 
-      pathwayVisible =
-        true;
 
-      setPathwayHighlight(
+      locationShown = false;
+      highlighted = true;
+
+
+      setBrainTransparency(
+        false
+      );
+
+
+      setTargetHighlight(
         true
       );
 
-      document
-        .getElementById(
-          "showLocation"
-        )
-        .classList.add(
-          "active"
-        );
 
-      document
-        .getElementById(
-          "highlight"
-        )
-        .classList.add(
-          "active"
-        );
+      locationLabel.classList.remove(
+        "show"
+      );
 
-      rotateBtn.classList.add(
+
+      showLocationBtn.classList.remove(
         "active"
       );
 
-      rotateBtn.textContent =
-        "⟳ Auto Rotate";
+
+      showLocationBtn.textContent =
+        "📍 Show Solitary Tract";
+
+
+      highlightBtn.classList.add(
+        "active"
+      );
+
+
+      highlightBtn.textContent =
+        "🔴 Highlight Solitary Tract";
+
     }
   );
 
+
 function updateLabel() {
 
-  if (!pathwayVisible) {
+  if (!locationShown) {
     return;
   }
 
+
+  if (targetMeshes.length === 0) {
+    return;
+  }
+
+
+  const box =
+    new THREE.Box3();
+
+
+  targetMeshes.forEach(
+    mesh => {
+
+      box.expandByObject(
+        mesh
+      );
+
+    }
+  );
+
+
+  if (box.isEmpty()) {
+    return;
+  }
+
+
   const position =
-    new THREE.Vector3(
-      .42,
-      -.55,
-      .54
+    box.getCenter(
+      new THREE.Vector3()
     );
 
-  position.project(camera);
+
+  position.project(
+    camera
+  );
+
 
   const x =
     (position.x + 1) / 2 *
     canvas.clientWidth;
 
+
   const y =
     (-position.y + 1) / 2 *
     canvas.clientHeight;
 
+
   locationLabel.style.left =
     x + "px";
 
+
   locationLabel.style.top =
-    (y - 30) + "px";
+    (y - 35) + "px";
+
 }
+
 
 function resize() {
 
   const width =
     canvas.clientWidth;
 
+
   const height =
     canvas.clientHeight;
+
 
   if (
     width <= 0 ||
@@ -2515,22 +3518,28 @@ function resize() {
     return;
   }
 
+
   camera.aspect =
     width / height;
 
+
   camera.updateProjectionMatrix();
+
 
   renderer.setSize(
     width,
     height,
     false
   );
+
 }
+
 
 window.addEventListener(
   "resize",
   resize
 );
+
 
 function animate() {
 
@@ -2538,23 +3547,30 @@ function animate() {
     animate
   );
 
+
   controls.update();
 
+
   updateLabel();
+
 
   renderer.render(
     scene,
     camera
   );
+
 }
 
+
 resize();
-
 animate();
-
-createBrainModel();
+loadRealBrain();
 
 </script>
+
+<!-- =========================================================
+     QUIZ SCRIPT
+     ========================================================= -->
 
 <script>
 
@@ -2566,10 +3582,12 @@ function checkAnswer(
   const parent =
     button.parentElement;
 
+
   const options =
     parent.querySelectorAll(
       ".option"
     );
+
 
   options.forEach(
     option => {
@@ -2578,8 +3596,10 @@ function checkAnswer(
         "correct",
         "wrong"
       );
+
     }
   );
+
 
   if (correct) {
 
@@ -2592,10 +3612,14 @@ function checkAnswer(
     button.classList.add(
       "wrong"
     );
+
   }
 
+
   updateQuizScore();
+
 }
+
 
 function updateQuizScore() {
 
@@ -2604,9 +3628,10 @@ function updateQuizScore() {
       "quizResult"
     );
 
-  let answered = 0;
 
+  let answered = 0;
   let correctAnswers = 0;
+
 
   document
     .querySelectorAll(
@@ -2620,9 +3645,11 @@ function updateQuizScore() {
             ".correct,.wrong"
           );
 
+
         if (selected) {
 
           answered++;
+
 
           if (
             selected.classList.contains(
@@ -2631,22 +3658,29 @@ function updateQuizScore() {
           ) {
 
             correctAnswers++;
+
           }
+
         }
+
       }
     );
+
 
   if (answered > 0) {
 
     result.style.display =
       "block";
 
+
     result.textContent =
       "Score: " +
       correctAnswers +
       " / " +
       answered;
+
   }
+
 }
 
 </script>
