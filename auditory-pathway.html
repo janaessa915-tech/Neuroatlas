@@ -1,0 +1,3142 @@
+<!-- /auditory-pathway.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NeuroAtlas | Auditory Pathway</title>
+
+<style>
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #050b13;
+  color: #eef4fa;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.7;
+}
+
+nav {
+  height: 70px;
+  padding: 0 7%;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+nav a {
+  color: #9db0c3;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+nav a:hover {
+  color: #fff;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 60px 7% 100px;
+}
+
+.eyebrow {
+  color: #61b5ff;
+  letter-spacing: 3px;
+  font-size: 12px;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+
+h1 {
+  font-size: clamp(48px, 7vw, 82px);
+  line-height: .95;
+  letter-spacing: -4px;
+  margin-bottom: 10px;
+}
+
+.arabic-title {
+  color: #ff4055;
+  font-size: 24px;
+  margin-bottom: 25px;
+}
+
+.hero p {
+  color: #a6b6c7;
+  max-width: 850px;
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.action-button,
+.controls button {
+  padding: 11px 17px;
+  border-radius: 9px;
+  background: #0b1928;
+  border: 1px solid #31516d;
+  color: #bdd0e0;
+  text-decoration: none;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.action-button:hover,
+.controls button:hover {
+  background: #14304a;
+  color: #fff;
+  border-color: #61b5ff;
+}
+
+.controls button.active {
+  background: #321218;
+  border-color: #ff4055;
+  color: #ffd9de;
+}
+
+.viewer {
+  margin-top: 60px;
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 24px;
+  overflow: hidden;
+  background: #02060b;
+  box-shadow: 0 25px 80px rgba(0,0,0,.45);
+}
+
+.viewer-header {
+  min-height: 65px;
+  padding: 0 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.viewer-title {
+  font-size: 14px;
+  color: #d2dce6;
+}
+
+.viewer-status {
+  color: #708499;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.scene {
+  position: relative;
+  width: 100%;
+  height: 700px;
+  background:
+    radial-gradient(
+      ellipse at 50% 45%,
+      #203b51 0%,
+      #0d1c2e 45%,
+      #02060b 100%
+    );
+}
+
+#brainCanvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.loading {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 16px;
+  background: #02060b;
+  color: #9db0c3;
+  font-size: 14px;
+  transition: opacity .8s;
+}
+
+.loading.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loading-bar {
+  width: 180px;
+  height: 2px;
+  background: rgba(255,255,255,.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.loading-bar-inner {
+  width: 0%;
+  height: 100%;
+  background: #ff4055;
+  transition: width .3s;
+}
+
+.location-label {
+  position: absolute;
+  z-index: 30;
+  pointer-events: none;
+  transform: translate(-50%,-100%);
+  display: none;
+}
+
+.location-label.show {
+  display: block;
+}
+
+.label-box {
+  position: relative;
+  padding: 9px 15px;
+  border-radius: 10px;
+  background: rgba(5,10,17,.96);
+  border: 1.5px solid #ffb6c1;
+  color: #ffd9de;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  box-shadow:
+    0 0 12px rgba(255,182,193,.35),
+    0 0 30px rgba(255,182,193,.2);
+}
+
+.label-box::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -15px;
+  width: 1.5px;
+  height: 15px;
+  background: #ffb6c1;
+  transform: translateX(-50%);
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 15px;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.section {
+  margin-top: 70px;
+}
+
+.section-label {
+  color: #61b5ff;
+  letter-spacing: 2px;
+  font-size: 11px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.section h2 {
+  font-size: 32px;
+  margin-bottom: 25px;
+}
+
+.section-intro {
+  color: #91a5b8;
+  max-width: 900px;
+  font-size: 15px;
+  line-height: 1.9;
+  margin-bottom: 30px;
+}
+
+.location {
+  margin-top: 70px;
+  padding: 35px;
+  background: #091522;
+  border: 1px solid #172b3e;
+  border-radius: 18px;
+}
+
+.location h2 {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+.location-intro {
+  color: #91a5b8;
+  max-width: 900px;
+  line-height: 1.9;
+  margin-bottom: 30px;
+}
+
+/* =========================================================
+   AUDITORY PATHWAY DIAGRAM
+   ========================================================= */
+
+.pathway-viewer {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  height: 760px;
+  margin: auto;
+  border: 1px solid #243b50;
+  border-radius: 20px;
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      ellipse at 50% 45%,
+      #182b3b 0%,
+      #0a1622 65%,
+      #02060b 100%
+    );
+}
+
+.pathway-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.pathway-title {
+  font-size: 13px;
+  letter-spacing: 2px;
+  fill: #d9e3eb;
+}
+
+.pathway-subtitle {
+  font-size: 10px;
+  letter-spacing: 1.2px;
+  fill: #71879a;
+}
+
+.brain-silhouette {
+  fill: #293c4b;
+  stroke: #6b7d8d;
+  stroke-width: 2;
+  opacity: .72;
+}
+
+.brain-inner {
+  fill: #142331;
+  stroke: #405568;
+  stroke-width: 1.5;
+}
+
+.cochlea {
+  fill: none;
+  stroke: #ff7182;
+  stroke-width: 5;
+}
+
+.pathway-line {
+  fill: none;
+  stroke: #ff4055;
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: url(#pathGlow);
+}
+
+.pathway-secondary {
+  fill: none;
+  stroke: #ff9daa;
+  stroke-width: 2;
+  stroke-dasharray: 6 7;
+  opacity: .7;
+}
+
+.pathway-node {
+  fill: #ff4055;
+  stroke: #ffd7dc;
+  stroke-width: 2;
+  filter: url(#nodeGlow);
+}
+
+.pathway-node-small {
+  fill: #ff8d9b;
+  stroke: #ffd7dc;
+  stroke-width: 1.5;
+}
+
+.node-label {
+  font-size: 13px;
+  font-weight: bold;
+  fill: #fff;
+}
+
+.node-arabic {
+  font-size: 10px;
+  fill: #ffb6c1;
+}
+
+.node-number {
+  font-size: 10px;
+  font-weight: bold;
+  fill: #fff;
+}
+
+.region-label {
+  font-size: 10px;
+  fill: #71879a;
+  letter-spacing: 1.4px;
+}
+
+.arrow {
+  fill: #ff4055;
+}
+
+.pathway-caption {
+  text-align: center;
+  color: #9fb0c3;
+  margin-top: 15px;
+  line-height: 1.8;
+}
+
+.source-note {
+  max-width: 900px;
+  margin: 15px auto 0;
+  color: #617487;
+  font-size: 11px;
+  text-align: center;
+}
+
+.legend {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #b5c2ce;
+  font-size: 11px;
+}
+
+.legend-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  box-shadow: 0 0 12px currentColor;
+}
+
+.legend-dot.path {
+  background: #ff4055;
+  color: #ff4055;
+}
+
+.legend-dot.relay {
+  background: #ff9daa;
+  color: #ff9daa;
+}
+
+.legend-dot.cortex {
+  background: #61b5ff;
+  color: #61b5ff;
+}
+
+/* =========================================================
+   INFORMATION CARDS
+   ========================================================= */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 20px;
+}
+
+.card {
+  padding: 27px;
+  background: #091522;
+  border: 1px solid #172b3e;
+  border-radius: 18px;
+  transition: transform .2s,border-color .2s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  border-color: #4a2027;
+}
+
+.card h3 {
+  font-size: 18px;
+  margin-bottom: 13px;
+  color: #eef4fa;
+  line-height: 1.45;
+}
+
+.card p {
+  color: #91a5b8;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.clinical-section {
+  margin-top: 65px;
+}
+
+.clinical-box {
+  padding: 30px;
+  background: #091522;
+  border: 1px solid #172b3e;
+  border-left: 3px solid #ff4055;
+  border-radius: 18px;
+}
+
+.clinical-box p {
+  color: #a7b7c6;
+  font-size: 15px;
+  line-height: 1.9;
+  margin-bottom: 18px;
+}
+
+.clinical-box p:last-child {
+  margin-bottom: 0;
+}
+
+.facts-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 15px;
+}
+
+.fact {
+  padding: 22px;
+  background: #091522;
+  border: 1px solid #172b3e;
+  border-radius: 16px;
+}
+
+.fact span {
+  display: block;
+  color: #ff4055;
+  font-size: 11px;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+.fact strong {
+  display: block;
+  color: #eef4fa;
+  font-size: 14px;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.fact p {
+  color: #8195a8;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.quiz {
+  margin-top: 65px;
+  padding: 30px;
+  background: #091522;
+  border: 1px solid #172b3e;
+  border-radius: 18px;
+}
+
+.quiz h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.quiz-intro {
+  color: #91a5b8;
+  margin-bottom: 25px;
+}
+
+.question {
+  margin-bottom: 30px;
+}
+
+.question:last-child {
+  margin-bottom: 0;
+}
+
+.question p {
+  color: #eef4fa;
+  font-size: 16px;
+  margin-bottom: 12px;
+  font-weight: bold;
+}
+
+.option {
+  display: block;
+  width: 100%;
+  padding: 12px 15px;
+  margin-top: 9px;
+  background: #0b1928;
+  color: #c7d5e2;
+  border: 1px solid #263951;
+  border-radius: 9px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+  transition: .2s;
+}
+
+.option:hover {
+  border-color: #ff4055;
+  background: #111e2c;
+}
+
+.option.correct {
+  border-color: #8fd3a8;
+  background: #14291e;
+  color: #b9f0c9;
+}
+
+.option.wrong {
+  border-color: #d88b9b;
+  background: #2a171d;
+  color: #ffc2cc;
+}
+
+.quiz-result {
+  margin-top: 25px;
+  padding: 15px;
+  border-radius: 10px;
+  background: #0b1928;
+  border: 1px solid #263951;
+  color: #aebdce;
+  display: none;
+}
+
+@media (max-width: 900px) {
+
+  .cards {
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  .facts-grid {
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  .pathway-viewer {
+    height: 650px;
+  }
+}
+
+@media (max-width: 800px) {
+
+  .scene {
+    height: 450px;
+  }
+
+  .viewer-status {
+    display: none;
+  }
+
+  .location {
+    padding: 25px;
+  }
+
+  .pathway-viewer {
+    height: 560px;
+  }
+}
+
+@media (max-width: 600px) {
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .facts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  h1 {
+    letter-spacing: -2px;
+  }
+
+  .location {
+    padding: 20px;
+  }
+
+  .pathway-viewer {
+    height: 500px;
+  }
+
+  .pathway-title {
+    font-size: 9px;
+  }
+
+  .node-label {
+    font-size: 8px;
+  }
+
+  .node-arabic {
+    font-size: 7px;
+  }
+
+  .region-label {
+    font-size: 7px;
+  }
+
+  .legend {
+    gap: 12px;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+  <a href="./explore.html">← Back to Explore</a>
+</nav>
+
+<main class="container">
+
+<div class="eyebrow">
+  Sensory Pathways · NeuroAtlas
+</div>
+
+<h1>
+  Auditory Pathway
+</h1>
+
+<div class="arabic-title">
+  المسار السمعي
+</div>
+
+<div class="hero">
+
+<p>
+The auditory pathway carries information about sound from the cochlea
+of the inner ear through the brainstem and thalamus to the primary
+auditory cortex in the temporal lobe. Unlike many sensory pathways,
+auditory information becomes bilateral early in its course, allowing
+both cerebral hemispheres to receive information from both ears.
+</p>
+
+</div>
+
+<div class="actions">
+
+<a class="action-button" href="#pathway">
+  🧠 Explore Pathway
+</a>
+
+<a class="action-button" href="#information">
+  📚 Learn the Pathway
+</a>
+
+<a class="action-button" href="#clinical">
+  🩺 Clinical Importance
+</a>
+
+<a class="action-button" href="#quiz">
+  📝 Test Yourself
+</a>
+
+</div>
+
+<!-- =========================================================
+     3D BRAIN VIEWER
+     ========================================================= -->
+
+<div class="viewer">
+
+<div class="viewer-header">
+
+<div class="viewer-title">
+  Human Brain · Interactive 3D
+</div>
+
+<div class="viewer-status">
+  DRAG TO ROTATE · SCROLL TO ZOOM
+</div>
+
+</div>
+
+<div class="scene">
+
+<div id="loading" class="loading">
+
+<span id="loadText">
+Loading real brain model...
+</span>
+
+<div class="loading-bar">
+  <div id="loadBar" class="loading-bar-inner"></div>
+</div>
+
+</div>
+
+<canvas id="brainCanvas"></canvas>
+
+<div id="locationLabel" class="location-label">
+
+<div class="label-box">
+  AUDITORY CORTEX · القشرة السمعية
+</div>
+
+</div>
+
+</div>
+
+<div class="controls">
+
+<button id="showLocation">
+  📍 Show Auditory Cortex
+</button>
+
+<button id="highlight" class="active">
+  🔴 Highlight Pathway
+</button>
+
+<button id="rotate" class="active">
+  ⟳ Auto Rotate
+</button>
+
+<button id="reset">
+  ↻ Reset View
+</button>
+
+</div>
+
+</div>
+
+<!-- =========================================================
+     PATHWAY
+     ========================================================= -->
+
+<section id="pathway" class="location">
+
+<div class="section-label">
+  Pathway · المسار
+</div>
+
+<h2>
+  🔊 How Does Sound Reach the Brain?
+</h2>
+
+<p class="location-intro">
+
+Sound vibrations are converted into neural signals by the cochlea.
+These signals travel through the cochlear division of the vestibulocochlear
+nerve, synapse in the cochlear nuclei, and then ascend through several
+brainstem and thalamic structures before reaching the primary auditory
+cortex.
+
+<br><br>
+
+يتم تحويل اهتزازات الصوت إلى إشارات عصبية بواسطة القوقعة. تنتقل هذه
+الإشارات عبر الجزء القوقعي من العصب الدهليزي القوقعي، ثم تتشابك في
+النوى القوقعية وتصعد عبر عدة تراكيب في جذع الدماغ والمهاد قبل وصولها
+إلى القشرة السمعية الأولية.
+
+</p>
+
+<div class="pathway-viewer">
+
+<svg
+class="pathway-svg"
+viewBox="0 0 1200 760"
+xmlns="http://www.w3.org/2000/svg"
+aria-label="Auditory pathway anatomical diagram"
+>
+
+<defs>
+
+<filter
+id="pathGlow"
+x="-100%"
+y="-100%"
+width="300%"
+height="300%"
+>
+
+<feGaussianBlur
+stdDeviation="4"
+result="blur"
+/>
+
+<feMerge>
+
+<feMergeNode in="blur"/>
+
+<feMergeNode in="SourceGraphic"/>
+
+</feMerge>
+
+</filter>
+
+<filter
+id="nodeGlow"
+x="-100%"
+y="-100%"
+width="300%"
+height="300%"
+>
+
+<feGaussianBlur
+stdDeviation="3"
+result="blur"
+/>
+
+<feMerge>
+
+<feMergeNode in="blur"/>
+
+<feMergeNode in="SourceGraphic"/>
+
+</feMerge>
+
+</filter>
+
+<marker
+id="arrowHead"
+markerWidth="10"
+markerHeight="10"
+refX="8"
+refY="3"
+orient="auto"
+>
+
+<path
+class="arrow"
+d="M0,0 L0,6 L8,3 z"
+/>
+
+</marker>
+
+</defs>
+
+<text
+class="pathway-title"
+x="600"
+y="35"
+text-anchor="middle"
+>
+AUDITORY PATHWAY · المسار السمعي
+</text>
+
+<text
+class="pathway-subtitle"
+x="600"
+y="56"
+text-anchor="middle"
+>
+SOUND → COCHLEA → BRAINSTEM → THALAMUS → AUDITORY CORTEX
+</text>
+
+<!-- EAR -->
+
+<text
+class="region-label"
+x="105"
+y="118"
+>
+INNER EAR
+</text>
+
+<text
+class="region-label"
+x="105"
+y="136"
+>
+الأذن الداخلية
+</text>
+
+<path
+class="cochlea"
+d="
+M145 185
+C120 165 89 179 89 210
+C89 239 119 250 137 231
+C152 216 142 195 125 198
+C109 201 109 218 120 224
+"
+/>
+
+<circle
+class="pathway-node"
+cx="145"
+cy="185"
+r="9"
+/>
+
+<text
+class="node-label"
+x="170"
+y="182"
+>
+COCHLEA
+</text>
+
+<text
+class="node-arabic"
+x="170"
+y="199"
+>
+القوقعة
+</text>
+
+<!-- CN VIII -->
+
+<path
+class="pathway-line"
+d="
+M145 185
+C180 190 205 205 230 225
+"
+marker-end="url(#arrowHead)"
+/>
+
+<circle
+class="pathway-node"
+cx="230"
+cy="225"
+r="10"
+/>
+
+<text
+class="node-number"
+x="230"
+y="229"
+text-anchor="middle"
+>
+1
+</text>
+
+<text
+class="node-label"
+x="250"
+y="220"
+>
+CN VIII
+</text>
+
+<text
+class="node-arabic"
+x="250"
+y="237"
+>
+العصب الدهليزي القوقعي
+</text>
+
+<!-- BRAINSTEM SILHOUETTE -->
+
+<path
+class="brain-silhouette"
+d="
+M470 125
+C435 160 420 210 428 260
+C434 300 426 340 443 382
+C455 412 473 430 490 449
+C510 472 516 511 510 560
+C505 608 525 649 565 672
+L635 672
+C675 649 695 608 690 560
+C684 511 690 472 710 449
+C727 430 745 412 757 382
+C774 340 766 300 772 260
+C780 210 765 160 730 125
+C665 98 535 98 470 125
+Z
+"
+/>
+
+<!-- BRAINSTEM INNER -->
+
+<path
+class="brain-inner"
+d="
+M535 190
+C515 230 514 280 530 315
+C542 342 535 373 548 401
+C559 424 574 440 575 470
+L575 585
+L625 585
+L625 470
+C626 440 641 424 652 401
+C665 373 658 342 670 315
+C686 280 685 230 665 190
+Z
+"/>
+
+<!-- COCHLEAR NUCLEI -->
+
+<circle
+class="pathway-node"
+cx="390"
+cy="240"
+r="13"
+/>
+
+<circle
+class="pathway-node-small"
+cx="410"
+cy="257"
+r="8"
+/>
+
+<text
+class="node-label"
+x="300"
+y="232"
+>
+COCHLEAR NUCLEI
+</text>
+
+<text
+class="node-arabic"
+x="300"
+y="249"
+>
+النوى القوقعية
+</text>
+
+<path
+class="pathway-line"
+d="
+M230 225
+C285 230 335 235 390 240
+"
+marker-end="url(#arrowHead)"
+/>
+
+<!-- SUPERIOR OLIVE -->
+
+<circle
+class="pathway-node"
+cx="505"
+cy="325"
+r="12"
+/>
+
+<circle
+class="pathway-node-small"
+cx="695"
+cy="325"
+r="12"
+/>
+
+<text
+class="node-label"
+x="755"
+y="316"
+>
+SUPERIOR OLIVARY
+</text>
+
+<text
+class="node-label"
+x="755"
+y="332"
+>
+COMPLEX
+</text>
+
+<text
+class="node-arabic"
+x="755"
+y="349"
+>
+المركب الزيتوني العلوي
+</text>
+
+<!-- BILATERAL CROSSING -->
+
+<path
+class="pathway-secondary"
+d="
+M390 240
+C450 260 490 285 505 325
+"/>
+
+<path
+class="pathway-secondary"
+d="
+M410 257
+C480 270 550 295 695 325
+"/>
+
+<path
+class="pathway-secondary"
+d="
+M410 257
+C500 300 610 310 695 325
+"/>
+
+<text
+class="region-label"
+x="585"
+y="285"
+text-anchor="middle"
+>
+BILATERAL PROJECTION
+</text>
+
+<!-- LATERAL LEMNISCUS -->
+
+<path
+class="pathway-line"
+d="
+M505 325
+C530 365 540 405 552 445
+C560 468 566 490 575 510
+"
+marker-end="url(#arrowHead)"
+/>
+
+<path
+class="pathway-line"
+d="
+M695 325
+C670 365 660 405 648 445
+C640 468 634 490 625 510
+"
+marker-end="url(#arrowHead)"
+/>
+
+<text
+class="node-label"
+x="420"
+y="455"
+>
+LATERAL LEMNISCUS
+</text>
+
+<text
+class="node-arabic"
+x="420"
+y="472"
+>
+الليمْنِسْكُس الوحشي
+</text>
+
+<!-- INFERIOR COLLICULUS -->
+
+<circle
+class="pathway-node"
+cx="575"
+cy="510"
+r="13"
+/>
+
+<circle
+class="pathway-node"
+cx="625"
+cy="510"
+r="13"
+/>
+
+<text
+class="node-label"
+x="760"
+y="500"
+>
+INFERIOR COLLICULUS
+</text>
+
+<text
+class="node-arabic"
+x="760"
+y="517"
+>
+الكوليكولوس السفلي
+</text>
+
+<!-- MGB -->
+
+<path
+class="pathway-line"
+d="
+M575 510
+C545 535 520 555 480 575
+"
+marker-end="url(#arrowHead)"
+/>
+
+<path
+class="pathway-line"
+d="
+M625 510
+C655 535 680 555 720 575
+"
+marker-end="url(#arrowHead)"
+/>
+
+<circle
+class="pathway-node"
+cx="480"
+cy="575"
+r="12"
+/>
+
+<circle
+class="pathway-node"
+cx="720"
+cy="575"
+r="12"
+/>
+
+<text
+class="node-label"
+x="300"
+y="568"
+>
+MEDIAL GENICULATE BODY
+</text>
+
+<text
+class="node-arabic"
+x="300"
+y="585"
+>
+الجسم الركبي الإنسي
+</text>
+
+<!-- AUDITORY RADIATIONS -->
+
+<path
+class="pathway-line"
+d="
+M480 575
+C430 595 375 610 310 620
+C275 625 245 625 210 625
+"
+marker-end="url(#arrowHead)"
+/>
+
+<path
+class="pathway-line"
+d="
+M720 575
+C770 595 825 610 890 620
+C925 625 955 625 990 625
+"
+marker-end="url(#arrowHead)"
+/>
+
+<text
+class="node-label"
+x="165"
+y="650"
+>
+AUDITORY RADIATIONS
+</text>
+
+<text
+class="node-arabic"
+x="165"
+y="667"
+>
+الإشعاعات السمعية
+</text>
+
+<!-- AUDITORY CORTEX -->
+
+<circle
+class="pathway-node"
+cx="180"
+cy="625"
+r="15"
+/>
+
+<circle
+class="pathway-node"
+cx="1020"
+cy="625"
+r="15"
+/>
+
+<text
+class="node-label"
+x="180"
+y="690"
+text-anchor="middle"
+>
+PRIMARY AUDITORY CORTEX
+</text>
+
+<text
+class="node-arabic"
+x="180"
+y="707"
+text-anchor="middle"
+>
+القشرة السمعية الأولية
+</text>
+
+<text
+class="node-label"
+x="1020"
+y="690"
+text-anchor="middle"
+>
+PRIMARY AUDITORY CORTEX
+</text>
+
+<text
+class="node-arabic"
+x="1020"
+y="707"
+text-anchor="middle"
+>
+القشرة السمعية الأولية
+</text>
+
+<!-- TEMPORAL LOBE -->
+
+<text
+class="region-label"
+x="180"
+y="735"
+text-anchor="middle"
+>
+TEMPORAL LOBE
+</text>
+
+<text
+class="region-label"
+x="1020"
+y="735"
+text-anchor="middle"
+>
+TEMPORAL LOBE
+</text>
+
+</svg>
+
+</div>
+
+<div class="legend">
+
+<div class="legend-item">
+<span class="legend-dot path"></span>
+Auditory Pathway
+</div>
+
+<div class="legend-item">
+<span class="legend-dot relay"></span>
+Relay / Crossing
+</div>
+
+<div class="legend-item">
+<span class="legend-dot cortex"></span>
+Cortical Destination
+</div>
+
+</div>
+
+<p class="pathway-caption">
+
+<strong>Sound information:</strong>
+Cochlea → CN VIII → Cochlear nuclei → Superior olivary complex →
+Lateral lemniscus → Inferior colliculus → Medial geniculate body →
+Auditory radiations → Primary auditory cortex.
+
+<br>
+
+<strong>معلومات الصوت:</strong>
+القوقعة → العصب الدهليزي القوقعي → النوى القوقعية →
+المركب الزيتوني العلوي → الليمْنِسْكُس الوحشي →
+الكوليكولوس السفلي → الجسم الركبي الإنسي →
+الإشعاعات السمعية → القشرة السمعية الأولية.
+
+</p>
+
+<p class="source-note">
+Simplified educational anatomical diagram. It demonstrates the major
+auditory pathway stations and does not represent an exact radiological
+section.
+</p>
+
+</section>
+
+<!-- =========================================================
+     INFORMATION
+     ========================================================= -->
+
+<section id="information" class="section">
+
+<div class="section-label">
+  Auditory Neuroanatomy · تشريح المسار السمعي
+</div>
+
+<h2>
+  The Auditory Pathway
+</h2>
+
+<p class="section-intro">
+
+The auditory pathway is a complex ascending sensory system that
+transmits information about sound from the inner ear to the cerebral
+cortex. Several brainstem nuclei contribute to sound localization,
+timing, intensity processing, and integration of information from both
+ears.
+
+<br><br>
+
+المسار السمعي هو نظام حسي صاعد معقد ينقل المعلومات المتعلقة بالصوت
+من الأذن الداخلية إلى القشرة المخية. وتساهم عدة نوى في جذع الدماغ
+في تحديد موقع الصوت ومعالجة التوقيت والشدة ودمج المعلومات القادمة
+من كلتا الأذنين.
+
+</p>
+
+<div class="cards">
+
+<div class="card">
+
+<h3>
+Cochlea · القوقعة
+</h3>
+
+<p>
+The cochlea is the sensory organ of hearing. Mechanical sound
+vibrations are converted into electrical signals by specialized
+sensory hair cells within the organ of Corti.
+<br><br>
+القوقعة هي العضو الحسي المسؤول عن السمع. يتم تحويل اهتزازات الصوت
+الميكانيكية إلى إشارات كهربائية بواسطة الخلايا الشعرية الحسية في
+عضو كورتي.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Cochlear Nerve · العصب القوقعي
+</h3>
+
+<p>
+The cochlear division of cranial nerve VIII carries auditory
+information from the cochlea toward the brainstem.
+<br><br>
+ينقل الجزء القوقعي من العصب القحفي الثامن المعلومات السمعية من
+القوقعة باتجاه جذع الدماغ.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Cochlear Nuclei · النوى القوقعية
+</h3>
+
+<p>
+The cochlear nuclei are located at the pontomedullary junction and
+represent the first major central relay of auditory information.
+<br><br>
+تقع النوى القوقعية عند الوصل بين الجسر والبصلة وتشكل أول محطة مركزية
+رئيسية للمعلومات السمعية.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Superior Olivary Complex · المركب الزيتوني العلوي
+</h3>
+
+<p>
+The superior olivary complex receives bilateral auditory input and
+plays an important role in processing differences between sounds
+arriving at the two ears.
+<br><br>
+يستقبل المركب الزيتوني العلوي معلومات سمعية من الجانبين ويساهم في
+معالجة الاختلافات بين الأصوات التي تصل إلى الأذنين.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Lateral Lemniscus · الليمْنِسْكُس الوحشي
+</h3>
+
+<p>
+The lateral lemniscus is an ascending auditory fiber pathway in the
+brainstem connecting lower auditory nuclei with higher auditory
+centers.
+<br><br>
+الليمْنِسْكُس الوحشي هو مسار من الألياف السمعية الصاعدة في جذع الدماغ
+يربط النوى السمعية السفلية بالمراكز السمعية الأعلى.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Inferior Colliculus · الكوليكولوس السفلي
+</h3>
+
+<p>
+The inferior colliculus is a major auditory relay in the midbrain and
+participates in auditory processing and reflexive responses to sound.
+<br><br>
+الكوليكولوس السفلي محطة سمعية رئيسية في الدماغ المتوسط ويساهم في
+معالجة الأصوات والاستجابات الانعكاسية لها.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Medial Geniculate Body · الجسم الركبي الإنسي
+</h3>
+
+<p>
+The medial geniculate body is the major thalamic relay for auditory
+information before it reaches the cerebral cortex.
+<br><br>
+الجسم الركبي الإنسي هو محطة المهاد الرئيسية للمعلومات السمعية قبل
+وصولها إلى القشرة المخية.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Auditory Radiations · الإشعاعات السمعية
+</h3>
+
+<p>
+Auditory radiations carry information from the medial geniculate body
+to the auditory cortex in the temporal lobe.
+<br><br>
+تنقل الإشعاعات السمعية المعلومات من الجسم الركبي الإنسي إلى القشرة
+السمعية في الفص الصدغي.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Primary Auditory Cortex · القشرة السمعية الأولية
+</h3>
+
+<p>
+The primary auditory cortex is located mainly on the transverse
+temporal gyri of Heschl and receives the major cortical projection
+from the auditory pathway.
+<br><br>
+تقع القشرة السمعية الأولية بشكل رئيسي على التلافيف الصدغية المستعرضة
+لهشل وتستقبل الإسقاط القشري الرئيسي للمسار السمعي.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Bilateral Organization · التنظيم الثنائي
+</h3>
+
+<p>
+Auditory information becomes bilateral early in the brainstem.
+Therefore, each auditory cortex receives input from both ears.
+<br><br>
+تصبح المعلومات السمعية ثنائية الجانب في وقت مبكر داخل جذع الدماغ،
+ولذلك تستقبل كل قشرة سمعية معلومات من كلتا الأذنين.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Sound Localization · تحديد موقع الصوت
+</h3>
+
+<p>
+Brainstem auditory circuits compare timing and intensity differences
+between the two ears to help determine the location of sounds.
+<br><br>
+تقارن دوائر السمع في جذع الدماغ فروق التوقيت والشدة بين الأذنين
+للمساعدة في تحديد موقع الأصوات.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Tonotopic Organization · التنظيم التوتري
+</h3>
+
+<p>
+Auditory structures maintain an organized representation of sound
+frequencies, known as tonotopy.
+<br><br>
+تحافظ التراكيب السمعية على تمثيل منظم لترددات الأصوات ويُعرف ذلك
+بالتنظيم التوتري.
+</p>
+
+</div>
+
+</div>
+
+<!-- =========================================================
+     CLINICAL
+     ========================================================= -->
+
+<div id="clinical" class="clinical-section">
+
+<div class="section-label">
+  Clinical Importance · الأهمية السريرية
+</div>
+
+<h2>
+  Why the Auditory Pathway Matters
+</h2>
+
+<div class="clinical-box">
+
+<p>
+Because auditory information becomes bilateral relatively early,
+lesions above the cochlear nuclei often do not produce complete
+unilateral deafness in one ear. Instead, lesions at higher levels can
+produce more subtle deficits involving sound localization,
+discrimination, or integration.
+</p>
+
+<p>
+A lesion affecting the cochlear nerve or cochlear structures can cause
+more prominent hearing loss on the affected side. Lesions involving
+higher auditory pathways must be interpreted according to the exact
+anatomical level involved.
+</p>
+
+<p dir="rtl">
+لأن المعلومات السمعية تصبح ثنائية الجانب في وقت مبكر نسبياً، فإن
+الآفات التي تقع بعد النوى القوقعية لا تسبب عادةً صمماً كاملاً في أذن
+واحدة. وبدلاً من ذلك قد تؤدي الآفات الأعلى إلى اضطرابات أكثر دقة في
+تحديد موقع الصوت أو تمييزه أو دمجه.
+</p>
+
+<p dir="rtl">
+يمكن أن تسبب الآفة التي تؤثر في العصب القوقعي أو تراكيب القوقعة فقداناً
+أكثر وضوحاً للسمع في الجانب المصاب. أما الآفات التي تصيب المسارات
+السمعية الأعلى فيجب تفسيرها وفق المستوى التشريحي الدقيق المتأثر.
+</p>
+
+</div>
+
+</div>
+
+<!-- =========================================================
+     QUICK FACTS
+     ========================================================= -->
+
+<div class="section">
+
+<div class="section-label">
+  Quick Facts · معلومات سريعة
+</div>
+
+<h2>
+  Auditory Pathway at a Glance
+</h2>
+
+<div class="facts-grid">
+
+<div class="fact">
+
+<span>01</span>
+
+<strong>
+First Sensory Organ
+</strong>
+
+<p>
+Cochlea
+</p>
+
+</div>
+
+<div class="fact">
+
+<span>02</span>
+
+<strong>
+Cranial Nerve
+</strong>
+
+<p>
+CN VIII · Vestibulocochlear nerve
+</p>
+
+</div>
+
+<div class="fact">
+
+<span>03</span>
+
+<strong>
+First Central Relay
+</strong>
+
+<p>
+Cochlear nuclei
+</p>
+
+</div>
+
+<div class="fact">
+
+<span>04</span>
+
+<strong>
+Important Brainstem Relay
+</strong>
+
+<p>
+Superior olivary complex
+</p>
+
+</div>
+
+<div class="fact">
+
+<span>05</span>
+
+<strong>
+Midbrain Relay
+</strong>
+
+<p>
+Inferior colliculus
+</p>
+
+</div>
+
+<div class="fact">
+
+<span>06</span>
+
+<strong>
+Thalamic Relay
+</strong>
+
+<p>
+Medial geniculate body
+</p>
+
+</div>
+
+<div class="fact">
+
+<span>07</span>
+
+<strong>
+Cortical Destination
+</strong>
+
+<p>
+Primary auditory cortex
+</p>
+
+</div>
+
+<div class="fact">
+
+<span>08</span>
+
+<strong>
+Key Feature
+</strong>
+
+<p>
+Bilateral representation
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- =========================================================
+     QUIZ
+     ========================================================= -->
+
+<div id="quiz" class="quiz">
+
+<div class="section-label">
+  Mini Test
+</div>
+
+<h2>
+  🧠 Test Yourself
+</h2>
+
+<p class="quiz-intro">
+Choose the best answer for each question.
+</p>
+
+<div class="question">
+
+<p>
+1. Where does auditory transduction begin?
+</p>
+
+<button
+class="option"
+onclick="checkAnswer(this,true)"
+>
+A. Cochlea
+</button>
+
+<button
+class="option"
+onclick="checkAnswer(this,false)"
+>
+B. Medial geniculate body
+</button>
+
+<button
+class="option"
+onclick="checkAnswer(this,false)"
+>
+C. Primary auditory cortex
+</button>
+
+<button
+class="option"
+onclick="checkAnswer(this,false)"
+>
+D. Inferior colliculus
+</button>
+
+</div>
+
+<div class="question">
+
+<p>
+2. Which cranial nerve carries auditory information from the cochlea?
+</p>
+
+<button
+class="option"
+onclick="checkAnswer(this,true)"
+>
+A. CN VIII
+</button>
+
+<button
+class="option"
+onclick="checkAnswer(this,false)"
+>
+B. CN II
+</button>
+
+<button
+class="option"
+onclick="checkAnswer(this,false)"
+>
+C. CN V
+</button>
+
+<button
+class="option"
+onclick="checkAnswer(this,false)"
+>
+D. CN VII
+</button>
+
+</div>
+
+<div class="question">
+
+<p>
+3. What is the major thalamic relay of the auditory pathway?
+</p>
+
+<button
+class="option"
+onclick="checkAnswer(this,false)"
+>
+A. Lateral geniculate body
+</button>
+
+<button
+class="option"
+onclick="checkAnswer(this,true)"
+>
+B. Medial geniculate body
+</button>
+
+<button
+class="option"
+onclick="checkAnswer(this,false)"
+>
+C. Ventral posterior nucleus
+</button>
+
+<button
+class="option"
+onclick="checkAnswer(this,false)"
+>
+D. Anterior nucleus
+</button>
+
+</div>
+
+<div class="question">
+
+<p>
+4. Where is the primary auditory cortex located?
+</p>
+
+<button
+class="option"
+onclick="checkAnswer(this,true)"
+>
+A. Temporal lobe
+</button>
+
+<button
+class="option"
+onclick="checkAnswer(this,false)"
+>
+B. Occipital lobe
+</button>
+
+<button
+class="option"
+onclick="checkAnswer(this,false)"
+>
+C. Frontal lobe
+</button>
+
+<button
+class="option"
+onclick="checkAnswer(this,false)"
+>
+D. Cerebellum
+</button>
+
+</div>
+
+<div class="question">
+
+<p>
+5. What is an important feature of the central auditory pathway?
+</p>
+
+<button
+class="option"
+onclick="checkAnswer(this,true)"
+>
+A. It becomes bilateral early
+</button>
+
+<button
+class="option"
+onclick="checkAnswer(this,false)"
+>
+B. It remains completely unilateral
+</button>
+
+<button
+class="option"
+onclick="checkAnswer(this,false)"
+>
+C. It bypasses the brainstem
+</button>
+
+<button
+class="option"
+onclick="checkAnswer(this,false)"
+>
+D. It terminates in the cerebellum
+</button>
+
+</div>
+
+<div id="quizResult" class="quiz-result"></div>
+
+</div>
+
+</section>
+
+</main>
+
+<!-- =========================================================
+     THREE.JS
+     ========================================================= -->
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+
+import * as THREE from "three";
+
+import {
+  OrbitControls
+} from "three/addons/controls/OrbitControls.js";
+
+import {
+  GLTFLoader
+} from "three/addons/loaders/GLTFLoader.js";
+
+import {
+  DRACOLoader
+} from "three/addons/loaders/DRACOLoader.js";
+
+const canvas =
+  document.getElementById("brainCanvas");
+
+const loading =
+  document.getElementById("loading");
+
+const loadText =
+  document.getElementById("loadText");
+
+const loadBar =
+  document.getElementById("loadBar");
+
+const locationLabel =
+  document.getElementById("locationLabel");
+
+const scene =
+  new THREE.Scene();
+
+const camera =
+  new THREE.PerspectiveCamera(
+    30,
+    1,
+    .01,
+    100
+  );
+
+camera.position.set(
+  3.2,
+  .3,
+  8.5
+);
+
+const renderer =
+  new THREE.WebGLRenderer({
+    canvas,
+    antialias: true,
+    alpha: true
+  });
+
+renderer.setPixelRatio(
+  Math.min(
+    window.devicePixelRatio || 1,
+    2
+  )
+);
+
+renderer.toneMapping =
+  THREE.ACESFilmicToneMapping;
+
+renderer.toneMappingExposure =
+  .75;
+
+const controls =
+  new OrbitControls(
+    camera,
+    canvas
+  );
+
+controls.enableRotate = true;
+
+controls.rotateSpeed = .6;
+
+controls.enableDamping = true;
+
+controls.dampingFactor = .05;
+
+controls.enableZoom = true;
+
+controls.zoomSpeed = .6;
+
+controls.enablePan = false;
+
+controls.autoRotate = true;
+
+controls.autoRotateSpeed = .2;
+
+controls.target.set(
+  0,
+  -.3,
+  0
+);
+
+controls.minDistance = 3.5;
+
+controls.maxDistance = 16;
+
+scene.add(
+  new THREE.AmbientLight(
+    0xffffff,
+    .55
+  )
+);
+
+scene.add(
+  new THREE.HemisphereLight(
+    0xffdce6,
+    0x081018,
+    .75
+  )
+);
+
+const keyLight =
+  new THREE.DirectionalLight(
+    0xfff5f0,
+    1.4
+  );
+
+keyLight.position.set(
+  6,
+  10,
+  8
+);
+
+scene.add(keyLight);
+
+const fillLight =
+  new THREE.DirectionalLight(
+    0x8ca9bd,
+    .4
+  );
+
+fillLight.position.set(
+  -7,
+  2,
+  6
+);
+
+scene.add(fillLight);
+
+const brainGroup =
+  new THREE.Group();
+
+scene.add(brainGroup);
+
+let brainMeshes = [];
+
+let targetMeshes = [];
+
+let locationShown = false;
+
+let highlighted = true;
+
+const brainOpaqueMaterial =
+  new THREE.MeshPhysicalMaterial({
+    color: 0xf1c5d0,
+    roughness: .62,
+    metalness: 0,
+    clearcoat: .12,
+    clearcoatRoughness: .5,
+    side: THREE.DoubleSide,
+    transparent: false,
+    opacity: 1
+  });
+
+const brainTransparentMaterial =
+  new THREE.MeshPhysicalMaterial({
+    color: 0xf1c5d0,
+    roughness: .55,
+    metalness: 0,
+    clearcoat: .1,
+    clearcoatRoughness: .5,
+    side: THREE.DoubleSide,
+    transparent: true,
+    opacity: .16,
+    depthWrite: false
+  });
+
+const targetMaterial =
+  new THREE.MeshPhysicalMaterial({
+    color: 0xff2948,
+    roughness: .3,
+    metalness: 0,
+    clearcoat: .6,
+    clearcoatRoughness: .12,
+    emissive: 0x5c0613,
+    emissiveIntensity: 1.05,
+    side: THREE.DoubleSide,
+    transparent: false,
+    opacity: 1
+  });
+
+const targetNormalMaterial =
+  new THREE.MeshPhysicalMaterial({
+    color: 0xf1c5d0,
+    roughness: .62,
+    metalness: 0,
+    clearcoat: .12,
+    clearcoatRoughness: .5,
+    side: THREE.DoubleSide
+  });
+
+function normalizeName(name) {
+
+  return String(name || "")
+    .toLowerCase()
+    .replace(
+      /[\s_\-.]+/g,
+      ""
+    );
+}
+
+function getMeshName(mesh) {
+
+  const userName =
+    mesh.userData &&
+    mesh.userData.name
+      ? mesh.userData.name
+      : "";
+
+  return `${mesh.name} ${userName}`;
+}
+
+function isAuditoryStructure(mesh) {
+
+  const name =
+    normalizeName(
+      getMeshName(mesh)
+    );
+
+  const targetNames = [
+
+    "auditorycortex",
+
+    "primaryauditorycortex",
+
+    "superiortemporal",
+
+    "heschl",
+
+    "transversetemporal",
+
+    "temporal",
+
+    "medialgeniculate",
+
+    "geniculate",
+
+    "inferiorcolliculus",
+
+    "cochlearnucleus",
+
+    "cochlear",
+
+    "laterallemniscus"
+
+  ];
+
+  return targetNames.some(
+    item =>
+      name.includes(item)
+  );
+}
+
+function isClearlyNotTarget(mesh) {
+
+  const name =
+    normalizeName(
+      getMeshName(mesh)
+    );
+
+  const excludedNames = [
+
+    "cerebellum",
+
+    "brainstem",
+
+    "medulla",
+
+    "pons",
+
+    "artery",
+
+    "vein",
+
+    "vessel",
+
+    "skull",
+
+    "skin"
+
+  ];
+
+  return excludedNames.some(
+    item =>
+      name.includes(item)
+  );
+}
+
+function calculateTargetCandidates(model) {
+
+  const meshes = [];
+
+  model.traverse(
+    child => {
+
+      if (!child.isMesh) {
+        return;
+      }
+
+      meshes.push(child);
+
+    }
+  );
+
+  return meshes.filter(
+    mesh =>
+      isAuditoryStructure(mesh) &&
+      !isClearlyNotTarget(mesh)
+  );
+}
+
+function prepareMaterials(model) {
+
+  brainMeshes = [];
+
+  targetMeshes = [];
+
+  model.traverse(
+    child => {
+
+      if (!child.isMesh) {
+        return;
+      }
+
+      child.castShadow = true;
+
+      child.receiveShadow = true;
+
+      child.material =
+        brainOpaqueMaterial.clone();
+
+      brainMeshes.push(child);
+
+    }
+  );
+
+  targetMeshes =
+    calculateTargetCandidates(
+      model
+    );
+
+  targetMeshes.forEach(
+    mesh => {
+
+      mesh.material =
+        targetMaterial.clone();
+
+    }
+  );
+}
+
+function loadRealBrain() {
+
+  const loader =
+    new GLTFLoader();
+
+  const dracoLoader =
+    new DRACOLoader();
+
+  dracoLoader.setDecoderPath(
+    "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/"
+  );
+
+  loader.setDRACOLoader(
+    dracoLoader
+  );
+
+  const urls = [
+
+    "https://cdn.jsdelivr.net/gh/itayinbarr/brainproject@main/brain-atlas/models/brain.glb",
+
+    "https://raw.githubusercontent.com/itayinbarr/brainproject/main/brain-atlas/models/brain.glb",
+
+    "https://itayinbarr.github.io/brainproject/models/brain.glb"
+
+  ];
+
+  let index = 0;
+
+  function tryLoad() {
+
+    if (index >= urls.length) {
+
+      loadText.textContent =
+        "Brain model could not be loaded.";
+
+      loadBar.style.width =
+        "100%";
+
+      setTimeout(
+        () => {
+
+          loading.classList.add(
+            "hide"
+          );
+
+        },
+        500
+      );
+
+      return;
+    }
+
+    const url =
+      urls[index++];
+
+    loader.load(
+
+      url,
+
+      gltf => {
+
+        const model =
+          gltf.scene;
+
+        const box =
+          new THREE.Box3()
+            .setFromObject(
+              model
+            );
+
+        const center =
+          box.getCenter(
+            new THREE.Vector3()
+          );
+
+        const size =
+          box.getSize(
+            new THREE.Vector3()
+          );
+
+        const maxDim =
+          Math.max(
+            size.x,
+            size.y,
+            size.z
+          );
+
+        const scale =
+          4.5 / maxDim;
+
+        model.scale.setScalar(
+          scale
+        );
+
+        model.position.sub(
+          center.multiplyScalar(
+            scale
+          )
+        );
+
+        model.position.y -= .6;
+
+        brainGroup.add(
+          model
+        );
+
+        prepareMaterials(
+          model
+        );
+
+        if (
+          targetMeshes.length === 0
+        ) {
+
+          loadText.textContent =
+            "Brain loaded · auditory structures unavailable";
+
+        } else {
+
+          loadText.textContent =
+            "Auditory structures located";
+
+          locationLabel.classList.add(
+            "show"
+          );
+
+        }
+
+        loadBar.style.width =
+          "100%";
+
+        setTimeout(
+          () => {
+
+            loading.classList.add(
+              "hide"
+            );
+
+          },
+          500
+        );
+
+      },
+
+      progress => {
+
+        if (
+          progress.total > 0
+        ) {
+
+          const pct =
+            Math.min(
+              95,
+              progress.loaded /
+              progress.total *
+              95
+            );
+
+          loadBar.style.width =
+            pct + "%";
+
+        }
+
+      },
+
+      error => {
+
+        console.warn(
+          "Brain model loading failed:",
+          error
+        );
+
+        tryLoad();
+
+      }
+
+    );
+
+  }
+
+  tryLoad();
+}
+
+function setBrainTransparency(
+  enabled
+) {
+
+  brainMeshes.forEach(
+    mesh => {
+
+      if (
+        targetMeshes.includes(
+          mesh
+        )
+      ) {
+
+        return;
+
+      }
+
+      mesh.material =
+        enabled
+          ? brainTransparentMaterial.clone()
+          : brainOpaqueMaterial.clone();
+
+    }
+  );
+}
+
+function setTargetHighlight(
+  enabled
+) {
+
+  targetMeshes.forEach(
+    mesh => {
+
+      mesh.material =
+        enabled
+          ? targetMaterial.clone()
+          : targetNormalMaterial.clone();
+
+    }
+  );
+}
+
+const showLocationBtn =
+  document.getElementById(
+    "showLocation"
+  );
+
+showLocationBtn.addEventListener(
+  "click",
+  () => {
+
+    locationShown =
+      !locationShown;
+
+    if (
+      locationShown
+    ) {
+
+      setBrainTransparency(
+        true
+      );
+
+      setTargetHighlight(
+        true
+      );
+
+      highlighted = true;
+
+      locationLabel.classList.add(
+        "show"
+      );
+
+      showLocationBtn.classList.add(
+        "active"
+      );
+
+      showLocationBtn.textContent =
+        "📍 Hide Auditory Cortex";
+
+      controls.autoRotate =
+        false;
+
+      rotateBtn.classList.remove(
+        "active"
+      );
+
+      rotateBtn.textContent =
+        "▶ Auto Rotate";
+
+    } else {
+
+      setBrainTransparency(
+        false
+      );
+
+      setTargetHighlight(
+        highlighted
+      );
+
+      locationLabel.classList.remove(
+        "show"
+      );
+
+      showLocationBtn.classList.remove(
+        "active"
+      );
+
+      showLocationBtn.textContent =
+        "📍 Show Auditory Cortex";
+
+    }
+
+  }
+);
+
+const highlightBtn =
+  document.getElementById(
+    "highlight"
+  );
+
+highlightBtn.addEventListener(
+  "click",
+  () => {
+
+    highlighted =
+      !highlighted;
+
+    setTargetHighlight(
+      highlighted
+    );
+
+    if (
+      highlighted
+    ) {
+
+      highlightBtn.classList.add(
+        "active"
+      );
+
+      highlightBtn.textContent =
+        "🔴 Highlight Pathway";
+
+    } else {
+
+      highlightBtn.classList.remove(
+        "active"
+      );
+
+      highlightBtn.textContent =
+        "🧠 Highlight Pathway";
+
+    }
+
+    if (
+      locationShown
+    ) {
+
+      setBrainTransparency(
+        true
+      );
+
+    }
+
+  }
+);
+
+const rotateBtn =
+  document.getElementById(
+    "rotate"
+  );
+
+rotateBtn.addEventListener(
+  "click",
+  () => {
+
+    controls.autoRotate =
+      !controls.autoRotate;
+
+    rotateBtn.classList.toggle(
+      "active",
+      controls.autoRotate
+    );
+
+    rotateBtn.textContent =
+      controls.autoRotate
+        ? "⟳ Auto Rotate"
+        : "▶ Auto Rotate";
+
+  }
+);
+
+document
+  .getElementById("reset")
+  .addEventListener(
+    "click",
+    () => {
+
+      camera.position.set(
+        3.2,
+        .3,
+        8.5
+      );
+
+      controls.target.set(
+        0,
+        -.3,
+        0
+      );
+
+      controls.update();
+
+      locationShown = false;
+
+      highlighted = true;
+
+      setBrainTransparency(
+        false
+      );
+
+      setTargetHighlight(
+        true
+      );
+
+      locationLabel.classList.remove(
+        "show"
+      );
+
+      showLocationBtn.classList.remove(
+        "active"
+      );
+
+      showLocationBtn.textContent =
+        "📍 Show Auditory Cortex";
+
+      highlightBtn.classList.add(
+        "active"
+      );
+
+      highlightBtn.textContent =
+        "🔴 Highlight Pathway";
+
+      controls.autoRotate =
+        true;
+
+      rotateBtn.classList.add(
+        "active"
+      );
+
+      rotateBtn.textContent =
+        "⟳ Auto Rotate";
+
+    }
+  );
+
+function updateLabel() {
+
+  if (
+    !locationShown
+  ) {
+
+    return;
+
+  }
+
+  if (
+    targetMeshes.length === 0
+  ) {
+
+    return;
+
+  }
+
+  const box =
+    new THREE.Box3();
+
+  targetMeshes.forEach(
+    mesh => {
+
+      box.expandByObject(
+        mesh
+      );
+
+    }
+  );
+
+  if (
+    box.isEmpty()
+  ) {
+
+    return;
+
+  }
+
+  const position =
+    box.getCenter(
+      new THREE.Vector3()
+    );
+
+  position.project(
+    camera
+  );
+
+  const x =
+    (position.x + 1) /
+    2 *
+    canvas.clientWidth;
+
+  const y =
+    (-position.y + 1) /
+    2 *
+    canvas.clientHeight;
+
+  locationLabel.style.left =
+    x + "px";
+
+  locationLabel.style.top =
+    (y - 35) + "px";
+}
+
+function resize() {
+
+  const width =
+    canvas.clientWidth;
+
+  const height =
+    canvas.clientHeight;
+
+  if (
+    width <= 0 ||
+    height <= 0
+  ) {
+
+    return;
+
+  }
+
+  camera.aspect =
+    width / height;
+
+  camera.updateProjectionMatrix();
+
+  renderer.setSize(
+    width,
+    height,
+    false
+  );
+}
+
+window.addEventListener(
+  "resize",
+  resize
+);
+
+function animate() {
+
+  requestAnimationFrame(
+    animate
+  );
+
+  controls.update();
+
+  updateLabel();
+
+  renderer.render(
+    scene,
+    camera
+  );
+}
+
+resize();
+
+animate();
+
+loadRealBrain();
+
+</script>
+
+<script>
+
+function checkAnswer(
+  button,
+  correct
+) {
+
+  const parent =
+    button.parentElement;
+
+  const options =
+    parent.querySelectorAll(
+      ".option"
+    );
+
+  options.forEach(
+    option => {
+
+      option.classList.remove(
+        "correct",
+        "wrong"
+      );
+
+    }
+  );
+
+  if (
+    correct
+  ) {
+
+    button.classList.add(
+      "correct"
+    );
+
+  } else {
+
+    button.classList.add(
+      "wrong"
+    );
+
+  }
+
+  updateQuizScore();
+}
+
+function updateQuizScore() {
+
+  const result =
+    document.getElementById(
+      "quizResult"
+    );
+
+  let answered = 0;
+
+  let correctAnswers = 0;
+
+  document
+    .querySelectorAll(
+      ".question"
+    )
+    .forEach(
+      question => {
+
+        const selected =
+          question.querySelector(
+            ".correct,.wrong"
+          );
+
+        if (
+          selected
+        ) {
+
+          answered++;
+
+          if (
+            selected.classList.contains(
+              "correct"
+            )
+          ) {
+
+            correctAnswers++;
+
+          }
+
+        }
+
+      }
+    );
+
+  if (
+    answered > 0
+  ) {
+
+    result.style.display =
+      "block";
+
+    result.textContent =
+      "Score: " +
+      correctAnswers +
+      " / " +
+      answered;
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>
