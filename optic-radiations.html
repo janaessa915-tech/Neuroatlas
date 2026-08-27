@@ -1,0 +1,2881 @@
+<!-- /optic-radiations.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NeuroAtlas | Optic Radiations</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #050b13;
+  color: #eef4fa;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.7;
+}
+
+nav {
+  height: 70px;
+  padding: 0 7%;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+nav a {
+  color: #9db0c3;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+nav a:hover {
+  color: #fff;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 60px 7% 100px;
+}
+
+.eyebrow {
+  color: #61b5ff;
+  letter-spacing: 3px;
+  font-size: 12px;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+
+h1 {
+  font-size: clamp(48px, 7vw, 82px);
+  line-height: .95;
+  letter-spacing: -4px;
+  margin-bottom: 10px;
+}
+
+.arabic-title {
+  color: #ff4055;
+  font-size: 24px;
+  margin-bottom: 25px;
+}
+
+.hero p {
+  color: #a6b6c7;
+  max-width: 850px;
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.action-button,
+.controls button {
+  padding: 11px 17px;
+  border-radius: 9px;
+  background: #0b1928;
+  border: 1px solid #31516d;
+  color: #bdd0e0;
+  text-decoration: none;
+  cursor: pointer;
+  transition: .2s;
+  font-size: 14px;
+}
+
+.action-button:hover,
+.controls button:hover {
+  background: #14304a;
+  color: #fff;
+  border-color: #61b5ff;
+}
+
+.controls button.active {
+  background: #321218;
+  border-color: #ff4055;
+  color: #ffd9de;
+}
+
+/* =========================================================
+   INTERACTIVE VIEWER
+   ========================================================= */
+
+.viewer {
+  margin-top: 60px;
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 24px;
+  overflow: hidden;
+  background: #02060b;
+  box-shadow: 0 25px 80px rgba(0,0,0,.45);
+}
+
+.viewer-header {
+  min-height: 65px;
+  padding: 0 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.viewer-title {
+  font-size: 14px;
+  color: #d2dce6;
+}
+
+.viewer-status {
+  color: #708499;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.scene {
+  position: relative;
+  width: 100%;
+  height: 700px;
+  background:
+    radial-gradient(
+      ellipse at 50% 45%,
+      #203b51 0%,
+      #0d1c2e 45%,
+      #02060b 100%
+    );
+}
+
+#brainCanvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.loading {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 16px;
+  background: #02060b;
+  color: #9db0c3;
+  font-size: 14px;
+  transition: opacity .8s;
+}
+
+.loading.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loading-bar {
+  width: 180px;
+  height: 2px;
+  background: rgba(255,255,255,.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.loading-bar-inner {
+  width: 0%;
+  height: 100%;
+  background: #ff4055;
+  transition: width .3s;
+}
+
+.location-label {
+  position: absolute;
+  z-index: 30;
+  pointer-events: none;
+  transform: translate(-50%,-100%);
+  display: none;
+}
+
+.location-label.show {
+  display: block;
+}
+
+.label-box {
+  position: relative;
+  padding: 9px 15px;
+  border-radius: 10px;
+  background: rgba(5,10,17,.96);
+  border: 1.5px solid #ffb6c1;
+  color: #ffd9de;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  box-shadow:
+    0 0 12px rgba(255,182,193,.35),
+    0 0 30px rgba(255,182,193,.2);
+}
+
+.label-box::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -15px;
+  width: 1.5px;
+  height: 15px;
+  background: #ffb6c1;
+  transform: translateX(-50%);
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 15px;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
+/* =========================================================
+   PATHWAY VISUALIZATION
+   ========================================================= */
+
+.section {
+  margin-top: 70px;
+}
+
+.section-label {
+  color: #61b5ff;
+  letter-spacing: 2px;
+  font-size: 11px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.section h2 {
+  font-size: 32px;
+  margin-bottom: 25px;
+}
+
+.section-intro {
+  color: #91a5b8;
+  max-width: 900px;
+  font-size: 15px;
+  line-height: 1.9;
+  margin-bottom: 30px;
+}
+
+.pathway-viewer {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  height: 690px;
+  margin: auto;
+  border: 1px solid #243b50;
+  border-radius: 20px;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      ellipse at 50% 48%,
+      #182b3b 0%,
+      #0a1622 62%,
+      #02060b 100%
+    );
+}
+
+.pathway-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.brain-silhouette {
+  fill: #735f68;
+  stroke: #c9b6bc;
+  stroke-width: 3;
+  opacity: .92;
+}
+
+.brain-inner {
+  fill: #192936;
+  opacity: .65;
+  stroke: #8c7c83;
+  stroke-width: 1.5;
+}
+
+.ventricle-shape {
+  fill: #07111a;
+  stroke: #667a89;
+  stroke-width: 2;
+}
+
+.lgn {
+  fill: #ff8a9a;
+  stroke: #ffd4da;
+  stroke-width: 2;
+}
+
+.visual-cortex {
+  fill: #ff667b;
+  stroke: #ffd9de;
+  stroke-width: 2;
+}
+
+.pathway-main {
+  fill: none;
+  stroke: #ff4055;
+  stroke-width: 9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: url(#pathGlow);
+}
+
+.pathway-secondary {
+  fill: none;
+  stroke: #ff9daa;
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.pathway-highlight {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 10 8;
+  opacity: .75;
+}
+
+.pathway-node {
+  fill: #ff4055;
+  stroke: #fff;
+  stroke-width: 2;
+}
+
+.pathway-label-line {
+  fill: none;
+  stroke: #ffb6c1;
+  stroke-width: 1.5;
+}
+
+.pathway-label-dot {
+  fill: #ffb6c1;
+  stroke: #fff;
+  stroke-width: 1;
+}
+
+.svg-label {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: .8px;
+  fill: #fff;
+}
+
+.svg-sub {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  fill: #ffb6c1;
+}
+
+.svg-small {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  fill: #91a5b8;
+  letter-spacing: 1px;
+}
+
+.direction {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  fill: #7190a8;
+  letter-spacing: 2px;
+}
+
+.pathway-title {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  color: #d9e3eb;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.pathway-badge {
+  position: absolute;
+  bottom: 20px;
+  left: 22px;
+  padding: 8px 12px;
+  border: 1px solid #31516d;
+  border-radius: 8px;
+  background: rgba(4,10,17,.88);
+  color: #8195a8;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+}
+
+.pathway-legend {
+  position: absolute;
+  right: 22px;
+  bottom: 20px;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #b5c2ce;
+  font-size: 10px;
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  box-shadow: 0 0 12px currentColor;
+}
+
+.legend-dot.red {
+  background: #ff4055;
+  color: #ff4055;
+}
+
+.legend-dot.pink {
+  background: #ff9daa;
+  color: #ff9daa;
+}
+
+.legend-dot.white {
+  background: #fff;
+  color: #fff;
+}
+
+@keyframes pathwayPulse {
+  0%, 100% {
+    opacity: .75;
+    filter: drop-shadow(0 0 4px rgba(255,64,85,.35));
+  }
+
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 16px rgba(255,64,85,.9));
+  }
+}
+
+.pathway-active {
+  animation: pathwayPulse 2s infinite;
+}
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 20px;
+}
+
+.card {
+  padding: 27px;
+  background: #091522;
+  border: 1px solid #172b3e;
+  border-radius: 18px;
+  transition: transform .2s,border-color .2s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  border-color: #4a2027;
+}
+
+.card h3 {
+  font-size: 18px;
+  margin-bottom: 13px;
+  color: #eef4fa;
+  line-height: 1.45;
+}
+
+.card p {
+  color: #91a5b8;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+/* =========================================================
+   CLINICAL
+   ========================================================= */
+
+.clinical-section {
+  margin-top: 65px;
+}
+
+.clinical-box {
+  padding: 30px;
+  background: #091522;
+  border: 1px solid #172b3e;
+  border-left: 3px solid #ff4055;
+  border-radius: 18px;
+}
+
+.clinical-box p {
+  color: #a7b7c6;
+  font-size: 15px;
+  line-height: 1.9;
+  margin-bottom: 18px;
+}
+
+.clinical-box p:last-child {
+  margin-bottom: 0;
+}
+
+.clinical-list {
+  margin-top: 20px;
+  display: grid;
+  gap: 12px;
+}
+
+.clinical-item {
+  padding: 16px 18px;
+  background: #0b1928;
+  border: 1px solid #1c3043;
+  border-radius: 12px;
+}
+
+.clinical-item strong {
+  display: block;
+  color: #eef4fa;
+  margin-bottom: 5px;
+}
+
+.clinical-item span {
+  color: #91a5b8;
+  font-size: 14px;
+}
+
+/* =========================================================
+   FACTS
+   ========================================================= */
+
+.facts-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 15px;
+}
+
+.fact {
+  padding: 22px;
+  background: #091522;
+  border: 1px solid #172b3e;
+  border-radius: 16px;
+}
+
+.fact span {
+  display: block;
+  color: #ff4055;
+  font-size: 11px;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+.fact strong {
+  display: block;
+  color: #eef4fa;
+  font-size: 14px;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.fact p {
+  color: #8195a8;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* =========================================================
+   QUIZ
+   ========================================================= */
+
+.quiz {
+  margin-top: 65px;
+  padding: 30px;
+  background: #091522;
+  border: 1px solid #172b3e;
+  border-radius: 18px;
+}
+
+.quiz h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.quiz-intro {
+  color: #91a5b8;
+  margin-bottom: 25px;
+}
+
+.question {
+  margin-bottom: 30px;
+}
+
+.question:last-child {
+  margin-bottom: 0;
+}
+
+.question p {
+  color: #eef4fa;
+  font-size: 16px;
+  margin-bottom: 12px;
+  font-weight: bold;
+}
+
+.option {
+  display: block;
+  width: 100%;
+  padding: 12px 15px;
+  margin-top: 9px;
+  background: #0b1928;
+  color: #c7d5e2;
+  border: 1px solid #263951;
+  border-radius: 9px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+  transition: .2s;
+}
+
+.option:hover {
+  border-color: #ff4055;
+  background: #111e2c;
+}
+
+.option.correct {
+  border-color: #8fd3a8;
+  background: #14291e;
+  color: #b9f0c9;
+}
+
+.option.wrong {
+  border-color: #d88b9b;
+  background: #2a171d;
+  color: #ffc2cc;
+}
+
+.quiz-result {
+  margin-top: 25px;
+  padding: 15px;
+  border-radius: 10px;
+  background: #0b1928;
+  border: 1px solid #263951;
+  color: #aebdce;
+  display: none;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .cards {
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  .facts-grid {
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  .pathway-viewer {
+    height: 580px;
+  }
+}
+
+@media (max-width: 800px) {
+  .scene {
+    height: 450px;
+  }
+
+  .viewer-status {
+    display: none;
+  }
+
+  .pathway-viewer {
+    height: 500px;
+  }
+}
+
+@media (max-width: 600px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .facts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  h1 {
+    letter-spacing: -2px;
+  }
+
+  .pathway-viewer {
+    height: 430px;
+  }
+
+  .pathway-title {
+    font-size: 8px;
+  }
+
+  .svg-label {
+    font-size: 8px;
+  }
+
+  .svg-sub {
+    font-size: 7px;
+  }
+
+  .svg-small {
+    font-size: 7px;
+  }
+
+  .pathway-legend {
+    display: none;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <a href="./pathways.html">← Back to Pathways</a>
+</nav>
+
+<main class="container">
+
+<div class="eyebrow">
+  Visual Pathway · NeuroAtlas
+</div>
+
+<h1>Optic Radiations</h1>
+
+<div class="arabic-title">
+  الإشعاعات البصرية
+</div>
+
+<div class="hero">
+
+<p>
+The optic radiations are a major white-matter pathway carrying visual
+information from the lateral geniculate nucleus of the thalamus to the
+primary visual cortex in the occipital lobe. They fan through the
+temporal and parietal lobes and preserve the organization of the visual
+field.
+</p>
+
+</div>
+
+<div class="actions">
+
+<a class="action-button" href="#pathway">
+  〰️ Follow the Pathway
+</a>
+
+<a class="action-button" href="#anatomy">
+  🧠 Learn the Anatomy
+</a>
+
+<a class="action-button" href="#clinical">
+  🩺 Clinical Localization
+</a>
+
+<a class="action-button" href="#quiz">
+  📝 Test Yourself
+</a>
+
+</div>
+
+<!-- =========================================================
+     3D VIEWER
+     ========================================================= -->
+
+<div class="viewer">
+
+<div class="viewer-header">
+
+<div class="viewer-title">
+  Human Brain · Interactive 3D
+</div>
+
+<div class="viewer-status">
+  DRAG TO ROTATE · SCROLL TO ZOOM
+</div>
+
+</div>
+
+<div class="scene">
+
+<div id="loading" class="loading">
+
+<span id="loadText">
+Loading real brain model...
+</span>
+
+<div class="loading-bar">
+  <div id="loadBar" class="loading-bar-inner"></div>
+</div>
+
+</div>
+
+<canvas id="brainCanvas"></canvas>
+
+<div id="locationLabel" class="location-label">
+
+<div class="label-box">
+  OPTIC RADIATIONS · الإشعاعات البصرية
+</div>
+
+</div>
+
+</div>
+
+<div class="controls">
+
+<button id="showLocation">
+  📍 Show Optic Radiations
+</button>
+
+<button id="highlight" class="active">
+  🔴 Highlight Pathway
+</button>
+
+<button id="rotate" class="active">
+  ⟳ Auto Rotate
+</button>
+
+<button id="reset">
+  ↻ Reset View
+</button>
+
+</div>
+
+</div>
+
+<!-- =========================================================
+     PATHWAY
+     ========================================================= -->
+
+<section id="pathway" class="section">
+
+<div class="section-label">
+  Pathway · المسار
+</div>
+
+<h2>
+  Follow the Optic Radiations
+</h2>
+
+<p class="section-intro">
+
+Visual information reaches the lateral geniculate nucleus through the
+optic tract. From the lateral geniculate nucleus, axons travel as the
+optic radiations toward the primary visual cortex around the calcarine
+sulcus. The pathway separates into major temporal and parietal
+components while maintaining retinotopic organization.
+
+<br><br>
+
+تنتقل المعلومات البصرية إلى الجسم الركبي الوحشي عبر السبيل البصري.
+ومن الجسم الركبي الوحشي تمتد المحاور العصبية ضمن الإشعاعات البصرية
+نحو القشرة البصرية الأولية حول الثلم المهمازي. وينقسم المسار إلى
+مكونات رئيسية تمر عبر الفص الصدغي والفص الجداري مع الحفاظ على التنظيم
+الرتينوتوبي للمجال البصري.
+
+</p>
+
+<div class="pathway-viewer">
+
+<div class="pathway-title">
+  Lateral View · Optic Radiations
+</div>
+
+<svg
+class="pathway-svg"
+viewBox="0 0 1200 690"
+xmlns="http://www.w3.org/2000/svg"
+aria-label="Anatomical illustration of the optic radiations">
+
+<defs>
+
+<filter
+id="pathGlow"
+x="-100%"
+y="-100%"
+width="300%"
+height="300%">
+
+<feGaussianBlur
+stdDeviation="5"
+result="blur"/>
+
+</filter>
+
+<filter
+id="brainShadow"
+x="-20%"
+y="-20%"
+width="140%"
+height="150%">
+
+<feDropShadow
+dx="0"
+dy="12"
+stdDeviation="12"
+flood-color="#000"
+flood-opacity=".7"/>
+
+</filter>
+
+</defs>
+
+<!-- Brain -->
+
+<path
+class="brain-silhouette"
+filter="url(#brainShadow)"
+d="
+M260 350
+C220 307 212 251 234 205
+C255 162 297 130 350 108
+C410 82 484 70 560 76
+C635 82 704 105 756 139
+C808 172 846 216 858 267
+C870 318 859 371 836 416
+C813 461 773 499 722 531
+C670 564 611 581 547 586
+C481 591 415 579 360 554
+C310 531 270 496 248 452
+C226 408 224 382 260 350
+Z
+"/>
+
+<!-- Inner brain -->
+
+<path
+class="brain-inner"
+d="
+M303 350
+C276 311 274 267 294 226
+C315 184 356 154 405 136
+C457 117 519 111 580 117
+C640 123 695 143 736 171
+C775 198 801 233 809 273
+C817 314 808 357 789 394
+C769 432 736 462 695 487
+C650 514 598 528 544 532
+C488 536 434 527 388 509
+C347 492 317 465 299 432
+C282 400 279 375 303 350
+Z
+"/>
+
+<!-- Ventricular landmark -->
+
+<path
+class="ventricle-shape"
+d="
+M458 273
+C434 277 415 292 409 313
+C404 330 412 346 427 354
+C443 362 460 358 470 345
+C480 331 481 312 475 296
+C471 286 467 278 458 273
+Z
+"/>
+
+<!-- Thalamic region -->
+
+<ellipse
+cx="520"
+cy="349"
+rx="43"
+ry="38"
+fill="#5e6c7d"
+stroke="#aebbc8"
+stroke-width="2"
+/>
+
+<!-- Lateral geniculate nucleus -->
+
+<ellipse
+class="lgn"
+cx="562"
+cy="374"
+rx="17"
+ry="13"
+class="pathway-active"
+/>
+
+<!-- Primary visual cortex -->
+
+<path
+class="visual-cortex"
+d="
+M777 263
+C799 289 808 319 805 348
+C802 377 791 404 774 426
+C759 444 742 455 724 462
+C737 431 744 399 746 367
+C748 331 744 296 734 265
+C748 259 763 258 777 263
+Z
+"/>
+
+<!-- Main optic radiation -->
+
+<path
+class="pathway-main pathway-active"
+d="
+M566 374
+C603 359 632 341 656 316
+C684 287 706 263 735 266
+"
+/>
+
+<!-- Meyer loop -->
+
+<path
+class="pathway-secondary pathway-active"
+d="
+M566 374
+C608 390 642 414 657 449
+C667 473 661 498 639 515
+C669 523 703 505 725 475
+C742 451 749 421 750 388
+"
+/>
+
+<!-- Superior/parietal pathway -->
+
+<path
+class="pathway-secondary pathway-active"
+d="
+M566 374
+C603 344 638 313 667 280
+C694 249 719 228 744 231
+C760 233 773 243 783 260
+"
+/>
+
+<!-- Dashed directional highlights -->
+
+<path
+class="pathway-highlight"
+d="
+M567 374
+C620 356 680 304 742 265
+"/>
+
+<path
+class="pathway-highlight"
+d="
+M568 376
+C628 399 676 462 726 469
+"/>
+
+<!-- Nodes -->
+
+<circle
+class="pathway-node"
+cx="566"
+cy="374"
+r="6"
+/>
+
+<circle
+class="pathway-node"
+cx="744"
+cy="265"
+r="6"
+/>
+
+<circle
+class="pathway-node"
+cx="726"
+cy="469"
+r="6"
+/>
+
+<!-- LGN label -->
+
+<path
+class="pathway-label-line"
+d="
+M562 374
+L430 438
+L245 438
+"/>
+
+<circle
+class="pathway-label-dot"
+cx="562"
+cy="374"
+r="4"
+/>
+
+<text
+class="svg-label"
+x="245"
+y="431">
+LATERAL GENICULATE NUCLEUS
+</text>
+
+<text
+class="svg-sub"
+x="245"
+y="449">
+الجسم الركبي الوحشي
+</text>
+
+<!-- Meyer loop label -->
+
+<path
+class="pathway-label-line"
+d="
+M657 449
+L480 535
+L245 535
+"/>
+
+<circle
+class="pathway-label-dot"
+cx="657"
+cy="449"
+r="4"
+/>
+
+<text
+class="svg-label"
+x="245"
+y="528">
+MEYER'S LOOP
+</text>
+
+<text
+class="svg-sub"
+x="245"
+y="546">
+حلقة ماير
+</text>
+
+<!-- Parietal radiation -->
+
+<path
+class="pathway-label-line"
+d="
+M684 278
+L900 190
+L1090 190
+"/>
+
+<circle
+class="pathway-label-dot"
+cx="684"
+cy="278"
+r="4"
+/>
+
+<text
+class="svg-label"
+x="900"
+y="183">
+SUPERIOR / PARIETAL RADIATIONS
+</text>
+
+<text
+class="svg-sub"
+x="900"
+y="201">
+الإشعاعات العلوية / الجدارية
+</text>
+
+<!-- Visual cortex -->
+
+<path
+class="pathway-label-line"
+d="
+M776 351
+L920 350
+L1090 350
+"/>
+
+<circle
+class="pathway-label-dot"
+cx="776"
+cy="351"
+r="4"
+/>
+
+<text
+class="svg-label"
+x="920"
+y="343">
+PRIMARY VISUAL CORTEX
+</text>
+
+<text
+class="svg-sub"
+x="920"
+y="361">
+القشرة البصرية الأولية
+</text>
+
+<!-- Temporal lobe -->
+
+<text
+class="svg-small"
+x="400"
+y="505">
+TEMPORAL LOBE
+</text>
+
+<text
+class="svg-sub"
+x="400"
+y="523">
+الفص الصدغي
+</text>
+
+<!-- Parietal lobe -->
+
+<text
+class="svg-small"
+x="675"
+y="175">
+PARIETAL REGION
+</text>
+
+<text
+class="svg-sub"
+x="675"
+y="193">
+المنطقة الجدارية
+</text>
+
+<!-- Occipital -->
+
+<text
+class="svg-small"
+x="812"
+y="485">
+OCCIPITAL LOBE
+</text>
+
+<text
+class="svg-sub"
+x="812"
+y="503">
+الفص القذالي
+</text>
+
+<!-- Direction -->
+
+<text
+class="direction"
+x="295"
+y="625">
+ANTERIOR
+</text>
+
+<text
+class="direction"
+x="1015"
+y="625">
+POSTERIOR
+</text>
+
+<text
+class="direction"
+x="558"
+y="655">
+VISUAL INFORMATION → PRIMARY VISUAL CORTEX
+</text>
+
+</svg>
+
+<div class="pathway-badge">
+  LGN → OPTIC RADIATIONS → V1
+</div>
+
+<div class="pathway-legend">
+
+<div class="legend-item">
+  <span class="legend-dot red"></span>
+  Main pathway
+</div>
+
+<div class="legend-item">
+  <span class="legend-dot pink"></span>
+  Major divisions
+</div>
+
+<div class="legend-item">
+  <span class="legend-dot white"></span>
+  Direction
+</div>
+
+</div>
+
+</div>
+
+<p class="location-caption">
+
+The optic radiations fan posteriorly from the lateral geniculate nucleus
+and terminate in the primary visual cortex. The temporal component forms
+Meyer's loop, while superior fibers travel through the parietal region.
+
+</p>
+
+<p class="source-note">
+
+Simplified anatomical pathway illustration intended for educational
+visualization. It is not intended as a radiological diagnostic image.
+
+</p>
+
+</section>
+
+<!-- =========================================================
+     ANATOMY
+     ========================================================= -->
+
+<section id="anatomy" class="section">
+
+<div class="section-label">
+  Anatomy · التشريح
+</div>
+
+<h2>
+  Optic Radiations Anatomy
+</h2>
+
+<p class="section-intro">
+
+The optic radiations are composed of fibers arising from the lateral
+geniculate nucleus. These fibers travel through the cerebral white
+matter before reaching the primary visual cortex in the occipital lobe.
+Their course is organized so that different portions of the visual
+field are represented in predictable parts of the pathway.
+
+<br><br>
+
+تتكون الإشعاعات البصرية من ألياف تنشأ من الجسم الركبي الوحشي. تمر هذه
+الألياف عبر المادة البيضاء في المخ قبل وصولها إلى القشرة البصرية الأولية
+في الفص القذالي. ويتميز مسارها بتنظيم يسمح بتمثيل أجزاء مختلفة من المجال
+البصري في مناطق محددة من المسار.
+
+</p>
+
+<div class="cards">
+
+<div class="card">
+
+<h3>
+Lateral Geniculate Nucleus · الجسم الركبي الوحشي
+</h3>
+
+<p>
+The lateral geniculate nucleus of the thalamus is the major relay nucleus
+from which the optic radiations arise.
+<br><br>
+يعد الجسم الركبي الوحشي في المهاد محطة الترحيل الرئيسية التي تنشأ منها
+الإشعاعات البصرية.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Optic Radiations · الإشعاعات البصرية
+</h3>
+
+<p>
+These fibers carry visual information from the lateral geniculate nucleus
+to the primary visual cortex.
+<br><br>
+تنقل هذه الألياف المعلومات البصرية من الجسم الركبي الوحشي إلى القشرة
+البصرية الأولية.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Meyer's Loop · حلقة ماير
+</h3>
+
+<p>
+The temporal component of the optic radiations sweeps anteriorly through
+the temporal lobe before turning posteriorly toward the visual cortex.
+<br><br>
+يمر الجزء الصدغي من الإشعاعات البصرية إلى الأمام داخل الفص الصدغي قبل
+أن يتجه للخلف نحو القشرة البصرية.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Parietal Component · الجزء الجداري
+</h3>
+
+<p>
+Superior optic-radiation fibers travel through the parietal region before
+reaching the occipital visual cortex.
+<br><br>
+تمر الألياف العلوية من الإشعاعات البصرية عبر المنطقة الجدارية قبل وصولها
+إلى القشرة البصرية القذالية.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Primary Visual Cortex · القشرة البصرية الأولية
+</h3>
+
+<p>
+The optic radiations terminate mainly in the primary visual cortex around
+the calcarine sulcus.
+<br><br>
+تنتهي الإشعاعات البصرية بشكل رئيسي في القشرة البصرية الأولية حول الثلم
+المهمازي.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Retinotopic Organization · التنظيم الرتينوتوبي
+</h3>
+
+<p>
+The pathway preserves spatial information about the visual field as
+signals travel toward the occipital cortex.
+<br><br>
+يحافظ المسار على المعلومات المكانية المتعلقة بالمجال البصري أثناء انتقال
+الإشارات نحو القشرة القذالية.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- =========================================================
+     FUNCTION
+     ========================================================= -->
+
+<section class="section">
+
+<div class="section-label">
+  Function · الوظيفة
+</div>
+
+<h2>
+  What Do the Optic Radiations Do?
+</h2>
+
+<div class="clinical-box">
+
+<p>
+The optic radiations transmit visual information from the lateral
+geniculate nucleus to the primary visual cortex. They are essential for
+bringing processed retinal information into the cortical visual system,
+where visual perception and further interpretation can occur.
+</p>
+
+<p dir="rtl">
+تنقل الإشعاعات البصرية المعلومات البصرية من الجسم الركبي الوحشي إلى
+القشرة البصرية الأولية. وهي ضرورية لنقل المعلومات القادمة من الشبكية
+إلى النظام البصري القشري حيث يمكن إدراك المعلومات البصرية ومعالجتها.
+</p>
+
+</div>
+
+</section>
+
+<!-- =========================================================
+     CLINICAL
+     ========================================================= -->
+
+<section id="clinical" class="clinical-section">
+
+<div class="section-label">
+  Clinical Localization · التحديد السريري
+</div>
+
+<h2>
+  Why the Optic Radiations Matter
+</h2>
+
+<div class="clinical-box">
+
+<p>
+Because the optic radiations preserve information about different portions
+of the visual field, lesions at different points can produce characteristic
+visual-field deficits.
+</p>
+
+<p dir="rtl">
+لأن الإشعاعات البصرية تحافظ على المعلومات المتعلقة بأجزاء مختلفة من
+المجال البصري، فإن الآفات في أجزاء مختلفة منها يمكن أن تسبب عيوباً
+مميزة في المجال البصري.
+</p>
+
+<div class="clinical-list">
+
+<div class="clinical-item">
+
+<strong>
+Meyer's Loop → Contralateral Superior Quadrantanopia
+</strong>
+
+<span>
+A lesion involving the temporal optic radiations, particularly Meyer's
+loop, classically affects fibers representing the contralateral superior
+visual field.
+</span>
+
+</div>
+
+<div class="clinical-item">
+
+<strong>
+Parietal Optic Radiations → Contralateral Inferior Quadrantanopia
+</strong>
+
+<span>
+A lesion affecting superior/parietal optic-radiation fibers can produce
+a contralateral inferior visual-field deficit.
+</span>
+
+</div>
+
+<div class="clinical-item">
+
+<strong>
+Complete Optic Radiation Lesion → Contralateral Homonymous Hemianopia
+</strong>
+
+<span>
+A sufficiently extensive lesion of one optic radiation can interrupt
+visual information from the contralateral visual hemifield.
+</span>
+
+</div>
+
+<div class="clinical-item">
+
+<strong>
+Occipital Cortex → Visual Cortex Correlation
+</strong>
+
+<span>
+The optic radiations terminate in the occipital visual cortex, making
+the pathway an important component of retrochiasmal visual localization.
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- =========================================================
+     QUICK FACTS
+     ========================================================= -->
+
+<section class="section">
+
+<div class="section-label">
+  Quick Facts · معلومات سريعة
+</div>
+
+<h2>
+  Optic Radiations at a Glance
+</h2>
+
+<div class="facts-grid">
+
+<div class="fact">
+
+<span>01</span>
+
+<strong>
+Origin · المنشأ
+</strong>
+
+<p>
+Lateral geniculate nucleus
+</p>
+
+</div>
+
+<div class="fact">
+
+<span>02</span>
+
+<strong>
+Destination · الوجهة
+</strong>
+
+<p>
+Primary visual cortex
+</p>
+
+</div>
+
+<div class="fact">
+
+<span>03</span>
+
+<strong>
+Temporal Division · القسم الصدغي
+</strong>
+
+<p>
+Meyer's loop
+</p>
+
+</div>
+
+<div class="fact">
+
+<span>04</span>
+
+<strong>
+Parietal Division · القسم الجداري
+</strong>
+
+<p>
+Superior optic radiations
+</p>
+
+</div>
+
+<div class="fact">
+
+<span>05</span>
+
+<strong>
+Major Lobe · الفص الرئيسي
+</strong>
+
+<p>
+Temporal and parietal white matter
+</p>
+
+</div>
+
+<div class="fact">
+
+<span>06</span>
+
+<strong>
+Final Cortex · القشرة النهائية
+</strong>
+
+<p>
+Occipital visual cortex
+</p>
+
+</div>
+
+<div class="fact">
+
+<span>07</span>
+
+<strong>
+Organization · التنظيم
+</strong>
+
+<p>
+Retinotopic
+</p>
+
+</div>
+
+<div class="fact">
+
+<span>08</span>
+
+<strong>
+Clinical Role · الأهمية السريرية
+</strong>
+
+<p>
+Visual-field localization
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- =========================================================
+     QUIZ
+     ========================================================= -->
+
+<div id="quiz" class="quiz">
+
+<div class="section-label">
+  Mini Test
+</div>
+
+<h2>
+  🧠 Test Yourself
+</h2>
+
+<p class="quiz-intro">
+Choose the best answer for each question.
+</p>
+
+<div class="question">
+
+<p>
+1. Where do the optic radiations primarily originate?
+</p>
+
+<button
+class="option"
+onclick="checkAnswer(this,true)">
+A. Lateral geniculate nucleus
+</button>
+
+<button
+class="option"
+onclick="checkAnswer(this,false)">
+B. Cerebellar cortex
+</button>
+
+<button
+class="option"
+onclick="checkAnswer(this,false)">
+C. Spinal cord
+</button>
+
+<button
+class="option"
+onclick="checkAnswer(this,false)">
+D. Hippocampus
+</button>
+
+</div>
+
+<div class="question">
+
+<p>
+2. Where do the optic radiations terminate?
+</p>
+
+<button
+class="option"
+onclick="checkAnswer(this,true)">
+A. Primary visual cortex
+</button>
+
+<button
+class="option"
+onclick="checkAnswer(this,false)">
+B. Primary motor cortex
+</button>
+
+<button
+class="option"
+onclick="checkAnswer(this,false)">
+C. Cerebellar vermis
+</button>
+
+<button
+class="option"
+onclick="checkAnswer(this,false)">
+D. Medulla
+</button>
+
+</div>
+
+<div class="question">
+
+<p>
+3. Which part of the optic radiations forms Meyer's loop?
+</p>
+
+<button
+class="option"
+onclick="checkAnswer(this,true)">
+A. Temporal component
+</button>
+
+<button
+class="option"
+onclick="checkAnswer(this,false)">
+B. Cerebellar component
+</button>
+
+<button
+class="option"
+onclick="checkAnswer(this,false)">
+C. Brainstem component
+</button>
+
+<button
+class="option"
+onclick="checkAnswer(this,false)">
+D. Spinal component
+</button>
+
+</div>
+
+<div class="question">
+
+<p>
+4. A lesion of Meyer's loop classically causes which deficit?
+</p>
+
+<button
+class="option"
+onclick="checkAnswer(this,true)">
+A. Contralateral superior quadrantanopia
+</button>
+
+<button
+class="option"
+onclick="checkAnswer(this,false)">
+B. Ipsilateral complete blindness
+</button>
+
+<button
+class="option"
+onclick="checkAnswer(this,false)">
+C. Bilateral hearing loss
+</button>
+
+<button
+class="option"
+onclick="checkAnswer(this,false)">
+D. Contralateral facial paralysis
+</button>
+
+</div>
+
+<div class="question">
+
+<p>
+5. Which lobe contains the temporal portion of the optic radiations?
+</p>
+
+<button
+class="option"
+onclick="checkAnswer(this,true)">
+A. Temporal lobe
+</button>
+
+<button
+class="option"
+onclick="checkAnswer(this,false)">
+B. Frontal lobe only
+</button>
+
+<button
+class="option"
+onclick="checkAnswer(this,false)">
+C. Cerebellum
+</button>
+
+<button
+class="option"
+onclick="checkAnswer(this,false)">
+D. Medulla
+</button>
+
+</div>
+
+<div id="quizResult" class="quiz-result"></div>
+
+</div>
+
+</main>
+
+<!-- =========================================================
+     THREE.JS
+     ========================================================= -->
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+
+import * as THREE from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
+
+const canvas = document.getElementById("brainCanvas");
+const loading = document.getElementById("loading");
+const loadText = document.getElementById("loadText");
+const loadBar = document.getElementById("loadBar");
+const locationLabel = document.getElementById("locationLabel");
+
+const scene = new THREE.Scene();
+
+const camera = new THREE.PerspectiveCamera(
+  30,
+  1,
+  .01,
+  100
+);
+
+camera.position.set(
+  3.2,
+  .3,
+  8.5
+);
+
+const renderer = new THREE.WebGLRenderer({
+  canvas,
+  antialias: true,
+  alpha: true
+});
+
+renderer.setPixelRatio(
+  Math.min(
+    window.devicePixelRatio || 1,
+    2
+  )
+);
+
+renderer.toneMapping =
+  THREE.ACESFilmicToneMapping;
+
+renderer.toneMappingExposure = .75;
+
+const controls =
+  new OrbitControls(
+    camera,
+    canvas
+  );
+
+controls.enableRotate = true;
+controls.rotateSpeed = .6;
+controls.enableDamping = true;
+controls.dampingFactor = .05;
+controls.enableZoom = true;
+controls.zoomSpeed = .6;
+controls.enablePan = false;
+controls.autoRotate = true;
+controls.autoRotateSpeed = .2;
+
+controls.target.set(
+  0,
+  -.3,
+  0
+);
+
+controls.minDistance = 3.5;
+controls.maxDistance = 16;
+
+scene.add(
+  new THREE.AmbientLight(
+    0xffffff,
+    .55
+  )
+);
+
+scene.add(
+  new THREE.HemisphereLight(
+    0xffdce6,
+    0x081018,
+    .75
+  )
+);
+
+const keyLight =
+  new THREE.DirectionalLight(
+    0xfff5f0,
+    1.4
+  );
+
+keyLight.position.set(
+  6,
+  10,
+  8
+);
+
+scene.add(keyLight);
+
+const fillLight =
+  new THREE.DirectionalLight(
+    0x8ca9bd,
+    .4
+  );
+
+fillLight.position.set(
+  -7,
+  2,
+  6
+);
+
+scene.add(fillLight);
+
+const brainGroup =
+  new THREE.Group();
+
+scene.add(brainGroup);
+
+let targetMeshes = [];
+let brainMeshes = [];
+
+let locationShown = false;
+let highlighted = true;
+
+const brainOpaqueMaterial =
+  new THREE.MeshPhysicalMaterial({
+    color: 0xf1c5d0,
+    roughness: .62,
+    metalness: 0,
+    clearcoat: .12,
+    clearcoatRoughness: .5,
+    side: THREE.DoubleSide,
+    transparent: false,
+    opacity: 1
+  });
+
+const brainTransparentMaterial =
+  new THREE.MeshPhysicalMaterial({
+    color: 0xf1c5d0,
+    roughness: .55,
+    metalness: 0,
+    clearcoat: .1,
+    clearcoatRoughness: .5,
+    side: THREE.DoubleSide,
+    transparent: true,
+    opacity: .16,
+    depthWrite: false
+  });
+
+const targetMaterial =
+  new THREE.MeshPhysicalMaterial({
+    color: 0xff2948,
+    roughness: .3,
+    metalness: 0,
+    clearcoat: .6,
+    clearcoatRoughness: .12,
+    emissive: 0x5c0613,
+    emissiveIntensity: 1.05,
+    side: THREE.DoubleSide,
+    transparent: false,
+    opacity: 1
+  });
+
+const targetNormalMaterial =
+  new THREE.MeshPhysicalMaterial({
+    color: 0xf1c5d0,
+    roughness: .62,
+    metalness: 0,
+    clearcoat: .12,
+    clearcoatRoughness: .5,
+    side: THREE.DoubleSide
+  });
+
+function normalizeName(name) {
+  return String(name || "")
+    .toLowerCase()
+    .replace(/[\s_\-.]+/g, "");
+}
+
+function getMeshName(mesh) {
+
+  const userName =
+    mesh.userData &&
+    mesh.userData.name
+      ? mesh.userData.name
+      : "";
+
+  return `${mesh.name} ${userName}`;
+}
+
+function isExplicitOpticRadiation(mesh) {
+
+  const name =
+    normalizeName(
+      getMeshName(mesh)
+    );
+
+  const targetNames = [
+    "opticradiation",
+    "opticradiations",
+    "opticalradiation",
+    "opticalradiations",
+    "meyersloop",
+    "meyerloop",
+    "visualradiation",
+    "visualradiations",
+    "geniculocalcarine",
+    "geniculocalcarinepathway",
+    "optictract",
+    "lateralgeniculate",
+    "lateralgeniculatebody",
+    "geniculatebody"
+  ];
+
+  return targetNames.some(
+    item => name.includes(item)
+  );
+}
+
+function isClearlyNotTarget(mesh) {
+
+  const name =
+    normalizeName(
+      getMeshName(mesh)
+    );
+
+  const excludedNames = [
+    "cerebellum",
+    "brainstem",
+    "medulla",
+    "pons",
+    "spinalcord",
+    "artery",
+    "vein",
+    "vessel",
+    "skull",
+    "skin",
+    "eye",
+    "opticnerve"
+  ];
+
+  return excludedNames.some(
+    item => name.includes(item)
+  );
+}
+
+function calculateTargetCandidates(model) {
+
+  const meshes = [];
+
+  model.traverse(child => {
+
+    if (!child.isMesh) {
+      return;
+    }
+
+    meshes.push(child);
+  });
+
+  return meshes.filter(
+    mesh =>
+      isExplicitOpticRadiation(mesh) &&
+      !isClearlyNotTarget(mesh)
+  );
+}
+
+function prepareMaterials(model) {
+
+  brainMeshes = [];
+  targetMeshes = [];
+
+  model.traverse(child => {
+
+    if (!child.isMesh) {
+      return;
+    }
+
+    child.castShadow = true;
+    child.receiveShadow = true;
+
+    child.material =
+      brainOpaqueMaterial.clone();
+
+    brainMeshes.push(child);
+  });
+
+  targetMeshes =
+    calculateTargetCandidates(model);
+
+  targetMeshes.forEach(mesh => {
+
+    mesh.material =
+      targetMaterial.clone();
+
+  });
+}
+
+function loadRealBrain() {
+
+  const loader =
+    new GLTFLoader();
+
+  const dracoLoader =
+    new DRACOLoader();
+
+  dracoLoader.setDecoderPath(
+    "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/"
+  );
+
+  loader.setDRACOLoader(
+    dracoLoader
+  );
+
+  const urls = [
+
+    "https://cdn.jsdelivr.net/gh/itayinbarr/brainproject@main/brain-atlas/models/brain.glb",
+
+    "https://raw.githubusercontent.com/itayinbarr/brainproject/main/brain-atlas/models/brain.glb",
+
+    "https://itayinbarr.github.io/brainproject/models/brain.glb"
+
+  ];
+
+  let index = 0;
+
+  function tryLoad() {
+
+    if (index >= urls.length) {
+
+      loadText.textContent =
+        "Brain model could not be loaded.";
+
+      loadBar.style.width =
+        "100%";
+
+      setTimeout(() => {
+
+        loading.classList.add(
+          "hide"
+        );
+
+      }, 500);
+
+      return;
+    }
+
+    const url =
+      urls[index++];
+
+    loader.load(
+
+      url,
+
+      gltf => {
+
+        const model =
+          gltf.scene;
+
+        const box =
+          new THREE.Box3()
+            .setFromObject(
+              model
+            );
+
+        const center =
+          box.getCenter(
+            new THREE.Vector3()
+          );
+
+        const size =
+          box.getSize(
+            new THREE.Vector3()
+          );
+
+        const maxDim =
+          Math.max(
+            size.x,
+            size.y,
+            size.z
+          );
+
+        const scale =
+          4.5 / maxDim;
+
+        model.scale.setScalar(
+          scale
+        );
+
+        model.position.sub(
+          center.multiplyScalar(
+            scale
+          )
+        );
+
+        model.position.y -= .6;
+
+        brainGroup.add(
+          model
+        );
+
+        prepareMaterials(
+          model
+        );
+
+        if (
+          targetMeshes.length === 0
+        ) {
+
+          loadText.textContent =
+            "Brain loaded · optic radiation surface unavailable";
+
+        } else {
+
+          loadText.textContent =
+            "Optic radiation structures located";
+
+          locationLabel.classList.add(
+            "show"
+          );
+        }
+
+        loadBar.style.width =
+          "100%";
+
+        setTimeout(() => {
+
+          loading.classList.add(
+            "hide"
+          );
+
+        }, 500);
+
+      },
+
+      progress => {
+
+        if (
+          progress.total > 0
+        ) {
+
+          const pct =
+            Math.min(
+              95,
+              progress.loaded /
+              progress.total *
+              95
+            );
+
+          loadBar.style.width =
+            pct + "%";
+        }
+
+      },
+
+      error => {
+
+        console.warn(
+          "Brain model loading failed:",
+          error
+        );
+
+        tryLoad();
+
+      }
+
+    );
+  }
+
+  tryLoad();
+}
+
+function setBrainTransparency(
+  enabled
+) {
+
+  brainMeshes.forEach(
+    mesh => {
+
+      if (
+        targetMeshes.includes(
+          mesh
+        )
+      ) {
+
+        return;
+      }
+
+      mesh.material =
+        enabled
+          ? brainTransparentMaterial.clone()
+          : brainOpaqueMaterial.clone();
+
+    }
+  );
+}
+
+function setTargetHighlight(
+  enabled
+) {
+
+  targetMeshes.forEach(
+    mesh => {
+
+      mesh.material =
+        enabled
+          ? targetMaterial.clone()
+          : targetNormalMaterial.clone();
+
+    }
+  );
+}
+
+const showLocationBtn =
+  document.getElementById(
+    "showLocation"
+  );
+
+showLocationBtn.addEventListener(
+  "click",
+  () => {
+
+    locationShown =
+      !locationShown;
+
+    if (locationShown) {
+
+      setBrainTransparency(
+        true
+      );
+
+      setTargetHighlight(
+        true
+      );
+
+      highlighted = true;
+
+      locationLabel.classList.add(
+        "show"
+      );
+
+      showLocationBtn.classList.add(
+        "active"
+      );
+
+      showLocationBtn.textContent =
+        "📍 Hide Optic Radiations";
+
+      controls.autoRotate =
+        false;
+
+      rotateBtn.classList.remove(
+        "active"
+      );
+
+      rotateBtn.textContent =
+        "▶ Auto Rotate";
+
+    } else {
+
+      setBrainTransparency(
+        false
+      );
+
+      setTargetHighlight(
+        highlighted
+      );
+
+      locationLabel.classList.remove(
+        "show"
+      );
+
+      showLocationBtn.classList.remove(
+        "active"
+      );
+
+      showLocationBtn.textContent =
+        "📍 Show Optic Radiations";
+
+    }
+
+  }
+);
+
+const highlightBtn =
+  document.getElementById(
+    "highlight"
+  );
+
+highlightBtn.addEventListener(
+  "click",
+  () => {
+
+    highlighted =
+      !highlighted;
+
+    setTargetHighlight(
+      highlighted
+    );
+
+    if (highlighted) {
+
+      highlightBtn.classList.add(
+        "active"
+      );
+
+      highlightBtn.textContent =
+        "🔴 Highlight Pathway";
+
+    } else {
+
+      highlightBtn.classList.remove(
+        "active"
+      );
+
+      highlightBtn.textContent =
+        "🧠 Highlight Pathway";
+
+    }
+
+    if (locationShown) {
+
+      setBrainTransparency(
+        true
+      );
+
+    }
+
+  }
+);
+
+const rotateBtn =
+  document.getElementById(
+    "rotate"
+  );
+
+rotateBtn.addEventListener(
+  "click",
+  () => {
+
+    controls.autoRotate =
+      !controls.autoRotate;
+
+    rotateBtn.classList.toggle(
+      "active",
+      controls.autoRotate
+    );
+
+    rotateBtn.textContent =
+      controls.autoRotate
+        ? "⟳ Auto Rotate"
+        : "▶ Auto Rotate";
+
+  }
+);
+
+document
+  .getElementById("reset")
+  .addEventListener(
+    "click",
+    () => {
+
+      camera.position.set(
+        3.2,
+        .3,
+        8.5
+      );
+
+      controls.target.set(
+        0,
+        -.3,
+        0
+      );
+
+      controls.update();
+
+      locationShown =
+        false;
+
+      highlighted =
+        true;
+
+      setBrainTransparency(
+        false
+      );
+
+      setTargetHighlight(
+        true
+      );
+
+      locationLabel.classList.remove(
+        "show"
+      );
+
+      showLocationBtn.classList.remove(
+        "active"
+      );
+
+      showLocationBtn.textContent =
+        "📍 Show Optic Radiations";
+
+      highlightBtn.classList.add(
+        "active"
+      );
+
+      highlightBtn.textContent =
+        "🔴 Highlight Pathway";
+
+      controls.autoRotate =
+        true;
+
+      rotateBtn.classList.add(
+        "active"
+      );
+
+      rotateBtn.textContent =
+        "⟳ Auto Rotate";
+
+    }
+  );
+
+function updateLabel() {
+
+  if (!locationShown) {
+    return;
+  }
+
+  if (
+    targetMeshes.length === 0
+  ) {
+    return;
+  }
+
+  const box =
+    new THREE.Box3();
+
+  targetMeshes.forEach(
+    mesh => {
+
+      box.expandByObject(
+        mesh
+      );
+
+    }
+  );
+
+  if (box.isEmpty()) {
+    return;
+  }
+
+  const position =
+    box.getCenter(
+      new THREE.Vector3()
+    );
+
+  position.project(
+    camera
+  );
+
+  const x =
+    (position.x + 1) /
+    2 *
+    canvas.clientWidth;
+
+  const y =
+    (-position.y + 1) /
+    2 *
+    canvas.clientHeight;
+
+  locationLabel.style.left =
+    x + "px";
+
+  locationLabel.style.top =
+    (y - 35) + "px";
+}
+
+function resize() {
+
+  const width =
+    canvas.clientWidth;
+
+  const height =
+    canvas.clientHeight;
+
+  if (
+    width <= 0 ||
+    height <= 0
+  ) {
+    return;
+  }
+
+  camera.aspect =
+    width / height;
+
+  camera.updateProjectionMatrix();
+
+  renderer.setSize(
+    width,
+    height,
+    false
+  );
+}
+
+window.addEventListener(
+  "resize",
+  resize
+);
+
+function animate() {
+
+  requestAnimationFrame(
+    animate
+  );
+
+  controls.update();
+
+  updateLabel();
+
+  renderer.render(
+    scene,
+    camera
+  );
+}
+
+resize();
+animate();
+loadRealBrain();
+
+</script>
+
+<!-- =========================================================
+     QUIZ LOGIC
+     ========================================================= -->
+
+<script>
+
+function checkAnswer(
+  button,
+  correct
+) {
+
+  const parent =
+    button.parentElement;
+
+  const options =
+    parent.querySelectorAll(
+      ".option"
+    );
+
+  options.forEach(
+    option => {
+
+      option.classList.remove(
+        "correct",
+        "wrong"
+      );
+
+    }
+  );
+
+  if (correct) {
+
+    button.classList.add(
+      "correct"
+    );
+
+  } else {
+
+    button.classList.add(
+      "wrong"
+    );
+
+  }
+
+  updateQuizScore();
+}
+
+function updateQuizScore() {
+
+  const result =
+    document.getElementById(
+      "quizResult"
+    );
+
+  let answered = 0;
+  let correctAnswers = 0;
+
+  document
+    .querySelectorAll(
+      ".question"
+    )
+    .forEach(
+      question => {
+
+        const selected =
+          question.querySelector(
+            ".correct,.wrong"
+          );
+
+        if (selected) {
+
+          answered++;
+
+          if (
+            selected.classList.contains(
+              "correct"
+            )
+          ) {
+
+            correctAnswers++;
+
+          }
+
+        }
+
+      }
+    );
+
+  if (answered > 0) {
+
+    result.style.display =
+      "block";
+
+    result.textContent =
+      "Score: " +
+      correctAnswers +
+      " / " +
+      answered;
+
+  }
+}
+
+</script>
+
+</body>
+</html>
