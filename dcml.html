@@ -1,0 +1,2987 @@
+<!-- /dcml.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NeuroAtlas | Dorsal Column–Medial Lemniscus Pathway</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #050b13;
+  color: #eef4fa;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.7;
+}
+
+nav {
+  height: 70px;
+  padding: 0 7%;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+nav a {
+  color: #9db0c3;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+nav a:hover {
+  color: #fff;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 60px 7% 100px;
+}
+
+.eyebrow {
+  color: #61b5ff;
+  letter-spacing: 3px;
+  font-size: 12px;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+
+h1 {
+  font-size: clamp(42px, 6vw, 78px);
+  line-height: .98;
+  letter-spacing: -3px;
+  margin-bottom: 12px;
+}
+
+.arabic-title {
+  color: #ff4055;
+  font-size: 23px;
+  margin-bottom: 25px;
+}
+
+.hero p {
+  color: #a6b6c7;
+  max-width: 850px;
+  font-size: 18px;
+  line-height: 1.85;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.action-button,
+.controls button {
+  padding: 11px 17px;
+  border-radius: 9px;
+  background: #0b1928;
+  border: 1px solid #31516d;
+  color: #bdd0e0;
+  text-decoration: none;
+  cursor: pointer;
+  transition: .2s;
+  font-size: 13px;
+}
+
+.action-button:hover,
+.controls button:hover {
+  background: #14304a;
+  color: #fff;
+  border-color: #61b5ff;
+}
+
+.controls button.active {
+  background: #321218;
+  border-color: #ff4055;
+  color: #ffd9de;
+}
+
+.viewer {
+  margin-top: 60px;
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 24px;
+  overflow: hidden;
+  background: #02060b;
+  box-shadow: 0 25px 80px rgba(0,0,0,.45);
+}
+
+.viewer-header {
+  min-height: 65px;
+  padding: 0 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.viewer-title {
+  font-size: 14px;
+  color: #d2dce6;
+}
+
+.viewer-status {
+  color: #708499;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.scene {
+  position: relative;
+  width: 100%;
+  height: 700px;
+  background:
+    radial-gradient(
+      ellipse at 50% 45%,
+      #203b51 0%,
+      #0d1c2e 45%,
+      #02060b 100%
+    );
+}
+
+#brainCanvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.loading {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 16px;
+  background: #02060b;
+  color: #9db0c3;
+  font-size: 14px;
+  transition: opacity .8s;
+}
+
+.loading.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loading-bar {
+  width: 180px;
+  height: 2px;
+  background: rgba(255,255,255,.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.loading-bar-inner {
+  width: 0%;
+  height: 100%;
+  background: #ff4055;
+  transition: width .3s;
+}
+
+.pathway-label {
+  position: absolute;
+  z-index: 30;
+  pointer-events: none;
+  transform: translate(-50%,-100%);
+  display: none;
+}
+
+.pathway-label.show {
+  display: block;
+}
+
+.label-box {
+  position: relative;
+  padding: 9px 15px;
+  border-radius: 10px;
+  background: rgba(5,10,17,.96);
+  border: 1.5px solid #ffb6c1;
+  color: #ffd9de;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  box-shadow:
+    0 0 12px rgba(255,182,193,.35),
+    0 0 30px rgba(255,182,193,.2);
+}
+
+.label-box::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -15px;
+  width: 1.5px;
+  height: 15px;
+  background: #ffb6c1;
+  transform: translateX(-50%);
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 15px;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.section {
+  margin-top: 70px;
+}
+
+.section-label {
+  color: #61b5ff;
+  letter-spacing: 2px;
+  font-size: 11px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.section h2 {
+  font-size: 32px;
+  margin-bottom: 25px;
+}
+
+.section-intro {
+  color: #91a5b8;
+  max-width: 900px;
+  font-size: 15px;
+  line-height: 1.9;
+  margin-bottom: 30px;
+}
+
+.location {
+  margin-top: 70px;
+  padding: 35px;
+  background: #091522;
+  border: 1px solid #172b3e;
+  border-radius: 18px;
+}
+
+.location h2 {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+.location-intro {
+  color: #91a5b8;
+  max-width: 900px;
+  line-height: 1.9;
+  margin-bottom: 30px;
+}
+
+/* =========================================================
+   ANATOMICAL DCML ILLUSTRATION
+   ========================================================= */
+
+.anatomy-viewer {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  height: 720px;
+  margin: auto;
+  border: 1px solid #243b50;
+  border-radius: 20px;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      ellipse at 50% 45%,
+      #1a3042 0%,
+      #091622 64%,
+      #02060b 100%
+    );
+}
+
+.brain-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.brain-title {
+  position: absolute;
+  left: 50%;
+  top: 20px;
+  transform: translateX(-50%);
+  color: #d9e3eb;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.brain-silhouette {
+  fill: url(#brainGradient);
+  stroke: #bbaeb3;
+  stroke-width: 3;
+  filter: url(#shadow);
+}
+
+.brain-inner {
+  fill: #5e5360;
+  opacity: .25;
+}
+
+.brain-fold {
+  fill: none;
+  stroke: #665962;
+  stroke-width: 3;
+  stroke-linecap: round;
+  opacity: .65;
+}
+
+.brain-highlight {
+  fill: none;
+  stroke: #eadfe2;
+  stroke-width: 1;
+  opacity: .18;
+  stroke-linecap: round;
+}
+
+.brainstem {
+  fill: url(#stemGradient);
+  stroke: #ad9fa6;
+  stroke-width: 2.5;
+}
+
+.cerebellum {
+  fill: url(#cerebellumGradient);
+  stroke: #aa9da4;
+  stroke-width: 2;
+}
+
+.cerebellar-fold {
+  fill: none;
+  stroke: #655860;
+  stroke-width: 2;
+  opacity: .65;
+}
+
+.thalamus {
+  fill: #6e7789;
+  stroke: #aeb9c7;
+  stroke-width: 1.5;
+}
+
+.cortex {
+  fill: #85727b;
+  opacity: .28;
+}
+
+.spinal-cord {
+  fill: #8c7b83;
+  stroke: #b9a9af;
+  stroke-width: 2;
+}
+
+.pathway {
+  fill: none;
+  stroke: #ff4055;
+  stroke-width: 9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: url(#pathGlow);
+}
+
+.pathway-secondary {
+  fill: none;
+  stroke: #ff9baa;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.pathway-node {
+  fill: #ff4055;
+  stroke: #ffe1e5;
+  stroke-width: 2;
+  filter: url(#nodeGlow);
+}
+
+.nucleus {
+  fill: #a28e96;
+  stroke: #d4c3c9;
+  stroke-width: 1.5;
+}
+
+.vpl {
+  fill: #ff6679;
+  stroke: #ffd2d8;
+  stroke-width: 2;
+}
+
+.sensory-cortex {
+  fill: #ff4055;
+  opacity: .9;
+  stroke: #ffd2d8;
+  stroke-width: 2;
+}
+
+.callout {
+  fill: none;
+  stroke: #ffb6c1;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+
+.callout-dot {
+  fill: #ffb6c1;
+  stroke: #fff;
+  stroke-width: 1;
+}
+
+.svg-label {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: .7px;
+  fill: #fff;
+}
+
+.svg-sub {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  fill: #ffb6c1;
+}
+
+.orientation-label {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  fill: #71879a;
+  letter-spacing: 1.5px;
+}
+
+.view-badge {
+  position: absolute;
+  left: 22px;
+  bottom: 20px;
+  padding: 8px 12px;
+  border: 1px solid #31516d;
+  border-radius: 8px;
+  background: rgba(4,10,17,.88);
+  color: #8195a8;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+}
+
+.legend {
+  position: absolute;
+  right: 22px;
+  bottom: 20px;
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #b5c2ce;
+  font-size: 10px;
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  box-shadow: 0 0 12px currentColor;
+}
+
+.legend-dot.path {
+  background: #ff4055;
+  color: #ff4055;
+}
+
+.legend-dot.brain {
+  background: #a18d96;
+  color: #a18d96;
+}
+
+@keyframes pathwayPulse {
+  0%, 100% {
+    opacity: .78;
+    filter: drop-shadow(0 0 4px rgba(255,64,85,.35));
+  }
+
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 15px rgba(255,64,85,.9));
+  }
+}
+
+.pathway-active {
+  animation: pathwayPulse 1.8s infinite;
+}
+
+.location-caption {
+  text-align: center;
+  color: #9fb0c3;
+  margin-top: 15px;
+  line-height: 1.8;
+}
+
+.source-note {
+  max-width: 900px;
+  margin: 15px auto 0;
+  color: #617487;
+  font-size: 11px;
+  text-align: center;
+}
+
+/* =========================================================
+   PATHWAY STEPS
+   ========================================================= */
+
+.pathway-flow {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.step {
+  position: relative;
+  padding: 22px 16px;
+  background: #091522;
+  border: 1px solid #172b3e;
+  border-radius: 15px;
+  min-height: 180px;
+}
+
+.step-number {
+  color: #ff4055;
+  font-size: 10px;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.step h3 {
+  color: #eef4fa;
+  font-size: 15px;
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+
+.step p {
+  color: #8195a8;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 20px;
+}
+
+.card {
+  padding: 27px;
+  background: #091522;
+  border: 1px solid #172b3e;
+  border-radius: 18px;
+  transition: transform .2s,border-color .2s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  border-color: #4a2027;
+}
+
+.card h3 {
+  font-size: 18px;
+  margin-bottom: 13px;
+  color: #eef4fa;
+  line-height: 1.45;
+}
+
+.card p {
+  color: #91a5b8;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.clinical-section {
+  margin-top: 65px;
+}
+
+.clinical-box {
+  padding: 30px;
+  background: #091522;
+  border: 1px solid #172b3e;
+  border-left: 3px solid #ff4055;
+  border-radius: 18px;
+}
+
+.clinical-box p {
+  color: #a7b7c6;
+  font-size: 15px;
+  line-height: 1.9;
+  margin-bottom: 18px;
+}
+
+.clinical-box p:last-child {
+  margin-bottom: 0;
+}
+
+.localize-grid {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 18px;
+  margin-top: 25px;
+}
+
+.localize-card {
+  padding: 24px;
+  background: #091522;
+  border: 1px solid #172b3e;
+  border-radius: 16px;
+}
+
+.localize-card strong {
+  display: block;
+  color: #eef4fa;
+  margin-bottom: 8px;
+}
+
+.localize-card p {
+  color: #8195a8;
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+.facts-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 15px;
+}
+
+.fact {
+  padding: 22px;
+  background: #091522;
+  border: 1px solid #172b3e;
+  border-radius: 16px;
+}
+
+.fact span {
+  display: block;
+  color: #ff4055;
+  font-size: 11px;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+.fact strong {
+  display: block;
+  color: #eef4fa;
+  font-size: 14px;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.fact p {
+  color: #8195a8;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.quiz {
+  margin-top: 65px;
+  padding: 30px;
+  background: #091522;
+  border: 1px solid #172b3e;
+  border-radius: 18px;
+}
+
+.quiz h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.quiz-intro {
+  color: #91a5b8;
+  margin-bottom: 25px;
+}
+
+.question {
+  margin-bottom: 30px;
+}
+
+.question:last-child {
+  margin-bottom: 0;
+}
+
+.question p {
+  color: #eef4fa;
+  font-size: 16px;
+  margin-bottom: 12px;
+  font-weight: bold;
+}
+
+.option {
+  display: block;
+  width: 100%;
+  padding: 12px 15px;
+  margin-top: 9px;
+  background: #0b1928;
+  color: #c7d5e2;
+  border: 1px solid #263951;
+  border-radius: 9px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+  transition: .2s;
+}
+
+.option:hover {
+  border-color: #ff4055;
+  background: #111e2c;
+}
+
+.option.correct {
+  border-color: #8fd3a8;
+  background: #14291e;
+  color: #b9f0c9;
+}
+
+.option.wrong {
+  border-color: #d88b9b;
+  background: #2a171d;
+  color: #ffc2cc;
+}
+
+.quiz-result {
+  margin-top: 25px;
+  padding: 15px;
+  border-radius: 10px;
+  background: #0b1928;
+  border: 1px solid #263951;
+  color: #aebdce;
+  display: none;
+}
+
+@media (max-width: 1000px) {
+  .pathway-flow {
+    grid-template-columns: repeat(3,1fr);
+  }
+
+  .cards {
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  .facts-grid {
+    grid-template-columns: repeat(2,1fr);
+  }
+}
+
+@media (max-width: 800px) {
+  .scene {
+    height: 450px;
+  }
+
+  .viewer-status {
+    display: none;
+  }
+
+  .location {
+    padding: 25px;
+  }
+
+  .anatomy-viewer {
+    height: 560px;
+  }
+
+  .pathway-flow {
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  .localize-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .facts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pathway-flow {
+    grid-template-columns: 1fr;
+  }
+
+  h1 {
+    letter-spacing: -2px;
+  }
+
+  .location {
+    padding: 20px;
+  }
+
+  .anatomy-viewer {
+    height: 470px;
+  }
+
+  .brain-title {
+    font-size: 8px;
+  }
+
+  .svg-label {
+    font-size: 8px;
+  }
+
+  .svg-sub {
+    font-size: 7px;
+  }
+
+  .legend {
+    display: none;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <a href="./somatosensory.html">← Back to Somatosensory Pathways</a>
+</nav>
+
+<main class="container">
+
+<div class="eyebrow">
+  Somatosensory Pathways · NeuroAtlas
+</div>
+
+<h1>Dorsal Column–Medial Lemniscus</h1>
+
+<div class="arabic-title">
+  مسار العمود الظهري – الشريط الإنسي
+</div>
+
+<div class="hero">
+
+<p>
+The dorsal column–medial lemniscus pathway, or DCML pathway, carries
+fine touch, vibration, conscious proprioception, and discriminative
+tactile information from the body to the cerebral cortex. The pathway
+ascends through the spinal cord, synapses in the gracile and cuneate
+nuclei of the medulla, crosses the midline, travels through the medial
+lemniscus, and relays in the ventral posterolateral nucleus of the
+thalamus before reaching the primary somatosensory cortex.
+</p>
+
+</div>
+
+<div class="actions">
+
+<a class="action-button" href="#location">
+  📍 View Pathway
+</a>
+
+<a class="action-button" href="#course">
+  〰️ Follow the Course
+</a>
+
+<a class="action-button" href="#information">
+  🧠 Learn the Anatomy
+</a>
+
+<a class="action-button" href="#quiz">
+  📝 Test Yourself
+</a>
+
+</div>
+
+<div class="viewer">
+
+<div class="viewer-header">
+
+<div class="viewer-title">
+  Human Nervous System · Interactive 3D
+</div>
+
+<div class="viewer-status">
+  DRAG TO ROTATE · SCROLL TO ZOOM
+</div>
+
+</div>
+
+<div class="scene">
+
+<div id="loading" class="loading">
+
+<span id="loadText">
+Loading nervous system model...
+</span>
+
+<div class="loading-bar">
+  <div id="loadBar" class="loading-bar-inner"></div>
+</div>
+
+</div>
+
+<canvas id="brainCanvas"></canvas>
+
+<div id="pathwayLabel" class="pathway-label">
+
+<div class="label-box">
+  DCML PATHWAY · المسار الحسي
+</div>
+
+</div>
+
+</div>
+
+<div class="controls">
+
+<button id="showPathway">
+  📍 Show DCML Pathway
+</button>
+
+<button id="highlight" class="active">
+  🔴 Highlight Pathway
+</button>
+
+<button id="rotate" class="active">
+  ⟳ Auto Rotate
+</button>
+
+<button id="reset">
+  ↻ Reset View
+</button>
+
+</div>
+
+</div>
+
+<section id="location" class="location">
+
+<div class="section-label">
+  Pathway Overview · نظرة عامة
+</div>
+
+<h2>
+  📍 Where Does the DCML Pathway Travel?
+</h2>
+
+<p class="location-intro">
+
+The DCML pathway begins with first-order sensory neurons whose cell
+bodies are located in the dorsal root ganglia. Their central processes
+enter the spinal cord and ascend ipsilaterally in the dorsal columns.
+Fibers carrying information from the lower body travel mainly in the
+fasciculus gracilis, while fibers from the upper body travel in the
+fasciculus cuneatus.
+
+<br><br>
+
+في مسار العمود الظهري والشريط الإنسي تبدأ المعلومات الحسية مع خلايا
+عصبية من الرتبة الأولى تقع أجسامها الخلوية في العقد الجذرية الظهرية.
+تصعد أليافها داخل الحبل الشوكي في الجهة نفسها ضمن الأعمدة الظهرية.
+تنقل الحزمة الرقيقة المعلومات من الجزء السفلي من الجسم، بينما تنقل
+الحزمة الإسفينية المعلومات من الجزء العلوي من الجسم.
+
+</p>
+
+<div class="anatomy-viewer">
+
+<div class="brain-title">
+  Anatomical Course · Dorsal Column–Medial Lemniscus
+</div>
+
+<svg
+  class="brain-svg"
+  viewBox="0 0 1200 720"
+  xmlns="http://www.w3.org/2000/svg"
+  aria-label="Anatomical illustration of the dorsal column medial lemniscus pathway"
+>
+
+<defs>
+
+<linearGradient id="brainGradient"
+  x1="0"
+  y1="0"
+  x2="1"
+  y2="1">
+
+<stop offset="0%" stop-color="#d6c2c9"/>
+<stop offset="35%" stop-color="#b59ea6"/>
+<stop offset="70%" stop-color="#89737c"/>
+<stop offset="100%" stop-color="#5d4d56"/>
+
+</linearGradient>
+
+<linearGradient id="stemGradient"
+  x1="0"
+  y1="0"
+  x2="1"
+  y2="1">
+
+<stop offset="0%" stop-color="#b9a3aa"/>
+<stop offset="55%" stop-color="#88727c"/>
+<stop offset="100%" stop-color="#5d4d57"/>
+
+</linearGradient>
+
+<linearGradient id="cerebellumGradient"
+  x1="0"
+  y1="0"
+  x2="1"
+  y2="1">
+
+<stop offset="0%" stop-color="#c2adb4"/>
+<stop offset="55%" stop-color="#927a83"/>
+<stop offset="100%" stop-color="#63535c"/>
+
+</linearGradient>
+
+<filter id="shadow"
+  x="-30%"
+  y="-30%"
+  width="160%"
+  height="170%">
+
+<feDropShadow
+  dx="0"
+  dy="15"
+  stdDeviation="13"
+  flood-color="#000"
+  flood-opacity=".72"/>
+
+</filter>
+
+<filter id="pathGlow"
+  x="-100%"
+  y="-100%"
+  width="300%"
+  height="300%">
+
+<feGaussianBlur
+  stdDeviation="4"/>
+
+</filter>
+
+<filter id="nodeGlow"
+  x="-100%"
+  y="-100%"
+  width="300%"
+  height="300%">
+
+<feGaussianBlur
+  stdDeviation="3"/>
+
+</filter>
+
+</defs>
+
+<!-- =====================================================
+     CEREBRAL HEMISPHERES
+     ===================================================== -->
+
+<path
+class="brain-silhouette"
+d="
+M600 72
+C534 48 454 49 381 65
+C296 83 226 117 173 164
+C126 206 101 257 101 310
+C101 363 124 414 163 456
+C205 501 262 530 326 555
+C401 584 477 595 549 598
+
+C570 599 587 606 600 618
+
+C613 606 630 599 651 598
+
+C723 595 799 584 874 555
+C938 530 995 501 1037 456
+C1076 414 1099 363 1099 310
+C1099 257 1074 206 1027 164
+C974 117 904 83 819 65
+C746 49 666 48 600 72
+Z
+"/>
+
+<path
+class="brain-inner"
+d="
+M600 106
+C530 83 454 86 390 101
+C315 119 257 148 211 187
+C174 220 151 261 150 307
+C149 353 168 395 201 431
+C239 472 291 497 350 520
+C416 545 480 554 546 557
+C567 558 586 566 600 579
+C614 566 633 558 654 557
+C720 554 784 545 850 520
+C909 497 961 472 999 431
+C1032 395 1051 353 1050 307
+C1049 261 1026 220 989 187
+C943 148 885 119 810 101
+C746 86 670 83 600 106
+Z
+"/>
+
+<!-- Cortical folds -->
+
+<path class="brain-fold"
+d="M164 212 C222 170 285 160 346 178 C394 192 429 190 470 171"/>
+
+<path class="brain-fold"
+d="M138 270 C196 228 254 221 310 240 C355 255 392 259 431 245"/>
+
+<path class="brain-fold"
+d="M132 327 C190 290 246 288 300 305 C349 321 389 326 424 314"/>
+
+<path class="brain-fold"
+d="M151 386 C206 355 258 353 311 369 C352 382 390 387 423 379"/>
+
+<path class="brain-fold"
+d="M191 442 C241 420 289 422 334 438 C371 451 402 453 430 446"/>
+
+<path class="brain-fold"
+d="M1036 212 C978 170 915 160 854 178 C806 192 771 190 730 171"/>
+
+<path class="brain-fold"
+d="M1062 270 C1004 228 946 221 890 240 C845 255 808 259 769 245"/>
+
+<path class="brain-fold"
+d="M1068 327 C1010 290 954 288 900 305 C851 321 811 326 776 314"/>
+
+<path class="brain-fold"
+d="M1049 386 C994 355 942 353 889 369 C848 382 810 387 777 379"/>
+
+<path class="brain-fold"
+d="M1009 442 C959 420 911 422 866 438 C829 451 798 453 770 446"/>
+
+<path class="brain-highlight"
+d="M183 188 C236 151 295 144 350 158"/>
+
+<path class="brain-highlight"
+d="M157 287 C208 253 259 250 309 267"/>
+
+<path class="brain-highlight"
+d="M1017 188 C964 151 905 144 850 158"/>
+
+<path class="brain-highlight"
+d="M1043 287 C992 253 941 250 891 267"/>
+
+<!-- =====================================================
+     BRAINSTEM
+     ===================================================== -->
+
+<path
+class="brainstem"
+d="
+M536 475
+C524 451 526 426 539 404
+C553 381 566 358 571 330
+C575 304 572 275 566 249
+
+L634 249
+
+C628 275 625 304 629 330
+C634 358 647 381 661 404
+C674 426 676 451 664 475
+L638 560
+C627 579 616 590 600 596
+C584 590 573 579 562 560
+Z
+"/>
+
+<!-- Cerebellum -->
+
+<path
+class="cerebellum"
+d="
+M530 412
+C494 387 454 386 423 406
+C393 426 381 462 394 493
+C408 527 440 544 478 544
+C509 544 536 529 551 504
+C561 487 559 457 550 439
+C545 428 538 419 530 412
+Z
+"/>
+
+<path
+class="cerebellum"
+d="
+M670 412
+C706 387 746 386 777 406
+C807 426 819 462 806 493
+C792 527 760 544 722 544
+C691 544 664 529 649 504
+C639 487 641 457 650 439
+C655 428 662 419 670 412
+Z
+"/>
+
+<path class="cerebellar-fold"
+d="M416 438 C452 420 489 426 522 448"/>
+
+<path class="cerebellar-fold"
+d="M404 467 C443 450 480 457 515 478"/>
+
+<path class="cerebellar-fold"
+d="M420 499 C453 486 481 491 507 506"/>
+
+<path class="cerebellar-fold"
+d="M784 438 C748 420 711 426 678 448"/>
+
+<path class="cerebellar-fold"
+d="M796 467 C757 450 720 457 685 478"/>
+
+<path class="cerebellar-fold"
+d="M780 499 C747 486 719 491 693 506"/>
+
+<!-- =====================================================
+     THALAMUS
+     ===================================================== -->
+
+<ellipse
+class="thalamus"
+cx="552"
+cy="282"
+rx="43"
+ry="35"
+/>
+
+<ellipse
+class="thalamus"
+cx="648"
+cy="282"
+rx="43"
+ry="35"
+/>
+
+<!-- =====================================================
+     SENSORY CORTEX TARGET
+     ===================================================== -->
+
+<path
+class="sensory-cortex"
+d="
+M410 120
+C431 104 452 99 475 103
+C498 107 514 119 527 136
+L527 171
+C507 162 486 157 463 159
+C442 161 425 168 410 178
+Z
+"/>
+
+<path
+class="sensory-cortex"
+d="
+M790 120
+C769 104 748 99 725 103
+C702 107 686 119 673 136
+L673 171
+C693 162 714 157 737 159
+C758 161 775 168 790 178
+Z
+"/>
+
+<!-- =====================================================
+     SPINAL CORD
+     ===================================================== -->
+
+<path
+class="spinal-cord"
+d="
+M562 536
+C550 558 546 586 550 615
+C553 642 568 660 600 667
+C632 660 647 642 650 615
+C654 586 650 558 638 536
+Z
+"/>
+
+<!-- =====================================================
+     DCML PATHWAY
+     ===================================================== -->
+
+<!-- Dorsal column, lower body -->
+
+<path
+class="pathway pathway-active"
+d="
+M583 655
+C577 625 576 592 580 558
+C583 531 584 504 583 474
+C582 443 580 415 579 388
+C578 361 578 337 579 313
+C580 290 579 266 578 243
+"
+/>
+
+<!-- Dorsal column, upper body -->
+
+<path
+class="pathway pathway-active"
+d="
+M617 655
+C623 625 624 592 620 558
+C617 531 616 504 617 474
+C618 443 620 415 621 388
+C622 361 622 337 621 313
+C620 290 621 266 622 243
+"
+/>
+
+<!-- Gracile / cuneate nuclei -->
+
+<circle
+class="pathway-node"
+cx="579"
+cy="230"
+r="9"
+/>
+
+<circle
+class="pathway-node"
+cx="621"
+cy="230"
+r="9"
+/>
+
+<!-- Decussation -->
+
+<path
+class="pathway-secondary pathway-active"
+d="
+M579 230
+C579 244 588 254 600 262
+C612 254 621 244 621 230
+"
+/>
+
+<!-- Medial lemniscus -->
+
+<path
+class="pathway pathway-active"
+d="
+M600 263
+C584 278 574 294 572 312
+C570 331 576 349 587 364
+C596 376 602 389 604 404
+C607 423 606 443 602 463
+C598 484 596 506 598 527
+C600 548 602 568 600 590
+"
+/>
+
+<!-- Thalamic relay -->
+
+<path
+class="pathway-secondary pathway-active"
+d="
+M600 263
+C603 270 610 276 620 281
+"
+/>
+
+<path
+class="pathway-secondary pathway-active"
+d="
+M600 263
+C597 270 590 276 580 281
+"
+/>
+
+<path
+class="pathway pathway-active"
+d="
+M620 281
+C657 242 694 208 725 174
+"
+/>
+
+<path
+class="pathway pathway-active"
+d="
+M580 281
+C543 242 506 208 475 174
+"/>
+
+<!-- Cortical endings -->
+
+<circle
+class="pathway-node"
+cx="725"
+cy="163"
+r="9"
+/>
+
+<circle
+class="pathway-node"
+cx="475"
+cy="163"
+r="9"
+/>
+
+<!-- Nuclei -->
+
+<circle
+class="nucleus"
+cx="579"
+cy="230"
+r="15"
+/>
+
+<circle
+class="nucleus"
+cx="621"
+cy="230"
+r="15"
+/>
+
+<ellipse
+class="vpl"
+cx="620"
+cy="281"
+rx="17"
+ry="14"
+/>
+
+<ellipse
+class="vpl"
+cx="580"
+cy="281"
+rx="17"
+ry="14"
+/>
+
+<!-- =====================================================
+     CALLOUTS
+     ===================================================== -->
+
+<path
+class="callout"
+d="
+M579 430
+L320 390
+L90 390
+"/>
+
+<circle
+class="callout-dot"
+cx="579"
+cy="430"
+r="4"
+/>
+
+<text
+class="svg-label"
+x="90"
+y="382"
+>
+DORSAL COLUMNS
+</text>
+
+<text
+class="svg-sub"
+x="90"
+y="400"
+>
+الأعمدة الظهرية
+</text>
+
+<path
+class="callout"
+d="
+M579 230
+L310 205
+L90 205
+"/>
+
+<circle
+class="callout-dot"
+cx="579"
+cy="230"
+r="4"
+/>
+
+<text
+class="svg-label"
+x="90"
+y="197"
+>
+GRACILE NUCLEUS
+</text>
+
+<text
+class="svg-sub"
+x="90"
+y="215"
+>
+النواة الرقيقة
+</text>
+
+<path
+class="callout"
+d="
+M621 230
+L890 205
+L1110 205
+"/>
+
+<circle
+class="callout-dot"
+cx="621"
+cy="230"
+r="4"
+/>
+
+<text
+class="svg-label"
+x="890"
+y="197"
+>
+CUNEATE NUCLEUS
+</text>
+
+<text
+class="svg-sub"
+x="890"
+y="215"
+>
+النواة الإسفينية
+</text>
+
+<path
+class="callout"
+d="
+M600 315
+L875 335
+L1110 335
+"/>
+
+<circle
+class="callout-dot"
+cx="600"
+cy="315"
+r="4"
+/>
+
+<text
+class="svg-label"
+x="875"
+y="327"
+>
+MEDIAL LEMNISCUS
+</text>
+
+<text
+class="svg-sub"
+x="875"
+y="345"
+>
+الشريط الإنسي
+</text>
+
+<path
+class="callout"
+d="
+M620 281
+L875 285
+L1110 285
+"/>
+
+<circle
+class="callout-dot"
+cx="620"
+cy="281"
+r="4"
+/>
+
+<text
+class="svg-label"
+x="875"
+y="277"
+>
+VPL THALAMUS
+</text>
+
+<text
+class="svg-sub"
+x="875"
+y="295"
+>
+النواة البطنية الخلفية الوحشية
+</text>
+
+<path
+class="callout"
+d="
+M725 163
+L865 115
+L1110 115
+"/>
+
+<circle
+class="callout-dot"
+cx="725"
+cy="163"
+r="4"
+/>
+
+<text
+class="svg-label"
+x="865"
+y="107"
+>
+PRIMARY SOMATOSENSORY CORTEX
+</text>
+
+<text
+class="svg-sub"
+x="865"
+y="125"
+>
+القشرة الحسية الجسدية الأولية
+</text>
+
+<!-- =====================================================
+     ORIENTATION
+     ===================================================== -->
+
+<text
+class="orientation-label"
+x="88"
+y="615"
+>
+SPINAL CORD
+</text>
+
+<text
+class="orientation-label"
+x="1030"
+y="615"
+>
+CEREBRAL CORTEX
+</text>
+
+<text
+class="orientation-label"
+x="555"
+y="690"
+>
+INFERIOR → SUPERIOR
+</text>
+
+</svg>
+
+<div class="view-badge">
+  DCML · CONSCIOUS BODY SENSATION
+</div>
+
+<div class="legend">
+
+<div class="legend-item">
+  <span class="legend-dot path"></span>
+  DCML Pathway
+</div>
+
+<div class="legend-item">
+  <span class="legend-dot brain"></span>
+  Surrounding Anatomy
+</div>
+
+</div>
+
+</div>
+
+<p class="location-caption">
+  🔴 The highlighted pathway demonstrates the major anatomical course
+  of the <strong>dorsal column–medial lemniscus system</strong>.
+</p>
+
+<p class="source-note">
+  Simplified anatomical illustration for educational visualization.
+  It demonstrates the major pathway relationships and is not intended
+  as a radiological or diagnostic image.
+</p>
+
+</section>
+
+<section id="course" class="section">
+
+<div class="section-label">
+  Pathway Course · مسار الطريق
+</div>
+
+<h2>
+  Follow the DCML Pathway
+</h2>
+
+<p class="section-intro">
+
+The pathway uses a three-neuron chain from peripheral sensory receptors
+to the cerebral cortex. A key anatomical feature is that the fibers
+remain on the same side of the spinal cord until they reach the
+medulla, where the second-order neurons cross the midline as internal
+arcuate fibers.
+
+<br><br>
+
+يتكون المسار من سلسلة من ثلاثة عصبونات تمتد من المستقبلات الحسية
+المحيطية إلى القشرة المخية. ومن أهم خصائصه التشريحية أن الألياف تبقى
+في الجانب نفسه من الحبل الشوكي حتى تصل إلى النخاع المستطيل، حيث تعبر
+عصبونات الرتبة الثانية خط الوسط كألياف قوسية داخلية.
+
+</p>
+
+<div class="pathway-flow">
+
+<div class="step">
+<div class="step-number">01 · FIRST ORDER</div>
+<h3>Dorsal Root Ganglion</h3>
+<p>
+Primary sensory neuron cell bodies are located in the dorsal root
+ganglia.
+</p>
+</div>
+
+<div class="step">
+<div class="step-number">02 · SPINAL CORD</div>
+<h3>Dorsal Columns</h3>
+<p>
+Central processes ascend ipsilaterally in the fasciculus gracilis or
+fasciculus cuneatus.
+</p>
+</div>
+
+<div class="step">
+<div class="step-number">03 · MEDULLA</div>
+<h3>Gracile &amp; Cuneate Nuclei</h3>
+<p>
+First-order fibers synapse with second-order neurons in the caudal
+medulla.
+</p>
+</div>
+
+<div class="step">
+<div class="step-number">04 · CROSSING</div>
+<h3>Internal Arcuate Fibers</h3>
+<p>
+Second-order axons cross the midline and form the medial lemniscus.
+</p>
+</div>
+
+<div class="step">
+<div class="step-number">05 · THALAMUS</div>
+<h3>VPL Nucleus</h3>
+<p>
+The medial lemniscus reaches the ventral posterolateral thalamic
+nucleus.
+</p>
+</div>
+
+<div class="step">
+<div class="step-number">06 · CORTEX</div>
+<h3>Primary Somatosensory Cortex</h3>
+<p>
+Third-order neurons project to the postcentral gyrus of the parietal
+lobe.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="information" class="section">
+
+<div class="section-label">
+  Anatomy · التشريح
+</div>
+
+<h2>
+  DCML Structures &amp; Functions
+</h2>
+
+<p class="section-intro">
+
+The DCML system specializes in accurately transmitting several forms of
+conscious somatic sensation. These include vibration, fine touch,
+two-point discrimination, stereognosis, and conscious proprioception.
+
+<br><br>
+
+يتخصص نظام العمود الظهري والشريط الإنسي في نقل عدة أنواع من الإحساس
+الجسدي الواعي بدقة، ومنها الاهتزاز واللمس الدقيق والتمييز بين نقطتين
+والتعرف على الأشياء باللمس والإحساس العميق الواعي.
+
+</p>
+
+<div class="cards">
+
+<div class="card">
+<h3>Fasciculus Gracilis · الحزمة الرقيقة</h3>
+<p>
+The fasciculus gracilis carries sensory information from the lower
+trunk and lower limbs. It is present throughout the spinal cord.
+<br><br>
+تنقل الحزمة الرقيقة المعلومات الحسية من الجزء السفلي من الجذع والطرفين
+السفليين، وتوجد على امتداد الحبل الشوكي.
+</p>
+</div>
+
+<div class="card">
+<h3>Fasciculus Cuneatus · الحزمة الإسفينية</h3>
+<p>
+The fasciculus cuneatus carries information from the upper trunk and
+upper limbs. It becomes present above approximately the upper thoracic
+levels.
+<br><br>
+تنقل الحزمة الإسفينية المعلومات من الجزء العلوي من الجذع والطرفين
+العلويين، وتظهر في المستويات الصدرية العلوية تقريباً فما فوق.
+</p>
+</div>
+
+<div class="card">
+<h3>Gracile Nucleus · النواة الرقيقة</h3>
+<p>
+Located in the caudal medulla, the gracile nucleus receives input from
+the lower body through the fasciculus gracilis.
+<br><br>
+تقع النواة الرقيقة في الجزء السفلي من النخاع المستطيل وتستقبل معلومات
+من الجزء السفلي للجسم عبر الحزمة الرقيقة.
+</p>
+</div>
+
+<div class="card">
+<h3>Cuneate Nucleus · النواة الإسفينية</h3>
+<p>
+The cuneate nucleus receives upper-body sensory information carried by
+the fasciculus cuneatus.
+<br><br>
+تستقبل النواة الإسفينية المعلومات الحسية من الجزء العلوي للجسم التي
+تنقلها الحزمة الإسفينية.
+</p>
+</div>
+
+<div class="card">
+<h3>Internal Arcuate Fibers · الألياف القوسية الداخلية</h3>
+<p>
+Second-order axons cross the midline in the caudal medulla as internal
+arcuate fibers before forming the medial lemniscus.
+<br><br>
+تعبر محاور العصبونات من الرتبة الثانية خط الوسط في النخاع المستطيل
+كألياف قوسية داخلية قبل أن تشكل الشريط الإنسي.
+</p>
+</div>
+
+<div class="card">
+<h3>Medial Lemniscus · الشريط الإنسي</h3>
+<p>
+After crossing, sensory information ascends through the brainstem in
+the medial lemniscus toward the thalamus.
+<br><br>
+بعد العبور تصعد المعلومات الحسية عبر جذع الدماغ في الشريط الإنسي
+باتجاه المهاد.
+</p>
+</div>
+
+<div class="card">
+<h3>VPL Thalamus · النواة VPL</h3>
+<p>
+The ventral posterolateral nucleus of the thalamus is the major
+thalamic relay for body somatosensory information.
+<br><br>
+تعد النواة البطنية الخلفية الوحشية للمهاد محطة ترحيل رئيسية للمعلومات
+الحسية الجسدية القادمة من الجسم.
+</p>
+</div>
+
+<div class="card">
+<h3>Primary Somatosensory Cortex · القشرة الحسية الجسدية</h3>
+<p>
+Third-order neurons project from the VPL to the primary somatosensory
+cortex in the postcentral gyrus.
+<br><br>
+تنتقل العصبونات من الرتبة الثالثة من VPL إلى القشرة الحسية الجسدية
+الأولية في التلفيف خلف المركزي.
+</p>
+</div>
+
+<div class="card">
+<h3>Fine Touch · اللمس الدقيق</h3>
+<p>
+The pathway transmits highly discriminative tactile information that
+allows detailed localization and characterization of touch.
+<br><br>
+ينقل المسار المعلومات اللمسية الدقيقة التي تسمح بتحديد اللمس ووصفه
+بدرجة عالية من الدقة.
+</p>
+</div>
+
+<div class="card">
+<h3>Vibration · الإحساس بالاهتزاز</h3>
+<p>
+Vibration sense from the body is transmitted through the DCML system
+toward the somatosensory cortex.
+<br><br>
+ينتقل إحساس الاهتزاز من الجسم عبر نظام العمود الظهري والشريط الإنسي
+نحو القشرة الحسية الجسدية.
+</p>
+</div>
+
+<div class="card">
+<h3>Conscious Proprioception · الحس العميق الواعي</h3>
+<p>
+The pathway carries conscious information about joint position and
+movement from the body.
+<br><br>
+ينقل المسار المعلومات الواعية المتعلقة بوضع المفاصل وحركة أجزاء الجسم.
+</p>
+</div>
+
+<div class="card">
+<h3>Two-Point Discrimination · التمييز بين نقطتين</h3>
+<p>
+Discriminative touch carried by the pathway contributes to the ability
+to distinguish closely spaced tactile stimuli.
+<br><br>
+يساهم اللمس التمييزي الذي ينقله المسار في القدرة على التفريق بين
+منبهات لمسية متقاربة.
+</p>
+</div>
+
+</div>
+
+<div class="clinical-section">
+
+<div class="section-label">
+  Clinical Localization · التوضع السريري
+</div>
+
+<h2>
+  Why the DCML Pathway Matters
+</h2>
+
+<div class="clinical-box">
+
+<p>
+A lesion of the DCML system can produce impairment of vibration,
+fine touch, discriminative touch, and conscious proprioception.
+The side of the deficit depends on where the lesion occurs because
+the pathway crosses in the medulla rather than immediately after
+entering the spinal cord.
+</p>
+
+<p dir="rtl">
+يمكن أن يؤدي حدوث آفة في نظام العمود الظهري والشريط الإنسي إلى ضعف
+الإحساس بالاهتزاز واللمس الدقيق واللمس التمييزي والحس العميق الواعي.
+ويعتمد جانب العجز على مستوى الآفة، لأن المسار يعبر خط الوسط في النخاع
+المستطيل وليس مباشرة بعد دخوله الحبل الشوكي.
+</p>
+
+</div>
+
+<div class="localize-grid">
+
+<div class="localize-card">
+<strong>Spinal Cord Lesion · آفة الحبل الشوكي</strong>
+<p>
+A unilateral lesion affecting the dorsal columns can cause ipsilateral
+loss of vibration, fine touch, and proprioception below the lesion.
+</p>
+</div>
+
+<div class="localize-card">
+<strong>Medullary Lesion · آفة النخاع المستطيل</strong>
+<p>
+A lesion involving the pathway after the sensory fibers have crossed
+can produce deficits affecting the opposite side of the body.
+</p>
+</div>
+
+<div class="localize-card">
+<strong>Brainstem Lesion · آفة جذع الدماغ</strong>
+<p>
+Damage to the medial lemniscus can disrupt contralateral body
+somatosensory information.
+</p>
+</div>
+
+<div class="localize-card">
+<strong>Thalamic Lesion · آفة المهاد</strong>
+<p>
+Damage involving the VPL relay can impair somatosensory information
+from the opposite side of the body.
+</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="section">
+
+<div class="section-label">
+  Quick Facts · معلومات سريعة
+</div>
+
+<h2>
+  DCML at a Glance
+</h2>
+
+<div class="facts-grid">
+
+<div class="fact">
+<span>01</span>
+<strong>Main Modalities · أنواع الإحساس</strong>
+<p>
+Fine touch, vibration, conscious proprioception
+</p>
+</div>
+
+<div class="fact">
+<span>02</span>
+<strong>First Synapse · أول تشابك</strong>
+<p>
+Gracile and cuneate nuclei in the medulla
+</p>
+</div>
+
+<div class="fact">
+<span>03</span>
+<strong>Major Crossing · مكان العبور</strong>
+<p>
+Caudal medulla via internal arcuate fibers
+</p>
+</div>
+
+<div class="fact">
+<span>04</span>
+<strong>Thalamic Relay · محطة المهاد</strong>
+<p>
+Ventral posterolateral nucleus
+</p>
+</div>
+
+<div class="fact">
+<span>05</span>
+<strong>Cortical Target · الهدف القشري</strong>
+<p>
+Primary somatosensory cortex
+</p>
+</div>
+
+<div class="fact">
+<span>06</span>
+<strong>Spinal Side · داخل الحبل الشوكي</strong>
+<p>
+Ascends ipsilaterally before crossing
+</p>
+</div>
+
+<div class="fact">
+<span>07</span>
+<strong>Neuron Chain · سلسلة العصبونات</strong>
+<p>
+Three-neuron sensory pathway
+</p>
+</div>
+
+<div class="fact">
+<span>08</span>
+<strong>Major Clinical Clue · علامة سريرية</strong>
+<p>
+Side of deficit changes after the medullary crossing
+</p>
+</div>
+
+</div>
+
+</section>
+
+<div id="quiz" class="quiz">
+
+<div class="section-label">
+  Mini Test
+</div>
+
+<h2>
+  🧠 Test Yourself
+</h2>
+
+<p class="quiz-intro">
+Choose the best answer for each question.
+</p>
+
+<div class="question">
+
+<p>
+1. Which sensory modality is primarily carried by the DCML pathway?
+</p>
+
+<button class="option" onclick="checkAnswer(this,true)">
+A. Vibration
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+B. Smell
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+C. Vision
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+D. Hearing
+</button>
+
+</div>
+
+<div class="question">
+
+<p>
+2. Where do the major second-order neurons of the DCML pathway cross?
+</p>
+
+<button class="option" onclick="checkAnswer(this,false)">
+A. Spinal cord
+</button>
+
+<button class="option" onclick="checkAnswer(this,true)">
+B. Caudal medulla
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+C. Cerebellum
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+D. Primary motor cortex
+</button>
+
+</div>
+
+<div class="question">
+
+<p>
+3. Which thalamic nucleus relays DCML information from the body?
+</p>
+
+<button class="option" onclick="checkAnswer(this,false)">
+A. VPM
+</button>
+
+<button class="option" onclick="checkAnswer(this,true)">
+B. VPL
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+C. LGN
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+D. MGN
+</button>
+
+</div>
+
+<div class="question">
+
+<p>
+4. Where does the pathway ultimately project for conscious perception?
+</p>
+
+<button class="option" onclick="checkAnswer(this,false)">
+A. Primary visual cortex
+</button>
+
+<button class="option" onclick="checkAnswer(this,true)">
+B. Primary somatosensory cortex
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+C. Primary auditory cortex
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+D. Primary motor cortex only
+</button>
+
+</div>
+
+<div id="quizResult" class="quiz-result"></div>
+
+</div>
+
+</main>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+
+import * as THREE from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
+
+const canvas = document.getElementById("brainCanvas");
+const loading = document.getElementById("loading");
+const loadText = document.getElementById("loadText");
+const loadBar = document.getElementById("loadBar");
+const pathwayLabel = document.getElementById("pathwayLabel");
+
+const scene = new THREE.Scene();
+
+const camera = new THREE.PerspectiveCamera(
+  30,
+  1,
+  .01,
+  100
+);
+
+camera.position.set(3.1, .25, 8.4);
+
+const renderer = new THREE.WebGLRenderer({
+  canvas,
+  antialias: true,
+  alpha: true
+});
+
+renderer.setPixelRatio(
+  Math.min(window.devicePixelRatio || 1, 2)
+);
+
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = .78;
+
+const controls = new OrbitControls(
+  camera,
+  canvas
+);
+
+controls.enableRotate = true;
+controls.rotateSpeed = .6;
+controls.enableDamping = true;
+controls.dampingFactor = .05;
+controls.enableZoom = true;
+controls.zoomSpeed = .6;
+controls.enablePan = false;
+controls.autoRotate = true;
+controls.autoRotateSpeed = .18;
+controls.target.set(0, -.25, 0);
+controls.minDistance = 3.5;
+controls.maxDistance = 16;
+
+scene.add(
+  new THREE.AmbientLight(
+    0xffffff,
+    .55
+  )
+);
+
+scene.add(
+  new THREE.HemisphereLight(
+    0xffdce6,
+    0x081018,
+    .75
+  )
+);
+
+const keyLight = new THREE.DirectionalLight(
+  0xfff5f0,
+  1.4
+);
+
+keyLight.position.set(6, 10, 8);
+scene.add(keyLight);
+
+const fillLight = new THREE.DirectionalLight(
+  0x8ca9bd,
+  .4
+);
+
+fillLight.position.set(-7, 2, 6);
+scene.add(fillLight);
+
+const brainGroup = new THREE.Group();
+
+scene.add(brainGroup);
+
+let brainMeshes = [];
+let targetMeshes = [];
+
+let pathwayShown = false;
+let highlighted = true;
+
+const brainOpaqueMaterial =
+  new THREE.MeshPhysicalMaterial({
+    color: 0xf0c4cf,
+    roughness: .62,
+    metalness: 0,
+    clearcoat: .12,
+    clearcoatRoughness: .5,
+    side: THREE.DoubleSide,
+    transparent: false,
+    opacity: 1
+  });
+
+const brainTransparentMaterial =
+  new THREE.MeshPhysicalMaterial({
+    color: 0xf0c4cf,
+    roughness: .55,
+    metalness: 0,
+    clearcoat: .1,
+    clearcoatRoughness: .5,
+    side: THREE.DoubleSide,
+    transparent: true,
+    opacity: .13,
+    depthWrite: false
+  });
+
+const pathwayMaterial =
+  new THREE.MeshPhysicalMaterial({
+    color: 0xff2948,
+    roughness: .28,
+    metalness: 0,
+    clearcoat: .65,
+    clearcoatRoughness: .1,
+    emissive: 0x5c0613,
+    emissiveIntensity: 1.1,
+    side: THREE.DoubleSide
+  });
+
+const normalMaterial =
+  new THREE.MeshPhysicalMaterial({
+    color: 0xf0c4cf,
+    roughness: .62,
+    metalness: 0,
+    clearcoat: .12,
+    clearcoatRoughness: .5,
+    side: THREE.DoubleSide
+  });
+
+function normalizeName(name) {
+  return String(name || "")
+    .toLowerCase()
+    .replace(/[\s_\-.]+/g, "");
+}
+
+function getMeshName(mesh) {
+  const userName =
+    mesh.userData && mesh.userData.name
+      ? mesh.userData.name
+      : "";
+
+  return `${mesh.name} ${userName}`;
+}
+
+function isPathwayMesh(mesh) {
+  const name = normalizeName(
+    getMeshName(mesh)
+  );
+
+  const names = [
+    "dorsalcolumn",
+    "dorsalcolumns",
+    "fasciculusgracilis",
+    "gracilis",
+    "fasciculuscuneatus",
+    "cuneatus",
+    "gracilenucleus",
+    "cuneatenucleus",
+    "gracilenuclei",
+    "cuneatenuclei",
+    "internalarcuate",
+    "arcuatefiber",
+    "mediallemniscus",
+    "vpl",
+    "ventralposterolateral",
+    "somatosensorycortex",
+    "primarysomatosensory"
+  ];
+
+  return names.some(
+    item => name.includes(item)
+  );
+}
+
+function isExcludedMesh(mesh) {
+  const name = normalizeName(
+    getMeshName(mesh)
+  );
+
+  const names = [
+    "skull",
+    "skin",
+    "artery",
+    "vein",
+    "vessel",
+    "eye"
+  ];
+
+  return names.some(
+    item => name.includes(item)
+  );
+}
+
+function prepareModel(model) {
+
+  brainMeshes = [];
+  targetMeshes = [];
+
+  model.traverse(child => {
+
+    if (!child.isMesh) {
+      return;
+    }
+
+    child.castShadow = true;
+    child.receiveShadow = true;
+
+    child.material =
+      brainOpaqueMaterial.clone();
+
+    brainMeshes.push(child);
+  });
+
+  targetMeshes =
+    brainMeshes.filter(
+      mesh =>
+        isPathwayMesh(mesh) &&
+        !isExcludedMesh(mesh)
+    );
+
+  targetMeshes.forEach(mesh => {
+    mesh.material =
+      pathwayMaterial.clone();
+  });
+}
+
+function loadRealBrain() {
+
+  const loader = new GLTFLoader();
+
+  const dracoLoader = new DRACOLoader();
+
+  dracoLoader.setDecoderPath(
+    "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/"
+  );
+
+  loader.setDRACOLoader(dracoLoader);
+
+  const urls = [
+    "https://cdn.jsdelivr.net/gh/itayinbarr/brainproject@main/brain-atlas/models/brain.glb",
+    "https://raw.githubusercontent.com/itayinbarr/brainproject/main/brain-atlas/models/brain.glb",
+    "https://itayinbarr.github.io/brainproject/models/brain.glb"
+  ];
+
+  let index = 0;
+
+  function tryLoad() {
+
+    if (index >= urls.length) {
+
+      loadText.textContent =
+        "3D model unavailable · anatomical pathway illustration remains available";
+
+      loadBar.style.width = "100%";
+
+      setTimeout(() => {
+        loading.classList.add("hide");
+      }, 700);
+
+      return;
+    }
+
+    const url = urls[index++];
+
+    loader.load(
+      url,
+
+      gltf => {
+
+        const model = gltf.scene;
+
+        const box =
+          new THREE.Box3()
+            .setFromObject(model);
+
+        const center =
+          box.getCenter(
+            new THREE.Vector3()
+          );
+
+        const size =
+          box.getSize(
+            new THREE.Vector3()
+          );
+
+        const maxDim =
+          Math.max(
+            size.x,
+            size.y,
+            size.z
+          );
+
+        const scale =
+          4.5 / maxDim;
+
+        model.scale.setScalar(scale);
+
+        model.position.sub(
+          center.multiplyScalar(scale)
+        );
+
+        model.position.y -= .6;
+
+        brainGroup.add(model);
+
+        prepareModel(model);
+
+        if (targetMeshes.length > 0) {
+
+          loadText.textContent =
+            "DCML pathway structures located";
+
+          pathwayLabel.classList.add("show");
+
+        } else {
+
+          loadText.textContent =
+            "Brain loaded · pathway-specific meshes unavailable";
+        }
+
+        loadBar.style.width = "100%";
+
+        setTimeout(() => {
+          loading.classList.add("hide");
+        }, 600);
+      },
+
+      progress => {
+
+        if (progress.total > 0) {
+
+          const pct =
+            Math.min(
+              95,
+              progress.loaded /
+              progress.total *
+              95
+            );
+
+          loadBar.style.width =
+            pct + "%";
+        }
+      },
+
+      error => {
+
+        console.warn(
+          "Brain model loading failed:",
+          error
+        );
+
+        tryLoad();
+      }
+    );
+  }
+
+  tryLoad();
+}
+
+function setBrainTransparency(enabled) {
+
+  brainMeshes.forEach(mesh => {
+
+    if (targetMeshes.includes(mesh)) {
+      return;
+    }
+
+    mesh.material =
+      enabled
+        ? brainTransparentMaterial.clone()
+        : brainOpaqueMaterial.clone();
+  });
+}
+
+function setPathwayHighlight(enabled) {
+
+  targetMeshes.forEach(mesh => {
+
+    mesh.material =
+      enabled
+        ? pathwayMaterial.clone()
+        : normalMaterial.clone();
+  });
+}
+
+const showPathwayBtn =
+  document.getElementById("showPathway");
+
+showPathwayBtn.addEventListener(
+  "click",
+  () => {
+
+    pathwayShown =
+      !pathwayShown;
+
+    if (pathwayShown) {
+
+      setBrainTransparency(true);
+      setPathwayHighlight(true);
+
+      pathwayLabel.classList.add("show");
+
+      showPathwayBtn.classList.add("active");
+
+      showPathwayBtn.textContent =
+        "📍 Hide DCML Pathway";
+
+      controls.autoRotate = false;
+
+      rotateBtn.classList.remove("active");
+
+      rotateBtn.textContent =
+        "▶ Auto Rotate";
+
+    } else {
+
+      setBrainTransparency(false);
+
+      setPathwayHighlight(highlighted);
+
+      pathwayLabel.classList.remove("show");
+
+      showPathwayBtn.classList.remove("active");
+
+      showPathwayBtn.textContent =
+        "📍 Show DCML Pathway";
+    }
+  }
+);
+
+const highlightBtn =
+  document.getElementById("highlight");
+
+highlightBtn.addEventListener(
+  "click",
+  () => {
+
+    highlighted =
+      !highlighted;
+
+    setPathwayHighlight(highlighted);
+
+    if (highlighted) {
+
+      highlightBtn.classList.add("active");
+
+      highlightBtn.textContent =
+        "🔴 Highlight Pathway";
+
+    } else {
+
+      highlightBtn.classList.remove("active");
+
+      highlightBtn.textContent =
+        "🧠 Highlight Pathway";
+    }
+
+    if (pathwayShown) {
+      setBrainTransparency(true);
+    }
+  }
+);
+
+const rotateBtn =
+  document.getElementById("rotate");
+
+rotateBtn.addEventListener(
+  "click",
+  () => {
+
+    controls.autoRotate =
+      !controls.autoRotate;
+
+    rotateBtn.classList.toggle(
+      "active",
+      controls.autoRotate
+    );
+
+    rotateBtn.textContent =
+      controls.autoRotate
+        ? "⟳ Auto Rotate"
+        : "▶ Auto Rotate";
+  }
+);
+
+document
+  .getElementById("reset")
+  .addEventListener(
+    "click",
+    () => {
+
+      camera.position.set(
+        3.1,
+        .25,
+        8.4
+      );
+
+      controls.target.set(
+        0,
+        -.25,
+        0
+      );
+
+      controls.update();
+
+      pathwayShown = false;
+      highlighted = true;
+
+      setBrainTransparency(false);
+      setPathwayHighlight(true);
+
+      pathwayLabel.classList.remove("show");
+
+      showPathwayBtn.classList.remove("active");
+
+      showPathwayBtn.textContent =
+        "📍 Show DCML Pathway";
+
+      highlightBtn.classList.add("active");
+
+      highlightBtn.textContent =
+        "🔴 Highlight Pathway";
+
+      controls.autoRotate = true;
+
+      rotateBtn.classList.add("active");
+
+      rotateBtn.textContent =
+        "⟳ Auto Rotate";
+    }
+  );
+
+function updateLabel() {
+
+  if (!pathwayShown) {
+    return;
+  }
+
+  if (targetMeshes.length === 0) {
+    return;
+  }
+
+  const box =
+    new THREE.Box3();
+
+  targetMeshes.forEach(
+    mesh => {
+      box.expandByObject(mesh);
+    }
+  );
+
+  if (box.isEmpty()) {
+    return;
+  }
+
+  const position =
+    box.getCenter(
+      new THREE.Vector3()
+    );
+
+  position.project(camera);
+
+  const x =
+    (position.x + 1) / 2 *
+    canvas.clientWidth;
+
+  const y =
+    (-position.y + 1) / 2 *
+    canvas.clientHeight;
+
+  pathwayLabel.style.left =
+    x + "px";
+
+  pathwayLabel.style.top =
+    (y - 35) + "px";
+}
+
+function resize() {
+
+  const width =
+    canvas.clientWidth;
+
+  const height =
+    canvas.clientHeight;
+
+  if (
+    width <= 0 ||
+    height <= 0
+  ) {
+    return;
+  }
+
+  camera.aspect =
+    width / height;
+
+  camera.updateProjectionMatrix();
+
+  renderer.setSize(
+    width,
+    height,
+    false
+  );
+}
+
+window.addEventListener(
+  "resize",
+  resize
+);
+
+function animate() {
+
+  requestAnimationFrame(
+    animate
+  );
+
+  controls.update();
+
+  updateLabel();
+
+  renderer.render(
+    scene,
+    camera
+  );
+}
+
+resize();
+animate();
+loadRealBrain();
+
+</script>
+
+<script>
+
+function checkAnswer(button, correct) {
+
+  const parent =
+    button.parentElement;
+
+  const options =
+    parent.querySelectorAll(
+      ".option"
+    );
+
+  options.forEach(
+    option => {
+
+      option.classList.remove(
+        "correct",
+        "wrong"
+      );
+    }
+  );
+
+  if (correct) {
+
+    button.classList.add(
+      "correct"
+    );
+
+  } else {
+
+    button.classList.add(
+      "wrong"
+    );
+  }
+
+  updateQuizScore();
+}
+
+function updateQuizScore() {
+
+  const result =
+    document.getElementById(
+      "quizResult"
+    );
+
+  let answered = 0;
+  let correctAnswers = 0;
+
+  document
+    .querySelectorAll(
+      ".question"
+    )
+    .forEach(
+      question => {
+
+        const selected =
+          question.querySelector(
+            ".correct,.wrong"
+          );
+
+        if (selected) {
+
+          answered++;
+
+          if (
+            selected.classList.contains(
+              "correct"
+            )
+          ) {
+
+            correctAnswers++;
+          }
+        }
+      }
+    );
+
+  if (answered > 0) {
+
+    result.style.display =
+      "block";
+
+    result.textContent =
+      "Score: " +
+      correctAnswers +
+      " / " +
+      answered;
+  }
+}
+
+</script>
+
+</body>
+</html>
