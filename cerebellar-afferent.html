@@ -1,0 +1,2997 @@
+<!-- /cerebellar-afferent.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NeuroAtlas | Cerebellar Afferent Pathways</title>
+
+<style>
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #050b13;
+  color: #eef4fa;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.7;
+}
+
+nav {
+  height: 70px;
+  padding: 0 7%;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+nav a {
+  color: #9db0c3;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+nav a:hover {
+  color: #fff;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 60px 7% 100px;
+}
+
+.eyebrow {
+  color: #61b5ff;
+  letter-spacing: 3px;
+  font-size: 12px;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+
+h1 {
+  font-size: clamp(46px, 7vw, 80px);
+  line-height: .95;
+  letter-spacing: -4px;
+  margin-bottom: 10px;
+}
+
+.arabic-title {
+  color: #ff4055;
+  font-size: 24px;
+  margin-bottom: 25px;
+}
+
+.hero p {
+  color: #a6b6c7;
+  max-width: 850px;
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.action-button,
+.controls button {
+  padding: 11px 17px;
+  border-radius: 9px;
+  background: #0b1928;
+  border: 1px solid #31516d;
+  color: #bdd0e0;
+  text-decoration: none;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.action-button:hover,
+.controls button:hover {
+  background: #14304a;
+  color: #fff;
+  border-color: #61b5ff;
+}
+
+.controls button.active {
+  background: #321218;
+  border-color: #ff4055;
+  color: #ffd9de;
+}
+
+.viewer {
+  margin-top: 60px;
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 24px;
+  overflow: hidden;
+  background: #02060b;
+  box-shadow: 0 25px 80px rgba(0,0,0,.45);
+}
+
+.viewer-header {
+  min-height: 65px;
+  padding: 0 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.viewer-title {
+  font-size: 14px;
+  color: #d2dce6;
+}
+
+.viewer-status {
+  color: #708499;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.scene {
+  position: relative;
+  width: 100%;
+  height: 700px;
+  background:
+    radial-gradient(
+      ellipse at 50% 45%,
+      #203b51 0%,
+      #0d1c2e 45%,
+      #02060b 100%
+    );
+}
+
+#brainCanvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.loading {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 16px;
+  background: #02060b;
+  color: #9db0c3;
+  font-size: 14px;
+  transition: opacity .8s;
+}
+
+.loading.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loading-bar {
+  width: 180px;
+  height: 2px;
+  background: rgba(255,255,255,.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.loading-bar-inner {
+  width: 0%;
+  height: 100%;
+  background: #ff4055;
+  transition: width .3s;
+}
+
+.location-label {
+  position: absolute;
+  z-index: 30;
+  pointer-events: none;
+  transform: translate(-50%,-100%);
+  display: none;
+}
+
+.location-label.show {
+  display: block;
+}
+
+.label-box {
+  position: relative;
+  padding: 9px 15px;
+  border-radius: 10px;
+  background: rgba(5,10,17,.96);
+  border: 1.5px solid #ffb6c1;
+  color: #ffd9de;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  box-shadow:
+    0 0 12px rgba(255,182,193,.35),
+    0 0 30px rgba(255,182,193,.2);
+}
+
+.label-box::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -15px;
+  width: 1.5px;
+  height: 15px;
+  background: #ffb6c1;
+  transform: translateX(-50%);
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 15px;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.section {
+  margin-top: 70px;
+}
+
+.section-label {
+  color: #61b5ff;
+  letter-spacing: 2px;
+  font-size: 11px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.section h2 {
+  font-size: 32px;
+  margin-bottom: 25px;
+}
+
+.section-intro {
+  color: #91a5b8;
+  max-width: 900px;
+  font-size: 15px;
+  line-height: 1.9;
+  margin-bottom: 30px;
+}
+
+.location {
+  margin-top: 70px;
+  padding: 35px;
+  background: #091522;
+  border: 1px solid #172b3e;
+  border-radius: 18px;
+}
+
+.location h2 {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+.location-intro {
+  color: #91a5b8;
+  max-width: 900px;
+  line-height: 1.9;
+  margin-bottom: 30px;
+}
+
+.pathway-viewer {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  height: 690px;
+  margin: auto;
+  border: 1px solid #243b50;
+  border-radius: 20px;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      ellipse at 50% 48%,
+      #182b3b 0%,
+      #0a1622 62%,
+      #02060b 100%
+    );
+}
+
+.pathway-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.pathway-title {
+  position: absolute;
+  left: 50%;
+  top: 20px;
+  transform: translateX(-50%);
+  color: #d9e3eb;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.brain-outline {
+  fill: url(#brainGradient);
+  stroke: #cdbdc2;
+  stroke-width: 3;
+  filter: url(#brainShadow);
+}
+
+.cerebellum {
+  fill: url(#cerebellumGradient);
+  stroke: #e4cbd0;
+  stroke-width: 2;
+}
+
+.brainstem {
+  fill: #6c5961;
+  stroke: #c5aeb5;
+  stroke-width: 2;
+}
+
+.pons {
+  fill: #9a7c86;
+  stroke: #e3c5cc;
+  stroke-width: 2;
+}
+
+.medulla {
+  fill: #725c65;
+  stroke: #c5abb3;
+  stroke-width: 1.8;
+}
+
+.midbrain {
+  fill: #806974;
+  stroke: #c8b2b9;
+  stroke-width: 1.8;
+}
+
+.cortex-line {
+  fill: none;
+  stroke: #594d55;
+  stroke-width: 3;
+  opacity: .7;
+  stroke-linecap: round;
+}
+
+.cortex-highlight {
+  fill: none;
+  stroke: #eadde0;
+  stroke-width: 1;
+  opacity: .18;
+}
+
+.cerebellar-folium {
+  fill: none;
+  stroke: #674f59;
+  stroke-width: 2;
+  opacity: .8;
+}
+
+.peduncle {
+  fill: none;
+  stroke: #ff4055;
+  stroke-width: 8;
+  stroke-linecap: round;
+  opacity: .28;
+}
+
+.pathway {
+  fill: none;
+  stroke: #ff4055;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: url(#pathGlow);
+  stroke-dasharray: 10 8;
+  animation: flowPath 2.5s linear infinite;
+}
+
+.pathway-secondary {
+  fill: none;
+  stroke: #ff9aaa;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 8 9;
+  opacity: .8;
+  animation: flowPath 3s linear infinite;
+}
+
+.path-node {
+  fill: #ff4055;
+  stroke: #fff;
+  stroke-width: 1.5;
+}
+
+.path-node-secondary {
+  fill: #ffb6c1;
+  stroke: #fff;
+  stroke-width: 1;
+}
+
+.callout {
+  fill: none;
+  stroke: #ffb6c1;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+
+.callout-dot {
+  fill: #ffb6c1;
+  stroke: #fff;
+  stroke-width: 1;
+}
+
+.svg-label {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: .8px;
+  fill: #fff;
+}
+
+.svg-sub {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  fill: #ffb6c1;
+}
+
+.svg-small {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  fill: #91a5b8;
+  letter-spacing: 1px;
+}
+
+.orientation-label {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  fill: #71879a;
+  letter-spacing: 1.5px;
+}
+
+.view-badge {
+  position: absolute;
+  left: 22px;
+  bottom: 20px;
+  padding: 8px 12px;
+  border: 1px solid #31516d;
+  border-radius: 8px;
+  background: rgba(4,10,17,.88);
+  color: #8195a8;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+}
+
+.legend {
+  position: absolute;
+  right: 22px;
+  bottom: 20px;
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #b5c2ce;
+  font-size: 10px;
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  box-shadow: 0 0 12px currentColor;
+}
+
+.legend-dot.path {
+  background: #ff4055;
+  color: #ff4055;
+}
+
+.legend-dot.structure {
+  background: #d7d0d4;
+  color: #d7d0d4;
+}
+
+.location-caption {
+  text-align: center;
+  color: #9fb0c3;
+  margin-top: 15px;
+  line-height: 1.8;
+}
+
+.source-note {
+  max-width: 900px;
+  margin: 15px auto 0;
+  color: #617487;
+  font-size: 11px;
+  text-align: center;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 20px;
+}
+
+.card {
+  padding: 27px;
+  background: #091522;
+  border: 1px solid #172b3e;
+  border-radius: 18px;
+  transition: transform .2s,border-color .2s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  border-color: #4a2027;
+}
+
+.card h3 {
+  font-size: 18px;
+  margin-bottom: 13px;
+  color: #eef4fa;
+  line-height: 1.45;
+}
+
+.card p {
+  color: #91a5b8;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.clinical-section {
+  margin-top: 65px;
+}
+
+.clinical-box {
+  padding: 30px;
+  background: #091522;
+  border: 1px solid #172b3e;
+  border-left: 3px solid #ff4055;
+  border-radius: 18px;
+}
+
+.clinical-box p {
+  color: #a7b7c6;
+  font-size: 15px;
+  line-height: 1.9;
+  margin-bottom: 18px;
+}
+
+.clinical-box p:last-child {
+  margin-bottom: 0;
+}
+
+.facts-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 15px;
+}
+
+.fact {
+  padding: 22px;
+  background: #091522;
+  border: 1px solid #172b3e;
+  border-radius: 16px;
+}
+
+.fact span {
+  display: block;
+  color: #ff4055;
+  font-size: 11px;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+.fact strong {
+  display: block;
+  color: #eef4fa;
+  font-size: 14px;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.fact p {
+  color: #8195a8;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.quiz {
+  margin-top: 65px;
+  padding: 30px;
+  background: #091522;
+  border: 1px solid #172b3e;
+  border-radius: 18px;
+}
+
+.quiz h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.quiz-intro {
+  color: #91a5b8;
+  margin-bottom: 25px;
+}
+
+.question {
+  margin-bottom: 30px;
+}
+
+.question:last-child {
+  margin-bottom: 0;
+}
+
+.question p {
+  color: #eef4fa;
+  font-size: 16px;
+  margin-bottom: 12px;
+  font-weight: bold;
+}
+
+.option {
+  display: block;
+  width: 100%;
+  padding: 12px 15px;
+  margin-top: 9px;
+  background: #0b1928;
+  color: #c7d5e2;
+  border: 1px solid #263951;
+  border-radius: 9px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+  transition: .2s;
+}
+
+.option:hover {
+  border-color: #ff4055;
+  background: #111e2c;
+}
+
+.option.correct {
+  border-color: #8fd3a8;
+  background: #14291e;
+  color: #b9f0c9;
+}
+
+.option.wrong {
+  border-color: #d88b9b;
+  background: #2a171d;
+  color: #ffc2cc;
+}
+
+.quiz-result {
+  margin-top: 25px;
+  padding: 15px;
+  border-radius: 10px;
+  background: #0b1928;
+  border: 1px solid #263951;
+  color: #aebdce;
+  display: none;
+}
+
+@keyframes flowPath {
+  to {
+    stroke-dashoffset: -36;
+  }
+}
+
+@media (max-width: 900px) {
+
+  .cards {
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  .facts-grid {
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  .pathway-viewer {
+    height: 580px;
+  }
+}
+
+@media (max-width: 800px) {
+
+  .scene {
+    height: 450px;
+  }
+
+  .viewer-status {
+    display: none;
+  }
+
+  .location {
+    padding: 25px;
+  }
+
+  .pathway-viewer {
+    height: 500px;
+  }
+}
+
+@media (max-width: 600px) {
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .facts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  h1 {
+    letter-spacing: -2px;
+  }
+
+  .location {
+    padding: 20px;
+  }
+
+  .pathway-viewer {
+    height: 430px;
+  }
+
+  .pathway-title {
+    font-size: 8px;
+  }
+
+  .svg-label {
+    font-size: 8px;
+  }
+
+  .svg-sub,
+  .svg-small {
+    font-size: 7px;
+  }
+
+  .legend {
+    display: none;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+  <a href="./pathways.html">← Back to Neural Pathways</a>
+</nav>
+
+<main class="container">
+
+<div class="eyebrow">
+  Cerebellar Connections · NeuroAtlas
+</div>
+
+<h1>
+  Cerebellar Afferent Pathways
+</h1>
+
+<div class="arabic-title">
+  المسارات الواردة إلى المخيخ
+</div>
+
+<div class="hero">
+
+<p>
+Cerebellar afferent pathways carry sensory, motor, vestibular, and
+cortical information into the cerebellum. These inputs allow the
+cerebellum to compare intended movement with actual movement and help
+coordinate balance, posture, timing, and motor learning.
+</p>
+
+</div>
+
+<div class="actions">
+
+<a class="action-button" href="#location">
+  📍 Show Pathway
+</a>
+
+<a class="action-button" href="#information">
+  🧠 Learn the Pathways
+</a>
+
+<a class="action-button" href="#quiz">
+  📝 Test Yourself
+</a>
+
+</div>
+
+<div class="viewer">
+
+<div class="viewer-header">
+
+<div class="viewer-title">
+  Human Brain · Interactive 3D
+</div>
+
+<div class="viewer-status">
+  DRAG TO ROTATE · SCROLL TO ZOOM
+</div>
+
+</div>
+
+<div class="scene">
+
+<div id="loading" class="loading">
+
+<span id="loadText">
+Loading real brain model...
+</span>
+
+<div class="loading-bar">
+  <div id="loadBar" class="loading-bar-inner"></div>
+</div>
+
+</div>
+
+<canvas id="brainCanvas"></canvas>
+
+<div id="locationLabel" class="location-label">
+
+<div class="label-box">
+  CEREBELLAR INPUT · المدخلات المخيخية
+</div>
+
+</div>
+
+</div>
+
+<div class="controls">
+
+<button id="showLocation">
+  📍 Show Cerebellar Pathways
+</button>
+
+<button id="highlight" class="active">
+  🔴 Highlight Target Region
+</button>
+
+<button id="rotate" class="active">
+  ⟳ Auto Rotate
+</button>
+
+<button id="reset">
+  ↻ Reset View
+</button>
+
+</div>
+
+</div>
+
+<section id="location" class="location">
+
+<div class="section-label">
+  Pathway · المسار
+</div>
+
+<h2>
+  📍 How Information Reaches the Cerebellum
+</h2>
+
+<p class="location-intro">
+
+The cerebellum receives information from multiple sources. Major
+afferent systems enter through the three cerebellar peduncles. The
+inferior cerebellar peduncle carries many spinal, vestibular, and
+olivary inputs; the middle cerebellar peduncle carries pontocerebellar
+fibers; and the superior cerebellar peduncle carries some ascending
+spinal information.
+
+<br><br>
+
+تستقبل المخيخ المعلومات من مصادر متعددة. تدخل معظم الأنظمة الواردة
+عبر السويقات المخيخية الثلاث. تحمل السويقة المخيخية السفلية العديد من
+المدخلات الشوكية والدهليزية والزيتونية، بينما تحمل السويقة المخيخية
+الوسطى الألياف الجسرية المخيخية، وتحمل السويقة المخيخية العلوية بعض
+المعلومات الصاعدة من الحبل الشوكي.
+
+</p>
+
+<div class="pathway-viewer">
+
+<div class="pathway-title">
+  Cerebellar Afferent Systems · Simplified Neuroanatomical Map
+</div>
+
+<svg
+class="pathway-svg"
+viewBox="0 0 1200 690"
+xmlns="http://www.w3.org/2000/svg"
+aria-label="Simplified diagram of cerebellar afferent pathways"
+>
+
+<defs>
+
+<linearGradient
+id="brainGradient"
+x1="0"
+y1="0"
+x2="1"
+y2="1"
+>
+
+<stop offset="0%" stop-color="#d8c5ca"/>
+<stop offset="35%" stop-color="#b8a1a8"/>
+<stop offset="70%" stop-color="#8f777f"/>
+<stop offset="100%" stop-color="#66545d"/>
+
+</linearGradient>
+
+<linearGradient
+id="cerebellumGradient"
+x1="0"
+y1="0"
+x2="1"
+y2="1"
+>
+
+<stop offset="0%" stop-color="#d9b3bc"/>
+<stop offset="50%" stop-color="#9b6875"/>
+<stop offset="100%" stop-color="#60424d"/>
+
+</linearGradient>
+
+<filter
+id="brainShadow"
+x="-20%"
+y="-20%"
+width="140%"
+height="150%"
+>
+
+<feDropShadow
+dx="0"
+dy="14"
+stdDeviation="14"
+flood-color="#000"
+flood-opacity=".7"
+/>
+
+</filter>
+
+<filter
+id="pathGlow"
+x="-100%"
+y="-100%"
+width="300%"
+height="300%"
+>
+
+<feGaussianBlur
+stdDeviation="2.5"
+result="blur"
+/>
+
+<feMerge>
+
+<feMergeNode in="blur"/>
+
+<feMergeNode in="SourceGraphic"/>
+
+</feMerge>
+
+</filter>
+
+</defs>
+
+<!-- Cerebral hemispheres -->
+
+<path
+class="brain-outline"
+d="
+M250 155
+
+C300 91 395 69 488 91
+C538 102 571 123 600 148
+
+C629 123 662 102 712 91
+C805 69 900 91 950 155
+
+C1003 223 1007 316 969 381
+
+C934 440 870 469 803 478
+
+L725 485
+
+L675 464
+
+L600 447
+
+L525 464
+L475 485
+L397 478
+
+C330 469 266 440 231 381
+
+C193 316 197 223 250 155
+Z
+"
+/>
+
+<!-- Cortical folds -->
+
+<path
+class="cortex-line"
+d="M236 210 C302 170 371 164 433 187 C468 200 494 199 530 180"
+/>
+
+<path
+class="cortex-line"
+d="M215 268 C280 229 349 226 409 247 C455 263 492 263 529 249"
+/>
+
+<path
+class="cortex-line"
+d="M218 328 C277 291 341 290 401 306 C451 320 487 323 526 311"
+/>
+
+<path
+class="cortex-line"
+d="M248 386 C302 354 355 353 408 367 C452 379 489 383 523 373"
+/>
+
+<path
+class="cortex-line"
+d="M964 210 C898 170 829 164 767 187 C732 200 706 199 670 180"
+/>
+
+<path
+class="cortex-line"
+d="M985 268 C920 229 851 226 791 247 C745 263 708 263 671 249"
+/>
+
+<path
+class="cortex-line"
+d="M982 328 C923 291 859 290 799 306 C749 320 713 323 674 311"
+/>
+
+<path
+class="cortex-line"
+d="M952 386 C898 354 845 353 792 367 C748 379 711 383 677 373"
+/>
+
+<path
+class="cortex-highlight"
+d="M270 176 C325 139 388 132 445 149"
+/>
+
+<path
+class="cortex-highlight"
+d="M930 176 C875 139 812 132 755 149"
+/>
+
+<!-- Brainstem -->
+
+<path
+class="brainstem"
+d="
+M557 420
+C568 398 583 388 600 388
+C617 388 632 398 643 420
+L652 497
+C646 529 626 548 600 552
+C574 548 554 529 548 497
+Z
+"
+/>
+
+<!-- Midbrain -->
+
+<path
+class="midbrain"
+d="
+M553 399
+C563 380 579 370 600 370
+C621 370 637 380 647 399
+L642 431
+C628 442 615 447 600 447
+C585 447 572 442 558 431
+Z
+"
+/>
+
+<!-- Pons -->
+
+<path
+class="pons"
+d="
+M548 423
+C560 411 580 405 600 405
+C620 405 640 411 652 423
+L655 465
+C641 482 623 489 600 490
+C577 489 559 482 545 465
+Z
+"
+/>
+
+<!-- Medulla -->
+
+<path
+class="medulla"
+d="
+M566 480
+C579 487 590 490 600 490
+C610 490 621 487 634 480
+L638 530
+C629 550 616 560 600 563
+C584 560 571 550 562 530
+Z
+"
+/>
+
+<!-- Cerebellum -->
+
+<path
+class="cerebellum"
+d="
+M690 394
+
+C715 356 756 337 806 339
+C854 341 895 360 920 394
+
+C941 423 943 458 926 486
+C907 517 871 535 830 538
+
+C789 541 750 530 722 510
+
+C697 492 683 467 681 442
+
+C679 424 683 408 690 394
+Z
+"
+/>
+
+<!-- Cerebellar folia -->
+
+<path
+class="cerebellar-folium"
+d="M700 403 C754 377 829 376 905 407"
+/>
+
+<path
+class="cerebellar-folium"
+d="M691 424 C751 401 833 400 920 430"
+/>
+
+<path
+class="cerebellar-folium"
+d="M688 446 C752 426 838 427 928 452"
+/>
+
+<path
+class="cerebellar-folium"
+d="M696 468 C759 452 837 453 920 476"
+/>
+
+<path
+class="cerebellar-folium"
+d="M712 490 C767 478 833 480 902 499"
+/>
+
+<!-- Cerebellar peduncles -->
+
+<path
+class="peduncle"
+d="M646 414 C672 414 694 414 720 416"
+/>
+
+<path
+class="peduncle"
+d="M652 442 C679 444 696 447 720 452"
+/>
+
+<path
+class="peduncle"
+d="M646 475 C674 480 695 487 719 492"
+/>
+
+<!-- Corticopontocerebellar pathway -->
+
+<path
+class="pathway"
+d="
+M286 205
+C400 230 480 280 535 360
+C555 389 570 405 584 419
+C603 436 620 443 650 443
+C682 443 701 448 724 455
+"
+/>
+
+<circle
+class="path-node"
+cx="286"
+cy="205"
+r="6"
+/>
+
+<circle
+class="path-node"
+cx="600"
+cy="421"
+r="6"
+/>
+
+<circle
+class="path-node"
+cx="724"
+cy="455"
+r="6"
+/>
+
+<!-- Spinocerebellar pathway -->
+
+<path
+class="pathway-secondary"
+d="
+M600 548
+C624 532 641 512 650 492
+C661 472 681 459 720 449
+"
+/>
+
+<circle
+class="path-node-secondary"
+cx="600"
+cy="548"
+r="5"
+/>
+
+<!-- Olivocerebellar pathway -->
+
+<path
+class="pathway"
+d="
+M570 508
+C592 497 616 489 641 484
+C669 479 693 480 721 488
+"
+/>
+
+<circle
+class="path-node"
+cx="570"
+cy="508"
+r="5"
+/>
+
+<!-- Vestibulocerebellar pathway -->
+
+<path
+class="pathway-secondary"
+d="
+M1030 370
+C969 385 930 400 905 416
+"
+/>
+
+<circle
+class="path-node-secondary"
+cx="1030"
+cy="370"
+r="5"
+/>
+
+<!-- Cortical source label -->
+
+<path
+class="callout"
+d="
+M286 205
+L165 145
+L70 145
+"
+/>
+
+<text
+class="svg-label"
+x="70"
+y="138"
+>
+CEREBRAL CORTEX
+</text>
+
+<text
+class="svg-sub"
+x="70"
+y="157"
+>
+القشرة المخية
+</text>
+
+<!-- Pons label -->
+
+<path
+class="callout"
+d="
+M600 445
+L465 520
+L310 520
+"
+/>
+
+<circle
+class="callout-dot"
+cx="600"
+cy="445"
+r="4"
+/>
+
+<text
+class="svg-label"
+x="310"
+y="513"
+>
+PONTINE NUCLEI
+</text>
+
+<text
+class="svg-sub"
+x="310"
+y="532"
+>
+النوى الجسرية
+</text>
+
+<!-- Spinal cord -->
+
+<path
+class="callout"
+d="
+M600 548
+L465 605
+L300 605
+"
+/>
+
+<circle
+class="callout-dot"
+cx="600"
+cy="548"
+r="4"
+/>
+
+<text
+class="svg-label"
+x="300"
+y="598"
+>
+SPINAL CORD
+</text>
+
+<text
+class="svg-sub"
+x="300"
+y="617"
+>
+الحبل الشوكي
+</text>
+
+<!-- Olive -->
+
+<path
+class="callout"
+d="
+M570 508
+L510 570
+L365 570
+"
+/>
+
+<circle
+class="callout-dot"
+cx="570"
+cy="508"
+r="4"
+/>
+
+<text
+class="svg-label"
+x="365"
+y="563"
+>
+INFERIOR OLIVE
+</text>
+
+<text
+class="svg-sub"
+x="365"
+y="582"
+>
+النواة الزيتونية السفلية
+</text>
+
+<!-- Vestibular -->
+
+<path
+class="callout"
+d="
+M1030 370
+L1055 315
+L1120 315
+"
+/>
+
+<circle
+class="callout-dot"
+cx="1030"
+cy="370"
+r="4"
+/>
+
+<text
+class="svg-label"
+x="1055"
+y="308"
+>
+VESTIBULAR INPUT
+</text>
+
+<text
+class="svg-sub"
+x="1055"
+y="327"
+>
+المدخلات الدهليزية
+</text>
+
+<!-- Cerebellum label -->
+
+<path
+class="callout"
+d="
+M820 440
+L965 525
+L1115 525
+"
+/>
+
+<circle
+class="callout-dot"
+cx="820"
+cy="440"
+r="4"
+/>
+
+<text
+class="svg-label"
+x="965"
+y="518"
+>
+CEREBELLUM
+</text>
+
+<text
+class="svg-sub"
+x="965"
+y="537"
+>
+المخيخ
+</text>
+
+<!-- Peduncles -->
+
+<text
+class="svg-small"
+x="650"
+y="400"
+>
+SUPERIOR PEDUNCLE
+</text>
+
+<text
+class="svg-small"
+x="652"
+y="432"
+>
+MIDDLE PEDUNCLE
+</text>
+
+<text
+class="svg-small"
+x="651"
+y="470"
+>
+INFERIOR PEDUNCLE
+</text>
+
+<!-- Orientation -->
+
+<text
+class="orientation-label"
+x="80"
+y="655"
+>
+CORTICAL / ROSTRAL
+</text>
+
+<text
+class="orientation-label"
+x="930"
+y="655"
+>
+CEREBELLAR
+</text>
+
+</svg>
+
+<div class="view-badge">
+  AFFERENT SYSTEMS · CEREBELLAR INPUT
+</div>
+
+<div class="legend">
+
+<div class="legend-item">
+<span class="legend-dot path"></span>
+Afferent pathway
+</div>
+
+<div class="legend-item">
+<span class="legend-dot structure"></span>
+Anatomical structure
+</div>
+
+</div>
+
+</div>
+
+<p class="location-caption">
+
+🔴 Major afferent systems carry cortical, spinal, vestibular, and
+olivary information toward the <strong>cerebellum</strong>.
+
+</p>
+
+<p class="source-note">
+
+Simplified anatomical illustration designed to demonstrate the major
+sources and routes of cerebellar afferent information. It is not
+intended as a radiological diagnostic image.
+
+</p>
+
+</section>
+
+<section id="information" class="section">
+
+<div class="section-label">
+  Cerebellar Pathways · المسارات المخيخية
+</div>
+
+<h2>
+  Major Cerebellar Afferent Systems
+</h2>
+
+<p class="section-intro">
+
+The cerebellum receives continuous information from the cerebral cortex,
+spinal cord, vestibular system, and inferior olivary complex. These
+signals allow the cerebellum to monitor movement and sensory state and
+to contribute to coordination and motor learning.
+
+<br><br>
+
+يستقبل المخيخ معلومات مستمرة من القشرة المخية والحبل الشوكي والجهاز
+الدهليزي والمركب الزيتوني السفلي. تسمح هذه الإشارات للمخيخ بمراقبة
+الحركة والحالة الحسية والمساهمة في التنسيق والتعلم الحركي.
+
+</p>
+
+<div class="cards">
+
+<div class="card">
+
+<h3>
+Mossy Fibers · الألياف الطحلبية
+</h3>
+
+<p>
+Mossy fibers provide the majority of excitatory input to the cerebellar
+cortex. They originate from several sources including pontine nuclei,
+spinal pathways, vestibular nuclei, and other brainstem structures.
+<br><br>
+توفر الألياف الطحلبية معظم المدخلات الاستثارية إلى قشرة المخيخ، وتنشأ
+من مصادر متعددة مثل النوى الجسرية والمسارات الشوكية والنوى الدهليزية
+وتراكيب جذع الدماغ الأخرى.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Climbing Fibers · الألياف المتسلقة
+</h3>
+
+<p>
+Climbing fibers arise from the contralateral inferior olivary nucleus
+and form powerful connections with Purkinje cells. They are strongly
+associated with error signaling and motor learning.
+<br><br>
+تنشأ الألياف المتسلقة من النواة الزيتونية السفلية المقابلة وترتبط
+بقوة بخلايا بركنجي، وترتبط بشكل مهم بإشارات الخطأ والتعلم الحركي.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Pontocerebellar Pathway · المسار الجسري المخيخي
+</h3>
+
+<p>
+Cerebral cortical information reaches pontine nuclei and then crosses
+the midline before entering the cerebellum through the middle
+cerebellar peduncle.
+<br><br>
+تصل المعلومات القشرية إلى النوى الجسرية ثم تعبر الخط المتوسط قبل دخول
+المخيخ عبر السويقة المخيخية الوسطى.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Spinocerebellar Pathways · المسارات الشوكية المخيخية
+</h3>
+
+<p>
+Spinocerebellar pathways carry proprioceptive and other information
+from the spinal cord to the cerebellum, helping it monitor the state
+of muscles and joints.
+<br><br>
+تنقل المسارات الشوكية المخيخية المعلومات الحسية العميقة وغيرها من
+الحبل الشوكي إلى المخيخ، مما يساعده على مراقبة حالة العضلات والمفاصل.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Vestibulocerebellar Input · المدخلات الدهليزية المخيخية
+</h3>
+
+<p>
+Vestibular information reaches the flocculonodular lobe and related
+cerebellar regions and contributes to balance and control of eye
+movements.
+<br><br>
+تصل المعلومات الدهليزية إلى الفص الندفي العقدي ومناطق مخيخية مرتبطة
+به وتساهم في التوازن والتحكم في حركات العين.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Olivocerebellar Pathway · المسار الزيتوني المخيخي
+</h3>
+
+<p>
+The inferior olive sends climbing fibers to the cerebellum. These
+connections are important in cerebellar learning and timing.
+<br><br>
+ترسل الزيتونة السفلية الألياف المتسلقة إلى المخيخ، وتساهم هذه
+الاتصالات في التعلم المخيخي والتوقيت الحركي.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Inferior Cerebellar Peduncle · السويقة المخيخية السفلية
+</h3>
+
+<p>
+The inferior peduncle carries many afferent signals including
+spinocerebellar, olivocerebellar, and vestibulocerebellar information.
+<br><br>
+تحمل السويقة المخيخية السفلية العديد من الإشارات الواردة، ومنها
+المعلومات الشوكية المخيخية والزيتونية المخيخية والدهليزية المخيخية.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Middle Cerebellar Peduncle · السويقة المخيخية الوسطى
+</h3>
+
+<p>
+The middle cerebellar peduncle is the major route by which pontine
+fibers carrying cortical information enter the cerebellum.
+<br><br>
+تعد السويقة المخيخية الوسطى الطريق الرئيسي لدخول الألياف الجسرية
+التي تحمل المعلومات القشرية إلى المخيخ.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Superior Cerebellar Peduncle · السويقة المخيخية العلوية
+</h3>
+
+<p>
+The superior peduncle contains important cerebellar connections,
+including major cerebellar output fibers and selected afferent
+pathways such as the anterior spinocerebellar tract.
+<br><br>
+تحتوي السويقة المخيخية العلوية على اتصالات مخيخية مهمة، بما في ذلك
+ألياف الخرج الرئيسية وبعض المسارات الواردة مثل السبيل الشوكي المخيخي
+الأمامي.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Proprioceptive Information · المعلومات الحسية العميقة
+</h3>
+
+<p>
+The cerebellum continuously receives information about limb and trunk
+position, helping compare intended and actual movement.
+<br><br>
+يستقبل المخيخ باستمرار معلومات عن وضع الأطراف والجذع، مما يساعده على
+مقارنة الحركة المقصودة بالحركة الفعلية.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Cerebellar Cortex · قشرة المخيخ
+</h3>
+
+<p>
+Incoming signals are processed within cerebellar cortical circuits,
+especially through interactions involving granule cells and Purkinje
+cells.
+<br><br>
+تتم معالجة الإشارات الواردة ضمن دوائر قشرة المخيخ، خاصة من خلال
+التفاعلات التي تشمل الخلايا الحبيبية وخلايا بركنجي.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+Motor Learning · التعلم الحركي
+</h3>
+
+<p>
+Cerebellar afferent signals provide information needed for adapting
+and refining coordinated movements.
+<br><br>
+توفر الإشارات الواردة إلى المخيخ المعلومات اللازمة لتعديل الحركات
+المنسقة وتحسينها.
+</p>
+
+</div>
+
+</div>
+
+<div class="clinical-section">
+
+<div class="section-label">
+  Clinical Importance · الأهمية السريرية
+</div>
+
+<h2>
+  Why Cerebellar Afferents Matter
+</h2>
+
+<div class="clinical-box">
+
+<p>
+Because the cerebellum depends on continuous incoming information,
+damage to its afferent pathways can interfere with coordination,
+balance, proprioceptive processing, and motor learning. The resulting
+neurological findings depend on which pathway and cerebellar region are
+affected.
+</p>
+
+<p dir="rtl">
+لأن المخيخ يعتمد على المعلومات الواردة بصورة مستمرة، فإن إصابة
+المسارات الواردة إليه قد تؤثر في التنسيق والتوازن ومعالجة الحس العميق
+والتعلم الحركي. وتختلف العلامات العصبية بحسب المسار والمنطقة المخيخية
+المتأثرة.
+</p>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<div class="section-label">
+  Quick Facts · معلومات سريعة
+</div>
+
+<h2>
+  Cerebellar Afferents at a Glance
+</h2>
+
+<div class="facts-grid">
+
+<div class="fact">
+
+<span>01</span>
+
+<strong>
+Major Inputs · أهم المدخلات
+</strong>
+
+<p>
+Cortex, spinal cord, vestibular system, inferior olive
+</p>
+
+</div>
+
+<div class="fact">
+
+<span>02</span>
+
+<strong>
+Major Fibers · الألياف الرئيسية
+</strong>
+
+<p>
+Mossy fibers and climbing fibers
+</p>
+
+</div>
+
+<div class="fact">
+
+<span>03</span>
+
+<strong>
+Major Entry Route · طريق الدخول الرئيسي
+</strong>
+
+<p>
+Three cerebellar peduncles
+</p>
+
+</div>
+
+<div class="fact">
+
+<span>04</span>
+
+<strong>
+Main Purpose · الوظيفة الرئيسية
+</strong>
+
+<p>
+Coordinate and refine movement
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div id="quiz" class="quiz">
+
+<div class="section-label">
+  Mini Test
+</div>
+
+<h2>
+  🧠 Test Yourself
+</h2>
+
+<p class="quiz-intro">
+Choose the best answer for each question.
+</p>
+
+<div class="question">
+
+<p>
+1. Which fibers provide the majority of excitatory input to the
+cerebellar cortex?
+</p>
+
+<button class="option" onclick="checkAnswer(this,true)">
+A. Mossy fibers
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+B. Optic radiations
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+C. Corticospinal fibers only
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+D. Commissural fibers
+</button>
+
+</div>
+
+<div class="question">
+
+<p>
+2. Where do climbing fibers originate?
+</p>
+
+<button class="option" onclick="checkAnswer(this,true)">
+A. Inferior olivary nucleus
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+B. Caudate nucleus
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+C. Thalamus
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+D. Hippocampus
+</button>
+
+</div>
+
+<div class="question">
+
+<p>
+3. Which cerebellar peduncle carries the major pontocerebellar input?
+</p>
+
+<button class="option" onclick="checkAnswer(this,true)">
+A. Middle cerebellar peduncle
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+B. Superior cerebellar peduncle only
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+C. Optic tract
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+D. Internal capsule
+</button>
+
+</div>
+
+<div class="question">
+
+<p>
+4. What type of information is strongly represented in
+spinocerebellar pathways?
+</p>
+
+<button class="option" onclick="checkAnswer(this,true)">
+A. Proprioceptive information
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+B. Visual information only
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+C. Auditory information only
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+D. Olfactory information only
+</button>
+
+</div>
+
+<div class="question">
+
+<p>
+5. Which system is particularly important for balance and eye-movement
+control?
+</p>
+
+<button class="option" onclick="checkAnswer(this,true)">
+A. Vestibulocerebellar input
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+B. Corticospinal tract
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+C. Optic radiation
+</button>
+
+<button class="option" onclick="checkAnswer(this,false)">
+D. Medial lemniscus
+</button>
+
+</div>
+
+<div id="quizResult" class="quiz-result"></div>
+
+</div>
+
+</section>
+
+</main>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+
+import * as THREE from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
+
+const canvas =
+  document.getElementById("brainCanvas");
+
+const loading =
+  document.getElementById("loading");
+
+const loadText =
+  document.getElementById("loadText");
+
+const loadBar =
+  document.getElementById("loadBar");
+
+const locationLabel =
+  document.getElementById("locationLabel");
+
+const scene =
+  new THREE.Scene();
+
+const camera =
+  new THREE.PerspectiveCamera(
+    30,
+    1,
+    .01,
+    100
+  );
+
+camera.position.set(
+  3.2,
+  .3,
+  8.5
+);
+
+const renderer =
+  new THREE.WebGLRenderer({
+    canvas,
+    antialias: true,
+    alpha: true
+  });
+
+renderer.setPixelRatio(
+  Math.min(
+    window.devicePixelRatio || 1,
+    2
+  )
+);
+
+renderer.toneMapping =
+  THREE.ACESFilmicToneMapping;
+
+renderer.toneMappingExposure =
+  .75;
+
+const controls =
+  new OrbitControls(
+    camera,
+    canvas
+  );
+
+controls.enableRotate = true;
+controls.rotateSpeed = .6;
+controls.enableDamping = true;
+controls.dampingFactor = .05;
+controls.enableZoom = true;
+controls.zoomSpeed = .6;
+controls.enablePan = false;
+controls.autoRotate = true;
+controls.autoRotateSpeed = .2;
+
+controls.target.set(
+  0,
+  -.3,
+  0
+);
+
+controls.minDistance = 3.5;
+controls.maxDistance = 16;
+
+scene.add(
+  new THREE.AmbientLight(
+    0xffffff,
+    .55
+  )
+);
+
+scene.add(
+  new THREE.HemisphereLight(
+    0xffdce6,
+    0x081018,
+    .75
+  )
+);
+
+const keyLight =
+  new THREE.DirectionalLight(
+    0xfff5f0,
+    1.4
+  );
+
+keyLight.position.set(
+  6,
+  10,
+  8
+);
+
+scene.add(keyLight);
+
+const fillLight =
+  new THREE.DirectionalLight(
+    0x8ca9bd,
+    .4
+  );
+
+fillLight.position.set(
+  -7,
+  2,
+  6
+);
+
+scene.add(fillLight);
+
+const brainGroup =
+  new THREE.Group();
+
+scene.add(brainGroup);
+
+let brainMeshes = [];
+let targetMeshes = [];
+
+let locationShown = false;
+let highlighted = true;
+
+const brainOpaqueMaterial =
+  new THREE.MeshPhysicalMaterial({
+    color: 0xf1c5d0,
+    roughness: .62,
+    metalness: 0,
+    clearcoat: .12,
+    clearcoatRoughness: .5,
+    side: THREE.DoubleSide,
+    transparent: false,
+    opacity: 1
+  });
+
+const brainTransparentMaterial =
+  new THREE.MeshPhysicalMaterial({
+    color: 0xf1c5d0,
+    roughness: .55,
+    metalness: 0,
+    clearcoat: .1,
+    clearcoatRoughness: .5,
+    side: THREE.DoubleSide,
+    transparent: true,
+    opacity: .16,
+    depthWrite: false
+  });
+
+const targetMaterial =
+  new THREE.MeshPhysicalMaterial({
+    color: 0xff2948,
+    roughness: .3,
+    metalness: 0,
+    clearcoat: .6,
+    clearcoatRoughness: .12,
+    emissive: 0x5c0613,
+    emissiveIntensity: 1.05,
+    side: THREE.DoubleSide,
+    transparent: false,
+    opacity: 1
+  });
+
+const targetNormalMaterial =
+  new THREE.MeshPhysicalMaterial({
+    color: 0xf1c5d0,
+    roughness: .62,
+    metalness: 0,
+    clearcoat: .12,
+    clearcoatRoughness: .5,
+    side: THREE.DoubleSide
+  });
+
+function normalizeName(name) {
+
+  return String(name || "")
+    .toLowerCase()
+    .replace(/[\s_\-.]+/g, "");
+
+}
+
+function getMeshName(mesh) {
+
+  const userName =
+    mesh.userData &&
+    mesh.userData.name
+      ? mesh.userData.name
+      : "";
+
+  return `${mesh.name} ${userName}`;
+
+}
+
+function isCerebellarTarget(mesh) {
+
+  const name =
+    normalizeName(
+      getMeshName(mesh)
+    );
+
+  const targetNames = [
+
+    "cerebellum",
+    "cerebellarcortex",
+    "cerebellarhemisphere",
+    "flocculus",
+    "nodulus",
+    "vermis",
+    "cerebellarpeduncle"
+
+  ];
+
+  return targetNames.some(
+    item =>
+      name.includes(item)
+  );
+
+}
+
+function calculateTargetCandidates(model) {
+
+  const meshes = [];
+
+  model.traverse(child => {
+
+    if (!child.isMesh) {
+      return;
+    }
+
+    meshes.push(child);
+
+  });
+
+  return meshes.filter(
+    mesh =>
+      isCerebellarTarget(mesh)
+  );
+
+}
+
+function prepareMaterials(model) {
+
+  brainMeshes = [];
+  targetMeshes = [];
+
+  model.traverse(child => {
+
+    if (!child.isMesh) {
+      return;
+    }
+
+    child.castShadow = true;
+    child.receiveShadow = true;
+
+    child.material =
+      brainOpaqueMaterial.clone();
+
+    brainMeshes.push(child);
+
+  });
+
+  targetMeshes =
+    calculateTargetCandidates(
+      model
+    );
+
+  targetMeshes.forEach(
+    mesh => {
+
+      mesh.material =
+        targetMaterial.clone();
+
+    }
+  );
+
+}
+
+function loadRealBrain() {
+
+  const loader =
+    new GLTFLoader();
+
+  const dracoLoader =
+    new DRACOLoader();
+
+  dracoLoader.setDecoderPath(
+    "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/"
+  );
+
+  loader.setDRACOLoader(
+    dracoLoader
+  );
+
+  const urls = [
+
+    "https://cdn.jsdelivr.net/gh/itayinbarr/brainproject@main/brain-atlas/models/brain.glb",
+
+    "https://raw.githubusercontent.com/itayinbarr/brainproject/main/brain-atlas/models/brain.glb",
+
+    "https://itayinbarr.github.io/brainproject/models/brain.glb"
+
+  ];
+
+  let index = 0;
+
+  function tryLoad() {
+
+    if (index >= urls.length) {
+
+      loadText.textContent =
+        "Brain model could not be loaded.";
+
+      loadBar.style.width =
+        "100%";
+
+      setTimeout(() => {
+
+        loading.classList.add(
+          "hide"
+        );
+
+      }, 500);
+
+      return;
+    }
+
+    const url =
+      urls[index++];
+
+    loader.load(
+
+      url,
+
+      gltf => {
+
+        const model =
+          gltf.scene;
+
+        const box =
+          new THREE.Box3()
+            .setFromObject(model);
+
+        const center =
+          box.getCenter(
+            new THREE.Vector3()
+          );
+
+        const size =
+          box.getSize(
+            new THREE.Vector3()
+          );
+
+        const maxDim =
+          Math.max(
+            size.x,
+            size.y,
+            size.z
+          );
+
+        const scale =
+          4.5 / maxDim;
+
+        model.scale.setScalar(
+          scale
+        );
+
+        model.position.sub(
+          center.multiplyScalar(
+            scale
+          )
+        );
+
+        model.position.y -= .6;
+
+        brainGroup.add(model);
+
+        prepareMaterials(model);
+
+        if (
+          targetMeshes.length === 0
+        ) {
+
+          loadText.textContent =
+            "Brain loaded · cerebellar surface unavailable";
+
+        } else {
+
+          loadText.textContent =
+            "Cerebellar region located";
+
+          locationLabel.classList.add(
+            "show"
+          );
+
+        }
+
+        loadBar.style.width =
+          "100%";
+
+        setTimeout(() => {
+
+          loading.classList.add(
+            "hide"
+          );
+
+        }, 500);
+
+      },
+
+      progress => {
+
+        if (progress.total > 0) {
+
+          const pct =
+            Math.min(
+              95,
+              progress.loaded /
+              progress.total *
+              95
+            );
+
+          loadBar.style.width =
+            pct + "%";
+
+        }
+
+      },
+
+      error => {
+
+        console.warn(
+          "Brain model loading failed:",
+          error
+        );
+
+        tryLoad();
+
+      }
+
+    );
+
+  }
+
+  tryLoad();
+
+}
+
+function setBrainTransparency(
+  enabled
+) {
+
+  brainMeshes.forEach(
+    mesh => {
+
+      if (
+        targetMeshes.includes(
+          mesh
+        )
+      ) {
+
+        return;
+
+      }
+
+      mesh.material =
+        enabled
+          ? brainTransparentMaterial.clone()
+          : brainOpaqueMaterial.clone();
+
+    }
+  );
+
+}
+
+function setTargetHighlight(
+  enabled
+) {
+
+  targetMeshes.forEach(
+    mesh => {
+
+      mesh.material =
+        enabled
+          ? targetMaterial.clone()
+          : targetNormalMaterial.clone();
+
+    }
+  );
+
+}
+
+const showLocationBtn =
+  document.getElementById(
+    "showLocation"
+  );
+
+showLocationBtn.addEventListener(
+  "click",
+  () => {
+
+    locationShown =
+      !locationShown;
+
+    if (locationShown) {
+
+      setBrainTransparency(
+        true
+      );
+
+      setTargetHighlight(
+        true
+      );
+
+      highlighted = true;
+
+      locationLabel.classList.add(
+        "show"
+      );
+
+      showLocationBtn.classList.add(
+        "active"
+      );
+
+      showLocationBtn.textContent =
+        "📍 Hide Cerebellar Pathways";
+
+      controls.autoRotate =
+        false;
+
+      rotateBtn.classList.remove(
+        "active"
+      );
+
+      rotateBtn.textContent =
+        "▶ Auto Rotate";
+
+    } else {
+
+      setBrainTransparency(
+        false
+      );
+
+      setTargetHighlight(
+        highlighted
+      );
+
+      locationLabel.classList.remove(
+        "show"
+      );
+
+      showLocationBtn.classList.remove(
+        "active"
+      );
+
+      showLocationBtn.textContent =
+        "📍 Show Cerebellar Pathways";
+
+    }
+
+  }
+);
+
+const highlightBtn =
+  document.getElementById(
+    "highlight"
+  );
+
+highlightBtn.addEventListener(
+  "click",
+  () => {
+
+    highlighted =
+      !highlighted;
+
+    setTargetHighlight(
+      highlighted
+    );
+
+    if (highlighted) {
+
+      highlightBtn.classList.add(
+        "active"
+      );
+
+      highlightBtn.textContent =
+        "🔴 Highlight Target Region";
+
+    } else {
+
+      highlightBtn.classList.remove(
+        "active"
+      );
+
+      highlightBtn.textContent =
+        "🧠 Highlight Target Region";
+
+    }
+
+    if (locationShown) {
+
+      setBrainTransparency(
+        true
+      );
+
+    }
+
+  }
+);
+
+const rotateBtn =
+  document.getElementById(
+    "rotate"
+  );
+
+rotateBtn.addEventListener(
+  "click",
+  () => {
+
+    controls.autoRotate =
+      !controls.autoRotate;
+
+    rotateBtn.classList.toggle(
+      "active",
+      controls.autoRotate
+    );
+
+    rotateBtn.textContent =
+      controls.autoRotate
+        ? "⟳ Auto Rotate"
+        : "▶ Auto Rotate";
+
+  }
+);
+
+document
+  .getElementById("reset")
+  .addEventListener(
+    "click",
+    () => {
+
+      camera.position.set(
+        3.2,
+        .3,
+        8.5
+      );
+
+      controls.target.set(
+        0,
+        -.3,
+        0
+      );
+
+      controls.update();
+
+      locationShown = false;
+      highlighted = true;
+
+      setBrainTransparency(
+        false
+      );
+
+      setTargetHighlight(
+        true
+      );
+
+      locationLabel.classList.remove(
+        "show"
+      );
+
+      showLocationBtn.classList.remove(
+        "active"
+      );
+
+      showLocationBtn.textContent =
+        "📍 Show Cerebellar Pathways";
+
+      highlightBtn.classList.add(
+        "active"
+      );
+
+      highlightBtn.textContent =
+        "🔴 Highlight Target Region";
+
+      controls.autoRotate =
+        true;
+
+      rotateBtn.classList.add(
+        "active"
+      );
+
+      rotateBtn.textContent =
+        "⟳ Auto Rotate";
+
+    }
+  );
+
+function updateLabel() {
+
+  if (!locationShown) {
+    return;
+  }
+
+  if (
+    targetMeshes.length === 0
+  ) {
+    return;
+  }
+
+  const box =
+    new THREE.Box3();
+
+  targetMeshes.forEach(
+    mesh => {
+
+      box.expandByObject(
+        mesh
+      );
+
+    }
+  );
+
+  if (box.isEmpty()) {
+    return;
+  }
+
+  const position =
+    box.getCenter(
+      new THREE.Vector3()
+    );
+
+  position.project(
+    camera
+  );
+
+  const x =
+    (position.x + 1) / 2 *
+    canvas.clientWidth;
+
+  const y =
+    (-position.y + 1) / 2 *
+    canvas.clientHeight;
+
+  locationLabel.style.left =
+    x + "px";
+
+  locationLabel.style.top =
+    (y - 35) + "px";
+
+}
+
+function resize() {
+
+  const width =
+    canvas.clientWidth;
+
+  const height =
+    canvas.clientHeight;
+
+  if (
+    width <= 0 ||
+    height <= 0
+  ) {
+
+    return;
+
+  }
+
+  camera.aspect =
+    width / height;
+
+  camera.updateProjectionMatrix();
+
+  renderer.setSize(
+    width,
+    height,
+    false
+  );
+
+}
+
+window.addEventListener(
+  "resize",
+  resize
+);
+
+function animate() {
+
+  requestAnimationFrame(
+    animate
+  );
+
+  controls.update();
+
+  updateLabel();
+
+  renderer.render(
+    scene,
+    camera
+  );
+
+}
+
+resize();
+
+animate();
+
+loadRealBrain();
+
+</script>
+
+<script>
+
+function checkAnswer(
+  button,
+  correct
+) {
+
+  const parent =
+    button.parentElement;
+
+  const options =
+    parent.querySelectorAll(
+      ".option"
+    );
+
+  options.forEach(
+    option => {
+
+      option.classList.remove(
+        "correct",
+        "wrong"
+      );
+
+    }
+  );
+
+  if (correct) {
+
+    button.classList.add(
+      "correct"
+    );
+
+  } else {
+
+    button.classList.add(
+      "wrong"
+    );
+
+  }
+
+  updateQuizScore();
+
+}
+
+function updateQuizScore() {
+
+  const result =
+    document.getElementById(
+      "quizResult"
+    );
+
+  let answered = 0;
+
+  let correctAnswers = 0;
+
+  document
+    .querySelectorAll(
+      ".question"
+    )
+    .forEach(
+      question => {
+
+        const selected =
+          question.querySelector(
+            ".correct,.wrong"
+          );
+
+        if (selected) {
+
+          answered++;
+
+          if (
+            selected.classList.contains(
+              "correct"
+            )
+          ) {
+
+            correctAnswers++;
+
+          }
+
+        }
+
+      }
+    );
+
+  if (answered > 0) {
+
+    result.style.display =
+      "block";
+
+    result.textContent =
+      "Score: " +
+      correctAnswers +
+      " / " +
+      answered;
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>
