@@ -1,0 +1,3609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NeuroAtlas | Medial Forebrain Bundle</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #050b13;
+  color: #eef4fa;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.7;
+}
+
+nav {
+  height: 70px;
+  padding: 0 7%;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+nav a {
+  color: #9db0c3;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+nav a:hover {
+  color: #fff;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 60px 7% 100px;
+}
+
+.eyebrow {
+  color: #61b5ff;
+  letter-spacing: 3px;
+  font-size: 12px;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+
+h1 {
+  font-size: clamp(48px, 7vw, 82px);
+  line-height: .95;
+  letter-spacing: -4px;
+  margin-bottom: 10px;
+}
+
+.arabic-title {
+  color: #ff4055;
+  font-size: 24px;
+  margin-bottom: 25px;
+}
+
+.hero p {
+  color: #a6b6c7;
+  max-width: 850px;
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.action-button,
+.controls button {
+  padding: 11px 17px;
+  border-radius: 9px;
+  background: #0b1928;
+  border: 1px solid #31516d;
+  color: #bdd0e0;
+  text-decoration: none;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.action-button:hover,
+.controls button:hover {
+  background: #14304a;
+  color: #fff;
+  border-color: #61b5ff;
+}
+
+.controls button.active {
+  background: #321218;
+  border-color: #ff4055;
+  color: #ffd9de;
+}
+
+.viewer {
+  margin-top: 60px;
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 24px;
+  overflow: hidden;
+  background: #02060b;
+  box-shadow: 0 25px 80px rgba(0,0,0,.45);
+}
+
+.viewer-header {
+  min-height: 65px;
+  padding: 0 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.viewer-title {
+  font-size: 14px;
+  color: #d2dce6;
+}
+
+.viewer-status {
+  color: #708499;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.scene {
+  position: relative;
+  width: 100%;
+  height: 700px;
+  background:
+    radial-gradient(
+      ellipse at 50% 45%,
+      #203b51 0%,
+      #0d1c2e 45%,
+      #02060b 100%
+    );
+}
+
+#brainCanvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.loading {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 16px;
+  background: #02060b;
+  color: #9db0c3;
+  font-size: 14px;
+  transition: opacity .8s;
+}
+
+.loading.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loading-bar {
+  width: 180px;
+  height: 2px;
+  background: rgba(255,255,255,.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.loading-bar-inner {
+  width: 0%;
+  height: 100%;
+  background: #ff4055;
+  transition: width .3s;
+}
+
+.pathway-label {
+  position: absolute;
+  z-index: 30;
+  pointer-events: none;
+  transform: translate(-50%,-100%);
+  display: none;
+}
+
+.pathway-label.show {
+  display: block;
+}
+
+.label-box {
+  position: relative;
+  padding: 9px 15px;
+  border-radius: 10px;
+  background: rgba(5,10,17,.96);
+  border: 1.5px solid #ffb6c1;
+  color: #ffd9de;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  box-shadow:
+    0 0 12px rgba(255,182,193,.35),
+    0 0 30px rgba(255,182,193,.2);
+}
+
+.label-box::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -15px;
+  width: 1.5px;
+  height: 15px;
+  background: #ffb6c1;
+  transform: translateX(-50%);
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 15px;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.section {
+  margin-top: 70px;
+}
+
+.section-label {
+  color: #61b5ff;
+  letter-spacing: 2px;
+  font-size: 11px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.section h2 {
+  font-size: 32px;
+  margin-bottom: 25px;
+}
+
+.section-intro {
+  color: #91a5b8;
+  max-width: 900px;
+  font-size: 15px;
+  line-height: 1.9;
+  margin-bottom: 30px;
+}
+
+.location {
+  margin-top: 70px;
+  padding: 35px;
+  background: #091522;
+  border: 1px solid #172b3e;
+  border-radius: 18px;
+}
+
+.location h2 {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+.location-intro {
+  color: #91a5b8;
+  max-width: 900px;
+  line-height: 1.9;
+  margin-bottom: 30px;
+}
+
+.pathway-viewer {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  height: 760px;
+  margin: auto;
+  border: 1px solid #243b50;
+  border-radius: 20px;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      ellipse at 50% 45%,
+      #182b3b 0%,
+      #0a1622 60%,
+      #02060b 100%
+    );
+}
+
+.pathway-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.pathway-title {
+  position: absolute;
+  left: 50%;
+  top: 20px;
+  transform: translateX(-50%);
+  color: #d9e3eb;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.brain {
+  fill: #8f7b84;
+  stroke: #d4c5c9;
+  stroke-width: 3;
+  opacity: .9;
+}
+
+.brain-inner {
+  fill: #c8b5ba;
+  opacity: .12;
+  stroke: #e2d6d9;
+  stroke-width: 1.2;
+}
+
+.cortex-line {
+  fill: none;
+  stroke: #554951;
+  stroke-width: 3;
+  opacity: .7;
+  stroke-linecap: round;
+}
+
+.midline {
+  stroke: #3f363c;
+  stroke-width: 5;
+  opacity: .9;
+}
+
+.white-matter {
+  fill: #cfc5c9;
+  opacity: .4;
+}
+
+.mfb-glow {
+  fill: none;
+  stroke: #ff4055;
+  stroke-width: 12;
+  opacity: .16;
+  filter: url(#glow);
+}
+
+.mfb-core {
+  fill: none;
+  stroke: #ff4055;
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: url(#pathGlow);
+}
+
+.mfb-secondary {
+  fill: none;
+  stroke: #ffb6c1;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  opacity: .9;
+}
+
+.mfb-node {
+  fill: #ff4055;
+  stroke: #fff0f2;
+  stroke-width: 2;
+  filter: url(#nodeGlow);
+}
+
+.node-ring {
+  fill: none;
+  stroke: #ffb6c1;
+  stroke-width: 2;
+  opacity: .55;
+}
+
+.target-region {
+  fill: rgba(255,182,193,.12);
+  stroke: #ffb6c1;
+  stroke-width: 1.5;
+}
+
+.target-label {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  fill: #ffd9de;
+  letter-spacing: .5px;
+  text-anchor: middle;
+}
+
+.callout {
+  fill: none;
+  stroke: #ffb6c1;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+
+.callout-dot {
+  fill: #ffb6c1;
+  stroke: #fff;
+  stroke-width: 1;
+}
+
+.svg-label {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: .8px;
+  fill: #fff;
+}
+
+.svg-sub {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  fill: #ffb6c1;
+}
+
+.orientation-label {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  fill: #71879a;
+  letter-spacing: 1.5px;
+}
+
+.route-label {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  fill: #ffd9de;
+  letter-spacing: 1px;
+}
+
+.view-badge {
+  position: absolute;
+  left: 22px;
+  bottom: 20px;
+  padding: 8px 12px;
+  border: 1px solid #31516d;
+  border-radius: 8px;
+  background: rgba(4,10,17,.88);
+  color: #8195a8;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+}
+
+.legend {
+  position: absolute;
+  right: 22px;
+  bottom: 20px;
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #b5c2ce;
+  font-size: 10px;
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  box-shadow: 0 0 12px currentColor;
+}
+
+.legend-dot.pathway {
+  background: #ff4055;
+  color: #ff4055;
+}
+
+.legend-dot.brain {
+  background: #a8959c;
+  color: #a8959c;
+}
+
+.legend-dot.cross {
+  background: #ffb6c1;
+  color: #ffb6c1;
+}
+
+@keyframes pathwayPulse {
+  0%, 100% {
+    opacity: .82;
+    filter: drop-shadow(0 0 4px rgba(255,64,85,.35));
+  }
+
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 15px rgba(255,64,85,.85));
+  }
+}
+
+.pathway-active {
+  animation: pathwayPulse 1.8s infinite;
+}
+
+.route-animated {
+  stroke-dasharray: 18 12;
+  animation: routeFlow 2s linear infinite;
+}
+
+@keyframes routeFlow {
+  to {
+    stroke-dashoffset: -60;
+  }
+}
+
+.location-caption {
+  text-align: center;
+  color: #9fb0c3;
+  margin-top: 15px;
+  line-height: 1.8;
+}
+
+.source-note {
+  max-width: 900px;
+  margin: 15px auto 0;
+  color: #617487;
+  font-size: 11px;
+  text-align: center;
+}
+
+.stage-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 18px;
+}
+
+.stage {
+  padding: 25px;
+  background: #091522;
+  border: 1px solid #172b3e;
+  border-radius: 18px;
+  transition:
+    transform .2s,
+    border-color .2s,
+    background .2s;
+}
+
+.stage:hover {
+  transform: translateY(-3px);
+  border-color: #4a2027;
+  background: #0c1927;
+}
+
+.stage-number {
+  color: #ff4055;
+  font-size: 11px;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.stage h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.stage p {
+  color: #91a5b8;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.stage .arabic {
+  color: #ffb6c1;
+  font-size: 12px;
+  margin-top: 12px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 20px;
+}
+
+.card {
+  padding: 27px;
+  background: #091522;
+  border: 1px solid #172b3e;
+  border-radius: 18px;
+  transition:
+    transform .2s,
+    border-color .2s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  border-color: #4a2027;
+}
+
+.card h3 {
+  font-size: 18px;
+  margin-bottom: 13px;
+  color: #eef4fa;
+  line-height: 1.45;
+}
+
+.card p {
+  color: #91a5b8;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.clinical-section {
+  margin-top: 65px;
+}
+
+.clinical-box {
+  padding: 30px;
+  background: #091522;
+  border: 1px solid #172b3e;
+  border-left: 3px solid #ff4055;
+  border-radius: 18px;
+}
+
+.clinical-box p {
+  color: #a7b7c6;
+  font-size: 15px;
+  line-height: 1.9;
+  margin-bottom: 18px;
+}
+
+.clinical-box p:last-child {
+  margin-bottom: 0;
+}
+
+.clinical-grid {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 18px;
+  margin-top: 22px;
+}
+
+.clinical-card {
+  padding: 23px;
+  background: #0b1928;
+  border: 1px solid #263951;
+  border-radius: 15px;
+}
+
+.clinical-card h3 {
+  color: #eef4fa;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.clinical-card p {
+  color: #91a5b8;
+  font-size: 13px;
+  line-height: 1.8;
+  margin: 0;
+}
+
+.facts-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 15px;
+}
+
+.fact {
+  padding: 22px;
+  background: #091522;
+  border: 1px solid #172b3e;
+  border-radius: 16px;
+}
+
+.fact span {
+  display: block;
+  color: #ff4055;
+  font-size: 11px;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+.fact strong {
+  display: block;
+  color: #eef4fa;
+  font-size: 14px;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.fact p {
+  color: #8195a8;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.quiz {
+  margin-top: 65px;
+  padding: 30px;
+  background: #091522;
+  border: 1px solid #172b3e;
+  border-radius: 18px;
+}
+
+.quiz h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.quiz-intro {
+  color: #91a5b8;
+  margin-bottom: 25px;
+}
+
+.question {
+  margin-bottom: 30px;
+}
+
+.question:last-child {
+  margin-bottom: 0;
+}
+
+.question p {
+  color: #eef4fa;
+  font-size: 16px;
+  margin-bottom: 12px;
+  font-weight: bold;
+}
+
+.option {
+  display: block;
+  width: 100%;
+  padding: 12px 15px;
+  margin-top: 9px;
+  background: #0b1928;
+  color: #c7d5e2;
+  border: 1px solid #263951;
+  border-radius: 9px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+  transition: .2s;
+}
+
+.option:hover {
+  border-color: #ff4055;
+  background: #111e2c;
+}
+
+.option.correct {
+  border-color: #8fd3a8;
+  background: #14291e;
+  color: #b9f0c9;
+}
+
+.option.wrong {
+  border-color: #d88b9b;
+  background: #2a171d;
+  color: #ffc2cc;
+}
+
+.quiz-result {
+  margin-top: 25px;
+  padding: 15px;
+  border-radius: 10px;
+  background: #0b1928;
+  border: 1px solid #263951;
+  color: #aebdce;
+  display: none;
+}
+
+@media (max-width: 950px) {
+  .stage-grid {
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  .cards {
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  .facts-grid {
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  .pathway-viewer {
+    height: 650px;
+  }
+}
+
+@media (max-width: 800px) {
+  .scene {
+    height: 450px;
+  }
+
+  .viewer-status {
+    display: none;
+  }
+
+  .location {
+    padding: 25px;
+  }
+
+  .pathway-viewer {
+    height: 570px;
+  }
+
+  .clinical-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .stage-grid,
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .facts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  h1 {
+    letter-spacing: -2px;
+  }
+
+  .location {
+    padding: 20px;
+  }
+
+  .pathway-viewer {
+    height: 500px;
+  }
+
+  .pathway-title {
+    font-size: 8px;
+  }
+
+  .svg-label {
+    font-size: 8px;
+  }
+
+  .svg-sub {
+    font-size: 7px;
+  }
+
+  .orientation-label {
+    font-size: 7px;
+  }
+
+  .route-label {
+    font-size: 7px;
+  }
+
+  .legend {
+    display: none;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <a href="./explore.html">← Back to Explore</a>
+</nav>
+
+<main class="container">
+
+<div class="eyebrow">
+  Limbic &amp; Reward Pathways · NeuroAtlas
+</div>
+
+<h1>
+  Medial Forebrain Bundle
+</h1>
+
+<div class="arabic-title">
+  الحزمة الأمامية للدماغ الإنسي
+</div>
+
+<div class="hero">
+
+<p>
+The medial forebrain bundle is a diffuse longitudinal system of
+interconnected fibers that links the basal forebrain, lateral hypothalamic
+region, midbrain, and limbic structures. It participates in reward,
+motivation, arousal, reinforcement learning, and the coordination of
+behavioral and autonomic states.
+</p>
+
+</div>
+
+<div class="actions">
+
+<a class="action-button" href="#location">
+  📍 Show Pathway
+</a>
+
+<a class="action-button" href="#pathway">
+  〰️ Follow the Route
+</a>
+
+<a class="action-button" href="#information">
+  🧠 Learn the Anatomy
+</a>
+
+<a class="action-button" href="#clinical">
+  🩺 Clinical Localization
+</a>
+
+<a class="action-button" href="#quiz">
+  📝 Test Yourself
+</a>
+
+</div>
+
+<div class="viewer">
+
+<div class="viewer-header">
+
+<div class="viewer-title">
+  Human Brain · Interactive 3D Pathway
+</div>
+
+<div class="viewer-status">
+  DRAG TO ROTATE · SCROLL TO ZOOM
+</div>
+
+</div>
+
+<div class="scene">
+
+<div id="loading" class="loading">
+
+<span id="loadText">
+  Loading real brain model...
+</span>
+
+<div class="loading-bar">
+  <div id="loadBar" class="loading-bar-inner"></div>
+</div>
+
+</div>
+
+<canvas id="brainCanvas"></canvas>
+
+<div id="pathwayLabel" class="pathway-label">
+
+<div class="label-box">
+  MEDIAL FOREBRAIN BUNDLE · الحزمة الأمامية للدماغ الإنسي
+</div>
+
+</div>
+
+</div>
+
+<div class="controls">
+
+<button id="showPathway">
+  📍 Show Medial Forebrain Bundle
+</button>
+
+<button id="highlight" class="active">
+  🔴 Highlight Pathway
+</button>
+
+<button id="rotate" class="active">
+  ⟳ Auto Rotate
+</button>
+
+<button id="reset">
+  ↻ Reset View
+</button>
+
+</div>
+
+</div>
+
+<section id="location" class="location">
+
+<div class="section-label">
+  Pathway · المسار
+</div>
+
+<h2>
+  📍 Where Does the Medial Forebrain Bundle Travel?
+</h2>
+
+<p class="location-intro">
+
+The medial forebrain bundle is not a single compact tract but a large,
+diffuse fiber system extending longitudinally through the basal forebrain,
+lateral hypothalamic area, and midbrain. It provides important connections
+between forebrain motivational and limbic structures and ascending
+monoaminergic and other modulatory systems of the brainstem.
+
+<br><br>
+
+الحزمة الأمامية للدماغ الإنسي ليست مساراً واحداً مدمجاً، بل هي نظام واسع
+من الألياف يمتد طولياً عبر الدماغ الأمامي القاعدي والمنطقة الوطائية
+الجانبية والدماغ المتوسط. وتوفر اتصالات مهمة بين البنى الحوفية وبنى
+الدافعية في الدماغ الأمامي والأنظمة المعدلة الصاعدة في جذع الدماغ.
+
+</p>
+
+<div id="pathway" class="pathway-viewer">
+
+<div class="pathway-title">
+  Limbic Pathway · Medial Forebrain Bundle Connections
+</div>
+
+<svg
+  class="pathway-svg"
+  viewBox="0 0 1200 760"
+  xmlns="http://www.w3.org/2000/svg"
+  aria-label="Simplified medial forebrain bundle pathway diagram"
+>
+
+<defs>
+
+<filter
+  id="glow"
+  x="-100%"
+  y="-100%"
+  width="300%"
+  height="300%"
+>
+  <feGaussianBlur stdDeviation="5"/>
+</filter>
+
+<filter
+  id="pathGlow"
+  x="-100%"
+  y="-100%"
+  width="300%"
+  height="300%"
+>
+
+  <feGaussianBlur
+    stdDeviation="3"
+    result="blur"
+  />
+
+  <feMerge>
+    <feMergeNode in="blur"/>
+    <feMergeNode in="SourceGraphic"/>
+  </feMerge>
+
+</filter>
+
+<filter
+  id="nodeGlow"
+  x="-100%"
+  y="-100%"
+  width="300%"
+  height="300%"
+>
+
+  <feGaussianBlur stdDeviation="2"/>
+
+</filter>
+
+<linearGradient
+  id="brainGradient"
+  x1="0"
+  y1="0"
+  x2="1"
+  y2="1"
+>
+
+  <stop
+    offset="0%"
+    stop-color="#d5c1c6"
+  />
+
+  <stop
+    offset="45%"
+    stop-color="#a99199"
+  />
+
+  <stop
+    offset="100%"
+    stop-color="#68565e"
+  />
+
+</linearGradient>
+
+<linearGradient
+  id="stemGradient"
+  x1="0"
+  y1="0"
+  x2="1"
+  y2="1"
+>
+
+  <stop
+    offset="0%"
+    stop-color="#a38d95"
+  />
+
+  <stop
+    offset="100%"
+    stop-color="#66565e"
+  />
+
+</linearGradient>
+
+</defs>
+
+<!-- BRAIN -->
+
+<path
+  class="brain"
+  fill="url(#brainGradient)"
+  d="
+    M600 70
+    C525 44 430 48 350 72
+    C265 98 196 145 156 205
+    C121 258 116 315 132 365
+    C147 414 183 454 231 479
+    C290 510 366 520 439 508
+    C500 498 548 469 600 430
+    C652 469 700 498 761 508
+    C834 520 910 510 969 479
+    C1017 454 1053 414 1068 365
+    C1084 315 1079 258 1044 205
+    C1004 145 935 98 850 72
+    C770 48 675 44 600 70
+    Z
+  "
+/>
+
+<path
+  class="brain-inner"
+  d="
+    M600 103
+    C531 77 447 82 378 103
+    C304 125 245 162 207 210
+    C176 250 168 294 179 332
+    C191 371 220 403 260 422
+    C311 446 375 452 438 441
+    C499 430 551 402 600 366
+    C649 402 701 430 762 441
+    C825 452 889 446 940 422
+    C980 403 1009 371 1021 332
+    C1032 294 1024 250 993 210
+    C955 162 896 125 822 103
+    C753 82 669 77 600 103
+    Z
+  "
+/>
+
+<!-- CORTEX -->
+
+<path
+  class="cortex-line"
+  d="M177 190 C240 145 316 137 383 160"
+/>
+
+<path
+  class="cortex-line"
+  d="M150 250 C221 208 288 207 350 232"
+/>
+
+<path
+  class="cortex-line"
+  d="M146 316 C211 280 275 281 335 301"
+/>
+
+<path
+  class="cortex-line"
+  d="M173 380 C233 351 292 352 348 370"
+/>
+
+<path
+  class="cortex-line"
+  d="M1023 190 C960 145 884 137 817 160"
+/>
+
+<path
+  class="cortex-line"
+  d="M1050 250 C979 208 912 207 850 232"
+/>
+
+<path
+  class="cortex-line"
+  d="M1054 316 C989 280 925 281 865 301"
+/>
+
+<path
+  class="cortex-line"
+  d="M1027 380 C967 351 908 352 852 370"
+/>
+
+<path
+  class="midline"
+  d="M600 95 L600 430"
+/>
+
+<path
+  class="white-matter"
+  d="
+    M350 265
+    C420 215 520 214 600 267
+    C680 214 780 215 850 265
+    C811 324 759 350 699 347
+    C656 345 625 327 600 306
+    C575 327 544 345 501 347
+    C441 350 389 324 350 265
+    Z
+  "
+/>
+
+<!-- BRAINSTEM -->
+
+<path
+  class="brainstem"
+  fill="url(#stemGradient)"
+  d="
+    M548 390
+    C530 420 527 454 538 480
+    C547 501 561 517 575 527
+    L625 527
+    C639 517 653 501 662 480
+    C673 454 670 420 652 390
+    Z
+  "
+/>
+
+<path
+  class="peduncle"
+  fill="#71616a"
+  stroke="#bdaeb3"
+  stroke-width="1.5"
+  d="
+    M548 392
+    C566 399 583 410 600 431
+    C617 410 634 399 652 392
+    L648 437
+    C631 447 615 459 600 480
+    C585 459 569 447 552 437
+    Z
+  "
+/>
+
+<path
+  class="pons"
+  fill="#7e6e76"
+  stroke="#c4b4b9"
+  stroke-width="2"
+  d="
+    M538 478
+    C527 491 528 514 541 527
+    C556 542 576 548 600 548
+    C624 548 644 542 659 527
+    C672 514 673 491 662 478
+    C640 489 620 493 600 493
+    C580 493 560 489 538 478
+    Z
+  "
+/>
+
+<path
+  class="medulla"
+  fill="#75656d"
+  stroke="#bdadb3"
+  stroke-width="2"
+  d="
+    M557 529
+    C551 551 552 581 563 606
+    C572 626 586 641 600 649
+    C614 641 628 626 637 606
+    C648 581 649 551 643 529
+    C630 540 615 545 600 545
+    C585 545 570 540 557 529
+    Z
+  "
+/>
+
+<!-- MFB MAIN LONGITUDINAL ROUTE -->
+
+<path
+  class="mfb-glow pathway-active"
+  d="
+    M480 190
+    C520 220 545 250 558 285
+    C570 320 575 355 582 390
+    C590 430 590 465 600 505
+  "
+/>
+
+<path
+  class="mfb-core pathway-active route-animated"
+  d="
+    M480 190
+    C520 220 545 250 558 285
+    C570 320 575 355 582 390
+    C590 430 590 465 600 505
+  "
+/>
+
+<!-- FOREBRAIN LIMBIC CONNECTION -->
+
+<path
+  class="mfb-secondary route-animated"
+  d="
+    M430 220
+    C470 235 500 255 530 285
+    C550 305 555 325 558 345
+  "
+/>
+
+<!-- HYPOTHALAMIC CONNECTION -->
+
+<path
+  class="mfb-secondary route-animated"
+  d="
+    M558 345
+    C520 370 485 390 455 420
+    C430 445 420 475 430 505
+  "
+/>
+
+<!-- MIDBRAIN REWARD CONNECTION -->
+
+<path
+  class="mfb-core pathway-active route-animated"
+  d="
+    M600 505
+    C620 530 650 548 680 555
+    C720 565 760 560 800 540
+  "
+/>
+
+<!-- PREFRONTAL / BASAL FOREBRAIN CONNECTION -->
+
+<path
+  class="mfb-secondary route-animated"
+  d="
+    M480 190
+    C430 165 370 150 315 155
+    C285 158 260 170 235 190
+  "
+/>
+
+<!-- HIPPOCAMPAL / LIMBIC CONNECTION -->
+
+<path
+  class="mfb-secondary route-animated"
+  d="
+    M530 285
+    C485 300 440 315 395 330
+    C360 342 330 350 295 350
+  "
+/>
+
+<!-- TARGET REGIONS -->
+
+<rect
+  class="target-region"
+  x="190"
+  y="165"
+  width="95"
+  height="42"
+  rx="10"
+/>
+
+<text
+  class="target-label"
+  x="237"
+  y="191"
+>
+  BASAL FOREBRAIN
+</text>
+
+<rect
+  class="target-region"
+  x="395"
+  y="490"
+  width="90"
+  height="42"
+  rx="10"
+/>
+
+<text
+  class="target-label"
+  x="440"
+  y="516"
+>
+  HYPOTHALAMUS
+</text>
+
+<rect
+  class="target-region"
+  x="755"
+  y="520"
+  width="95"
+  height="42"
+  rx="10"
+/>
+
+<text
+  class="target-label"
+  x="802"
+  y="546"
+>
+  VTA / MIDBRAIN
+</text>
+
+<rect
+  class="target-region"
+  x="250"
+  y="330"
+  width="90"
+  height="42"
+  rx="10"
+/>
+
+<text
+  class="target-label"
+  x="295"
+  y="356"
+>
+  HIPPOCAMPUS
+</text>
+
+<rect
+  class="target-region"
+  x="185"
+  y="150"
+  width="105"
+  height="42"
+  rx="10"
+/>
+
+<!-- NODES -->
+
+<circle
+  class="node-ring"
+  cx="480"
+  cy="190"
+  r="16"
+/>
+
+<circle
+  class="mfb-node"
+  cx="480"
+  cy="190"
+  r="7"
+/>
+
+<circle
+  class="node-ring"
+  cx="558"
+  cy="345"
+  r="15"
+/>
+
+<circle
+  class="mfb-node"
+  cx="558"
+  cy="345"
+  r="7"
+/>
+
+<circle
+  class="node-ring"
+  cx="600"
+  cy="505"
+  r="15"
+/>
+
+<circle
+  class="mfb-node"
+  cx="600"
+  cy="505"
+  r="7"
+/>
+
+<circle
+  class="node-ring"
+  cx="802"
+  cy="540"
+  r="12"
+/>
+
+<circle
+  class="mfb-node"
+  cx="802"
+  cy="540"
+  r="5"
+/>
+
+<circle
+  class="node-ring"
+  cx="440"
+  cy="510"
+  r="12"
+/>
+
+<circle
+  class="mfb-node"
+  cx="440"
+  cy="510"
+  r="5"
+/>
+
+<circle
+  class="node-ring"
+  cx="295"
+  cy="350"
+  r="12"
+/>
+
+<circle
+  class="mfb-node"
+  cx="295"
+  cy="350"
+  r="5"
+/>
+
+<!-- ARROWS -->
+
+<path
+  class="pathway-arrow"
+  fill="#ff4055"
+  d="M473 200 L480 215 L487 200 Z"
+/>
+
+<path
+  class="pathway-arrow"
+  fill="#ff4055"
+  d="M551 355 L558 370 L565 355 Z"
+/>
+
+<path
+  class="pathway-arrow"
+  fill="#ff4055"
+  d="M593 515 L600 530 L607 515 Z"
+/>
+
+<path
+  class="pathway-arrow"
+  fill="#ff4055"
+  d="M790 535 L805 540 L790 545 Z"
+/>
+
+<path
+  class="pathway-arrow"
+  fill="#ff4055"
+  d="M440 495 L445 510 L455 495 Z"
+/>
+
+<path
+  class="pathway-arrow"
+  fill="#ff4055"
+  d="M310 345 L295 350 L310 355 Z"
+/>
+
+<!-- LEFT CALLOUTS -->
+
+<path
+  class="callout"
+  d="M480 190 L350 170 L85 170"
+/>
+
+<circle
+  class="callout-dot"
+  cx="480"
+  cy="190"
+  r="4"
+/>
+
+<text
+  class="svg-label"
+  x="85"
+  y="163"
+>
+  BASAL FOREBRAIN
+</text>
+
+<text
+  class="svg-sub"
+  x="85"
+  y="181"
+>
+  الدماغ الأمامي القاعدي
+</text>
+
+<path
+  class="callout"
+  d="M295 350 L180 320 L85 320"
+/>
+
+<circle
+  class="callout-dot"
+  cx="295"
+  cy="350"
+  r="4"
+/>
+
+<text
+  class="svg-label"
+  x="85"
+  y="313"
+>
+  HIPPOCAMPAL / LIMBIC
+</text>
+
+<text
+  class="svg-sub"
+  x="85"
+  y="331"
+>
+  الاتصالات الحوفية والحصينية
+</text>
+
+<path
+  class="callout"
+  d="M440 510 L330 550 L85 550"
+/>
+
+<circle
+  class="callout-dot"
+  cx="440"
+  cy="510"
+  r="4"
+/>
+
+<text
+  class="svg-label"
+  x="85"
+  y="543"
+>
+  LATERAL HYPOTHALAMUS
+</text>
+
+<text
+  class="svg-sub"
+  x="85"
+  y="561"
+>
+  الوطاء الجانبي
+</text>
+
+<!-- RIGHT CALLOUTS -->
+
+<path
+  class="callout"
+  d="M558 345 L850 300 L1115 300"
+/>
+
+<circle
+  class="callout-dot"
+  cx="558"
+  cy="345"
+  r="4"
+/>
+
+<text
+  class="svg-label"
+  x="870"
+  y="293"
+>
+  LONGITUDINAL MFB CORE
+</text>
+
+<text
+  class="svg-sub"
+  x="870"
+  y="311"
+>
+  الجزء الطولي الرئيسي للحزمة
+</text>
+
+<path
+  class="callout"
+  d="M600 505 L850 475 L1115 475"
+/>
+
+<circle
+  class="callout-dot"
+  cx="600"
+  cy="505"
+  r="4"
+/>
+
+<text
+  class="svg-label"
+  x="870"
+  y="468"
+>
+  MIDBRAIN / REWARD SYSTEM
+</text>
+
+<text
+  class="svg-sub"
+  x="870"
+  y="486"
+>
+  الدماغ المتوسط ونظام المكافأة
+</text>
+
+<path
+  class="callout"
+  d="M802 540 L900 575 L1115 575"
+/>
+
+<circle
+  class="callout-dot"
+  cx="802"
+  cy="540"
+  r="4"
+/>
+
+<text
+  class="svg-label"
+  x="870"
+  y="568"
+>
+  VENTRAL TEGMENTAL AREA
+</text>
+
+<text
+  class="svg-sub"
+  x="870"
+  y="586"
+>
+  المنطقة السقيفية البطنية
+</text>
+
+<!-- ROUTE LABELS -->
+
+<text
+  class="route-label"
+  x="410"
+  y="220"
+>
+  FOREBRAIN INPUT
+</text>
+
+<text
+  class="route-label"
+  x="590"
+  y="410"
+>
+  LONGITUDINAL FIBER SYSTEM
+</text>
+
+<text
+  class="route-label"
+  x="660"
+  y="535"
+>
+  REWARD / MOTIVATION
+</text>
+
+<!-- ORIENTATION -->
+
+<text
+  class="orientation-label"
+  x="515"
+  y="86"
+>
+  ANTERIOR FOREBRAIN
+</text>
+
+<text
+  class="orientation-label"
+  x="515"
+  y="748"
+>
+  POSTERIOR MIDBRAIN
+</text>
+
+</svg>
+
+<div class="view-badge">
+  LIMBIC / REWARD CIRCUIT
+</div>
+
+<div class="legend">
+
+<div class="legend-item">
+  <span class="legend-dot pathway"></span>
+  MFB Pathway
+</div>
+
+<div class="legend-item">
+  <span class="legend-dot brain"></span>
+  Neural Structures
+</div>
+
+<div class="legend-item">
+  <span class="legend-dot cross"></span>
+  Target Regions
+</div>
+
+</div>
+
+</div>
+
+<p class="location-caption">
+  🔴 The highlighted routes represent the major longitudinal and
+  reciprocal connections associated with the medial forebrain bundle,
+  linking forebrain motivational systems with hypothalamic and midbrain
+  circuits.
+</p>
+
+<p class="source-note">
+  Simplified educational pathway illustration. The medial forebrain bundle
+  is a diffuse fiber system rather than a single anatomically discrete
+  tract; proportions and boundaries are intentionally simplified.
+</p>
+
+</section>
+
+<!-- PATHWAY STAGES -->
+
+<section class="section">
+
+<div class="section-label">
+  Route · المسار التشريحي
+</div>
+
+<h2>
+  Follow the Medial Forebrain Bundle
+</h2>
+
+<p class="section-intro">
+
+The medial forebrain bundle forms an extensive longitudinal communication
+system between limbic and basal forebrain structures, the hypothalamus,
+and the midbrain. Its fibers participate in motivation, reinforcement,
+arousal, and the integration of behavioral and autonomic states.
+
+<br><br>
+
+تشكل الحزمة الأمامية للدماغ الإنسي نظام اتصال طولي واسع بين البنى
+الحوفية والدماغ الأمامي القاعدي والوطاء والدماغ المتوسط. وتشارك أليافها
+في الدافعية والتعزيز واليقظة ودمج الحالات السلوكية والمستقلة.
+
+</p>
+
+<div class="stage-grid">
+
+<div class="stage">
+
+<div class="stage-number">
+  01 · BASAL FOREBRAIN
+</div>
+
+<h3>
+  Forebrain Limbic Connections
+</h3>
+
+<p>
+The MFB begins as a diffuse system within the basal forebrain and carries
+reciprocal fibers between limbic, septal, preoptic, and hypothalamic
+regions.
+</p>
+
+<div class="arabic">
+  اتصالات الدماغ الأمامي الحوفية
+</div>
+
+</div>
+
+<div class="stage">
+
+<div class="stage-number">
+  02 · LATERAL HYPOTHALAMUS
+</div>
+
+<h3>
+  Hypothalamic Passage
+</h3>
+
+<p>
+A prominent portion of the bundle travels through the lateral hypothalamic
+region, where it interfaces with systems controlling arousal, feeding,
+autonomic activity, and motivated behavior.
+</p>
+
+<div class="arabic">
+  المرور عبر الوطاء الجانبي
+</div>
+
+</div>
+
+<div class="stage">
+
+<div class="stage-number">
+  03 · MIDBRAIN
+</div>
+
+<h3>
+  Ascending &amp; Descending Fibers
+</h3>
+
+<p>
+The MFB continues into the midbrain and contains bidirectional pathways
+connecting forebrain structures with brainstem modulatory systems.
+</p>
+
+<div class="arabic">
+  الألياف الصاعدة والنازلة في الدماغ المتوسط
+</div>
+
+</div>
+
+<div class="stage">
+
+<div class="stage-number">
+  04 · VTA CONNECTIONS
+</div>
+
+<h3>
+  Dopaminergic Reward Circuit
+</h3>
+
+<p>
+Connections involving the ventral tegmental area place the MFB within
+important reward and reinforcement networks, including pathways involving
+dopamine.
+</p>
+
+<div class="arabic">
+  اتصالات المنطقة السقيفية ونظام المكافأة
+</div>
+
+</div>
+
+<div class="stage">
+
+<div class="stage-number">
+  05 · LIMBIC SYSTEM
+</div>
+
+<h3>
+  Motivation &amp; Emotion
+</h3>
+
+<p>
+Reciprocal interactions with limbic structures allow motivational and
+emotional information to influence behavioral selection and reinforcement.
+</p>
+
+<div class="arabic">
+  الدافعية والعاطفة
+</div>
+
+</div>
+
+<div class="stage">
+
+<div class="stage-number">
+  06 · PREFRONTAL SYSTEMS
+</div>
+
+<h3>
+  Cognitive-Motivational Integration
+</h3>
+
+<p>
+Forebrain connections allow motivational signals to interact with
+attention, decision-making, planning, and goal-directed behavior.
+</p>
+
+<div class="arabic">
+  التكامل المعرفي والدافعي
+</div>
+
+</div>
+
+<div class="stage">
+
+<div class="stage-number">
+  07 · HYPOTHALAMIC OUTPUT
+</div>
+
+<h3>
+  Autonomic &amp; Endocrine Coordination
+</h3>
+
+<p>
+Connections with hypothalamic systems allow motivational states to
+interact with endocrine and autonomic responses.
+</p>
+
+<div class="arabic">
+  التنسيق المستقل والغدي
+</div>
+
+</div>
+
+<div class="stage">
+
+<div class="stage-number">
+  08 · BRAINSTEM MODULATION
+</div>
+
+<h3>
+  Arousal Systems
+</h3>
+
+<p>
+The MFB interfaces with ascending brainstem systems involved in
+wakefulness, alertness, and behavioral activation.
+</p>
+
+<div class="arabic">
+  أنظمة اليقظة والتنشيط في جذع الدماغ
+</div>
+
+</div>
+
+<div class="stage">
+
+<div class="stage-number">
+  09 · BEHAVIORAL OUTPUT
+</div>
+
+<h3>
+  Goal-Directed Behavior
+</h3>
+
+<p>
+Through its distributed connections, the MFB contributes to coordinated
+motivational behavior, reinforcement learning, and behavioral activation.
+</p>
+
+<div class="arabic">
+  السلوك الموجه نحو الهدف
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- INFORMATION -->
+
+<section id="information" class="section">
+
+<div class="section-label">
+  Anatomy · التشريح
+</div>
+
+<h2>
+  Understanding the Medial Forebrain Bundle
+</h2>
+
+<p class="section-intro">
+
+The medial forebrain bundle is best understood as a diffuse network of
+longitudinal fibers rather than a single compact tract. It connects
+multiple forebrain, hypothalamic, and midbrain systems and contains
+different populations of ascending and descending axons.
+
+<br><br>
+
+من الأفضل فهم الحزمة الأمامية للدماغ الإنسي باعتبارها شبكة منتشرة من
+الألياف الطولية وليست مساراً واحداً مدمجاً. فهي تربط عدة أنظمة في
+الدماغ الأمامي والوطاء والدماغ المتوسط، وتحتوي على مجموعات مختلفة من
+المحاور العصبية الصاعدة والنازلة.
+
+</p>
+
+<div class="cards">
+
+<div class="card">
+
+<h3>
+  Reward &amp; Reinforcement · المكافأة والتعزيز
+</h3>
+
+<p>
+The MFB is closely associated with neural circuits involved in reward,
+reinforcement, and motivated behavior, particularly through its
+relationships with midbrain dopaminergic systems.
+<br><br>
+ترتبط الحزمة الأمامية للدماغ الإنسي ارتباطاً وثيقاً بدوائر المكافأة
+والتعزيز والسلوك الدافعي، وخاصة من خلال علاقاتها بالأنظمة الدوبامينية
+في الدماغ المتوسط.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+  Motivation · الدافعية
+</h3>
+
+<p>
+Distributed MFB connections help coordinate neural signals that influence
+goal-directed behavior and motivational states.
+<br><br>
+تساعد اتصالات الحزمة المنتشرة على تنسيق الإشارات العصبية التي تؤثر في
+السلوك الموجه نحو الهدف والحالات الدافعية.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+  Arousal · اليقظة
+</h3>
+
+<p>
+The bundle interfaces with ascending systems that contribute to
+wakefulness, alertness, and behavioral activation.
+<br><br>
+تتفاعل الحزمة مع الأنظمة الصاعدة التي تساهم في اليقظة والانتباه
+والتنشيط السلوكي.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+  Hypothalamic Integration · التكامل الوطائي
+</h3>
+
+<p>
+Connections through the lateral hypothalamic region link motivational
+states with autonomic and endocrine regulation.
+<br><br>
+تربط الاتصالات عبر المنطقة الوطائية الجانبية الحالات الدافعية
+بالتنظيم المستقل والغدي.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+  Dopamine Systems · أنظمة الدوبامين
+</h3>
+
+<p>
+MFB-associated circuits interact with dopaminergic neurons in the
+ventral tegmental area and other modulatory systems.
+<br><br>
+تتفاعل الدوائر المرتبطة بالحزمة مع الخلايا العصبية الدوبامينية في
+المنطقة السقيفية البطنية وأنظمة التعديل العصبي الأخرى.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+  Limbic Integration · التكامل الحوفي
+</h3>
+
+<p>
+The MFB connects motivational systems with limbic structures involved in
+emotion, memory, and behavioral relevance.
+<br><br>
+تربط الحزمة أنظمة الدافعية بالبنى الحوفية المشاركة في العاطفة والذاكرة
+والأهمية السلوكية.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+  Bidirectional Fibers · الألياف ثنائية الاتجاه
+</h3>
+
+<p>
+The MFB contains both ascending and descending components, allowing
+communication between forebrain and midbrain systems in both directions.
+<br><br>
+تحتوي الحزمة على مكونات صاعدة ونازلة، مما يسمح بالاتصال ثنائي الاتجاه
+بين أنظمة الدماغ الأمامي والدماغ المتوسط.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+  Behavioral Activation · التنشيط السلوكي
+</h3>
+
+<p>
+MFB-related circuits contribute to behavioral activation and the selection
+of actions associated with motivational significance.
+<br><br>
+تساهم الدوائر المرتبطة بالحزمة في التنشيط السلوكي واختيار الأفعال ذات
+الأهمية الدافعية.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+  Neuroanatomical Organization · التنظيم التشريحي العصبي
+</h3>
+
+<p>
+The MFB is anatomically heterogeneous and contains multiple fiber
+populations rather than representing one uniform axonal tract.
+<br><br>
+الحزمة غير متجانسة تشريحياً وتحتوي على مجموعات متعددة من الألياف بدلاً
+من كونها مساراً محورياً موحداً.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+  Lateral Hypothalamic Region · المنطقة الوطائية الجانبية
+</h3>
+
+<p>
+A major portion of the MFB passes through the lateral hypothalamic region,
+where it interacts with circuits involved in feeding, arousal, and
+motivation.
+<br><br>
+يمر جزء مهم من الحزمة عبر المنطقة الوطائية الجانبية التي تتفاعل مع
+دوائر التغذية واليقظة والدافعية.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+  Ventral Tegmental Connections · اتصالات المنطقة السقيفية
+</h3>
+
+<p>
+Connections between the MFB and ventral tegmental dopaminergic systems
+are important for understanding reward-related neural circuitry.
+<br><br>
+تعد الاتصالات بين الحزمة والأنظمة الدوبامينية في المنطقة السقيفية مهمة
+لفهم دوائر المكافأة العصبية.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+  Clinical Relevance · الأهمية السريرية
+</h3>
+
+<p>
+Because the MFB participates in distributed motivational and reward
+networks, altered function can affect systems involved in motivation,
+arousal, and reinforcement.
+<br><br>
+نظراً لمشاركة الحزمة في شبكات الدافعية والمكافأة، يمكن أن يؤثر تغير
+وظيفتها في الأنظمة المرتبطة بالدافعية واليقظة والتعزيز.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- CONNECTIONS -->
+
+<section class="section">
+
+<div class="section-label">
+  Connections · الاتصالات
+</div>
+
+<h2>
+  How the Medial Forebrain Bundle Connects the Nervous System
+</h2>
+
+<p class="section-intro">
+
+The MFB provides a distributed communication framework linking limbic,
+hypothalamic, basal forebrain, and midbrain systems. These connections
+allow motivational, emotional, autonomic, and arousal-related information
+to interact.
+
+<br><br>
+
+توفر الحزمة إطاراً واسعاً للاتصال بين الأنظمة الحوفية والوطائية والدماغ
+الأمامي القاعدي والدماغ المتوسط، مما يسمح بتفاعل المعلومات المرتبطة
+بالدافعية والعاطفة والاستجابات المستقلة واليقظة.
+
+</p>
+
+<div class="cards">
+
+<div class="card">
+
+<h3>
+  Basal Forebrain ↔ Midbrain
+</h3>
+
+<p>
+Longitudinal fibers connect forebrain motivational systems with midbrain
+modulatory networks.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+  Hypothalamus ↔ Reward Systems
+</h3>
+
+<p>
+Connections through the lateral hypothalamic region integrate motivational,
+autonomic, and reward-related signals.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+  Limbic ↔ Motivational Networks
+</h3>
+
+<p>
+MFB-associated pathways allow emotional and contextual information to
+interact with systems controlling motivated behavior.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- CLINICAL -->
+
+<section id="clinical" class="clinical-section">
+
+<div class="section-label">
+  Clinical Localization · التحديد السريري
+</div>
+
+<h2>
+  Why the Medial Forebrain Bundle Matters Clinically
+</h2>
+
+<div class="clinical-box">
+
+<p>
+The medial forebrain bundle is a distributed pathway system rather than
+a single compact tract, so its clinical significance is best understood
+through the larger motivational, reward, arousal, and hypothalamic
+networks with which it interacts.
+</p>
+
+<p dir="rtl">
+الحزمة الأمامية للدماغ الإنسي هي نظام مسارات منتشر وليست مساراً واحداً
+مدمجاً، ولذلك من الأفضل فهم أهميتها السريرية من خلال شبكات الدافعية
+والمكافأة واليقظة والوطاء التي تتفاعل معها.
+</p>
+
+<div class="clinical-grid">
+
+<div class="clinical-card">
+
+<h3>
+  Reward Circuitry
+</h3>
+
+<p>
+MFB-associated connections with dopaminergic midbrain systems are
+important in understanding neural mechanisms of reinforcement and
+motivated behavior.
+</p>
+
+</div>
+
+<div class="clinical-card">
+
+<h3>
+  Addiction Research
+</h3>
+
+<p>
+Reward-related MFB circuitry has been important in experimental models
+used to investigate reinforcement, incentive motivation, and addictive
+behavior.
+</p>
+
+</div>
+
+<div class="clinical-card">
+
+<h3>
+  Arousal Disorders
+</h3>
+
+<p>
+Because the MFB interacts with ascending arousal systems, disruption of
+related networks may influence alertness and behavioral activation.
+</p>
+
+</div>
+
+<div class="clinical-card">
+
+<h3>
+  Hypothalamic Dysfunction
+</h3>
+
+<p>
+Its relationship with hypothalamic circuits makes the MFB relevant to
+the study of interactions between motivation, autonomic regulation, and
+homeostatic behavior.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- QUICK FACTS -->
+
+<section class="section">
+
+<div class="section-label">
+  Quick Facts · معلومات سريعة
+</div>
+
+<h2>
+  Medial Forebrain Bundle at a Glance
+</h2>
+
+<div class="facts-grid">
+
+<div class="fact">
+
+<span>01</span>
+
+<strong>
+  Organization · التنظيم
+</strong>
+
+<p>
+Diffuse longitudinal fiber system rather than a single compact tract
+</p>
+
+</div>
+
+<div class="fact">
+
+<span>02</span>
+
+<strong>
+  Major Region · المنطقة الرئيسية
+</strong>
+
+<p>
+Basal forebrain and lateral hypothalamic region
+</p>
+
+</div>
+
+<div class="fact">
+
+<span>03</span>
+
+<strong>
+  Midbrain Link · اتصال الدماغ المتوسط
+</strong>
+
+<p>
+Strong relationships with midbrain motivational and modulatory systems
+</p>
+
+</div>
+
+<div class="fact">
+
+<span>04</span>
+
+<strong>
+  Reward · المكافأة
+</strong>
+
+<p>
+Important in reward, reinforcement, and motivated behavior
+</p>
+
+</div>
+
+<div class="fact">
+
+<span>05</span>
+
+<strong>
+  Direction · الاتجاه
+</strong>
+
+<p>
+Contains both ascending and descending fiber populations
+</p>
+
+</div>
+
+<div class="fact">
+
+<span>06</span>
+
+<strong>
+  Hypothalamus · الوطاء
+</strong>
+
+<p>
+Links motivational circuits with autonomic and endocrine systems
+</p>
+
+</div>
+
+<div class="fact">
+
+<span>07</span>
+
+<strong>
+  Dopamine · الدوبامين
+</strong>
+
+<p>
+Interacts with dopaminergic systems including the ventral tegmental area
+</p>
+
+</div>
+
+<div class="fact">
+
+<span>08</span>
+
+<strong>
+  Main Role · الدور الرئيسي
+</strong>
+
+<p>
+Motivation, reward, arousal, reinforcement, and behavioral activation
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- QUIZ -->
+
+<div id="quiz" class="quiz">
+
+<div class="section-label">
+  Mini Test
+</div>
+
+<h2>
+  🧠 Test Yourself
+</h2>
+
+<p class="quiz-intro">
+Choose the best answer for each question.
+</p>
+
+<div class="question">
+
+<p>
+1. What is the medial forebrain bundle best described as?
+</p>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)"
+>
+  A. A single compact motor tract
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,true)"
+>
+  B. A diffuse longitudinal fiber system
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)"
+>
+  C. A cranial nerve nucleus
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)"
+>
+  D. A cerebellar lobe
+</button>
+
+</div>
+
+<div class="question">
+
+<p>
+2. Which region is a major part of the MFB's course?
+</p>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)"
+>
+  A. Occipital pole
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,true)"
+>
+  B. Lateral hypothalamic region
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)"
+>
+  C. Primary visual cortex
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)"
+>
+  D. Cerebellar vermis
+</button>
+
+</div>
+
+<div class="question">
+
+<p>
+3. Which function is strongly associated with MFB-related circuitry?
+</p>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,true)"
+>
+  A. Reward and motivation
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)"
+>
+  B. Fine finger movement only
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)"
+>
+  C. Primary auditory transduction
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)"
+>
+  D. Spinal reflex generation
+</button>
+
+</div>
+
+<div class="question">
+
+<p>
+4. Which midbrain structure is closely associated with reward circuitry involving the MFB?
+</p>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,true)"
+>
+  A. Ventral tegmental area
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)"
+>
+  B. Inferior olive
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)"
+>
+  C. Red nucleus only
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)"
+>
+  D. Medial geniculate nucleus
+</button>
+
+</div>
+
+<div class="question">
+
+<p>
+5. Why is the MFB not usually considered a single simple tract?
+</p>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,true)"
+>
+  A. It contains multiple distributed fiber populations
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)"
+>
+  B. It contains only one neuron
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)"
+>
+  C. It is located entirely outside the brain
+</button>
+
+<button
+  class="option"
+  onclick="checkAnswer(this,false)"
+>
+  D. It is composed only of sensory receptors
+</button>
+
+</div>
+
+<div id="quizResult" class="quiz-result"></div>
+
+</div>
+
+</main>
+
+<!-- THREE.JS -->
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+
+import * as THREE from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
+
+const canvas = document.getElementById("brainCanvas");
+const loading = document.getElementById("loading");
+const loadText = document.getElementById("loadText");
+const loadBar = document.getElementById("loadBar");
+const pathwayLabel = document.getElementById("pathwayLabel");
+
+const scene = new THREE.Scene();
+
+const camera = new THREE.PerspectiveCamera(
+  30,
+  1,
+  .01,
+  100
+);
+
+camera.position.set(3.2, .3, 8.5);
+
+const renderer = new THREE.WebGLRenderer({
+  canvas,
+  antialias: true,
+  alpha: true
+});
+
+renderer.setPixelRatio(
+  Math.min(window.devicePixelRatio || 1, 2)
+);
+
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = .75;
+
+const controls = new OrbitControls(
+  camera,
+  canvas
+);
+
+controls.enableRotate = true;
+controls.rotateSpeed = .6;
+controls.enableDamping = true;
+controls.dampingFactor = .05;
+controls.enableZoom = true;
+controls.zoomSpeed = .6;
+controls.enablePan = false;
+controls.autoRotate = true;
+controls.autoRotateSpeed = .2;
+controls.target.set(0, -.3, 0);
+controls.minDistance = 3.5;
+controls.maxDistance = 16;
+
+/* Lighting */
+
+scene.add(
+  new THREE.AmbientLight(
+    0xffffff,
+    .55
+  )
+);
+
+scene.add(
+  new THREE.HemisphereLight(
+    0xffdce6,
+    0x081018,
+    .75
+  )
+);
+
+const keyLight =
+  new THREE.DirectionalLight(
+    0xfff5f0,
+    1.4
+  );
+
+keyLight.position.set(
+  6,
+  10,
+  8
+);
+
+scene.add(keyLight);
+
+const fillLight =
+  new THREE.DirectionalLight(
+    0x8ca9bd,
+    .4
+  );
+
+fillLight.position.set(
+  -7,
+  2,
+  6
+);
+
+scene.add(fillLight);
+
+/* Brain */
+
+const brainGroup =
+  new THREE.Group();
+
+scene.add(brainGroup);
+
+let brainMeshes = [];
+let pathwayMeshes = [];
+
+let pathwayVisible = true;
+let highlighted = true;
+let locationShown = false;
+
+/* Materials */
+
+const brainOpaqueMaterial =
+  new THREE.MeshPhysicalMaterial({
+    color: 0xf1c5d0,
+    roughness: .62,
+    metalness: 0,
+    clearcoat: .12,
+    clearcoatRoughness: .5,
+    side: THREE.DoubleSide,
+    transparent: false,
+    opacity: 1
+  });
+
+const brainTransparentMaterial =
+  new THREE.MeshPhysicalMaterial({
+    color: 0xf1c5d0,
+    roughness: .55,
+    metalness: 0,
+    clearcoat: .1,
+    clearcoatRoughness: .5,
+    side: THREE.DoubleSide,
+    transparent: true,
+    opacity: .14,
+    depthWrite: false
+  });
+
+const pathwayMaterial =
+  new THREE.MeshPhysicalMaterial({
+    color: 0xff2948,
+    roughness: .3,
+    metalness: 0,
+    clearcoat: .6,
+    clearcoatRoughness: .12,
+    emissive: 0x5c0613,
+    emissiveIntensity: 1.1,
+    side: THREE.DoubleSide
+  });
+
+const pathwayNormalMaterial =
+  new THREE.MeshPhysicalMaterial({
+    color: 0xf1c5d0,
+    roughness: .62,
+    metalness: 0,
+    clearcoat: .12,
+    clearcoatRoughness: .5,
+    side: THREE.DoubleSide
+  });
+
+/* Name handling */
+
+function normalizeName(name) {
+  return String(name || "")
+    .toLowerCase()
+    .replace(/[\s_\-.]+/g, "");
+}
+
+function getMeshName(mesh) {
+  const userName =
+    mesh.userData &&
+    mesh.userData.name
+      ? mesh.userData.name
+      : "";
+
+  return `${mesh.name} ${userName}`;
+}
+
+function isPathwayMesh(mesh) {
+  const name =
+    normalizeName(
+      getMeshName(mesh)
+    );
+
+  const pathwayNames = [
+    "forebrain",
+    "medialforebrain",
+    "mfb",
+    "hypothalamus",
+    "lateralhypothalamus",
+    "midbrain",
+    "ventraltegmental",
+    "vta",
+    "limbic",
+    "reward",
+    "septal",
+    "basalforebrain",
+    "nucleusaccumbens",
+    "stria"
+  ];
+
+  return pathwayNames.some(
+    item => name.includes(item)
+  );
+}
+
+/* Load brain */
+
+function loadRealBrain() {
+
+  const loader =
+    new GLTFLoader();
+
+  const dracoLoader =
+    new DRACOLoader();
+
+  dracoLoader.setDecoderPath(
+    "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/"
+  );
+
+  loader.setDRACOLoader(
+    dracoLoader
+  );
+
+  const urls = [
+    "https://cdn.jsdelivr.net/gh/itayinbarr/brainproject@main/brain-atlas/models/brain.glb",
+    "https://raw.githubusercontent.com/itayinbarr/brainproject/main/brain-atlas/models/brain.glb",
+    "https://itayinbarr.github.io/brainproject/models/brain.glb"
+  ];
+
+  let index = 0;
+
+  function tryLoad() {
+
+    if (index >= urls.length) {
+
+      loadText.textContent =
+        "Brain model could not be loaded.";
+
+      loadBar.style.width =
+        "100%";
+
+      setTimeout(() => {
+        loading.classList.add("hide");
+      }, 500);
+
+      return;
+    }
+
+    const url =
+      urls[index++];
+
+    loader.load(
+      url,
+
+      gltf => {
+
+        const model =
+          gltf.scene;
+
+        const box =
+          new THREE.Box3()
+            .setFromObject(model);
+
+        const center =
+          box.getCenter(
+            new THREE.Vector3()
+          );
+
+        const size =
+          box.getSize(
+            new THREE.Vector3()
+          );
+
+        const maxDim =
+          Math.max(
+            size.x,
+            size.y,
+            size.z
+          );
+
+        const scale =
+          4.5 / maxDim;
+
+        model.scale.setScalar(
+          scale
+        );
+
+        model.position.sub(
+          center.multiplyScalar(
+            scale
+          )
+        );
+
+        model.position.y -= .6;
+
+        brainGroup.add(model);
+
+        prepareMaterials(model);
+
+        loadText.textContent =
+          "Medial forebrain bundle ready";
+
+        loadBar.style.width =
+          "100%";
+
+        setTimeout(() => {
+          loading.classList.add("hide");
+        }, 500);
+      },
+
+      progress => {
+
+        if (progress.total > 0) {
+
+          const pct =
+            Math.min(
+              95,
+              progress.loaded /
+                progress.total *
+                95
+            );
+
+          loadBar.style.width =
+            pct + "%";
+        }
+      },
+
+      error => {
+
+        console.warn(
+          "Brain model loading failed:",
+          error
+        );
+
+        tryLoad();
+      }
+    );
+  }
+
+  tryLoad();
+}
+
+/* Prepare materials */
+
+function prepareMaterials(model) {
+
+  brainMeshes = [];
+  pathwayMeshes = [];
+
+  model.traverse(child => {
+
+    if (!child.isMesh) {
+      return;
+    }
+
+    child.castShadow = true;
+    child.receiveShadow = true;
+
+    const isPathway =
+      isPathwayMesh(child);
+
+    if (isPathway) {
+
+      child.material =
+        pathwayMaterial.clone();
+
+      pathwayMeshes.push(child);
+
+    } else {
+
+      child.material =
+        brainOpaqueMaterial.clone();
+
+      brainMeshes.push(child);
+    }
+  });
+}
+
+/* Transparency */
+
+function setBrainTransparency(enabled) {
+
+  brainMeshes.forEach(mesh => {
+
+    mesh.material =
+      enabled
+        ? brainTransparentMaterial.clone()
+        : brainOpaqueMaterial.clone();
+  });
+}
+
+/* Highlight */
+
+function setPathwayHighlight(enabled) {
+
+  pathwayMeshes.forEach(mesh => {
+
+    mesh.visible =
+      pathwayVisible;
+
+    mesh.material =
+      enabled
+        ? pathwayMaterial.clone()
+        : pathwayNormalMaterial.clone();
+  });
+}
+
+/* Show pathway */
+
+const showPathwayBtn =
+  document.getElementById(
+    "showPathway"
+  );
+
+showPathwayBtn.addEventListener(
+  "click",
+  () => {
+
+    locationShown =
+      !locationShown;
+
+    if (locationShown) {
+
+      pathwayVisible = true;
+
+      setBrainTransparency(
+        true
+      );
+
+      setPathwayHighlight(
+        true
+      );
+
+      pathwayLabel.classList.add(
+        "show"
+      );
+
+      showPathwayBtn.classList.add(
+        "active"
+      );
+
+      showPathwayBtn.textContent =
+        "📍 Hide Medial Forebrain Bundle";
+
+      controls.autoRotate =
+        false;
+
+      rotateBtn.classList.remove(
+        "active"
+      );
+
+      rotateBtn.textContent =
+        "▶ Auto Rotate";
+
+    } else {
+
+      setBrainTransparency(
+        false
+      );
+
+      setPathwayHighlight(
+        highlighted
+      );
+
+      pathwayLabel.classList.remove(
+        "show"
+      );
+
+      showPathwayBtn.classList.remove(
+        "active"
+      );
+
+      showPathwayBtn.textContent =
+        "📍 Show Medial Forebrain Bundle";
+    }
+  }
+);
+
+/* Highlight */
+
+const highlightBtn =
+  document.getElementById(
+    "highlight"
+  );
+
+highlightBtn.addEventListener(
+  "click",
+  () => {
+
+    highlighted =
+      !highlighted;
+
+    setPathwayHighlight(
+      highlighted
+    );
+
+    if (highlighted) {
+
+      highlightBtn.classList.add(
+        "active"
+      );
+
+      highlightBtn.textContent =
+        "🔴 Highlight Pathway";
+
+    } else {
+
+      highlightBtn.classList.remove(
+        "active"
+      );
+
+      highlightBtn.textContent =
+        "🧠 Highlight Pathway";
+    }
+
+    if (locationShown) {
+      setBrainTransparency(
+        true
+      );
+    }
+  }
+);
+
+/* Rotate */
+
+const rotateBtn =
+  document.getElementById(
+    "rotate"
+  );
+
+rotateBtn.addEventListener(
+  "click",
+  () => {
+
+    controls.autoRotate =
+      !controls.autoRotate;
+
+    rotateBtn.classList.toggle(
+      "active",
+      controls.autoRotate
+    );
+
+    rotateBtn.textContent =
+      controls.autoRotate
+        ? "⟳ Auto Rotate"
+        : "▶ Auto Rotate";
+  }
+);
+
+/* Reset */
+
+document
+  .getElementById("reset")
+  .addEventListener(
+    "click",
+    () => {
+
+      camera.position.set(
+        3.2,
+        .3,
+        8.5
+      );
+
+      controls.target.set(
+        0,
+        -.3,
+        0
+      );
+
+      controls.update();
+
+      locationShown = false;
+      highlighted = true;
+      pathwayVisible = true;
+
+      setBrainTransparency(
+        false
+      );
+
+      setPathwayHighlight(
+        true
+      );
+
+      pathwayLabel.classList.remove(
+        "show"
+      );
+
+      showPathwayBtn.classList.remove(
+        "active"
+      );
+
+      showPathwayBtn.textContent =
+        "📍 Show Medial Forebrain Bundle";
+
+      highlightBtn.classList.add(
+        "active"
+      );
+
+      highlightBtn.textContent =
+        "🔴 Highlight Pathway";
+
+      controls.autoRotate =
+        true;
+
+      rotateBtn.classList.add(
+        "active"
+      );
+
+      rotateBtn.textContent =
+        "⟳ Auto Rotate";
+    }
+  );
+
+/* Label */
+
+function updateLabel() {
+
+  if (!locationShown) {
+    return;
+  }
+
+  if (pathwayMeshes.length === 0) {
+    return;
+  }
+
+  const box =
+    new THREE.Box3();
+
+  pathwayMeshes.forEach(
+    mesh => {
+
+      if (mesh.visible) {
+        box.expandByObject(
+          mesh
+        );
+      }
+    }
+  );
+
+  if (box.isEmpty()) {
+    return;
+  }
+
+  const position =
+    box.getCenter(
+      new THREE.Vector3()
+    );
+
+  position.project(
+    camera
+  );
+
+  const x =
+    (position.x + 1) /
+    2 *
+    canvas.clientWidth;
+
+  const y =
+    (-position.y + 1) /
+    2 *
+    canvas.clientHeight;
+
+  pathwayLabel.style.left =
+    x + "px";
+
+  pathwayLabel.style.top =
+    (y - 35) + "px";
+}
+
+/* Resize */
+
+function resize() {
+
+  const width =
+    canvas.clientWidth;
+
+  const height =
+    canvas.clientHeight;
+
+  if (
+    width <= 0 ||
+    height <= 0
+  ) {
+    return;
+  }
+
+  camera.aspect =
+    width / height;
+
+  camera.updateProjectionMatrix();
+
+  renderer.setSize(
+    width,
+    height,
+    false
+  );
+}
+
+window.addEventListener(
+  "resize",
+  resize
+);
+
+/* Animation */
+
+function animate() {
+
+  requestAnimationFrame(
+    animate
+  );
+
+  controls.update();
+
+  updateLabel();
+
+  renderer.render(
+    scene,
+    camera
+  );
+}
+
+resize();
+animate();
+loadRealBrain();
+
+</script>
+
+<!-- QUIZ SCRIPT -->
+
+<script>
+
+function checkAnswer(button, correct) {
+
+  const parent =
+    button.parentElement;
+
+  const options =
+    parent.querySelectorAll(
+      ".option"
+    );
+
+  options.forEach(
+    option => {
+      option.classList.remove(
+        "correct",
+        "wrong"
+      );
+    }
+  );
+
+  if (correct) {
+
+    button.classList.add(
+      "correct"
+    );
+
+  } else {
+
+    button.classList.add(
+      "wrong"
+    );
+  }
+
+  updateQuizScore();
+}
+
+function updateQuizScore() {
+
+  const result =
+    document.getElementById(
+      "quizResult"
+    );
+
+  let answered = 0;
+  let correctAnswers = 0;
+
+  document
+    .querySelectorAll(".question")
+    .forEach(question => {
+
+      const selected =
+        question.querySelector(
+          ".correct,.wrong"
+        );
+
+      if (selected) {
+
+        answered++;
+
+        if (
+          selected.classList.contains(
+            "correct"
+          )
+        ) {
+          correctAnswers++;
+        }
+      }
+    });
+
+  if (answered > 0) {
+
+    result.style.display =
+      "block";
+
+    result.textContent =
+      "Score: " +
+      correctAnswers +
+      " / " +
+      answered;
+  }
+}
+
+</script>
+
+</body>
+</html>
