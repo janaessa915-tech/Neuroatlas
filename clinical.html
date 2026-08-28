@@ -1,0 +1,949 @@
+<!-- /clinical.html -->
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NeuroAtlas | Clinical Localization</title>
+
+<meta
+name="description"
+content="Practice clinical neuroanatomy by connecting neurological findings to anatomical locations."
+
+>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #050b13;
+  color: #eef4fa;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  width: min(1180px, 92%);
+  margin: auto;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  background: rgba(5, 11, 19, 0.88);
+  backdrop-filter: blur(14px);
+
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.nav-inner {
+  min-height: 72px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.logo span {
+  color: #4db8ff;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.nav-links a {
+  color: #aebdca;
+  font-size: 14px;
+  transition: 0.25s ease;
+}
+
+.nav-links a:hover {
+  color: #ffffff;
+}
+
+.nav-links .active {
+  color: #4db8ff;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+  min-height: 70vh;
+
+  display: flex;
+  align-items: center;
+
+  padding: 100px 0 80px;
+
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+
+  position: absolute;
+
+  width: 500px;
+  height: 500px;
+
+  right: -180px;
+  top: 30px;
+
+  background: rgba(77, 184, 255, 0.08);
+
+  filter: blur(100px);
+  border-radius: 50%;
+}
+
+.hero-content {
+  max-width: 850px;
+  position: relative;
+  z-index: 2;
+}
+
+.eyebrow {
+  display: inline-block;
+
+  color: #4db8ff;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  letter-spacing: 2px;
+  text-transform: uppercase;
+
+  margin-bottom: 18px;
+}
+
+.hero h1 {
+  font-size: clamp(44px, 7vw, 82px);
+  line-height: 1.02;
+  letter-spacing: -3px;
+
+  margin-bottom: 28px;
+}
+
+.hero h1 span {
+  color: #4db8ff;
+}
+
+.hero p {
+  max-width: 720px;
+
+  color: #aebdca;
+
+  font-size: 19px;
+  line-height: 1.8;
+
+  margin-bottom: 38px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 14px 22px;
+
+  border-radius: 10px;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  transition: 0.25s ease;
+}
+
+.btn-primary {
+  background: #4db8ff;
+  color: #04101a;
+
+  box-shadow: 0 0 30px rgba(77,184,255,0.15);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 40px rgba(77,184,255,0.25);
+}
+
+.btn-secondary {
+  border: 1px solid rgba(255,255,255,0.12);
+  color: #d9e5ed;
+  background: rgba(255,255,255,0.025);
+}
+
+.btn-secondary:hover {
+  border-color: rgba(77,184,255,0.4);
+}
+
+/* =========================
+   SECTION
+========================= */
+
+.section {
+  padding: 90px 0;
+}
+
+.section-header {
+  max-width: 700px;
+  margin-bottom: 45px;
+}
+
+.section-label {
+  color: #4db8ff;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  letter-spacing: 2px;
+  text-transform: uppercase;
+
+  margin-bottom: 12px;
+}
+
+.section h2 {
+  font-size: clamp(30px, 4vw, 48px);
+  line-height: 1.15;
+
+  margin-bottom: 15px;
+}
+
+.section-header p {
+  color: #93a5b3;
+  font-size: 16px;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.cards {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 18px;
+}
+
+.card {
+  min-height: 250px;
+
+  padding: 30px;
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  border-radius: 16px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,0.045),
+      rgba(255,255,255,0.015)
+    );
+
+  transition: 0.3s ease;
+
+  position: relative;
+  overflow: hidden;
+}
+
+.card::after {
+  content: "";
+
+  position: absolute;
+
+  width: 150px;
+  height: 150px;
+
+  right: -70px;
+  bottom: -70px;
+
+  border-radius: 50%;
+
+  background: rgba(77,184,255,0.05);
+
+  transition: 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+
+  border-color: rgba(77,184,255,0.35);
+
+  box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+}
+
+.card:hover::after {
+  background: rgba(77,184,255,0.1);
+}
+
+.card-icon {
+  width: 52px;
+  height: 52px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 13px;
+
+  background: rgba(77,184,255,0.08);
+
+  font-size: 25px;
+
+  margin-bottom: 25px;
+}
+
+.card h3 {
+  font-size: 21px;
+  margin-bottom: 10px;
+}
+
+.card p {
+  color: #91a2af;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.card-arrow {
+  display: inline-block;
+
+  margin-top: 22px;
+
+  color: #4db8ff;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* =========================
+   HOW IT WORKS
+========================= */
+
+.reasoning {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.steps {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 20px;
+}
+
+.step {
+  position: relative;
+
+  padding: 28px;
+
+  border-radius: 15px;
+
+  background: rgba(255,255,255,0.025);
+
+  border: 1px solid rgba(255,255,255,0.07);
+}
+
+.step-number {
+  color: #4db8ff;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  letter-spacing: 2px;
+
+  margin-bottom: 20px;
+}
+
+.step h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.step p {
+  color: #91a2af;
+  font-size: 14px;
+}
+
+/* =========================
+   CTA
+========================= */
+
+.cta {
+  padding: 110px 0;
+}
+
+.cta-box {
+  padding: 70px 45px;
+
+  text-align: center;
+
+  border-radius: 20px;
+
+  border: 1px solid rgba(77,184,255,0.15);
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(77,184,255,0.08),
+      transparent 65%
+    ),
+    rgba(255,255,255,0.02);
+}
+
+.cta-box h2 {
+  font-size: clamp(30px, 5vw, 52px);
+  margin-bottom: 15px;
+}
+
+.cta-box p {
+  max-width: 600px;
+
+  margin: 0 auto 30px;
+
+  color: #91a2af;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+  border-top: 1px solid rgba(255,255,255,0.07);
+
+  padding: 35px 0;
+
+  color: #71818e;
+
+  font-size: 13px;
+}
+
+.footer-inner {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .steps {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+@media (max-width: 650px) {
+
+  .nav-inner {
+    min-height: 65px;
+  }
+
+  .nav-links {
+    gap: 15px;
+  }
+
+  .nav-links a {
+    font-size: 12px;
+  }
+
+  .hero {
+    padding: 75px 0 60px;
+  }
+
+  .hero h1 {
+    letter-spacing: -1.5px;
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
+
+  .cards,
+  .steps {
+    grid-template-columns: 1fr;
+  }
+
+  .section {
+    padding: 65px 0;
+  }
+
+  .cta-box {
+    padding: 50px 25px;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- =========================
+     NAVIGATION
+========================= -->
+
+<nav>
+
+  <div class="container nav-inner">
+
+```
+<a href="index.html" class="logo">
+  Neuro<span>Atlas</span>
+</a>
+
+<div class="nav-links">
+
+  <a href="explore.html">
+    Explore
+  </a>
+
+  <a href="pathways.html">
+    Learn
+  </a>
+
+  <a href="clinical.html" class="active">
+    Clinical
+  </a>
+
+  <a href="index.html#about">
+    About
+  </a>
+
+</div>
+```
+
+  </div>
+
+</nav>
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+  <div class="container">
+
+```
+<div class="hero-content">
+
+  <div class="eyebrow">
+    Clinical Neuroanatomy
+  </div>
+
+  <h1>
+    From symptoms<br>
+    to <span>location.</span>
+  </h1>
+
+  <p>
+    Clinical localization is the process of using neurological
+    findings to determine where a lesion or dysfunction is located.
+    Practice connecting symptoms, anatomy, and neural pathways
+    through interactive clinical cases.
+  </p>
+
+  <div class="hero-buttons">
+
+    <a href="#cases" class="btn btn-primary">
+      Start Clinical Cases →
+    </a>
+
+    <a href="#how" class="btn btn-secondary">
+      How It Works
+    </a>
+
+  </div>
+
+</div>
+```
+
+  </div>
+
+</section>
+
+<!-- =========================
+     CASE CATEGORIES
+========================= -->
+
+<section class="section" id="cases">
+
+  <div class="container">
+
+```
+<div class="section-header">
+
+  <div class="section-label">
+    Clinical Cases
+  </div>
+
+  <h2>
+    Where is the lesion?
+  </h2>
+
+  <p>
+    Explore neurological presentations and learn how clinical
+    findings point toward specific anatomical locations.
+  </p>
+
+</div>
+
+
+<div class="cards">
+
+  <a href="clinical-cortex.html" class="card">
+
+    <div class="card-icon">
+      🧠
+    </div>
+
+    <h3>
+      Cortical Localization
+    </h3>
+
+    <p>
+      Connect motor, sensory, language, visual, and cognitive
+      findings to specific cortical regions.
+    </p>
+
+    <span class="card-arrow">
+      Explore cases →
+    </span>
+
+  </a>
+
+
+  <a href="clinical-brainstem.html" class="card">
+
+    <div class="card-icon">
+      🧩
+    </div>
+
+    <h3>
+      Brainstem Localization
+    </h3>
+
+    <p>
+      Use cranial nerve findings and long-tract signs to identify
+      brainstem levels and affected structures.
+    </p>
+
+    <span class="card-arrow">
+      Explore cases →
+    </span>
+
+  </a>
+
+
+  <a href="clinical-cerebellum.html" class="card">
+
+    <div class="card-icon">
+      🌀
+    </div>
+
+    <h3>
+      Cerebellar Localization
+    </h3>
+
+    <p>
+      Recognize patterns of coordination, balance, and movement
+      abnormalities associated with cerebellar regions.
+    </p>
+
+    <span class="card-arrow">
+      Explore cases →
+    </span>
+
+  </a>
+
+
+  <a href="clinical-spinal-cord.html" class="card">
+
+    <div class="card-icon">
+      🧬
+    </div>
+
+    <h3>
+      Spinal Cord Localization
+    </h3>
+
+    <p>
+      Analyze sensory, motor, and reflex patterns to identify
+      possible levels of spinal cord involvement.
+    </p>
+
+    <span class="card-arrow">
+      Explore cases →
+    </span>
+
+  </a>
+
+
+  <a href="clinical-visual.html" class="card">
+
+    <div class="card-icon">
+      👁️
+    </div>
+
+    <h3>
+      Visual Localization
+    </h3>
+
+    <p>
+      Follow visual field findings through the visual pathway
+      to identify where dysfunction may occur.
+    </p>
+
+    <span class="card-arrow">
+      Explore cases →
+    </span>
+
+  </a>
+
+
+  <a href="clinical-motor.html" class="card">
+
+    <div class="card-icon">
+      ⚡
+    </div>
+
+    <h3>
+      Motor Localization
+    </h3>
+
+    <p>
+      Distinguish patterns involving the cortex, descending
+      pathways, spinal cord, and peripheral motor system.
+    </p>
+
+    <span class="card-arrow">
+      Explore cases →
+    </span>
+
+  </a>
+
+</div>
+```
+
+  </div>
+
+</section>
+
+<!-- =========================
+     REASONING
+========================= -->
+
+<section class="section reasoning" id="how">
+
+  <div class="container">
+
+```
+<div class="section-header">
+
+  <div class="section-label">
+    Clinical Reasoning
+  </div>
+
+  <h2>
+    Think like a neurologist.
+  </h2>
+
+  <p>
+    Don't memorize the answer. Follow the neurological evidence
+    and use anatomy to narrow down the location.
+  </p>
+
+</div>
+
+
+<div class="steps">
+
+  <div class="step">
+
+    <div class="step-number">
+      01
+    </div>
+
+    <h3>
+      Identify the findings
+    </h3>
+
+    <p>
+      Start with the patient's neurological signs and symptoms.
+    </p>
+
+  </div>
+
+
+  <div class="step">
+
+    <div class="step-number">
+      02
+    </div>
+
+    <h3>
+      Find the system
+    </h3>
+
+    <p>
+      Decide which functional system is involved: motor,
+      sensory, visual, language, or coordination.
+    </p>
+
+  </div>
+
+
+  <div class="step">
+
+    <div class="step-number">
+      03
+    </div>
+
+    <h3>
+      Localize
+    </h3>
+
+    <p>
+      Use the pattern of findings to narrow down the anatomical
+      location.
+    </p>
+
+  </div>
+
+
+  <div class="step">
+
+    <div class="step-number">
+      04
+    </div>
+
+    <h3>
+      Explain
+    </h3>
+
+    <p>
+      Connect the clinical findings back to the structure
+      or pathway responsible.
+    </p>
+
+  </div>
+
+</div>
+```
+
+  </div>
+
+</section>
+
+<!-- =========================
+     CTA
+========================= -->
+
+<section class="cta">
+
+  <div class="container">
+
+```
+<div class="cta-box">
+
+  <h2>
+    Ready to localize?
+  </h2>
+
+  <p>
+    Test your neuroanatomical reasoning by working through
+    clinical cases step by step.
+  </p>
+
+  <a href="#cases" class="btn btn-primary">
+    Explore Cases →
+  </a>
+
+</div>
+```
+
+  </div>
+
+</section>
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+  <div class="container footer-inner">
+
+```
+<div>
+  NeuroAtlas · Free bilingual neuroanatomy education
+</div>
+
+<div>
+  © 2026 NeuroAtlas
+</div>
+```
+
+  </div>
+
+</footer>
+
+</body>
+</html>
