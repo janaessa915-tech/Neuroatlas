@@ -1,0 +1,2812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NeuroAtlas | Brainstem Localization</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#050b13;
+    color:#eef4fa;
+    font-family:Arial,Helvetica,sans-serif;
+    line-height:1.65;
+}
+
+nav{
+    height:70px;
+    padding:0 7%;
+    display:flex;
+    align-items:center;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    background:#050b13;
+}
+
+nav a{
+    color:#9db0c3;
+    text-decoration:none;
+    font-size:14px;
+}
+
+nav a:hover{
+    color:white;
+}
+
+.container{
+    max-width:1250px;
+    margin:auto;
+    padding:65px 7% 110px;
+}
+
+.eyebrow{
+    color:#61b5ff;
+    letter-spacing:3px;
+    font-size:11px;
+    text-transform:uppercase;
+    margin-bottom:15px;
+}
+
+h1{
+    font-size:clamp(52px,8vw,88px);
+    line-height:.95;
+    letter-spacing:-4px;
+    margin-bottom:12px;
+}
+
+.arabic-title{
+    color:#ffb6c9;
+    font-size:25px;
+    margin-bottom:25px;
+}
+
+.hero-text{
+    color:#a8b8c8;
+    max-width:900px;
+    font-size:17px;
+    line-height:1.9;
+}
+
+.actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:28px;
+}
+
+.btn{
+    padding:11px 17px;
+    border-radius:9px;
+    background:#0b1928;
+    border:1px solid #31516d;
+    color:#bdd0e0;
+    cursor:pointer;
+    text-decoration:none;
+    font-size:14px;
+    transition:.2s;
+}
+
+.btn:hover{
+    background:#14304a;
+    color:white;
+    border-color:white;
+}
+
+.section{
+    margin-top:75px;
+}
+
+.section-label{
+    color:#61b5ff;
+    letter-spacing:2px;
+    font-size:11px;
+    text-transform:uppercase;
+    margin-bottom:8px;
+}
+
+.section h2{
+    font-size:34px;
+    margin-bottom:14px;
+}
+
+.intro{
+    color:#91a5b8;
+    max-width:950px;
+    line-height:1.9;
+    margin-bottom:30px;
+}
+
+/* CASE */
+
+.case-header{
+    padding:30px;
+    border:1px solid #1b344a;
+    border-radius:20px;
+    background:
+        radial-gradient(circle at 90% 10%,rgba(97,181,255,.09),transparent 35%),
+        #091522;
+}
+
+.case-tag{
+    display:inline-block;
+    padding:6px 10px;
+    border:1px solid #31516d;
+    border-radius:7px;
+    color:#61b5ff;
+    font-size:11px;
+    letter-spacing:2px;
+    margin-bottom:15px;
+}
+
+.case-header h2{
+    font-size:31px;
+    margin-bottom:10px;
+}
+
+.case-subtitle{
+    color:#ffb6c9;
+    margin-bottom:18px;
+}
+
+.profile-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+    margin-top:25px;
+}
+
+.profile{
+    background:#0b1928;
+    border:1px solid #172f43;
+    border-radius:14px;
+    padding:18px;
+}
+
+.profile span{
+    display:block;
+    color:#70869a;
+    font-size:10px;
+    letter-spacing:2px;
+    margin-bottom:7px;
+}
+
+.profile strong{
+    color:#eef4fa;
+    font-size:15px;
+}
+
+/* STORY */
+
+.story{
+    margin-top:22px;
+    padding:27px;
+    background:#08131f;
+    border:1px solid #172b3e;
+    border-radius:17px;
+}
+
+.story h3{
+    font-size:19px;
+    margin-bottom:14px;
+}
+
+.story p{
+    color:#a0b1c1;
+    margin-bottom:17px;
+}
+
+.story p:last-child{
+    margin-bottom:0;
+}
+
+.timeline{
+    margin-top:25px;
+    display:grid;
+    gap:12px;
+}
+
+.timeline-item{
+    display:grid;
+    grid-template-columns:95px 1fr;
+    gap:18px;
+    align-items:start;
+}
+
+.time{
+    color:#61b5ff;
+    font-size:12px;
+    letter-spacing:1px;
+    padding-top:4px;
+}
+
+.timeline-item div:last-child{
+    color:#9eb0c0;
+    border-left:1px solid #29445a;
+    padding-left:18px;
+}
+
+/* FINDINGS */
+
+.findings{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+    margin-top:25px;
+}
+
+.finding{
+    padding:22px;
+    background:#091522;
+    border:1px solid #172b3e;
+    border-radius:16px;
+}
+
+.finding-number{
+    color:#61b5ff;
+    font-size:11px;
+    letter-spacing:2px;
+    margin-bottom:7px;
+}
+
+.finding h3{
+    font-size:17px;
+    margin-bottom:8px;
+}
+
+.finding p{
+    color:#91a5b8;
+    font-size:14px;
+}
+
+.clue{
+    margin-top:12px;
+    padding:10px 12px;
+    background:#0d2031;
+    border-left:2px solid #61b5ff;
+    color:#bdd0e0;
+    font-size:13px;
+}
+
+/* LOCALIZER */
+
+.localizer{
+    margin-top:30px;
+    padding:30px;
+    background:#07111c;
+    border:1px solid #1a3348;
+    border-radius:20px;
+}
+
+.localizer h3{
+    font-size:22px;
+    margin-bottom:8px;
+}
+
+.localizer-intro{
+    color:#8196aa;
+    margin-bottom:25px;
+}
+
+.steps{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:25px;
+}
+
+.step{
+    padding:9px 13px;
+    border-radius:8px;
+    border:1px solid #203b51;
+    background:#0a1825;
+    color:#7890a5;
+    cursor:pointer;
+    font-size:12px;
+}
+
+.step.active{
+    background:#16324a;
+    border-color:#61b5ff;
+    color:white;
+}
+
+.step-content{
+    display:none;
+    padding:24px;
+    background:#091522;
+    border:1px solid #172b3e;
+    border-radius:15px;
+}
+
+.step-content.active{
+    display:block;
+}
+
+.step-content h4{
+    font-size:19px;
+    margin-bottom:10px;
+}
+
+.step-content p{
+    color:#9cafbf;
+}
+
+.logic{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-top:18px;
+}
+
+.logic-box{
+    padding:15px;
+    border:1px solid #1b3448;
+    border-radius:12px;
+    background:#0b1928;
+}
+
+.logic-box strong{
+    display:block;
+    color:white;
+    margin-bottom:5px;
+}
+
+.logic-box span{
+    color:#8095a8;
+    font-size:13px;
+}
+
+/* BRAINSTEM VISUAL */
+
+.brain-panel{
+    margin-top:30px;
+    padding:25px;
+    border:1px solid #1b344a;
+    border-radius:20px;
+    background:#07111c;
+}
+
+.brain-layout{
+    display:grid;
+    grid-template-columns:1.25fr .8fr;
+    gap:25px;
+    align-items:center;
+}
+
+.brain-svg-wrap{
+    background:
+        radial-gradient(circle at center,#172c40,#050b13 72%);
+    border-radius:18px;
+    padding:15px;
+    min-height:430px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.brain-svg{
+    width:100%;
+    max-width:620px;
+}
+
+.brain-outline{
+    fill:#172b3e;
+    stroke:#91a7b9;
+    stroke-width:3;
+}
+
+.structure{
+    cursor:pointer;
+    transition:.25s;
+    stroke:#8299ac;
+    stroke-width:2;
+}
+
+.structure:hover{
+    filter:
+        drop-shadow(0 0 8px rgba(97,181,255,.8));
+}
+
+.structure.selected{
+    fill:#61b5ff !important;
+    stroke:white;
+    filter:
+        drop-shadow(0 0 10px rgba(97,181,255,.9))
+        drop-shadow(0 0 22px rgba(97,181,255,.45));
+}
+
+.midbrain{
+    fill:#31495d;
+}
+
+.pons{
+    fill:#29465d;
+}
+
+.medulla{
+    fill:#233d52;
+}
+
+.cerebellum{
+    fill:#20394e;
+}
+
+.spinal{
+    fill:#182f43;
+}
+
+.brain-label{
+    fill:#d9e5ee;
+    font-size:15px;
+    font-weight:bold;
+    pointer-events:none;
+}
+
+.region-info{
+    background:#091522;
+    border:1px solid #1c3549;
+    border-radius:16px;
+    padding:24px;
+}
+
+.region-info .mini{
+    color:#61b5ff;
+    font-size:10px;
+    letter-spacing:2px;
+    margin-bottom:8px;
+}
+
+.region-info h3{
+    font-size:23px;
+    margin-bottom:10px;
+}
+
+.region-info p{
+    color:#91a5b8;
+    font-size:14px;
+}
+
+.region-info hr{
+    border:none;
+    border-top:1px solid #1a3042;
+    margin:20px 0;
+}
+
+.info-row{
+    margin-bottom:13px;
+}
+
+.info-row span{
+    display:block;
+    color:#6f8599;
+    font-size:10px;
+    letter-spacing:1px;
+    margin-bottom:3px;
+}
+
+.info-row strong{
+    color:#dce7ef;
+    font-size:13px;
+}
+
+/* DIFFERENTIAL */
+
+.compare{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+    margin-top:25px;
+}
+
+.compare-card{
+    padding:23px;
+    background:#091522;
+    border:1px solid #172b3e;
+    border-radius:16px;
+}
+
+.compare-card h3{
+    font-size:17px;
+    margin-bottom:10px;
+}
+
+.compare-card p{
+    color:#91a5b8;
+    font-size:14px;
+}
+
+.compare-card .why{
+    margin-top:14px;
+    padding-top:12px;
+    border-top:1px solid #1a3042;
+    color:#b9c9d7;
+    font-size:13px;
+}
+
+/* QUESTIONS */
+
+.question-card{
+    margin-top:20px;
+    padding:28px;
+    background:#091522;
+    border:1px solid #172f43;
+    border-radius:18px;
+}
+
+.question-number{
+    color:#61b5ff;
+    font-size:11px;
+    letter-spacing:2px;
+    margin-bottom:10px;
+}
+
+.question-card h3{
+    font-size:19px;
+    margin-bottom:17px;
+}
+
+.options{
+    display:grid;
+    gap:9px;
+}
+
+.option{
+    width:100%;
+    padding:14px;
+    border-radius:10px;
+    background:#0d2031;
+    border:1px solid #223c52;
+    color:#dce6ee;
+    text-align:left;
+    cursor:pointer;
+    font-size:14px;
+    transition:.2s;
+}
+
+.option:hover{
+    border-color:#61b5ff;
+    transform:translateX(3px);
+}
+
+.option.correct{
+    background:#132b28;
+    border-color:#69d3b1;
+}
+
+.option.wrong{
+    background:#291b20;
+    border-color:#c56d7f;
+}
+
+.answer{
+    display:none;
+    margin-top:15px;
+    padding:15px;
+    border-radius:10px;
+    background:#0d1d2b;
+    color:#a9bbc9;
+    font-size:13px;
+}
+
+.answer.show{
+    display:block;
+}
+
+.answer strong{
+    color:white;
+}
+
+.score-box{
+    margin-top:30px;
+    padding:25px;
+    border:1px solid #24445d;
+    border-radius:17px;
+    background:#0a1825;
+    text-align:center;
+}
+
+.score-number{
+    font-size:42px;
+    font-weight:bold;
+    color:#61b5ff;
+}
+
+.score-message{
+    color:#91a5b8;
+    margin-top:5px;
+}
+
+.takeaway{
+    margin-top:35px;
+    padding:28px;
+    background:#091522;
+    border-left:3px solid #61b5ff;
+    border-radius:13px;
+}
+
+.takeaway h3{
+    margin-bottom:12px;
+}
+
+.takeaway p{
+    color:#9cafbf;
+}
+
+.case-divider{
+    height:1px;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        #24445d,
+        transparent
+    );
+    margin:90px 0;
+}
+
+.case-nav{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:25px;
+}
+
+.case-nav a{
+    text-decoration:none;
+    color:#9fb4c6;
+    padding:10px 14px;
+    border:1px solid #203b51;
+    background:#0a1825;
+    border-radius:8px;
+    font-size:13px;
+}
+
+.case-nav a:hover{
+    color:white;
+    border-color:#61b5ff;
+}
+
+.next-case{
+    margin-top:45px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    padding:24px;
+    background:#091522;
+    border:1px solid #172b3e;
+    border-radius:17px;
+}
+
+.next-case p{
+    color:#8196a9;
+    font-size:14px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:950px){
+
+    .profile-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .brain-layout{
+        grid-template-columns:1fr;
+    }
+
+    .compare{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:700px){
+
+    .findings{
+        grid-template-columns:1fr;
+    }
+
+    .logic{
+        grid-template-columns:1fr;
+    }
+
+    .profile-grid{
+        grid-template-columns:1fr;
+    }
+
+    .timeline-item{
+        grid-template-columns:1fr;
+        gap:3px;
+    }
+
+    h1{
+        letter-spacing:-2px;
+    }
+
+    .next-case{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<a href="./clinical.html">← Back to Clinical Neuroanatomy</a>
+</nav>
+
+<main class="container">
+
+<div class="eyebrow">
+Clinical Cases · Brainstem Localization · NeuroAtlas
+</div>
+
+<h1>Brainstem<br>Localization</h1>
+
+<div class="arabic-title">
+تحديد موضع الآفة في جذع الدماغ
+</div>
+
+<p class="hero-text">
+
+The brainstem is one of the most powerful regions for neurological
+localization because it contains cranial nerve nuclei, long ascending
+sensory pathways, descending motor pathways, and connections with the
+cerebellum.
+
+The most important clue is often the relationship between the face,
+cranial nerves, and the body.
+
+<br><br>
+
+جذع الدماغ من أهم المناطق في تحديد موضع الآفة العصبية، لأنه يحتوي
+على أنوية الأعصاب القحفية والمسارات الحركية والحسية الصاعدة والنازلة،
+بالإضافة إلى الاتصالات المهمة مع المخيخ.
+
+ومن أهم العلامات التي تساعدنا على تحديد المكان وجود أعراض في أحد
+الأعصاب القحفية مع أعراض في الجانب المقابل من الجسم.
+
+</p>
+
+<div class="actions">
+<a class="btn" href="#case1">🧠 Case 01</a>
+<a class="btn" href="#case2">🧩 Case 02</a>
+<a class="btn" href="#case3">🌀 Case 03</a>
+<a class="btn" href="#brain">🗺️ Brainstem Map</a>
+</div>
+
+
+<!-- =========================================================
+CASE 01
+========================================================= -->
+
+<section id="case1" class="section">
+
+<div class="case-header">
+
+<div class="case-tag">
+CASE 01 · MIDBRAIN
+</div>
+
+<h2>
+The Drooping Eyelid
+</h2>
+
+<div class="case-subtitle">
+تدلي الجفن واضطراب حركة العين
+</div>
+
+<p class="hero-text">
+A 59-year-old man develops sudden double vision and difficulty
+keeping his right eye open. His family also notices weakness on
+the left side of his body.
+</p>
+
+<div class="profile-grid">
+
+<div class="profile">
+<span>AGE</span>
+<strong>59 years</strong>
+</div>
+
+<div class="profile">
+<span>ONSET</span>
+<strong>Sudden</strong>
+</div>
+
+<div class="profile">
+<span>CRANIAL NERVE</span>
+<strong>CN III pattern</strong>
+</div>
+
+<div class="profile">
+<span>BODY FINDING</span>
+<strong>Left-sided weakness</strong>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="story">
+
+<h3>History · التاريخ المرضي</h3>
+
+<p>
+The patient was walking normally earlier in the morning. He suddenly
+developed double vision followed by a drooping right eyelid. When
+asked to look in different directions, movements of the right eye
+are abnormal. Several minutes later, his family notices weakness
+in the left arm and left leg.
+</p>
+
+<p dir="rtl">
+كان المريض يمشي بصورة طبيعية في بداية اليوم. ظهرت لديه فجأة ازدواجية
+في الرؤية ثم بدأ الجفن الأيمن في التدلي. عند فحص حركة العين، توجد
+صعوبة في تحريك العين اليمنى في عدة اتجاهات. وبعد دقائق لاحظت أسرته
+ضعفًا في الذراع والساق اليسرى.
+</p>
+
+<div class="timeline">
+
+<div class="timeline-item">
+<div class="time">07:40</div>
+<div>Patient was neurologically normal.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">07:55</div>
+<div>Sudden diplopia develops.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">08:00</div>
+<div>Right ptosis becomes obvious.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">08:08</div>
+<div>Left arm and leg weakness is recognized.</div>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="section-label" style="margin-top:35px;">
+Neurological Examination · الفحص العصبي
+</div>
+
+<h2>What do we find?</h2>
+
+<div class="findings">
+
+<div class="finding">
+<div class="finding-number">01 · EYE MOVEMENT</div>
+<h3>Right Oculomotor Dysfunction</h3>
+<p>
+The right eye has impaired movements consistent with involvement
+of the oculomotor nerve pathway.
+</p>
+<div class="clue">
+Clue: a cranial nerve finding localizes the lesion to a specific
+brainstem region.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">02 · EYELID</div>
+<h3>Right Ptosis</h3>
+<p>
+The right upper eyelid is drooping.
+</p>
+<div class="clue">
+Clue: CN III dysfunction can produce ptosis.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">03 · MOTOR</div>
+<h3>Left Arm + Leg Weakness</h3>
+<p>
+Strength is reduced on the left side of the body.
+</p>
+<div class="clue">
+Clue: the body deficit is on the opposite side from the cranial
+nerve finding.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">04 · SENSORY</div>
+<h3>No Major Sensory Level</h3>
+<p>
+There is no clear sensory level suggesting a spinal cord lesion.
+</p>
+<div class="clue">
+Clue: the pattern is strongly brainstem-oriented.
+</div>
+</div>
+
+</div>
+
+
+<div class="localizer">
+
+<h3>Interactive Localization Engine</h3>
+
+<p class="localizer-intro">
+Follow the localization logic instead of jumping straight to the
+final structure.
+</p>
+
+<div class="steps">
+
+<button class="step active" onclick="showStep('c1',1,this)">
+01 · Findings
+</button>
+
+<button class="step" onclick="showStep('c1',2,this)">
+02 · Cranial Nerve
+</button>
+
+<button class="step" onclick="showStep('c1',3,this)">
+03 · Body Side
+</button>
+
+<button class="step" onclick="showStep('c1',4,this)">
+04 · Level
+</button>
+
+<button class="step" onclick="showStep('c1',5,this)">
+05 · Localization
+</button>
+
+</div>
+
+<div class="step-content active" id="c1-step1">
+<h4>01 · Identify the pattern</h4>
+<p>
+The patient has a right cranial nerve deficit combined with
+left-sided body weakness. This is a crossed neurological pattern.
+</p>
+
+<div class="logic">
+<div class="logic-box">
+<strong>Cranial</strong>
+<span>Right eye movement abnormality</span>
+</div>
+<div class="logic-box">
+<strong>Motor</strong>
+<span>Left arm + leg weakness</span>
+</div>
+<div class="logic-box">
+<strong>Pattern</strong>
+<span>Crossed findings</span>
+</div>
+</div>
+</div>
+
+<div class="step-content" id="c1-step2">
+<h4>02 · Identify the cranial nerve</h4>
+<p>
+Ptosis and abnormal eye movements strongly suggest involvement
+of the oculomotor nerve pathway, CN III.
+</p>
+
+<div class="logic">
+<div class="logic-box">
+<strong>CN III</strong>
+<span>Oculomotor pathway</span>
+</div>
+<div class="logic-box">
+<strong>Major role</strong>
+<span>Several extraocular movements + eyelid elevation</span>
+</div>
+<div class="logic-box">
+<strong>Side</strong>
+<span>Right</span>
+</div>
+</div>
+</div>
+
+<div class="step-content" id="c1-step3">
+<h4>03 · Determine the body side</h4>
+<p>
+The body weakness is left-sided while the cranial nerve abnormality
+is right-sided. This face/body dissociation is highly useful for
+brainstem localization.
+</p>
+
+<div class="logic">
+<div class="logic-box">
+<strong>CN finding</strong>
+<span>Right</span>
+</div>
+<div class="logic-box">
+<strong>Body weakness</strong>
+<span>Left</span>
+</div>
+<div class="logic-box">
+<strong>Pattern</strong>
+<span>Crossed</span>
+</div>
+</div>
+</div>
+
+<div class="step-content" id="c1-step4">
+<h4>04 · Determine the brainstem level</h4>
+<p>
+The oculomotor nerve emerges from the midbrain. A CN III pattern
+combined with contralateral weakness therefore strongly suggests
+a midbrain localization.
+</p>
+
+<div class="logic">
+<div class="logic-box">
+<strong>Midbrain</strong>
+<span>Strongly supported</span>
+</div>
+<div class="logic-box">
+<strong>Pons</strong>
+<span>Less compatible with CN III</span>
+</div>
+<div class="logic-box">
+<strong>Medulla</strong>
+<span>Does not fit the cranial nerve</span>
+</div>
+</div>
+</div>
+
+<div class="step-content" id="c1-step5">
+<h4>05 · Final localization</h4>
+<p>
+The combination of ipsilateral CN III dysfunction and contralateral
+hemiparesis is classically localizing to the ventral midbrain,
+where descending corticospinal fibers can be affected alongside
+oculomotor structures.
+</p>
+
+<div class="logic">
+<div class="logic-box">
+<strong>Side</strong>
+<span>Right midbrain</span>
+</div>
+<div class="logic-box">
+<strong>Cranial structure</strong>
+<span>CN III pathway</span>
+</div>
+<div class="logic-box">
+<strong>Long tract</strong>
+<span>Corticospinal pathway</span>
+</div>
+</div>
+</div>
+
+</div>
+
+
+<!-- CASE 1 QUESTIONS -->
+
+<section class="section">
+
+<div class="section-label">
+Case 01 Assessment · اختبار الحالة الأولى
+</div>
+
+<h2>Prove your localization</h2>
+
+<p class="intro">
+Answer all five questions. The questions are independent from the
+other cases, so you can return to Case 02 or Case 03 whenever you want.
+</p>
+
+<div class="question-card">
+<div class="question-number">CASE 01 · QUESTION 01</div>
+<h3>Which cranial nerve is most strongly implicated?</h3>
+
+<div class="options">
+<button class="option" onclick="answer(this,false,'c1q1')">
+A. CN VII
+</button>
+<button class="option" onclick="answer(this,true,'c1q1')">
+B. CN III
+</button>
+<button class="option" onclick="answer(this,false,'c1q1')">
+C. CN XII
+</button>
+</div>
+
+<div id="c1q1" class="answer">
+<strong>Correct.</strong>
+Ptosis and impaired extraocular movements are characteristic clues
+for an oculomotor pathway lesion.
+</div>
+</div>
+
+
+<div class="question-card">
+<div class="question-number">CASE 01 · QUESTION 02</div>
+<h3>
+The combination of a right cranial nerve deficit and left-sided
+weakness is best described as:
+</h3>
+
+<div class="options">
+<button class="option" onclick="answer(this,false,'c1q2')">
+A. Bilateral peripheral pattern
+</button>
+<button class="option" onclick="answer(this,false,'c1q2')">
+B. Pure cortical pattern
+</button>
+<button class="option" onclick="answer(this,true,'c1q2')">
+C. Crossed brainstem pattern
+</button>
+</div>
+
+<div id="c1q2" class="answer">
+<strong>Correct.</strong>
+An ipsilateral cranial nerve abnormality with contralateral body
+weakness is a classic localization clue for the brainstem.
+</div>
+</div>
+
+
+<div class="question-card">
+<div class="question-number">CASE 01 · QUESTION 03</div>
+<h3>
+Which brainstem level best fits the cranial nerve finding?
+</h3>
+
+<div class="options">
+<button class="option" onclick="answer(this,true,'c1q3')">
+A. Midbrain
+</button>
+<button class="option" onclick="answer(this,false,'c1q3')">
+B. Medulla
+</button>
+<button class="option" onclick="answer(this,false,'c1q3')">
+C. Spinal cord
+</button>
+</div>
+
+<div id="c1q3" class="answer">
+<strong>Correct.</strong>
+The oculomotor nerve is associated with the midbrain.
+</div>
+</div>
+
+
+<div class="question-card">
+<div class="question-number">CASE 01 · QUESTION 04</div>
+<h3>
+Which finding provides the strongest evidence for a long-tract motor
+involvement?
+</h3>
+
+<div class="options">
+<button class="option" onclick="answer(this,false,'c1q4')">
+A. Ptosis
+</button>
+<button class="option" onclick="answer(this,true,'c1q4')">
+B. Left arm and leg weakness
+</button>
+<button class="option" onclick="answer(this,false,'c1q4')">
+C. Diplopia alone
+</button>
+</div>
+
+<div id="c1q4" class="answer">
+<strong>Correct.</strong>
+Contralateral arm and leg weakness indicates involvement of a
+descending motor pathway.
+</div>
+</div>
+
+
+<div class="question-card">
+<div class="question-number">CASE 01 · QUESTION 05</div>
+<h3>
+Which localization best unifies the entire case?
+</h3>
+
+<div class="options">
+<button class="option" onclick="answer(this,false,'c1q5')">
+A. Right cerebellar hemisphere
+</button>
+<button class="option" onclick="answer(this,true,'c1q5')">
+B. Right ventral midbrain
+</button>
+<button class="option" onclick="answer(this,false,'c1q5')">
+C. Left peripheral nerve
+</button>
+</div>
+
+<div id="c1q5" class="answer">
+<strong>Correct.</strong>
+Ipsilateral CN III dysfunction plus contralateral weakness strongly
+supports a right midbrain localization.
+</div>
+</div>
+
+<div class="score-box">
+<div class="score-number" id="score-c1">0 / 5</div>
+<div class="score-message" id="message-c1">
+Answer the questions to reveal your result.
+</div>
+</div>
+
+</section>
+
+</section>
+
+
+<div class="case-divider"></div>
+
+
+<!-- =========================================================
+CASE 02
+========================================================= -->
+
+<section id="case2" class="section">
+
+<div class="case-header">
+
+<div class="case-tag">
+CASE 02 · PONS
+</div>
+
+<h2>
+The Face-Arm Cross
+</h2>
+
+<div class="case-subtitle">
+ضعف الوجه مع ضعف الجانب المقابل من الجسم
+</div>
+
+<p class="hero-text">
+A 64-year-old woman suddenly develops weakness of the right side
+of her face. At the same time, her left arm and leg become weak.
+She also complains of double vision.
+</p>
+
+<div class="profile-grid">
+
+<div class="profile">
+<span>AGE</span>
+<strong>64 years</strong>
+</div>
+
+<div class="profile">
+<span>ONSET</span>
+<strong>Sudden</strong>
+</div>
+
+<div class="profile">
+<span>CRANIAL NERVE</span>
+<strong>CN VI + VII pattern</strong>
+</div>
+
+<div class="profile">
+<span>BODY FINDING</span>
+<strong>Left hemiparesis</strong>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="story">
+
+<h3>History · التاريخ المرضي</h3>
+
+<p>
+The patient was previously independent. While speaking with her
+daughter, she suddenly noticed that the room appeared to move when
+she looked toward the left. Her daughter then noticed that the
+right side of her face looked weak. Within minutes, weakness of the
+left arm and leg became apparent.
+</p>
+
+<p dir="rtl">
+كانت المريضة مستقلة في حياتها اليومية. أثناء حديثها مع ابنتها،
+شعرت فجأة باضطراب في الرؤية عند النظر إلى اليسار. لاحظت ابنتها
+وجود ضعف في الجانب الأيمن من الوجه، وبعد دقائق ظهر ضعف في الذراع
+والساق اليسرى.
+</p>
+
+<div class="timeline">
+
+<div class="timeline-item">
+<div class="time">11:20</div>
+<div>Sudden visual disturbance begins.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">11:23</div>
+<div>Right facial weakness becomes noticeable.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">11:27</div>
+<div>Left arm weakness develops.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">11:30</div>
+<div>Left leg weakness is confirmed.</div>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="section-label" style="margin-top:35px;">
+Neurological Examination · الفحص العصبي
+</div>
+
+<h2>What do we find?</h2>
+
+<div class="findings">
+
+<div class="finding">
+<div class="finding-number">01 · EYE MOVEMENT</div>
+<h3>Abnormal Horizontal Gaze</h3>
+<p>
+The patient has difficulty coordinating horizontal eye movement,
+especially when looking toward the affected side.
+</p>
+<div class="clue">
+Clue: horizontal gaze abnormalities can point toward pontine
+structures.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">02 · FACE</div>
+<h3>Right Facial Weakness</h3>
+<p>
+The weakness involves the right side of the face.
+</p>
+<div class="clue">
+Clue: a peripheral-pattern facial deficit can indicate involvement
+of the facial nerve nucleus or fascicles.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">03 · BODY</div>
+<h3>Left Arm + Leg Weakness</h3>
+<p>
+The left upper and lower limbs are weak.
+</p>
+<div class="clue">
+Clue: the body deficit is opposite the facial deficit.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">04 · SENSATION</div>
+<h3>Mild Left-Sided Sensory Change</h3>
+<p>
+Sensation is mildly reduced on the left side of the body.
+</p>
+<div class="clue">
+Clue: ascending sensory pathways may also be involved.
+</div>
+</div>
+
+</div>
+
+
+<div class="localizer">
+
+<h3>Interactive Localization Engine</h3>
+
+<p class="localizer-intro">
+Build the localization from the cranial nerve findings and the
+contralateral body findings.
+</p>
+
+<div class="steps">
+
+<button class="step active" onclick="showStep('c2',1,this)">
+01 · Pattern
+</button>
+
+<button class="step" onclick="showStep('c2',2,this)">
+02 · Cranial Nerves
+</button>
+
+<button class="step" onclick="showStep('c2',3,this)">
+03 · Crossed Side
+</button>
+
+<button class="step" onclick="showStep('c2',4,this)">
+04 · Brainstem Level
+</button>
+
+<button class="step" onclick="showStep('c2',5,this)">
+05 · Final Region
+</button>
+
+</div>
+
+<div class="step-content active" id="c2-step1">
+<h4>01 · Recognize the pattern</h4>
+<p>
+The patient has ipsilateral facial dysfunction with contralateral
+limb weakness. This strongly suggests a lesion involving the pons.
+</p>
+
+<div class="logic">
+<div class="logic-box">
+<strong>Face</strong>
+<span>Right</span>
+</div>
+<div class="logic-box">
+<strong>Body</strong>
+<span>Left</span>
+</div>
+<div class="logic-box">
+<strong>Pattern</strong>
+<span>Crossed</span>
+</div>
+</div>
+</div>
+
+<div class="step-content" id="c2-step2">
+<h4>02 · Analyze the cranial nerve findings</h4>
+<p>
+Facial weakness and abnormal horizontal gaze point toward pontine
+cranial nerve structures, particularly CN VI and CN VII pathways.
+</p>
+
+<div class="logic">
+<div class="logic-box">
+<strong>CN VI</strong>
+<span>Abducens pathway</span>
+</div>
+<div class="logic-box">
+<strong>CN VII</strong>
+<span>Facial nerve pathway</span>
+</div>
+<div class="logic-box">
+<strong>Region</strong>
+<span>Pons</span>
+</div>
+</div>
+</div>
+
+<div class="step-content" id="c2-step3">
+<h4>03 · Determine the side</h4>
+<p>
+The cranial nerve findings are on the right while the body weakness
+is on the left. Therefore the brainstem lesion is most likely
+right-sided.
+</p>
+
+<div class="logic">
+<div class="logic-box">
+<strong>Cranial findings</strong>
+<span>Right</span>
+</div>
+<div class="logic-box">
+<strong>Body findings</strong>
+<span>Left</span>
+</div>
+<div class="logic-box">
+<strong>Likely lesion</strong>
+<span>Right pons</span>
+</div>
+</div>
+</div>
+
+<div class="step-content" id="c2-step4">
+<h4>04 · Determine the level</h4>
+<p>
+The combination of facial nerve involvement and horizontal gaze
+abnormality strongly favors the pons rather than the midbrain or
+medulla.
+</p>
+
+<div class="logic">
+<div class="logic-box">
+<strong>Midbrain</strong>
+<span>Less likely</span>
+</div>
+<div class="logic-box">
+<strong>Pons</strong>
+<span>Strongly supported</span>
+</div>
+<div class="logic-box">
+<strong>Medulla</strong>
+<span>Less likely</span>
+</div>
+</div>
+</div>
+
+<div class="step-content" id="c2-step5">
+<h4>05 · Final localization</h4>
+<p>
+The crossed facial and body findings, combined with ocular motor
+and facial nerve abnormalities, localize the lesion to the right
+pons with involvement of cranial nerve pathways and descending
+motor fibers.
+</p>
+
+<div class="logic">
+<div class="logic-box">
+<strong>Side</strong>
+<span>Right</span>
+</div>
+<div class="logic-box">
+<strong>Level</strong>
+<span>Pons</span>
+</div>
+<div class="logic-box">
+<strong>Structures</strong>
+<span>CN VI / VII + long tracts</span>
+</div>
+</div>
+</div>
+
+</div>
+
+
+<!-- CASE 2 QUESTIONS -->
+
+<section class="section">
+
+<div class="section-label">
+Case 02 Assessment · اختبار الحالة الثانية
+</div>
+
+<h2>Can you localize the pons?</h2>
+
+<div class="question-card">
+<div class="question-number">CASE 02 · QUESTION 01</div>
+<h3>
+Which cranial nerve is most directly associated with facial
+movement?
+</h3>
+
+<div class="options">
+<button class="option" onclick="answer(this,false,'c2q1')">
+A. CN V
+</button>
+<button class="option" onclick="answer(this,false,'c2q1')">
+B. CN XII
+</button>
+<button class="option" onclick="answer(this,true,'c2q1')">
+C. CN VII
+</button>
+</div>
+
+<div id="c2q1" class="answer">
+<strong>Correct.</strong>
+The facial nerve carries the motor supply to the muscles of facial
+expression.
+</div>
+</div>
+
+
+<div class="question-card">
+<div class="question-number">CASE 02 · QUESTION 02</div>
+<h3>
+What makes this pattern particularly suggestive of the brainstem?
+</h3>
+
+<div class="options">
+<button class="option" onclick="answer(this,true,'c2q2')">
+A. Ipsilateral cranial findings with contralateral body findings
+</button>
+<button class="option" onclick="answer(this,false,'c2q2')">
+B. Isolated bilateral leg weakness
+</button>
+<button class="option" onclick="answer(this,false,'c2q2')">
+C. Pure memory impairment
+</button>
+</div>
+
+<div id="c2q2" class="answer">
+<strong>Correct.</strong>
+Crossed face-body findings are an important brainstem localization
+principle.
+</div>
+</div>
+
+
+<div class="question-card">
+<div class="question-number">CASE 02 · QUESTION 03</div>
+<h3>
+Which brainstem level best fits the combination of CN VI/CN VII
+findings?
+</h3>
+
+<div class="options">
+<button class="option" onclick="answer(this,false,'c2q3')">
+A. Midbrain
+</button>
+<button class="option" onclick="answer(this,true,'c2q3')">
+B. Pons
+</button>
+<button class="option" onclick="answer(this,false,'c2q3')">
+C. Medulla
+</button>
+</div>
+
+<div id="c2q3" class="answer">
+<strong>Correct.</strong>
+The abducens and facial nerve nuclei/pathways are associated with
+the pons.
+</div>
+</div>
+
+
+<div class="question-card">
+<div class="question-number">CASE 02 · QUESTION 04</div>
+<h3>
+Which side of the pons is most likely affected?
+</h3>
+
+<div class="options">
+<button class="option" onclick="answer(this,false,'c2q4')">
+A. Left
+</button>
+<button class="option" onclick="answer(this,true,'c2q4')">
+B. Right
+</button>
+<button class="option" onclick="answer(this,false,'c2q4')">
+C. Bilateral
+</button>
+</div>
+
+<div id="c2q4" class="answer">
+<strong>Correct.</strong>
+The cranial nerve findings are right-sided, while the body weakness
+is left-sided, pointing toward the right pons.
+</div>
+</div>
+
+
+<div class="question-card">
+<div class="question-number">CASE 02 · QUESTION 05</div>
+<h3>
+Which description best summarizes the lesion?
+</h3>
+
+<div class="options">
+<button class="option" onclick="answer(this,false,'c2q5')">
+A. Left cortical lesion
+</button>
+<button class="option" onclick="answer(this,false,'c2q5')">
+B. Right cerebellar lesion
+</button>
+<button class="option" onclick="answer(this,true,'c2q5')">
+C. Right pontine lesion affecting cranial nerve pathways and long tracts
+</button>
+</div>
+
+<div id="c2q5" class="answer">
+<strong>Correct.</strong>
+The crossed facial-body pattern and pontine cranial nerve findings
+are best unified by a right pontine localization.
+</div>
+</div>
+
+<div class="score-box">
+<div class="score-number" id="score-c2">0 / 5</div>
+<div class="score-message" id="message-c2">
+Answer the questions to reveal your result.
+</div>
+</div>
+
+</section>
+
+</section>
+
+
+<div class="case-divider"></div>
+
+
+<!-- =========================================================
+CASE 03
+========================================================= -->
+
+<section id="case3" class="section">
+
+<div class="case-header">
+
+<div class="case-tag">
+CASE 03 · MEDULLA
+</div>
+
+<h2>
+The Swallowing Problem
+</h2>
+
+<div class="case-subtitle">
+اضطراب البلع والصوت مع علامات حسية
+</div>
+
+<p class="hero-text">
+A 71-year-old man develops sudden difficulty swallowing, a hoarse
+voice, dizziness, and sensory changes affecting different sides
+of the face and body.
+</p>
+
+<div class="profile-grid">
+
+<div class="profile">
+<span>AGE</span>
+<strong>71 years</strong>
+</div>
+
+<div class="profile">
+<span>ONSET</span>
+<strong>Sudden</strong>
+</div>
+
+<div class="profile">
+<span>KEY CRANIAL NERVE</span>
+<strong>CN IX / X pattern</strong>
+</div>
+
+<div class="profile">
+<span>KEY FEATURE</span>
+<strong>Crossed sensory findings</strong>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="story">
+
+<h3>History · التاريخ المرضي</h3>
+
+<p>
+The patient suddenly becomes dizzy while standing. He feels that
+the room is spinning and has difficulty walking. Soon afterward,
+his voice becomes hoarse and he has difficulty swallowing liquids.
+He also describes reduced sensation over one side of his face and
+altered pain and temperature sensation over the opposite side of
+his body.
+</p>
+
+<p dir="rtl">
+شعر المريض فجأة بدوار شديد أثناء الوقوف، وأصبح يشعر بأن المكان
+يدور من حوله مع صعوبة في المشي. بعد ذلك أصبح صوته أجش وظهرت لديه
+صعوبة في بلع السوائل. كما لاحظ انخفاض الإحساس في أحد جانبي الوجه
+مع تغير الإحساس بالألم والحرارة في الجانب المقابل من الجسم.
+</p>
+
+<div class="timeline">
+
+<div class="timeline-item">
+<div class="time">15:05</div>
+<div>Sudden vertigo begins.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">15:10</div>
+<div>Gait becomes markedly unsteady.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">15:15</div>
+<div>Voice becomes hoarse and swallowing becomes difficult.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">15:20</div>
+<div>Crossed facial and body sensory changes are detected.</div>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="section-label" style="margin-top:35px;">
+Neurological Examination · الفحص العصبي
+</div>
+
+<h2>What do we find?</h2>
+
+<div class="findings">
+
+<div class="finding">
+<div class="finding-number">01 · BULBAR</div>
+<h3>Dysphagia + Hoarseness</h3>
+<p>
+The patient has difficulty swallowing and a hoarse voice.
+</p>
+<div class="clue">
+Clue: these findings can suggest involvement of lower cranial
+nerve pathways.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">02 · FACE SENSATION</div>
+<h3>Reduced Facial Pain/Temperature</h3>
+<p>
+Pain and temperature sensation are reduced on one side of the face.
+</p>
+<div class="clue">
+Clue: trigeminal sensory pathways may be involved.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">03 · BODY SENSATION</div>
+<h3>Opposite Body Sensory Change</h3>
+<p>
+Pain and temperature sensation are reduced on the opposite side
+of the body.
+</p>
+<div class="clue">
+Clue: crossed sensory findings are important for brainstem
+localization.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">04 · COORDINATION</div>
+<h3>Marked Ataxia</h3>
+<p>
+The patient has difficulty maintaining balance and walks with
+a broad-based, unsteady gait.
+</p>
+<div class="clue">
+Clue: nearby cerebellar connections may be involved.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">05 · AUTONOMIC</div>
+<h3>Possible Ipsilateral Horner Pattern</h3>
+<p>
+There is subtle ptosis and pupillary asymmetry on the affected
+side.
+</p>
+<div class="clue">
+Clue: descending sympathetic fibers can pass through the lateral
+brainstem.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">06 · MOTOR</div>
+<h3>No Major Hemiparesis</h3>
+<p>
+Strength is relatively preserved compared with the prominent
+sensory, bulbar, vestibular, and coordination findings.
+</p>
+<div class="clue">
+Clue: this helps distinguish the pattern from a major corticospinal
+lesion.
+</div>
+</div>
+
+</div>
+
+
+<div class="localizer">
+
+<h3>Interactive Localization Engine</h3>
+
+<p class="localizer-intro">
+This case demonstrates how multiple smaller findings can converge
+on one brainstem region.
+</p>
+
+<div class="steps">
+
+<button class="step active" onclick="showStep('c3',1,this)">
+01 · Pattern
+</button>
+
+<button class="step" onclick="showStep('c3',2,this)">
+02 · Cranial Nerves
+</button>
+
+<button class="step" onclick="showStep('c3',3,this)">
+03 · Sensory Crossing
+</button>
+
+<button class="step" onclick="showStep('c3',4,this)">
+04 · Associated Systems
+</button>
+
+<button class="step" onclick="showStep('c3',5,this)">
+05 · Localization
+</button>
+
+</div>
+
+<div class="step-content active" id="c3-step1">
+<h4>01 · Recognize the pattern</h4>
+<p>
+The combination of vertigo, dysphagia, hoarseness, crossed sensory
+findings, and ataxia suggests a lateral brainstem syndrome.
+</p>
+
+<div class="logic">
+<div class="logic-box">
+<strong>Bulbar</strong>
+<span>Dysphagia + hoarseness</span>
+</div>
+<div class="logic-box">
+<strong>Sensory</strong>
+<span>Crossed face/body findings</span>
+</div>
+<div class="logic-box">
+<strong>Coordination</strong>
+<span>Ataxia + vertigo</span>
+</div>
+</div>
+</div>
+
+<div class="step-content" id="c3-step2">
+<h4>02 · Identify the cranial nerve region</h4>
+<p>
+Dysphagia and hoarseness suggest involvement of the nucleus
+ambiguus region, associated with CN IX and X functions.
+</p>
+
+<div class="logic">
+<div class="logic-box">
+<strong>CN IX</strong>
+<span>Glossopharyngeal functions</span>
+</div>
+<div class="logic-box">
+<strong>CN X</strong>
+<span>Pharyngeal/laryngeal functions</span>
+</div>
+<div class="logic-box">
+<strong>Key clue</strong>
+<span>Hoarseness + dysphagia</span>
+</div>
+</div>
+</div>
+
+<div class="step-content" id="c3-step3">
+<h4>03 · Analyze the sensory pattern</h4>
+<p>
+Loss of facial pain and temperature on one side with loss of
+body pain and temperature on the opposite side is a classic
+crossed sensory brainstem pattern.
+</p>
+
+<div class="logic">
+<div class="logic-box">
+<strong>Face</strong>
+<span>Ipsilateral sensory change</span>
+</div>
+<div class="logic-box">
+<strong>Body</strong>
+<span>Contralateral sensory change</span>
+</div>
+<div class="logic-box">
+<strong>Meaning</strong>
+<span>Brainstem localization</span>
+</div>
+</div>
+</div>
+
+<div class="step-content" id="c3-step4">
+<h4>04 · Connect the additional systems</h4>
+<p>
+Vertigo can reflect vestibular pathway involvement, while ataxia
+can reflect disruption of cerebellar connections. A Horner pattern
+can occur when descending sympathetic fibers are affected.
+</p>
+
+<div class="logic">
+<div class="logic-box">
+<strong>Vestibular</strong>
+<span>Vertigo</span>
+</div>
+<div class="logic-box">
+<strong>Cerebellar connections</strong>
+<span>Ataxia</span>
+</div>
+<div class="logic-box">
+<strong>Sympathetic</strong>
+<span>Possible Horner pattern</span>
+</div>
+</div>
+</div>
+
+<div class="step-content" id="c3-step5">
+<h4>05 · Final localization</h4>
+<p>
+The combined findings strongly support a lateral medullary
+localization. Multiple systems are involved because the lateral
+medulla contains or lies near several ascending, descending,
+cranial nerve, vestibular, and cerebellar pathways.
+</p>
+
+<div class="logic">
+<div class="logic-box">
+<strong>Level</strong>
+<span>Medulla</span>
+</div>
+<div class="logic-box">
+<strong>Region</strong>
+<span>Lateral medulla</span>
+</div>
+<div class="logic-box">
+<strong>Pattern</strong>
+<span>Multisystem brainstem syndrome</span>
+</div>
+</div>
+</div>
+
+</div>
+
+
+<!-- CASE 3 QUESTIONS -->
+
+<section class="section">
+
+<div class="section-label">
+Case 03 Assessment · اختبار الحالة الثالثة
+</div>
+
+<h2>Can you recognize the syndrome?</h2>
+
+<div class="question-card">
+<div class="question-number">CASE 03 · QUESTION 01</div>
+<h3>
+Which finding most strongly points toward lower cranial nerve
+involvement?
+</h3>
+
+<div class="options">
+<button class="option" onclick="answer(this,false,'c3q1')">
+A. Vertigo
+</button>
+<button class="option" onclick="answer(this,true,'c3q1')">
+B. Dysphagia and hoarseness
+</button>
+<button class="option" onclick="answer(this,false,'c3q1')">
+C. Leg weakness
+</button>
+</div>
+
+<div id="c3q1" class="answer">
+<strong>Correct.</strong>
+Difficulty swallowing and hoarseness strongly suggest involvement
+of structures serving pharyngeal and laryngeal function, including
+CN IX/X-related pathways.
+</div>
+</div>
+
+
+<div class="question-card">
+<div class="question-number">CASE 03 · QUESTION 02</div>
+<h3>
+What does the crossed facial and body sensory pattern suggest?
+</h3>
+
+<div class="options">
+<button class="option" onclick="answer(this,false,'c3q2')">
+A. Isolated peripheral nerve disease
+</button>
+<button class="option" onclick="answer(this,false,'c3q2')">
+B. Pure cerebellar disease
+</button>
+<button class="option" onclick="answer(this,true,'c3q2')">
+C. Brainstem involvement
+</button>
+</div>
+
+<div id="c3q2" class="answer">
+<strong>Correct.</strong>
+Crossed sensory findings occur because different sensory pathways
+and their crossings occupy different locations within the brainstem.
+</div>
+</div>
+
+
+<div class="question-card">
+<div class="question-number">CASE 03 · QUESTION 03</div>
+<h3>
+Which brainstem level best fits this combination of findings?
+</h3>
+
+<div class="options">
+<button class="option" onclick="answer(this,true,'c3q3')">
+A. Medulla
+</button>
+<button class="option" onclick="answer(this,false,'c3q3')">
+B. Midbrain
+</button>
+<button class="option" onclick="answer(this,false,'c3q3')">
+C. Spinal cord
+</button>
+</div>
+
+<div id="c3q3" class="answer">
+<strong>Correct.</strong>
+The bulbar findings, crossed sensory pattern, vestibular symptoms,
+and possible Horner pattern strongly favor the lateral medulla.
+</div>
+</div>
+
+
+<div class="question-card">
+<div class="question-number">CASE 03 · QUESTION 04</div>
+<h3>
+Which additional finding supports involvement of cerebellar
+connections?
+</h3>
+
+<div class="options">
+<button class="option" onclick="answer(this,false,'c3q4')">
+A. Hoarseness
+</button>
+<button class="option" onclick="answer(this,false,'c3q4')">
+B. Facial sensory loss
+</button>
+<button class="option" onclick="answer(this,true,'c3q4')">
+C. Ipsilateral ataxia
+</button>
+</div>
+
+<div id="c3q4" class="answer">
+<strong>Correct.</strong>
+Prominent ataxia can occur when cerebellar connections in the
+lateral brainstem are affected.
+</div>
+</div>
+
+
+<div class="question-card">
+<div class="question-number">CASE 03 · QUESTION 05</div>
+<h3>
+Which localization best unifies the complete presentation?
+</h3>
+
+<div class="options">
+<button class="option" onclick="answer(this,false,'c3q5')">
+A. Medial frontal cortex
+</button>
+<button class="option" onclick="answer(this,true,'c3q5')">
+B. Lateral medulla
+</button>
+<button class="option" onclick="answer(this,false,'c3q5')">
+C. Peripheral facial nerve
+</button>
+</div>
+
+<div id="c3q5" class="answer">
+<strong>Correct.</strong>
+The combination of bulbar dysfunction, crossed sensory findings,
+vertigo, ataxia, and possible Horner syndrome strongly supports
+a lateral medullary localization.
+</div>
+</div>
+
+<div class="score-box">
+<div class="score-number" id="score-c3">0 / 5</div>
+<div class="score-message" id="message-c3">
+Answer the questions to reveal your result.
+</div>
+</div>
+
+</section>
+
+</section>
+
+
+<!-- =========================================================
+INTERACTIVE BRAINSTEM
+========================================================= -->
+
+<section id="brain" class="section">
+
+<div class="section-label">
+Interactive Neuroanatomy · التشريح العصبي التفاعلي
+</div>
+
+<h2>
+Explore the Brainstem
+</h2>
+
+<p class="intro">
+Click each major brainstem region to explore its position, major
+structures, neurological functions, and clinical localization clues.
+</p>
+
+<div class="brain-panel">
+
+<div class="brain-layout">
+
+<div class="brain-svg-wrap">
+
+<svg class="brain-svg"
+viewBox="0 0 650 650"
+xmlns="http://www.w3.org/2000/svg">
+
+<!-- Cerebellum -->
+<path
+class="structure cerebellum"
+onclick="selectBrain('cerebellum')"
+d="
+M390 190
+C475 160 555 205 570 285
+C585 365 540 435 470 455
+C420 470 380 440 365 395
+C345 350 350 285 365 235
+C370 215 378 200 390 190Z"
+/>
+
+<!-- Midbrain -->
+<path
+class="structure midbrain"
+onclick="selectBrain('midbrain')"
+d="
+M270 115
+C315 100 365 105 395 130
+L385 210
+C350 225 305 225 270 205Z"
+/>
+
+<!-- Pons -->
+<path
+class="structure pons"
+onclick="selectBrain('pons')"
+d="
+M265 205
+C305 185 365 190 395 220
+C425 255 420 315 395 350
+C365 375 300 375 265 350
+C240 315 238 250 265 205Z"
+/>
+
+<!-- Medulla -->
+<path
+class="structure medulla"
+onclick="selectBrain('medulla')"
+d="
+M275 350
+C300 340 365 340 390 350
+L375 470
+C360 505 305 505 290 470Z"
+/>
+
+<!-- Spinal cord -->
+<path
+class="structure spinal"
+onclick="selectBrain('spinal')"
+d="
+M295 470
+C310 460 350 460 365 470
+L360 570
+C350 595 310 595 300 570Z"
+/>
+
+<!-- Midbrain label -->
+<text
+class="brain-label"
+x="286"
+y="165">
+MIDBRAIN
+</text>
+
+<!-- Pons label -->
+<text
+class="brain-label"
+x="300"
+y="285">
+PONS
+</text>
+
+<!-- Medulla label -->
+<text
+class="brain-label"
+x="292"
+y="420">
+MEDULLA
+</text>
+
+<!-- Spinal label -->
+<text
+class="brain-label"
+x="292"
+y="535">
+CORD
+</text>
+
+<!-- Cerebellum label -->
+<text
+class="brain-label"
+x="455"
+y="315">
+CEREBELLUM
+</text>
+
+</svg>
+
+</div>
+
+
+<div class="region-info">
+
+<div class="mini">
+SELECTED REGION
+</div>
+
+<h3 id="brainTitle">
+Midbrain
+</h3>
+
+<p id="brainDescription">
+The midbrain contains pathways involved in eye movements,
+motor control, sensory processing, and arousal.
+</p>
+
+<hr>
+
+<div class="info-row">
+<span>KEY STRUCTURES</span>
+<strong id="brainStructures">
+CN III pathways + descending motor fibers
+</strong>
+</div>
+
+<div class="info-row">
+<span>CLINICAL CLUES</span>
+<strong id="brainClues">
+Oculomotor findings + contralateral weakness
+</strong>
+</div>
+
+<div class="info-row">
+<span>CASE CONNECTION</span>
+<strong id="brainCase">
+Case 01 · Midbrain localization
+</strong>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- DIFFERENTIAL -->
+
+<section class="section">
+
+<div class="section-label">
+Differential Localization · المقارنة التشريحية
+</div>
+
+<h2>
+Why the brainstem?
+</h2>
+
+<p class="intro">
+A good localization should explain why the findings fit the
+brainstem and why alternative levels are less convincing.
+</p>
+
+<div class="compare">
+
+<div class="compare-card">
+<h3>🧠 Cerebral Cortex</h3>
+<p>
+Cortical lesions can cause contralateral weakness, sensory changes,
+language deficits, visual abnormalities, or seizures.
+</p>
+
+<div class="why">
+<strong>Why less likely in these cases:</strong><br>
+Crossed cranial-nerve and body findings are much more characteristic
+of brainstem localization.
+</div>
+</div>
+
+<div class="compare-card">
+<h3>🌀 Cerebellum</h3>
+<p>
+Cerebellar lesions can produce ataxia, dysmetria, imbalance,
+and coordination abnormalities.
+</p>
+
+<div class="why">
+<strong>Why not enough alone:</strong><br>
+Cerebellar dysfunction does not explain cranial nerve deficits
+plus crossed sensory or motor findings by itself.
+</div>
+</div>
+
+<div class="compare-card">
+<h3>⚡ Spinal Cord</h3>
+<p>
+Spinal lesions can produce motor and sensory deficits below a
+specific level.
+</p>
+
+<div class="why">
+<strong>Why less likely:</strong><br>
+The presence of cranial nerve findings points above the spinal
+cord and toward the brainstem.
+</div>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- TAKEAWAY -->
+
+<div class="takeaway">
+
+<h3>
+🎯 NeuroAtlas Brainstem Takeaway
+</h3>
+
+<p>
+The brainstem is especially useful for localization because multiple
+systems are packed into a small anatomical space. A cranial nerve
+finding on one side combined with a motor or sensory deficit on the
+opposite side should immediately make you consider a brainstem lesion.
+The exact cranial nerve involved can then help determine the level:
+<strong>midbrain, pons, or medulla.</strong>
+</p>
+
+<br>
+
+<p dir="rtl">
+جذع الدماغ مهم جدًا في تحديد موضع الآفة لأن العديد من المسارات
+والأعصاب القحفية تمر في مساحة صغيرة. وجود علامة في عصب قحفي في جانب
+مع وجود ضعف أو اضطراب حسي في الجانب المقابل يجب أن يجعلنا نفكر في
+آفة في جذع الدماغ. بعد ذلك يمكن استخدام العصب القحفي المتأثر لتحديد
+المستوى: <strong>الدماغ الأوسط أو الجسر أو النخاع المستطيل.</strong>
+</p>
+
+</div>
+
+
+<!-- FREE CASE NAVIGATION -->
+
+<section class="section">
+
+<div class="section-label">
+Explore Freely · استكشف بحرية
+</div>
+
+<h2>
+Choose any case
+</h2>
+
+<p class="intro">
+There is no required order. You can move between the three cases
+whenever you want and each case keeps its own independent assessment.
+</p>
+
+<div class="case-nav">
+
+<a href="#case1">
+🧠 Case 01 · Midbrain
+</a>
+
+<a href="#case2">
+🧩 Case 02 · Pons
+</a>
+
+<a href="#case3">
+🌀 Case 03 · Medulla
+</a>
+
+<a href="#brain">
+🗺️ Brainstem Map
+</a>
+
+</div>
+
+</section>
+
+
+<div class="next-case">
+
+<div>
+
+<div class="section-label">
+NEXT CLINICAL LEVEL
+</div>
+
+<h3>
+Cerebellar Localization · تحديد موضع آفة المخيخ
+</h3>
+
+<p>
+Ready to move from brainstem localization to coordination,
+ataxia, balance, and cerebellar anatomy?
+</p>
+
+</div>
+
+<a class="btn" href="./clinical-cerebellum.html">
+Next Level →
+</a>
+
+</div>
+
+</main>
+
+
+<script>
+
+/* =========================================================
+   LOCALIZATION TABS
+========================================================= */
+
+function showStep(caseId,number,button){
+
+    const container =
+        button.closest(".localizer");
+
+    container.querySelectorAll(".step")
+        .forEach(step => step.classList.remove("active"));
+
+    container.querySelectorAll(".step-content")
+        .forEach(content => content.classList.remove("active"));
+
+    button.classList.add("active");
+
+    document
+        .getElementById(caseId+"-step"+number)
+        .classList.add("active");
+}
+
+
+/* =========================================================
+   QUESTION SYSTEM
+========================================================= */
+
+const scores = {
+    c1:0,
+    c2:0,
+    c3:0
+};
+
+const answered = new Set();
+
+
+function answer(button,correct,answerId){
+
+    const card =
+        button.closest(".question-card");
+
+    const options =
+        card.querySelectorAll(".option");
+
+    options.forEach(option => {
+        option.disabled = true;
+    });
+
+    const answerBox =
+        document.getElementById(answerId);
+
+    answerBox.classList.add("show");
+
+    let caseId = "";
+
+    if(answerId.startsWith("c1")){
+        caseId = "c1";
+    }
+
+    if(answerId.startsWith("c2")){
+        caseId = "c2";
+    }
+
+    if(answerId.startsWith("c3")){
+        caseId = "c3";
+    }
+
+    if(correct){
+
+        button.classList.add("correct");
+
+        if(!answered.has(answerId)){
+
+            scores[caseId]++;
+            answered.add(answerId);
+
+        }
+
+    }else{
+
+        button.classList.add("wrong");
+
+        options.forEach(option => {
+
+            const clickValue =
+                option.getAttribute("onclick");
+
+            if(
+                clickValue &&
+                clickValue.includes("true")
+            ){
+                option.classList.add("correct");
+            }
+
+        });
+
+        answered.add(answerId);
+    }
+
+    updateScore(caseId);
+}
+
+
+function updateScore(caseId){
+
+    const scoreElement =
+        document.getElementById("score-"+caseId);
+
+    const messageElement =
+        document.getElementById("message-"+caseId);
+
+    scoreElement.textContent =
+        scores[caseId] + " / 5";
+
+    if(scores[caseId] === 0){
+
+        messageElement.textContent =
+        "Keep working through the case.";
+
+    }else if(scores[caseId] <= 2){
+
+        messageElement.textContent =
+        "Good start — review the brainstem localization clues.";
+
+    }else if(scores[caseId] <= 4){
+
+        messageElement.textContent =
+        "Strong reasoning — you're connecting cranial nerves with long tracts.";
+
+    }else{
+
+        messageElement.textContent =
+        "Excellent! You localized the brainstem case step by step.";
+
+    }
+}
+
+
+/* =========================================================
+   BRAINSTEM INTERACTIVE MAP
+========================================================= */
+
+function selectBrain(region){
+
+    document.querySelectorAll(".structure")
+        .forEach(r => r.classList.remove("selected"));
+
+    const clicked =
+        document.querySelector(".structure."+region);
+
+    if(clicked){
+        clicked.classList.add("selected");
+    }
+
+    const data = {
+
+        midbrain:{
+            title:"Midbrain",
+            description:
+            "The midbrain is the upper part of the brainstem and contains pathways involved in eye movements, motor control, sensory processing, and arousal.",
+            structures:
+            "CN III pathways + descending motor fibers + major ascending pathways",
+            clues:
+            "Oculomotor abnormalities, ptosis, diplopia, contralateral weakness",
+            case:
+            "Case 01 · CN III + contralateral weakness"
+        },
+
+        pons:{
+            title:"Pons",
+            description:
+            "The pons contains important cranial nerve nuclei and pathways connecting the cerebrum, cerebellum, and spinal cord.",
+            structures:
+            "CN VI/VII pathways + corticospinal fibers + pontocerebellar connections",
+            clues:
+            "Facial weakness, gaze abnormalities, crossed motor or sensory findings",
+            case:
+            "Case 02 · Crossed facial and body findings"
+        },
+
+        medulla:{
+            title:"Medulla",
+            description:
+            "The medulla contains lower cranial nerve structures and major ascending and descending pathways. Its lateral region is particularly important in clinical localization.",
+            structures:
+            "CN IX/X-related structures + sensory pathways + autonomic and cerebellar connections",
+            clues:
+            "Dysphagia, hoarseness, crossed sensory findings, vertigo, ataxia",
+            case:
+            "Case 03 · Lateral medullary pattern"
+        },
+
+        cerebellum:{
+            title:"Cerebellar Connections",
+            description:
+            "The cerebellum connects extensively with the brainstem and helps coordinate movement, balance, timing, and motor accuracy.",
+            structures:
+            "Cerebellar peduncles + vestibulocerebellar connections",
+            clues:
+            "Ataxia, dysmetria, gait disturbance, impaired coordination",
+            case:
+            "Relevant to Case 03 because of ataxia"
+        },
+
+        spinal:{
+            title:"Spinal Cord",
+            description:
+            "The spinal cord continues from the medulla and carries ascending sensory and descending motor pathways.",
+            structures:
+            "Ascending sensory tracts + descending motor tracts",
+            clues:
+            "Sensory level, bilateral or segmental findings, long-tract signs",
+            case:
+            "Important differential when cranial nerve findings are absent"
+        }
+
+    };
+
+    const d = data[region];
+
+    document.getElementById("brainTitle").textContent =
+        d.title;
+
+    document.getElementById("brainDescription").textContent =
+        d.description;
+
+    document.getElementById("brainStructures").textContent =
+        d.structures;
+
+    document.getElementById("brainClues").textContent =
+        d.clues;
+
+    document.getElementById("brainCase").textContent =
+        d.case;
+}
+
+
+/* Default selected structure */
+
+selectBrain("midbrain");
+
+</script>
+
+</body>
+</html>
