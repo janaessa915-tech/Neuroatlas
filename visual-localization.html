@@ -1,0 +1,3057 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NeuroAtlas | Visual Localization</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#050b13;
+    color:#eef4fa;
+    font-family:Arial,Helvetica,sans-serif;
+    line-height:1.65;
+}
+
+nav{
+    height:70px;
+    padding:0 7%;
+    display:flex;
+    align-items:center;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    background:#050b13;
+}
+
+nav a{
+    color:#9db0c3;
+    text-decoration:none;
+    font-size:14px;
+}
+
+nav a:hover{
+    color:white;
+}
+
+.container{
+    max-width:1250px;
+    margin:auto;
+    padding:65px 7% 110px;
+}
+
+.eyebrow{
+    color:#61b5ff;
+    letter-spacing:3px;
+    font-size:11px;
+    text-transform:uppercase;
+    margin-bottom:15px;
+}
+
+h1{
+    font-size:clamp(52px,8vw,88px);
+    line-height:.95;
+    letter-spacing:-4px;
+    margin-bottom:12px;
+}
+
+.arabic-title{
+    color:#ffb6c9;
+    font-size:25px;
+    margin-bottom:25px;
+}
+
+.hero-text{
+    color:#a8b8c8;
+    max-width:950px;
+    font-size:17px;
+    line-height:1.9;
+}
+
+.actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:28px;
+}
+
+.btn{
+    padding:11px 17px;
+    border-radius:9px;
+    background:#0b1928;
+    border:1px solid #31516d;
+    color:#bdd0e0;
+    cursor:pointer;
+    text-decoration:none;
+    font-size:14px;
+    transition:.2s;
+}
+
+.btn:hover{
+    background:#14304a;
+    color:white;
+    border-color:white;
+}
+
+.section{
+    margin-top:75px;
+}
+
+.section-label{
+    color:#61b5ff;
+    letter-spacing:2px;
+    font-size:11px;
+    text-transform:uppercase;
+    margin-bottom:8px;
+}
+
+.section h2{
+    font-size:34px;
+    margin-bottom:14px;
+}
+
+.intro{
+    color:#91a5b8;
+    max-width:950px;
+    line-height:1.9;
+    margin-bottom:30px;
+}
+
+/* CASE */
+
+.case-header{
+    padding:30px;
+    border:1px solid #1b344a;
+    border-radius:20px;
+    background:
+        radial-gradient(circle at 90% 10%,rgba(97,181,255,.09),transparent 35%),
+        #091522;
+}
+
+.case-tag{
+    display:inline-block;
+    padding:6px 10px;
+    border:1px solid #31516d;
+    border-radius:7px;
+    color:#61b5ff;
+    font-size:11px;
+    letter-spacing:2px;
+    margin-bottom:15px;
+}
+
+.case-header h2{
+    font-size:31px;
+    margin-bottom:10px;
+}
+
+.case-subtitle{
+    color:#ffb6c9;
+    margin-bottom:18px;
+}
+
+.profile-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+    margin-top:25px;
+}
+
+.profile{
+    background:#0b1928;
+    border:1px solid #172f43;
+    border-radius:14px;
+    padding:18px;
+}
+
+.profile span{
+    display:block;
+    color:#70869a;
+    font-size:10px;
+    letter-spacing:2px;
+    margin-bottom:7px;
+}
+
+.profile strong{
+    color:#eef4fa;
+    font-size:15px;
+}
+
+/* STORY */
+
+.story{
+    margin-top:22px;
+    padding:27px;
+    background:#08131f;
+    border:1px solid #172b3e;
+    border-radius:17px;
+}
+
+.story h3{
+    font-size:19px;
+    margin-bottom:14px;
+}
+
+.story p{
+    color:#a0b1c1;
+    margin-bottom:17px;
+}
+
+.timeline{
+    margin-top:25px;
+    display:grid;
+    gap:12px;
+}
+
+.timeline-item{
+    display:grid;
+    grid-template-columns:95px 1fr;
+    gap:18px;
+}
+
+.time{
+    color:#61b5ff;
+    font-size:12px;
+    letter-spacing:1px;
+}
+
+.timeline-item div:last-child{
+    color:#9eb0c0;
+    border-left:1px solid #29445a;
+    padding-left:18px;
+}
+
+/* FINDINGS */
+
+.findings{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+    margin-top:25px;
+}
+
+.finding{
+    padding:22px;
+    background:#091522;
+    border:1px solid #172b3e;
+    border-radius:16px;
+}
+
+.finding-number{
+    color:#61b5ff;
+    font-size:11px;
+    letter-spacing:2px;
+    margin-bottom:7px;
+}
+
+.finding h3{
+    font-size:17px;
+    margin-bottom:8px;
+}
+
+.finding p{
+    color:#91a5b8;
+    font-size:14px;
+}
+
+.clue{
+    margin-top:12px;
+    padding:10px 12px;
+    background:#0d2031;
+    border-left:2px solid #61b5ff;
+    color:#bdd0e0;
+    font-size:13px;
+}
+
+/* LOCALIZER */
+
+.localizer{
+    margin-top:30px;
+    padding:30px;
+    background:#07111c;
+    border:1px solid #1a3348;
+    border-radius:20px;
+}
+
+.localizer h3{
+    font-size:22px;
+    margin-bottom:8px;
+}
+
+.localizer-intro{
+    color:#8196aa;
+    margin-bottom:25px;
+}
+
+.steps{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:25px;
+}
+
+.step{
+    padding:9px 13px;
+    border-radius:8px;
+    border:1px solid #203b51;
+    background:#0a1825;
+    color:#7890a5;
+    cursor:pointer;
+    font-size:12px;
+}
+
+.step.active{
+    background:#16324a;
+    border-color:#61b5ff;
+    color:white;
+}
+
+.step-content{
+    display:none;
+    padding:24px;
+    background:#091522;
+    border:1px solid #172b3e;
+    border-radius:15px;
+}
+
+.step-content.active{
+    display:block;
+}
+
+.step-content h4{
+    font-size:19px;
+    margin-bottom:10px;
+}
+
+.step-content p{
+    color:#9cafbf;
+}
+
+.logic{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-top:18px;
+}
+
+.logic-box{
+    padding:15px;
+    border:1px solid #1b3448;
+    border-radius:12px;
+    background:#0b1928;
+}
+
+.logic-box strong{
+    display:block;
+    color:white;
+    margin-bottom:5px;
+}
+
+.logic-box span{
+    color:#8095a8;
+    font-size:13px;
+}
+
+/* VISUALIZATION */
+
+.visual-panel{
+    margin-top:30px;
+    padding:25px;
+    border:1px solid #1b344a;
+    border-radius:20px;
+    background:#07111c;
+}
+
+.visual-layout{
+    display:grid;
+    grid-template-columns:1.3fr .7fr;
+    gap:25px;
+    align-items:center;
+}
+
+.visual-map{
+    min-height:420px;
+    border-radius:18px;
+    padding:20px;
+    background:
+        radial-gradient(circle at center,#172c40,#050b13 75%);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.visual-svg{
+    width:100%;
+    max-width:650px;
+}
+
+.path{
+    fill:#1d3448;
+    stroke:#7f98ab;
+    stroke-width:2;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.path:hover{
+    filter:drop-shadow(0 0 8px rgba(97,181,255,.8));
+}
+
+.path.selected{
+    fill:#61b5ff !important;
+    stroke:white;
+    filter:
+        drop-shadow(0 0 10px rgba(97,181,255,.9))
+        drop-shadow(0 0 22px rgba(97,181,255,.4));
+}
+
+.eye{
+    fill:#dce8f0;
+    stroke:#7891a4;
+    stroke-width:2;
+}
+
+.nerve{
+    fill:none;
+    stroke:#536f84;
+    stroke-width:7;
+    stroke-linecap:round;
+}
+
+.nerve.active{
+    stroke:#61b5ff;
+    filter:drop-shadow(0 0 8px rgba(97,181,255,.8));
+}
+
+.visual-label{
+    fill:#dce7ef;
+    font-size:14px;
+    font-weight:bold;
+    pointer-events:none;
+}
+
+.visual-info{
+    background:#091522;
+    border:1px solid #1c3549;
+    border-radius:16px;
+    padding:24px;
+}
+
+.visual-info .mini{
+    color:#61b5ff;
+    font-size:10px;
+    letter-spacing:2px;
+    margin-bottom:8px;
+}
+
+.visual-info h3{
+    font-size:23px;
+    margin-bottom:10px;
+}
+
+.visual-info p{
+    color:#91a5b8;
+    font-size:14px;
+}
+
+.visual-info hr{
+    border:none;
+    border-top:1px solid #1a3042;
+    margin:20px 0;
+}
+
+.info-row{
+    margin-bottom:13px;
+}
+
+.info-row span{
+    display:block;
+    color:#6f8599;
+    font-size:10px;
+    letter-spacing:1px;
+}
+
+.info-row strong{
+    color:#dce7ef;
+    font-size:13px;
+}
+
+/* QUESTIONS */
+
+.question-card{
+    margin-top:20px;
+    padding:28px;
+    background:#091522;
+    border:1px solid #172f43;
+    border-radius:18px;
+}
+
+.question-number{
+    color:#61b5ff;
+    font-size:11px;
+    letter-spacing:2px;
+    margin-bottom:10px;
+}
+
+.question-card h3{
+    font-size:19px;
+    margin-bottom:17px;
+}
+
+.options{
+    display:grid;
+    gap:9px;
+}
+
+.option{
+    width:100%;
+    padding:14px;
+    border-radius:10px;
+    background:#0d2031;
+    border:1px solid #223c52;
+    color:#dce6ee;
+    text-align:left;
+    cursor:pointer;
+    font-size:14px;
+    transition:.2s;
+}
+
+.option:hover{
+    border-color:#61b5ff;
+    transform:translateX(3px);
+}
+
+.option.correct{
+    background:#132b28;
+    border-color:#69d3b1;
+}
+
+.option.wrong{
+    background:#291b20;
+    border-color:#c56d7f;
+}
+
+.answer{
+    display:none;
+    margin-top:15px;
+    padding:15px;
+    border-radius:10px;
+    background:#0d1d2b;
+    color:#a9bbc9;
+    font-size:13px;
+}
+
+.answer.show{
+    display:block;
+}
+
+.answer strong{
+    color:white;
+}
+
+.score-box{
+    margin-top:30px;
+    padding:25px;
+    border:1px solid #24445d;
+    border-radius:17px;
+    background:#0a1825;
+    text-align:center;
+}
+
+.score-number{
+    font-size:42px;
+    font-weight:bold;
+    color:#61b5ff;
+}
+
+.score-message{
+    color:#91a5b8;
+    margin-top:5px;
+}
+
+/* DIVIDER */
+
+.case-divider{
+    height:1px;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        #24445d,
+        transparent
+    );
+    margin:90px 0;
+}
+
+/* TAKEAWAY */
+
+.takeaway{
+    margin-top:35px;
+    padding:28px;
+    background:#091522;
+    border-left:3px solid #61b5ff;
+    border-radius:13px;
+}
+
+.takeaway h3{
+    margin-bottom:12px;
+}
+
+.takeaway p{
+    color:#9cafbf;
+}
+
+/* NEXT */
+
+.next-case{
+    margin-top:55px;
+    padding:30px;
+    background:
+        radial-gradient(circle at 90% 50%,rgba(97,181,255,.08),transparent 40%),
+        #091522;
+    border:1px solid #1b344a;
+    border-radius:20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+}
+
+.next-case p{
+    color:#8196a9;
+    font-size:14px;
+}
+
+.next-btn{
+    display:inline-block;
+    text-decoration:none;
+    padding:13px 20px;
+    border-radius:10px;
+    background:#0d2031;
+    border:1px solid #31516d;
+    color:#dce8f0;
+    transition:.2s;
+    white-space:nowrap;
+}
+
+.next-btn:hover{
+    background:#16324a;
+    border-color:#61b5ff;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:950px){
+
+    .profile-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .visual-layout{
+        grid-template-columns:1fr;
+    }
+
+    .logic{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:700px){
+
+    .findings{
+        grid-template-columns:1fr;
+    }
+
+    .profile-grid{
+        grid-template-columns:1fr;
+    }
+
+    .timeline-item{
+        grid-template-columns:1fr;
+        gap:3px;
+    }
+
+    h1{
+        letter-spacing:-2px;
+    }
+
+    .next-case{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<a href="./clinical.html">← Back to Clinical Neuroanatomy</a>
+</nav>
+
+<main class="container">
+
+<div class="eyebrow">
+Clinical Cases · Visual Localization · NeuroAtlas
+</div>
+
+<h1>
+Visual<br>Localization
+</h1>
+
+<div class="arabic-title">
+تحديد موضع الآفة في المسار البصري
+</div>
+
+<p class="hero-text">
+
+Visual localization is based on one powerful principle:
+the pattern of visual field loss tells us where the visual pathway
+has been interrupted.
+
+The pathway begins at the retina, travels through the optic nerves,
+meets at the optic chiasm, continues through the optic tracts and
+lateral geniculate bodies, and finally reaches the visual cortex
+through the optic radiations.
+
+<br><br>
+
+تحديد موضع الآفة في المسار البصري يعتمد بشكل أساسي على شكل فقدان
+المجال البصري. يبدأ المسار من الشبكية، ثم العصب البصري، والتصالب
+البصري، ثم السبيل البصري، والإشعاعات البصرية، حتى يصل إلى القشرة
+البصرية في الفص القذالي.
+
+</p>
+
+<div class="actions">
+<a class="btn" href="#case1">👁️ Case 01</a>
+<a class="btn" href="#case2">🧠 Case 02</a>
+<a class="btn" href="#case3">🔎 Case 03</a>
+<a class="btn" href="#visual-map">🗺️ Visual Pathway</a>
+</div>
+
+
+<!-- =========================================================
+CASE 01
+========================================================= -->
+
+<section id="case1" class="section">
+
+<div class="case-header">
+
+<div class="case-tag">
+CASE 01 · OPTIC NERVE
+</div>
+
+<h2>
+The One-Eye Blind Spot
+</h2>
+
+<div class="case-subtitle">
+فقدان الرؤية في عين واحدة
+</div>
+
+<p class="hero-text">
+A 42-year-old woman suddenly notices that vision in her right eye
+has become severely reduced. Vision in the left eye remains normal.
+</p>
+
+<div class="profile-grid">
+
+<div class="profile">
+<span>AGE</span>
+<strong>42 years</strong>
+</div>
+
+<div class="profile">
+<span>ONSET</span>
+<strong>Sudden</strong>
+</div>
+
+<div class="profile">
+<span>KEY FINDING</span>
+<strong>Monocular visual loss</strong>
+</div>
+
+<div class="profile">
+<span>LOCALIZATION</span>
+<strong>Right optic nerve</strong>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="story">
+
+<h3>
+History · التاريخ المرضي
+</h3>
+
+<p>
+The patient reports that objects appear normal when viewed with her
+left eye, but vision is markedly reduced when she closes the left
+eye. There is no clear loss of the temporal or nasal half of vision
+in both eyes.
+</p>
+
+<p dir="rtl">
+تذكر المريضة أن الأشياء تبدو طبيعية عند استخدام العين اليسرى،
+لكن الرؤية تنخفض بشكل واضح عند إغلاق العين اليسرى. لا يوجد نمط
+واضح لفقدان نصف المجال البصري في كلتا العينين.
+</p>
+
+<div class="timeline">
+
+<div class="timeline-item">
+<div class="time">09:10</div>
+<div>Vision is initially normal.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">09:25</div>
+<div>Patient notices blurred vision in the right eye.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">09:40</div>
+<div>Right-eye visual loss becomes obvious.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">10:00</div>
+<div>Left-eye vision remains preserved.</div>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="section-label" style="margin-top:35px;">
+Neurological Examination · الفحص العصبي
+</div>
+
+<h2>What do we find?</h2>
+
+<div class="findings">
+
+<div class="finding">
+<div class="finding-number">01 · RIGHT EYE</div>
+<h3>Marked Monocular Visual Loss</h3>
+<p>
+The right eye has substantially reduced vision.
+</p>
+<div class="clue">
+Clue: isolated monocular loss points toward the visual pathway
+before the optic chiasm.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">02 · LEFT EYE</div>
+<h3>Left Vision Preserved</h3>
+<p>
+The left eye has relatively normal visual function.
+</p>
+<div class="clue">
+Clue: both eyes are not affected in the same visual field pattern.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">03 · VISUAL FIELD</div>
+<h3>No Homonymous Pattern</h3>
+<p>
+There is no matching field deficit affecting the same side of
+visual space in both eyes.
+</p>
+<div class="clue">
+Clue: this makes a post-chiasmal lesion less likely.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">04 · LOCALIZATION</div>
+<h3>Pre-Chiasmal Pathway</h3>
+<p>
+The pattern is most consistent with a lesion affecting the right
+optic nerve or retina.
+</p>
+<div class="clue">
+Clue: localization begins by asking whether one eye or both eyes
+are affected.
+</div>
+</div>
+
+</div>
+
+
+<div class="localizer">
+
+<h3>
+Interactive Localization Engine
+</h3>
+
+<p class="localizer-intro">
+Follow the visual-field logic step by step.
+</p>
+
+<div class="steps">
+
+<button class="step active" onclick="showStep('c1',1,this)">
+01 · Pattern
+</button>
+
+<button class="step" onclick="showStep('c1',2,this)">
+02 · One Eye?
+</button>
+
+<button class="step" onclick="showStep('c1',3,this)">
+03 · Pathway
+</button>
+
+<button class="step" onclick="showStep('c1',4,this)">
+04 · Side
+</button>
+
+<button class="step" onclick="showStep('c1',5,this)">
+05 · Localization
+</button>
+
+</div>
+
+<div class="step-content active" id="c1-step1">
+<h4>01 · Identify the visual pattern</h4>
+
+<p>
+The most important finding is severe visual loss confined mainly
+to one eye.
+</p>
+
+<div class="logic">
+<div class="logic-box">
+<strong>Right eye</strong>
+<span>Abnormal</span>
+</div>
+
+<div class="logic-box">
+<strong>Left eye</strong>
+<span>Preserved</span>
+</div>
+
+<div class="logic-box">
+<strong>Pattern</strong>
+<span>Monocular</span>
+</div>
+</div>
+</div>
+
+
+<div class="step-content" id="c1-step2">
+<h4>02 · Is one eye affected?</h4>
+
+<p>
+Yes. When visual loss is isolated to one eye, the lesion is usually
+localized before the optic chiasm.
+</p>
+
+<div class="logic">
+<div class="logic-box">
+<strong>Retina</strong>
+<span>Possible</span>
+</div>
+
+<div class="logic-box">
+<strong>Optic nerve</strong>
+<span>Possible</span>
+</div>
+
+<div class="logic-box">
+<strong>Chiasm</strong>
+<span>Less likely</span>
+</div>
+</div>
+</div>
+
+
+<div class="step-content" id="c1-step3">
+<h4>03 · Identify the pathway level</h4>
+
+<p>
+Because information from only one eye is affected, the lesion is
+most consistent with a pre-chiasmal visual structure.
+</p>
+
+<div class="logic">
+<div class="logic-box">
+<strong>Retina</strong>
+<span>Pre-chiasmal</span>
+</div>
+
+<div class="logic-box">
+<strong>Optic nerve</strong>
+<span>Pre-chiasmal</span>
+</div>
+
+<div class="logic-box">
+<strong>Optic tract</strong>
+<span>Post-chiasmal</span>
+</div>
+</div>
+</div>
+
+
+<div class="step-content" id="c1-step4">
+<h4>04 · Determine the side</h4>
+
+<p>
+The abnormal eye is the right eye, so a lesion of the right optic
+nerve would explain the pattern.
+</p>
+
+<div class="logic">
+<div class="logic-box">
+<strong>Right eye</strong>
+<span>Affected</span>
+</div>
+
+<div class="logic-box">
+<strong>Left eye</strong>
+<span>Preserved</span>
+</div>
+
+<div class="logic-box">
+<strong>Likely side</strong>
+<span>Right</span>
+</div>
+</div>
+</div>
+
+
+<div class="step-content" id="c1-step5">
+<h4>05 · Final localization</h4>
+
+<p>
+The pattern is most consistent with a right pre-chiasmal lesion,
+with the right optic nerve being the key localization.
+</p>
+
+<div class="logic">
+<div class="logic-box">
+<strong>Level</strong>
+<span>Pre-chiasmal</span>
+</div>
+
+<div class="logic-box">
+<strong>Side</strong>
+<span>Right</span>
+</div>
+
+<div class="logic-box">
+<strong>Structure</strong>
+<span>Right optic nerve</span>
+</div>
+</div>
+</div>
+
+</div>
+
+
+<!-- QUESTIONS CASE 1 -->
+
+<section class="section">
+
+<div class="section-label">
+Case 01 Assessment · اختبار الحالة الأولى
+</div>
+
+<h2>
+Prove your localization
+</h2>
+
+<div class="question-card">
+<div class="question-number">CASE 01 · QUESTION 01</div>
+
+<h3>
+What visual pattern is present?
+</h3>
+
+<div class="options">
+
+<button class="option" onclick="answer(this,true,'c1q1')">
+A. Monocular visual loss
+</button>
+
+<button class="option" onclick="answer(this,false,'c1q1')">
+B. Bitemporal hemianopia
+</button>
+
+<button class="option" onclick="answer(this,false,'c1q1')">
+C. Homonymous hemianopia
+</button>
+
+</div>
+
+<div id="c1q1" class="answer">
+<strong>Correct.</strong>
+The major deficit is confined to one eye.
+</div>
+</div>
+
+
+<div class="question-card">
+<div class="question-number">CASE 01 · QUESTION 02</div>
+
+<h3>
+A lesion affecting one eye alone is most likely located:
+</h3>
+
+<div class="options">
+
+<button class="option" onclick="answer(this,false,'c1q2')">
+A. Behind the optic chiasm
+</button>
+
+<button class="option" onclick="answer(this,true,'c1q2')">
+B. Before the optic chiasm
+</button>
+
+<button class="option" onclick="answer(this,false,'c1q2')">
+C. In the occipital cortex
+</button>
+
+</div>
+
+<div id="c1q2" class="answer">
+<strong>Correct.</strong>
+The optic nerve and retina are located before the optic chiasm.
+</div>
+</div>
+
+
+<div class="question-card">
+<div class="question-number">CASE 01 · QUESTION 03</div>
+
+<h3>
+Which structure is the strongest localization?
+</h3>
+
+<div class="options">
+
+<button class="option" onclick="answer(this,true,'c1q3')">
+A. Right optic nerve
+</button>
+
+<button class="option" onclick="answer(this,false,'c1q3')">
+B. Optic tract
+</button>
+
+<button class="option" onclick="answer(this,false,'c1q3')">
+C. Occipital cortex
+</button>
+
+</div>
+
+<div id="c1q3" class="answer">
+<strong>Correct.</strong>
+The right optic nerve carries visual information from the right eye
+before the chiasm.
+</div>
+</div>
+
+
+<div class="question-card">
+<div class="question-number">CASE 01 · QUESTION 04</div>
+
+<h3>
+Which finding argues against a typical homonymous hemianopia?
+</h3>
+
+<div class="options">
+
+<button class="option" onclick="answer(this,false,'c1q4')">
+A. One side of visual space is affected in both eyes
+</button>
+
+<button class="option" onclick="answer(this,true,'c1q4')">
+B. Only one eye has major visual loss
+</button>
+
+<button class="option" onclick="answer(this,false,'c1q4')">
+C. Both eyes share a field deficit
+</button>
+
+</div>
+
+<div id="c1q4" class="answer">
+<strong>Correct.</strong>
+Homonymous defects affect corresponding visual fields of both eyes.
+</div>
+</div>
+
+
+<div class="question-card">
+<div class="question-number">CASE 01 · QUESTION 05</div>
+
+<h3>
+What is the best final localization?
+</h3>
+
+<div class="options">
+
+<button class="option" onclick="answer(this,true,'c1q5')">
+A. Right optic nerve
+</button>
+
+<button class="option" onclick="answer(this,false,'c1q5')">
+B. Optic chiasm
+</button>
+
+<button class="option" onclick="answer(this,false,'c1q5')">
+C. Left occipital cortex
+</button>
+
+</div>
+
+<div id="c1q5" class="answer">
+<strong>Correct.</strong>
+The isolated right-eye deficit localizes best to the right
+pre-chiasmal visual pathway.
+</div>
+</div>
+
+
+<div class="score-box">
+<div class="score-number" id="score-c1">
+0 / 5
+</div>
+
+<div class="score-message" id="message-c1">
+Answer the questions to reveal your result.
+</div>
+</div>
+
+</section>
+
+</section>
+
+
+<div class="case-divider"></div>
+
+
+<!-- =========================================================
+CASE 02
+========================================================= -->
+
+<section id="case2" class="section">
+
+<div class="case-header">
+
+<div class="case-tag">
+CASE 02 · OPTIC CHIASM
+</div>
+
+<h2>
+The Missing Sides
+</h2>
+
+<div class="case-subtitle">
+فقدان المجالين الصدغيين
+</div>
+
+<p class="hero-text">
+A 51-year-old woman notices that she repeatedly bumps into objects
+on both sides of her surroundings. She can still see objects directly
+in front of her.
+</p>
+
+<div class="profile-grid">
+
+<div class="profile">
+<span>AGE</span>
+<strong>51 years</strong>
+</div>
+
+<div class="profile">
+<span>ONSET</span>
+<strong>Gradual</strong>
+</div>
+
+<div class="profile">
+<span>KEY FINDING</span>
+<strong>Bitemporal loss</strong>
+</div>
+
+<div class="profile">
+<span>LOCALIZATION</span>
+<strong>Optic chiasm</strong>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="story">
+
+<h3>
+History · التاريخ المرضي
+</h3>
+
+<p>
+The patient reports difficulty noticing objects approaching from
+either side. When tested formally, the temporal portions of both
+visual fields are reduced while central vision remains relatively
+preserved.
+</p>
+
+<p dir="rtl">
+تذكر المريضة أنها تجد صعوبة في ملاحظة الأشياء القادمة من جانبيها.
+وعند فحص المجال البصري، يظهر فقدان في الأجزاء الصدغية من المجال
+البصري لكلتا العينين، بينما تظل الرؤية المركزية محفوظة نسبيًا.
+</p>
+
+<div class="timeline">
+
+<div class="timeline-item">
+<div class="time">Weeks</div>
+<div>Patient begins noticing objects from the sides less often.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">Later</div>
+<div>She starts bumping into objects beside her.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">Exam</div>
+<div>Temporal visual fields are reduced bilaterally.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">Result</div>
+<div>Bitemporal hemianopic pattern is identified.</div>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="section-label" style="margin-top:35px;">
+Neurological Examination · الفحص العصبي
+</div>
+
+<h2>
+What do we find?
+</h2>
+
+<div class="findings">
+
+<div class="finding">
+
+<div class="finding-number">
+01 · RIGHT VISUAL FIELD
+</div>
+
+<h3>
+Temporal Field Loss
+</h3>
+
+<p>
+The temporal field of the right eye is reduced.
+</p>
+
+<div class="clue">
+Clue: temporal visual information comes from the nasal retina.
+</div>
+
+</div>
+
+
+<div class="finding">
+
+<div class="finding-number">
+02 · LEFT VISUAL FIELD
+</div>
+
+<h3>
+Temporal Field Loss
+</h3>
+
+<p>
+The temporal field of the left eye is also reduced.
+</p>
+
+<div class="clue">
+Clue: the same side of visual space is not simply lost in both eyes;
+the temporal fields are affected.
+</div>
+
+</div>
+
+
+<div class="finding">
+
+<div class="finding-number">
+03 · CENTRAL VISION
+</div>
+
+<h3>
+Relatively Preserved</h3>
+
+<p>
+Central visual function remains relatively better preserved.
+</p>
+
+<div class="clue">
+Clue: the pattern is not typical of complete loss of one optic nerve.
+</div>
+
+</div>
+
+
+<div class="finding">
+
+<div class="finding-number">
+04 · LOCALIZATION
+</div>
+
+<h3>
+Optic Chiasm</h3>
+
+<p>
+The pattern strongly suggests involvement of the optic chiasm,
+where nasal retinal fibers cross.
+</p>
+
+<div class="clue">
+Clue: bitemporal hemianopia is a classic chiasmal localization.
+</div>
+
+</div>
+
+</div>
+
+
+<div class="localizer">
+
+<h3>
+Interactive Localization Engine
+</h3>
+
+<p class="localizer-intro">
+Use the visual-field pattern to identify the exact level of the
+pathway.
+</p>
+
+<div class="steps">
+
+<button class="step active" onclick="showStep('c2',1,this)">
+01 · Field Pattern
+</button>
+
+<button class="step" onclick="showStep('c2',2,this)">
+02 · Retinal Fibers
+</button>
+
+<button class="step" onclick="showStep('c2',3,this)">
+03 · Crossing
+</button>
+
+<button class="step" onclick="showStep('c2',4,this)">
+04 · Level
+</button>
+
+<button class="step" onclick="showStep('c2',5,this)">
+05 · Localization
+</button>
+
+</div>
+
+
+<div class="step-content active" id="c2-step1">
+
+<h4>
+01 · Recognize the field pattern
+</h4>
+
+<p>
+Both temporal visual fields are affected. This is called a
+bitemporal hemianopic pattern.
+</p>
+
+<div class="logic">
+
+<div class="logic-box">
+<strong>Right eye</strong>
+<span>Temporal field reduced</span>
+</div>
+
+<div class="logic-box">
+<strong>Left eye</strong>
+<span>Temporal field reduced</span>
+</div>
+
+<div class="logic-box">
+<strong>Pattern</strong>
+<span>Bitemporal</span>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="step-content" id="c2-step2">
+
+<h4>
+02 · Which retinal fibers carry temporal-field information?
+</h4>
+
+<p>
+The temporal visual field projects onto the nasal retina.
+The nasal retinal fibers are the fibers that cross at the chiasm.
+</p>
+
+<div class="logic">
+
+<div class="logic-box">
+<strong>Temporal field</strong>
+<span>Projects to nasal retina</span>
+</div>
+
+<div class="logic-box">
+<strong>Nasal retinal fibers</strong>
+<span>Cross</span>
+</div>
+
+<div class="logic-box">
+<strong>Key structure</strong>
+<span>Optic chiasm</span>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="step-content" id="c2-step3">
+
+<h4>
+03 · Identify the crossing point
+</h4>
+
+<p>
+The optic chiasm is the point where nasal retinal fibers from the
+two eyes cross to the opposite side.
+</p>
+
+<div class="logic">
+
+<div class="logic-box">
+<strong>Right nasal fibers</strong>
+<span>Cross</span>
+</div>
+
+<div class="logic-box">
+<strong>Left nasal fibers</strong>
+<span>Cross</span>
+</div>
+
+<div class="logic-box">
+<strong>Crossing</strong>
+<span>Optic chiasm</span>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="step-content" id="c2-step4">
+
+<h4>
+04 · Determine the pathway level
+</h4>
+
+<p>
+Because both temporal fields are affected, the lesion is best
+localized to the optic chiasm rather than one optic nerve or a
+post-chiasmal structure.
+</p>
+
+<div class="logic">
+
+<div class="logic-box">
+<strong>Optic nerve</strong>
+<span>Usually monocular</span>
+</div>
+
+<div class="logic-box">
+<strong>Optic chiasm</strong>
+<span>Strongly supported</span>
+</div>
+
+<div class="logic-box">
+<strong>Optic tract</strong>
+<span>Usually homonymous</span>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="step-content" id="c2-step5">
+
+<h4>
+05 · Final localization
+</h4>
+
+<p>
+The bitemporal pattern localizes to the optic chiasm, where the
+nasal retinal fibers cross.
+</p>
+
+<div class="logic">
+
+<div class="logic-box">
+<strong>Pattern</strong>
+<span>Bitemporal hemianopia</span>
+</div>
+
+<div class="logic-box">
+<strong>Structure</strong>
+<span>Optic chiasm</span>
+</div>
+
+<div class="logic-box">
+<strong>Fiber group</strong>
+<span>Nasal retinal fibers</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- QUESTIONS CASE 2 -->
+
+<section class="section">
+
+<div class="section-label">
+Case 02 Assessment · اختبار الحالة الثانية
+</div>
+
+<h2>
+Can you localize the chiasm?
+</h2>
+
+
+<div class="question-card">
+
+<div class="question-number">
+CASE 02 · QUESTION 01
+</div>
+
+<h3>
+What is the visual field pattern?
+</h3>
+
+<div class="options">
+
+<button class="option" onclick="answer(this,false,'c2q1')">
+A. Monocular blindness
+</button>
+
+<button class="option" onclick="answer(this,true,'c2q1')">
+B. Bitemporal hemianopia
+</button>
+
+<button class="option" onclick="answer(this,false,'c2q1')">
+C. Left homonymous hemianopia
+</button>
+
+</div>
+
+<div id="c2q1" class="answer">
+<strong>Correct.</strong>
+The temporal visual fields of both eyes are affected.
+</div>
+
+</div>
+
+
+<div class="question-card">
+
+<div class="question-number">
+CASE 02 · QUESTION 02
+</div>
+
+<h3>
+Which retinal fibers cross at the optic chiasm?
+</h3>
+
+<div class="options">
+
+<button class="option" onclick="answer(this,true,'c2q2')">
+A. Nasal retinal fibers
+</button>
+
+<button class="option" onclick="answer(this,false,'c2q2')">
+B. Temporal retinal fibers only
+</button>
+
+<button class="option" onclick="answer(this,false,'c2q2')">
+C. Optic radiations
+</button>
+
+</div>
+
+<div id="c2q2" class="answer">
+<strong>Correct.</strong>
+Nasal retinal fibers cross at the optic chiasm.
+</div>
+
+</div>
+
+
+<div class="question-card">
+
+<div class="question-number">
+CASE 02 · QUESTION 03
+</div>
+
+<h3>
+Which structure is the most likely lesion site?
+</h3>
+
+<div class="options">
+
+<button class="option" onclick="answer(this,false,'c2q3')">
+A. Right optic nerve
+</button>
+
+<button class="option" onclick="answer(this,true,'c2q3')">
+B. Optic chiasm
+</button>
+
+<button class="option" onclick="answer(this,false,'c2q3')">
+C. Occipital cortex
+</button>
+
+</div>
+
+<div id="c2q3" class="answer">
+<strong>Correct.</strong>
+The bitemporal pattern strongly points to the optic chiasm.
+</div>
+
+</div>
+
+
+<div class="question-card">
+
+<div class="question-number">
+CASE 02 · QUESTION 04
+</div>
+
+<h3>
+The temporal visual field projects primarily onto which retinal
+region?
+</h3>
+
+<div class="options">
+
+<button class="option" onclick="answer(this,false,'c2q4')">
+A. Temporal retina
+</button>
+
+<button class="option" onclick="answer(this,true,'c2q4')">
+B. Nasal retina
+</button>
+
+<button class="option" onclick="answer(this,false,'c2q4')">
+C. Optic tract
+</button>
+
+</div>
+
+<div id="c2q4" class="answer">
+<strong>Correct.</strong>
+The optics of the eye invert the visual field, so temporal visual
+space projects onto the nasal retina.
+</div>
+
+</div>
+
+
+<div class="question-card">
+
+<div class="question-number">
+CASE 02 · QUESTION 05
+</div>
+
+<h3>
+Which finding most strongly supports a chiasmal lesion?
+</h3>
+
+<div class="options">
+
+<button class="option" onclick="answer(this,false,'c2q5')">
+A. Complete loss of vision in one eye
+</button>
+
+<button class="option" onclick="answer(this,true,'c2q5')">
+B. Temporal field loss in both eyes
+</button>
+
+<button class="option" onclick="answer(this,false,'c2q5')">
+C. Isolated color blindness
+</button>
+
+</div>
+
+<div id="c2q5" class="answer">
+<strong>Correct.</strong>
+Bitemporal visual field loss is a classic clue to optic chiasm
+involvement.
+</div>
+
+</div>
+
+
+<div class="score-box">
+
+<div class="score-number" id="score-c2">
+0 / 5
+</div>
+
+<div class="score-message" id="message-c2">
+Answer the questions to reveal your result.
+</div>
+
+</div>
+
+</section>
+
+</section>
+
+
+<div class="case-divider"></div>
+
+
+<!-- =========================================================
+CASE 03
+========================================================= -->
+
+<section id="case3" class="section">
+
+<div class="case-header">
+
+<div class="case-tag">
+CASE 03 · RETROCHIASMAL
+</div>
+
+<h2>
+The Missing Half
+</h2>
+
+<div class="case-subtitle">
+فقدان نصف المجال البصري في العينين
+</div>
+
+<p class="hero-text">
+A 67-year-old man suddenly notices that he cannot see objects on
+the left side of his surroundings. Testing shows loss of the left
+half of the visual field in both eyes.
+</p>
+
+<div class="profile-grid">
+
+<div class="profile">
+<span>AGE</span>
+<strong>67 years</strong>
+</div>
+
+<div class="profile">
+<span>ONSET</span>
+<strong>Sudden</strong>
+</div>
+
+<div class="profile">
+<span>KEY FINDING</span>
+<strong>Left homonymous hemianopia</strong>
+</div>
+
+<div class="profile">
+<span>LOCALIZATION</span>
+<strong>Right retrochiasmal pathway</strong>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="story">
+
+<h3>
+History · التاريخ المرضي
+</h3>
+
+<p>
+The patient reports suddenly missing objects and people on his left.
+When reading, he sometimes loses the beginning of a line. Formal
+visual-field testing demonstrates loss of the left visual field
+in both eyes.
+</p>
+
+<p dir="rtl">
+يذكر المريض أنه بدأ فجأة في عدم ملاحظة الأشياء والأشخاص الموجودين
+على الجانب الأيسر منه. وعند القراءة يجد أحيانًا صعوبة في رؤية بداية
+السطر. ويُظهر فحص المجال البصري فقدان الجانب الأيسر من المجال البصري
+في كلتا العينين.
+</p>
+
+<div class="timeline">
+
+<div class="timeline-item">
+<div class="time">13:40</div>
+<div>Sudden visual disturbance begins.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">13:45</div>
+<div>Patient notices objects missing on the left.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">14:00</div>
+<div>Visual-field testing reveals left-sided field loss.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">14:15</div>
+<div>Both eyes show the same left visual-field deficit.</div>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="section-label" style="margin-top:35px;">
+Neurological Examination · الفحص العصبي
+</div>
+
+<h2>
+What do we find?
+</h2>
+
+
+<div class="findings">
+
+<div class="finding">
+
+<div class="finding-number">
+01 · RIGHT EYE
+</div>
+
+<h3>
+Left Visual Field Loss
+</h3>
+
+<p>
+The left half of the visual field is absent from the right eye.
+</p>
+
+<div class="clue">
+Clue: the deficit is described by visual space rather than by
+one eye alone.
+</div>
+
+</div>
+
+
+<div class="finding">
+
+<div class="finding-number">
+02 · LEFT EYE
+</div>
+
+<h3>
+Left Visual Field Loss
+</h3>
+
+<p>
+The same left-sided visual field is affected in the left eye.
+</p>
+
+<div class="clue">
+Clue: matching visual-field loss in both eyes is homonymous.
+</div>
+
+</div>
+
+
+<div class="finding">
+
+<div class="finding-number">
+03 · FIELD PATTERN
+</div>
+
+<h3>
+Left Homonymous Hemianopia
+</h3>
+
+<p>
+The patient has loss of the same side of visual space in both eyes.
+</p>
+
+<div class="clue">
+Clue: this pattern indicates a post-chiasmal lesion.
+</div>
+
+</div>
+
+
+<div class="finding">
+
+<div class="finding-number">
+04 · SIDE</div>
+
+<h3>
+Right Retrochiasmal Pathway
+</h3>
+
+<p>
+A left homonymous defect generally indicates a lesion on the right
+side behind the optic chiasm.
+</p>
+
+<div class="clue">
+Clue: post-chiasmal pathways represent the opposite visual field.
+</div>
+
+</div>
+
+
+<div class="finding">
+
+<div class="finding-number">
+05 · POSSIBLE LEVEL
+</div>
+
+<h3>
+Optic Tract → Radiations → Cortex
+</h3>
+
+<p>
+Several structures can produce a homonymous defect, so additional
+clinical findings may be needed to identify the exact level.
+</p>
+
+<div class="clue">
+Clue: visual-field pattern localizes the side, while associated
+findings help determine the precise structure.
+</div>
+
+</div>
+
+
+<div class="finding">
+
+<div class="finding-number">
+06 · HIGHER CORTICAL CLUE
+</div>
+
+<h3>
+Consider the Occipital Cortex</h3>
+
+<p>
+If the deficit is isolated and highly congruous, an occipital
+localization becomes particularly important.
+</p>
+
+<div class="clue">
+Clue: the visual cortex is located in the occipital lobe.
+</div>
+
+</div>
+
+</div>
+
+
+<div class="localizer">
+
+<h3>
+Interactive Localization Engine
+</h3>
+
+<p class="localizer-intro">
+Move from the visual field to the side of the lesion, then determine
+the possible post-chiasmal structures.
+</p>
+
+
+<div class="steps">
+
+<button class="step active" onclick="showStep('c3',1,this)">
+01 · Field Pattern
+</button>
+
+<button class="step" onclick="showStep('c3',2,this)">
+02 · One Eye or Both?
+</button>
+
+<button class="step" onclick="showStep('c3',3,this)">
+03 · Lesion Side
+</button>
+
+<button class="step" onclick="showStep('c3',4,this)">
+04 · Pathway
+</button>
+
+<button class="step" onclick="showStep('c3',5,this)">
+05 · Localization
+</button>
+
+</div>
+
+
+<div class="step-content active" id="c3-step1">
+
+<h4>
+01 · Recognize the visual field pattern
+</h4>
+
+<p>
+The patient has loss of the left half of visual space in both eyes.
+This is a left homonymous hemianopic pattern.
+</p>
+
+<div class="logic">
+
+<div class="logic-box">
+<strong>Right eye</strong>
+<span>Left field lost</span>
+</div>
+
+<div class="logic-box">
+<strong>Left eye</strong>
+<span>Left field lost</span>
+</div>
+
+<div class="logic-box">
+<strong>Pattern</strong>
+<span>Left homonymous</span>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="step-content" id="c3-step2">
+
+<h4>
+02 · Is the deficit monocular?
+</h4>
+
+<p>
+No. The same visual field is affected in both eyes. This immediately
+moves the localization behind the optic chiasm.
+</p>
+
+<div class="logic">
+
+<div class="logic-box">
+<strong>One eye</strong>
+<span>No</span>
+</div>
+
+<div class="logic-box">
+<strong>Both eyes</strong>
+<span>Yes</span>
+</div>
+
+<div class="logic-box">
+<strong>Level</strong>
+<span>Post-chiasmal</span>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="step-content" id="c3-step3">
+
+<h4>
+03 · Determine the side</h4>
+
+<p>
+A left homonymous field deficit indicates a lesion affecting the
+right post-chiasmal visual pathway.
+</p>
+
+<div class="logic">
+
+<div class="logic-box">
+<strong>Visual field lost</strong>
+<span>Left</span>
+</div>
+
+<div class="logic-box">
+<strong>Lesion side</strong>
+<span>Right</span>
+</div>
+
+<div class="logic-box">
+<strong>Relationship</strong>
+<span>Contralateral</span>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="step-content" id="c3-step4">
+
+<h4>
+04 · Identify possible structures
+</h4>
+
+<p>
+The right optic tract, right optic radiations, or right visual cortex
+can produce a left homonymous defect. The exact site requires
+additional clues.
+</p>
+
+<div class="logic">
+
+<div class="logic-box">
+<strong>Optic tract</strong>
+<span>Possible</span>
+</div>
+
+<div class="logic-box">
+<strong>Optic radiations</strong>
+<span>Possible</span>
+</div>
+
+<div class="logic-box">
+<strong>Visual cortex</strong>
+<span>Possible</span>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="step-content" id="c3-step5">
+
+<h4>
+05 · Final localization</h4>
+
+<p>
+The most important localization is a right retrochiasmal lesion.
+If the deficit is isolated and highly congruous, the right occipital
+visual cortex becomes a particularly important consideration.
+</p>
+
+<div class="logic">
+
+<div class="logic-box">
+<strong>Field</strong>
+<span>Left</span>
+</div>
+
+<div class="logic-box">
+<strong>Side</strong>
+<span>Right</span>
+</div>
+
+<div class="logic-box">
+<strong>Level</strong>
+<span>Retrochiasmal</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =========================================================
+VISUALIZATION
+========================================================= -->
+
+<div id="visual-map" class="visual-panel">
+
+<div class="section-label">
+Interactive Visualization · التصور التفاعلي
+</div>
+
+<h2>
+Visual Pathway Map
+</h2>
+
+<p class="intro">
+Click a structure to see its role in visual localization.
+</p>
+
+
+<div class="visual-layout">
+
+<div class="visual-map">
+
+<svg class="visual-svg"
+viewBox="0 0 760 430"
+xmlns="http://www.w3.org/2000/svg">
+
+<!-- LEFT EYE -->
+
+<ellipse
+class="eye"
+cx="80"
+cy="125"
+rx="43"
+ry="58"
+onclick="selectVisual('retina')"/>
+
+<circle
+cx="80"
+cy="125"
+r="16"
+fill="#61b5ff"
+opacity=".65"/>
+
+<!-- RIGHT EYE -->
+
+<ellipse
+class="eye"
+cx="80"
+cy="305"
+rx="43"
+ry="58"
+onclick="selectVisual('retina')"/>
+
+<circle
+cx="80"
+cy="305"
+r="16"
+fill="#61b5ff"
+opacity=".65"/>
+
+
+<!-- OPTIC NERVES -->
+
+<path
+class="nerve"
+d="M123 125 C180 125 190 165 260 210"
+onclick="selectVisual('opticnerve')"/>
+
+<path
+class="nerve"
+d="M123 305 C180 305 190 255 260 210"
+onclick="selectVisual('opticnerve')"/>
+
+
+<!-- CHIASM -->
+
+<rect
+class="path"
+x="250"
+y="185"
+width="75"
+height="50"
+rx="12"
+onclick="selectVisual('chiasm')"/>
+
+
+<!-- TRACTS -->
+
+<path
+class="nerve"
+d="M325 210 C390 175 430 150 480 125"
+onclick="selectVisual('tract')"/>
+
+<path
+class="nerve"
+d="M325 210 C390 245 430 270 480 295"
+onclick="selectVisual('tract')"/>
+
+
+<!-- LGN -->
+
+<circle
+class="path"
+cx="495"
+cy="125"
+r="27"
+onclick="selectVisual('lgn')"/>
+
+<circle
+class="path"
+cx="495"
+cy="295"
+r="27"
+onclick="selectVisual('lgn')"/>
+
+
+<!-- RADIATIONS -->
+
+<path
+class="nerve"
+d="M515 125 C575 105 610 75 665 70"
+onclick="selectVisual('radiations')"/>
+
+<path
+class="nerve"
+d="M515 125 C575 145 610 170 665 210"
+onclick="selectVisual('radiations')"/>
+
+<path
+class="nerve"
+d="M515 295 C575 315 610 275 665 210"
+onclick="selectVisual('radiations')"/>
+
+<path
+class="nerve"
+d="M515 295 C575 335 620 350 665 350"
+onclick="selectVisual('radiations')"/>
+
+
+<!-- VISUAL CORTEX -->
+
+<path
+class="path"
+d="M665 60
+Q735 210 665 360
+Q635 330 650 210
+Q635 90 665 60Z"
+onclick="selectVisual('cortex')"/>
+
+
+<!-- LABELS -->
+
+<text
+class="visual-label"
+x="45"
+y="55">
+Retina
+</text>
+
+<text
+class="visual-label"
+x="230"
+y="170">
+Chiasm
+</text>
+
+<text
+class="visual-label"
+x="450"
+y="85">
+LGN
+</text>
+
+<text
+class="visual-label"
+x="610"
+y="40">
+Visual Cortex
+</text>
+
+</svg>
+
+</div>
+
+
+<div class="visual-info">
+
+<div class="mini">
+VISUAL PATHWAY
+</div>
+
+<h3 id="visual-title">
+Select a structure
+</h3>
+
+<p id="visual-description">
+Click any part of the visual pathway to explore its role in
+localization.
+</p>
+
+<hr>
+
+<div class="info-row">
+
+<span>STRUCTURE</span>
+
+<strong id="visual-structure">
+—
+</strong>
+
+</div>
+
+<div class="info-row">
+
+<span>MAIN ROLE</span>
+
+<strong id="visual-role">
+—
+</strong>
+
+</div>
+
+<div class="info-row">
+
+<span>LOCALIZATION CLUE</span>
+
+<strong id="visual-clue">
+—
+</strong>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- QUESTIONS CASE 3 -->
+
+<section class="section">
+
+<div class="section-label">
+Case 03 Assessment · اختبار الحالة الثالثة
+</div>
+
+<h2>
+Can you follow the visual field?
+</h2>
+
+
+<div class="question-card">
+
+<div class="question-number">
+CASE 03 · QUESTION 01
+</div>
+
+<h3>
+What visual field pattern does the patient have?
+</h3>
+
+<div class="options">
+
+<button class="option" onclick="answer(this,false,'c3q1')">
+A. Bitemporal hemianopia
+</button>
+
+<button class="option" onclick="answer(this,true,'c3q1')">
+B. Left homonymous hemianopia
+</button>
+
+<button class="option" onclick="answer(this,false,'c3q1')">
+C. Right monocular blindness
+</button>
+
+</div>
+
+<div id="c3q1" class="answer">
+<strong>Correct.</strong>
+The left half of visual space is lost in both eyes.
+</div>
+
+</div>
+
+
+<div class="question-card">
+
+<div class="question-number">
+CASE 03 · QUESTION 02
+</div>
+
+<h3>
+Does a homonymous hemianopia usually indicate a lesion before or
+after the optic chiasm?
+</h3>
+
+<div class="options">
+
+<button class="option" onclick="answer(this,false,'c3q2')">
+A. Before the chiasm
+</button>
+
+<button class="option" onclick="answer(this,true,'c3q2')">
+B. After the chiasm
+</button>
+
+<button class="option" onclick="answer(this,false,'c3q2')">
+C. In the retina only
+</button>
+
+</div>
+
+<div id="c3q2" class="answer">
+<strong>Correct.</strong>
+Homonymous visual-field defects are produced by lesions behind
+the optic chiasm.
+</div>
+
+</div>
+
+
+<div class="question-card">
+
+<div class="question-number">
+CASE 03 · QUESTION 03
+</div>
+
+<h3>
+A left homonymous hemianopia most strongly suggests a lesion on
+which side?
+</h3>
+
+<div class="options">
+
+<button class="option" onclick="answer(this,false,'c3q3')">
+A. Left
+</button>
+
+<button class="option" onclick="answer(this,true,'c3q3')">
+B. Right
+</button>
+
+<button class="option" onclick="answer(this,false,'c3q3')">
+C. Bilateral only
+</button>
+
+</div>
+
+<div id="c3q3" class="answer">
+<strong>Correct.</strong>
+Post-chiasmal visual pathways represent the opposite side of
+visual space.
+</div>
+
+</div>
+
+
+<div class="question-card">
+
+<div class="question-number">
+CASE 03 · QUESTION 04
+</div>
+
+<h3>
+Which group contains possible sites for a homonymous visual-field
+defect?
+</h3>
+
+<div class="options">
+
+<button class="option" onclick="answer(this,true,'c3q4')">
+A. Optic tract, optic radiations, visual cortex
+</button>
+
+<button class="option" onclick="answer(this,false,'c3q4')">
+B. Retina only
+</button>
+
+<button class="option" onclick="answer(this,false,'c3q4')">
+C. Oculomotor nerve only
+</button>
+
+</div>
+
+<div id="c3q4" class="answer">
+<strong>Correct.</strong>
+These are all post-chiasmal components of the visual pathway.
+</div>
+
+</div>
+
+
+<div class="question-card">
+
+<div class="question-number">
+CASE 03 · QUESTION 05
+</div>
+
+<h3>
+What is the best overall localization for this case?
+</h3>
+
+<div class="options">
+
+<button class="option" onclick="answer(this,false,'c3q5')">
+A. Right optic nerve
+</button>
+
+<button class="option" onclick="answer(this,true,'c3q5')">
+B. Right retrochiasmal visual pathway
+</button>
+
+<button class="option" onclick="answer(this,false,'c3q5')">
+C. Optic chiasm only
+</button>
+
+</div>
+
+<div id="c3q5" class="answer">
+<strong>Correct.</strong>
+The left homonymous deficit localizes to the right side of the
+visual pathway behind the optic chiasm.
+</div>
+
+</div>
+
+
+<div class="score-box">
+
+<div class="score-number" id="score-c3">
+0 / 5
+</div>
+
+<div class="score-message" id="message-c3">
+Answer the questions to reveal your result.
+</div>
+
+</div>
+
+</section>
+
+
+<div class="takeaway">
+
+<h3>
+Clinical Takeaway · الخلاصة السريرية
+</h3>
+
+<p>
+Visual localization can often be approached with three questions:
+Is one eye affected or both? Which part of the visual field is lost?
+And does the pattern indicate a pre-chiasmal, chiasmal, or
+post-chiasmal lesion?
+
+</p>
+
+<p dir="rtl" style="margin-top:12px;">
+يمكن تحديد موضع الآفة في المسار البصري من خلال ثلاثة أسئلة أساسية:
+هل تتأثر عين واحدة أم كلتا العينين؟ ما الجزء المفقود من المجال
+البصري؟ وهل يشير النمط إلى آفة قبل التصالب البصري أم في التصالب
+أم بعده؟
+</p>
+
+</div>
+
+
+<!-- ONLY NEXT BUTTON -->
+
+<div class="next-case">
+
+<div>
+
+<div class="section-label">
+NEXT · MOTOR LOCALIZATION
+</div>
+
+<h2>
+Ready for Motor Localization?
+</h2>
+
+<p>
+Continue to the next clinical localization module.
+</p>
+
+</div>
+
+<a
+class="next-btn"
+href="./motor-localization.html">
+Continue to Motor Localization →
+</a>
+
+</div>
+
+</section>
+
+</main>
+
+
+<script>
+
+/* =========================================================
+LOCALIZATION STEPS
+========================================================= */
+
+function showStep(caseId,stepNumber,button){
+
+    const contents =
+        document.querySelectorAll(
+            '[id^="'+caseId+'-step"]'
+        );
+
+    contents.forEach(function(content){
+        content.classList.remove("active");
+    });
+
+    const selected =
+        document.getElementById(
+            caseId+"-step"+stepNumber
+        );
+
+    if(selected){
+        selected.classList.add("active");
+    }
+
+    const parent = button.parentElement;
+
+    parent.querySelectorAll(".step").forEach(function(btn){
+        btn.classList.remove("active");
+    });
+
+    button.classList.add("active");
+}
+
+
+/* =========================================================
+QUESTION SYSTEM
+========================================================= */
+
+const scores = {
+    c1:0,
+    c2:0,
+    c3:0
+};
+
+const answered = {};
+
+
+function answer(button,isCorrect,answerId){
+
+    if(answered[answerId]){
+        return;
+    }
+
+    answered[answerId] = true;
+
+    const card = button.closest(".question-card");
+
+    card.querySelectorAll(".option").forEach(function(option){
+        option.disabled = true;
+    });
+
+    if(isCorrect){
+
+        button.classList.add("correct");
+
+        const caseId =
+            answerId.substring(0,2);
+
+        scores[caseId]++;
+
+    }else{
+
+        button.classList.add("wrong");
+
+        card.querySelectorAll(".option").forEach(function(option){
+
+            const text =
+                option.textContent.trim();
+
+            if(
+                (answerId==="c1q1" && text.includes("Monocular")) ||
+                (answerId==="c1q2" && text.includes("Before")) ||
+                (answerId==="c1q3" && text.includes("Right optic nerve")) ||
+                (answerId==="c1q4" && text.includes("Only one eye")) ||
+                (answerId==="c1q5" && text.includes("Right optic nerve")) ||
+
+                (answerId==="c2q1" && text.includes("Bitemporal")) ||
+                (answerId==="c2q2" && text.includes("Nasal retinal")) ||
+                (answerId==="c2q3" && text.includes("Optic chiasm")) ||
+                (answerId==="c2q4" && text.includes("Nasal retina")) ||
+                (answerId==="c2q5" && text.includes("Temporal field")) ||
+
+                (answerId==="c3q1" && text.includes("Left homonymous")) ||
+                (answerId==="c3q2" && text.includes("After")) ||
+                (answerId==="c3q3" && text.includes("Right")) ||
+                (answerId==="c3q4" && text.includes("Optic tract")) ||
+                (answerId==="c3q5" && text.includes("Right retrochiasmal"))
+            ){
+                option.classList.add("correct");
+            }
+
+        });
+
+    }
+
+    const answerBox =
+        document.getElementById(answerId);
+
+    if(answerBox){
+        answerBox.classList.add("show");
+    }
+
+    updateScore("c1");
+    updateScore("c2");
+    updateScore("c3");
+}
+
+
+function updateScore(caseId){
+
+    const scoreElement =
+        document.getElementById(
+            "score-"+caseId
+        );
+
+    const messageElement =
+        document.getElementById(
+            "message-"+caseId
+        );
+
+    if(!scoreElement){
+        return;
+    }
+
+    scoreElement.textContent =
+        scores[caseId]+" / 5";
+
+    if(scores[caseId]===5){
+
+        messageElement.textContent =
+            "Excellent localization. You identified the pattern correctly.";
+
+    }else if(scores[caseId]>=3){
+
+        messageElement.textContent =
+            "Good work. Review the clues you missed and try again mentally.";
+
+    }else{
+
+        messageElement.textContent =
+            "Keep going. Use the visual-field pattern as your main clue.";
+
+    }
+}
+
+
+/* =========================================================
+VISUALIZATION
+========================================================= */
+
+const visualData = {
+
+    retina:{
+        title:"Retina",
+        structure:"Retina",
+        role:"Receives light and begins visual processing.",
+        clue:"A lesion affecting one retina or optic nerve can produce monocular visual loss."
+    },
+
+    opticnerve:{
+        title:"Optic Nerve",
+        structure:"CN II · Optic nerve",
+        role:"Carries visual information from one eye toward the optic chiasm.",
+        clue:"A lesion here typically produces visual loss affecting one eye."
+    },
+
+    chiasm:{
+        title:"Optic Chiasm",
+        structure:"Optic chiasm",
+        role:"Nasal retinal fibers cross here.",
+        clue:"Chiasmal lesions classically produce bitemporal visual-field loss."
+    },
+
+    tract:{
+        title:"Optic Tract",
+        structure:"Optic tract",
+        role:"Carries information representing the opposite visual field.",
+        clue:"A lesion can produce a contralateral homonymous visual-field defect."
+    },
+
+    lgn:{
+        title:"Lateral Geniculate Nucleus",
+        structure:"LGN",
+        role:"Thalamic relay station for the visual pathway.",
+        clue:"Post-chiasmal lesions here can produce homonymous field defects."
+    },
+
+    radiations:{
+        title:"Optic Radiations",
+        structure:"Optic radiations",
+        role:"Carry visual information from the LGN toward the visual cortex.",
+        clue:"Different portions can affect different parts of the contralateral visual field."
+    },
+
+    cortex:{
+        title:"Primary Visual Cortex",
+        structure:"Occipital visual cortex",
+        role:"Receives and processes visual information in the occipital lobe.",
+        clue:"Occipital lesions can produce contralateral homonymous visual-field defects."
+    }
+
+};
+
+
+function selectVisual(key){
+
+    const data =
+        visualData[key];
+
+    if(!data){
+        return;
+    }
+
+    document.getElementById(
+        "visual-title"
+    ).textContent =
+        data.title;
+
+    document.getElementById(
+        "visual-description"
+    ).textContent =
+        data.role;
+
+    document.getElementById(
+        "visual-structure"
+    ).textContent =
+        data.structure;
+
+    document.getElementById(
+        "visual-role"
+    ).textContent =
+        data.role;
+
+    document.getElementById(
+        "visual-clue"
+    ).textContent =
+        data.clue;
+}
+
+</script>
+
+</body>
+  </html>
