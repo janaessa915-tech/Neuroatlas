@@ -29,8 +29,12 @@ nav{
     padding:0 7%;
     display:flex;
     align-items:center;
+    justify-content:space-between;
     border-bottom:1px solid rgba(255,255,255,.08);
     background:#050b13;
+    position:sticky;
+    top:0;
+    z-index:100;
 }
 
 nav a{
@@ -72,7 +76,7 @@ h1{
 
 .hero-text{
     color:#a8b8c8;
-    max-width:900px;
+    max-width:950px;
     font-size:17px;
     line-height:1.9;
 }
@@ -126,9 +130,48 @@ h1{
     margin-bottom:30px;
 }
 
-/* ===============================
-   CASE OVERVIEW
-================================ */
+/* CASE NAVIGATION */
+
+.case-navigation{
+    margin-top:55px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+}
+
+.case-nav{
+    padding:20px;
+    background:#091522;
+    border:1px solid #172f43;
+    border-radius:15px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.case-nav:hover{
+    border-color:#61b5ff;
+    transform:translateY(-3px);
+}
+
+.case-nav span{
+    display:block;
+    color:#61b5ff;
+    font-size:10px;
+    letter-spacing:2px;
+    margin-bottom:6px;
+}
+
+.case-nav strong{
+    font-size:16px;
+}
+
+.case-nav p{
+    color:#71879a;
+    font-size:12px;
+    margin-top:6px;
+}
+
+/* CASE HEADER */
 
 .case-header{
     padding:30px;
@@ -160,9 +203,7 @@ h1{
     margin-bottom:18px;
 }
 
-/* ===============================
-   PATIENT PROFILE
-================================ */
+/* PROFILE */
 
 .profile-grid{
     display:grid;
@@ -191,9 +232,7 @@ h1{
     font-size:15px;
 }
 
-/* ===============================
-   CLINICAL STORY
-================================ */
+/* STORY */
 
 .story{
     margin-top:22px;
@@ -243,9 +282,7 @@ h1{
     padding-left:18px;
 }
 
-/* ===============================
-   FINDINGS
-================================ */
+/* FINDINGS */
 
 .findings{
     display:grid;
@@ -287,9 +324,7 @@ h1{
     font-size:13px;
 }
 
-/* ===============================
-   INTERACTIVE LOCALIZATION
-================================ */
+/* LOCALIZER */
 
 .localizer{
     margin-top:30px;
@@ -378,9 +413,7 @@ h1{
     font-size:13px;
 }
 
-/* ===============================
-   BRAIN VISUALIZATION
-================================ */
+/* BRAIN */
 
 .brain-panel{
     margin-top:30px;
@@ -434,8 +467,7 @@ h1{
 }
 
 .region:hover{
-    filter:
-        drop-shadow(0 0 8px rgba(97,181,255,.8));
+    filter:drop-shadow(0 0 8px rgba(97,181,255,.8));
 }
 
 .region.selected{
@@ -446,21 +478,10 @@ h1{
         drop-shadow(0 0 22px rgba(97,181,255,.45));
 }
 
-.region.frontal{
-    fill:#29425a;
-}
-
-.region.parietal{
-    fill:#314b61;
-}
-
-.region.temporal{
-    fill:#263f55;
-}
-
-.region.occipital{
-    fill:#20394e;
-}
+.region.frontal{fill:#29425a;}
+.region.parietal{fill:#314b61;}
+.region.temporal{fill:#263f55;}
+.region.occipital{fill:#20394e;}
 
 .region-info{
     background:#091522;
@@ -492,10 +513,6 @@ h1{
     margin:20px 0;
 }
 
-region-info strong{
-    color:white;
-}
-
 .info-row{
     margin-bottom:13px;
 }
@@ -513,9 +530,7 @@ region-info strong{
     font-size:13px;
 }
 
-/* ===============================
-   DIFFERENTIAL
-================================ */
+/* COMPARE */
 
 .compare{
     display:grid;
@@ -549,9 +564,7 @@ region-info strong{
     font-size:13px;
 }
 
-/* ===============================
-   QUESTION SYSTEM
-================================ */
+/* QUESTIONS */
 
 .question-card{
     margin-top:20px;
@@ -624,9 +637,7 @@ region-info strong{
     color:white;
 }
 
-/* ===============================
-   SCORE
-================================ */
+/* SCORE */
 
 .score-box{
     margin-top:30px;
@@ -648,9 +659,7 @@ region-info strong{
     margin-top:5px;
 }
 
-/* ===============================
-   TAKEAWAY
-================================ */
+/* TAKEAWAY */
 
 .takeaway{
     margin-top:35px;
@@ -668,9 +677,20 @@ region-info strong{
     color:#9cafbf;
 }
 
-/* ===============================
-   NEXT CASE
-================================ */
+/* CASE DIVIDER */
+
+.case-divider{
+    margin:100px 0 30px;
+    height:1px;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        #31516d,
+        transparent
+    );
+}
+
+/* NEXT */
 
 .next-case{
     margin-top:45px;
@@ -689,9 +709,7 @@ region-info strong{
     font-size:14px;
 }
 
-/* ===============================
-   RESPONSIVE
-================================ */
+/* RESPONSIVE */
 
 @media(max-width:950px){
 
@@ -707,6 +725,9 @@ region-info strong{
         grid-template-columns:1fr;
     }
 
+    .case-navigation{
+        grid-template-columns:1fr;
+    }
 }
 
 @media(max-width:700px){
@@ -731,7 +752,6 @@ region-info strong{
     h1{
         letter-spacing:-2px;
     }
-
 }
 </style>
 </head>
@@ -740,50 +760,81 @@ region-info strong{
 
 <nav>
 <a href="./clinical.html">← Back to Clinical Neuroanatomy</a>
+<a href="#case1">Case 01</a>
+<a href="#case2">Case 02</a>
+<a href="#case3">Case 03</a>
 </nav>
 
 <main class="container">
 
 <div class="eyebrow">
-Clinical Case 01 · NeuroAtlas
+Clinical Cortex · NeuroAtlas
 </div>
 
-<h1>Cortical<br>Localization</h1>
+<h1>
+Cortical<br>Localization
+</h1>
 
 <div class="arabic-title">
 تحديد موضع الآفة في القشرة المخية
 </div>
 
 <p class="hero-text">
-A neurological examination does more than identify symptoms.
-The distribution of those findings can reveal which part of the
-brain is affected. In this case, work through the patient's history,
-examination, functional systems, and neuroanatomy before reaching
-the final localization.
+Three different patients. Three different neurological patterns.
+Your job is to use the findings to work backward toward anatomy.
+Do not memorize the final answer — build the localization from
+the evidence.
+</p>
 
-<br><br>
-
-الفحص العصبي لا يحدد الأعراض فقط، بل يمكن أن يساعدنا توزيع هذه
-الأعراض على معرفة المنطقة المتأثرة في الدماغ. في هذه الحالة،
-سنحلل التاريخ المرضي والفحص العصبي والأنظمة الوظيفية والتشريح
-العصبي خطوة بخطوة قبل الوصول إلى موضع الآفة.
+<p class="hero-text" dir="rtl" style="margin-top:15px;">
+ثلاث حالات عصبية مختلفة، وكل حالة تقدم نمطًا مختلفًا من الأعراض.
+مهمتك هي استخدام هذه العلامات للوصول إلى المكان المحتمل للآفة.
+لا تحفظ الإجابة النهائية فقط، بل ابنِ الاستنتاج خطوة بخطوة من الأدلة.
 </p>
 
 <div class="actions">
-<a class="btn" href="#case">🧠 Start Case</a>
+<a class="btn" href="#case1">🧠 Case 01</a>
+<a class="btn" href="#case2">🧠 Case 02</a>
+<a class="btn" href="#case3">🧠 Case 03</a>
 <a class="btn" href="#brain">🗺️ Brain Map</a>
-<a class="btn" href="#questions">🧪 Questions</a>
 </div>
 
 
-<!-- CASE -->
+<!-- CASE NAVIGATION -->
 
-<section id="case" class="section">
+<div class="case-navigation">
+
+<div class="case-nav" onclick="location.href='#case1'">
+<span>CASE 01</span>
+<strong>Motor + Language</strong>
+<p>Dominant frontal cortical localization</p>
+</div>
+
+<div class="case-nav" onclick="location.href='#case2'">
+<span>CASE 02</span>
+<strong>Sensory + Neglect</strong>
+<p>Parietal cortical localization</p>
+</div>
+
+<div class="case-nav" onclick="location.href='#case3'">
+<span>CASE 03</span>
+<strong>Visual Field Loss</strong>
+<p>Occipital cortical localization</p>
+</div>
+
+</div>
+
+
+<!-- =========================================================
+CASE 01
+========================================================= -->
+
+<section id="case1" class="section">
 
 <div class="case-header">
 
 <div class="case-tag">
-CASE 01 · CORTEX
+CASE 01 · DOMINANT FRONTAL CORTEX
 </div>
 
 <h2>
@@ -819,11 +870,10 @@ his right arm and face approximately two hours earlier.
 
 <div class="profile">
 <span>MAIN PROBLEM</span>
-<strong>Right-sided weakness</strong>
+<strong>Right face + arm weakness</strong>
 </div>
 
 </div>
-
 </div>
 
 
@@ -869,11 +919,8 @@ getting some words out.
 </div>
 
 </div>
-
 </div>
 
-
-<!-- FINDINGS -->
 
 <div class="section-label" style="margin-top:35px;">
 Neurological Examination · الفحص العصبي
@@ -893,7 +940,7 @@ Strength is reduced in the right upper limb. The lower face is
 also weak on the right.
 </p>
 <div class="clue">
-High-yield clue: face and arm are affected more than the leg.
+Face and arm are affected more than the leg.
 </div>
 </div>
 
@@ -905,7 +952,7 @@ The patient understands simple questions but produces short,
 effortful speech.
 </p>
 <div class="clue">
-High-yield clue: language dysfunction suggests cortical involvement.
+A language deficit strongly supports cortical involvement.
 </div>
 </div>
 
@@ -916,19 +963,19 @@ High-yield clue: language dysfunction suggests cortical involvement.
 Light-touch sensation is reduced over the right hand and forearm.
 </p>
 <div class="clue">
-High-yield clue: sensory findings accompany the motor deficit.
+Motor and sensory findings occur together.
 </div>
 </div>
 
 <div class="finding">
 <div class="finding-number">04 · VISUAL</div>
-<h3>No Major Visual Complaint</h3>
+<h3>No Major Visual Deficit</h3>
 <p>
-The patient does not report a clear visual-field disturbance during
-the initial examination.
+No clear visual-field disturbance is identified on the initial
+examination.
 </p>
 <div class="clue">
-High-yield clue: the dominant problem is not primarily visual.
+The main problem is not primarily visual.
 </div>
 </div>
 
@@ -936,11 +983,11 @@ High-yield clue: the dominant problem is not primarily visual.
 <div class="finding-number">05 · COORDINATION</div>
 <h3>No Primary Cerebellar Pattern</h3>
 <p>
-There is no prominent intention tremor, dysmetria, or isolated
+There is no prominent dysmetria, intention tremor, or isolated
 coordination syndrome.
 </p>
 <div class="clue">
-High-yield clue: this does not look primarily cerebellar.
+Weakness is the dominant motor problem.
 </div>
 </div>
 
@@ -948,244 +995,1097 @@ High-yield clue: this does not look primarily cerebellar.
 <div class="finding-number">06 · CRANIAL NERVES</div>
 <h3>Lower Facial Weakness</h3>
 <p>
-The right lower face is weak, while the upper face is relatively
+The right lower face is weak while the upper face is relatively
 preserved.
 </p>
 <div class="clue">
-High-yield clue: corticobulbar involvement can produce this pattern.
+This is compatible with corticobulbar involvement.
 </div>
 </div>
 
 </div>
 
-
-<!-- LOCALIZATION STEPS -->
 
 <div class="localizer">
 
 <h3>Interactive Localization Engine</h3>
 
 <p class="localizer-intro">
-Don't jump directly to the answer. Click through the reasoning
-chain and see how each finding changes the localization.
+Click through the reasoning chain and see how the findings narrow
+the anatomical location.
 </p>
 
 <div class="steps">
 
-<button class="step active" onclick="showStep(1,this)">
-01 · Findings
-</button>
-
-<button class="step" onclick="showStep(2,this)">
-02 · System
-</button>
-
-<button class="step" onclick="showStep(3,this)">
-03 · Side
-</button>
-
-<button class="step" onclick="showStep(4,this)">
-04 · Level
-</button>
-
-<button class="step" onclick="showStep(5,this)">
-05 · Region
-</button>
-
-<button class="step" onclick="showStep(6,this)">
-06 · Explanation
-</button>
+<button class="step active" onclick="showStep('c1',1,this)">01 · Findings</button>
+<button class="step" onclick="showStep('c1',2,this)">02 · System</button>
+<button class="step" onclick="showStep('c1',3,this)">03 · Side</button>
+<button class="step" onclick="showStep('c1',4,this)">04 · Level</button>
+<button class="step" onclick="showStep('c1',5,this)">05 · Region</button>
+<button class="step" onclick="showStep('c1',6,this)">06 · Explanation</button>
 
 </div>
 
-
-<div class="step-content active" id="step1">
+<div class="step-content active" id="c1-step1">
 <h4>01 · Identify the important findings</h4>
-
 <p>
-The most important abnormalities are right lower facial weakness,
-right upper-limb weakness, mild right upper-limb sensory loss,
-and difficulty producing language.
+Right lower facial weakness, right upper-limb weakness,
+mild right upper-limb sensory loss, and expressive language
+difficulty are the key findings.
 </p>
-
 <div class="logic">
-
-<div class="logic-box">
-<strong>Motor</strong>
-<span>Right face + arm weakness</span>
-</div>
-
-<div class="logic-box">
-<strong>Language</strong>
-<span>Expressive difficulty</span>
-</div>
-
-<div class="logic-box">
-<strong>Sensory</strong>
-<span>Right hand/forearm</span>
-</div>
-
+<div class="logic-box"><strong>Motor</strong><span>Right face + arm weakness</span></div>
+<div class="logic-box"><strong>Language</strong><span>Expressive difficulty</span></div>
+<div class="logic-box"><strong>Sensory</strong><span>Right hand/forearm</span></div>
 </div>
 </div>
 
-
-<div class="step-content" id="step2">
-<h4>02 · Identify the functional system</h4>
-
+<div class="step-content" id="c1-step2">
+<h4>02 · Identify the functional systems</h4>
 <p>
-The dominant system is motor, but the presence of language
-dysfunction is extremely important because language is a
-higher cortical function.
+The motor system is prominently affected, but the language deficit
+adds an important cortical clue.
 </p>
-
 <div class="logic">
-
-<div class="logic-box">
-<strong>Primary</strong>
-<span>Motor system</span>
-</div>
-
-<div class="logic-box">
-<strong>Additional</strong>
-<span>Language system</span>
-</div>
-
-<div class="logic-box">
-<strong>Supporting</strong>
-<span>Sensory system</span>
-</div>
-
+<div class="logic-box"><strong>Primary</strong><span>Motor</span></div>
+<div class="logic-box"><strong>Additional</strong><span>Language</span></div>
+<div class="logic-box"><strong>Supporting</strong><span>Sensory</span></div>
 </div>
 </div>
 
-
-<div class="step-content" id="step3">
+<div class="step-content" id="c1-step3">
 <h4>03 · Determine the side</h4>
-
 <p>
-The weakness is on the right side of the body. Because major
-descending motor pathways cross before reaching the spinal motor
-neurons, a supratentorial motor lesion usually produces
-contralateral weakness.
+Right-sided body weakness from a supratentorial motor lesion points
+toward the left cerebral hemisphere because major corticospinal
+pathways cross before reaching their final motor targets.
 </p>
-
 <div class="logic">
-
-<div class="logic-box">
-<strong>Weak side</strong>
-<span>Right</span>
-</div>
-
-<div class="logic-box">
-<strong>Likely brain side</strong>
-<span>Left</span>
-</div>
-
-<div class="logic-box">
-<strong>Key principle</strong>
-<span>Contralateral motor control</span>
-</div>
-
+<div class="logic-box"><strong>Weak side</strong><span>Right</span></div>
+<div class="logic-box"><strong>Brain side</strong><span>Left</span></div>
+<div class="logic-box"><strong>Principle</strong><span>Contralateral motor control</span></div>
 </div>
 </div>
 
-
-<div class="step-content" id="step4">
-<h4>04 · Determine the neurological level</h4>
-
+<div class="step-content" id="c1-step4">
+<h4>04 · Determine the level</h4>
 <p>
-The combination of a focal motor deficit with a language
-disturbance strongly favors a cerebral cortical or nearby
-supratentorial localization rather than a peripheral nerve,
-spinal cord, or isolated cerebellar lesion.
+The focal weakness plus a language deficit favors a cerebral
+cortical or nearby supratentorial localization.
 </p>
-
 <div class="logic">
-
-<div class="logic-box">
-<strong>Cortex</strong>
-<span>Strongly supported</span>
-</div>
-
-<div class="logic-box">
-<strong>Brainstem</strong>
-<span>Less likely</span>
-</div>
-
-<div class="logic-box">
-<strong>Spinal / PNS</strong>
-<span>Does not explain language</span>
-</div>
-
+<div class="logic-box"><strong>Cortex</strong><span>Strongly supported</span></div>
+<div class="logic-box"><strong>Brainstem</strong><span>Less likely</span></div>
+<div class="logic-box"><strong>PNS</strong><span>Does not explain language</span></div>
 </div>
 </div>
 
-
-<div class="step-content" id="step5">
+<div class="step-content" id="c1-step5">
 <h4>05 · Narrow the cortical region</h4>
-
 <p>
 Face and upper-limb weakness greater than leg involvement points
-toward the lateral portion of the primary motor cortex and its
-nearby corticobulbar representation. The language deficit further
-supports involvement of the dominant hemisphere.
+toward the lateral motor representation. Expressive language
+difficulty further supports the dominant hemisphere.
+</p>
+<div class="logic">
+<div class="logic-box"><strong>Side</strong><span>Left</span></div>
+<div class="logic-box"><strong>Motor</strong><span>Lateral precentral region</span></div>
+<div class="logic-box"><strong>Language</strong><span>Dominant frontal network</span></div>
+</div>
+</div>
+
+<div class="step-content" id="c1-step6">
+<h4>06 · Final localization</h4>
+<p>
+The findings are best unified by a left dominant lateral frontal
+cortical process affecting face and upper-limb motor representations
+with involvement of nearby language networks.
+</p>
+<div class="logic">
+<div class="logic-box"><strong>Right weakness</strong><span>Left motor cortex</span></div>
+<div class="logic-box"><strong>Face + arm</strong><span>Lateral representation</span></div>
+<div class="logic-box"><strong>Language</strong><span>Dominant hemisphere</span></div>
+</div>
+</div>
+
+</div>
+
+
+<div class="compare">
+
+<div class="compare-card">
+<h3>🧩 Brainstem</h3>
+<p>
+Can produce cranial nerve and long-tract findings.
+</p>
+<div class="why">
+<strong>Less likely:</strong><br>
+The language disturbance favors cortical localization.
+</div>
+</div>
+
+<div class="compare-card">
+<h3>🌀 Cerebellum</h3>
+<p>
+Produces coordination and balance abnormalities.
+</p>
+<div class="why">
+<strong>Less likely:</strong><br>
+Weakness is the dominant abnormality.
+</div>
+</div>
+
+<div class="compare-card">
+<h3>⚡ Peripheral Nerve</h3>
+<p>
+Usually follows a nerve or root distribution.
+</p>
+<div class="why">
+<strong>Less likely:</strong><br>
+Cannot explain the language deficit.
+</div>
+</div>
+
+</div>
+
+
+<!-- CASE 1 QUESTIONS -->
+
+<div class="section" id="case1questions">
+
+<div class="section-label">
+CASE 01 TEST · اختبار الحالة الأولى
+</div>
+
+<h2>
+Localize Case 01
+</h2>
+
+<p class="intro">
+Answer all five questions before moving to the next case.
 </p>
 
-<div class="logic">
-
-<div class="logic-box">
-<strong>Side</strong>
-<span>Left hemisphere</span>
+<div class="question-card">
+<div class="question-number">QUESTION 01</div>
+<h3>Which side of the body is weak?</h3>
+<div class="options">
+<button class="option" onclick="answerQuestion(this,false,'c1q1')">A. Left</button>
+<button class="option" onclick="answerQuestion(this,true,'c1q1')">B. Right</button>
+<button class="option" onclick="answerQuestion(this,false,'c1q1')">C. Bilateral</button>
 </div>
-
-<div class="logic-box">
-<strong>Motor region</strong>
-<span>Lateral precentral gyrus</span>
-</div>
-
-<div class="logic-box">
-<strong>Language</strong>
-<span>Dominant frontal network</span>
-</div>
-
+<div id="c1q1" class="answer">
+<strong>Correct — B.</strong>
+The weakness involves the right face and right upper limb.
 </div>
 </div>
 
+<div class="question-card">
+<div class="question-number">QUESTION 02</div>
+<h3>Which hemisphere is most likely involved?</h3>
+<div class="options">
+<button class="option" onclick="answerQuestion(this,true,'c1q2')">A. Left hemisphere</button>
+<button class="option" onclick="answerQuestion(this,false,'c1q2')">B. Right hemisphere</button>
+<button class="option" onclick="answerQuestion(this,false,'c1q2')">C. Cerebellum</button>
+</div>
+<div id="c1q2" class="answer">
+<strong>Correct — A.</strong>
+Right-sided weakness from a supratentorial motor lesion points toward the left hemisphere.
+</div>
+</div>
 
-<div class="step-content" id="step6">
-<h4>06 · Explain the entire pattern</h4>
+<div class="question-card">
+<div class="question-number">QUESTION 03</div>
+<h3>Which finding provides a particularly strong cortical clue?</h3>
+<div class="options">
+<button class="option" onclick="answerQuestion(this,false,'c1q3')">A. Mild hand sensory loss</button>
+<button class="option" onclick="answerQuestion(this,false,'c1q3')">B. Lower facial weakness</button>
+<button class="option" onclick="answerQuestion(this,true,'c1q3')">C. Expressive language difficulty</button>
+</div>
+<div id="c1q3" class="answer">
+<strong>Correct — C.</strong>
+Language is a higher cortical function and is especially useful in cortical localization.
+</div>
+</div>
+
+<div class="question-card">
+<div class="question-number">QUESTION 04</div>
+<h3>Face and arm weakness greater than leg weakness suggests which motor representation?</h3>
+<div class="options">
+<button class="option" onclick="answerQuestion(this,false,'c1q4')">A. Medial leg representation</button>
+<button class="option" onclick="answerQuestion(this,true,'c1q4')">B. Lateral face-arm representation</button>
+<button class="option" onclick="answerQuestion(this,false,'c1q4')">C. Occipital visual cortex</button>
+</div>
+<div id="c1q4" class="answer">
+<strong>Correct — B.</strong>
+The face and upper limb occupy more lateral portions of the motor cortex.
+</div>
+</div>
+
+<div class="question-card">
+<div class="question-number">QUESTION 05</div>
+<h3>Which localization best unifies the case?</h3>
+<div class="options">
+<button class="option" onclick="answerQuestion(this,false,'c1q5')">A. Right cerebellar hemisphere</button>
+<button class="option" onclick="answerQuestion(this,false,'c1q5')">B. Peripheral radial nerve</button>
+<button class="option" onclick="answerQuestion(this,true,'c1q5')">C. Left dominant lateral frontal cortex</button>
+</div>
+<div id="c1q5" class="answer">
+<strong>Correct — C.</strong>
+The combination of right face-arm weakness and language dysfunction points toward the left dominant lateral frontal cortex.
+</div>
+</div>
+
+<div class="score-box">
+<div class="score-number" id="score-c1">0 / 5</div>
+<div class="score-message" id="message-c1">
+Complete the five questions to reveal your score.
+</div>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+CASE 02
+========================================================= -->
+
+<div class="case-divider"></div>
+
+<section id="case2" class="section">
+
+<div class="case-header">
+
+<div class="case-tag">
+CASE 02 · PARIETAL CORTEX
+</div>
+
+<h2>
+The Patient Who Cannot Find His Left Side
+</h2>
+
+<div class="case-subtitle">
+المريض الذي لا ينتبه إلى الجانب الأيسر
+</div>
+
+<p class="hero-text">
+A 72-year-old right-handed woman is brought to clinic after her
+family notices that she repeatedly ignores objects on her left,
+bumps into doorways, and insists that there is nothing wrong with
+her left arm.
+</p>
+
+<div class="profile-grid">
+
+<div class="profile">
+<span>AGE</span>
+<strong>72 years</strong>
+</div>
+
+<div class="profile">
+<span>HANDEDNESS</span>
+<strong>Right-handed</strong>
+</div>
+
+<div class="profile">
+<span>ONSET</span>
+<strong>Subacute</strong>
+</div>
+
+<div class="profile">
+<span>MAIN PROBLEM</span>
+<strong>Left-sided neglect</strong>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="story">
+
+<h3>History · التاريخ المرضي</h3>
 
 <p>
-The findings can be unified by a left lateral frontal cortical
-localization involving motor representations for the face and
-upper limb, with nearby dominant-hemisphere language networks
-also affected.
+Her family reports that she has recently started eating only the
+food on the right side of her plate. When asked to copy a simple
+drawing, she reproduces only the right half. She frequently
+bumps into objects located on her left and becomes frustrated
+when family members point this out.
 </p>
 
+<p dir="rtl">
+لاحظت الأسرة أنها بدأت مؤخرًا في تناول الطعام الموجود في الجانب
+الأيمن فقط من الطبق. وعندما طُلب منها نسخ رسم بسيط، قامت برسم
+النصف الأيمن فقط. كما تصطدم بشكل متكرر بالأشياء الموجودة على
+يسارها، وتشعر بالضيق عندما يخبرها أفراد الأسرة بذلك.
+</p>
+
+<div class="timeline">
+
+<div class="timeline-item">
+<div class="time">DAY 1</div>
+<div>Family first notices that she leaves food on the left side of the plate.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">DAY 3</div>
+<div>She begins bumping into objects on her left.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">DAY 5</div>
+<div>She denies having difficulty using or noticing the left side.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">DAY 7</div>
+<div>Neurological examination demonstrates prominent left-sided neglect.</div>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="section-label" style="margin-top:35px;">
+Neurological Examination · الفحص العصبي
+</div>
+
+<h2>
+Look beyond simple weakness.
+</h2>
+
+<div class="findings">
+
+<div class="finding">
+<div class="finding-number">01 · ATTENTION</div>
+<h3>Left Hemispatial Neglect</h3>
+<p>
+The patient consistently fails to attend to stimuli presented on
+the left side of space.
+</p>
+<div class="clue">
+Strong clue for a right parietal attentional network.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">02 · BODY AWARENESS</div>
+<h3>Reduced Awareness of Left Side</h3>
+<p>
+She behaves as though the left side of her body is less relevant
+and does not spontaneously correct errors involving it.
+</p>
+<div class="clue">
+Suggests disturbed spatial awareness rather than simple weakness.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">03 · SENSORY</div>
+<h3>Cortical Sensory Difficulty</h3>
+<p>
+Basic sensation is relatively preserved, but complex sensory
+recognition is impaired.
+</p>
+<div class="clue">
+Higher-order sensory processing can be affected by parietal lesions.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">04 · MOTOR</div>
+<h3>Mild Left Arm Weakness</h3>
+<p>
+There is mild weakness of the left upper limb, but it does not
+fully explain the patient's behavior.
+</p>
+<div class="clue">
+The attentional deficit is much more prominent.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">05 · LANGUAGE</div>
+<h3>No Major Aphasia</h3>
+<p>
+She follows instructions and communicates normally without a major
+expressive or receptive language deficit.
+</p>
+<div class="clue">
+This makes a dominant frontal language syndrome less likely.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">06 · VISUAL</div>
+<h3>Visual Field Testing</h3>
+<p>
+Formal testing does not show a simple isolated left homonymous
+visual-field deficit that explains all of her behavior.
+</p>
+<div class="clue">
+Neglect is broader than a primary visual-field loss.
+</div>
+</div>
+
+</div>
+
+
+<div class="localizer">
+
+<h3>Interactive Localization Engine</h3>
+
+<p class="localizer-intro">
+Follow the clues. Notice how neglect differs from an isolated
+visual-field deficit.
+</p>
+
+<div class="steps">
+
+<button class="step active" onclick="showStep('c2',1,this)">01 · Findings</button>
+<button class="step" onclick="showStep('c2',2,this)">02 · System</button>
+<button class="step" onclick="showStep('c2',3,this)">03 · Side</button>
+<button class="step" onclick="showStep('c2',4,this)">04 · Level</button>
+<button class="step" onclick="showStep('c2',5,this)">05 · Region</button>
+<button class="step" onclick="showStep('c2',6,this)">06 · Explanation</button>
+
+</div>
+
+<div class="step-content active" id="c2-step1">
+<h4>01 · Identify the important findings</h4>
+<p>
+The defining abnormality is failure to attend to the left side of
+space, accompanied by impaired awareness and higher-order sensory
+difficulty.
+</p>
 <div class="logic">
-
-<div class="logic-box">
-<strong>Right weakness</strong>
-<span>Left motor cortex</span>
-</div>
-
-<div class="logic-box">
-<strong>Face + arm</strong>
-<span>Lateral cortical representation</span>
-</div>
-
-<div class="logic-box">
-<strong>Language</strong>
-<span>Dominant hemisphere involvement</span>
-</div>
-
+<div class="logic-box"><strong>Attention</strong><span>Left neglect</span></div>
+<div class="logic-box"><strong>Awareness</strong><span>Reduced left-sided awareness</span></div>
+<div class="logic-box"><strong>Sensory</strong><span>Cortical sensory difficulty</span></div>
 </div>
 </div>
 
+<div class="step-content" id="c2-step2">
+<h4>02 · Identify the functional system</h4>
+<p>
+This is primarily an attentional and spatial-integration problem,
+not simply a motor deficit.
+</p>
+<div class="logic">
+<div class="logic-box"><strong>Primary</strong><span>Spatial attention</span></div>
+<div class="logic-box"><strong>Additional</strong><span>Body awareness</span></div>
+<div class="logic-box"><strong>Supporting</strong><span>Cortical sensation</span></div>
+</div>
+</div>
+
+<div class="step-content" id="c2-step3">
+<h4>03 · Determine the side</h4>
+<p>
+Prominent left hemispatial neglect classically suggests dysfunction
+of the right cerebral hemisphere, particularly right parietal
+attention networks.
+</p>
+<div class="logic">
+<div class="logic-box"><strong>Neglected side</strong><span>Left</span></div>
+<div class="logic-box"><strong>Likely hemisphere</strong><span>Right</span></div>
+<div class="logic-box"><strong>Key clue</strong><span>Spatial attention</span></div>
+</div>
+</div>
+
+<div class="step-content" id="c2-step4">
+<h4>04 · Determine the level</h4>
+<p>
+The complex attentional and perceptual pattern strongly favors
+cortical involvement rather than a peripheral nerve or isolated
+muscle problem.
+</p>
+<div class="logic">
+<div class="logic-box"><strong>Cortex</strong><span>Strongly supported</span></div>
+<div class="logic-box"><strong>PNS</strong><span>Very unlikely</span></div>
+<div class="logic-box"><strong>Cerebellum</strong><span>Does not fit neglect</span></div>
+</div>
+</div>
+
+<div class="step-content" id="c2-step5">
+<h4>05 · Narrow the cortical region</h4>
+<p>
+The combination of hemispatial neglect, impaired body awareness,
+and higher-order sensory abnormalities points toward the right
+parietal association cortex and its attentional networks.
+</p>
+<div class="logic">
+<div class="logic-box"><strong>Side</strong><span>Right hemisphere</span></div>
+<div class="logic-box"><strong>Region</strong><span>Parietal association cortex</span></div>
+<div class="logic-box"><strong>Function</strong><span>Spatial attention</span></div>
+</div>
+</div>
+
+<div class="step-content" id="c2-step6">
+<h4>06 · Final localization</h4>
+<p>
+The complete pattern is most consistent with dysfunction of the
+right parietal cortical attention network.
+</p>
+<div class="logic">
+<div class="logic-box"><strong>Left neglect</strong><span>Right hemisphere</span></div>
+<div class="logic-box"><strong>Spatial awareness</strong><span>Parietal networks</span></div>
+<div class="logic-box"><strong>Higher sensation</strong><span>Cortical association area</span></div>
+</div>
+</div>
+
 </div>
 
 
-<!-- BRAIN MAP -->
+<div class="compare">
+
+<div class="compare-card">
+<h3>👁️ Occipital Cortex</h3>
+<p>
+Can produce visual-field deficits.
+</p>
+<div class="why">
+<strong>Less likely:</strong><br>
+A visual-field deficit alone does not explain broad spatial neglect.
+</div>
+</div>
+
+<div class="compare-card">
+<h3>⚡ Peripheral Nerve</h3>
+<p>
+Produces weakness or sensory loss in a peripheral distribution.
+</p>
+<div class="why">
+<strong>Less likely:</strong><br>
+Cannot produce hemispatial neglect.
+</div>
+</div>
+
+<div class="compare-card">
+<h3>🧠 Right Parietal Cortex</h3>
+<p>
+Supports spatial attention and integration of sensory information.
+</p>
+<div class="why">
+<strong>Best fit:</strong><br>
+Explains neglect, awareness changes, and cortical sensory findings.
+</div>
+</div>
+
+</div>
+
+
+<div class="section" id="case2questions">
+
+<div class="section-label">
+CASE 02 TEST · اختبار الحالة الثانية
+</div>
+
+<h2>
+Can you localize Case 02?
+</h2>
+
+<div class="question-card">
+<div class="question-number">QUESTION 01</div>
+<h3>What is the defining neurological abnormality?</h3>
+<div class="options">
+<button class="option" onclick="answerQuestion(this,false,'c2q1')">A. Expressive aphasia</button>
+<button class="option" onclick="answerQuestion(this,true,'c2q1')">B. Left hemispatial neglect</button>
+<button class="option" onclick="answerQuestion(this,false,'c2q1')">C. Isolated visual loss</button>
+</div>
+<div id="c2q1" class="answer">
+<strong>Correct — B.</strong>
+The dominant finding is failure to attend to the left side of space.
+</div>
+</div>
+
+<div class="question-card">
+<div class="question-number">QUESTION 02</div>
+<h3>Which hemisphere is most strongly associated with this pattern?</h3>
+<div class="options">
+<button class="option" onclick="answerQuestion(this,false,'c2q2')">A. Left hemisphere</button>
+<button class="option" onclick="answerQuestion(this,true,'c2q2')">B. Right hemisphere</button>
+<button class="option" onclick="answerQuestion(this,false,'c2q2')">C. Cerebellum</button>
+</div>
+<div id="c2q2" class="answer">
+<strong>Correct — B.</strong>
+Left hemispatial neglect is classically associated with right hemispheric dysfunction.
+</div>
+</div>
+
+<div class="question-card">
+<div class="question-number">QUESTION 03</div>
+<h3>Which cortical lobe is the strongest localization?</h3>
+<div class="options">
+<button class="option" onclick="answerQuestion(this,false,'c2q3')">A. Occipital</button>
+<button class="option" onclick="answerQuestion(this,true,'c2q3')">B. Parietal</button>
+<button class="option" onclick="answerQuestion(this,false,'c2q3')">C. Temporal</button>
+</div>
+<div id="c2q3" class="answer">
+<strong>Correct — B.</strong>
+Right parietal association networks are strongly involved in spatial attention.
+</div>
+</div>
+
+<div class="question-card">
+<div class="question-number">QUESTION 04</div>
+<h3>Why is this not simply an isolated visual-field deficit?</h3>
+<div class="options">
+<button class="option" onclick="answerQuestion(this,false,'c2q4')">A. Because she has normal hearing</button>
+<button class="option" onclick="answerQuestion(this,true,'c2q4')">B. Because the deficit includes broader spatial awareness and attention</button>
+<button class="option" onclick="answerQuestion(this,false,'c2q4')">C. Because she is right-handed</button>
+</div>
+<div id="c2q4" class="answer">
+<strong>Correct — B.</strong>
+Neglect involves attention and spatial awareness, not simply loss of visual input.
+</div>
+</div>
+
+<div class="question-card">
+<div class="question-number">QUESTION 05</div>
+<h3>Which final localization best explains the case?</h3>
+<div class="options">
+<button class="option" onclick="answerQuestion(this,true,'c2q5')">A. Right parietal association cortex</button>
+<button class="option" onclick="answerQuestion(this,false,'c2q5')">B. Left occipital cortex</button>
+<button class="option" onclick="answerQuestion(this,false,'c2q5')">C. Peripheral sensory nerve</button>
+</div>
+<div id="c2q5" class="answer">
+<strong>Correct — A.</strong>
+The pattern of left neglect and impaired spatial awareness points toward the right parietal cortex.
+</div>
+</div>
+
+<div class="score-box">
+<div class="score-number" id="score-c2">0 / 5</div>
+<div class="score-message" id="message-c2">
+Complete the five questions to reveal your score.
+</div>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+CASE 03
+========================================================= -->
+
+<div class="case-divider"></div>
+
+<section id="case3" class="section">
+
+<div class="case-header">
+
+<div class="case-tag">
+CASE 03 · OCCIPITAL CORTEX
+</div>
+
+<h2>
+The Missing Half of the Visual World
+</h2>
+
+<div class="case-subtitle">
+فقدان نصف المجال البصري
+</div>
+
+<p class="hero-text">
+A 61-year-old man suddenly notices that he keeps missing objects
+on the right side while reading and walking. He has no significant
+weakness, no aphasia, and no major sensory complaint.
+</p>
+
+<div class="profile-grid">
+
+<div class="profile">
+<span>AGE</span>
+<strong>61 years</strong>
+</div>
+
+<div class="profile">
+<span>HANDEDNESS</span>
+<strong>Right-handed</strong>
+</div>
+
+<div class="profile">
+<span>ONSET</span>
+<strong>Sudden</strong>
+</div>
+
+<div class="profile">
+<span>MAIN PROBLEM</span>
+<strong>Right visual-field loss</strong>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="story">
+
+<h3>History · التاريخ المرضي</h3>
+
+<p>
+The patient reports that while reading, the right side of words
+seems to disappear. He also misses people approaching from his
+right while walking. He can move both arms normally and has no
+difficulty understanding or producing speech.
+</p>
+
+<p dir="rtl">
+يذكر المريض أنه أثناء القراءة يبدو أن الجانب الأيمن من الكلمات
+يختفي. كما أنه لا يلاحظ الأشخاص الذين يقتربون من جانبه الأيمن
+أثناء المشي. يستطيع تحريك ذراعيه بشكل طبيعي ولا توجد لديه صعوبة
+واضحة في فهم الكلام أو إنتاجه.
+</p>
+
+<div class="timeline">
+
+<div class="timeline-item">
+<div class="time">14:10</div>
+<div>Patient notices missing objects on the right side.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">14:30</div>
+<div>Reading becomes difficult because the right side of text is missed.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">15:05</div>
+<div>No weakness or language deficit is identified.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">15:30</div>
+<div>Visual-field testing demonstrates a right homonymous deficit.</div>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="section-label" style="margin-top:35px;">
+Neurological Examination · الفحص العصبي
+</div>
+
+<h2>
+Trace the visual pathway.
+</h2>
+
+<div class="findings">
+
+<div class="finding">
+<div class="finding-number">01 · VISUAL FIELD</div>
+<h3>Right Homonymous Field Loss</h3>
+<p>
+The right half of the visual field is absent in both eyes when
+tested appropriately.
+</p>
+<div class="clue">
+A post-chiasmal lesion can produce a homonymous field deficit.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">02 · MOTOR</div>
+<h3>Strength Preserved</h3>
+<p>
+Strength is normal in both upper and lower limbs.
+</p>
+<div class="clue">
+There is no major corticospinal motor syndrome.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">03 · LANGUAGE</div>
+<h3>No Aphasia</h3>
+<p>
+Speech production and comprehension are preserved.
+</p>
+<div class="clue">
+The dominant language cortex is not the main problem.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">04 · SENSORY</div>
+<h3>No Major Body Sensory Loss</h3>
+<p>
+The patient has no significant hemisensory deficit.
+</p>
+<div class="clue">
+The deficit is highly localized to vision.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">05 · EYE MOVEMENTS</div>
+<h3>Extraocular Movements Preserved</h3>
+<p>
+The eyes move normally without a major ocular-motor syndrome.
+</p>
+<div class="clue">
+This supports a central visual pathway problem rather than an ocular-motor deficit.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">06 · HIGHER FUNCTION</div>
+<h3>Visual Recognition Mostly Preserved</h3>
+<p>
+The patient recognizes familiar objects but fails to perceive
+the right half of the visual field.
+</p>
+<div class="clue">
+The deficit is consistent with visual-field loss rather than generalized cognition failure.
+</div>
+</div>
+
+</div>
+
+
+<div class="localizer">
+
+<h3>Interactive Localization Engine</h3>
+
+<p class="localizer-intro">
+Use the visual-field pattern to trace the lesion backward through
+the visual pathway.
+</p>
+
+<div class="steps">
+
+<button class="step active" onclick="showStep('c3',1,this)">01 · Findings</button>
+<button class="step" onclick="showStep('c3',2,this)">02 · System</button>
+<button class="step" onclick="showStep('c3',3,this)">03 · Side</button>
+<button class="step" onclick="showStep('c3',4,this)">04 · Level</button>
+<button class="step" onclick="showStep('c3',5,this)">05 · Region</button>
+<button class="step" onclick="showStep('c3',6,this)">06 · Explanation</button>
+
+</div>
+
+<div class="step-content active" id="c3-step1">
+<h4>01 · Identify the important finding</h4>
+<p>
+The defining abnormality is a right homonymous visual-field deficit
+with preserved motor, language, and major somatic sensory function.
+</p>
+<div class="logic">
+<div class="logic-box"><strong>Visual</strong><span>Right homonymous loss</span></div>
+<div class="logic-box"><strong>Motor</strong><span>Preserved</span></div>
+<div class="logic-box"><strong>Language</strong><span>Preserved</span></div>
+</div>
+</div>
+
+<div class="step-content" id="c3-step2">
+<h4>02 · Identify the functional system</h4>
+<p>
+The affected functional system is visual rather than motor,
+language, or somatosensory.
+</p>
+<div class="logic">
+<div class="logic-box"><strong>Primary</strong><span>Vision</span></div>
+<div class="logic-box"><strong>Motor</strong><span>Not prominent</span></div>
+<div class="logic-box"><strong>Language</strong><span>Preserved</span></div>
+</div>
+</div>
+
+<div class="step-content" id="c3-step3">
+<h4>03 · Determine the side</h4>
+<p>
+A right visual-field deficit in both eyes indicates involvement
+of visual pathways carrying information from the right visual field,
+which ultimately project to the left visual cortex.
+</p>
+<div class="logic">
+<div class="logic-box"><strong>Field lost</strong><span>Right</span></div>
+<div class="logic-box"><strong>Likely cortex</strong><span>Left</span></div>
+<div class="logic-box"><strong>Pathway principle</strong><span>Contralateral visual representation</span></div>
+</div>
+</div>
+
+<div class="step-content" id="c3-step4">
+<h4>04 · Determine the level</h4>
+<p>
+Because the deficit is homonymous, the lesion is most likely
+posterior to the optic chiasm. The absence of major motor or
+language findings further supports a posterior localization.
+</p>
+<div class="logic">
+<div class="logic-box"><strong>Pre-chiasmal</strong><span>Less likely</span></div>
+<div class="logic-box"><strong>Post-chiasmal</strong><span>Strongly supported</span></div>
+<div class="logic-box"><strong>Motor cortex</strong><span>Not supported</span></div>
+</div>
+</div>
+
+<div class="step-content" id="c3-step5">
+<h4>05 · Narrow the cortical region</h4>
+<p>
+An isolated homonymous field deficit with preserved higher functions
+can point toward the primary visual cortex in the occipital lobe.
+</p>
+<div class="logic">
+<div class="logic-box"><strong>Side</strong><span>Left</span></div>
+<div class="logic-box"><strong>Lobe</strong><span>Occipital</span></div>
+<div class="logic-box"><strong>Core function</strong><span>Primary visual processing</span></div>
+</div>
+</div>
+
+<div class="step-content" id="c3-step6">
+<h4>06 · Final localization</h4>
+<p>
+The overall pattern is most consistent with a lesion involving
+the left occipital visual cortex or nearby posterior visual pathway.
+</p>
+<div class="logic">
+<div class="logic-box"><strong>Right field loss</strong><span>Left visual cortex</span></div>
+<div class="logic-box"><strong>Motor preserved</strong><span>Posterior localization</span></div>
+<div class="logic-box"><strong>Language preserved</strong><span>Visual system dominant</span></div>
+</div>
+</div>
+
+</div>
+
+
+<div class="compare">
+
+<div class="compare-card">
+<h3>👁️ Optic Nerve</h3>
+<p>
+An optic-nerve lesion typically produces monocular visual loss.
+</p>
+<div class="why">
+<strong>Less likely:</strong><br>
+This patient has a homonymous field deficit involving both eyes.
+</div>
+</div>
+
+<div class="compare-card">
+<h3>✦ Optic Chiasm</h3>
+<p>
+Chiasmal lesions classically affect crossing nasal retinal fibers.
+</p>
+<div class="why">
+<strong>Less likely:</strong><br>
+The pattern is homonymous rather than bitemporal.
+</div>
+</div>
+
+<div class="compare-card">
+<h3>🧠 Occipital Cortex</h3>
+<p>
+Processes visual information from the contralateral visual field.
+</p>
+<div class="why">
+<strong>Best fit:</strong><br>
+Explains an isolated contralateral homonymous field deficit.
+</div>
+</div>
+
+</div>
+
+
+<div class="section" id="case3questions">
+
+<div class="section-label">
+CASE 03 TEST · اختبار الحالة الثالثة
+</div>
+
+<h2>
+Can you localize Case 03?
+</h2>
+
+<div class="question-card">
+<div class="question-number">QUESTION 01</div>
+<h3>What is the dominant neurological deficit?</h3>
+<div class="options">
+<button class="option" onclick="answerQuestion(this,true,'c3q1')">A. Right homonymous visual-field loss</button>
+<button class="option" onclick="answerQuestion(this,false,'c3q1')">B. Right arm weakness</button>
+<button class="option" onclick="answerQuestion(this,false,'c3q1')">C. Aphasia</button>
+</div>
+<div id="c3q1" class="answer">
+<strong>Correct — A.</strong>
+The defining finding is loss of the right visual field in both eyes.
+</div>
+</div>
+
+<div class="question-card">
+<div class="question-number">QUESTION 02</div>
+<h3>Which side of the visual cortex is most likely involved?</h3>
+<div class="options">
+<button class="option" onclick="answerQuestion(this,false,'c3q2')">A. Right</button>
+<button class="option" onclick="answerQuestion(this,true,'c3q2')">B. Left</button>
+<button class="option" onclick="answerQuestion(this,false,'c3q2')">C. Bilateral equally</button>
+</div>
+<div id="c3q2" class="answer">
+<strong>Correct — B.</strong>
+The left visual cortex represents the right visual field.
+</div>
+</div>
+
+<div class="question-card">
+<div class="question-number">QUESTION 03</div>
+<h3>What does a homonymous field deficit suggest?</h3>
+<div class="options">
+<button class="option" onclick="answerQuestion(this,false,'c3q3')">A. A purely muscular problem</button>
+<button class="option" onclick="answerQuestion(this,false,'c3q3')">B. A peripheral nerve lesion</button>
+<button class="option" onclick="answerQuestion(this,true,'c3q3')">C. A post-chiasmal visual pathway lesion</button>
+</div>
+<div id="c3q3" class="answer">
+<strong>Correct — C.</strong>
+Homonymous visual-field deficits localize posterior to the optic chiasm.
+</div>
+</div>
+
+<div class="question-card">
+<div class="question-number">QUESTION 04</div>
+<h3>Which lobe contains the primary visual cortex?</h3>
+<div class="options">
+<button class="option" onclick="answerQuestion(this,true,'c3q4')">A. Occipital lobe</button>
+<button class="option" onclick="answerQuestion(this,false,'c3q4')">B. Frontal lobe</button>
+<button class="option" onclick="answerQuestion(this,false,'c3q4')">C. Parietal lobe</button>
+</div>
+<div id="c3q4" class="answer">
+<strong>Correct — A.</strong>
+The primary visual cortex is located in the occipital lobe around the calcarine cortex.
+</div>
+</div>
+
+<div class="question-card">
+<div class="question-number">QUESTION 05</div>
+<h3>Which localization best fits the complete pattern?</h3>
+<div class="options">
+<button class="option" onclick="answerQuestion(this,false,'c3q5')">A. Right frontal motor cortex</button>
+<button class="option" onclick="answerQuestion(this,true,'c3q5')">B. Left occipital visual cortex</button>
+<button class="option" onclick="answerQuestion(this,false,'c3q5')">C. Right cerebellar hemisphere</button>
+</div>
+<div id="c3q5" class="answer">
+<strong>Correct — B.</strong>
+An isolated right homonymous visual-field deficit points toward the left occipital visual cortex.
+</div>
+</div>
+
+<div class="score-box">
+<div class="score-number" id="score-c3">0 / 5</div>
+<div class="score-message" id="message-c3">
+Complete the five questions to reveal your score.
+</div>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+INTERACTIVE BRAIN MAP
+========================================================= -->
 
 <section id="brain" class="section">
 
@@ -1194,13 +2094,12 @@ Interactive Neuroanatomy · التشريح العصبي التفاعلي
 </div>
 
 <h2>
-Click the cortical regions
+Explore the cortical map
 </h2>
 
 <p class="intro">
-Explore the major cortical territories involved in neurological
-localization. Click a region to see its function, major clinical
-clues, and what deficits can occur when it is affected.
+Click a cortical region to explore its major functions and see
+which of the three cases connects most strongly to it.
 </p>
 
 <div class="brain-panel">
@@ -1213,7 +2112,6 @@ clues, and what deficits can occur when it is affected.
 viewBox="0 0 800 520"
 xmlns="http://www.w3.org/2000/svg">
 
-<!-- Brain -->
 <path
 class="brain-outline"
 d="
@@ -1230,7 +2128,6 @@ C290 450 220 425 210 380
 C155 385 110 345 115 290Z
 "/>
 
-<!-- Frontal -->
 <path
 class="region frontal"
 onclick="selectRegion('frontal')"
@@ -1243,7 +2140,6 @@ C205 290 160 265 135 230
 C115 205 120 175 135 155Z
 "/>
 
-<!-- Parietal -->
 <path
 class="region parietal"
 onclick="selectRegion('parietal')"
@@ -1255,7 +2151,6 @@ C500 270 455 280 410 260
 C370 245 345 220 350 180Z
 "/>
 
-<!-- Temporal -->
 <path
 class="region temporal"
 onclick="selectRegion('temporal')"
@@ -1267,7 +2162,6 @@ C380 410 315 420 270 400
 C230 385 205 350 205 285Z
 "/>
 
-<!-- Occipital -->
 <path
 class="region occipital"
 onclick="selectRegion('occipital')"
@@ -1279,21 +2173,23 @@ C580 325 535 300 515 265
 C500 225 505 165 525 125Z
 "/>
 
-<!-- Sulci -->
 <path class="brain-sulcus"
 d="M175 165 C220 140 270 145 310 170"/>
+
 <path class="brain-sulcus"
 d="M150 215 C210 190 275 205 320 230"/>
+
 <path class="brain-sulcus"
 d="M380 130 C425 155 470 160 515 145"/>
+
 <path class="brain-sulcus"
 d="M380 205 C430 185 475 205 515 225"/>
+
 <path class="brain-sulcus"
 d="M245 320 C290 300 340 320 370 350"/>
+
 <path class="brain-sulcus"
 d="M540 180 C580 200 605 225 615 260"/>
-
-<!-- Labels -->
 
 <text x="205" y="180"
 fill="#d9e5ee"
@@ -1362,7 +2258,7 @@ Weakness, language changes, behavioral changes
 <div class="info-row">
 <span>CASE CONNECTION</span>
 <strong id="regionCase">
-High relevance to this case
+Case 01 · High relevance
 </strong>
 </div>
 
@@ -1375,297 +2271,7 @@ High relevance to this case
 </section>
 
 
-<!-- DIFFERENTIAL -->
-
-<section class="section">
-
-<div class="section-label">
-Differential Localization · المقارنة التشريحية
-</div>
-
-<h2>
-Why not somewhere else?
-</h2>
-
-<p class="intro">
-Localization becomes stronger when you can explain not only why
-one location fits, but also why competing locations fit less well.
-</p>
-
-<div class="compare">
-
-<div class="compare-card">
-<h3>🧩 Brainstem</h3>
-<p>
-Brainstem lesions can produce cranial nerve abnormalities with
-long-tract findings and may create crossed face-body patterns.
-</p>
-<div class="why">
-<strong>Why less likely here:</strong><br>
-The language disturbance and cortical distribution favor a
-supratentorial cortical process.
-</div>
-</div>
-
-<div class="compare-card">
-<h3>🌀 Cerebellum</h3>
-<p>
-Cerebellar dysfunction typically produces abnormalities of
-coordination, balance, timing, and movement accuracy.
-</p>
-<div class="why">
-<strong>Why less likely here:</strong><br>
-The dominant finding is weakness rather than a primary
-coordination syndrome.
-</div>
-</div>
-
-<div class="compare-card">
-<h3>⚡ Peripheral Nerve</h3>
-<p>
-Peripheral lesions usually follow a nerve, root, plexus, or
-muscle distribution.
-</p>
-<div class="why">
-<strong>Why less likely here:</strong><br>
-A peripheral lesion cannot easily explain the associated
-language dysfunction.
-</div>
-</div>
-
-</div>
-
-</section>
-
-
-<!-- QUESTIONS -->
-
-<section id="questions" class="section">
-
-<div class="section-label">
-Clinical Reasoning Test · اختبار التفكير السريري
-</div>
-
-<h2>
-Can you localize it?
-</h2>
-
-<p class="intro">
-Answer each question before moving to the next. Your score updates
-automatically as you work through the case.
-</p>
-
-
-<div class="question-card">
-
-<div class="question-number">
-QUESTION 01
-</div>
-
-<h3>
-The patient's weakness is predominantly on which side?
-</h3>
-
-<div class="options">
-
-<button class="option"
-onclick="answerQuestion(this,true,'a1')">
-A. Right
-</button>
-
-<button class="option"
-onclick="answerQuestion(this,false,'a1')">
-B. Left
-</button>
-
-<button class="option"
-onclick="answerQuestion(this,false,'a1')">
-C. Bilateral equally
-</button>
-
-</div>
-
-<div id="a1" class="answer">
-<strong>Correct.</strong>
-The examination describes weakness of the right face and right
-upper limb.
-</div>
-
-</div>
-
-
-<div class="question-card">
-
-<div class="question-number">
-QUESTION 02
-</div>
-
-<h3>
-Which brain hemisphere is most likely involved in a supratentorial
-lesion producing this motor pattern?
-</h3>
-
-<div class="options">
-
-<button class="option"
-onclick="answerQuestion(this,true,'a2')">
-A. Left hemisphere
-</button>
-
-<button class="option"
-onclick="answerQuestion(this,false,'a2')">
-B. Right hemisphere
-</button>
-
-<button class="option"
-onclick="answerQuestion(this,false,'a2')">
-C. Cerebellum
-</button>
-
-</div>
-
-<div id="a2" class="answer">
-<strong>Correct.</strong>
-Major corticospinal motor pathways produce contralateral control
-after their relevant crossing, making a left cerebral lesion a strong
-localization for right-sided weakness.
-</div>
-
-</div>
-
-
-<div class="question-card">
-
-<div class="question-number">
-QUESTION 03
-</div>
-
-<h3>
-Why is the language finding especially useful for localization?
-</h3>
-
-<div class="options">
-
-<button class="option"
-onclick="answerQuestion(this,true,'a3')">
-A. It supports dominant cortical involvement
-</button>
-
-<button class="option"
-onclick="answerQuestion(this,false,'a3')">
-B. It proves a cerebellar lesion
-</button>
-
-<button class="option"
-onclick="answerQuestion(this,false,'a3')">
-C. It indicates a peripheral nerve lesion
-</button>
-
-</div>
-
-<div id="a3" class="answer">
-<strong>Correct.</strong>
-Language functions depend on distributed cortical networks and
-are therefore powerful clues when determining cortical localization.
-</div>
-
-</div>
-
-
-<div class="question-card">
-
-<div class="question-number">
-QUESTION 04
-</div>
-
-<h3>
-Face and arm weakness greater than leg weakness points most strongly
-toward which cortical region?
-</h3>
-
-<div class="options">
-
-<button class="option"
-onclick="answerQuestion(this,true,'a4')">
-A. Lateral primary motor cortex
-</button>
-
-<button class="option"
-onclick="answerQuestion(this,false,'a4')">
-B. Medial occipital cortex
-</button>
-
-<button class="option"
-onclick="answerQuestion(this,false,'a4')">
-C. Cerebellar vermis
-</button>
-
-</div>
-
-<div id="a4" class="answer">
-<strong>Correct.</strong>
-The motor homunculus places face and upper-limb representations
-more laterally, while the lower limb is represented more medially.
-</div>
-
-</div>
-
-
-<div class="question-card">
-
-<div class="question-number">
-QUESTION 05
-</div>
-
-<h3>
-Which localization best unifies the complete pattern?
-</h3>
-
-<div class="options">
-
-<button class="option"
-onclick="answerQuestion(this,true,'a5')">
-A. Left lateral frontal cortical region
-</button>
-
-<button class="option"
-onclick="answerQuestion(this,false,'a5')">
-B. Right cerebellar hemisphere
-</button>
-
-<button class="option"
-onclick="answerQuestion(this,false,'a5')">
-C. Peripheral radial nerve
-</button>
-
-</div>
-
-<div id="a5" class="answer">
-<strong>Correct.</strong>
-The combination of contralateral face-arm weakness, sensory
-findings, and language dysfunction points toward the dominant
-left lateral frontal cortical region.
-</div>
-
-</div>
-
-
-<div class="score-box">
-
-<div class="score-number" id="score">
-0 / 5
-</div>
-
-<div class="score-message" id="scoreMessage">
-Answer the questions to reveal your final result.
-</div>
-
-</div>
-
-</section>
-
-
-<!-- TAKEAWAY -->
+<!-- FINAL TAKEAWAY -->
 
 <div class="takeaway">
 
@@ -1674,21 +2280,26 @@ Answer the questions to reveal your final result.
 </h3>
 
 <p>
-Localization is a process of pattern recognition supported by
-anatomy. In this case, the combination of <strong>right face-arm
-weakness + sensory involvement + language dysfunction</strong>
-moves the reasoning toward the <strong>left dominant lateral
-cerebral cortex</strong>. The distribution of the weakness helps
-narrow the motor component toward the lateral motor representation.
+These three cases demonstrate why localization depends on the
+<strong>pattern</strong>, not a single symptom. Case 01 uses
+motor distribution and language dysfunction to point toward the
+<strong>left dominant frontal cortex</strong>. Case 02 uses
+<strong>left hemispatial neglect</strong> and higher-order sensory
+findings to point toward the <strong>right parietal cortex</strong>.
+Case 03 uses a <strong>right homonymous visual-field deficit</strong>
+to point toward the <strong>left occipital visual cortex</strong>.
 </p>
 
 <br>
 
 <p dir="rtl">
-تحديد موضع الآفة يعتمد على ربط الأعراض بالتشريح. في هذه الحالة،
-يساعد الجمع بين <strong>ضعف الوجه والذراع الأيمن + اضطراب الإحساس
-+ اضطراب اللغة</strong> على تحديد المنطقة اليسرى المسيطرة من القشرة
-المخية، وخاصة المنطقة الجانبية المرتبطة بالوظائف الحركية واللغوية.
+توضح الحالات الثلاث أن تحديد موضع الآفة يعتمد على
+<strong>نمط الأعراض</strong> وليس على عرض واحد فقط. الحالة الأولى
+تشير إلى القشرة الجبهية اليسرى المسيطرة من خلال الضعف الحركي
+واضطراب اللغة. الحالة الثانية تشير إلى القشرة الجدارية اليمنى
+من خلال إهمال الجانب الأيسر واضطراب الوعي المكاني. أما الحالة
+الثالثة فتشير إلى القشرة البصرية القذالية اليسرى من خلال فقدان
+المجال البصري الأيمن.
 </p>
 
 </div>
@@ -1698,7 +2309,7 @@ narrow the motor component toward the lateral motor representation.
 
 <div>
 <div class="section-label">
-NEXT CASE
+NEXT CLINICAL LEVEL
 </div>
 
 <h3>
@@ -1712,7 +2323,7 @@ and brainstem anatomy?
 </div>
 
 <a class="btn" href="./clinical-brainstem.html">
-Next Case →
+Next Clinical Module →
 </a>
 
 </div>
@@ -1722,27 +2333,40 @@ Next Case →
 
 <script>
 
-let score = 0;
+let scores = {
+    c1:0,
+    c2:0,
+    c3:0
+};
+
 let answered = new Set();
 
 
-function showStep(number,button){
+/* =========================================
+   LOCALIZATION STEPS
+========================================= */
 
-    document.querySelectorAll(".step").forEach(
-        step => step.classList.remove("active")
-    );
+function showStep(caseId,number,button){
 
-    document.querySelectorAll(".step-content").forEach(
-        content => content.classList.remove("active")
-    );
+    const localizer = button.closest(".localizer");
+
+    localizer.querySelectorAll(".step")
+        .forEach(step => step.classList.remove("active"));
+
+    localizer.querySelectorAll(".step-content")
+        .forEach(content => content.classList.remove("active"));
 
     button.classList.add("active");
 
     document
-        .getElementById("step"+number)
+        .getElementById(caseId+"-step"+number)
         .classList.add("active");
 }
 
+
+/* =========================================
+   BRAIN REGION
+========================================= */
 
 function selectRegion(region){
 
@@ -1761,49 +2385,49 @@ function selectRegion(region){
         frontal:{
             title:"Frontal Lobe",
             description:
-            "The frontal lobe contains important motor and higher-order networks. Its lateral portions include motor representations for the face and upper limb and, in the dominant hemisphere, language-related regions.",
+            "The frontal lobe contains important motor, executive, and language-related networks. Its lateral motor regions represent the face and upper limb, while dominant frontal networks contribute to language production.",
             function:
-            "Voluntary movement + executive and language functions",
+            "Voluntary movement + executive functions + language",
             clues:
-            "Contralateral weakness, expressive language changes, behavioral or executive changes",
+            "Contralateral weakness, expressive language changes, executive or behavioral changes",
             case:
-            "Very high relevance — fits the motor and language findings"
+            "Case 01 · Strong connection"
         },
 
         parietal:{
             title:"Parietal Lobe",
             description:
-            "The parietal lobe integrates somatic sensory information and contributes to spatial attention and higher-order sensory processing.",
+            "The parietal lobe integrates somatic sensory information and contributes to spatial attention, body awareness, and higher-order sensory processing.",
             function:
-            "Somatosensation + spatial integration",
+            "Somatosensation + spatial integration + attention",
             clues:
-            "Sensory loss, neglect, impaired cortical sensory processing",
+            "Neglect, cortical sensory deficits, spatial disorientation",
             case:
-            "Possible contributor to sensory findings, but not the strongest localization"
+            "Case 02 · Strong connection"
         },
 
         temporal:{
             title:"Temporal Lobe",
             description:
-            "Temporal cortical networks participate in auditory processing, memory, emotion, and language comprehension.",
+            "Temporal cortical networks participate in auditory processing, memory, emotion, and aspects of language comprehension.",
             function:
             "Auditory processing + memory + language networks",
             clues:
-            "Memory disturbance, auditory changes, comprehension problems",
+            "Memory changes, auditory abnormalities, comprehension difficulties",
             case:
-            "Not the best explanation for the predominant face-arm weakness"
+            "No primary case connection"
         },
 
         occipital:{
             title:"Occipital Lobe",
             description:
-            "The occipital lobe contains the primary visual cortex and visual association networks.",
+            "The occipital lobe contains primary and association visual cortex and processes information about the visual field.",
             function:
-            "Visual processing",
+            "Primary visual processing",
             clues:
-            "Visual-field deficits and higher visual-processing abnormalities",
+            "Homonymous visual-field deficits and higher visual-processing abnormalities",
             case:
-            "Low relevance because there is no dominant visual-field deficit"
+            "Case 03 · Strong connection"
         }
 
     };
@@ -1817,6 +2441,10 @@ function selectRegion(region){
     document.getElementById("regionCase").textContent = d.case;
 }
 
+
+/* =========================================
+   QUESTIONS
+========================================= */
 
 function answerQuestion(button,correct,answerId){
 
@@ -1835,13 +2463,15 @@ function answerQuestion(button,correct,answerId){
 
     answer.classList.add("show");
 
+    let caseId = answerId.substring(0,2);
+
     if(correct){
 
         button.classList.add("correct");
 
         if(!answered.has(answerId)){
 
-            score++;
+            scores[caseId]++;
             answered.add(answerId);
 
         }
@@ -1854,8 +2484,7 @@ function answerQuestion(button,correct,answerId){
 
             if(
                 option.getAttribute("onclick") &&
-                option.getAttribute("onclick")
-                .includes("true")
+                option.getAttribute("onclick").includes("true")
             ){
                 option.classList.add("correct");
             }
@@ -1865,39 +2494,55 @@ function answerQuestion(button,correct,answerId){
         answered.add(answerId);
     }
 
-    updateScore();
+    updateScore(caseId);
 }
 
 
-function updateScore(){
+/* =========================================
+   SCORE
+========================================= */
 
-    document.getElementById("score")
-        .textContent = score + " / 5";
+function updateScore(caseId){
+
+    document.getElementById("score-"+caseId)
+        .textContent = scores[caseId] + " / 5";
 
     const message =
-        document.getElementById("scoreMessage");
+        document.getElementById("message-"+caseId);
 
-    if(score === 0){
+    if(scores[caseId] === 0){
+
         message.textContent =
         "Keep working through the case.";
+
     }
 
-    else if(score <= 2){
+    else if(scores[caseId] <= 2){
+
         message.textContent =
         "Good start — review the localization chain.";
+
     }
 
-    else if(score <= 4){
+    else if(scores[caseId] <= 4){
+
         message.textContent =
         "Strong reasoning — you're connecting findings to anatomy.";
+
     }
 
     else{
+
         message.textContent =
-        "Excellent! You localized the case step by step.";
+        "Excellent! You localized this case step by step.";
+
     }
 }
 
+
+/* =========================================
+   DEFAULT REGION
+========================================= */
 
 selectRegion("frontal");
 
