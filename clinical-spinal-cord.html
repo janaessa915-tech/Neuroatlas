@@ -13,7 +13,9 @@
     padding:0;
 }
 
-html{scroll-behavior:smooth;}
+html{
+    scroll-behavior:smooth;
+}
 
 body{
     background:#050b13;
@@ -37,7 +39,9 @@ nav a{
     font-size:14px;
 }
 
-nav a:hover{color:white;}
+nav a:hover{
+    color:white;
+}
 
 .container{
     max-width:1250px;
@@ -98,7 +102,15 @@ h1{
     border-color:white;
 }
 
-.section{margin-top:75px;}
+.visual-btn{
+    background:#16324a;
+    border-color:#61b5ff;
+    color:white;
+}
+
+.section{
+    margin-top:75px;
+}
 
 .section-label{
     color:#61b5ff;
@@ -199,7 +211,9 @@ h1{
     margin-bottom:17px;
 }
 
-.story p:last-child{margin-bottom:0;}
+.story p:last-child{
+    margin-bottom:0;
+}
 
 .timeline{
     margin-top:25px;
@@ -320,14 +334,18 @@ h1{
     border-radius:15px;
 }
 
-.step-content.active{display:block;}
+.step-content.active{
+    display:block;
+}
 
 .step-content h4{
     font-size:19px;
     margin-bottom:10px;
 }
 
-.step-content p{color:#9cafbf;}
+.step-content p{
+    color:#9cafbf;
+}
 
 .logic{
     display:grid;
@@ -354,9 +372,9 @@ h1{
     font-size:13px;
 }
 
-/* SPINAL MAP */
+/* CORD MAP */
 
-.spinal-panel{
+.cord-panel{
     margin-top:30px;
     padding:25px;
     border:1px solid #1b344a;
@@ -364,100 +382,75 @@ h1{
     background:#07111c;
 }
 
-.spinal-layout{
+.cord-layout{
     display:grid;
-    grid-template-columns:1.1fr .9fr;
+    grid-template-columns:1.15fr .85fr;
     gap:25px;
     align-items:center;
 }
 
-.spinal-visual{
-    min-height:500px;
+.cord-visual{
+    min-height:430px;
+    border-radius:18px;
+    padding:20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
     background:
         radial-gradient(circle at center,#172c40,#050b13 72%);
-    border-radius:18px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:20px;
 }
 
-.cord{
-    width:110px;
-    min-height:400px;
-    border-radius:55px;
-    background:
-        linear-gradient(90deg,
-        #203c52 0%,
-        #41627a 50%,
-        #203c52 100%);
-    border:3px solid #8299ac;
-    position:relative;
-    box-shadow:0 0 25px rgba(97,181,255,.12);
+.cord-svg{
+    width:100%;
+    max-width:500px;
 }
 
-.level{
-    position:absolute;
-    left:-95px;
-    width:80px;
-    padding:5px;
-    text-align:right;
-    color:#91a7b9;
-    font-size:12px;
+.cord-outline{
+    fill:#172b3e;
+    stroke:#91a7b9;
+    stroke-width:3;
 }
-
-.level::after{
-    content:"";
-    position:absolute;
-    right:-18px;
-    top:50%;
-    width:18px;
-    height:1px;
-    background:#31516d;
-}
-
-.l1{top:20px;}
-.l2{top:90px;}
-.l3{top:160px;}
-.l4{top:230px;}
-.l5{top:300px;}
-.l6{top:370px;}
 
 .cord-region{
-    position:absolute;
-    left:50%;
-    transform:translateX(-50%);
-    width:55px;
-    border-radius:12px;
-    background:#61b5ff;
-    opacity:.75;
     cursor:pointer;
-    transition:.2s;
+    transition:.25s;
+    stroke:#8299ac;
+    stroke-width:2;
 }
 
 .cord-region:hover{
-    opacity:1;
-    box-shadow:0 0 15px rgba(97,181,255,.8);
+    filter:drop-shadow(0 0 8px rgba(97,181,255,.8));
+}
+
+.cord-region.selected{
+    fill:#61b5ff !important;
+    stroke:white;
+    filter:
+        drop-shadow(0 0 10px rgba(97,181,255,.9))
+        drop-shadow(0 0 22px rgba(97,181,255,.45));
 }
 
 .cervical{
-    top:20px;
-    height:70px;
+    fill:#31495d;
 }
 
 .thoracic{
-    top:95px;
-    height:125px;
+    fill:#29465d;
 }
 
 .lumbar{
-    top:225px;
-    height:80px;
+    fill:#233d52;
 }
 
 .sacral{
-    top:310px;
-    height:75px;
+    fill:#20394e;
+}
+
+.cord-label{
+    fill:#d9e5ee;
+    font-size:14px;
+    font-weight:bold;
+    pointer-events:none;
 }
 
 .region-info{
@@ -490,7 +483,9 @@ h1{
     margin:20px 0;
 }
 
-.info-row{margin-bottom:13px;}
+.info-row{
+    margin-bottom:13px;
+}
 
 .info-row span{
     display:block;
@@ -502,6 +497,40 @@ h1{
 
 .info-row strong{
     color:#dce7ef;
+    font-size:13px;
+}
+
+/* DIFFERENTIAL */
+
+.compare{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+    margin-top:25px;
+}
+
+.compare-card{
+    padding:23px;
+    background:#091522;
+    border:1px solid #172b3e;
+    border-radius:16px;
+}
+
+.compare-card h3{
+    font-size:17px;
+    margin-bottom:10px;
+}
+
+.compare-card p{
+    color:#91a5b8;
+    font-size:14px;
+}
+
+.compare-card .why{
+    margin-top:14px;
+    padding-top:12px;
+    border-top:1px solid #1a3042;
+    color:#b9c9d7;
     font-size:13px;
 }
 
@@ -570,9 +599,13 @@ h1{
     font-size:13px;
 }
 
-.answer.show{display:block;}
+.answer.show{
+    display:block;
+}
 
-.answer strong{color:white;}
+.answer strong{
+    color:white;
+}
 
 .score-box{
     margin-top:30px;
@@ -602,9 +635,13 @@ h1{
     border-radius:13px;
 }
 
-.takeaway h3{margin-bottom:12px;}
+.takeaway h3{
+    margin-bottom:12px;
+}
 
-.takeaway p{color:#9cafbf;}
+.takeaway p{
+    color:#9cafbf;
+}
 
 .case-divider{
     height:1px;
@@ -617,40 +654,91 @@ h1{
     margin:90px 0;
 }
 
-.next-case{
-    margin-top:45px;
+/* FINAL NAV */
+
+.final-navigation{
+    margin-top:80px;
+    padding:32px;
+    background:
+        radial-gradient(circle at 85% 20%,rgba(97,181,255,.12),transparent 35%),
+        #091522;
+    border:1px solid #24445d;
+    border-radius:20px;
     display:flex;
     justify-content:space-between;
     align-items:center;
-    gap:20px;
-    padding:24px;
-    background:#091522;
-    border:1px solid #172b3e;
-    border-radius:17px;
+    gap:25px;
 }
 
-.next-case p{
+.final-navigation h3{
+    font-size:23px;
+    margin-bottom:7px;
+}
+
+.final-navigation p{
     color:#8196a9;
     font-size:14px;
 }
 
-/* RESPONSIVE */
+.next-button{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    padding:13px 19px;
+    border-radius:10px;
+    background:#16324a;
+    border:1px solid #61b5ff;
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+    white-space:nowrap;
+    transition:.2s;
+}
+
+.next-button:hover{
+    background:#214967;
+    transform:translateX(3px);
+}
 
 @media(max-width:950px){
-    .profile-grid{grid-template-columns:repeat(2,1fr);}
-    .spinal-layout{grid-template-columns:1fr;}
+
+    .profile-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .cord-layout{
+        grid-template-columns:1fr;
+    }
+
+    .compare{
+        grid-template-columns:1fr;
+    }
 }
 
 @media(max-width:700px){
-    .findings{grid-template-columns:1fr;}
-    .logic{grid-template-columns:1fr;}
-    .profile-grid{grid-template-columns:1fr;}
+
+    .findings{
+        grid-template-columns:1fr;
+    }
+
+    .logic{
+        grid-template-columns:1fr;
+    }
+
+    .profile-grid{
+        grid-template-columns:1fr;
+    }
+
     .timeline-item{
         grid-template-columns:1fr;
         gap:3px;
     }
-    h1{letter-spacing:-2px;}
-    .next-case{
+
+    h1{
+        letter-spacing:-2px;
+    }
+
+    .final-navigation{
         flex-direction:column;
         align-items:flex-start;
     }
@@ -670,7 +758,9 @@ h1{
 Clinical Cases · Spinal Cord Localization · NeuroAtlas
 </div>
 
-<h1>Spinal Cord<br>Localization</h1>
+<h1>
+Spinal Cord<br>Localization
+</h1>
 
 <div class="arabic-title">
 تحديد موضع الآفة في الحبل الشوكي
@@ -678,26 +768,33 @@ Clinical Cases · Spinal Cord Localization · NeuroAtlas
 
 <p class="hero-text">
 
-The spinal cord carries ascending sensory information and descending
-motor commands between the brain and the body. Because different
-tracts cross at different levels, the pattern of weakness, sensory
-loss, reflex changes, and the presence or absence of cranial nerve
-findings can help localize a lesion with remarkable precision.
+The spinal cord contains ascending sensory pathways, descending motor
+pathways, segmental neurons, and autonomic pathways. Because these
+systems follow organized anatomical patterns, neurological findings
+can often reveal the level and side of a spinal cord lesion.
+
+The most useful clues include a sensory level, upper motor neuron
+signs below the lesion, segmental findings at the lesion level, and
+specific patterns of sensory loss.
 
 <br><br>
 
-الحبل الشوكي ينقل المعلومات الحسية الصاعدة والأوامر الحركية النازلة
-بين المخ والجسم. وبسبب اختلاف أماكن عبور المسارات العصبية، فإن نمط
-الضعف وفقدان الإحساس وتغير المنعكسات يمكن أن يساعدنا على تحديد
-مكان الآفة بدقة.
+يحتوي الحبل الشوكي على مسارات حسية صاعدة، ومسارات حركية نازلة،
+وخلايا عصبية قطعية، ومسارات للجهاز العصبي الذاتي. وبسبب التنظيم
+التشريحي الدقيق لهذه المسارات، يمكن للأعراض العصبية أن تساعدنا
+في تحديد مستوى وجانب الإصابة.
+
+ومن أهم العلامات: وجود مستوى حسي واضح، وعلامات إصابة العصبون
+الحركي العلوي أسفل الآفة، وعلامات قطعية عند مستوى الإصابة،
+وأنماط محددة لفقد الإحساس.
 
 </p>
 
 <div class="actions">
 <a class="btn" href="#case1">🧠 Case 01</a>
 <a class="btn" href="#case2">🧩 Case 02</a>
-<a class="btn" href="#case3">⚡ Case 03</a>
-<a class="btn" href="#cord">🗺️ Spinal Cord Map</a>
+<a class="btn" href="#case3">🧬 Case 03</a>
+<a class="btn" href="#cord-map">🗺️ Cord Map</a>
 </div>
 
 
@@ -709,25 +806,29 @@ CASE 01
 
 <div class="case-header">
 
-<div class="case-tag">CASE 01 · CERVICAL CORD</div>
+<div class="case-tag">
+CASE 01 · THORACIC CORD
+</div>
 
-<h2>The Weak Hands</h2>
+<h2>
+The Sensory Level
+</h2>
 
 <div class="case-subtitle">
-ضعف اليدين مع علامات إصابة الحبل الشوكي العنقي
+مستوى حسي واضح مع ضعف في الطرفين السفليين
 </div>
 
 <p class="hero-text">
-A 46-year-old patient develops progressive weakness in both hands,
-difficulty with fine movements, and later develops stiffness in the
-legs with an abnormal gait.
+A 42-year-old patient develops progressive weakness in both legs
+and notices that sensation is different below the level of the
+lower chest.
 </p>
 
 <div class="profile-grid">
 
 <div class="profile">
 <span>AGE</span>
-<strong>46 years</strong>
+<strong>42 years</strong>
 </div>
 
 <div class="profile">
@@ -736,63 +837,65 @@ legs with an abnormal gait.
 </div>
 
 <div class="profile">
-<span>KEY REGION</span>
-<strong>Cervical cord</strong>
+<span>KEY CLUE</span>
+<strong>Thoracic sensory level</strong>
 </div>
 
 <div class="profile">
-<span>KEY CLUE</span>
-<strong>Mixed UMN + LMN signs</strong>
+<span>MOTOR</span>
+<strong>Bilateral leg weakness</strong>
 </div>
 
 </div>
 
 </div>
+
 
 <div class="story">
 
 <h3>History · التاريخ المرضي</h3>
 
 <p>
-The patient initially notices difficulty opening jars and buttoning
-clothes. Over several months, weakness develops in both hands.
-Later, the patient begins experiencing stiffness in both legs and
-difficulty walking. There is also reduced pain and temperature
-sensation across the upper trunk and arms.
+The patient initially notices that both legs feel unusually heavy.
+Over several days, walking becomes increasingly difficult. The
+patient also notices reduced sensation beginning around the lower
+part of the chest and extending downward. There is no facial
+weakness and no cranial nerve abnormality.
 </p>
 
 <p dir="rtl">
-لاحظ المريض في البداية صعوبة في فتح الأشياء وربط الأزرار. خلال عدة
-أشهر ظهر ضعف في كلتا اليدين. وبعد ذلك بدأ يشعر بتيبس في الساقين
-وصعوبة في المشي، مع وجود تغير في الإحساس بالألم والحرارة في الجزء
-العلوي من الجسم.
+لاحظ المريض في البداية أن ساقيه أصبحتا ثقيلتين بشكل غير معتاد.
+وخلال عدة أيام أصبحت عملية المشي أكثر صعوبة. كما لاحظ تغيرًا في
+الإحساس يبدأ تقريبًا من الجزء السفلي من الصدر ويمتد إلى أسفل.
+ولا يوجد ضعف في الوجه أو أي علامات تخص الأعصاب القحفية.
 </p>
 
 <div class="timeline">
 
 <div class="timeline-item">
-<div class="time">MONTH 1</div>
-<div>Fine hand movements become difficult.</div>
+<div class="time">DAY 01</div>
+<div>Both legs begin feeling heavy.</div>
 </div>
 
 <div class="timeline-item">
-<div class="time">MONTH 3</div>
-<div>Weakness of both hands becomes obvious.</div>
+<div class="time">DAY 02</div>
+<div>Walking becomes slower and more difficult.</div>
 </div>
 
 <div class="timeline-item">
-<div class="time">MONTH 5</div>
-<div>Leg stiffness and gait difficulty develop.</div>
+<div class="time">DAY 03</div>
+<div>A clear sensory change is noticed below the lower chest.</div>
 </div>
 
 <div class="timeline-item">
-<div class="time">MONTH 6</div>
-<div>Mixed motor and sensory signs are confirmed.</div>
+<div class="time">DAY 04</div>
+<div>Neurological examination confirms bilateral leg weakness.</div>
 </div>
 
 </div>
 
 </div>
+
 
 <div class="section-label" style="margin-top:35px;">
 Neurological Examination · الفحص العصبي
@@ -803,62 +906,64 @@ Neurological Examination · الفحص العصبي
 <div class="findings">
 
 <div class="finding">
-<div class="finding-number">01 · HANDS</div>
-<h3>Weakness of the Hands</h3>
+<div class="finding-number">01 · SENSORY LEVEL</div>
+<h3>Clear Truncal Sensory Level</h3>
 <p>
-There is marked weakness affecting fine movements of both hands.
+Sensation is relatively normal above the lower chest but altered
+below that level.
 </p>
 <div class="clue">
-Clue: lower motor neuron signs at the level of the lesion may
-involve anterior horn cells or nerve roots.
+Clue: a sensory level is a major clue for spinal cord localization.
 </div>
 </div>
 
 <div class="finding">
-<div class="finding-number">02 · LEGS</div>
-<h3>Leg Spasticity</h3>
+<div class="finding-number">02 · MOTOR</div>
+<h3>Bilateral Leg Weakness</h3>
 <p>
-Both legs are stiff with increased tone.
+Both lower limbs are weak, while upper limb function remains
+relatively preserved.
 </p>
 <div class="clue">
-Clue: corticospinal tract involvement can produce upper motor
-neuron signs below the lesion.
+Clue: the distribution points below the cervical cord.
 </div>
 </div>
 
 <div class="finding">
-<div class="finding-number">03 · REFLEXES</div>
-<h3>Mixed Reflex Pattern</h3>
+<div class="finding-number">03 · UPPER MOTOR NEURON</div>
+<h3>Increased Reflexes Below the Lesion</h3>
 <p>
-Upper-limb reflexes may be reduced while lower-limb reflexes are
-brisk.
+Reflexes in the lower limbs are brisk.
 </p>
 <div class="clue">
-Clue: mixed UMN and LMN signs can be highly localizing.
+Clue: corticospinal tract involvement can produce UMN signs below
+a spinal cord lesion.
 </div>
 </div>
 
 <div class="finding">
-<div class="finding-number">04 · SENSORY</div>
-<h3>Segmental Sensory Change</h3>
+<div class="finding-number">04 · CRANIAL NERVES</div>
+<h3>No Cranial Nerve Findings</h3>
 <p>
-Pain and temperature sensation are altered over the upper trunk
-and upper limbs.
+Eye movements, facial movement, speech, and swallowing are
+preserved.
 </p>
 <div class="clue">
-Clue: a sensory level supports spinal cord localization.
+Clue: absence of cranial nerve involvement supports a spinal
+rather than brainstem localization.
 </div>
 </div>
 
 </div>
+
 
 <div class="localizer">
 
 <h3>Interactive Localization Engine</h3>
 
 <p class="localizer-intro">
-Use the combination of segmental findings and long-tract signs to
-determine the level of the lesion.
+Use the sensory level and motor distribution to identify the
+approximate spinal cord level.
 </p>
 
 <div class="steps">
@@ -868,11 +973,11 @@ determine the level of the lesion.
 </button>
 
 <button class="step" onclick="showStep('c1',2,this)">
-02 · Motor Signs
+02 · Sensory Level
 </button>
 
 <button class="step" onclick="showStep('c1',3,this)">
-03 · Sensory Level
+03 · Motor Tracts
 </button>
 
 <button class="step" onclick="showStep('c1',4,this)">
@@ -888,70 +993,77 @@ determine the level of the lesion.
 <div class="step-content active" id="c1-step1">
 <h4>01 · Recognize the pattern</h4>
 <p>
-The combination of hand weakness with leg spasticity suggests a
-lesion affecting both segmental structures and descending long
-tracts.
+Bilateral leg weakness plus a clear truncal sensory level strongly
+suggests a spinal cord lesion rather than an isolated peripheral
+nerve lesion.
 </p>
 
 <div class="logic">
 <div class="logic-box">
-<strong>Hands</strong>
-<span>Segmental weakness</span>
+<strong>Motor</strong>
+<span>Both legs</span>
 </div>
+
 <div class="logic-box">
-<strong>Legs</strong>
-<span>Upper motor neuron signs</span>
+<strong>Sensation</strong>
+<span>Defined level</span>
 </div>
+
 <div class="logic-box">
-<strong>Pattern</strong>
-<span>Spinal cord</span>
+<strong>Cranial nerves</strong>
+<span>Normal</span>
 </div>
 </div>
 </div>
 
 <div class="step-content" id="c1-step2">
-<h4>02 · Analyze the motor findings</h4>
+<h4>02 · Find the sensory level</h4>
 <p>
-Reduced upper-limb reflexes combined with brisk lower-limb reflexes
-suggest a lesion affecting cervical segments while disrupting
-descending corticospinal fibers.
+The sensory change begins around the lower thoracic region. A
+horizontal sensory boundary on the trunk is particularly useful
+because spinal sensory pathways are organized by segmental levels.
 </p>
 
 <div class="logic">
 <div class="logic-box">
-<strong>At level</strong>
-<span>LMN-type signs</span>
+<strong>Above level</strong>
+<span>Relatively preserved</span>
 </div>
+
+<div class="logic-box">
+<strong>At level</strong>
+<span>Thoracic sensory change</span>
+</div>
+
 <div class="logic-box">
 <strong>Below level</strong>
-<span>UMN-type signs</span>
-</div>
-<div class="logic-box">
-<strong>Best fit</strong>
-<span>Cervical cord</span>
+<span>Reduced sensation</span>
 </div>
 </div>
 </div>
 
 <div class="step-content" id="c1-step3">
-<h4>03 · Use the sensory findings</h4>
+<h4>03 · Analyze the motor pathway</h4>
 <p>
-A sensory change involving the upper trunk and arms suggests a
-cervical spinal cord level rather than an isolated peripheral nerve.
+The corticospinal tract descends through the spinal cord. A lesion
+in the thoracic cord can therefore produce upper motor neuron
+weakness in both legs below the lesion.
 </p>
 
 <div class="logic">
 <div class="logic-box">
-<strong>Sensory level</strong>
-<span>Upper trunk</span>
+<strong>Upper limbs</strong>
+<span>Relatively preserved</span>
 </div>
+
 <div class="logic-box">
-<strong>Distribution</strong>
-<span>Not one peripheral nerve</span>
+<strong>Lower limbs</strong>
+<span>Weakness + brisk reflexes</span>
 </div>
+
 <div class="logic-box">
-<strong>Localization</strong>
-<span>Cervical cord</span>
+<strong>Tract</strong>
+<span>Corticospinal</span>
 </div>
 </div>
 </div>
@@ -959,22 +1071,25 @@ cervical spinal cord level rather than an isolated peripheral nerve.
 <div class="step-content" id="c1-step4">
 <h4>04 · Determine the level</h4>
 <p>
-Upper-limb segmental abnormalities together with long-tract signs
-in both legs indicate involvement of the cervical spinal cord.
+Because the upper limbs are preserved and the sensory level is
+thoracic, the lesion is most consistent with the thoracic spinal
+cord.
 </p>
 
 <div class="logic">
 <div class="logic-box">
 <strong>Cervical</strong>
-<span>Strongly supported</span>
+<span>Less compatible</span>
 </div>
+
 <div class="logic-box">
 <strong>Thoracic</strong>
-<span>Does not explain hand signs</span>
+<span>Strongly supported</span>
 </div>
+
 <div class="logic-box">
 <strong>Lumbar</strong>
-<span>Does not explain arm findings</span>
+<span>Less compatible with UMN signs</span>
 </div>
 </div>
 </div>
@@ -982,30 +1097,31 @@ in both legs indicate involvement of the cervical spinal cord.
 <div class="step-content" id="c1-step5">
 <h4>05 · Final localization</h4>
 <p>
-The most coherent localization is a cervical spinal cord lesion
-affecting segmental upper-limb structures and descending motor
-pathways to the legs.
+The overall pattern is most consistent with a thoracic spinal cord
+lesion producing bilateral corticospinal dysfunction and a defined
+sensory level.
 </p>
 
 <div class="logic">
 <div class="logic-box">
 <strong>Region</strong>
-<span>Cervical spinal cord</span>
+<span>Thoracic cord</span>
 </div>
+
 <div class="logic-box">
-<strong>At lesion</strong>
-<span>Segmental motor signs</span>
+<strong>Major tract</strong>
+<span>Corticospinal</span>
 </div>
+
 <div class="logic-box">
-<strong>Below lesion</strong>
-<span>Corticospinal signs</span>
+<strong>Key clue</strong>
+<span>Sensory level</span>
 </div>
 </div>
 </div>
 
 </div>
 
-<!-- QUESTIONS -->
 
 <section class="section">
 
@@ -1018,123 +1134,165 @@ Case 01 Assessment · اختبار الحالة الأولى
 <div class="question-card">
 <div class="question-number">CASE 01 · QUESTION 01</div>
 <h3>
-What does leg spasticity most strongly suggest?
+Which finding is especially helpful for spinal cord localization?
 </h3>
 
 <div class="options">
-<button class="option" onclick="answer(this,true,'c1q1')">
-A. Upper motor neuron pathway involvement
+
+<button class="option"
+onclick="answer(this,false,'c1q1')">
+A. Isolated diplopia
 </button>
-<button class="option" onclick="answer(this,false,'c1q1')">
-B. Isolated muscle disease
+
+<button class="option"
+onclick="answer(this,true,'c1q1')">
+B. A defined sensory level
 </button>
-<button class="option" onclick="answer(this,false,'c1q1')">
-C. Peripheral sensory nerve lesion
+
+<button class="option"
+onclick="answer(this,false,'c1q1')">
+C. Isolated facial weakness
 </button>
+
 </div>
 
 <div id="c1q1" class="answer">
 <strong>Correct.</strong>
-Spasticity and brisk reflexes are classic upper motor neuron signs.
+A sensory level is one of the most useful clues for identifying
+a spinal cord lesion.
 </div>
 </div>
+
 
 <div class="question-card">
 <div class="question-number">CASE 01 · QUESTION 02</div>
 <h3>
-Why are the hands important for localization?
+Why are the legs affected while the arms remain relatively normal?
 </h3>
 
 <div class="options">
-<button class="option" onclick="answer(this,false,'c1q2')">
-A. They prove a cortical lesion
+
+<button class="option"
+onclick="answer(this,true,'c1q2')">
+A. The lesion is below the cervical enlargement
 </button>
-<button class="option" onclick="answer(this,true,'c1q2')">
-B. They can indicate segmental involvement at the cervical level
+
+<button class="option"
+onclick="answer(this,false,'c1q2')">
+B. The lesion is in the brainstem
 </button>
-<button class="option" onclick="answer(this,false,'c1q2')">
-C. They exclude spinal cord disease
+
+<button class="option"
+onclick="answer(this,false,'c1q2')">
+C. The lesion is in the peripheral facial nerve
 </button>
+
 </div>
 
 <div id="c1q2" class="answer">
 <strong>Correct.</strong>
-Upper-limb segmental findings can help identify the cervical level.
+A thoracic cord lesion can affect descending pathways to the legs
+without directly affecting the upper limbs.
 </div>
 </div>
+
 
 <div class="question-card">
 <div class="question-number">CASE 01 · QUESTION 03</div>
 <h3>
-Which region best explains both arm and leg findings?
+Brisk lower-limb reflexes suggest involvement of which system?
 </h3>
 
 <div class="options">
-<button class="option" onclick="answer(this,true,'c1q3')">
-A. Cervical spinal cord
+
+<button class="option"
+onclick="answer(this,false,'c1q3')">
+A. Lower motor neurons only
 </button>
-<button class="option" onclick="answer(this,false,'c1q3')">
-B. Lumbar spinal cord
+
+<button class="option"
+onclick="answer(this,true,'c1q3')">
+B. Corticospinal tract
 </button>
-<button class="option" onclick="answer(this,false,'c1q3')">
-C. Cerebellum
+
+<button class="option"
+onclick="answer(this,false,'c1q3')">
+C. Optic pathway
 </button>
+
 </div>
 
 <div id="c1q3" class="answer">
 <strong>Correct.</strong>
-A cervical cord lesion can affect upper-limb segments and descending
-tracts to the legs.
+A spinal cord lesion affecting descending corticospinal pathways
+can produce upper motor neuron signs below the lesion.
 </div>
 </div>
+
 
 <div class="question-card">
 <div class="question-number">CASE 01 · QUESTION 04</div>
 <h3>
-What is the most useful general principle here?
+Which level is most consistent with preserved arm function and
+bilateral leg weakness?
 </h3>
 
 <div class="options">
-<button class="option" onclick="answer(this,false,'c1q4')">
-A. Only cranial nerves localize neurological lesions
+
+<button class="option"
+onclick="answer(this,false,'c1q4')">
+A. Cervical cord
 </button>
-<button class="option" onclick="answer(this,true,'c1q4')">
-B. Signs at the lesion can differ from signs below the lesion
+
+<button class="option"
+onclick="answer(this,true,'c1q4')">
+B. Thoracic cord
 </button>
-<button class="option" onclick="answer(this,false,'c1q4')">
-C. Reflexes are never useful
+
+<button class="option"
+onclick="answer(this,false,'c1q4')">
+C. Medulla
 </button>
+
 </div>
 
 <div id="c1q4" class="answer">
 <strong>Correct.</strong>
-Spinal cord lesions can produce segmental signs at the lesion and
-long-tract signs below it.
+The thoracic cord is below the major pathways supplying the upper
+limbs.
 </div>
 </div>
+
 
 <div class="question-card">
 <div class="question-number">CASE 01 · QUESTION 05</div>
 <h3>
-Which localization best unifies the case?
+Which finding best unifies the case?
 </h3>
 
 <div class="options">
-<button class="option" onclick="answer(this,false,'c1q5')">
-A. Cerebellar hemisphere
+
+<button class="option"
+onclick="answer(this,false,'c1q5')">
+A. Facial weakness
 </button>
-<button class="option" onclick="answer(this,true,'c1q5')">
-B. Cervical spinal cord
+
+<button class="option"
+onclick="answer(this,true,'c1q5')">
+B. Thoracic sensory level with bilateral leg UMN weakness
 </button>
-<button class="option" onclick="answer(this,false,'c1q5')">
-C. Isolated peripheral nerve
+
+<button class="option"
+onclick="answer(this,false,'c1q5')">
+C. Isolated eye movement abnormality
 </button>
+
 </div>
 
 <div id="c1q5" class="answer">
 <strong>Correct.</strong>
-The mixed segmental and long-tract pattern is best localized to the
-cervical spinal cord.
+The combination strongly supports a thoracic spinal cord
+localization.
 </div>
 </div>
 
@@ -1161,25 +1319,29 @@ CASE 02
 
 <div class="case-header">
 
-<div class="case-tag">CASE 02 · THORACIC CORD</div>
+<div class="case-tag">
+CASE 02 · CERVICAL CORD
+</div>
 
-<h2>The Sensory Level</h2>
+<h2>
+The Weak Hands
+</h2>
 
 <div class="case-subtitle">
-فقدان الإحساس أسفل مستوى محدد
+ضعف اليدين مع علامات إصابة الحبل الشوكي العنقي
 </div>
 
 <p class="hero-text">
-A 38-year-old patient develops progressive leg weakness and
-difficulty walking. Examination reveals a clear sensory level
-across the trunk.
+A 55-year-old patient develops weakness affecting the hands and
+arms, followed by difficulty walking and abnormal reflexes in the
+legs.
 </p>
 
 <div class="profile-grid">
 
 <div class="profile">
 <span>AGE</span>
-<strong>38 years</strong>
+<strong>55 years</strong>
 </div>
 
 <div class="profile">
@@ -1189,60 +1351,64 @@ across the trunk.
 
 <div class="profile">
 <span>KEY REGION</span>
-<strong>Thoracic cord</strong>
+<strong>Cervical cord</strong>
 </div>
 
 <div class="profile">
 <span>KEY CLUE</span>
-<strong>Defined sensory level</strong>
+<strong>Arm + leg findings</strong>
 </div>
 
 </div>
 
 </div>
+
 
 <div class="story">
 
 <h3>History · التاريخ المرضي</h3>
 
 <p>
-The patient notices that both legs feel heavy and increasingly
-difficult to control. Walking becomes slow and stiff. The patient
-also notices reduced pain and temperature sensation beginning at
-approximately the lower chest and extending downward.
+The patient initially notices difficulty opening jars and buttoning
+clothes. Over time, the weakness becomes more noticeable in the
+hands. The patient later develops stiffness in both legs and
+difficulty walking. There is no facial weakness, diplopia, or
+speech disturbance.
 </p>
 
 <p dir="rtl">
-لاحظ المريض أن ساقيه أصبحتا ثقيلتين مع صعوبة متزايدة في التحكم
-بهما. أصبح المشي بطيئًا ومتيبسًا، كما لاحظ انخفاض الإحساس بالألم
-والحرارة بدايةً من منطقة أسفل الصدر وامتدادًا إلى أسفل الجسم.
+لاحظ المريض في البداية صعوبة في فتح البرطمانات وربط أزرار الملابس.
+ومع مرور الوقت أصبح الضعف أكثر وضوحًا في اليدين. ثم ظهرت صعوبة في
+المشي مع تيبس في الساقين. ولا يوجد ضعف في الوجه أو ازدواجية في
+الرؤية أو اضطراب في الكلام.
 </p>
 
 <div class="timeline">
 
 <div class="timeline-item">
-<div class="time">WEEK 1</div>
-<div>Leg heaviness begins.</div>
+<div class="time">WEEK 01</div>
+<div>Fine hand movements become difficult.</div>
 </div>
 
 <div class="timeline-item">
-<div class="time">WEEK 3</div>
-<div>Walking becomes stiff.</div>
+<div class="time">WEEK 03</div>
+<div>Grip weakness becomes more noticeable.</div>
 </div>
 
 <div class="timeline-item">
-<div class="time">WEEK 5</div>
-<div>Sensory changes become noticeable below the trunk.</div>
+<div class="time">WEEK 05</div>
+<div>Leg stiffness and gait difficulty develop.</div>
 </div>
 
 <div class="timeline-item">
-<div class="time">WEEK 6</div>
-<div>A clear sensory level is identified.</div>
+<div class="time">WEEK 06</div>
+<div>Examination reveals mixed arm and leg signs.</div>
 </div>
 
 </div>
 
 </div>
+
 
 <div class="section-label" style="margin-top:35px;">
 Neurological Examination · الفحص العصبي
@@ -1253,74 +1419,76 @@ Neurological Examination · الفحص العصبي
 <div class="findings">
 
 <div class="finding">
-<div class="finding-number">01 · MOTOR</div>
-<h3>Bilateral Leg Weakness</h3>
+<div class="finding-number">01 · HANDS</div>
+<h3>Hand Weakness</h3>
 <p>
-Both lower limbs are weak with increased tone.
+Fine motor tasks are difficult and grip strength is reduced.
 </p>
 <div class="clue">
-Clue: bilateral UMN signs suggest involvement of descending
-pathways.
+Clue: segmental lower motor neuron involvement can occur at the
+level of a cervical cord lesion.
 </div>
 </div>
 
 <div class="finding">
-<div class="finding-number">02 · REFLEXES</div>
-<h3>Brisk Lower-Limb Reflexes</h3>
+<div class="finding-number">02 · LEGS</div>
+<h3>Leg Spasticity</h3>
 <p>
-Deep tendon reflexes are increased in both legs.
+The legs are stiff with brisk reflexes.
 </p>
 <div class="clue">
-Clue: this supports corticospinal tract involvement.
+Clue: corticospinal tract involvement below the lesion produces
+upper motor neuron signs.
 </div>
 </div>
 
 <div class="finding">
 <div class="finding-number">03 · SENSORY</div>
-<h3>Clear Truncal Sensory Level</h3>
+<h3>Upper-Limb Sensory Change</h3>
 <p>
-Pain and temperature sensation change below a defined level on
-the trunk.
+Sensation is altered in the hands and upper limbs.
 </p>
 <div class="clue">
-Clue: a sensory level is a major clue for spinal cord localization.
+Clue: segmental sensory findings can help identify the cervical
+level.
 </div>
 </div>
 
 <div class="finding">
 <div class="finding-number">04 · CRANIAL NERVES</div>
-<h3>No Cranial Nerve Findings</h3>
+<h3>No Cranial Nerve Deficit</h3>
 <p>
-Cranial nerve examination is normal.
+Eye movements, facial movement, and swallowing remain normal.
 </p>
 <div class="clue">
-Clue: this supports a lesion below the brainstem.
+Clue: this supports a spinal localization.
 </div>
 </div>
 
 </div>
+
 
 <div class="localizer">
 
 <h3>Interactive Localization Engine</h3>
 
 <p class="localizer-intro">
-The sensory level is the key. Combine it with the bilateral UMN
-findings to identify the spinal cord region.
+A cervical cord lesion can create different neurological signs at
+the level of the lesion and below it.
 </p>
 
 <div class="steps">
 
 <button class="step active" onclick="showStep('c2',1,this)">
-01 · Motor Pattern
+01 · Pattern
 </button>
 
 <button class="step" onclick="showStep('c2',2,this)">
-02 · Sensory Level
+02 · Hands
 </button>
 
 <button class="step" onclick="showStep('c2',3,this)">
-03 · Cranial Nerves
+03 · Legs
 </button>
 
 <button class="step" onclick="showStep('c2',4,this)">
@@ -1334,94 +1502,104 @@ findings to identify the spinal cord region.
 </div>
 
 <div class="step-content active" id="c2-step1">
-<h4>01 · Recognize the motor pattern</h4>
+<h4>01 · Recognize the pattern</h4>
 <p>
-Bilateral leg weakness with increased tone and brisk reflexes
-indicates a long-tract motor lesion above the lumbar segments.
+The combination of hand weakness and upper motor neuron signs in
+the legs suggests a lesion within the cervical spinal cord.
 </p>
 
 <div class="logic">
 <div class="logic-box">
+<strong>Arms</strong>
+<span>Weak hands</span>
+</div>
+
+<div class="logic-box">
 <strong>Legs</strong>
-<span>Bilateral weakness</span>
+<span>UMN signs</span>
 </div>
+
 <div class="logic-box">
-<strong>Tone</strong>
-<span>Increased</span>
-</div>
-<div class="logic-box">
-<strong>Pattern</strong>
-<span>UMN</span>
+<strong>Brainstem</strong>
+<span>No cranial findings</span>
 </div>
 </div>
 </div>
 
 <div class="step-content" id="c2-step2">
-<h4>02 · Find the sensory level</h4>
+<h4>02 · Analyze the hand findings</h4>
 <p>
-A defined sensory level across the trunk strongly suggests a
-spinal cord lesion rather than a peripheral neuropathy.
+A cervical cord lesion can damage neurons or their connections at
+the affected segment, producing weakness in muscles supplied by
+that region.
 </p>
 
 <div class="logic">
 <div class="logic-box">
-<strong>Finding</strong>
-<span>Sensory level</span>
+<strong>Hands</strong>
+<span>Weakness</span>
 </div>
+
 <div class="logic-box">
-<strong>Distribution</strong>
-<span>Below a horizontal level</span>
+<strong>Pattern</strong>
+<span>Segmental</span>
 </div>
+
 <div class="logic-box">
-<strong>Meaning</strong>
-<span>Cord localization</span>
+<strong>Region</strong>
+<span>Cervical</span>
 </div>
 </div>
 </div>
 
 <div class="step-content" id="c2-step3">
-<h4>03 · Use the cranial nerve examination</h4>
+<h4>03 · Analyze the legs</h4>
 <p>
-Normal cranial nerves make a brainstem lesion less likely and
-support a lesion in the spinal cord.
+Below a cervical cord lesion, descending corticospinal fibers can
+be disrupted, producing bilateral upper motor neuron signs in the
+legs.
 </p>
 
 <div class="logic">
 <div class="logic-box">
-<strong>Cranial nerves</strong>
-<span>Normal</span>
+<strong>Reflexes</strong>
+<span>Brisk</span>
 </div>
+
 <div class="logic-box">
-<strong>Body</strong>
-<span>Abnormal</span>
+<strong>Tone</strong>
+<span>Increased</span>
 </div>
+
 <div class="logic-box">
-<strong>Direction</strong>
-<span>Below brainstem</span>
+<strong>Pathway</strong>
+<span>Corticospinal</span>
 </div>
 </div>
 </div>
 
 <div class="step-content" id="c2-step4">
-<h4>04 · Determine the cord level</h4>
+<h4>04 · Determine the level</h4>
 <p>
-Because the sensory level begins around the trunk and the arms
-are relatively spared, a thoracic localization is strongly
-supported.
+Because both upper and lower limbs are involved, the lesion must
+be located at or above the cervical enlargement rather than in the
+thoracic cord.
 </p>
 
 <div class="logic">
 <div class="logic-box">
 <strong>Cervical</strong>
-<span>Would often involve arms</span>
-</div>
-<div class="logic-box">
-<strong>Thoracic</strong>
 <span>Strongly supported</span>
 </div>
+
+<div class="logic-box">
+<strong>Thoracic</strong>
+<span>Would spare the arms</span>
+</div>
+
 <div class="logic-box">
 <strong>Lumbar</strong>
-<span>Does not explain truncal level</span>
+<span>Would not explain hand weakness</span>
 </div>
 </div>
 </div>
@@ -1429,28 +1607,31 @@ supported.
 <div class="step-content" id="c2-step5">
 <h4>05 · Final localization</h4>
 <p>
-The bilateral leg UMN pattern, clear truncal sensory level, and
-normal cranial nerves localize the lesion to the thoracic spinal
-cord.
+The combination of hand weakness, upper-limb sensory changes,
+and bilateral leg upper motor neuron signs is most consistent
+with a cervical spinal cord lesion.
 </p>
 
 <div class="logic">
 <div class="logic-box">
 <strong>Region</strong>
-<span>Thoracic spinal cord</span>
+<span>Cervical cord</span>
 </div>
+
 <div class="logic-box">
-<strong>Motor</strong>
-<span>UMN signs below lesion</span>
+<strong>Upper limbs</strong>
+<span>Segmental involvement</span>
 </div>
+
 <div class="logic-box">
-<strong>Sensory</strong>
-<span>Defined level</span>
+<strong>Lower limbs</strong>
+<span>Long-tract involvement</span>
 </div>
 </div>
 </div>
 
 </div>
+
 
 <section class="section">
 
@@ -1458,127 +1639,170 @@ cord.
 Case 02 Assessment · اختبار الحالة الثانية
 </div>
 
-<h2>Can you find the level?</h2>
+<h2>Can you localize the cervical cord?</h2>
 
 <div class="question-card">
 <div class="question-number">CASE 02 · QUESTION 01</div>
 <h3>
-What is one of the strongest clues to spinal cord localization?
+Why is a cervical cord lesion able to affect both the arms and legs?
 </h3>
 
 <div class="options">
-<button class="option" onclick="answer(this,true,'c2q1')">
-A. A defined sensory level
+
+<button class="option"
+onclick="answer(this,true,'c2q1')">
+A. Major pathways to both upper and lower limbs pass through it
 </button>
-<button class="option" onclick="answer(this,false,'c2q1')">
-B. Isolated finger pain
+
+<button class="option"
+onclick="answer(this,false,'c2q1')">
+B. It contains only cranial nerves
 </button>
-<button class="option" onclick="answer(this,false,'c2q1')">
-C. Hearing loss
+
+<button class="option"
+onclick="answer(this,false,'c2q1')">
+C. It contains only sensory neurons
 </button>
+
 </div>
 
 <div id="c2q1" class="answer">
 <strong>Correct.</strong>
-A sensory level is a classic clue suggesting spinal cord disease.
+The cervical cord contains pathways serving both upper and lower
+limbs.
 </div>
 </div>
+
 
 <div class="question-card">
 <div class="question-number">CASE 02 · QUESTION 02</div>
 <h3>
-What do brisk leg reflexes suggest?
+What finding suggests corticospinal tract involvement below the
+lesion?
 </h3>
 
 <div class="options">
-<button class="option" onclick="answer(this,true,'c2q2')">
-A. Upper motor neuron involvement
+
+<button class="option"
+onclick="answer(this,false,'c2q2')">
+A. Facial droop
 </button>
-<button class="option" onclick="answer(this,false,'c2q2')">
-B. Isolated muscle injury
+
+<button class="option"
+onclick="answer(this,true,'c2q2')">
+B. Spastic legs with brisk reflexes
 </button>
-<button class="option" onclick="answer(this,false,'c2q2')">
-C. Cranial nerve disease
+
+<button class="option"
+onclick="answer(this,false,'c2q2')">
+C. Isolated ptosis
 </button>
+
 </div>
 
 <div id="c2q2" class="answer">
 <strong>Correct.</strong>
-Brisk reflexes are an important upper motor neuron sign.
+Upper motor neuron signs in the legs indicate disruption of
+descending motor pathways.
 </div>
 </div>
+
 
 <div class="question-card">
 <div class="question-number">CASE 02 · QUESTION 03</div>
 <h3>
-Why is a thoracic lesion favored over a cervical lesion?
+Which level best explains hand weakness plus leg UMN signs?
 </h3>
 
 <div class="options">
-<button class="option" onclick="answer(this,false,'c2q3')">
-A. Because the patient has facial weakness
+
+<button class="option"
+onclick="answer(this,true,'c2q3')">
+A. Cervical cord
 </button>
-<button class="option" onclick="answer(this,true,'c2q3')">
-B. Because the arms are relatively spared and there is a truncal sensory level
+
+<button class="option"
+onclick="answer(this,false,'c2q3')">
+B. Thoracic cord
 </button>
-<button class="option" onclick="answer(this,false,'c2q3')">
-C. Because the patient has diplopia
+
+<button class="option"
+onclick="answer(this,false,'c2q3')">
+C. Sacral cord
 </button>
+
 </div>
 
 <div id="c2q3" class="answer">
 <strong>Correct.</strong>
-A truncal sensory level with relatively spared arms supports a
-thoracic localization.
+A cervical lesion can affect upper-limb structures at the level and
+descending pathways to the legs.
 </div>
 </div>
+
 
 <div class="question-card">
 <div class="question-number">CASE 02 · QUESTION 04</div>
 <h3>
-What finding makes a brainstem lesion less likely?
+Which finding argues against a brainstem lesion?
 </h3>
 
 <div class="options">
-<button class="option" onclick="answer(this,true,'c2q4')">
-A. Normal cranial nerve examination
+
+<button class="option"
+onclick="answer(this,true,'c2q4')">
+A. No cranial nerve abnormalities
 </button>
-<button class="option" onclick="answer(this,false,'c2q4')">
-B. Diplopia
+
+<button class="option"
+onclick="answer(this,false,'c2q4')">
+B. Eye movement abnormality
 </button>
-<button class="option" onclick="answer(this,false,'c2q4')">
+
+<button class="option"
+onclick="answer(this,false,'c2q4')">
 C. Facial weakness
 </button>
+
 </div>
 
 <div id="c2q4" class="answer">
 <strong>Correct.</strong>
-Normal cranial nerves make a brainstem localization less likely.
+The absence of cranial nerve findings supports localization
+outside the brainstem.
 </div>
 </div>
+
 
 <div class="question-card">
 <div class="question-number">CASE 02 · QUESTION 05</div>
 <h3>
-What is the best final localization?
+Which description best summarizes the case?
 </h3>
 
 <div class="options">
-<button class="option" onclick="answer(this,false,'c2q5')">
-A. Cerebellum
+
+<button class="option"
+onclick="answer(this,false,'c2q5')">
+A. Isolated peripheral hand neuropathy
 </button>
-<button class="option" onclick="answer(this,true,'c2q5')">
-B. Thoracic spinal cord
+
+<button class="option"
+onclick="answer(this,true,'c2q5')">
+B. Cervical cord lesion affecting segmental and long-tract systems
 </button>
-<button class="option" onclick="answer(this,false,'c2q5')">
-C. Peripheral facial nerve
+
+<button class="option"
+onclick="answer(this,false,'c2q5')">
+C. Cerebellar lesion
 </button>
+
 </div>
 
 <div id="c2q5" class="answer">
 <strong>Correct.</strong>
-The sensory level and bilateral UMN signs strongly support the
-thoracic spinal cord.
+The mixed upper- and lower-level pattern points toward the
+cervical spinal cord.
 </div>
 </div>
 
@@ -1605,26 +1829,29 @@ CASE 03
 
 <div class="case-header">
 
-<div class="case-tag">CASE 03 · HEMISECTION</div>
+<div class="case-tag">
+CASE 03 · HEMICORD
+</div>
 
-<h2>The Half-Cord Pattern</h2>
+<h2>
+The Half-Cord Pattern
+</h2>
 
 <div class="case-subtitle">
-نمط إصابة نصف الحبل الشوكي
+نمط نصف الحبل الشوكي
 </div>
 
 <p class="hero-text">
-A 29-year-old patient develops weakness on one side of the body
-below a spinal injury, loss of vibration and position sense on the
-same side, and altered pain and temperature sensation on the
-opposite side.
+A 36-year-old patient develops weakness and several different
+patterns of sensory loss affecting one side of the body after a
+spinal injury.
 </p>
 
 <div class="profile-grid">
 
 <div class="profile">
 <span>AGE</span>
-<strong>29 years</strong>
+<strong>36 years</strong>
 </div>
 
 <div class="profile">
@@ -1634,63 +1861,64 @@ opposite side.
 
 <div class="profile">
 <span>KEY PATTERN</span>
-<strong>Crossed sensory findings</strong>
+<strong>Unilateral cord findings</strong>
 </div>
 
 <div class="profile">
-<span>SYNDROME</span>
-<strong>Hemisection pattern</strong>
+<span>KEY CLUE</span>
+<strong>Crossed sensory loss</strong>
 </div>
 
 </div>
 
 </div>
+
 
 <div class="story">
 
 <h3>History · التاريخ المرضي</h3>
 
 <p>
-After a localized spinal injury, the patient develops weakness of
-the right leg. Examination reveals increased tone and brisk reflexes
-on the right below the injury. Vibration and position sense are also
-reduced on the right, while pain and temperature sensation are
-reduced on the opposite side below the lesion.
+Following a spinal injury, the patient develops weakness on the
+right side of the lower body. Vibration and position sense are
+reduced on the right side, while pain and temperature sensation
+are reduced on the opposite side beginning several segments below
+the lesion.
 </p>
 
 <p dir="rtl">
-بعد إصابة موضعية في العمود الفقري، ظهر لدى المريض ضعف في الساق
-اليمنى. أظهر الفحص زيادة في توتر العضلات وارتفاع المنعكسات في
-الجانب الأيمن أسفل مستوى الإصابة. كما انخفض الإحساس بالاهتزاز
-ووضعية المفصل في الجانب الأيمن، بينما انخفض الإحساس بالألم
-والحرارة في الجانب المقابل أسفل الآفة.
+بعد إصابة في العمود الفقري، ظهر لدى المريض ضعف في الجانب الأيمن
+من الجزء السفلي من الجسم. كما انخفض الإحساس بالاهتزاز ووضعية
+المفاصل في الجانب الأيمن، بينما انخفض الإحساس بالألم والحرارة
+في الجانب المقابل بدايةً من عدة قطاعات أسفل مستوى الإصابة.
 </p>
 
 <div class="timeline">
 
 <div class="timeline-item">
-<div class="time">DAY 0</div>
-<div>Localized spinal injury occurs.</div>
+<div class="time">0 HR</div>
+<div>Spinal injury occurs.</div>
 </div>
 
 <div class="timeline-item">
-<div class="time">HOUR 2</div>
-<div>Right leg weakness becomes apparent.</div>
+<div class="time">1 HR</div>
+<div>Right-sided weakness becomes apparent.</div>
 </div>
 
 <div class="timeline-item">
-<div class="time">HOUR 4</div>
+<div class="time">2 HR</div>
 <div>Right vibration and position sense are reduced.</div>
 </div>
 
 <div class="timeline-item">
-<div class="time">HOUR 6</div>
-<div>Contralateral pain and temperature loss is identified.</div>
+<div class="time">3 HR</div>
+<div>Left pain and temperature sensation become impaired below the lesion.</div>
 </div>
 
 </div>
 
 </div>
+
 
 <div class="section-label" style="margin-top:35px;">
 Neurological Examination · الفحص العصبي
@@ -1702,37 +1930,37 @@ Neurological Examination · الفحص العصبي
 
 <div class="finding">
 <div class="finding-number">01 · MOTOR</div>
-<h3>Ipsilateral UMN Weakness</h3>
+<h3>Right-Sided Weakness</h3>
 <p>
-Weakness and upper motor neuron signs occur below the lesion on
-the same side.
+Weakness is greater on the right side below the level of injury.
 </p>
 <div class="clue">
-Clue: descending corticospinal fibers are affected.
+Clue: corticospinal fibers are organized within the spinal cord.
 </div>
 </div>
 
 <div class="finding">
 <div class="finding-number">02 · DORSAL COLUMN</div>
-<h3>Ipsilateral Vibration Loss</h3>
+<h3>Right Loss of Vibration + Position</h3>
 <p>
-Vibration and position sense are reduced on the same side below
-the lesion.
+The patient has impaired vibration and proprioception on the
+right side below the lesion.
 </p>
 <div class="clue">
-Clue: dorsal column pathways ascend ipsilaterally in the spinal
-cord.
+Clue: dorsal column pathways ascend ipsilaterally within the
+spinal cord.
 </div>
 </div>
 
 <div class="finding">
 <div class="finding-number">03 · SPINOTHALAMIC</div>
-<h3>Contralateral Pain/Temperature Loss</h3>
+<h3>Left Pain + Temperature Loss</h3>
 <p>
-Pain and temperature sensation are reduced on the opposite side.
+Pain and temperature sensation are reduced on the opposite side,
+beginning below the lesion.
 </p>
 <div class="clue">
-Clue: the spinothalamic pathway crosses within the spinal cord.
+Clue: spinothalamic fibers cross within the spinal cord.
 </div>
 </div>
 
@@ -1740,24 +1968,23 @@ Clue: the spinothalamic pathway crosses within the spinal cord.
 <div class="finding-number">04 · PATTERN</div>
 <h3>Three-Pathway Combination</h3>
 <p>
-Motor, dorsal column, and spinothalamic findings create a highly
+Motor, dorsal-column, and spinothalamic findings create a highly
 specific pattern.
 </p>
 <div class="clue">
-Clue: combining pathways is more powerful than interpreting one
-finding alone.
+Clue: multiple pathways point toward a hemicord lesion.
 </div>
 </div>
 
 </div>
+
 
 <div class="localizer">
 
 <h3>Interactive Localization Engine</h3>
 
 <p class="localizer-intro">
-This is a pathway-based localization problem. Identify where each
-major tract travels and where it crosses.
+The key is to understand where each sensory pathway crosses.
 </p>
 
 <div class="steps">
@@ -1771,7 +1998,7 @@ major tract travels and where it crosses.
 </button>
 
 <button class="step" onclick="showStep('c3',3,this)">
-03 · Pain/Temperature
+03 · Pain & Temperature
 </button>
 
 <button class="step" onclick="showStep('c3',4,this)">
@@ -1785,49 +2012,51 @@ major tract travels and where it crosses.
 </div>
 
 <div class="step-content active" id="c3-step1">
-<h4>01 · Analyze the motor pathway</h4>
+<h4>01 · Analyze the motor finding</h4>
 <p>
-The corticospinal tract has already crossed in the brainstem before
-descending through the spinal cord. Therefore a spinal cord lesion
-produces ipsilateral motor weakness below the lesion.
+The right-sided weakness below the lesion suggests involvement of
+the right corticospinal tract within the spinal cord.
 </p>
 
 <div class="logic">
 <div class="logic-box">
-<strong>Motor</strong>
-<span>Corticospinal tract</span>
+<strong>Weakness</strong>
+<span>Right side</span>
 </div>
+
 <div class="logic-box">
-<strong>Finding</strong>
-<span>Ipsilateral weakness</span>
+<strong>Pathway</strong>
+<span>Corticospinal</span>
 </div>
+
 <div class="logic-box">
-<strong>Meaning</strong>
-<span>Cord lesion</span>
+<strong>Localization</strong>
+<span>Spinal cord</span>
 </div>
 </div>
 </div>
 
 <div class="step-content" id="c3-step2">
-<h4>02 · Analyze the dorsal columns</h4>
+<h4>02 · Analyze vibration and position</h4>
 <p>
-The dorsal column pathway carries vibration, fine touch, and
-proprioception upward on the same side of the spinal cord until it
-crosses in the medulla.
+The dorsal columns carry vibration, fine touch, and proprioceptive
+information upward on the same side of the spinal cord.
 </p>
 
 <div class="logic">
 <div class="logic-box">
-<strong>Modality</strong>
+<strong>Loss</strong>
+<span>Right</span>
+</div>
+
+<div class="logic-box">
+<strong>Modalities</strong>
 <span>Vibration + position</span>
 </div>
+
 <div class="logic-box">
-<strong>Cord side</strong>
-<span>Ipsilateral</span>
-</div>
-<div class="logic-box">
-<strong>Finding</strong>
-<span>Right-sided loss</span>
+<strong>Pathway</strong>
+<span>Dorsal columns</span>
 </div>
 </div>
 </div>
@@ -1835,23 +2064,25 @@ crosses in the medulla.
 <div class="step-content" id="c3-step3">
 <h4>03 · Analyze pain and temperature</h4>
 <p>
-Pain and temperature fibers cross within the spinal cord through
-the anterior white commissure and then ascend in the opposite
-spinothalamic tract.
+Pain and temperature fibers cross within the spinal cord before
+ascending. Therefore a left-sided loss below the lesion can point
+toward a right-sided spinal cord lesion.
 </p>
 
 <div class="logic">
 <div class="logic-box">
-<strong>Modality</strong>
+<strong>Loss</strong>
+<span>Left</span>
+</div>
+
+<div class="logic-box">
+<strong>Modalities</strong>
 <span>Pain + temperature</span>
 </div>
+
 <div class="logic-box">
 <strong>Crossing</strong>
 <span>Within spinal cord</span>
-</div>
-<div class="logic-box">
-<strong>Finding</strong>
-<span>Contralateral loss</span>
 </div>
 </div>
 </div>
@@ -1859,8 +2090,9 @@ spinothalamic tract.
 <div class="step-content" id="c3-step4">
 <h4>04 · Determine the side</h4>
 <p>
-Ipsilateral motor and dorsal column deficits identify the side of
-the hemicord involved. Here, those findings are on the right.
+Right-sided corticospinal and dorsal-column findings together with
+contralateral pain-temperature loss indicate a right-sided
+hemicord lesion.
 </p>
 
 <div class="logic">
@@ -1868,13 +2100,15 @@ the hemicord involved. Here, those findings are on the right.
 <strong>Motor</strong>
 <span>Right</span>
 </div>
+
 <div class="logic-box">
 <strong>Dorsal column</strong>
 <span>Right</span>
 </div>
+
 <div class="logic-box">
-<strong>Lesion side</strong>
-<span>Right</span>
+<strong>Pain/temp</strong>
+<span>Left</span>
 </div>
 </div>
 </div>
@@ -1882,9 +2116,9 @@ the hemicord involved. Here, those findings are on the right.
 <div class="step-content" id="c3-step5">
 <h4>05 · Final localization</h4>
 <p>
-The combination of ipsilateral corticospinal and dorsal column
-deficits with contralateral pain and temperature loss is the classic
-pattern of a spinal cord hemisection.
+The combination of ipsilateral weakness and dorsal-column loss
+with contralateral pain-temperature loss is classically associated
+with a spinal cord hemisection pattern.
 </p>
 
 <div class="logic">
@@ -1892,18 +2126,21 @@ pattern of a spinal cord hemisection.
 <strong>Region</strong>
 <span>Spinal cord</span>
 </div>
+
 <div class="logic-box">
 <strong>Side</strong>
 <span>Right hemicord</span>
 </div>
+
 <div class="logic-box">
 <strong>Pattern</strong>
-<span>Hemisection syndrome</span>
+<span>Hemicord syndrome</span>
 </div>
 </div>
 </div>
 
 </div>
+
 
 <section class="section">
 
@@ -1911,24 +2148,32 @@ pattern of a spinal cord hemisection.
 Case 03 Assessment · اختبار الحالة الثالثة
 </div>
 
-<h2>Master the pathways</h2>
+<h2>Master the hemicord pattern</h2>
 
 <div class="question-card">
 <div class="question-number">CASE 03 · QUESTION 01</div>
 <h3>
-Which pathway carries vibration and proprioception?
+Which pathway carries vibration and proprioception in the spinal
+cord?
 </h3>
 
 <div class="options">
-<button class="option" onclick="answer(this,true,'c3q1')">
-A. Dorsal column–medial lemniscus pathway
+
+<button class="option"
+onclick="answer(this,true,'c3q1')">
+A. Dorsal column pathway
 </button>
-<button class="option" onclick="answer(this,false,'c3q1')">
-B. Corticospinal tract
+
+<button class="option"
+onclick="answer(this,false,'c3q1')">
+B. Spinothalamic pathway
 </button>
-<button class="option" onclick="answer(this,false,'c3q1')">
-C. Spinocerebellar pathway only
+
+<button class="option"
+onclick="answer(this,false,'c3q1')">
+C. Corticobulbar pathway
 </button>
+
 </div>
 
 <div id="c3q1" class="answer">
@@ -1938,102 +2183,138 @@ discriminative touch.
 </div>
 </div>
 
+
 <div class="question-card">
 <div class="question-number">CASE 03 · QUESTION 02</div>
 <h3>
-Where does the spinothalamic pathway cross?
+Which modality is reduced on the opposite side in a hemicord
+pattern?
 </h3>
 
 <div class="options">
-<button class="option" onclick="answer(this,false,'c3q2')">
-A. Only in the cortex
+
+<button class="option"
+onclick="answer(this,true,'c3q2')">
+A. Pain and temperature
 </button>
-<button class="option" onclick="answer(this,true,'c3q2')">
-B. Within the spinal cord
+
+<button class="option"
+onclick="answer(this,false,'c3q2')">
+B. Proprioception only
 </button>
-<button class="option" onclick="answer(this,false,'c3q2')">
-C. At the neuromuscular junction
+
+<button class="option"
+onclick="answer(this,false,'c3q2')">
+C. Hearing
 </button>
+
 </div>
 
 <div id="c3q2" class="answer">
 <strong>Correct.</strong>
-Pain and temperature fibers cross within the spinal cord.
+Spinothalamic fibers cross within the spinal cord, producing
+contralateral pain and temperature loss below the lesion.
 </div>
 </div>
+
 
 <div class="question-card">
 <div class="question-number">CASE 03 · QUESTION 03</div>
 <h3>
-Why is motor weakness ipsilateral in a spinal cord hemisection?
+Why are vibration and position sense lost on the same side as the
+motor weakness?
 </h3>
 
 <div class="options">
-<button class="option" onclick="answer(this,true,'c3q3')">
-A. The corticospinal tract has already crossed above the spinal cord
+
+<button class="option"
+onclick="answer(this,true,'c3q3')">
+A. Their pathways ascend ipsilaterally in the spinal cord
 </button>
-<button class="option" onclick="answer(this,false,'c3q3')">
-B. Motor fibers never cross
+
+<button class="option"
+onclick="answer(this,false,'c3q3')">
+B. They cross immediately in the spinal cord
 </button>
-<button class="option" onclick="answer(this,false,'c3q3')">
-C. The cerebellum controls the spinal cord directly
+
+<button class="option"
+onclick="answer(this,false,'c3q3')">
+C. They are carried by cranial nerves
 </button>
+
 </div>
 
 <div id="c3q3" class="answer">
 <strong>Correct.</strong>
-Most corticospinal fibers cross in the caudal medulla before
-descending through the spinal cord.
+The dorsal column pathway remains on the same side within the
+spinal cord before crossing higher in the nervous system.
 </div>
 </div>
+
 
 <div class="question-card">
 <div class="question-number">CASE 03 · QUESTION 04</div>
 <h3>
-Which finding is contralateral in this classic pattern?
+Which side of the spinal cord is most likely affected?
 </h3>
 
 <div class="options">
-<button class="option" onclick="answer(this,false,'c3q4')">
-A. Motor weakness
+
+<button class="option"
+onclick="answer(this,true,'c3q4')">
+A. Right
 </button>
-<button class="option" onclick="answer(this,false,'c3q4')">
-B. Vibration loss
+
+<button class="option"
+onclick="answer(this,false,'c3q4')">
+B. Left
 </button>
-<button class="option" onclick="answer(this,true,'c3q4')">
-C. Pain and temperature loss
+
+<button class="option"
+onclick="answer(this,false,'c3q4')">
+C. Bilateral only
 </button>
+
 </div>
 
 <div id="c3q4" class="answer">
 <strong>Correct.</strong>
-Spinothalamic pain and temperature loss is typically contralateral
-below the lesion.
+Right-sided weakness and right dorsal-column loss combined with
+left pain-temperature loss point toward the right hemicord.
 </div>
 </div>
+
 
 <div class="question-card">
 <div class="question-number">CASE 03 · QUESTION 05</div>
 <h3>
-What is the best final localization?
+Which pattern best describes the entire case?
 </h3>
 
 <div class="options">
-<button class="option" onclick="answer(this,false,'c3q5')">
-A. Right cerebral cortex
+
+<button class="option"
+onclick="answer(this,false,'c3q5')">
+A. Pure peripheral neuropathy
 </button>
-<button class="option" onclick="answer(this,true,'c3q5')">
-B. Right spinal cord hemisection
+
+<button class="option"
+onclick="answer(this,true,'c3q5')">
+B. Spinal cord hemisection pattern
 </button>
-<button class="option" onclick="answer(this,false,'c3q5')">
-C. Left cerebellum
+
+<button class="option"
+onclick="answer(this,false,'c3q5')">
+C. Isolated cerebellar lesion
 </button>
+
 </div>
 
 <div id="c3q5" class="answer">
 <strong>Correct.</strong>
-Ipsilateral motor and dorsal column loss with contralateral pain
-and temperature loss is the classic hemicord pattern.
+The combination of ipsilateral motor and dorsal-column loss with
+contralateral pain-temperature loss is characteristic of a
+hemicord pattern.
 </div>
 </div>
 
@@ -2056,80 +2337,146 @@ Answer the questions to reveal your result.
 SPINAL CORD MAP
 ========================================================= -->
 
-<section id="cord" class="section">
+<section id="cord-map" class="section">
 
 <div class="section-label">
-Interactive Neuroanatomy · التشريح العصبي التفاعلي
+Interactive Anatomy · التشريح التفاعلي
 </div>
 
 <h2>Explore the Spinal Cord</h2>
 
 <p class="intro">
-Click a spinal cord region to explore its approximate anatomical
-level, major clinical relevance, and the type of neurological
-findings that may help localize a lesion.
+Click different regions of the spinal cord to review the major
+localization principles associated with each level.
 </p>
 
-<div class="spinal-panel">
+<div class="cord-panel">
 
-<div class="spinal-layout">
+<div class="cord-layout">
 
-<div class="spinal-visual">
+<div class="cord-visual">
 
-<div class="cord">
+<svg class="cord-svg"
+viewBox="0 0 500 650"
+xmlns="http://www.w3.org/2000/svg">
 
-<div class="level l1">Cervical</div>
-<div class="level l2">Thoracic</div>
-<div class="level l3">Lumbar</div>
-<div class="level l4">Sacral</div>
+<path
+class="cord-outline"
+d="M245 25
+C205 35 190 75 198 120
+L208 205
+C214 260 210 330 215 395
+L222 485
+C225 545 230 600 250 625
+C270 600 275 545 278 485
+L285 395
+C290 330 286 260 292 205
+L302 120
+C310 75 295 35 255 25 Z"/>
 
-<div class="cord-region cervical"
-onclick="selectCord('Cervical Cord','C1–C8','Upper limbs + long tracts','Arm findings with possible leg UMN signs')">
-</div>
+<rect
+class="cord-region cervical"
+x="210"
+y="90"
+width="80"
+height="115"
+rx="28"
+onclick="selectRegion('cervical',this)"/>
 
-<div class="cord-region thoracic"
-onclick="selectCord('Thoracic Cord','T1–T12','Trunk + descending pathways','Sensory level with bilateral leg UMN signs')">
-</div>
+<rect
+class="cord-region thoracic"
+x="213"
+y="205"
+width="74"
+height="175"
+rx="25"
+onclick="selectRegion('thoracic',this)"/>
 
-<div class="cord-region lumbar"
-onclick="selectCord('Lumbar Region','L1–L5','Lower-limb segments','Lower-limb weakness and segmental signs')">
-</div>
+<rect
+class="cord-region lumbar"
+x="218"
+y="380"
+width="64"
+height="120"
+rx="22"
+onclick="selectRegion('lumbar',this)"/>
 
-<div class="cord-region sacral"
-onclick="selectCord('Sacral Region','S1–S5','Pelvic and distal functions','Saddle/perineal and lower sacral findings')">
-</div>
+<rect
+class="cord-region sacral"
+x="225"
+y="500"
+width="50"
+height="95"
+rx="18"
+onclick="selectRegion('sacral',this)"/>
 
-</div>
+<text
+class="cord-label"
+x="325"
+y="150">
+Cervical
+</text>
+
+<text
+class="cord-label"
+x="325"
+y="295">
+Thoracic
+</text>
+
+<text
+class="cord-label"
+x="325"
+y="445">
+Lumbar
+</text>
+
+<text
+class="cord-label"
+x="325"
+y="550">
+Sacral
+</text>
+
+</svg>
 
 </div>
 
 <div class="region-info">
 
-<div class="mini">SELECT A REGION</div>
+<div class="mini">
+SELECTED REGION
+</div>
 
-<h3 id="cordTitle">Cervical Cord</h3>
+<h3 id="region-title">
+Spinal Cord
+</h3>
 
-<p id="cordDescription">
-The cervical spinal cord contains pathways serving the upper limbs
-as well as descending pathways traveling toward the lower body.
+<p id="region-description">
+Select a spinal cord region to explore its clinical localization
+features.
 </p>
 
 <hr>
 
 <div class="info-row">
-<span>LEVEL</span>
-<strong id="cordLevel">C1–C8</strong>
-</div>
-
-<div class="info-row">
-<span>MAJOR CLINICAL ROLE</span>
-<strong id="cordRole">Upper limbs + long tracts</strong>
+<span>KEY ROLE</span>
+<strong id="region-role">
+Ascending + descending pathways
+</strong>
 </div>
 
 <div class="info-row">
 <span>LOCALIZATION CLUE</span>
-<strong id="cordClue">
-Arm findings with possible leg UMN signs
+<strong id="region-clue">
+Pattern of weakness and sensory loss
+</strong>
+</div>
+
+<div class="info-row">
+<span>CLINICAL IDEA</span>
+<strong id="region-clinical">
+Find the level before naming the lesion
 </strong>
 </div>
 
@@ -2142,51 +2489,80 @@ Arm findings with possible leg UMN signs
 </section>
 
 
+<!-- =========================================================
+FINAL TAKEAWAY
+========================================================= -->
+
+<section class="section">
+
 <div class="takeaway">
 
-<h3>Clinical Localization Takeaway · الخلاصة</h3>
+<h3>
+Clinical Localization Rule · قاعدة مهمة
+</h3>
 
 <p>
-Spinal cord localization depends on recognizing patterns rather
-than memorizing isolated symptoms. Look for a sensory level, compare
-upper and lower motor neuron signs, determine which modalities are
-affected, and always ask where each major pathway crosses.
+When localizing a spinal cord lesion, first ask four questions:
+Is there a sensory level? Are the motor signs upper or lower
+motor neuron? Which sensory modalities are affected? And are the
+arms involved? These questions can narrow the lesion to a specific
+region of the cord before you even identify the exact pathology.
 </p>
 
-<p dir="rtl" style="margin-top:12px;">
-تحديد موضع الإصابة في الحبل الشوكي يعتمد على فهم النمط العصبي،
-وليس حفظ الأعراض بشكل منفصل. ابحث عن مستوى حسي واضح، وقارن بين
-علامات العصبون الحركي العلوي والسفلي، وحدد نوع الإحساس المتأثر،
-واسأل دائمًا: أين يعبر كل مسار عصبي؟
+<p dir="rtl" style="margin-top:15px;">
+عند تحديد موضع آفة الحبل الشوكي، ابدأ بأربع أسئلة: هل يوجد مستوى
+حسي؟ هل العلامات الحركية من نوع العصبون الحركي العلوي أم السفلي؟
+ما أنواع الإحساس المتأثرة؟ وهل الذراعان متأثران؟ تساعد هذه الأسئلة
+في تحديد منطقة الحبل الشوكي قبل تحديد المرض نفسه.
 </p>
 
 </div>
 
+</section>
 
-<div class="next-case">
+
+<!-- =========================================================
+NEXT PAGE
+========================================================= -->
+
+<div class="final-navigation">
 
 <div>
-<strong>Continue Clinical Neuroanatomy</strong>
-<p>
-Return to the clinical case library and explore another localization
-problem.
-</p>
+
+<div class="section-label">
+NEXT · VISUAL LOCALIZATION
 </div>
 
-<a class="btn" href="./clinical.html">
-Back to Clinical Cases →
+<h3>
+Ready to see the lesion?
+</h3>
+
+<p>
+Move from clinical reasoning to interactive visual localization.
+</p>
+
+</div>
+
+<a
+class="next-button"
+href="./visual-localization.html">
+
+Visual Localization
+<span>→</span>
+
 </a>
 
 </div>
+
 
 </main>
 
 
 <script>
 
-/* =========================
-LOCALIZATION ENGINE
-========================= */
+/* =========================================================
+STEP ENGINE
+========================================================= */
 
 function showStep(caseId,number,button){
 
@@ -2194,7 +2570,7 @@ function showStep(caseId,number,button){
         '[id^="'+caseId+'-step"]'
     );
 
-    contents.forEach(content=>{
+    contents.forEach(function(content){
         content.classList.remove("active");
     });
 
@@ -2208,7 +2584,7 @@ function showStep(caseId,number,button){
 
     const parent=button.parentElement;
 
-    parent.querySelectorAll(".step").forEach(step=>{
+    parent.querySelectorAll(".step").forEach(function(step){
         step.classList.remove("active");
     });
 
@@ -2216,9 +2592,9 @@ function showStep(caseId,number,button){
 }
 
 
-/* =========================
-QUIZ SYSTEM
-========================= */
+/* =========================================================
+QUESTION SYSTEM
+========================================================= */
 
 const scores={
     c1:0,
@@ -2228,34 +2604,76 @@ const scores={
 
 const answered={};
 
-function answer(button,correct,answerId){
+function answer(button,correct,id){
 
-    if(answered[answerId]) return;
+    if(answered[id]){
+        return;
+    }
 
-    answered[answerId]=true;
+    answered[id]=true;
 
-    const answerBox=document.getElementById(answerId);
+    const card=button.closest(".question-card");
+    const options=card.querySelectorAll(".option");
+
+    options.forEach(function(option){
+        option.disabled=true;
+    });
 
     if(correct){
 
         button.classList.add("correct");
 
-        answerBox.innerHTML=
-        "<strong>Correct.</strong> "+answerBox.innerText.replace("Correct.","").trim();
+        const caseId=id.substring(0,2);
 
-        scores[answerId.substring(0,2)]++;
+        if(scores[caseId] !== undefined){
+            scores[caseId]++;
+        }
 
     }else{
 
         button.classList.add("wrong");
 
-        answerBox.innerHTML=
-        "<strong>Not quite.</strong> "+answerBox.innerText.replace("Correct.","").trim();
+        options.forEach(function(option){
+
+            const text=option.textContent.trim();
+
+            if(
+                (id==="c1q1" && text.includes("CN III")) ||
+                (id==="c1q2" && text.includes("Crossed")) ||
+                (id==="c1q3" && text.includes("Midbrain")) ||
+                (id==="c1q4" && text.includes("Left arm")) ||
+                (id==="c1q5" && text.includes("Right ventral")) ||
+
+                (id==="c2q1" && text.includes("CN VII")) ||
+                (id==="c2q2" && text.includes("Ipsilateral")) ||
+                (id==="c2q3" && text.includes("Pons")) ||
+                (id==="c2q4" && text.includes("Right")) ||
+                (id==="c2q5" && text.includes("Right pontine")) ||
+
+                (id==="c3q1" && text.includes("Dorsal")) ||
+                (id==="c3q2" && text.includes("Pain")) ||
+                (id==="c3q3" && text.includes("ipsilaterally")) ||
+                (id==="c3q4" && text.includes("Right")) ||
+                (id==="c3q5" && text.includes("hemisection"))
+            ){
+                option.classList.add("correct");
+            }
+
+        });
+
     }
 
-    answerBox.classList.add("show");
+    const explanation=document.getElementById(id);
 
-    const caseId=answerId.substring(0,2);
+    if(explanation){
+        explanation.classList.add("show");
+    }
+
+    updateScore(id.substring(0,2));
+}
+
+
+function updateScore(caseId){
 
     const scoreElement=document.getElementById(
         "score-"+caseId
@@ -2265,44 +2683,118 @@ function answer(button,correct,answerId){
         "message-"+caseId
     );
 
-    scoreElement.innerText=
+    if(!scoreElement){
+        return;
+    }
+
+    scoreElement.textContent=
         scores[caseId]+" / 5";
 
     if(scores[caseId]===5){
-        messageElement.innerText=
-        "Excellent localization. You identified all five clues.";
-    }
-    else if(scores[caseId]>=3){
-        messageElement.innerText=
-        "Good work. Review the pathway crossings and try again.";
-    }
-    else{
-        messageElement.innerText=
-        "Keep going. Focus on the neurological pattern.";
+
+        messageElement.textContent=
+            "Excellent localization. You identified every major clue.";
+
+    }else if(scores[caseId]>=3){
+
+        messageElement.textContent=
+            "Strong work. Review the pathway logic and try again.";
+
+    }else{
+
+        messageElement.textContent=
+            "Keep going. Use the localization clues above.";
+
     }
 }
 
 
-/* =========================
-SPINAL CORD MAP
-========================= */
+/* =========================================================
+CORD MAP
+========================================================= */
 
-function selectCord(title,level,role,clue){
+const regionData={
 
-    document.getElementById("cordTitle").innerText=title;
+    cervical:{
+        title:"Cervical Cord",
+        description:
+        "The cervical cord contains pathways and segmental structures serving the upper limbs while also carrying descending pathways to the lower body.",
+        role:
+        "Upper-limb structures + long tracts",
+        clue:
+        "Arm findings plus leg UMN signs",
+        clinical:
+        "Think cervical when both arms and legs are involved"
+    },
 
-    document.getElementById("cordLevel").innerText=level;
+    thoracic:{
+        title:"Thoracic Cord",
+        description:
+        "The thoracic cord is especially useful for recognizing a sensory level with lower-limb upper motor neuron findings while the arms remain relatively preserved.",
+        role:
+        "Trunk pathways + long tracts",
+        clue:
+        "Sensory level + bilateral leg signs",
+        clinical:
+        "Think thoracic when the arms are spared"
+    },
 
-    document.getElementById("cordRole").innerText=role;
+    lumbar:{
+        title:"Lumbar Cord",
+        description:
+        "The lumbar region contains important structures involved in lower-limb function and segmental motor and sensory control.",
+        role:
+        "Lower-limb segmental systems",
+        clue:
+        "Lower-limb segmental findings",
+        clinical:
+        "Distinguish cord lesions from cauda equina or peripheral lesions"
+    },
 
-    document.getElementById("cordClue").innerText=clue;
+    sacral:{
+        title:"Sacral Cord",
+        description:
+        "The sacral cord contributes to lower-limb, pelvic, bowel, bladder, and sexual autonomic functions.",
+        role:
+        "Pelvic + distal lower-body functions",
+        clue:
+        "Saddle-region and sphincter findings",
+        clinical:
+        "Consider sacral pathways when pelvic functions are affected"
+    }
 
-    document.getElementById("cordDescription").innerText=
-        title+
-        " is an important region for understanding how neurological findings can be organized by spinal level and pathway involvement.";
+};
+
+
+function selectRegion(region,element){
+
+    document.querySelectorAll(".cord-region").forEach(
+        function(item){
+            item.classList.remove("selected");
+        }
+    );
+
+    element.classList.add("selected");
+
+    const data=regionData[region];
+
+    document.getElementById("region-title").textContent=
+        data.title;
+
+    document.getElementById("region-description").textContent=
+        data.description;
+
+    document.getElementById("region-role").textContent=
+        data.role;
+
+    document.getElementById("region-clue").textContent=
+        data.clue;
+
+    document.getElementById("region-clinical").textContent=
+        data.clinical;
 }
 
 </script>
 
 </body>
-  </html>
+</html>
