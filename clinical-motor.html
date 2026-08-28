@@ -1,0 +1,3164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NeuroAtlas | Motor Localization</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#050b13;
+    color:#eef4fa;
+    font-family:Arial,Helvetica,sans-serif;
+    line-height:1.65;
+}
+
+nav{
+    height:70px;
+    padding:0 7%;
+    display:flex;
+    align-items:center;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    background:#050b13;
+}
+
+nav a{
+    color:#9db0c3;
+    text-decoration:none;
+    font-size:14px;
+}
+
+nav a:hover{
+    color:white;
+}
+
+.container{
+    max-width:1250px;
+    margin:auto;
+    padding:65px 7% 110px;
+}
+
+.eyebrow{
+    color:#61b5ff;
+    letter-spacing:3px;
+    font-size:11px;
+    text-transform:uppercase;
+    margin-bottom:15px;
+}
+
+h1{
+    font-size:clamp(52px,8vw,88px);
+    line-height:.95;
+    letter-spacing:-4px;
+    margin-bottom:12px;
+}
+
+.arabic-title{
+    color:#ffb6c9;
+    font-size:25px;
+    margin-bottom:25px;
+}
+
+.hero-text{
+    color:#a8b8c8;
+    max-width:900px;
+    font-size:17px;
+    line-height:1.9;
+}
+
+.actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:28px;
+}
+
+.btn{
+    padding:11px 17px;
+    border-radius:9px;
+    background:#0b1928;
+    border:1px solid #31516d;
+    color:#bdd0e0;
+    cursor:pointer;
+    text-decoration:none;
+    font-size:14px;
+    transition:.2s;
+}
+
+.btn:hover{
+    background:#14304a;
+    color:white;
+    border-color:white;
+}
+
+.section{
+    margin-top:75px;
+}
+
+.section-label{
+    color:#61b5ff;
+    letter-spacing:2px;
+    font-size:11px;
+    text-transform:uppercase;
+    margin-bottom:8px;
+}
+
+.section h2{
+    font-size:34px;
+    margin-bottom:14px;
+}
+
+.intro{
+    color:#91a5b8;
+    max-width:950px;
+    line-height:1.9;
+    margin-bottom:30px;
+}
+
+/* CASE */
+
+.case-header{
+    padding:30px;
+    border:1px solid #1b344a;
+    border-radius:20px;
+    background:
+        radial-gradient(circle at 90% 10%,rgba(97,181,255,.09),transparent 35%),
+        #091522;
+}
+
+.case-tag{
+    display:inline-block;
+    padding:6px 10px;
+    border:1px solid #31516d;
+    border-radius:7px;
+    color:#61b5ff;
+    font-size:11px;
+    letter-spacing:2px;
+    margin-bottom:15px;
+}
+
+.case-header h2{
+    font-size:31px;
+    margin-bottom:10px;
+}
+
+.case-subtitle{
+    color:#ffb6c9;
+    margin-bottom:18px;
+}
+
+.profile-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+    margin-top:25px;
+}
+
+.profile{
+    background:#0b1928;
+    border:1px solid #172f43;
+    border-radius:14px;
+    padding:18px;
+}
+
+.profile span{
+    display:block;
+    color:#70869a;
+    font-size:10px;
+    letter-spacing:2px;
+    margin-bottom:7px;
+}
+
+.profile strong{
+    color:#eef4fa;
+    font-size:15px;
+}
+
+/* STORY */
+
+.story{
+    margin-top:22px;
+    padding:27px;
+    background:#08131f;
+    border:1px solid #172b3e;
+    border-radius:17px;
+}
+
+.story h3{
+    font-size:19px;
+    margin-bottom:14px;
+}
+
+.story p{
+    color:#a0b1c1;
+    margin-bottom:17px;
+}
+
+.story p:last-child{
+    margin-bottom:0;
+}
+
+.timeline{
+    margin-top:25px;
+    display:grid;
+    gap:12px;
+}
+
+.timeline-item{
+    display:grid;
+    grid-template-columns:95px 1fr;
+    gap:18px;
+    align-items:start;
+}
+
+.time{
+    color:#61b5ff;
+    font-size:12px;
+    letter-spacing:1px;
+    padding-top:4px;
+}
+
+.timeline-item div:last-child{
+    color:#9eb0c0;
+    border-left:1px solid #29445a;
+    padding-left:18px;
+}
+
+/* FINDINGS */
+
+.findings{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+    margin-top:25px;
+}
+
+.finding{
+    padding:22px;
+    background:#091522;
+    border:1px solid #172b3e;
+    border-radius:16px;
+}
+
+.finding-number{
+    color:#61b5ff;
+    font-size:11px;
+    letter-spacing:2px;
+    margin-bottom:7px;
+}
+
+.finding h3{
+    font-size:17px;
+    margin-bottom:8px;
+}
+
+.finding p{
+    color:#91a5b8;
+    font-size:14px;
+}
+
+.clue{
+    margin-top:12px;
+    padding:10px 12px;
+    background:#0d2031;
+    border-left:2px solid #61b5ff;
+    color:#bdd0e0;
+    font-size:13px;
+}
+
+/* LOCALIZER */
+
+.localizer{
+    margin-top:30px;
+    padding:30px;
+    background:#07111c;
+    border:1px solid #1a3348;
+    border-radius:20px;
+}
+
+.localizer h3{
+    font-size:22px;
+    margin-bottom:8px;
+}
+
+.localizer-intro{
+    color:#8196aa;
+    margin-bottom:25px;
+}
+
+.steps{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:25px;
+}
+
+.step{
+    padding:9px 13px;
+    border-radius:8px;
+    border:1px solid #203b51;
+    background:#0a1825;
+    color:#7890a5;
+    cursor:pointer;
+    font-size:12px;
+}
+
+.step.active{
+    background:#16324a;
+    border-color:#61b5ff;
+    color:white;
+}
+
+.step-content{
+    display:none;
+    padding:24px;
+    background:#091522;
+    border:1px solid #172b3e;
+    border-radius:15px;
+}
+
+.step-content.active{
+    display:block;
+}
+
+.step-content h4{
+    font-size:19px;
+    margin-bottom:10px;
+}
+
+.step-content p{
+    color:#9cafbf;
+}
+
+.logic{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-top:18px;
+}
+
+.logic-box{
+    padding:15px;
+    border:1px solid #1b3448;
+    border-radius:12px;
+    background:#0b1928;
+}
+
+.logic-box strong{
+    display:block;
+    color:white;
+    margin-bottom:5px;
+}
+
+.logic-box span{
+    color:#8095a8;
+    font-size:13px;
+}
+
+/* MOTOR VISUALIZATION */
+
+.motor-panel{
+    margin-top:30px;
+    padding:25px;
+    border:1px solid #1b344a;
+    border-radius:20px;
+    background:#07111c;
+}
+
+.motor-layout{
+    display:grid;
+    grid-template-columns:1.2fr .8fr;
+    gap:25px;
+    align-items:center;
+}
+
+.motor-svg-wrap{
+    background:
+        radial-gradient(circle at center,#172c40,#050b13 72%);
+    border-radius:18px;
+    padding:20px;
+    min-height:430px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.motor-svg{
+    width:100%;
+    max-width:620px;
+}
+
+.cortex{
+    fill:#243c50;
+    stroke:#8fa5b7;
+    stroke-width:3;
+}
+
+.motor-area{
+    fill:#35556d;
+    stroke:#9db4c5;
+    stroke-width:2;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.motor-area:hover{
+    filter:
+        drop-shadow(0 0 8px rgba(97,181,255,.8));
+}
+
+.motor-area.selected{
+    fill:#61b5ff !important;
+    stroke:white;
+    filter:
+        drop-shadow(0 0 10px rgba(97,181,255,.9))
+        drop-shadow(0 0 22px rgba(97,181,255,.45));
+}
+
+.corticospinal{
+    fill:none;
+    stroke:#527d9c;
+    stroke-width:8;
+    stroke-linecap:round;
+    opacity:.8;
+}
+
+.spinal-cord{
+    fill:#20394e;
+    stroke:#8fa5b7;
+    stroke-width:2;
+}
+
+.motor-label{
+    fill:#dce7ef;
+    font-size:14px;
+    font-weight:bold;
+    pointer-events:none;
+}
+
+.motor-info{
+    background:#091522;
+    border:1px solid #1c3549;
+    border-radius:16px;
+    padding:24px;
+}
+
+.motor-info .mini{
+    color:#61b5ff;
+    font-size:10px;
+    letter-spacing:2px;
+    margin-bottom:8px;
+}
+
+.motor-info h3{
+    font-size:23px;
+    margin-bottom:10px;
+}
+
+.motor-info p{
+    color:#91a5b8;
+    font-size:14px;
+}
+
+.motor-info hr{
+    border:none;
+    border-top:1px solid #1a3042;
+    margin:20px 0;
+}
+
+.info-row{
+    margin-bottom:13px;
+}
+
+.info-row span{
+    display:block;
+    color:#6f8599;
+    font-size:10px;
+    letter-spacing:1px;
+    margin-bottom:3px;
+}
+
+.info-row strong{
+    color:#dce7ef;
+    font-size:13px;
+}
+
+/* DIFFERENTIAL */
+
+.compare{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+    margin-top:25px;
+}
+
+.compare-card{
+    padding:23px;
+    background:#091522;
+    border:1px solid #172b3e;
+    border-radius:16px;
+}
+
+.compare-card h3{
+    font-size:17px;
+    margin-bottom:10px;
+}
+
+.compare-card p{
+    color:#91a5b8;
+    font-size:14px;
+}
+
+.compare-card .why{
+    margin-top:14px;
+    padding-top:12px;
+    border-top:1px solid #1a3042;
+    color:#b9c9d7;
+    font-size:13px;
+}
+
+/* QUESTIONS */
+
+.question-card{
+    margin-top:20px;
+    padding:28px;
+    background:#091522;
+    border:1px solid #172f43;
+    border-radius:18px;
+}
+
+.question-number{
+    color:#61b5ff;
+    font-size:11px;
+    letter-spacing:2px;
+    margin-bottom:10px;
+}
+
+.question-card h3{
+    font-size:19px;
+    margin-bottom:17px;
+}
+
+.options{
+    display:grid;
+    gap:9px;
+}
+
+.option{
+    width:100%;
+    padding:14px;
+    border-radius:10px;
+    background:#0d2031;
+    border:1px solid #223c52;
+    color:#dce6ee;
+    text-align:left;
+    cursor:pointer;
+    font-size:14px;
+    transition:.2s;
+}
+
+.option:hover{
+    border-color:#61b5ff;
+    transform:translateX(3px);
+}
+
+.option.correct{
+    background:#132b28;
+    border-color:#69d3b1;
+}
+
+.option.wrong{
+    background:#291b20;
+    border-color:#c56d7f;
+}
+
+.answer{
+    display:none;
+    margin-top:15px;
+    padding:15px;
+    border-radius:10px;
+    background:#0d1d2b;
+    color:#a9bbc9;
+    font-size:13px;
+}
+
+.answer.show{
+    display:block;
+}
+
+.answer strong{
+    color:white;
+}
+
+.score-box{
+    margin-top:30px;
+    padding:25px;
+    border:1px solid #24445d;
+    border-radius:17px;
+    background:#0a1825;
+    text-align:center;
+}
+
+.score-number{
+    font-size:42px;
+    font-weight:bold;
+    color:#61b5ff;
+}
+
+.score-message{
+    color:#91a5b8;
+    margin-top:5px;
+}
+
+.takeaway{
+    margin-top:35px;
+    padding:28px;
+    background:#091522;
+    border-left:3px solid #61b5ff;
+    border-radius:13px;
+}
+
+.takeaway h3{
+    margin-bottom:12px;
+}
+
+.takeaway p{
+    color:#9cafbf;
+}
+
+.case-divider{
+    height:1px;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        #24445d,
+        transparent
+    );
+    margin:90px 0;
+}
+
+/* FINAL NAV */
+
+.next-case{
+    margin-top:55px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    padding:26px;
+    background:#091522;
+    border:1px solid #1b344a;
+    border-radius:18px;
+}
+
+.next-case p{
+    color:#8196a9;
+    font-size:14px;
+}
+
+.next-btn{
+    padding:13px 20px;
+    border-radius:9px;
+    background:#0b1928;
+    border:1px solid #31516d;
+    color:#bdd0e0;
+    text-decoration:none;
+    font-size:14px;
+    transition:.2s;
+}
+
+.next-btn:hover{
+    background:#16324a;
+    border-color:#61b5ff;
+    color:white;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:950px){
+
+    .profile-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .motor-layout{
+        grid-template-columns:1fr;
+    }
+
+    .compare{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:700px){
+
+    .findings{
+        grid-template-columns:1fr;
+    }
+
+    .logic{
+        grid-template-columns:1fr;
+    }
+
+    .profile-grid{
+        grid-template-columns:1fr;
+    }
+
+    .timeline-item{
+        grid-template-columns:1fr;
+        gap:3px;
+    }
+
+    h1{
+        letter-spacing:-2px;
+    }
+
+    .next-case{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<a href="./clinical.html">← Back to Clinical Neuroanatomy</a>
+</nav>
+
+<main class="container">
+
+<div class="eyebrow">
+Clinical Cases · Motor Localization · NeuroAtlas
+</div>
+
+<h1>
+Motor<br>Localization
+</h1>
+
+<div class="arabic-title">
+تحديد موضع الآفة في المسار الحركي
+</div>
+
+<p class="hero-text">
+
+Motor localization is the process of using weakness, reflexes,
+muscle tone, distribution of affected muscles, and associated
+neurological findings to determine where a lesion lies along the
+motor system.
+
+The major possibilities include the motor cortex, corticospinal
+tract, brainstem, spinal cord, anterior horn cell, peripheral nerve,
+neuromuscular junction, and muscle.
+
+<br><br>
+
+تحديد موضع الآفة الحركية يعتمد على تحليل نمط الضعف، والمنعكسات،
+وتوتر العضلات، وتوزيع العضلات المتأثرة، والأعراض العصبية المصاحبة.
+ومن خلال هذه العلامات يمكن تحديد مكان الإصابة على طول الجهاز
+الحركي، من القشرة الحركية وحتى العضلة.
+
+</p>
+
+<div class="actions">
+<a class="btn" href="#case1">🧠 Case 01</a>
+<a class="btn" href="#case2">🧩 Case 02</a>
+<a class="btn" href="#case3">⚡ Case 03</a>
+<a class="btn" href="#motor-map">🗺️ Motor Map</a>
+</div>
+
+
+<!-- =========================================================
+CASE 01 — CORTICAL
+========================================================= -->
+
+<section id="case1" class="section">
+
+<div class="case-header">
+
+<div class="case-tag">
+CASE 01 · MOTOR CORTEX
+</div>
+
+<h2>
+The Weak Hand
+</h2>
+
+<div class="case-subtitle">
+ضعف اليد مع علامات قشرية
+</div>
+
+<p class="hero-text">
+A 67-year-old woman suddenly develops weakness mainly affecting
+her right hand. She also has difficulty performing a previously
+familiar skilled movement and has mild word-finding difficulty.
+</p>
+
+<div class="profile-grid">
+
+<div class="profile">
+<span>AGE</span>
+<strong>67 years</strong>
+</div>
+
+<div class="profile">
+<span>ONSET</span>
+<strong>Sudden</strong>
+</div>
+
+<div class="profile">
+<span>MAIN DEFICIT</span>
+<strong>Right hand weakness</strong>
+</div>
+
+<div class="profile">
+<span>ASSOCIATED</span>
+<strong>Cortical signs</strong>
+</div>
+
+</div>
+
+</div>
+
+<div class="story">
+
+<h3>History · التاريخ المرضي</h3>
+
+<p>
+The patient was preparing breakfast when she suddenly noticed that
+her right hand felt weak. She could move the arm, but precise
+movements were difficult. Her family also noticed a mild problem
+finding words.
+</p>
+
+<p dir="rtl">
+كانت المريضة تقوم بتحضير الإفطار عندما لاحظت فجأة ضعفًا في يدها
+اليمنى. كانت قادرة على تحريك الذراع، لكن الحركات الدقيقة أصبحت
+صعبة. كما لاحظت الأسرة وجود صعوبة بسيطة في إيجاد الكلمات.
+</p>
+
+<div class="timeline">
+
+<div class="timeline-item">
+<div class="time">08:15</div>
+<div>Patient is functioning normally.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">08:23</div>
+<div>Sudden right hand weakness begins.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">08:27</div>
+<div>Fine motor movements become difficult.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">08:35</div>
+<div>Mild language difficulty is noticed.</div>
+</div>
+
+</div>
+
+</div>
+
+<div class="section-label" style="margin-top:35px;">
+Neurological Examination · الفحص العصبي
+</div>
+
+<h2>What do we find?</h2>
+
+<div class="findings">
+
+<div class="finding">
+<div class="finding-number">01 · DISTRIBUTION</div>
+<h3>Predominant Hand Weakness</h3>
+<p>
+Weakness is much greater in the right hand than in the proximal
+arm.
+</p>
+<div class="clue">
+Clue: selective weakness can reflect the somatotopic organization
+of the motor cortex.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">02 · FINE MOTOR</div>
+<h3>Loss of Skilled Movement</h3>
+<p>
+Rapid and precise finger movements are impaired.
+</p>
+<div class="clue">
+Clue: cortical motor areas are important for skilled voluntary
+movement.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">03 · LANGUAGE</div>
+<h3>Mild Word-Finding Difficulty</h3>
+<p>
+The patient has mild difficulty finding appropriate words.
+</p>
+<div class="clue">
+Clue: an additional cortical sign makes a peripheral lesion less
+likely.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">04 · REFLEXES</div>
+<h3>Mildly Brisk Reflexes</h3>
+<p>
+Reflexes on the right are slightly brisker than on the left.
+</p>
+<div class="clue">
+Clue: an upper motor neuron pattern supports central involvement.
+</div>
+</div>
+
+</div>
+
+<div class="localizer">
+
+<h3>Interactive Localization Engine</h3>
+
+<p class="localizer-intro">
+Follow the motor pathway from the clinical pattern to the most
+likely anatomical level.
+</p>
+
+<div class="steps">
+
+<button class="step active" onclick="showStep('c1',1,this)">
+01 · Pattern
+</button>
+
+<button class="step" onclick="showStep('c1',2,this)">
+02 · UMN / LMN
+</button>
+
+<button class="step" onclick="showStep('c1',3,this)">
+03 · Distribution
+</button>
+
+<button class="step" onclick="showStep('c1',4,this)">
+04 · Cortical Clues
+</button>
+
+<button class="step" onclick="showStep('c1',5,this)">
+05 · Localization
+</button>
+
+</div>
+
+<div class="step-content active" id="c1-step1">
+<h4>01 · Recognize the pattern</h4>
+
+<p>
+The weakness is unilateral and predominantly affects the hand,
+with additional neurological findings suggesting a central lesion.
+</p>
+
+<div class="logic">
+<div class="logic-box">
+<strong>Side</strong>
+<span>Right</span>
+</div>
+
+<div class="logic-box">
+<strong>Distribution</strong>
+<span>Hand &gt; arm</span>
+</div>
+
+<div class="logic-box">
+<strong>Pattern</strong>
+<span>Central motor deficit</span>
+</div>
+</div>
+</div>
+
+<div class="step-content" id="c1-step2">
+<h4>02 · Upper or lower motor neuron?</h4>
+
+<p>
+The mildly brisk reflexes and absence of a focal peripheral nerve
+distribution favor an upper motor neuron lesion.
+</p>
+
+<div class="logic">
+<div class="logic-box">
+<strong>Reflexes</strong>
+<span>Brisker</span>
+</div>
+
+<div class="logic-box">
+<strong>Tone</strong>
+<span>Central pattern</span>
+</div>
+
+<div class="logic-box">
+<strong>Classification</strong>
+<span>UMN</span>
+</div>
+</div>
+</div>
+
+<div class="step-content" id="c1-step3">
+<h4>03 · Analyze the distribution</h4>
+
+<p>
+The deficit is disproportionately severe in the hand. This is
+important because different parts of the body are represented in
+different regions of the motor cortex.
+</p>
+
+<div class="logic">
+<div class="logic-box">
+<strong>Hand</strong>
+<span>Markedly affected</span>
+</div>
+
+<div class="logic-box">
+<strong>Leg</strong>
+<span>Relatively preserved</span>
+</div>
+
+<div class="logic-box">
+<strong>Localization clue</strong>
+<span>Somatotopic</span>
+</div>
+</div>
+</div>
+
+<div class="step-content" id="c1-step4">
+<h4>04 · Look for cortical clues</h4>
+
+<p>
+The associated language difficulty provides evidence that the lesion
+is not simply somewhere along a peripheral motor nerve.
+</p>
+
+<div class="logic">
+<div class="logic-box">
+<strong>Motor</strong>
+<span>Right hand weakness</span>
+</div>
+
+<div class="logic-box">
+<strong>Cortical sign</strong>
+<span>Language difficulty</span>
+</div>
+
+<div class="logic-box">
+<strong>Central lesion</strong>
+<span>Strongly supported</span>
+</div>
+</div>
+</div>
+
+<div class="step-content" id="c1-step5">
+<h4>05 · Final localization</h4>
+
+<p>
+The pattern is most consistent with a lesion involving the left
+lateral motor cortex, particularly the region representing the
+right upper limb and hand.
+</p>
+
+<div class="logic">
+<div class="logic-box">
+<strong>Side</strong>
+<span>Left hemisphere</span>
+</div>
+
+<div class="logic-box">
+<strong>Region</strong>
+<span>Motor cortex</span>
+</div>
+
+<div class="logic-box">
+<strong>Representation</strong>
+<span>Upper limb / hand</span>
+</div>
+</div>
+</div>
+
+</div>
+
+
+<!-- VISUALIZATION CASE 1 -->
+
+<div class="motor-panel" id="motor-map">
+
+<div class="motor-layout">
+
+<div class="motor-svg-wrap">
+
+<svg class="motor-svg"
+viewBox="0 0 650 480"
+xmlns="http://www.w3.org/2000/svg">
+
+<path class="cortex"
+d="M90 250
+C65 205 80 135 130 100
+C180 60 260 60 315 90
+C360 55 430 65 470 105
+C515 150 515 225 475 265
+C445 295 405 310 370 325
+C330 345 285 350 235 345
+C180 340 120 315 90 250Z"/>
+
+<path
+class="motor-area"
+id="handArea"
+onclick="selectMotor('hand')"
+d="M380 125
+C400 105 430 105 447 125
+C462 143 458 170 440 182
+C420 195 390 190 375 170
+C365 150 365 137 380 125Z"/>
+
+<path
+class="motor-area"
+onclick="selectMotor('arm')"
+d="M335 175
+C355 160 380 165 390 185
+C400 205 388 225 365 232
+C340 238 320 220 320 200
+C320 190 326 181 335 175Z"/>
+
+<path
+class="motor-area"
+onclick="selectMotor('leg')"
+d="M270 275
+C280 245 310 230 335 240
+C355 250 362 278 350 300
+C335 325 300 335 275 320
+C258 310 260 292 270 275Z"/>
+
+<path
+class="corticospinal"
+d="M420 185
+C405 225 395 265 390 305
+C382 350 370 385 365 420"/>
+
+<path
+class="spinal-cord"
+d="M345 400
+C355 390 380 390 390 400
+L385 465
+C375 475 355 475 345 465Z"/>
+
+<text class="motor-label"
+x="105" y="390">
+Motor Cortex
+</text>
+
+<text class="motor-label"
+x="380" y="115">
+Hand
+</text>
+
+<text class="motor-label"
+x="323" y="160">
+Arm
+</text>
+
+<text class="motor-label"
+x="260" y="350">
+Leg
+</text>
+
+<text class="motor-label"
+x="400" y="430">
+Corticospinal tract
+</text>
+
+</svg>
+
+</div>
+
+<div class="motor-info">
+
+<div class="mini">
+INTERACTIVE MOTOR MAP
+</div>
+
+<h3 id="motorTitle">
+Select a region
+</h3>
+
+<p id="motorDescription">
+Click the hand, arm, or leg representation to explore the
+somatotopic organization of the motor cortex.
+</p>
+
+<hr>
+
+<div class="info-row">
+<span>REGION</span>
+<strong id="motorRegion">—</strong>
+</div>
+
+<div class="info-row">
+<span>MAIN FUNCTION</span>
+<strong id="motorFunction">—</strong>
+</div>
+
+<div class="info-row">
+<span>LESION EFFECT</span>
+<strong id="motorEffect">—</strong>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- CASE 1 QUESTIONS -->
+
+<section class="section">
+
+<div class="section-label">
+Case 01 Assessment · اختبار الحالة الأولى
+</div>
+
+<h2>Prove your localization</h2>
+
+<div class="question-card">
+
+<div class="question-number">
+CASE 01 · QUESTION 01
+</div>
+
+<h3>
+Which motor neuron pattern is most likely?
+</h3>
+
+<div class="options">
+
+<button class="option"
+onclick="answer(this,true,'c1q1')">
+A. Upper motor neuron
+</button>
+
+<button class="option"
+onclick="answer(this,false,'c1q1')">
+B. Lower motor neuron
+</button>
+
+<button class="option"
+onclick="answer(this,false,'c1q1')">
+C. Neuromuscular junction
+</button>
+
+</div>
+
+<div id="c1q1" class="answer">
+<strong>Correct.</strong>
+Brisk reflexes and a central distribution support an upper motor
+neuron lesion.
+</div>
+
+</div>
+
+
+<div class="question-card">
+
+<div class="question-number">
+CASE 01 · QUESTION 02
+</div>
+
+<h3>
+Why is the hand especially useful for localization in this case?
+</h3>
+
+<div class="options">
+
+<button class="option"
+onclick="answer(this,false,'c1q2')">
+A. The hand has no cortical representation
+</button>
+
+<button class="option"
+onclick="answer(this,true,'c1q2')">
+B. Motor cortex is somatotopically organized
+</button>
+
+<button class="option"
+onclick="answer(this,false,'c1q2')">
+C. Hand weakness always means peripheral nerve disease
+</button>
+
+</div>
+
+<div id="c1q2" class="answer">
+<strong>Correct.</strong>
+Different body regions occupy different areas of the motor cortex,
+making the distribution of weakness a useful localization clue.
+</div>
+
+</div>
+
+
+<div class="question-card">
+
+<div class="question-number">
+CASE 01 · QUESTION 03
+</div>
+
+<h3>
+Which hemisphere is most likely involved?
+</h3>
+
+<div class="options">
+
+<button class="option"
+onclick="answer(this,true,'c1q3')">
+A. Left
+</button>
+
+<button class="option"
+onclick="answer(this,false,'c1q3')">
+B. Right
+</button>
+
+<button class="option"
+onclick="answer(this,false,'c1q3')">
+C. Cerebellar hemisphere only
+</button>
+
+</div>
+
+<div id="c1q3" class="answer">
+<strong>Correct.</strong>
+The left motor cortex controls voluntary movement of the right
+side of the body.
+</div>
+
+</div>
+
+
+<div class="question-card">
+
+<div class="question-number">
+CASE 01 · QUESTION 04
+</div>
+
+<h3>
+Which additional finding makes a cortical lesion more likely?
+</h3>
+
+<div class="options">
+
+<button class="option"
+onclick="answer(this,false,'c1q4')">
+A. Isolated muscle pain
+</button>
+
+<button class="option"
+onclick="answer(this,true,'c1q4')">
+B. Language difficulty
+</button>
+
+<button class="option"
+onclick="answer(this,false,'c1q4')">
+C. Muscle fasciculations
+</button>
+
+</div>
+
+<div id="c1q4" class="answer">
+<strong>Correct.</strong>
+Language difficulty is a cortical clue and is not expected from an
+isolated peripheral motor lesion.
+</div>
+
+</div>
+
+
+<div class="question-card">
+
+<div class="question-number">
+CASE 01 · QUESTION 05
+</div>
+
+<h3>
+What is the best final localization?
+</h3>
+
+<div class="options">
+
+<button class="option"
+onclick="answer(this,true,'c1q5')">
+A. Left lateral motor cortex
+</button>
+
+<button class="option"
+onclick="answer(this,false,'c1q5')">
+B. Right peripheral nerve
+</button>
+
+<button class="option"
+onclick="answer(this,false,'c1q5')">
+C. Left anterior horn cell
+</button>
+
+</div>
+
+<div id="c1q5" class="answer">
+<strong>Correct.</strong>
+The selective right hand weakness plus cortical language findings
+best localize to the left motor cortex.
+</div>
+
+</div>
+
+<div class="score-box">
+
+<div class="score-number" id="score-c1">
+0 / 5
+</div>
+
+<div class="score-message" id="message-c1">
+Answer the questions to reveal your result.
+</div>
+
+</div>
+
+</section>
+
+</section>
+
+
+<div class="case-divider"></div>
+
+
+<!-- =========================================================
+CASE 02 — INTERNAL CAPSULE
+========================================================= -->
+
+<section id="case2" class="section">
+
+<div class="case-header">
+
+<div class="case-tag">
+CASE 02 · INTERNAL CAPSULE
+</div>
+
+<h2>
+The Pure Hemiparesis
+</h2>
+
+<div class="case-subtitle">
+ضعف نصفي نقي بدون علامات قشرية واضحة
+</div>
+
+<p class="hero-text">
+A 62-year-old man suddenly develops weakness involving his entire
+right face, arm, and leg. There are no clear cortical sensory or
+language abnormalities.
+</p>
+
+<div class="profile-grid">
+
+<div class="profile">
+<span>AGE</span>
+<strong>62 years</strong>
+</div>
+
+<div class="profile">
+<span>ONSET</span>
+<strong>Sudden</strong>
+</div>
+
+<div class="profile">
+<span>DEFICIT</span>
+<strong>Right hemiparesis</strong>
+</div>
+
+<div class="profile">
+<span>KEY CLUE</span>
+<strong>Pure motor pattern</strong>
+</div>
+
+</div>
+
+</div>
+
+<div class="story">
+
+<h3>History · التاريخ المرضي</h3>
+
+<p>
+The patient suddenly drops a cup from his right hand. Within
+minutes, his right arm and leg become weak. His family notices
+that the right side of his lower face also appears weak.
+</p>
+
+<p dir="rtl">
+أسقط المريض كوبًا من يده اليمنى بشكل مفاجئ. وخلال دقائق أصبح هناك
+ضعف في الذراع والساق اليمنى، ولاحظت أسرته أيضًا ضعفًا في الجزء
+السفلي من الجانب الأيمن للوجه.
+</p>
+
+<div class="timeline">
+
+<div class="timeline-item">
+<div class="time">13:10</div>
+<div>Sudden right hand weakness.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">13:12</div>
+<div>Right arm weakness progresses.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">13:15</div>
+<div>Right leg weakness becomes obvious.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">13:20</div>
+<div>Right facial weakness is detected.</div>
+</div>
+
+</div>
+
+</div>
+
+<div class="section-label" style="margin-top:35px;">
+Neurological Examination · الفحص العصبي
+</div>
+
+<h2>What do we find?</h2>
+
+<div class="findings">
+
+<div class="finding">
+<div class="finding-number">01 · FACE</div>
+<h3>Right Lower Facial Weakness</h3>
+<p>
+The lower right side of the face is weak with preserved forehead
+movement.
+</p>
+<div class="clue">
+Clue: this can reflect corticobulbar pathway involvement above
+the facial nucleus.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">02 · ARM</div>
+<h3>Right Arm Weakness</h3>
+<p>
+The right upper limb is significantly weak.
+</p>
+<div class="clue">
+Clue: corticospinal fibers are involved.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">03 · LEG</div>
+<h3>Right Leg Weakness</h3>
+<p>
+The right lower limb is also weak.
+</p>
+<div class="clue">
+Clue: face, arm, and leg involvement suggests a compact central
+motor pathway.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">04 · CORTICAL SIGNS</div>
+<h3>No Major Cortical Features</h3>
+<p>
+There is no prominent aphasia, neglect, or cortical sensory deficit.
+</p>
+<div class="clue">
+Clue: this favors a subcortical localization.
+</div>
+</div>
+
+</div>
+
+<div class="localizer">
+
+<h3>Interactive Localization Engine</h3>
+
+<p class="localizer-intro">
+Use the distribution of weakness and the absence of cortical signs
+to move deeper into the motor pathway.
+</p>
+
+<div class="steps">
+
+<button class="step active" onclick="showStep('c2',1,this)">
+01 · Pattern
+</button>
+
+<button class="step" onclick="showStep('c2',2,this)">
+02 · UMN
+</button>
+
+<button class="step" onclick="showStep('c2',3,this)">
+03 · Distribution
+</button>
+
+<button class="step" onclick="showStep('c2',4,this)">
+04 · Cortical Signs
+</button>
+
+<button class="step" onclick="showStep('c2',5,this)">
+05 · Localization
+</button>
+
+</div>
+
+<div class="step-content active" id="c2-step1">
+
+<h4>01 · Recognize the pattern</h4>
+
+<p>
+The patient has face, arm, and leg weakness on the same side of
+the body.
+</p>
+
+<div class="logic">
+
+<div class="logic-box">
+<strong>Face</strong>
+<span>Right</span>
+</div>
+
+<div class="logic-box">
+<strong>Arm + leg</strong>
+<span>Right</span>
+</div>
+
+<div class="logic-box">
+<strong>Pattern</strong>
+<span>Pure hemiparesis</span>
+</div>
+
+</div>
+
+</div>
+
+<div class="step-content" id="c2-step2">
+
+<h4>02 · Identify the motor neuron level</h4>
+
+<p>
+The distribution is consistent with an upper motor neuron lesion
+affecting descending motor fibers.
+</p>
+
+<div class="logic">
+
+<div class="logic-box">
+<strong>Weakness</strong>
+<span>Hemiparesis</span>
+</div>
+
+<div class="logic-box">
+<strong>Pathway</strong>
+<span>Corticospinal</span>
+</div>
+
+<div class="logic-box">
+<strong>Level</strong>
+<span>UMN</span>
+</div>
+
+</div>
+
+</div>
+
+<div class="step-content" id="c2-step3">
+
+<h4>03 · Analyze the distribution</h4>
+
+<p>
+Because the face, arm, and leg are all affected together, a compact
+subcortical motor pathway becomes an important consideration.
+</p>
+
+<div class="logic">
+
+<div class="logic-box">
+<strong>Face</strong>
+<span>Involved</span>
+</div>
+
+<div class="logic-box">
+<strong>Arm</strong>
+<span>Involved</span>
+</div>
+
+<div class="logic-box">
+<strong>Leg</strong>
+<span>Involved</span>
+</div>
+
+</div>
+
+</div>
+
+<div class="step-content" id="c2-step4">
+
+<h4>04 · Check for cortical signs</h4>
+
+<p>
+The absence of prominent aphasia, neglect, or cortical sensory
+abnormalities argues against a large cortical lesion.
+</p>
+
+<div class="logic">
+
+<div class="logic-box">
+<strong>Aphasia</strong>
+<span>Absent</span>
+</div>
+
+<div class="logic-box">
+<strong>Neglect</strong>
+<span>Absent</span>
+</div>
+
+<div class="logic-box">
+<strong>Conclusion</strong>
+<span>Subcortical favored</span>
+</div>
+
+</div>
+
+</div>
+
+<div class="step-content" id="c2-step5">
+
+<h4>05 · Final localization</h4>
+
+<p>
+A pure motor hemiparesis involving the face, arm, and leg without
+major cortical findings strongly suggests involvement of the
+internal capsule, where descending motor fibers are tightly packed.
+</p>
+
+<div class="logic">
+
+<div class="logic-box">
+<strong>Side</strong>
+<span>Left</span>
+</div>
+
+<div class="logic-box">
+<strong>Region</strong>
+<span>Internal capsule</span>
+</div>
+
+<div class="logic-box">
+<strong>Pathway</strong>
+<span>Corticospinal + corticobulbar</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- VISUALIZATION CASE 2 -->
+
+<div class="motor-panel">
+
+<div class="motor-layout">
+
+<div class="motor-svg-wrap">
+
+<svg class="motor-svg"
+viewBox="0 0 650 480"
+xmlns="http://www.w3.org/2000/svg">
+
+<path class="cortex"
+d="M90 250
+C65 205 80 135 130 100
+C180 60 260 60 315 90
+C360 55 430 65 470 105
+C515 150 515 225 475 265
+C445 295 405 310 370 325
+C330 345 285 350 235 345
+C180 340 120 315 90 250Z"/>
+
+<circle
+class="motor-area"
+cx="325"
+cy="190"
+r="42"
+onclick="selectMotor('capsule')"/>
+
+<path
+class="corticospinal"
+d="M325 232
+C330 275 340 315 350 350
+C355 380 360 410 365 445"/>
+
+<rect
+class="spinal-cord"
+x="345"
+y="400"
+width="40"
+height="65"
+rx="18"/>
+
+<text
+class="motor-label"
+x="295"
+y="184">
+IC
+</text>
+
+<text
+class="motor-label"
+x="110"
+y="390">
+Motor Cortex
+</text>
+
+<text
+class="motor-label"
+x="390"
+y="290">
+Descending
+</text>
+
+<text
+class="motor-label"
+x="390"
+y="310">
+motor fibers
+</text>
+
+<text
+class="motor-label"
+x="395"
+y="435">
+Spinal cord
+</text>
+
+</svg>
+
+</div>
+
+<div class="motor-info">
+
+<div class="mini">
+SUBCORTICAL MOTOR MAP
+</div>
+
+<h3 id="capsuleTitle">
+Internal Capsule
+</h3>
+
+<p id="capsuleDescription">
+The internal capsule contains densely packed descending motor
+fibers traveling from the cerebral cortex toward the brainstem
+and spinal cord.
+</p>
+
+<hr>
+
+<div class="info-row">
+<span>REGION</span>
+<strong>Internal capsule</strong>
+</div>
+
+<div class="info-row">
+<span>MAIN PATHWAY</span>
+<strong>Corticospinal tract</strong>
+</div>
+
+<div class="info-row">
+<span>COMMON PATTERN</span>
+<strong>Contralateral pure motor weakness</strong>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- CASE 2 QUESTIONS -->
+
+<section class="section">
+
+<div class="section-label">
+Case 02 Assessment · اختبار الحالة الثانية
+</div>
+
+<h2>Can you localize the lesion?</h2>
+
+<div class="question-card">
+
+<div class="question-number">
+CASE 02 · QUESTION 01
+</div>
+
+<h3>
+What pattern is most characteristic of this case?
+</h3>
+
+<div class="options">
+
+<button class="option"
+onclick="answer(this,true,'c2q1')">
+A. Pure motor hemiparesis
+</button>
+
+<button class="option"
+onclick="answer(this,false,'c2q1')">
+B. Isolated sensory loss
+</button>
+
+<button class="option"
+onclick="answer(this,false,'c2q1')">
+C. Cerebellar ataxia only
+</button>
+
+</div>
+
+<div id="c2q1" class="answer">
+<strong>Correct.</strong>
+The patient has weakness of the face, arm, and leg without major
+additional cortical signs.
+</div>
+
+</div>
+
+
+<div class="question-card">
+
+<div class="question-number">
+CASE 02 · QUESTION 02
+</div>
+
+<h3>
+Which pathway is primarily responsible for voluntary limb movement?
+</h3>
+
+<div class="options">
+
+<button class="option"
+onclick="answer(this,false,'c2q2')">
+A. Spinothalamic tract
+</button>
+
+<button class="option"
+onclick="answer(this,true,'c2q2')">
+B. Corticospinal tract
+</button>
+
+<button class="option"
+onclick="answer(this,false,'c2q2')">
+C. Dorsal column
+</button>
+
+</div>
+
+<div id="c2q2" class="answer">
+<strong>Correct.</strong>
+The corticospinal tract is a major descending motor pathway.
+</div>
+
+</div>
+
+
+<div class="question-card">
+
+<div class="question-number">
+CASE 02 · QUESTION 03
+</div>
+
+<h3>
+Why is a large cortical lesion less likely?
+</h3>
+
+<div class="options">
+
+<button class="option"
+onclick="answer(this,false,'c2q3')">
+A. The patient has no weakness
+</button>
+
+<button class="option"
+onclick="answer(this,true,'c2q3')">
+B. There are no prominent cortical signs
+</button>
+
+<button class="option"
+onclick="answer(this,false,'c2q3')">
+C. The legs are completely normal
+</button>
+
+</div>
+
+<div id="c2q3" class="answer">
+<strong>Correct.</strong>
+The absence of prominent aphasia, neglect, or cortical sensory
+deficits favors a subcortical motor lesion.
+</div>
+
+</div>
+
+
+<div class="question-card">
+
+<div class="question-number">
+CASE 02 · QUESTION 04
+</div>
+
+<h3>
+Which structure contains densely packed descending motor fibers?
+</h3>
+
+<div class="options">
+
+<button class="option"
+onclick="answer(this,true,'c2q4')">
+A. Internal capsule
+</button>
+
+<button class="option"
+onclick="answer(this,false,'c2q4')">
+B. Hippocampus
+</button>
+
+<button class="option"
+onclick="answer(this,false,'c2q4')">
+C. Cerebellar cortex
+</button>
+
+</div>
+
+<div id="c2q4" class="answer">
+<strong>Correct.</strong>
+The internal capsule contains tightly packed descending
+corticospinal and corticobulbar fibers.
+</div>
+
+</div>
+
+
+<div class="question-card">
+
+<div class="question-number">
+CASE 02 · QUESTION 05
+</div>
+
+<h3>
+What is the best final localization?
+</h3>
+
+<div class="options">
+
+<button class="option"
+onclick="answer(this,false,'c2q5')">
+A. Right motor cortex
+</button>
+
+<button class="option"
+onclick="answer(this,true,'c2q5')">
+B. Left internal capsule
+</button>
+
+<button class="option"
+onclick="answer(this,false,'c2q5')">
+C. Right peripheral nerve
+</button>
+
+</div>
+
+<div id="c2q5" class="answer">
+<strong>Correct.</strong>
+The right-sided face, arm, and leg weakness points to the left
+internal capsule.
+</div>
+
+</div>
+
+<div class="score-box">
+
+<div class="score-number" id="score-c2">
+0 / 5
+</div>
+
+<div class="score-message" id="message-c2">
+Answer the questions to reveal your result.
+</div>
+
+</div>
+
+</section>
+
+</section>
+
+
+<div class="case-divider"></div>
+
+
+<!-- =========================================================
+CASE 03 — SPINAL CORD
+========================================================= -->
+
+<section id="case3" class="section">
+
+<div class="case-header">
+
+<div class="case-tag">
+CASE 03 · SPINAL CORD
+</div>
+
+<h2>
+The Level Below the Chest
+</h2>
+
+<div class="case-subtitle">
+ضعف الطرفين السفليين مع مستوى حسي
+</div>
+
+<p class="hero-text">
+A 45-year-old man develops progressive weakness in both legs.
+He reports a clear change in sensation beginning around the lower
+chest and extending downward.
+</p>
+
+<div class="profile-grid">
+
+<div class="profile">
+<span>AGE</span>
+<strong>45 years</strong>
+</div>
+
+<div class="profile">
+<span>DEFICIT</span>
+<strong>Bilateral leg weakness</strong>
+</div>
+
+<div class="profile">
+<span>KEY CLUE</span>
+<strong>Sensory level</strong>
+</div>
+
+<div class="profile">
+<span>LOCALIZATION</span>
+<strong>Spinal cord</strong>
+</div>
+
+</div>
+
+</div>
+
+<div class="story">
+
+<h3>History · التاريخ المرضي</h3>
+
+<p>
+The patient initially noticed that both legs felt heavy. Over the
+next several hours, walking became difficult. He then noticed a
+distinct change in sensation beginning around the lower part of
+his chest. His arms remain normal.
+</p>
+
+<p dir="rtl">
+لاحظ المريض في البداية أن ساقيه أصبحتا ثقيلتين. وخلال الساعات
+التالية أصبح المشي صعبًا. ثم لاحظ تغيرًا واضحًا في الإحساس يبدأ
+من الجزء السفلي من الصدر إلى أسفل، بينما ظلت الذراعان طبيعيتين.
+</p>
+
+<div class="timeline">
+
+<div class="timeline-item">
+<div class="time">09:00</div>
+<div>Both legs feel heavy.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">11:00</div>
+<div>Walking becomes difficult.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">13:00</div>
+<div>A clear sensory level is noticed.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">15:00</div>
+<div>Arms remain neurologically normal.</div>
+</div>
+
+</div>
+
+</div>
+
+<div class="section-label" style="margin-top:35px;">
+Neurological Examination · الفحص العصبي
+</div>
+
+<h2>What do we find?</h2>
+
+<div class="findings">
+
+<div class="finding">
+<div class="finding-number">01 · MOTOR</div>
+<h3>Bilateral Leg Weakness</h3>
+<p>
+Both lower limbs demonstrate weakness.
+</p>
+<div class="clue">
+Clue: bilateral involvement suggests a central pathway affecting
+both sides.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">02 · SENSORY</div>
+<h3>Clear Sensory Level</h3>
+<p>
+Sensation changes begin at a relatively defined level on the trunk.
+</p>
+<div class="clue">
+Clue: a sensory level is a major clue for spinal cord localization.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">03 · UPPER LIMBS</div>
+<h3>Arms Preserved</h3>
+<p>
+Upper-limb strength and sensation remain relatively normal.
+</p>
+<div class="clue">
+Clue: this helps localize the lesion below the cervical cord.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">04 · REFLEXES</div>
+<h3>Brisk Lower-Limb Reflexes</h3>
+<p>
+Lower-limb reflexes are brisk.
+</p>
+<div class="clue">
+Clue: corticospinal tract involvement can produce an upper motor
+neuron pattern below the lesion.
+</div>
+</div>
+
+</div>
+
+<div class="localizer">
+
+<h3>Interactive Localization Engine</h3>
+
+<p class="localizer-intro">
+A sensory level is one of the most useful clues when distinguishing
+spinal cord disease from brain and peripheral nerve disorders.
+</p>
+
+<div class="steps">
+
+<button class="step active" onclick="showStep('c3',1,this)">
+01 · Pattern
+</button>
+
+<button class="step" onclick="showStep('c3',2,this)">
+02 · Sensory Level
+</button>
+
+<button class="step" onclick="showStep('c3',3,this)">
+03 · Arms vs Legs
+</button>
+
+<button class="step" onclick="showStep('c3',4,this)">
+04 · Motor Tracts
+</button>
+
+<button class="step" onclick="showStep('c3',5,this)">
+05 · Localization
+</button>
+
+</div>
+
+<div class="step-content active" id="c3-step1">
+
+<h4>01 · Recognize the pattern</h4>
+
+<p>
+Bilateral leg weakness combined with a defined trunk sensory level
+strongly points toward the spinal cord.
+</p>
+
+<div class="logic">
+
+<div class="logic-box">
+<strong>Motor</strong>
+<span>Both legs</span>
+</div>
+
+<div class="logic-box">
+<strong>Sensation</strong>
+<span>Defined level</span>
+</div>
+
+<div class="logic-box">
+<strong>Region</strong>
+<span>Spinal cord</span>
+</div>
+
+</div>
+
+</div>
+
+<div class="step-content" id="c3-step2">
+
+<h4>02 · Use the sensory level</h4>
+
+<p>
+A clear sensory level on the trunk is difficult to explain with an
+isolated peripheral nerve lesion and strongly supports a spinal
+cord process.
+</p>
+
+<div class="logic">
+
+<div class="logic-box">
+<strong>Trunk</strong>
+<span>Sensory boundary</span>
+</div>
+
+<div class="logic-box">
+<strong>Below level</strong>
+<span>Abnormal</span>
+</div>
+
+<div class="logic-box">
+<strong>Localization clue</strong>
+<span>Spinal cord</span>
+</div>
+
+</div>
+
+</div>
+
+<div class="step-content" id="c3-step3">
+
+<h4>03 · Compare upper and lower limbs</h4>
+
+<p>
+The arms are preserved while the legs are affected. This suggests
+a lesion below the cervical enlargement.
+</p>
+
+<div class="logic">
+
+<div class="logic-box">
+<strong>Arms</strong>
+<span>Preserved</span>
+</div>
+
+<div class="logic-box">
+<strong>Legs</strong>
+<span>Weak</span>
+</div>
+
+<div class="logic-box">
+<strong>Level</strong>
+<span>Below cervical region</span>
+</div>
+
+</div>
+
+</div>
+
+<div class="step-content" id="c3-step4">
+
+<h4>04 · Analyze the motor tract</h4>
+
+<p>
+The corticospinal tracts carry descending voluntary motor signals
+through the spinal cord. A lesion can therefore produce upper motor
+neuron signs below the level of injury.
+</p>
+
+<div class="logic">
+
+<div class="logic-box">
+<strong>Pathway</strong>
+<span>Corticospinal</span>
+</div>
+
+<div class="logic-box">
+<strong>Reflexes</strong>
+<span>Brisk</span>
+</div>
+
+<div class="logic-box">
+<strong>Pattern</strong>
+<span>UMN below lesion</span>
+</div>
+
+</div>
+
+</div>
+
+<div class="step-content" id="c3-step5">
+
+<h4>05 · Final localization</h4>
+
+<p>
+The bilateral leg weakness, defined trunk sensory level, preserved
+arms, and brisk lower-limb reflexes are most consistent with a
+thoracic spinal cord lesion.
+</p>
+
+<div class="logic">
+
+<div class="logic-box">
+<strong>Region</strong>
+<span>Spinal cord</span>
+</div>
+
+<div class="logic-box">
+<strong>Approximate level</strong>
+<span>Thoracic</span>
+</div>
+
+<div class="logic-box">
+<strong>Pathway</strong>
+<span>Corticospinal + sensory tracts</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- VISUALIZATION CASE 3 -->
+
+<div class="motor-panel">
+
+<div class="motor-layout">
+
+<div class="motor-svg-wrap">
+
+<svg class="motor-svg"
+viewBox="0 0 650 480"
+xmlns="http://www.w3.org/2000/svg">
+
+<path
+class="cortex"
+d="M105 105
+C150 70 220 65 270 95
+C300 115 310 145 305 175
+L290 205
+L275 230
+L260 250
+L250 275
+L235 300
+L220 330
+L210 365
+L200 400
+L190 445
+L160 445
+L165 395
+L170 350
+L175 305
+L180 265
+L185 225
+L175 185
+L155 155
+L120 140Z"/>
+
+<path
+class="corticospinal"
+d="M330 120
+C335 165 335 210 340 255
+C345 300 350 345 355 390
+C360 420 365 440 365 455"/>
+
+<rect
+class="spinal-cord"
+x="340"
+y="395"
+width="50"
+height="65"
+rx="22"/>
+
+<rect
+class="motor-area"
+x="318"
+y="225"
+width="45"
+height="85"
+rx="18"
+onclick="selectMotor('thoracic')"/>
+
+<text
+class="motor-label"
+x="110"
+y="105">
+Brain
+</text>
+
+<text
+class="motor-label"
+x="370"
+y="250">
+Thoracic
+</text>
+
+<text
+class="motor-label"
+x="370"
+y="270">
+cord
+</text>
+
+<text
+class="motor-label"
+x="405"
+y="425">
+Spinal cord
+</text>
+
+</svg>
+
+</div>
+
+<div class="motor-info">
+
+<div class="mini">
+SPINAL MOTOR MAP
+</div>
+
+<h3>
+Thoracic Spinal Cord
+</h3>
+
+<p>
+A lesion in the thoracic spinal cord can interrupt descending
+corticospinal fibers and ascending sensory pathways destined for
+the lower body.
+</p>
+
+<hr>
+
+<div class="info-row">
+<span>REGION</span>
+<strong>Thoracic spinal cord</strong>
+</div>
+
+<div class="info-row">
+<span>MOTOR EFFECT</span>
+<strong>Bilateral leg weakness</strong>
+</div>
+
+<div class="info-row">
+<span>KEY LOCALIZER</span>
+<strong>Trunk sensory level</strong>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- CASE 3 QUESTIONS -->
+
+<section class="section">
+
+<div class="section-label">
+Case 03 Assessment · اختبار الحالة الثالثة
+</div>
+
+<h2>Can you identify the spinal level?</h2>
+
+<div class="question-card">
+
+<div class="question-number">
+CASE 03 · QUESTION 01
+</div>
+
+<h3>
+Which finding is especially helpful for spinal cord localization?
+</h3>
+
+<div class="options">
+
+<button class="option"
+onclick="answer(this,false,'c3q1')">
+A. Isolated hand weakness
+</button>
+
+<button class="option"
+onclick="answer(this,true,'c3q1')">
+B. A defined sensory level
+</button>
+
+<button class="option"
+onclick="answer(this,false,'c3q1')">
+C. Facial twitching
+</button>
+
+</div>
+
+<div id="c3q1" class="answer">
+<strong>Correct.</strong>
+A clear sensory level on the trunk strongly suggests involvement
+of the spinal cord.
+</div>
+
+</div>
+
+
+<div class="question-card">
+
+<div class="question-number">
+CASE 03 · QUESTION 02
+</div>
+
+<h3>
+Why does preservation of the arms matter?
+</h3>
+
+<div class="options">
+
+<button class="option"
+onclick="answer(this,true,'c3q2')">
+A. It suggests the lesion is below the cervical cord
+</button>
+
+<button class="option"
+onclick="answer(this,false,'c3q2')">
+B. It proves the lesion is cortical
+</button>
+
+<button class="option"
+onclick="answer(this,false,'c3q2')">
+C. It proves a muscle disorder
+</button>
+
+</div>
+
+<div id="c3q2" class="answer">
+<strong>Correct.</strong>
+Preserved upper limbs with bilateral leg involvement points toward
+a lesion below the cervical enlargement.
+</div>
+
+</div>
+
+
+<div class="question-card">
+
+<div class="question-number">
+CASE 03 · QUESTION 03
+</div>
+
+<h3>
+Which tract is primarily responsible for descending voluntary motor
+control?
+</h3>
+
+<div class="options">
+
+<button class="option"
+onclick="answer(this,true,'c3q3')">
+A. Corticospinal tract
+</button>
+
+<button class="option"
+onclick="answer(this,false,'c3q3')">
+B. Spinothalamic tract
+</button>
+
+<button class="option"
+onclick="answer(this,false,'c3q3')">
+C. Medial lemniscus
+</button>
+
+</div>
+
+<div id="c3q3" class="answer">
+<strong>Correct.</strong>
+The corticospinal tract carries descending voluntary motor signals.
+</div>
+
+</div>
+
+
+<div class="question-card">
+
+<div class="question-number">
+CASE 03 · QUESTION 04
+</div>
+
+<h3>
+What motor-neuron pattern is suggested by brisk leg reflexes?
+</h3>
+
+<div class="options">
+
+<button class="option"
+onclick="answer(this,true,'c3q4')">
+A. Upper motor neuron pattern
+</button>
+
+<button class="option"
+onclick="answer(this,false,'c3q4')">
+B. Lower motor neuron pattern
+</button>
+
+<button class="option"
+onclick="answer(this,false,'c3q4')">
+C. Neuromuscular junction pattern
+</button>
+
+</div>
+
+<div id="c3q4" class="answer">
+<strong>Correct.</strong>
+Brisk reflexes below a lesion are consistent with an upper motor
+neuron pattern.
+</div>
+
+</div>
+
+
+<div class="question-card">
+
+<div class="question-number">
+CASE 03 · QUESTION 05
+</div>
+
+<h3>
+What is the best overall localization?
+</h3>
+
+<div class="options">
+
+<button class="option"
+onclick="answer(this,false,'c3q5')">
+A. Peripheral nerve
+</button>
+
+<button class="option"
+onclick="answer(this,true,'c3q5')">
+B. Thoracic spinal cord
+</button>
+
+<button class="option"
+onclick="answer(this,false,'c3q5')">
+C. Motor cortex
+</button>
+
+</div>
+
+<div id="c3q5" class="answer">
+<strong>Correct.</strong>
+Bilateral leg weakness with a trunk sensory level and preserved
+arms strongly supports a thoracic spinal cord localization.
+</div>
+
+</div>
+
+<div class="score-box">
+
+<div class="score-number" id="score-c3">
+0 / 5
+</div>
+
+<div class="score-message" id="message-c3">
+Answer the questions to reveal your result.
+</div>
+
+</div>
+
+</section>
+
+</section>
+
+
+<!-- =========================================================
+FINAL TAKEAWAY
+========================================================= -->
+
+<div class="case-divider"></div>
+
+<section class="section">
+
+<div class="section-label">
+Motor Localization · الخلاصة
+</div>
+
+<h2>
+Think Along the Pathway
+</h2>
+
+<p class="intro">
+When localizing a motor lesion, do not stop at “weakness.”
+Ask where along the motor pathway the problem must be.
+</p>
+
+<div class="compare">
+
+<div class="compare-card">
+
+<h3>Motor Cortex</h3>
+
+<p>
+Weakness can follow a somatotopic pattern and may be accompanied
+by other cortical findings.
+</p>
+
+<div class="why">
+Key clue: cortical signs + selective distribution.
+</div>
+
+</div>
+
+<div class="compare-card">
+
+<h3>Internal Capsule</h3>
+
+<p>
+Descending motor fibers are tightly packed, producing a dense
+contralateral motor deficit.
+</p>
+
+<div class="why">
+Key clue: face + arm + leg weakness without major cortical signs.
+</div>
+
+</div>
+
+<div class="compare-card">
+
+<h3>Spinal Cord</h3>
+
+<p>
+Motor and sensory findings can appear below a defined anatomical
+level.
+</p>
+
+<div class="why">
+Key clue: sensory level + bilateral or patterned limb deficits.
+</div>
+
+</div>
+
+</div>
+
+<div class="takeaway">
+
+<h3>
+The Localization Rule
+</h3>
+
+<p>
+Distribution matters. Reflexes matter. Associated findings matter.
+A motor deficit becomes much more informative when you combine all
+three with the anatomy of the descending motor pathway.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+ONLY FINAL BUTTON
+========================================================= -->
+
+<div class="next-case">
+
+<div>
+<strong>Ready for the next localization system?</strong>
+<p>
+Continue from Motor Localization to Cortical Localization.
+</p>
+</div>
+
+<a
+class="next-btn"
+href="./cortical-localization.html">
+Continue to Cortical Localization →
+</a>
+
+</div>
+
+</main>
+
+
+<script>
+
+/* =========================================================
+LOCALIZATION STEPS
+========================================================= */
+
+function showStep(caseId, number, button){
+
+    const contents =
+        document.querySelectorAll(
+            '[id^="' + caseId + '-step"]'
+        );
+
+    contents.forEach(function(content){
+        content.classList.remove("active");
+    });
+
+    const target =
+        document.getElementById(
+            caseId + "-step" + number
+        );
+
+    if(target){
+        target.classList.add("active");
+    }
+
+    const parent =
+        button.parentElement;
+
+    parent.querySelectorAll(".step").forEach(function(step){
+        step.classList.remove("active");
+    });
+
+    button.classList.add("active");
+}
+
+
+/* =========================================================
+QUESTION SYSTEM
+========================================================= */
+
+const scores = {
+    c1:0,
+    c2:0,
+    c3:0
+};
+
+const answered = {};
+
+function answer(button, correct, questionId){
+
+    if(answered[questionId]){
+        return;
+    }
+
+    answered[questionId] = true;
+
+    button.classList.add(
+        correct ? "correct" : "wrong"
+    );
+
+    const answerBox =
+        document.getElementById(questionId);
+
+    if(answerBox){
+        answerBox.classList.add("show");
+    }
+
+    const caseId =
+        questionId.substring(0,2);
+
+    if(correct){
+        scores[caseId]++;
+    }
+
+    updateScore(caseId);
+}
+
+
+function updateScore(caseId){
+
+    const scoreElement =
+        document.getElementById(
+            "score-" + caseId
+        );
+
+    const messageElement =
+        document.getElementById(
+            "message-" + caseId
+        );
+
+    const score =
+        scores[caseId];
+
+    scoreElement.textContent =
+        score + " / 5";
+
+    if(score === 5){
+
+        messageElement.textContent =
+            "Excellent localization. You identified all five clues correctly.";
+
+    }else if(score >= 3){
+
+        messageElement.textContent =
+            "Good work. Review the localization logic and try again.";
+
+    }else{
+
+        messageElement.textContent =
+            "Keep analyzing the distribution, reflexes, and associated findings.";
+
+    }
+}
+
+
+/* =========================================================
+MOTOR VISUALIZATION
+========================================================= */
+
+function selectMotor(region){
+
+    document.querySelectorAll(".motor-area")
+        .forEach(function(area){
+            area.classList.remove("selected");
+        });
+
+    if(region === "hand"){
+
+        const areas =
+            document.querySelectorAll(".motor-area");
+
+        if(areas[0]){
+            areas[0].classList.add("selected");
+        }
+
+        document.getElementById("motorTitle")
+            .textContent = "Hand Representation";
+
+        document.getElementById("motorDescription")
+            .textContent =
+            "The hand occupies a relatively large region of the motor cortex because skilled hand movements require extensive cortical control.";
+
+        document.getElementById("motorRegion")
+            .textContent = "Lateral motor cortex";
+
+        document.getElementById("motorFunction")
+            .textContent = "Fine voluntary hand movement";
+
+        document.getElementById("motorEffect")
+            .textContent = "Contralateral hand weakness";
+
+    }
+
+    else if(region === "arm"){
+
+        const areas =
+            document.querySelectorAll(".motor-area");
+
+        if(areas[1]){
+            areas[1].classList.add("selected");
+        }
+
+        document.getElementById("motorTitle")
+            .textContent = "Arm Representation";
+
+        document.getElementById("motorDescription")
+            .textContent =
+            "The upper limb is represented in the lateral portion of the primary motor cortex.";
+
+        document.getElementById("motorRegion")
+            .textContent = "Lateral motor cortex";
+
+        document.getElementById("motorFunction")
+            .textContent = "Voluntary upper-limb movement";
+
+        document.getElementById("motorEffect")
+            .textContent = "Contralateral arm weakness";
+
+    }
+
+    else if(region === "leg"){
+
+        const areas =
+            document.querySelectorAll(".motor-area");
+
+        if(areas[2]){
+            areas[2].classList.add("selected");
+        }
+
+        document.getElementById("motorTitle")
+            .textContent = "Leg Representation";
+
+        document.getElementById("motorDescription")
+            .textContent =
+            "The leg and foot are represented more medially in the primary motor cortex.";
+
+        document.getElementById("motorRegion")
+            .textContent = "Medial motor cortex";
+
+        document.getElementById("motorFunction")
+            .textContent = "Voluntary lower-limb movement";
+
+        document.getElementById("motorEffect")
+            .textContent = "Contralateral leg weakness";
+
+    }
+
+}
+
+
+/* =========================================================
+INITIAL STATE
+========================================================= */
+
+document.addEventListener("DOMContentLoaded",function(){
+
+    const firstSteps =
+        document.querySelectorAll(".step-content");
+
+    firstSteps.forEach(function(content){
+
+        if(content.id.endsWith("step1")){
+            content.classList.add("active");
+        }
+
+    });
+
+});
+
+</script>
+
+</body>
+  </html>
