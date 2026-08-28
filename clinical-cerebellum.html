@@ -1,0 +1,2549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NeuroAtlas | Cerebellar Localization</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#050b13;
+    color:#eef4fa;
+    font-family:Arial,Helvetica,sans-serif;
+    line-height:1.65;
+}
+
+nav{
+    height:70px;
+    padding:0 7%;
+    display:flex;
+    align-items:center;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    background:#050b13;
+}
+
+nav a{
+    color:#9db0c3;
+    text-decoration:none;
+    font-size:14px;
+}
+
+nav a:hover{
+    color:white;
+}
+
+.container{
+    max-width:1250px;
+    margin:auto;
+    padding:65px 7% 110px;
+}
+
+.eyebrow,
+.section-label{
+    color:#61b5ff;
+    letter-spacing:2px;
+    font-size:11px;
+    text-transform:uppercase;
+}
+
+.eyebrow{
+    margin-bottom:15px;
+}
+
+h1{
+    font-size:clamp(50px,8vw,88px);
+    line-height:.95;
+    letter-spacing:-4px;
+    margin-bottom:12px;
+}
+
+.arabic-title{
+    color:#ffb6c9;
+    font-size:25px;
+    margin-bottom:25px;
+}
+
+.hero-text{
+    color:#a8b8c8;
+    max-width:950px;
+    font-size:17px;
+    line-height:1.9;
+}
+
+.actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:28px;
+}
+
+.btn{
+    display:inline-block;
+    padding:11px 17px;
+    border-radius:9px;
+    background:#0b1928;
+    border:1px solid #31516d;
+    color:#bdd0e0;
+    cursor:pointer;
+    text-decoration:none;
+    font-size:14px;
+    transition:.2s;
+}
+
+.btn:hover{
+    background:#14304a;
+    color:white;
+    border-color:white;
+}
+
+.section{
+    margin-top:75px;
+}
+
+.section-label{
+    margin-bottom:8px;
+}
+
+.section h2{
+    font-size:34px;
+    margin-bottom:14px;
+}
+
+.intro{
+    color:#91a5b8;
+    max-width:950px;
+    line-height:1.9;
+    margin-bottom:30px;
+}
+
+/* CASE */
+
+.case{
+    margin-top:70px;
+}
+
+.case-header{
+    padding:30px;
+    border:1px solid #1b344a;
+    border-radius:20px;
+    background:
+        radial-gradient(circle at 90% 10%,rgba(97,181,255,.09),transparent 35%),
+        #091522;
+}
+
+.case-tag{
+    display:inline-block;
+    padding:6px 10px;
+    border:1px solid #31516d;
+    border-radius:7px;
+    color:#61b5ff;
+    font-size:11px;
+    letter-spacing:2px;
+    margin-bottom:15px;
+}
+
+.case-header h2{
+    font-size:31px;
+    margin-bottom:8px;
+}
+
+.case-subtitle{
+    color:#ffb6c9;
+    margin-bottom:18px;
+}
+
+.profile-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+    margin-top:25px;
+}
+
+.profile{
+    background:#0b1928;
+    border:1px solid #172f43;
+    border-radius:14px;
+    padding:18px;
+}
+
+.profile span{
+    display:block;
+    color:#70869a;
+    font-size:10px;
+    letter-spacing:2px;
+    margin-bottom:7px;
+}
+
+.profile strong{
+    font-size:15px;
+}
+
+/* STORY */
+
+.story{
+    margin-top:22px;
+    padding:27px;
+    background:#08131f;
+    border:1px solid #172b3e;
+    border-radius:17px;
+}
+
+.story h3{
+    font-size:20px;
+    margin-bottom:14px;
+}
+
+.story p{
+    color:#a0b1c1;
+    margin-bottom:17px;
+}
+
+.story p:last-child{
+    margin-bottom:0;
+}
+
+.timeline{
+    margin-top:25px;
+    display:grid;
+    gap:12px;
+}
+
+.timeline-item{
+    display:grid;
+    grid-template-columns:95px 1fr;
+    gap:18px;
+}
+
+.time{
+    color:#61b5ff;
+    font-size:12px;
+    letter-spacing:1px;
+}
+
+.timeline-item div:last-child{
+    color:#9eb0c0;
+    border-left:1px solid #29445a;
+    padding-left:18px;
+}
+
+/* FINDINGS */
+
+.findings{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+    margin-top:25px;
+}
+
+.finding{
+    padding:22px;
+    background:#091522;
+    border:1px solid #172b3e;
+    border-radius:16px;
+}
+
+.finding-number{
+    color:#61b5ff;
+    font-size:11px;
+    letter-spacing:2px;
+    margin-bottom:7px;
+}
+
+.finding h3{
+    font-size:17px;
+    margin-bottom:8px;
+}
+
+.finding p{
+    color:#91a5b8;
+    font-size:14px;
+}
+
+.clue{
+    margin-top:12px;
+    padding:10px 12px;
+    background:#0d2031;
+    border-left:2px solid #61b5ff;
+    color:#bdd0e0;
+    font-size:13px;
+}
+
+/* LOCALIZER */
+
+.localizer{
+    margin-top:30px;
+    padding:30px;
+    background:#07111c;
+    border:1px solid #1a3348;
+    border-radius:20px;
+}
+
+.localizer h3{
+    font-size:22px;
+    margin-bottom:8px;
+}
+
+.localizer-intro{
+    color:#8196aa;
+    margin-bottom:25px;
+}
+
+.steps{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:25px;
+}
+
+.step{
+    padding:9px 13px;
+    border-radius:8px;
+    border:1px solid #203b51;
+    background:#0a1825;
+    color:#7890a5;
+    cursor:pointer;
+    font-size:12px;
+}
+
+.step.active{
+    background:#16324a;
+    border-color:#61b5ff;
+    color:white;
+}
+
+.step-content{
+    display:none;
+    padding:24px;
+    background:#091522;
+    border:1px solid #172b3e;
+    border-radius:15px;
+}
+
+.step-content.active{
+    display:block;
+}
+
+.step-content h4{
+    font-size:19px;
+    margin-bottom:10px;
+}
+
+.step-content p{
+    color:#9cafbf;
+}
+
+.logic{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-top:18px;
+}
+
+.logic-box{
+    padding:15px;
+    border:1px solid #1b3448;
+    border-radius:12px;
+    background:#0b1928;
+}
+
+.logic-box strong{
+    display:block;
+    color:white;
+    margin-bottom:5px;
+}
+
+.logic-box span{
+    color:#8095a8;
+    font-size:13px;
+}
+
+/* DIFFERENTIAL */
+
+.compare{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+    margin-top:25px;
+}
+
+.compare-card{
+    padding:23px;
+    background:#091522;
+    border:1px solid #172b3e;
+    border-radius:16px;
+}
+
+.compare-card h3{
+    font-size:17px;
+    margin-bottom:10px;
+}
+
+.compare-card p{
+    color:#91a5b8;
+    font-size:14px;
+}
+
+.why{
+    margin-top:14px;
+    padding-top:12px;
+    border-top:1px solid #1a3042;
+    color:#b9c9d7;
+    font-size:13px;
+}
+
+/* QUESTIONS */
+
+.question-section{
+    margin-top:35px;
+}
+
+.question-card{
+    margin-top:20px;
+    padding:28px;
+    background:#091522;
+    border:1px solid #172f43;
+    border-radius:18px;
+}
+
+.question-number{
+    color:#61b5ff;
+    font-size:11px;
+    letter-spacing:2px;
+    margin-bottom:10px;
+}
+
+.question-card h3{
+    font-size:19px;
+    margin-bottom:17px;
+}
+
+.options{
+    display:grid;
+    gap:9px;
+}
+
+.option{
+    width:100%;
+    padding:14px;
+    border-radius:10px;
+    background:#0d2031;
+    border:1px solid #223c52;
+    color:#dce6ee;
+    text-align:left;
+    cursor:pointer;
+    font-size:14px;
+    transition:.2s;
+}
+
+.option:hover{
+    border-color:#61b5ff;
+    transform:translateX(3px);
+}
+
+.option.correct{
+    background:#132b28;
+    border-color:#69d3b1;
+}
+
+.option.wrong{
+    background:#291b20;
+    border-color:#c56d7f;
+}
+
+.answer{
+    display:none;
+    margin-top:15px;
+    padding:15px;
+    border-radius:10px;
+    background:#0d1d2b;
+    color:#a9bbc9;
+    font-size:13px;
+}
+
+.answer.show{
+    display:block;
+}
+
+/* SCORE */
+
+.score-box{
+    margin-top:25px;
+    padding:22px;
+    border:1px solid #24445d;
+    border-radius:17px;
+    background:#0a1825;
+    text-align:center;
+}
+
+.score-number{
+    font-size:38px;
+    font-weight:bold;
+    color:#61b5ff;
+}
+
+.score-message{
+    color:#91a5b8;
+}
+
+/* TAKEAWAY */
+
+.takeaway{
+    margin-top:35px;
+    padding:28px;
+    background:#091522;
+    border-left:3px solid #61b5ff;
+    border-radius:13px;
+}
+
+.takeaway p{
+    color:#9cafbf;
+}
+
+/* CEREBELLUM MAP */
+
+.cerebellum-panel{
+    margin-top:30px;
+    padding:28px;
+    border:1px solid #1b344a;
+    border-radius:20px;
+    background:#07111c;
+}
+
+.cerebellum-layout{
+    display:grid;
+    grid-template-columns:1.35fr .8fr;
+    gap:25px;
+    align-items:center;
+}
+
+.cerebellum-visual{
+    min-height:440px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:
+        radial-gradient(circle at center,#172c40,#050b13 75%);
+    border-radius:18px;
+    padding:20px;
+}
+
+.cerebellum-svg{
+    width:100%;
+    max-width:650px;
+}
+
+.cerebellum-base{
+    fill:#172b3e;
+    stroke:#8fa5b7;
+    stroke-width:3;
+}
+
+.cerebellum-region{
+    cursor:pointer;
+    stroke:#8198aa;
+    stroke-width:2;
+    transition:.25s;
+}
+
+.cerebellum-region:hover{
+    filter:drop-shadow(0 0 9px rgba(97,181,255,.8));
+}
+
+.cerebellum-region.selected{
+    fill:#61b5ff !important;
+    stroke:white;
+    filter:
+        drop-shadow(0 0 10px rgba(97,181,255,.9))
+        drop-shadow(0 0 23px rgba(97,181,255,.4));
+}
+
+.cortex-region{
+    fill:#29425a;
+}
+
+.vermis-region{
+    fill:#405a70;
+}
+
+.deep-region{
+    fill:#233d53;
+}
+
+.fissure{
+    fill:none;
+    stroke:#526a80;
+    stroke-width:4;
+    stroke-linecap:round;
+}
+
+.cerebellum-info{
+    background:#091522;
+    border:1px solid #1c3549;
+    border-radius:16px;
+    padding:24px;
+}
+
+.cerebellum-info .mini{
+    color:#61b5ff;
+    font-size:10px;
+    letter-spacing:2px;
+    margin-bottom:8px;
+}
+
+.cerebellum-info h3{
+    font-size:23px;
+    margin-bottom:10px;
+}
+
+.cerebellum-info p{
+    color:#91a5b8;
+    font-size:14px;
+}
+
+.info-row{
+    margin-top:18px;
+}
+
+.info-row span{
+    display:block;
+    color:#6f8599;
+    font-size:10px;
+    letter-spacing:1px;
+    margin-bottom:3px;
+}
+
+.info-row strong{
+    color:#dce7ef;
+    font-size:13px;
+}
+
+/* NEXT */
+
+.next-case{
+    margin-top:45px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    padding:24px;
+    background:#091522;
+    border:1px solid #172b3e;
+    border-radius:17px;
+}
+
+.next-case p{
+    color:#8196a9;
+    font-size:14px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:950px){
+
+    .profile-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .compare{
+        grid-template-columns:1fr;
+    }
+
+    .cerebellum-layout{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:700px){
+
+    .findings{
+        grid-template-columns:1fr;
+    }
+
+    .logic{
+        grid-template-columns:1fr;
+    }
+
+    .profile-grid{
+        grid-template-columns:1fr;
+    }
+
+    .timeline-item{
+        grid-template-columns:1fr;
+        gap:3px;
+    }
+
+    h1{
+        letter-spacing:-2px;
+    }
+
+    .next-case{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<a href="./clinical.html">← Back to Clinical Neuroanatomy</a>
+</nav>
+
+<main class="container">
+
+<div class="eyebrow">
+Clinical Case Series · NeuroAtlas
+</div>
+
+<h1>
+Cerebellar<br>Localization
+</h1>
+
+<div class="arabic-title">
+تحديد موضع الآفة في المخيخ
+</div>
+
+<p class="hero-text">
+
+Cerebellar localization is not simply about recognizing the word
+"ataxia." The distribution of coordination problems, gait findings,
+eye movements, speech, tremor, and postural control can help identify
+which cerebellar system is involved.
+
+<br><br>
+
+تحديد موضع الآفة في المخيخ لا يعتمد فقط على معرفة أن المريض يعاني
+من الترنح. توزيع اضطرابات التناسق والمشي وحركات العين والكلام
+والتحكم في وضعية الجسم يمكن أن يساعدنا على تحديد الجزء المتأثر
+من المخيخ والدوائر المرتبطة به.
+
+</p>
+
+<div class="actions">
+<a class="btn" href="#case1">🧠 Case 01</a>
+<a class="btn" href="#case2">🧩 Case 02</a>
+<a class="btn" href="#case3">🌀 Case 03</a>
+<a class="btn" href="#cerebellum">🗺️ Cerebellum Map</a>
+</div>
+
+
+<!-- =========================================================
+CASE 01
+========================================================= -->
+
+<section id="case1" class="case">
+
+<div class="case-header">
+
+<div class="case-tag">
+CASE 01 · CEREBELLAR HEMISPHERE
+</div>
+
+<h2>
+The Unsteady Right Hand
+</h2>
+
+<div class="case-subtitle">
+اليد اليمنى غير المتناسقة
+</div>
+
+<p class="hero-text">
+A 54-year-old woman develops difficulty performing precise
+movements with her right hand over several weeks. She reports
+dropping objects, missing targets when reaching, and feeling
+"clumsy" despite normal strength.
+</p>
+
+<div class="profile-grid">
+
+<div class="profile">
+<span>AGE</span>
+<strong>54 years</strong>
+</div>
+
+<div class="profile">
+<span>ONSET</span>
+<strong>Several weeks</strong>
+</div>
+
+<div class="profile">
+<span>MAIN PROBLEM</span>
+<strong>Right arm coordination</strong>
+</div>
+
+<div class="profile">
+<span>STRENGTH</span>
+<strong>Preserved</strong>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="story">
+
+<h3>History · التاريخ المرضي</h3>
+
+<p>
+The patient describes increasing difficulty using her right hand
+for tasks requiring accuracy. She has trouble reaching for a cup
+without overshooting it and occasionally knocks objects over.
+She does not describe numbness or loss of strength.
+</p>
+
+<p dir="rtl">
+تصف المريضة زيادة تدريجية في صعوبة استخدام يدها اليمنى في
+الحركات التي تحتاج إلى دقة. تجد صعوبة في الوصول إلى الكوب دون
+تجاوز الهدف، وأحيانًا تسقط الأشياء أو تصطدم بها. ولا تصف وجود
+فقدان للإحساس أو ضعف حقيقي في القوة.
+</p>
+
+<div class="timeline">
+
+<div class="timeline-item">
+<div class="time">WEEK 1</div>
+<div>Patient notices occasional clumsiness of the right hand.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">WEEK 2</div>
+<div>Difficulty accurately reaching for small objects becomes more obvious.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">WEEK 3</div>
+<div>Family notices an irregular tremor during intentional movement.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">TODAY</div>
+<div>Neurological examination demonstrates a clear right-sided coordination syndrome.</div>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="section-label" style="margin-top:35px;">
+Neurological Examination · الفحص العصبي
+</div>
+
+<h2>
+What does the examination reveal?
+</h2>
+
+<div class="findings">
+
+<div class="finding">
+<div class="finding-number">01 · STRENGTH</div>
+<h3>Normal Power</h3>
+<p>
+Strength is 5/5 in the right and left upper limbs.
+</p>
+<div class="clue">
+Clue: poor movement accuracy is not explained by weakness.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">02 · FINGER-NOSE</div>
+<h3>Right Dysmetria</h3>
+<p>
+The patient's right index finger repeatedly overshoots the target.
+</p>
+<div class="clue">
+Clue: dysmetria is a classic cerebellar sign.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">03 · RAPID MOVEMENTS</div>
+<h3>Right Dysdiadochokinesia</h3>
+<p>
+Rapid alternating movements of the right hand are irregular and slow.
+</p>
+<div class="clue">
+Clue: impaired rapid alternating movement suggests cerebellar dysfunction.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">04 · REFLEXES</div>
+<h3>No Major Pyramidal Pattern</h3>
+<p>
+There is no prominent spasticity or pathologic plantar response.
+</p>
+<div class="clue">
+Clue: the examination does not strongly suggest a corticospinal lesion.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">05 · SENSATION</div>
+<h3>Intact Sensation</h3>
+<p>
+Light touch and proprioception are preserved.
+</p>
+<div class="clue">
+Clue: sensory loss is not driving the abnormal movement.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">06 · GAIT</div>
+<h3>Mild Right-Sided Ataxia</h3>
+<p>
+The patient has mild instability with tandem walking but no major
+weakness.
+</p>
+<div class="clue">
+Clue: limb coordination and gait abnormalities support cerebellar involvement.
+</div>
+</div>
+
+</div>
+
+
+<div class="localizer">
+
+<h3>Interactive Localization Engine</h3>
+
+<p class="localizer-intro">
+Follow the reasoning chain instead of jumping directly to the
+anatomical answer.
+</p>
+
+<div class="steps">
+
+<button class="step active" onclick="showSteps('c1',1,this)">
+01 · Findings
+</button>
+
+<button class="step" onclick="showSteps('c1',2,this)">
+02 · System
+</button>
+
+<button class="step" onclick="showSteps('c1',3,this)">
+03 · Side
+</button>
+
+<button class="step" onclick="showSteps('c1',4,this)">
+04 · Level
+</button>
+
+<button class="step" onclick="showSteps('c1',5,this)">
+05 · Region
+</button>
+
+<button class="step" onclick="showSteps('c1',6,this)">
+06 · Explanation
+</button>
+
+</div>
+
+<div class="step-content active c1-step" id="c1step1">
+<h4>01 · Identify the findings</h4>
+<p>
+The dominant abnormalities are right-sided dysmetria,
+dysdiadochokinesia, intention tremor, and mild gait ataxia.
+Strength and sensation remain relatively preserved.
+</p>
+<div class="logic">
+<div class="logic-box">
+<strong>Motor Power</strong>
+<span>Preserved</span>
+</div>
+<div class="logic-box">
+<strong>Coordination</strong>
+<span>Clearly impaired</span>
+</div>
+<div class="logic-box">
+<strong>Side</strong>
+<span>Predominantly right</span>
+</div>
+</div>
+</div>
+
+<div class="step-content c1-step" id="c1step2">
+<h4>02 · Identify the functional system</h4>
+<p>
+The pattern primarily involves coordination rather than force
+generation. This points toward the cerebellar motor control system.
+</p>
+<div class="logic">
+<div class="logic-box">
+<strong>Primary</strong>
+<span>Cerebellar coordination</span>
+</div>
+<div class="logic-box">
+<strong>Not primary</strong>
+<span>Strength pathway</span>
+</div>
+<div class="logic-box">
+<strong>Key signs</strong>
+<span>Dysmetria + dysdiadochokinesia</span>
+</div>
+</div>
+</div>
+
+<div class="step-content c1-step" id="c1step3">
+<h4>03 · Determine the side</h4>
+<p>
+A cerebellar hemisphere generally influences coordination on the
+same side of the body. Therefore, prominent right-limb ataxia
+supports a right cerebellar hemisphere localization.
+</p>
+<div class="logic">
+<div class="logic-box">
+<strong>Abnormal limb</strong>
+<span>Right</span>
+</div>
+<div class="logic-box">
+<strong>Likely cerebellar side</strong>
+<span>Right</span>
+</div>
+<div class="logic-box">
+<strong>Principle</strong>
+<span>Ipsilateral coordination</span>
+</div>
+</div>
+</div>
+
+<div class="step-content c1-step" id="c1step4">
+<h4>04 · Determine the neurological level</h4>
+<p>
+The combination of dysmetria, dysdiadochokinesia, and intention
+tremor strongly supports cerebellar involvement rather than an
+isolated peripheral nerve or primary sensory lesion.
+</p>
+<div class="logic">
+<div class="logic-box">
+<strong>Cerebellum</strong>
+<span>Strongly supported</span>
+</div>
+<div class="logic-box">
+<strong>Cortex</strong>
+<span>Less likely</span>
+</div>
+<div class="logic-box">
+<strong>Peripheral nerve</strong>
+<span>Poor fit</span>
+</div>
+</div>
+</div>
+
+<div class="step-content c1-step" id="c1step5">
+<h4>05 · Narrow the cerebellar region</h4>
+<p>
+The prominent unilateral limb coordination deficit favors a
+cerebellar hemisphere rather than a purely midline syndrome.
+</p>
+<div class="logic">
+<div class="logic-box">
+<strong>Side</strong>
+<span>Right</span>
+</div>
+<div class="logic-box">
+<strong>Region</strong>
+<span>Right cerebellar hemisphere</span>
+</div>
+<div class="logic-box">
+<strong>Function</strong>
+<span>Limb coordination</span>
+</div>
+</div>
+</div>
+
+<div class="step-content c1-step" id="c1step6">
+<h4>06 · Explain the entire pattern</h4>
+<p>
+Right-sided dysmetria, dysdiadochokinesia, and intention tremor
+with preserved strength and sensation form a classic cerebellar
+coordination pattern. The side of the limb findings supports the
+right cerebellar hemisphere.
+</p>
+</div>
+
+</div>
+
+
+<section class="question-section">
+
+<div class="section-label">
+Case 01 Questions · أسئلة الحالة الأولى
+</div>
+
+<div class="question-card">
+<div class="question-number">QUESTION 01</div>
+<h3>
+Which finding most strongly indicates cerebellar dysfunction?
+</h3>
+
+<div class="options">
+<button class="option" onclick="answer(this,false,'c1q1')">
+A. Normal strength
+</button>
+
+<button class="option" onclick="answer(this,true,'c1q1')">
+B. Dysmetria
+</button>
+
+<button class="option" onclick="answer(this,false,'c1q1')">
+C. Preserved sensation
+</button>
+</div>
+
+<div id="c1q1" class="answer">
+<strong>Correct.</strong>
+Dysmetria, or inaccurate targeting of voluntary movement, is a
+classic sign of cerebellar dysfunction.
+</div>
+</div>
+
+<div class="question-card">
+<div class="question-number">QUESTION 02</div>
+<h3>
+The prominent limb coordination abnormality is on which side?
+</h3>
+
+<div class="options">
+<button class="option" onclick="answer(this,false,'c1q2')">
+A. Left
+</button>
+
+<button class="option" onclick="answer(this,true,'c1q2')">
+B. Right
+</button>
+
+<button class="option" onclick="answer(this,false,'c1q2')">
+C. Bilateral equally
+</button>
+</div>
+
+<div id="c1q2" class="answer">
+<strong>Correct.</strong>
+The right upper limb shows the major coordination deficit.
+Cerebellar hemispheric dysfunction typically produces ipsilateral
+limb coordination abnormalities.
+</div>
+</div>
+
+<div class="question-card">
+<div class="question-number">QUESTION 03</div>
+<h3>
+Which localization best explains the complete pattern?
+</h3>
+
+<div class="options">
+<button class="option" onclick="answer(this,false,'c1q3')">
+A. Left motor cortex
+</button>
+
+<button class="option" onclick="answer(this,false,'c1q3')">
+B. Right peripheral nerve
+</button>
+
+<button class="option" onclick="answer(this,true,'c1q3')">
+C. Right cerebellar hemisphere
+</button>
+</div>
+
+<div id="c1q3" class="answer">
+<strong>Correct.</strong>
+The combination of ipsilateral dysmetria, dysdiadochokinesia,
+and intention tremor strongly supports the right cerebellar hemisphere.
+</div>
+</div>
+
+<div class="score-box">
+<div class="score-number" id="score1">0 / 3</div>
+<div class="score-message" id="message1">
+Answer all three questions to complete Case 01.
+</div>
+</div>
+
+</section>
+
+</section>
+
+
+<!-- =========================================================
+CASE 02
+========================================================= -->
+
+<section id="case2" class="case">
+
+<div class="case-header">
+
+<div class="case-tag">
+CASE 02 · VERMIS / MIDLINE
+</div>
+
+<h2>
+The Unsteady Walk
+</h2>
+
+<div class="case-subtitle">
+اضطراب المشي والتحكم في الجذع
+</div>
+
+<p class="hero-text">
+A 61-year-old man develops progressive difficulty walking.
+He repeatedly feels as though he is falling to either side and
+has difficulty maintaining a stable upright posture.
+</p>
+
+<div class="profile-grid">
+
+<div class="profile">
+<span>AGE</span>
+<strong>61 years</strong>
+</div>
+
+<div class="profile">
+<span>MAIN PROBLEM</span>
+<strong>Gait instability</strong>
+</div>
+
+<div class="profile">
+<span>UPPER LIMBS</span>
+<strong>Relatively preserved</strong>
+</div>
+
+<div class="profile">
+<span>KEY DOMAIN</span>
+<strong>Truncal coordination</strong>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="story">
+
+<h3>History · التاريخ المرضي</h3>
+
+<p>
+The patient reports that his walking has gradually become wider
+and less stable. He needs to hold onto furniture when turning.
+His family notices that he sways while standing and occasionally
+loses his balance even when his feet are close together.
+</p>
+
+<p dir="rtl">
+يذكر المريض أن مشيته أصبحت تدريجيًا أكثر اتساعًا وأقل ثباتًا.
+ويحتاج إلى الإمساك بالأثاث عند الدوران. كما لاحظت أسرته أنه
+يتمايل أثناء الوقوف وأحيانًا يفقد توازنه حتى عندما تكون قدماه
+قريبتين من بعضهما.
+</p>
+
+<div class="timeline">
+
+<div class="timeline-item">
+<div class="time">MONTH 1</div>
+<div>Patient notices increased instability while walking.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">MONTH 2</div>
+<div>Broad-based gait becomes obvious to family members.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">MONTH 3</div>
+<div>Difficulty maintaining a stable seated and standing posture develops.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">TODAY</div>
+<div>Neurological examination confirms prominent truncal and gait ataxia.</div>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="section-label" style="margin-top:35px;">
+Neurological Examination · الفحص العصبي
+</div>
+
+<h2>
+What pattern is emerging?
+</h2>
+
+<div class="findings">
+
+<div class="finding">
+<div class="finding-number">01 · GAIT</div>
+<h3>Broad-Based Gait</h3>
+<p>
+The patient walks with his feet widely separated to maintain stability.
+</p>
+<div class="clue">
+Clue: a broad-based gait is a major cerebellar localization clue.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">02 · TRUNK</div>
+<h3>Truncal Ataxia</h3>
+<p>
+The patient sways significantly while sitting and standing.
+</p>
+<div class="clue">
+Clue: prominent truncal instability raises suspicion for midline cerebellar involvement.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">03 · LIMBS</div>
+<h3>Mild Limb Findings</h3>
+<p>
+Finger-nose testing is only mildly abnormal bilaterally.
+</p>
+<div class="clue">
+Clue: gait and trunk dysfunction dominate the presentation.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">04 · STRENGTH</div>
+<h3>Preserved Strength</h3>
+<p>
+No major weakness is found in the upper or lower limbs.
+</p>
+<div class="clue">
+Clue: instability is not simply caused by loss of muscle power.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">05 · SENSATION</div>
+<h3>No Clear Sensory Level</h3>
+<p>
+Proprioception and light touch are preserved.
+</p>
+<div class="clue">
+Clue: a sensory ataxia pattern is less likely.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">06 · SPEECH</div>
+<h3>Mild Scanning Quality</h3>
+<p>
+Speech is slightly irregular and poorly timed.
+</p>
+<div class="clue">
+Clue: cerebellar networks can influence speech timing and coordination.
+</div>
+</div>
+
+</div>
+
+
+<div class="localizer">
+
+<h3>Interactive Localization Engine</h3>
+
+<p class="localizer-intro">
+The distribution of the ataxia matters. Ask whether the main problem
+is in the limbs or in axial and truncal control.
+</p>
+
+<div class="steps">
+
+<button class="step active" onclick="showSteps('c2',1,this)">
+01 · Findings
+</button>
+
+<button class="step" onclick="showSteps('c2',2,this)">
+02 · System
+</button>
+
+<button class="step" onclick="showSteps('c2',3,this)">
+03 · Pattern
+</button>
+
+<button class="step" onclick="showSteps('c2',4,this)">
+04 · Level
+</button>
+
+<button class="step" onclick="showSteps('c2',5,this)">
+05 · Region
+</button>
+
+<button class="step" onclick="showSteps('c2',6,this)">
+06 · Explanation
+</button>
+
+</div>
+
+<div class="step-content active c2-step" id="c2step1">
+<h4>01 · Identify the findings</h4>
+<p>
+The major abnormalities are broad-based gait, truncal sway,
+difficulty maintaining posture, and mild bilateral limb incoordination.
+</p>
+<div class="logic">
+<div class="logic-box">
+<strong>Gait</strong>
+<span>Markedly abnormal</span>
+</div>
+<div class="logic-box">
+<strong>Trunk</strong>
+<span>Markedly unstable</span>
+</div>
+<div class="logic-box">
+<strong>Strength</strong>
+<span>Preserved</span>
+</div>
+</div>
+</div>
+
+<div class="step-content c2-step" id="c2step2">
+<h4>02 · Identify the functional system</h4>
+<p>
+The dominant system is postural and axial coordination. This
+pattern is more characteristic of midline cerebellar systems than
+a purely unilateral limb syndrome.
+</p>
+</div>
+
+<div class="step-content c2-step" id="c2step3">
+<h4>03 · Recognize the distribution</h4>
+<p>
+The most severe abnormalities involve standing, walking, and trunk
+control rather than one upper limb. This distribution is important
+because different cerebellar regions contribute differently to
+axial and appendicular coordination.
+</p>
+</div>
+
+<div class="step-content c2-step" id="c2step4">
+<h4>04 · Determine the level</h4>
+<p>
+The examination supports cerebellar involvement. The preserved
+strength and sensation make a primary corticospinal or sensory
+lesion less convincing as the main explanation.
+</p>
+</div>
+
+<div class="step-content c2-step" id="c2step5">
+<h4>05 · Narrow the region</h4>
+<p>
+Prominent truncal and gait ataxia points toward midline cerebellar
+structures, particularly the vermis and associated axial-control
+networks.
+</p>
+<div class="logic">
+<div class="logic-box">
+<strong>Dominant deficit</strong>
+<span>Truncal ataxia</span>
+</div>
+<div class="logic-box">
+<strong>Region</strong>
+<span>Cerebellar vermis</span>
+</div>
+<div class="logic-box">
+<strong>Function</strong>
+<span>Axial and postural control</span>
+</div>
+</div>
+</div>
+
+<div class="step-content c2-step" id="c2step6">
+<h4>06 · Explain the entire pattern</h4>
+<p>
+A midline cerebellar localization provides a strong anatomical
+explanation for the patient's severe gait and truncal instability,
+with relatively mild bilateral limb findings.
+</p>
+</div>
+
+</div>
+
+
+<section class="question-section">
+
+<div class="section-label">
+Case 02 Questions · أسئلة الحالة الثانية
+</div>
+
+<div class="question-card">
+<div class="question-number">QUESTION 01</div>
+<h3>
+Which finding is most characteristic of this patient's dominant syndrome?
+</h3>
+
+<div class="options">
+<button class="option" onclick="answer(this,true,'c2q1')">
+A. Truncal ataxia
+</button>
+
+<button class="option" onclick="answer(this,false,'c2q1')">
+B. Isolated hand weakness
+</button>
+
+<button class="option" onclick="answer(this,false,'c2q1')">
+C. Dermatomal sensory loss
+</button>
+</div>
+
+<div id="c2q1" class="answer">
+<strong>Correct.</strong>
+Severe truncal and gait instability is a key clue toward
+midline cerebellar involvement.
+</div>
+</div>
+
+<div class="question-card">
+<div class="question-number">QUESTION 02</div>
+<h3>
+Which cerebellar region is most strongly associated with this pattern?
+</h3>
+
+<div class="options">
+<button class="option" onclick="answer(this,false,'c2q2')">
+A. Lateral cerebellar hemisphere
+</button>
+
+<button class="option" onclick="answer(this,true,'c2q2')">
+B. Cerebellar vermis
+</button>
+
+<button class="option" onclick="answer(this,false,'c2q2')">
+C. Primary visual cortex
+</button>
+</div>
+
+<div id="c2q2" class="answer">
+<strong>Correct.</strong>
+The vermis and associated midline cerebellar systems are especially
+important for axial posture and gait coordination.
+</div>
+</div>
+
+<div class="question-card">
+<div class="question-number">QUESTION 03</div>
+<h3>
+Why is a sensory ataxia pattern less likely?
+</h3>
+
+<div class="options">
+<button class="option" onclick="answer(this,false,'c2q3')">
+A. Because the patient has weakness
+</button>
+
+<button class="option" onclick="answer(this,true,'c2q3')">
+B. Because proprioception and sensation are preserved
+</button>
+
+<button class="option" onclick="answer(this,false,'c2q3')">
+C. Because the patient has visual loss
+</button>
+</div>
+
+<div id="c2q3" class="answer">
+<strong>Correct.</strong>
+Preserved sensory modalities make a primary loss of proprioceptive
+input less convincing as the explanation for the ataxia.
+</div>
+</div>
+
+<div class="score-box">
+<div class="score-number" id="score2">0 / 3</div>
+<div class="score-message" id="message2">
+Answer all three questions to complete Case 02.
+</div>
+</div>
+
+</section>
+
+</section>
+
+
+<!-- =========================================================
+CASE 03
+========================================================= -->
+
+<section id="case3" class="case">
+
+<div class="case-header">
+
+<div class="case-tag">
+CASE 03 · VESTIBULOCEREBELLAR SYSTEM
+</div>
+
+<h2>
+The Patient Who Cannot Keep His Eyes Still
+</h2>
+
+<div class="case-subtitle">
+اضطراب التوازن وحركات العين
+</div>
+
+<p class="hero-text">
+A 47-year-old woman presents with dizziness, imbalance, and
+difficulty keeping her vision stable when turning her head.
+Her main problem is not weakness but the coordination of eye
+movements and balance.
+</p>
+
+<div class="profile-grid">
+
+<div class="profile">
+<span>AGE</span>
+<strong>47 years</strong>
+</div>
+
+<div class="profile">
+<span>MAIN PROBLEM</span>
+<strong>Dizziness + imbalance</strong>
+</div>
+
+<div class="profile">
+<span>VISION</span>
+<strong>Oscillopsia</strong>
+</div>
+
+<div class="profile">
+<span>KEY DOMAIN</span>
+<strong>Eye + balance control</strong>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="story">
+
+<h3>History · التاريخ المرضي</h3>
+
+<p>
+The patient reports that the environment seems to move or bounce
+when she walks. Turning her head makes the sensation worse.
+She has difficulty maintaining a stable visual target while moving
+and feels particularly unsteady in visually complex environments.
+</p>
+
+<p dir="rtl">
+تذكر المريضة أن البيئة المحيطة تبدو وكأنها تتحرك أو تهتز أثناء
+المشي. ويزداد الإحساس عند تحريك الرأس. كما تجد صعوبة في الحفاظ
+على ثبات الصورة أثناء الحركة وتشعر بعدم الثبات بشكل أكبر في
+الأماكن المزدحمة بصريًا.
+</p>
+
+<div class="timeline">
+
+<div class="timeline-item">
+<div class="time">DAY 1</div>
+<div>Patient develops dizziness and visual instability.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">DAY 3</div>
+<div>Walking becomes difficult, especially while turning the head.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">DAY 5</div>
+<div>Oscillopsia becomes the dominant complaint.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">TODAY</div>
+<div>Examination demonstrates abnormal ocular motor control and balance.</div>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="section-label" style="margin-top:35px;">
+Neurological Examination · الفحص العصبي
+</div>
+
+<h2>
+Eye movements change the localization
+</h2>
+
+<div class="findings">
+
+<div class="finding">
+<div class="finding-number">01 · OCULAR MOTOR</div>
+<h3>Abnormal Smooth Pursuit</h3>
+<p>
+Eye movements used to follow a moving target are irregular rather
+than smoothly coordinated.
+</p>
+<div class="clue">
+Clue: cerebellar networks contribute to precise ocular motor control.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">02 · NYSTAGMUS</div>
+<h3>Gaze-Evoked Nystagmus</h3>
+<p>
+The patient develops rhythmic involuntary eye movements when
+looking away from the center.
+</p>
+<div class="clue">
+Clue: abnormal eye movement patterns can provide important localization clues.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">03 · BALANCE</div>
+<h3>Postural Instability</h3>
+<p>
+The patient is unstable while standing and becomes worse with
+head movement.
+</p>
+<div class="clue">
+Clue: vestibular-cerebellar systems help integrate balance information.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">04 · LIMBS</div>
+<h3>Minimal Limb Dysmetria</h3>
+<p>
+Finger-nose testing produces only subtle abnormalities.
+</p>
+<div class="clue">
+Clue: the limb coordination deficit is not the dominant feature.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">05 · STRENGTH</div>
+<h3>Normal Strength</h3>
+<p>
+There is no major weakness in the upper or lower limbs.
+</p>
+<div class="clue">
+Clue: the primary problem is coordination and balance.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">06 · SENSATION</div>
+<h3>Sensation Preserved</h3>
+<p>
+Light touch and proprioception are not significantly impaired.
+</p>
+<div class="clue">
+Clue: the symptoms cannot be easily explained by sensory loss.
+</div>
+</div>
+
+</div>
+
+
+<div class="localizer">
+
+<h3>Interactive Localization Engine</h3>
+
+<p class="localizer-intro">
+This case demonstrates why cerebellar localization is broader than
+limb coordination alone. Eye movements and balance can be equally
+important.
+</p>
+
+<div class="steps">
+
+<button class="step active" onclick="showSteps('c3',1,this)">
+01 · Findings
+</button>
+
+<button class="step" onclick="showSteps('c3',2,this)">
+02 · System
+</button>
+
+<button class="step" onclick="showSteps('c3',3,this)">
+03 · Pattern
+</button>
+
+<button class="step" onclick="showSteps('c3',4,this)">
+04 · Level
+</button>
+
+<button class="step" onclick="showSteps('c3',5,this)">
+05 · Region
+</button>
+
+<button class="step" onclick="showSteps('c3',6,this)">
+06 · Explanation
+</button>
+
+</div>
+
+<div class="step-content active c3-step" id="c3step1">
+<h4>01 · Identify the findings</h4>
+<p>
+The dominant abnormalities are ocular motor dysfunction,
+nystagmus, postural instability, and oscillopsia.
+</p>
+</div>
+
+<div class="step-content c3-step" id="c3step2">
+<h4>02 · Identify the functional system</h4>
+<p>
+The pattern strongly involves vestibular and ocular motor
+coordination rather than primary muscle strength.
+</p>
+<div class="logic">
+<div class="logic-box">
+<strong>Eye control</strong>
+<span>Abnormal</span>
+</div>
+<div class="logic-box">
+<strong>Balance</strong>
+<span>Abnormal</span>
+</div>
+<div class="logic-box">
+<strong>Strength</strong>
+<span>Preserved</span>
+</div>
+</div>
+</div>
+
+<div class="step-content c3-step" id="c3step3">
+<h4>03 · Recognize the pattern</h4>
+<p>
+The combination of dizziness, visual instability, abnormal
+nystagmus, and postural imbalance suggests dysfunction of systems
+that integrate vestibular information with eye and postural control.
+</p>
+</div>
+
+<div class="step-content c3-step" id="c3step4">
+<h4>04 · Determine the level</h4>
+<p>
+The neurological pattern is compatible with cerebellar involvement,
+particularly the systems that communicate with vestibular pathways
+and regulate ocular and postural responses.
+</p>
+</div>
+
+<div class="step-content c3-step" id="c3step5">
+<h4>05 · Narrow the region</h4>
+<p>
+Vestibulocerebellar structures, particularly the flocculonodular
+lobe and associated midline networks, are important for equilibrium
+and eye movement control.
+</p>
+<div class="logic">
+<div class="logic-box">
+<strong>Dominant function</strong>
+<span>Balance + eye movements</span>
+</div>
+<div class="logic-box">
+<strong>Region</strong>
+<span>Vestibulocerebellar system</span>
+</div>
+<div class="logic-box">
+<strong>Key structure</strong>
+<span>Flocculonodular lobe</span>
+</div>
+</div>
+</div>
+
+<div class="step-content c3-step" id="c3step6">
+<h4>06 · Explain the entire pattern</h4>
+<p>
+The ocular motor abnormalities, oscillopsia, and postural
+instability can be unified by dysfunction of vestibulocerebellar
+circuits involved in integrating vestibular signals with eye and
+postural control.
+</p>
+</div>
+
+</div>
+
+
+<section class="question-section">
+
+<div class="section-label">
+Case 03 Questions · أسئلة الحالة الثالثة
+</div>
+
+<div class="question-card">
+<div class="question-number">QUESTION 01</div>
+<h3>
+Which feature most strongly separates this case from a simple limb
+coordination syndrome?
+</h3>
+
+<div class="options">
+<button class="option" onclick="answer(this,false,'c3q1')">
+A. Normal muscle strength
+</button>
+
+<button class="option" onclick="answer(this,false,'c3q1')">
+B. Mild hand dysmetria
+</button>
+
+<button class="option" onclick="answer(this,true,'c3q1')">
+C. Ocular motor and balance abnormalities
+</button>
+</div>
+
+<div id="c3q1" class="answer">
+<strong>Correct.</strong>
+The dominant ocular motor and balance findings suggest involvement
+of vestibulocerebellar networks rather than an isolated cerebellar
+hemisphere syndrome.
+</div>
+</div>
+
+<div class="question-card">
+<div class="question-number">QUESTION 02</div>
+<h3>
+Which cerebellar system is most closely associated with equilibrium
+and eye movement control?
+</h3>
+
+<div class="options">
+<button class="option" onclick="answer(this,true,'c3q2')">
+A. Vestibulocerebellar system
+</button>
+
+<button class="option" onclick="answer(this,false,'c3q2')">
+B. Primary somatosensory cortex
+</button>
+
+<button class="option" onclick="answer(this,false,'c3q2')">
+C. Peripheral motor nerve
+</button>
+</div>
+
+<div id="c3q2" class="answer">
+<strong>Correct.</strong>
+Vestibulocerebellar circuits are strongly involved in equilibrium,
+vestibular integration, and coordination of eye movements.
+</div>
+</div>
+
+<div class="question-card">
+<div class="question-number">QUESTION 03</div>
+<h3>
+Which structure is particularly associated with the vestibulocerebellar
+system?
+</h3>
+
+<div class="options">
+<button class="option" onclick="answer(this,false,'c3q3')">
+A. Cerebral peduncle
+</button>
+
+<button class="option" onclick="answer(this,true,'c3q3')">
+B. Flocculonodular lobe
+</button>
+
+<button class="option" onclick="answer(this,false,'c3q3')">
+C. Precentral gyrus
+</button>
+</div>
+
+<div id="c3q3" class="answer">
+<strong>Correct.</strong>
+The flocculonodular lobe is a major component of the
+vestibulocerebellar system and contributes to balance and
+ocular motor control.
+</div>
+</div>
+
+<div class="score-box">
+<div class="score-number" id="score3">0 / 3</div>
+<div class="score-message" id="message3">
+Answer all three questions to complete Case 03.
+</div>
+</div>
+
+</section>
+
+</section>
+
+
+<!-- =========================================================
+OVERALL TAKEAWAY
+========================================================= -->
+
+<section class="section">
+
+<div class="section-label">
+Clinical Integration · الربط السريري
+</div>
+
+<h2>
+Three patterns. Three localization strategies.
+</h2>
+
+<p class="intro">
+The cerebellum should not be treated as one uniform structure.
+The clinical pattern can help you decide whether the dominant
+problem involves limb coordination, axial control, or
+vestibular/ocular function.
+</p>
+
+<div class="compare">
+
+<div class="compare-card">
+<h3>🧠 Cerebellar Hemisphere</h3>
+<p>
+Think about ipsilateral limb dysmetria, dysdiadochokinesia,
+intention tremor, and impaired precision.
+</p>
+<div class="why">
+<strong>Case 01:</strong><br>
+Right limb coordination → right cerebellar hemisphere.
+</div>
+</div>
+
+<div class="compare-card">
+<h3>🌀 Vermis / Midline</h3>
+<p>
+Think about gait instability, truncal ataxia, and impaired
+axial postural control.
+</p>
+<div class="why">
+<strong>Case 02:</strong><br>
+Prominent trunk and gait dysfunction → midline cerebellar systems.
+</div>
+</div>
+
+<div class="compare-card">
+<h3>👁️ Vestibulocerebellar System</h3>
+<p>
+Think about equilibrium, nystagmus, ocular motor abnormalities,
+and visual instability during movement.
+</p>
+<div class="why">
+<strong>Case 03:</strong><br>
+Eye + balance dysfunction → vestibulocerebellar circuits.
+</div>
+</div>
+
+</div>
+
+</section>
+
+
+<div class="takeaway">
+
+<h3>
+🎯 NeuroAtlas Clinical Takeaway
+</h3>
+
+<p>
+Cerebellar localization depends heavily on the <strong>distribution
+of the coordination deficit</strong>. A unilateral limb syndrome
+can point toward a cerebellar hemisphere, prominent truncal and
+gait ataxia can suggest midline cerebellar structures, and dominant
+ocular or vestibular findings can suggest vestibulocerebellar
+circuits.
+</p>
+
+<br>
+
+<p dir="rtl">
+يعتمد تحديد موضع الآفة في المخيخ بدرجة كبيرة على
+<strong>توزيع اضطراب التناسق الحركي</strong>. فقد يشير اضطراب
+حركة أحد الأطراف إلى نصف كرة مخيخية، بينما قد تشير عدم ثبات
+الجذع والمشي إلى التراكيب المخيخية الوسطى، وقد تشير اضطرابات
+حركات العين والتوازن إلى الدوائر المخيخية الدهليزية.
+</p>
+
+</div>
+
+
+<!-- =========================================================
+INTERACTIVE CEREBELLUM AT END
+========================================================= -->
+
+<section id="cerebellum" class="section">
+
+<div class="section-label">
+Interactive Neuroanatomy · التشريح العصبي التفاعلي
+</div>
+
+<h2>
+Explore the cerebellum
+</h2>
+
+<p class="intro">
+Click different cerebellar territories to explore their major
+functions, clinical clues, and connections to the three cases.
+</p>
+
+<div class="cerebellum-panel">
+
+<div class="cerebellum-layout">
+
+<div class="cerebellum-visual">
+
+<svg class="cerebellum-svg"
+viewBox="0 0 800 500"
+xmlns="http://www.w3.org/2000/svg">
+
+<!-- Overall cerebellum -->
+<path
+class="cerebellum-base"
+d="
+M120 260
+C100 190 155 115 240 105
+C290 50 390 65 420 105
+C470 60 570 80 590 130
+C680 135 725 200 690 255
+C720 315 675 375 610 370
+C570 430 475 420 425 380
+C365 430 275 425 235 375
+C165 380 110 330 120 260Z
+"/>
+
+<!-- Hemisphere left -->
+<path
+class="cerebellum-region cortex-region"
+onclick="selectCerebellum('hemisphere')"
+d="
+M125 255
+C120 190 165 125 240 110
+C295 100 350 135 365 190
+C375 245 350 310 315 350
+C270 385 205 365 165 330
+C135 310 120 285 125 255Z
+"/>
+
+<!-- Vermis -->
+<path
+class="cerebellum-region vermis-region"
+onclick="selectCerebellum('vermis')"
+d="
+M350 145
+C380 120 420 120 450 145
+C470 185 470 250 450 300
+C435 345 410 370 390 375
+C365 350 345 315 340 270
+C335 220 338 175 350 145Z
+"/>
+
+<!-- Hemisphere right -->
+<path
+class="cerebellum-region cortex-region"
+onclick="selectCerebellum('hemisphere2')"
+d="
+M450 145
+C480 110 545 100 595 125
+C655 150 695 205 680 260
+C690 310 650 355 600 370
+C540 390 480 360 455 315
+C435 260 435 195 450 145Z
+"/>
+
+<!-- Deep region -->
+<path
+class="cerebellum-region deep-region"
+onclick="selectCerebellum('deep')"
+d="
+M365 220
+C390 200 425 200 445 220
+C460 245 455 285 435 300
+C410 320 375 305 360 280
+C350 260 350 235 365 220Z
+"/>
+
+<!-- Fissures -->
+<path class="fissure"
+d="M155 185 C205 160 270 165 320 190"/>
+<path class="fissure"
+d="M145 250 C210 225 275 235 325 265"/>
+<path class="fissure"
+d="M475 180 C530 155 590 165 640 195"/>
+<path class="fissure"
+d="M470 250 C530 225 595 240 650 270"/>
+<path class="fissure"
+d="M375 165 C390 190 400 205 395 225"/>
+
+<text x="195" y="230"
+fill="#dce7ef"
+font-size="18"
+font-weight="bold">
+HEMISPHERE
+</text>
+
+<text x="365" y="255"
+fill="#dce7ef"
+font-size="16"
+font-weight="bold">
+VERMIS
+</text>
+
+<text x="520" y="230"
+fill="#dce7ef"
+font-size="17"
+font-weight="bold">
+HEMISPHERE
+</text>
+
+<text x="372" y="265"
+fill="#eef4fa"
+font-size="11">
+DEEP
+</text>
+
+</svg>
+
+</div>
+
+
+<div class="cerebellum-info">
+
+<div class="mini">
+SELECTED REGION
+</div>
+
+<h3 id="cerebellumTitle">
+Cerebellar Hemisphere
+</h3>
+
+<p id="cerebellumDescription">
+The cerebellar hemispheres are strongly involved in coordinating
+precise movements of the limbs.
+</p>
+
+<div class="info-row">
+<span>MAIN FUNCTION</span>
+<strong id="cerebellumFunction">
+Limb coordination and movement accuracy
+</strong>
+</div>
+
+<div class="info-row">
+<span>CLINICAL CLUES</span>
+<strong id="cerebellumClues">
+Dysmetria, dysdiadochokinesia, intention tremor
+</strong>
+</div>
+
+<div class="info-row">
+<span>CASE CONNECTION</span>
+<strong id="cerebellumCase">
+Case 01 · Unilateral limb ataxia
+</strong>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<div class="next-case">
+
+<div>
+
+<div class="section-label">
+NEXT CLINICAL LEVEL
+</div>
+
+<h3>
+Spinal Cord Localization · تحديد موضع آفة الحبل الشوكي
+</h3>
+
+<p>
+Ready to move from cerebellar localization to sensory levels,
+motor findings, reflexes, and spinal cord syndromes?
+</p>
+
+</div>
+
+<a class="btn" href="./clinical-spinal-cord.html">
+Next Clinical Level →
+</a>
+
+</div>
+
+</main>
+
+
+<script>
+
+let scores = {
+    c1:0,
+    c2:0,
+    c3:0
+};
+
+let answered = new Set();
+
+
+/* =========================
+   LOCALIZATION STEPS
+========================= */
+
+function showSteps(caseName,number,button){
+
+    const parent = button.closest(".localizer");
+
+    parent.querySelectorAll(".step")
+        .forEach(step => step.classList.remove("active"));
+
+    parent.querySelectorAll(".step-content")
+        .forEach(content => content.classList.remove("active"));
+
+    button.classList.add("active");
+
+    const target =
+        parent.querySelector("#"+caseName+"step"+number);
+
+    if(target){
+        target.classList.add("active");
+    }
+}
+
+
+/* =========================
+   QUESTIONS
+========================= */
+
+function answer(button,correct,id){
+
+    const card = button.closest(".question-card");
+
+    const options =
+        card.querySelectorAll(".option");
+
+    options.forEach(option => {
+        option.disabled = true;
+    });
+
+    const explanation =
+        document.getElementById(id);
+
+    explanation.classList.add("show");
+
+    if(correct){
+
+        button.classList.add("correct");
+
+        if(!answered.has(id)){
+
+            answered.add(id);
+
+            if(id.startsWith("c1")){
+                scores.c1++;
+            }
+
+            if(id.startsWith("c2")){
+                scores.c2++;
+            }
+
+            if(id.startsWith("c3")){
+                scores.c3++;
+            }
+        }
+
+    }else{
+
+        button.classList.add("wrong");
+
+        options.forEach(option => {
+
+            const click =
+                option.getAttribute("onclick");
+
+            if(click && click.includes("true")){
+                option.classList.add("correct");
+            }
+
+        });
+
+        answered.add(id);
+    }
+
+    updateScores();
+}
+
+
+function updateScores(){
+
+    document.getElementById("score1").textContent =
+        scores.c1 + " / 3";
+
+    document.getElementById("score2").textContent =
+        scores.c2 + " / 3";
+
+    document.getElementById("score3").textContent =
+        scores.c3 + " / 3";
+
+
+    updateMessage(
+        "message1",
+        scores.c1,
+        "Case 01"
+    );
+
+    updateMessage(
+        "message2",
+        scores.c2,
+        "Case 02"
+    );
+
+    updateMessage(
+        "message3",
+        scores.c3,
+        "Case 03"
+    );
+}
+
+
+function updateMessage(id,score,caseName){
+
+    const element =
+        document.getElementById(id);
+
+    if(score === 0){
+
+        element.textContent =
+            "Start analyzing the neurological pattern.";
+
+    }else if(score === 1){
+
+        element.textContent =
+            "Good start — review the localization clues.";
+
+    }else if(score === 2){
+
+        element.textContent =
+            "Strong reasoning — one more question.";
+
+    }else{
+
+        element.textContent =
+            "Excellent! You localized "+caseName+" successfully.";
+
+    }
+}
+
+
+/* =========================
+   CEREBELLUM MAP
+========================= */
+
+function selectCerebellum(region){
+
+    document.querySelectorAll(".cerebellum-region")
+        .forEach(r => r.classList.remove("selected"));
+
+    const data = {
+
+        hemisphere:{
+            title:"Cerebellar Hemisphere",
+            description:
+            "The cerebellar hemispheres are strongly involved in precise coordination of voluntary limb movements.",
+            function:
+            "Limb coordination + movement accuracy",
+            clues:
+            "Dysmetria, dysdiadochokinesia, intention tremor",
+            case:
+            "Case 01 · Right limb coordination syndrome"
+        },
+
+        hemisphere2:{
+            title:"Cerebellar Hemisphere",
+            description:
+            "The opposite cerebellar hemisphere participates in coordination of movements on its corresponding side.",
+            function:
+            "Precision + timing of limb movement",
+            clues:
+            "Ipsilateral limb ataxia and impaired motor accuracy",
+            case:
+            "Useful comparison for Case 01"
+        },
+
+        vermis:{
+            title:"Cerebellar Vermis",
+            description:
+            "The vermis is a midline cerebellar structure strongly associated with axial posture, trunk control, and gait coordination.",
+            function:
+            "Axial + truncal coordination",
+            clues:
+            "Truncal ataxia, broad-based gait, postural instability",
+            case:
+            "Case 02 · Prominent gait and truncal ataxia"
+        },
+
+        deep:{
+            title:"Deep Cerebellar Region",
+            description:
+            "Deep cerebellar nuclei form important output pathways connecting cerebellar processing with motor control systems.",
+            function:
+            "Cerebellar output + motor coordination",
+            clues:
+            "Abnormal coordination depending on affected circuits",
+            case:
+            "Supports the circuitry underlying all three cases"
+        }
+
+    };
+
+    const selected =
+        document.querySelector(
+            ".cerebellum-region[onclick=\"selectCerebellum('"+region+"')\"]"
+        );
+
+    if(selected){
+        selected.classList.add("selected");
+    }
+
+    const d = data[region];
+
+    document.getElementById("cerebellumTitle").textContent =
+        d.title;
+
+    document.getElementById("cerebellumDescription").textContent =
+        d.description;
+
+    document.getElementById("cerebellumFunction").textContent =
+        d.function;
+
+    document.getElementById("cerebellumClues").textContent =
+        d.clues;
+
+    document.getElementById("cerebellumCase").textContent =
+        d.case;
+}
+
+
+/* Default map */
+
+selectCerebellum("hemisphere");
+
+</script>
+
+</body>
+  </html>
