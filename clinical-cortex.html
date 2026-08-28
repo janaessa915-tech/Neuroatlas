@@ -1,0 +1,1907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NeuroAtlas | Cortical Localization</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#050b13;
+    color:#eef4fa;
+    font-family:Arial,Helvetica,sans-serif;
+    line-height:1.65;
+}
+
+nav{
+    height:70px;
+    padding:0 7%;
+    display:flex;
+    align-items:center;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    background:#050b13;
+}
+
+nav a{
+    color:#9db0c3;
+    text-decoration:none;
+    font-size:14px;
+}
+
+nav a:hover{
+    color:white;
+}
+
+.container{
+    max-width:1250px;
+    margin:auto;
+    padding:65px 7% 110px;
+}
+
+.eyebrow{
+    color:#61b5ff;
+    letter-spacing:3px;
+    font-size:11px;
+    text-transform:uppercase;
+    margin-bottom:15px;
+}
+
+h1{
+    font-size:clamp(52px,8vw,88px);
+    line-height:.95;
+    letter-spacing:-4px;
+    margin-bottom:12px;
+}
+
+.arabic-title{
+    color:#ffb6c9;
+    font-size:25px;
+    margin-bottom:25px;
+}
+
+.hero-text{
+    color:#a8b8c8;
+    max-width:900px;
+    font-size:17px;
+    line-height:1.9;
+}
+
+.actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:28px;
+}
+
+.btn{
+    padding:11px 17px;
+    border-radius:9px;
+    background:#0b1928;
+    border:1px solid #31516d;
+    color:#bdd0e0;
+    cursor:pointer;
+    text-decoration:none;
+    font-size:14px;
+    transition:.2s;
+}
+
+.btn:hover{
+    background:#14304a;
+    color:white;
+    border-color:white;
+}
+
+.section{
+    margin-top:75px;
+}
+
+.section-label{
+    color:#61b5ff;
+    letter-spacing:2px;
+    font-size:11px;
+    text-transform:uppercase;
+    margin-bottom:8px;
+}
+
+.section h2{
+    font-size:34px;
+    margin-bottom:14px;
+}
+
+.intro{
+    color:#91a5b8;
+    max-width:950px;
+    line-height:1.9;
+    margin-bottom:30px;
+}
+
+/* ===============================
+   CASE OVERVIEW
+================================ */
+
+.case-header{
+    padding:30px;
+    border:1px solid #1b344a;
+    border-radius:20px;
+    background:
+        radial-gradient(circle at 90% 10%,rgba(97,181,255,.09),transparent 35%),
+        #091522;
+}
+
+.case-tag{
+    display:inline-block;
+    padding:6px 10px;
+    border:1px solid #31516d;
+    border-radius:7px;
+    color:#61b5ff;
+    font-size:11px;
+    letter-spacing:2px;
+    margin-bottom:15px;
+}
+
+.case-header h2{
+    font-size:31px;
+    margin-bottom:10px;
+}
+
+.case-subtitle{
+    color:#ffb6c9;
+    margin-bottom:18px;
+}
+
+/* ===============================
+   PATIENT PROFILE
+================================ */
+
+.profile-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+    margin-top:25px;
+}
+
+.profile{
+    background:#0b1928;
+    border:1px solid #172f43;
+    border-radius:14px;
+    padding:18px;
+}
+
+.profile span{
+    display:block;
+    color:#70869a;
+    font-size:10px;
+    letter-spacing:2px;
+    margin-bottom:7px;
+}
+
+.profile strong{
+    color:#eef4fa;
+    font-size:15px;
+}
+
+/* ===============================
+   CLINICAL STORY
+================================ */
+
+.story{
+    margin-top:22px;
+    padding:27px;
+    background:#08131f;
+    border:1px solid #172b3e;
+    border-radius:17px;
+}
+
+.story h3{
+    font-size:19px;
+    margin-bottom:14px;
+}
+
+.story p{
+    color:#a0b1c1;
+    margin-bottom:17px;
+}
+
+.story p:last-child{
+    margin-bottom:0;
+}
+
+.timeline{
+    margin-top:25px;
+    display:grid;
+    gap:12px;
+}
+
+.timeline-item{
+    display:grid;
+    grid-template-columns:95px 1fr;
+    gap:18px;
+    align-items:start;
+}
+
+.time{
+    color:#61b5ff;
+    font-size:12px;
+    letter-spacing:1px;
+    padding-top:4px;
+}
+
+.timeline-item div:last-child{
+    color:#9eb0c0;
+    border-left:1px solid #29445a;
+    padding-left:18px;
+}
+
+/* ===============================
+   FINDINGS
+================================ */
+
+.findings{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+    margin-top:25px;
+}
+
+.finding{
+    padding:22px;
+    background:#091522;
+    border:1px solid #172b3e;
+    border-radius:16px;
+}
+
+.finding-number{
+    color:#61b5ff;
+    font-size:11px;
+    letter-spacing:2px;
+    margin-bottom:7px;
+}
+
+.finding h3{
+    font-size:17px;
+    margin-bottom:8px;
+}
+
+.finding p{
+    color:#91a5b8;
+    font-size:14px;
+}
+
+.clue{
+    margin-top:12px;
+    padding:10px 12px;
+    background:#0d2031;
+    border-left:2px solid #61b5ff;
+    color:#bdd0e0;
+    font-size:13px;
+}
+
+/* ===============================
+   INTERACTIVE LOCALIZATION
+================================ */
+
+.localizer{
+    margin-top:30px;
+    padding:30px;
+    background:#07111c;
+    border:1px solid #1a3348;
+    border-radius:20px;
+}
+
+.localizer h3{
+    font-size:22px;
+    margin-bottom:8px;
+}
+
+.localizer-intro{
+    color:#8196aa;
+    margin-bottom:25px;
+}
+
+.steps{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:25px;
+}
+
+.step{
+    padding:9px 13px;
+    border-radius:8px;
+    border:1px solid #203b51;
+    background:#0a1825;
+    color:#7890a5;
+    cursor:pointer;
+    font-size:12px;
+}
+
+.step.active{
+    background:#16324a;
+    border-color:#61b5ff;
+    color:white;
+}
+
+.step-content{
+    display:none;
+    padding:24px;
+    background:#091522;
+    border:1px solid #172b3e;
+    border-radius:15px;
+}
+
+.step-content.active{
+    display:block;
+}
+
+.step-content h4{
+    font-size:19px;
+    margin-bottom:10px;
+}
+
+.step-content p{
+    color:#9cafbf;
+}
+
+.logic{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-top:18px;
+}
+
+.logic-box{
+    padding:15px;
+    border:1px solid #1b3448;
+    border-radius:12px;
+    background:#0b1928;
+}
+
+.logic-box strong{
+    display:block;
+    color:white;
+    margin-bottom:5px;
+}
+
+.logic-box span{
+    color:#8095a8;
+    font-size:13px;
+}
+
+/* ===============================
+   BRAIN VISUALIZATION
+================================ */
+
+.brain-panel{
+    margin-top:30px;
+    padding:25px;
+    border:1px solid #1b344a;
+    border-radius:20px;
+    background:#07111c;
+}
+
+.brain-layout{
+    display:grid;
+    grid-template-columns:1.4fr .8fr;
+    gap:25px;
+    align-items:center;
+}
+
+.brain-svg-wrap{
+    background:
+        radial-gradient(circle at center,#172c40,#050b13 72%);
+    border-radius:18px;
+    padding:15px;
+    min-height:430px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.brain-svg{
+    width:100%;
+    max-width:650px;
+}
+
+.brain-outline{
+    fill:#172b3e;
+    stroke:#91a7b9;
+    stroke-width:3;
+}
+
+.brain-sulcus{
+    fill:none;
+    stroke:#526a80;
+    stroke-width:4;
+    stroke-linecap:round;
+}
+
+.region{
+    cursor:pointer;
+    transition:.25s;
+    stroke:#8299ac;
+    stroke-width:2;
+}
+
+.region:hover{
+    filter:
+        drop-shadow(0 0 8px rgba(97,181,255,.8));
+}
+
+.region.selected{
+    fill:#61b5ff !important;
+    stroke:white;
+    filter:
+        drop-shadow(0 0 10px rgba(97,181,255,.9))
+        drop-shadow(0 0 22px rgba(97,181,255,.45));
+}
+
+.region.frontal{
+    fill:#29425a;
+}
+
+.region.parietal{
+    fill:#314b61;
+}
+
+.region.temporal{
+    fill:#263f55;
+}
+
+.region.occipital{
+    fill:#20394e;
+}
+
+.region-info{
+    background:#091522;
+    border:1px solid #1c3549;
+    border-radius:16px;
+    padding:24px;
+}
+
+.region-info .mini{
+    color:#61b5ff;
+    font-size:10px;
+    letter-spacing:2px;
+    margin-bottom:8px;
+}
+
+.region-info h3{
+    font-size:23px;
+    margin-bottom:10px;
+}
+
+.region-info p{
+    color:#91a5b8;
+    font-size:14px;
+}
+
+.region-info hr{
+    border:none;
+    border-top:1px solid #1a3042;
+    margin:20px 0;
+}
+
+region-info strong{
+    color:white;
+}
+
+.info-row{
+    margin-bottom:13px;
+}
+
+.info-row span{
+    display:block;
+    color:#6f8599;
+    font-size:10px;
+    letter-spacing:1px;
+    margin-bottom:3px;
+}
+
+.info-row strong{
+    color:#dce7ef;
+    font-size:13px;
+}
+
+/* ===============================
+   DIFFERENTIAL
+================================ */
+
+.compare{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+    margin-top:25px;
+}
+
+.compare-card{
+    padding:23px;
+    background:#091522;
+    border:1px solid #172b3e;
+    border-radius:16px;
+}
+
+.compare-card h3{
+    font-size:17px;
+    margin-bottom:10px;
+}
+
+.compare-card p{
+    color:#91a5b8;
+    font-size:14px;
+}
+
+.compare-card .why{
+    margin-top:14px;
+    padding-top:12px;
+    border-top:1px solid #1a3042;
+    color:#b9c9d7;
+    font-size:13px;
+}
+
+/* ===============================
+   QUESTION SYSTEM
+================================ */
+
+.question-card{
+    margin-top:20px;
+    padding:28px;
+    background:#091522;
+    border:1px solid #172f43;
+    border-radius:18px;
+}
+
+.question-number{
+    color:#61b5ff;
+    font-size:11px;
+    letter-spacing:2px;
+    margin-bottom:10px;
+}
+
+.question-card h3{
+    font-size:19px;
+    margin-bottom:17px;
+}
+
+.options{
+    display:grid;
+    gap:9px;
+}
+
+.option{
+    width:100%;
+    padding:14px;
+    border-radius:10px;
+    background:#0d2031;
+    border:1px solid #223c52;
+    color:#dce6ee;
+    text-align:left;
+    cursor:pointer;
+    font-size:14px;
+    transition:.2s;
+}
+
+.option:hover{
+    border-color:#61b5ff;
+    transform:translateX(3px);
+}
+
+.option.correct{
+    background:#132b28;
+    border-color:#69d3b1;
+}
+
+.option.wrong{
+    background:#291b20;
+    border-color:#c56d7f;
+}
+
+.answer{
+    display:none;
+    margin-top:15px;
+    padding:15px;
+    border-radius:10px;
+    background:#0d1d2b;
+    color:#a9bbc9;
+    font-size:13px;
+}
+
+.answer.show{
+    display:block;
+}
+
+.answer strong{
+    color:white;
+}
+
+/* ===============================
+   SCORE
+================================ */
+
+.score-box{
+    margin-top:30px;
+    padding:25px;
+    border:1px solid #24445d;
+    border-radius:17px;
+    background:#0a1825;
+    text-align:center;
+}
+
+.score-number{
+    font-size:42px;
+    font-weight:bold;
+    color:#61b5ff;
+}
+
+.score-message{
+    color:#91a5b8;
+    margin-top:5px;
+}
+
+/* ===============================
+   TAKEAWAY
+================================ */
+
+.takeaway{
+    margin-top:35px;
+    padding:28px;
+    background:#091522;
+    border-left:3px solid #61b5ff;
+    border-radius:13px;
+}
+
+.takeaway h3{
+    margin-bottom:12px;
+}
+
+.takeaway p{
+    color:#9cafbf;
+}
+
+/* ===============================
+   NEXT CASE
+================================ */
+
+.next-case{
+    margin-top:45px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    padding:24px;
+    background:#091522;
+    border:1px solid #172b3e;
+    border-radius:17px;
+}
+
+.next-case p{
+    color:#8196a9;
+    font-size:14px;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+
+@media(max-width:950px){
+
+    .profile-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .brain-layout{
+        grid-template-columns:1fr;
+    }
+
+    .compare{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:700px){
+
+    .findings{
+        grid-template-columns:1fr;
+    }
+
+    .logic{
+        grid-template-columns:1fr;
+    }
+
+    .profile-grid{
+        grid-template-columns:1fr;
+    }
+
+    .timeline-item{
+        grid-template-columns:1fr;
+        gap:3px;
+    }
+
+    h1{
+        letter-spacing:-2px;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<a href="./clinical.html">← Back to Clinical Neuroanatomy</a>
+</nav>
+
+<main class="container">
+
+<div class="eyebrow">
+Clinical Case 01 · NeuroAtlas
+</div>
+
+<h1>Cortical<br>Localization</h1>
+
+<div class="arabic-title">
+تحديد موضع الآفة في القشرة المخية
+</div>
+
+<p class="hero-text">
+A neurological examination does more than identify symptoms.
+The distribution of those findings can reveal which part of the
+brain is affected. In this case, work through the patient's history,
+examination, functional systems, and neuroanatomy before reaching
+the final localization.
+
+<br><br>
+
+الفحص العصبي لا يحدد الأعراض فقط، بل يمكن أن يساعدنا توزيع هذه
+الأعراض على معرفة المنطقة المتأثرة في الدماغ. في هذه الحالة،
+سنحلل التاريخ المرضي والفحص العصبي والأنظمة الوظيفية والتشريح
+العصبي خطوة بخطوة قبل الوصول إلى موضع الآفة.
+</p>
+
+<div class="actions">
+<a class="btn" href="#case">🧠 Start Case</a>
+<a class="btn" href="#brain">🗺️ Brain Map</a>
+<a class="btn" href="#questions">🧪 Questions</a>
+</div>
+
+
+<!-- CASE -->
+
+<section id="case" class="section">
+
+<div class="case-header">
+
+<div class="case-tag">
+CASE 01 · CORTEX
+</div>
+
+<h2>
+The Sudden Neurological Deficit
+</h2>
+
+<div class="case-subtitle">
+الحالة العصبية المفاجئة
+</div>
+
+<p class="hero-text">
+A 68-year-old right-handed man is brought to the emergency
+department because his family noticed sudden difficulty moving
+his right arm and face approximately two hours earlier.
+</p>
+
+<div class="profile-grid">
+
+<div class="profile">
+<span>AGE</span>
+<strong>68 years</strong>
+</div>
+
+<div class="profile">
+<span>HANDEDNESS</span>
+<strong>Right-handed</strong>
+</div>
+
+<div class="profile">
+<span>ONSET</span>
+<strong>Sudden</strong>
+</div>
+
+<div class="profile">
+<span>MAIN PROBLEM</span>
+<strong>Right-sided weakness</strong>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="story">
+
+<h3>History · التاريخ المرضي</h3>
+
+<p>
+The patient was previously independent. He was having breakfast
+when his family noticed that his right hand suddenly became weak.
+He then developed difficulty smiling normally on the right side.
+His speech also sounded unusual, and he appeared to have trouble
+getting some words out.
+</p>
+
+<p dir="rtl">
+كان المريض مستقلًا في حياته اليومية قبل ذلك. أثناء تناوله الإفطار،
+لاحظت أسرته أن يده اليمنى أصبحت ضعيفة بشكل مفاجئ، ثم ظهرت صعوبة
+في الابتسام بصورة طبيعية من الجانب الأيمن. كما أصبح كلامه غير طبيعي
+وبدا أنه يجد صعوبة في إخراج بعض الكلمات.
+</p>
+
+<div class="timeline">
+
+<div class="timeline-item">
+<div class="time">08:10</div>
+<div>Patient was normal and eating breakfast.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">08:25</div>
+<div>Sudden right hand weakness was noticed.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">08:30</div>
+<div>Right facial weakness and abnormal speech developed.</div>
+</div>
+
+<div class="timeline-item">
+<div class="time">09:05</div>
+<div>Patient arrived for neurological evaluation.</div>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- FINDINGS -->
+
+<div class="section-label" style="margin-top:35px;">
+Neurological Examination · الفحص العصبي
+</div>
+
+<h2>
+What do we actually find?
+</h2>
+
+<div class="findings">
+
+<div class="finding">
+<div class="finding-number">01 · MOTOR</div>
+<h3>Right Face + Arm Weakness</h3>
+<p>
+Strength is reduced in the right upper limb. The lower face is
+also weak on the right.
+</p>
+<div class="clue">
+High-yield clue: face and arm are affected more than the leg.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">02 · LANGUAGE</div>
+<h3>Expressive Difficulty</h3>
+<p>
+The patient understands simple questions but produces short,
+effortful speech.
+</p>
+<div class="clue">
+High-yield clue: language dysfunction suggests cortical involvement.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">03 · SENSORY</div>
+<h3>Mild Right Hand Sensory Loss</h3>
+<p>
+Light-touch sensation is reduced over the right hand and forearm.
+</p>
+<div class="clue">
+High-yield clue: sensory findings accompany the motor deficit.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">04 · VISUAL</div>
+<h3>No Major Visual Complaint</h3>
+<p>
+The patient does not report a clear visual-field disturbance during
+the initial examination.
+</p>
+<div class="clue">
+High-yield clue: the dominant problem is not primarily visual.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">05 · COORDINATION</div>
+<h3>No Primary Cerebellar Pattern</h3>
+<p>
+There is no prominent intention tremor, dysmetria, or isolated
+coordination syndrome.
+</p>
+<div class="clue">
+High-yield clue: this does not look primarily cerebellar.
+</div>
+</div>
+
+<div class="finding">
+<div class="finding-number">06 · CRANIAL NERVES</div>
+<h3>Lower Facial Weakness</h3>
+<p>
+The right lower face is weak, while the upper face is relatively
+preserved.
+</p>
+<div class="clue">
+High-yield clue: corticobulbar involvement can produce this pattern.
+</div>
+</div>
+
+</div>
+
+
+<!-- LOCALIZATION STEPS -->
+
+<div class="localizer">
+
+<h3>Interactive Localization Engine</h3>
+
+<p class="localizer-intro">
+Don't jump directly to the answer. Click through the reasoning
+chain and see how each finding changes the localization.
+</p>
+
+<div class="steps">
+
+<button class="step active" onclick="showStep(1,this)">
+01 · Findings
+</button>
+
+<button class="step" onclick="showStep(2,this)">
+02 · System
+</button>
+
+<button class="step" onclick="showStep(3,this)">
+03 · Side
+</button>
+
+<button class="step" onclick="showStep(4,this)">
+04 · Level
+</button>
+
+<button class="step" onclick="showStep(5,this)">
+05 · Region
+</button>
+
+<button class="step" onclick="showStep(6,this)">
+06 · Explanation
+</button>
+
+</div>
+
+
+<div class="step-content active" id="step1">
+<h4>01 · Identify the important findings</h4>
+
+<p>
+The most important abnormalities are right lower facial weakness,
+right upper-limb weakness, mild right upper-limb sensory loss,
+and difficulty producing language.
+</p>
+
+<div class="logic">
+
+<div class="logic-box">
+<strong>Motor</strong>
+<span>Right face + arm weakness</span>
+</div>
+
+<div class="logic-box">
+<strong>Language</strong>
+<span>Expressive difficulty</span>
+</div>
+
+<div class="logic-box">
+<strong>Sensory</strong>
+<span>Right hand/forearm</span>
+</div>
+
+</div>
+</div>
+
+
+<div class="step-content" id="step2">
+<h4>02 · Identify the functional system</h4>
+
+<p>
+The dominant system is motor, but the presence of language
+dysfunction is extremely important because language is a
+higher cortical function.
+</p>
+
+<div class="logic">
+
+<div class="logic-box">
+<strong>Primary</strong>
+<span>Motor system</span>
+</div>
+
+<div class="logic-box">
+<strong>Additional</strong>
+<span>Language system</span>
+</div>
+
+<div class="logic-box">
+<strong>Supporting</strong>
+<span>Sensory system</span>
+</div>
+
+</div>
+</div>
+
+
+<div class="step-content" id="step3">
+<h4>03 · Determine the side</h4>
+
+<p>
+The weakness is on the right side of the body. Because major
+descending motor pathways cross before reaching the spinal motor
+neurons, a supratentorial motor lesion usually produces
+contralateral weakness.
+</p>
+
+<div class="logic">
+
+<div class="logic-box">
+<strong>Weak side</strong>
+<span>Right</span>
+</div>
+
+<div class="logic-box">
+<strong>Likely brain side</strong>
+<span>Left</span>
+</div>
+
+<div class="logic-box">
+<strong>Key principle</strong>
+<span>Contralateral motor control</span>
+</div>
+
+</div>
+</div>
+
+
+<div class="step-content" id="step4">
+<h4>04 · Determine the neurological level</h4>
+
+<p>
+The combination of a focal motor deficit with a language
+disturbance strongly favors a cerebral cortical or nearby
+supratentorial localization rather than a peripheral nerve,
+spinal cord, or isolated cerebellar lesion.
+</p>
+
+<div class="logic">
+
+<div class="logic-box">
+<strong>Cortex</strong>
+<span>Strongly supported</span>
+</div>
+
+<div class="logic-box">
+<strong>Brainstem</strong>
+<span>Less likely</span>
+</div>
+
+<div class="logic-box">
+<strong>Spinal / PNS</strong>
+<span>Does not explain language</span>
+</div>
+
+</div>
+</div>
+
+
+<div class="step-content" id="step5">
+<h4>05 · Narrow the cortical region</h4>
+
+<p>
+Face and upper-limb weakness greater than leg involvement points
+toward the lateral portion of the primary motor cortex and its
+nearby corticobulbar representation. The language deficit further
+supports involvement of the dominant hemisphere.
+</p>
+
+<div class="logic">
+
+<div class="logic-box">
+<strong>Side</strong>
+<span>Left hemisphere</span>
+</div>
+
+<div class="logic-box">
+<strong>Motor region</strong>
+<span>Lateral precentral gyrus</span>
+</div>
+
+<div class="logic-box">
+<strong>Language</strong>
+<span>Dominant frontal network</span>
+</div>
+
+</div>
+</div>
+
+
+<div class="step-content" id="step6">
+<h4>06 · Explain the entire pattern</h4>
+
+<p>
+The findings can be unified by a left lateral frontal cortical
+localization involving motor representations for the face and
+upper limb, with nearby dominant-hemisphere language networks
+also affected.
+</p>
+
+<div class="logic">
+
+<div class="logic-box">
+<strong>Right weakness</strong>
+<span>Left motor cortex</span>
+</div>
+
+<div class="logic-box">
+<strong>Face + arm</strong>
+<span>Lateral cortical representation</span>
+</div>
+
+<div class="logic-box">
+<strong>Language</strong>
+<span>Dominant hemisphere involvement</span>
+</div>
+
+</div>
+</div>
+
+</div>
+
+
+<!-- BRAIN MAP -->
+
+<section id="brain" class="section">
+
+<div class="section-label">
+Interactive Neuroanatomy · التشريح العصبي التفاعلي
+</div>
+
+<h2>
+Click the cortical regions
+</h2>
+
+<p class="intro">
+Explore the major cortical territories involved in neurological
+localization. Click a region to see its function, major clinical
+clues, and what deficits can occur when it is affected.
+</p>
+
+<div class="brain-panel">
+
+<div class="brain-layout">
+
+<div class="brain-svg-wrap">
+
+<svg class="brain-svg"
+viewBox="0 0 800 520"
+xmlns="http://www.w3.org/2000/svg">
+
+<!-- Brain -->
+<path
+class="brain-outline"
+d="
+M115 290
+C80 250 90 180 145 150
+C145 90 215 55 275 78
+C325 30 410 50 435 92
+C500 65 570 92 585 145
+C650 145 700 190 680 240
+C730 285 700 350 650 365
+C630 420 565 440 515 415
+C465 470 380 460 350 420
+C290 450 220 425 210 380
+C155 385 110 345 115 290Z
+"/>
+
+<!-- Frontal -->
+<path
+class="region frontal"
+onclick="selectRegion('frontal')"
+d="
+M135 155
+C180 95 250 80 315 100
+C345 115 365 155 350 205
+C335 245 300 275 255 285
+C205 290 160 265 135 230
+C115 205 120 175 135 155Z
+"/>
+
+<!-- Parietal -->
+<path
+class="region parietal"
+onclick="selectRegion('parietal')"
+d="
+M350 105
+C405 80 485 90 525 125
+C550 155 555 205 530 240
+C500 270 455 280 410 260
+C370 245 345 220 350 180Z
+"/>
+
+<!-- Temporal -->
+<path
+class="region temporal"
+onclick="selectRegion('temporal')"
+d="
+M205 285
+C250 275 305 275 350 295
+C390 315 420 350 405 380
+C380 410 315 420 270 400
+C230 385 205 350 205 285Z
+"/>
+
+<!-- Occipital -->
+<path
+class="region occipital"
+onclick="selectRegion('occipital')"
+d="
+M525 125
+C580 135 630 165 650 210
+C665 250 650 290 620 310
+C580 325 535 300 515 265
+C500 225 505 165 525 125Z
+"/>
+
+<!-- Sulci -->
+<path class="brain-sulcus"
+d="M175 165 C220 140 270 145 310 170"/>
+<path class="brain-sulcus"
+d="M150 215 C210 190 275 205 320 230"/>
+<path class="brain-sulcus"
+d="M380 130 C425 155 470 160 515 145"/>
+<path class="brain-sulcus"
+d="M380 205 C430 185 475 205 515 225"/>
+<path class="brain-sulcus"
+d="M245 320 C290 300 340 320 370 350"/>
+<path class="brain-sulcus"
+d="M540 180 C580 200 605 225 615 260"/>
+
+<!-- Labels -->
+
+<text x="205" y="180"
+fill="#d9e5ee"
+font-size="18"
+font-weight="bold">
+FRONTAL
+</text>
+
+<text x="405" y="175"
+fill="#d9e5ee"
+font-size="17"
+font-weight="bold">
+PARIETAL
+</text>
+
+<text x="270" y="365"
+fill="#d9e5ee"
+font-size="17"
+font-weight="bold">
+TEMPORAL
+</text>
+
+<text x="545" y="240"
+fill="#d9e5ee"
+font-size="16"
+font-weight="bold">
+OCCIPITAL
+</text>
+
+</svg>
+
+</div>
+
+
+<div class="region-info">
+
+<div class="mini">
+SELECTED REGION
+</div>
+
+<h3 id="regionTitle">
+Frontal Lobe
+</h3>
+
+<p id="regionDescription">
+Important for voluntary movement, executive functions,
+language production, and several higher-order behaviors.
+</p>
+
+<hr>
+
+<div class="info-row">
+<span>FUNCTION</span>
+<strong id="regionFunction">
+Motor control + executive functions
+</strong>
+</div>
+
+<div class="info-row">
+<span>CLINICAL CLUES</span>
+<strong id="regionClues">
+Weakness, language changes, behavioral changes
+</strong>
+</div>
+
+<div class="info-row">
+<span>CASE CONNECTION</span>
+<strong id="regionCase">
+High relevance to this case
+</strong>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- DIFFERENTIAL -->
+
+<section class="section">
+
+<div class="section-label">
+Differential Localization · المقارنة التشريحية
+</div>
+
+<h2>
+Why not somewhere else?
+</h2>
+
+<p class="intro">
+Localization becomes stronger when you can explain not only why
+one location fits, but also why competing locations fit less well.
+</p>
+
+<div class="compare">
+
+<div class="compare-card">
+<h3>🧩 Brainstem</h3>
+<p>
+Brainstem lesions can produce cranial nerve abnormalities with
+long-tract findings and may create crossed face-body patterns.
+</p>
+<div class="why">
+<strong>Why less likely here:</strong><br>
+The language disturbance and cortical distribution favor a
+supratentorial cortical process.
+</div>
+</div>
+
+<div class="compare-card">
+<h3>🌀 Cerebellum</h3>
+<p>
+Cerebellar dysfunction typically produces abnormalities of
+coordination, balance, timing, and movement accuracy.
+</p>
+<div class="why">
+<strong>Why less likely here:</strong><br>
+The dominant finding is weakness rather than a primary
+coordination syndrome.
+</div>
+</div>
+
+<div class="compare-card">
+<h3>⚡ Peripheral Nerve</h3>
+<p>
+Peripheral lesions usually follow a nerve, root, plexus, or
+muscle distribution.
+</p>
+<div class="why">
+<strong>Why less likely here:</strong><br>
+A peripheral lesion cannot easily explain the associated
+language dysfunction.
+</div>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- QUESTIONS -->
+
+<section id="questions" class="section">
+
+<div class="section-label">
+Clinical Reasoning Test · اختبار التفكير السريري
+</div>
+
+<h2>
+Can you localize it?
+</h2>
+
+<p class="intro">
+Answer each question before moving to the next. Your score updates
+automatically as you work through the case.
+</p>
+
+
+<div class="question-card">
+
+<div class="question-number">
+QUESTION 01
+</div>
+
+<h3>
+The patient's weakness is predominantly on which side?
+</h3>
+
+<div class="options">
+
+<button class="option"
+onclick="answerQuestion(this,true,'a1')">
+A. Right
+</button>
+
+<button class="option"
+onclick="answerQuestion(this,false,'a1')">
+B. Left
+</button>
+
+<button class="option"
+onclick="answerQuestion(this,false,'a1')">
+C. Bilateral equally
+</button>
+
+</div>
+
+<div id="a1" class="answer">
+<strong>Correct.</strong>
+The examination describes weakness of the right face and right
+upper limb.
+</div>
+
+</div>
+
+
+<div class="question-card">
+
+<div class="question-number">
+QUESTION 02
+</div>
+
+<h3>
+Which brain hemisphere is most likely involved in a supratentorial
+lesion producing this motor pattern?
+</h3>
+
+<div class="options">
+
+<button class="option"
+onclick="answerQuestion(this,true,'a2')">
+A. Left hemisphere
+</button>
+
+<button class="option"
+onclick="answerQuestion(this,false,'a2')">
+B. Right hemisphere
+</button>
+
+<button class="option"
+onclick="answerQuestion(this,false,'a2')">
+C. Cerebellum
+</button>
+
+</div>
+
+<div id="a2" class="answer">
+<strong>Correct.</strong>
+Major corticospinal motor pathways produce contralateral control
+after their relevant crossing, making a left cerebral lesion a strong
+localization for right-sided weakness.
+</div>
+
+</div>
+
+
+<div class="question-card">
+
+<div class="question-number">
+QUESTION 03
+</div>
+
+<h3>
+Why is the language finding especially useful for localization?
+</h3>
+
+<div class="options">
+
+<button class="option"
+onclick="answerQuestion(this,true,'a3')">
+A. It supports dominant cortical involvement
+</button>
+
+<button class="option"
+onclick="answerQuestion(this,false,'a3')">
+B. It proves a cerebellar lesion
+</button>
+
+<button class="option"
+onclick="answerQuestion(this,false,'a3')">
+C. It indicates a peripheral nerve lesion
+</button>
+
+</div>
+
+<div id="a3" class="answer">
+<strong>Correct.</strong>
+Language functions depend on distributed cortical networks and
+are therefore powerful clues when determining cortical localization.
+</div>
+
+</div>
+
+
+<div class="question-card">
+
+<div class="question-number">
+QUESTION 04
+</div>
+
+<h3>
+Face and arm weakness greater than leg weakness points most strongly
+toward which cortical region?
+</h3>
+
+<div class="options">
+
+<button class="option"
+onclick="answerQuestion(this,true,'a4')">
+A. Lateral primary motor cortex
+</button>
+
+<button class="option"
+onclick="answerQuestion(this,false,'a4')">
+B. Medial occipital cortex
+</button>
+
+<button class="option"
+onclick="answerQuestion(this,false,'a4')">
+C. Cerebellar vermis
+</button>
+
+</div>
+
+<div id="a4" class="answer">
+<strong>Correct.</strong>
+The motor homunculus places face and upper-limb representations
+more laterally, while the lower limb is represented more medially.
+</div>
+
+</div>
+
+
+<div class="question-card">
+
+<div class="question-number">
+QUESTION 05
+</div>
+
+<h3>
+Which localization best unifies the complete pattern?
+</h3>
+
+<div class="options">
+
+<button class="option"
+onclick="answerQuestion(this,true,'a5')">
+A. Left lateral frontal cortical region
+</button>
+
+<button class="option"
+onclick="answerQuestion(this,false,'a5')">
+B. Right cerebellar hemisphere
+</button>
+
+<button class="option"
+onclick="answerQuestion(this,false,'a5')">
+C. Peripheral radial nerve
+</button>
+
+</div>
+
+<div id="a5" class="answer">
+<strong>Correct.</strong>
+The combination of contralateral face-arm weakness, sensory
+findings, and language dysfunction points toward the dominant
+left lateral frontal cortical region.
+</div>
+
+</div>
+
+
+<div class="score-box">
+
+<div class="score-number" id="score">
+0 / 5
+</div>
+
+<div class="score-message" id="scoreMessage">
+Answer the questions to reveal your final result.
+</div>
+
+</div>
+
+</section>
+
+
+<!-- TAKEAWAY -->
+
+<div class="takeaway">
+
+<h3>
+🎯 NeuroAtlas Clinical Takeaway
+</h3>
+
+<p>
+Localization is a process of pattern recognition supported by
+anatomy. In this case, the combination of <strong>right face-arm
+weakness + sensory involvement + language dysfunction</strong>
+moves the reasoning toward the <strong>left dominant lateral
+cerebral cortex</strong>. The distribution of the weakness helps
+narrow the motor component toward the lateral motor representation.
+</p>
+
+<br>
+
+<p dir="rtl">
+تحديد موضع الآفة يعتمد على ربط الأعراض بالتشريح. في هذه الحالة،
+يساعد الجمع بين <strong>ضعف الوجه والذراع الأيمن + اضطراب الإحساس
++ اضطراب اللغة</strong> على تحديد المنطقة اليسرى المسيطرة من القشرة
+المخية، وخاصة المنطقة الجانبية المرتبطة بالوظائف الحركية واللغوية.
+</p>
+
+</div>
+
+
+<div class="next-case">
+
+<div>
+<div class="section-label">
+NEXT CASE
+</div>
+
+<h3>
+Brainstem Localization · تحديد موضع آفة جذع الدماغ
+</h3>
+
+<p>
+Ready to work through cranial nerves, crossed findings,
+and brainstem anatomy?
+</p>
+</div>
+
+<a class="btn" href="./clinical-brainstem.html">
+Next Case →
+</a>
+
+</div>
+
+</main>
+
+
+<script>
+
+let score = 0;
+let answered = new Set();
+
+
+function showStep(number,button){
+
+    document.querySelectorAll(".step").forEach(
+        step => step.classList.remove("active")
+    );
+
+    document.querySelectorAll(".step-content").forEach(
+        content => content.classList.remove("active")
+    );
+
+    button.classList.add("active");
+
+    document
+        .getElementById("step"+number)
+        .classList.add("active");
+}
+
+
+function selectRegion(region){
+
+    document.querySelectorAll(".region")
+        .forEach(r => r.classList.remove("selected"));
+
+    const clicked =
+        document.querySelector(".region."+region);
+
+    if(clicked){
+        clicked.classList.add("selected");
+    }
+
+    const data = {
+
+        frontal:{
+            title:"Frontal Lobe",
+            description:
+            "The frontal lobe contains important motor and higher-order networks. Its lateral portions include motor representations for the face and upper limb and, in the dominant hemisphere, language-related regions.",
+            function:
+            "Voluntary movement + executive and language functions",
+            clues:
+            "Contralateral weakness, expressive language changes, behavioral or executive changes",
+            case:
+            "Very high relevance — fits the motor and language findings"
+        },
+
+        parietal:{
+            title:"Parietal Lobe",
+            description:
+            "The parietal lobe integrates somatic sensory information and contributes to spatial attention and higher-order sensory processing.",
+            function:
+            "Somatosensation + spatial integration",
+            clues:
+            "Sensory loss, neglect, impaired cortical sensory processing",
+            case:
+            "Possible contributor to sensory findings, but not the strongest localization"
+        },
+
+        temporal:{
+            title:"Temporal Lobe",
+            description:
+            "Temporal cortical networks participate in auditory processing, memory, emotion, and language comprehension.",
+            function:
+            "Auditory processing + memory + language networks",
+            clues:
+            "Memory disturbance, auditory changes, comprehension problems",
+            case:
+            "Not the best explanation for the predominant face-arm weakness"
+        },
+
+        occipital:{
+            title:"Occipital Lobe",
+            description:
+            "The occipital lobe contains the primary visual cortex and visual association networks.",
+            function:
+            "Visual processing",
+            clues:
+            "Visual-field deficits and higher visual-processing abnormalities",
+            case:
+            "Low relevance because there is no dominant visual-field deficit"
+        }
+
+    };
+
+    const d = data[region];
+
+    document.getElementById("regionTitle").textContent = d.title;
+    document.getElementById("regionDescription").textContent = d.description;
+    document.getElementById("regionFunction").textContent = d.function;
+    document.getElementById("regionClues").textContent = d.clues;
+    document.getElementById("regionCase").textContent = d.case;
+}
+
+
+function answerQuestion(button,correct,answerId){
+
+    const card =
+        button.closest(".question-card");
+
+    const options =
+        card.querySelectorAll(".option");
+
+    options.forEach(
+        option => option.disabled = true
+    );
+
+    const answer =
+        document.getElementById(answerId);
+
+    answer.classList.add("show");
+
+    if(correct){
+
+        button.classList.add("correct");
+
+        if(!answered.has(answerId)){
+
+            score++;
+            answered.add(answerId);
+
+        }
+
+    }else{
+
+        button.classList.add("wrong");
+
+        options.forEach(option => {
+
+            if(
+                option.getAttribute("onclick") &&
+                option.getAttribute("onclick")
+                .includes("true")
+            ){
+                option.classList.add("correct");
+            }
+
+        });
+
+        answered.add(answerId);
+    }
+
+    updateScore();
+}
+
+
+function updateScore(){
+
+    document.getElementById("score")
+        .textContent = score + " / 5";
+
+    const message =
+        document.getElementById("scoreMessage");
+
+    if(score === 0){
+        message.textContent =
+        "Keep working through the case.";
+    }
+
+    else if(score <= 2){
+        message.textContent =
+        "Good start — review the localization chain.";
+    }
+
+    else if(score <= 4){
+        message.textContent =
+        "Strong reasoning — you're connecting findings to anatomy.";
+    }
+
+    else{
+        message.textContent =
+        "Excellent! You localized the case step by step.";
+    }
+}
+
+
+selectRegion("frontal");
+
+</script>
+
+</body>
+</html>
